@@ -18,19 +18,19 @@
     "accepted"
   ],
   "activeBuild": {
-    "pieceId": "P00",
+    "pieceId": "P10",
     "round": 1,
-    "roundLabel": "Round 001",
-    "status": "accepted",
-    "builder": "Round-1 builder + fresh critic",
-    "brief": "P00 is accepted as review infrastructure after independent Unity reruns, validation, dashboard checks, and a locked blind baseline comparison.",
+    "roundLabel": "P10 · Round 001",
+    "status": "building",
+    "builder": "Fresh P10 round-1 builder",
+    "brief": "Replace only the mannequin hero proxy with one original authored anime-style hero mesh and coherent material set while the S01 seed, camera, arena, and render settings stay frozen.",
     "facts": [
-      "Two critic reruns and a clean-source recapture produced the same screenshot SHA-256 a54a917a…4a525aab and render-settings SHA-256 44c656be…73acc12.",
-      "Capture self-validation, the standalone validator, all 6 focused EditMode tests, dashboard lint/build, and all 4 dashboard tests passed.",
-      "The filed S01 bundle is a 1600×900 Unity 6000.5.4f1 / URP 17.5.0 capture produced with fixed seed 24007001 on Apple M2 / Metal.",
-      "The anonymous judge locked Reference 09 (B) over the current Unity frame (A): 76.67 versus 28.33 normalized visual score.",
-      "The visual loss is recorded without calling it a win. P00 passes only under its infrastructure exception; every later visual piece must satisfy the full blind-win gate.",
-      "The critic assigned exactly one next piece: P10 hero look development, replacing the mannequin proxy with one authored hero mesh and coherent material set."
+      "P00 is accepted as infrastructure; its blind visual baseline remains an explicit 28.33–76.67 loss.",
+      "The critic assigned P10 only: the raw mannequin hero and untextured focal read are the single gap under construction.",
+      "The builder is authoring one original fighter with layered hair, cloth, armor, leather, metal, skin, and a distinct weapon; no paid or restricted source asset is being republished.",
+      "Seed 24007001, the low-shoulder S01 camera, arena geometry, lighting, and render settings are frozen against the filed P00 baseline.",
+      "Required proof is a deterministic 1600×900 S01 capture, a neutral turntable, matching manifests and hashes, validation, and a fresh blind A/B.",
+      "No P10 score or preference exists yet; a separate fresh critic will judge only after the evidence bundle is filed."
     ],
     "evidenceFingerprint": {
       "gitRevision": "7fe9b937249a053f9c0d986e02d556eada33f733",
@@ -46,7 +46,7 @@
       "screenshotSha256": "a54a917a70b537ed34f57f9cdf13b877dc58b9d9579e2b2ec10f1e184a525aab",
       "captureContractSha256": "abf2238fa56fcb07030ce88f33adc45db2932c31e7a24a427d267bab5599f914"
     },
-    "nextGate": "Start P10 only: replace the central hero proxy while freezing the S01 seed, camera, arena, and render settings; file a neutral turntable and fresh deterministic blind-test evidence."
+    "nextGate": "Builder files the P10 S01 and neutral turntable with validation; then a fresh critic runs the game, randomizes the comparison, and locks its preference before reveal."
   },
   "canonicalCapture": {
     "shotId": "S01",
@@ -114,6 +114,22 @@
         "score": 28.33,
         "preference": "Reference 09 (B) over current Unity (A)",
         "primaryGap": "The current Unity frame remains a raw blockout: untextured primitive geometry and a mannequin-like hero prevent the focal character and world from reading as production-quality rendered content."
+      }
+    },
+    {
+      "round": 1,
+      "label": "P10 · Round 001",
+      "pieceId": "P10",
+      "phase": "Builder in progress",
+      "status": "building",
+      "date": "2026-07-30",
+      "builderBrief": "Replace only the central hero proxy with one authored hero mesh and coherent material set while freezing the S01 seed, camera, arena, and render settings.",
+      "evidence": "Builder is authoring the hero and P10-specific S01 plus neutral-turntable evidence. No capture has been filed yet.",
+      "critic": {
+        "status": "Not started",
+        "score": null,
+        "preference": null,
+        "primaryGap": null
       }
     }
   ],
@@ -237,7 +253,7 @@
       "id": "P10",
       "name": "Hero look development",
       "group": "Vertical slice",
-      "status": "queued",
+      "status": "building",
       "outcome": "The first anime-style fighter reads as a premium authored character at gameplay and finisher distance, with coherent skin, hair, cloth, metal, and weapon materials.",
       "requiredEvidence": [
         "S01, S02, and S06",

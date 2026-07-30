@@ -125,11 +125,16 @@ test("checked-in data contains the complete, honest P00–P25 ledger", async () 
     expectedNames,
   );
 
-  const [p00, ...queuedPieces] = dashboard.pieces;
+  const p00 = dashboard.pieces[0];
+  const p10 = dashboard.pieces[10];
+  const queuedPieces = dashboard.pieces.filter(
+    (piece) => piece.id !== "P00" && piece.id !== "P10",
+  );
   assert.equal(p00.status, "accepted");
-  assert.equal(dashboard.activeBuild.pieceId, "P00");
+  assert.equal(p10.status, "building");
+  assert.equal(dashboard.activeBuild.pieceId, "P10");
   assert.equal(dashboard.activeBuild.round, 1);
-  assert.equal(dashboard.activeBuild.status, p00.status);
+  assert.equal(dashboard.activeBuild.status, p10.status);
   assert.ok(queuedPieces.every((piece) => piece.status === "queued"));
 
   assert.equal(dashboard.canonicalCapture.camera, "Low shoulder");
@@ -156,7 +161,7 @@ test("checked-in data contains the complete, honest P00–P25 ledger", async () 
   assert.equal(dashboard.acceptance.maximum, 100);
   assert.match(dashboard.acceptance.p00Exception, /visual loss does not block/i);
 
-  assert.equal(dashboard.rounds.length, 1);
+  assert.equal(dashboard.rounds.length, 2);
   assert.equal(dashboard.rounds[0].pieceId, "P00");
   assert.equal(
     dashboard.rounds[0].critic.status,
@@ -168,6 +173,12 @@ test("checked-in data contains the complete, honest P00–P25 ledger", async () 
     "Reference 09 (B) over current Unity (A)",
   );
   assert.match(dashboard.rounds[0].critic.primaryGap, /raw blockout/i);
+  assert.equal(dashboard.rounds[1].pieceId, "P10");
+  assert.equal(dashboard.rounds[1].status, "building");
+  assert.equal(dashboard.rounds[1].critic.status, "Not started");
+  assert.equal(dashboard.rounds[1].critic.score, null);
+  assert.equal(dashboard.rounds[1].critic.preference, null);
+  assert.equal(dashboard.rounds[1].critic.primaryGap, null);
 });
 
 test("ledger fingerprint matches the filed Unity evidence", async () => {

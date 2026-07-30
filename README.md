@@ -11,9 +11,10 @@ and passed all 4 dashboard tests. Its anonymous visual baseline comparison was
 an honest loss: the current Unity frame scored `28.33/100` against Reference
 09 at `76.67/100`. No visual win is claimed.
 
-The critic assigned P10 next: replace the mannequin hero proxy with one authored
-anime-style hero mesh and coherent material set while freezing the S01 seed,
-camera, arena, and render settings. P01–P09 and P11–P25 remain queued.
+P10 round 1 is now building: a fresh builder is replacing the mannequin hero
+proxy with one original authored anime-style hero mesh and coherent material
+set while freezing the S01 seed, camera, arena, and render settings. P01–P09
+and P11–P25 remain queued; no P10 score or visual win is claimed.
 
 ## Requirements
 
