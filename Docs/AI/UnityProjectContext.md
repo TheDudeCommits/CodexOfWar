@@ -138,3 +138,21 @@
 - complete top-level `Assets` file inventory
 
 <!-- unity-onboarding:generated:end -->
+
+## Verified production state after onboarding
+
+- P00 is accepted as an infrastructure exception. Its deterministic S01
+  evidence, manifest, validator, and dashboard path are checked in; its visual
+  baseline loss remains explicit.
+- P10 round 001 added the first original hero candidate, isolated lookdev and
+  turntable scenes, deterministic capture commands, and focused contract
+  tests. Two fresh critic runs reproduced all six PNG hashes exactly; P10
+  standalone validation passed, focused EditMode passed 8/8, the full suite
+  passed 14/14, and the P00 byte gate passed.
+- P10 round 001 is not visually accepted. The blind judge scored ours `9/60`
+  versus Reference 09 at `49/60`; the critic scored ours `10/60` versus
+  `51/60`. Both preferred the reference.
+- P10 round 002 is active with one frozen gap: replace the disconnected
+  plastic-mannequin hero with one continuous anatomically credible authored
+  shell. The P00 bytes and P10 S01 seed, camera, arena, and render contract must
+  remain unchanged; round-001 evidence is immutable history.

@@ -1,0 +1,210 @@
+{
+    "schemaVersion": "1.0",
+    "piece": "P10",
+    "round": 1,
+    "gitRevision": "2dedf617ace47ea5dbb2cde1817d6119604842d2",
+    "workingTree": true,
+    "gitState": "working-tree",
+    "unityVersion": "6000.5.4f1",
+    "urpVersion": "17.5.0",
+    "renderPipelineAsset": "Assets/Settings/PC_RPAsset.asset",
+    "renderSettingsSha256": "44c656be7394557e9bc93929faa2256ac71fe0f208d0e1206901f58ae73acc12",
+    "p00BaselineScreenshotSha256": "a54a917a70b537ed34f57f9cdf13b877dc58b9d9579e2b2ec10f1e184a525aab",
+    "p00BaselineRenderSettingsSha256": "44c656be7394557e9bc93929faa2256ac71fe0f208d0e1206901f58ae73acc12",
+    "p00SceneSha256Before": "66ad8694112ee79295f66f7c0609f76b0a628ce4f8f0a60957caf6c175a6748b",
+    "p00SceneSha256After": "66ad8694112ee79295f66f7c0609f76b0a628ce4f8f0a60957caf6c175a6748b",
+    "frozenEnvironmentSha256P00": "691a0aff44cc11e10d518052f4468b58ffd0d634d3e63305c0b6706adca5c414",
+    "frozenEnvironmentSha256P10": "691a0aff44cc11e10d518052f4468b58ffd0d634d3e63305c0b6706adca5c414",
+    "baselineProfilePersistenceNote": "The filed P00 volume contains null serialized component references; P10 persists an isolated profile with the original P00 builder grade and leaves every P00 byte untouched.",
+    "scene": "Assets/CodexOfWar/Review/Scenes/P10_HeroLookdev.unity",
+    "seed": 24007001,
+    "preset": "S01_Explore",
+    "resolution": {
+        "width": 1600,
+        "height": 900
+    },
+    "camera": {
+        "positionX": -5.25,
+        "positionY": 3.0199999809265138,
+        "positionZ": -13.800000190734864,
+        "rotationX": 0.029533343389630319,
+        "rotationY": 0.19760645925998689,
+        "rotationZ": -0.005956185050308704,
+        "rotationW": 0.9798184037208557,
+        "fieldOfView": 50.0,
+        "nearClip": 0.10000000149011612,
+        "farClip": 105.0,
+        "hdr": true,
+        "msaa": true,
+        "postProcessing": true,
+        "antialiasing": "SubpixelMorphologicalAntiAliasing",
+        "antialiasingQuality": "High",
+        "dithering": true,
+        "occlusionCulling": false
+    },
+    "capturedAtUtc": "2026-07-30T19:46:51.517Z",
+    "machineProfile": {
+        "operatingSystem": "Mac OS X 26.5.1",
+        "deviceModel": "Mac14,2",
+        "processor": "Apple M2",
+        "systemMemoryMb": 8192,
+        "graphicsDevice": "Apple M2",
+        "graphicsApi": "Metal"
+    },
+    "screenshotRelativePath": "captures/P10/round-001/S01_Explore.png",
+    "screenshotSha256": "5c7317c59b610f2d6ae4c2c6e89cf6828a964f336a20176592100435eb180dcf",
+    "captureContractSha256": "4b0cbf30a29fa7ca0824780d9de90ce29ed78d10572fd2b98c7665b1fc91efa3",
+    "heroAssetPath": "Assets/CodexOfWar/Heroes/P10/Models/P10_AstraValeHero.fbx",
+    "heroAssetGuid": "57a20214e3f244431b9d9bb6684a14e7",
+    "heroMeshCount": 2,
+    "heroRendererCount": 2,
+    "heroTriangleCount": 82906,
+    "heroMaterialCount": 5,
+    "heroScreenHeightFraction": 0.29820388555526736,
+    "heroMaterialNames": [
+        "P10_ClothLeather",
+        "P10_Glow",
+        "P10_Hair",
+        "P10_Metal",
+        "P10_Skin"
+    ],
+    "proxyLeakageDetected": false,
+    "sourceAssets": [
+        {
+            "repositoryPath": "Tools/Blender/P10_AstraValeHero.py",
+            "unityAssetPath": "",
+            "sha256": "ddbf261f4af9da3bd23376fd4e2b10bbcdb27f0fc7d7b0cda03a92b727a348c3",
+            "origin": "Original deterministic Blender 5.2 Python authorship",
+            "license": "Original project work; repository redistribution permitted",
+            "modificationRecord": "Creates all 120 modular meshes, material slots, silhouette details, editable blend, and FBX."
+        },
+        {
+            "repositoryPath": "ArtSource/P10/P10_AstraValeHero.blend",
+            "unityAssetPath": "",
+            "sha256": "fe1da7c00f88300f081a5f9b4e65fcf98ab8d00fd8786d7b2f2a480d645902a5",
+            "origin": "Generated editable source from the checked-in P10 Blender script",
+            "license": "Original project work; repository redistribution permitted",
+            "modificationRecord": "Editable Blender 5.2 source with named modular meshes and materials."
+        },
+        {
+            "repositoryPath": "game/Assets/CodexOfWar/Heroes/P10/Models/P10_AstraValeHero.fbx",
+            "unityAssetPath": "Assets/CodexOfWar/Heroes/P10/Models/P10_AstraValeHero.fbx",
+            "sha256": "e301584e65e5b7c4c005771b93e5ec26e6342ed4af6b89b2db199cd017927af9",
+            "origin": "Deterministic FBX export from original checked-in Blender source",
+            "license": "Original project work; repository redistribution permitted",
+            "modificationRecord": "Unity delivery mesh; meter units, authored normals, no animation or external dependencies."
+        },
+        {
+            "repositoryPath": "game/Assets/CodexOfWar/Heroes/P10/Textures/P10_ClothLeather_Atlas.png",
+            "unityAssetPath": "Assets/CodexOfWar/Heroes/P10/Textures/P10_ClothLeather_Atlas.png",
+            "sha256": "9874df31839efdce1948fc6fa433ccc7f264f91a7475ec31e15072d45a61a770",
+            "origin": "Original procedural atlas generated by the checked-in Blender script",
+            "license": "Original project work; repository redistribution permitted",
+            "modificationRecord": "Deterministic palette atlas supplying authored color-family breakup."
+        },
+        {
+            "repositoryPath": "game/Assets/CodexOfWar/Heroes/P10/Textures/P10_Glow_Atlas.png",
+            "unityAssetPath": "Assets/CodexOfWar/Heroes/P10/Textures/P10_Glow_Atlas.png",
+            "sha256": "6e5338fd768bb0f9d73523951753a59b88194c4f31524e3c71139c5270d5911f",
+            "origin": "Original procedural atlas generated by the checked-in Blender script",
+            "license": "Original project work; repository redistribution permitted",
+            "modificationRecord": "Deterministic palette atlas supplying authored color-family breakup."
+        },
+        {
+            "repositoryPath": "game/Assets/CodexOfWar/Heroes/P10/Textures/P10_Hair_Atlas.png",
+            "unityAssetPath": "Assets/CodexOfWar/Heroes/P10/Textures/P10_Hair_Atlas.png",
+            "sha256": "b274dbbf6f6dbe3eb42bfb4a315dba53496411707f758d2e15a428d11ce42741",
+            "origin": "Original procedural atlas generated by the checked-in Blender script",
+            "license": "Original project work; repository redistribution permitted",
+            "modificationRecord": "Deterministic palette atlas supplying authored color-family breakup."
+        },
+        {
+            "repositoryPath": "game/Assets/CodexOfWar/Heroes/P10/Textures/P10_Metal_Atlas.png",
+            "unityAssetPath": "Assets/CodexOfWar/Heroes/P10/Textures/P10_Metal_Atlas.png",
+            "sha256": "f0a31f7dc7d9d549bb003a6a9b81dc2169ddd0a260c37eb2e87b32552f582a83",
+            "origin": "Original procedural atlas generated by the checked-in Blender script",
+            "license": "Original project work; repository redistribution permitted",
+            "modificationRecord": "Deterministic palette atlas supplying authored color-family breakup."
+        },
+        {
+            "repositoryPath": "game/Assets/CodexOfWar/Heroes/P10/Textures/P10_Skin_Atlas.png",
+            "unityAssetPath": "Assets/CodexOfWar/Heroes/P10/Textures/P10_Skin_Atlas.png",
+            "sha256": "1c349d65798bf93199a8bb1e052ce67f5a7a28a800f109a50eef13c9f592ad26",
+            "origin": "Original procedural atlas generated by the checked-in Blender script",
+            "license": "Original project work; repository redistribution permitted",
+            "modificationRecord": "Deterministic palette atlas supplying authored color-family breakup."
+        }
+    ],
+    "turntableImages": [
+        {
+            "label": "Front",
+            "relativePath": "captures/P10/round-001/Turntable_Front.png",
+            "sha256": "c2f39cbb99120f2d6f420f20167fecce668084cfbb93afc698746fedc834f7bd",
+            "width": 1600,
+            "height": 900,
+            "cameraPositionX": 0.0,
+            "cameraPositionY": 1.9500000476837159,
+            "cameraPositionZ": 8.199999809265137,
+            "targetX": 0.0,
+            "targetY": 1.5399999618530274,
+            "targetZ": 0.0,
+            "fieldOfView": 35.0
+        },
+        {
+            "label": "Three-quarter",
+            "relativePath": "captures/P10/round-001/Turntable_ThreeQuarter.png",
+            "sha256": "629ff47b218a5b52e1817d1d328d2a628691a498dcdfd1b56f75863ac6b64a12",
+            "width": 1600,
+            "height": 900,
+            "cameraPositionX": -5.798299789428711,
+            "cameraPositionY": 2.049999952316284,
+            "cameraPositionZ": 5.798299789428711,
+            "targetX": 0.0,
+            "targetY": 1.5399999618530274,
+            "targetZ": 0.0,
+            "fieldOfView": 35.0
+        },
+        {
+            "label": "Back",
+            "relativePath": "captures/P10/round-001/Turntable_Back.png",
+            "sha256": "71d49549414e565513600bc2c5ba69c83a0127952f794844bbd667d94964c30b",
+            "width": 1600,
+            "height": 900,
+            "cameraPositionX": 0.0,
+            "cameraPositionY": 1.9500000476837159,
+            "cameraPositionZ": -8.199999809265137,
+            "targetX": 0.0,
+            "targetY": 1.5399999618530274,
+            "targetZ": 0.0,
+            "fieldOfView": 35.0
+        },
+        {
+            "label": "Profile",
+            "relativePath": "captures/P10/round-001/Turntable_Profile.png",
+            "sha256": "10f091dd2d21b29ff79ac2c5345e84b245863f9f611e1df3be575a64dec24f2c",
+            "width": 1600,
+            "height": 900,
+            "cameraPositionX": 8.199999809265137,
+            "cameraPositionY": 1.9500000476837159,
+            "cameraPositionZ": 0.0,
+            "targetX": 0.0,
+            "targetY": 1.5399999618530274,
+            "targetZ": 0.0,
+            "fieldOfView": 35.0
+        },
+        {
+            "label": "Four-view contact sheet",
+            "relativePath": "captures/P10/round-001/Turntable_ContactSheet.png",
+            "sha256": "c4acdf3d6a3e206d4181735831c59a9d05e7a9f3247692fd146e38cb3f1378b9",
+            "width": 1600,
+            "height": 900,
+            "cameraPositionX": 0.0,
+            "cameraPositionY": 0.0,
+            "cameraPositionZ": 0.0,
+            "targetX": 0.0,
+            "targetY": 0.0,
+            "targetZ": 0.0,
+            "fieldOfView": 0.0
+        }
+    ]
+}

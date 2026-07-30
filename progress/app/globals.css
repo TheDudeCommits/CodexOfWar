@@ -768,6 +768,199 @@ summary:focus-visible {
   gap: 20px;
 }
 
+.evidence-bundle {
+  margin-top: 20px;
+  border: 1px solid var(--line);
+  background: var(--panel);
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(360px, 0.7fr);
+}
+
+.evidence-visual {
+  padding: clamp(22px, 3vw, 38px);
+  border-right: 1px solid var(--line);
+}
+
+.evidence-visual-header {
+  min-height: 52px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.evidence-visual-header h3 {
+  margin: 8px 0 0;
+  font-size: clamp(1.2rem, 2vw, 1.8rem);
+  font-weight: 620;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.turntable-link {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border: 1px solid var(--line-strong);
+  background: var(--ink-soft);
+  display: block;
+}
+
+.turntable-link object {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.asset-hash {
+  margin-top: 14px;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 12px;
+  color: var(--paper-dim);
+  font: 550 0.52rem/1.5 var(--font-mono);
+}
+
+.asset-hash span {
+  color: var(--ember);
+  letter-spacing: 0.06em;
+}
+
+.asset-hash code {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.evidence-ledger {
+  padding: clamp(24px, 3vw, 42px);
+}
+
+.evidence-ledger-header {
+  margin-bottom: 26px;
+  padding-bottom: 22px;
+  border-bottom: 1px solid var(--line);
+}
+
+.evidence-ledger-header strong {
+  margin-top: 9px;
+  color: var(--blue);
+  display: block;
+  font-size: 0.86rem;
+  font-weight: 620;
+}
+
+.evidence-file-hashes {
+  margin: 0 0 28px;
+}
+
+.evidence-file-hashes > div {
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.evidence-file-hashes dt {
+  margin-bottom: 6px;
+  color: var(--paper-dim);
+  font: 600 0.52rem/1.3 var(--font-mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.evidence-file-hashes dd {
+  margin: 0;
+  overflow: hidden;
+  color: var(--paper-soft);
+  font: 530 0.55rem/1.4 var(--font-mono);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.evidence-metrics {
+  margin: 0 0 28px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.evidence-metrics > div {
+  min-height: 76px;
+  padding: 13px;
+  border: 1px solid var(--line);
+}
+
+.evidence-metrics dt {
+  margin-bottom: 8px;
+  color: var(--paper-dim);
+  font: 600 0.52rem/1.3 var(--font-mono);
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.evidence-metrics dd {
+  margin: 0;
+  color: var(--paper);
+  font-size: 1.18rem;
+  font-weight: 650;
+  letter-spacing: -0.035em;
+}
+
+.evidence-checks > span,
+.evidence-limitations > span {
+  color: var(--paper-dim);
+  font: 600 0.54rem/1 var(--font-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.evidence-checks ul,
+.evidence-limitations ul {
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.evidence-checks li,
+.evidence-limitations li {
+  position: relative;
+  padding: 8px 0 8px 18px;
+  border-top: 1px solid var(--line);
+  color: var(--paper-soft);
+  font-size: 0.67rem;
+  line-height: 1.45;
+}
+
+.evidence-checks li::before,
+.evidence-limitations li::before {
+  position: absolute;
+  top: 13px;
+  left: 1px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--green);
+  content: "";
+}
+
+.evidence-limitations {
+  margin-top: 24px;
+}
+
+.evidence-limitations li::before {
+  border: 1px solid var(--yellow);
+  background: transparent;
+}
+
+.evidence-bundle-links {
+  margin-top: 26px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+  justify-content: flex-start;
+}
+
 .builder-brief,
 .state-card,
 .contract-card,
@@ -1655,8 +1848,14 @@ footer > a:hover {
   }
 
   .active-grid,
+  .evidence-bundle,
   .contract-grid {
     grid-template-columns: 1fr;
+  }
+
+  .evidence-visual {
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
   }
 
   .machine-contract {

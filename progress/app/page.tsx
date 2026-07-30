@@ -17,6 +17,12 @@ type Piece = {
   requiredEvidence: string[];
 };
 
+type EvidenceAsset = {
+  label: string;
+  path: string;
+  sha256: string;
+};
+
 type Dashboard = {
   project: {
     name: string;
@@ -37,6 +43,33 @@ type Dashboard = {
     builder: string;
     brief: string;
     facts: string[];
+    evidenceFingerprint: {
+      gitRevision: string;
+      gitState: string;
+      unityVersion: string;
+      urpVersion: string;
+      scene: string;
+      seed: number;
+      preset: string;
+      resolution: string;
+      capturedAtUtc: string;
+      renderSettingsSha256: string;
+      screenshotSha256: string;
+      captureContractSha256: string;
+    };
+    evidenceBundle: {
+      roundLabel: string;
+      status: string;
+      manifestPath: string;
+      s01: EvidenceAsset;
+      turntable: EvidenceAsset;
+      metrics: Array<{
+        label: string;
+        value: string;
+      }>;
+      checks: string[];
+      limitations: string[];
+    };
     nextGate: string;
   };
   canonicalCapture: {
@@ -45,6 +78,7 @@ type Dashboard = {
     purpose: string;
     camera: string;
     heroHeight: string;
+    measuredHeroHeight: string;
     sceneRead: string;
     benchmarkId: string;
     benchmarkPolicy: string;
@@ -77,9 +111,11 @@ type Dashboard = {
     date: string;
     builderBrief: string;
     evidence: string;
+    evidenceLinks: string[];
     critic: {
       status: string;
       score: number | null;
+      scoreLabel: string | null;
       preference: string | null;
       primaryGap: string | null;
     };
@@ -310,7 +346,7 @@ export default function Home() {
                 />
                 <div className="capture-overlay" aria-hidden="true">
                   <span>{dashboard.activeBuild.pieceId}</span>
-                  <span>{dashboard.activeBuild.roundLabel}</span>
+                  <span>{dashboard.activeBuild.evidenceBundle.roundLabel}</span>
                   <span>{dashboard.project.captureResolution}</span>
                 </div>
               </div>
@@ -319,13 +355,16 @@ export default function Home() {
                 <div className="capture-purpose">
                   <span>{capture.purpose}</span>
                   <strong>
-                    {capture.camera} · hero {capture.heroHeight}
+                    {capture.camera} · hero measured{" "}
+                    {capture.measuredHeroHeight}
                   </strong>
                 </div>
                 <div className="evidence-links">
                   <a href={capture.capturePath}>Open capture</a>
                   <a href={capture.manifestPath}>Open manifest</a>
-                  <a href={capture.latestManifestPath}>Latest manifest</a>
+                  <a href={capture.latestManifestPath}>
+                    P00-pinned latest
+                  </a>
                 </div>
               </figcaption>
             </figure>
@@ -342,7 +381,11 @@ export default function Home() {
             <div>
               <dt>Review-ready</dt>
               <dd>{counts["review-ready"]}</dd>
-              <small>Awaiting blind critic</small>
+              <small>
+                {counts["review-ready"] > 0
+                  ? "Awaiting blind critic"
+                  : "No piece waiting"}
+              </small>
             </div>
             <div>
               <dt>Accepted</dt>
@@ -388,7 +431,11 @@ export default function Home() {
                 <span>{dashboard.activeBuild.builder}</span>
                 <span>{dashboard.activeBuild.roundLabel}</span>
               </div>
-              <h3>Wire the proof before building the spectacle.</h3>
+              <h3>
+                {dashboard.activeBuild.status === "revising"
+                  ? "Round rejected. Rebuild in progress."
+                  : "Proof filed. Critic in progress."}
+              </h3>
               <p className="brief-copy">{dashboard.activeBuild.brief}</p>
 
               <ol className="builder-facts">
@@ -435,6 +482,101 @@ export default function Home() {
               </p>
             </aside>
           </div>
+
+          <article className="evidence-bundle" aria-labelledby="evidence-heading">
+            <div className="evidence-visual">
+              <div className="evidence-visual-header">
+                <div>
+                  <p className="panel-label">Neutral turntable</p>
+                  <h3 id="evidence-heading">
+                    {dashboard.activeBuild.evidenceBundle.turntable.label}
+                  </h3>
+                </div>
+                <span className="availability is-filed">
+                  <span aria-hidden="true" />
+                  Filed
+                </span>
+              </div>
+              <a
+                className="turntable-link"
+                href={dashboard.activeBuild.evidenceBundle.turntable.path}
+              >
+                <object
+                  aria-label="P10 four-view turntable contact sheet"
+                  data={dashboard.activeBuild.evidenceBundle.turntable.path}
+                  type="image/png"
+                />
+              </a>
+              <div className="asset-hash">
+                <span>SHA-256</span>
+                <code>
+                  {dashboard.activeBuild.evidenceBundle.turntable.sha256}
+                </code>
+              </div>
+            </div>
+
+            <div className="evidence-ledger">
+              <div className="evidence-ledger-header">
+                <p className="panel-label">Latest filed evidence state</p>
+                <strong>{dashboard.activeBuild.evidenceBundle.status}</strong>
+              </div>
+
+              <dl className="evidence-file-hashes">
+                {[dashboard.activeBuild.evidenceBundle.s01,
+                  dashboard.activeBuild.evidenceBundle.turntable].map(
+                  (asset) => (
+                    <div key={asset.path}>
+                      <dt>{asset.label} SHA-256</dt>
+                      <dd>
+                        <code>{asset.sha256}</code>
+                      </dd>
+                    </div>
+                  ),
+                )}
+              </dl>
+
+              <dl className="evidence-metrics">
+                {dashboard.activeBuild.evidenceBundle.metrics.map((metric) => (
+                  <div key={metric.label}>
+                    <dt>{metric.label}</dt>
+                    <dd>{metric.value}</dd>
+                  </div>
+                ))}
+              </dl>
+
+              <div className="evidence-checks">
+                <span>Verified</span>
+                <ul>
+                  {dashboard.activeBuild.evidenceBundle.checks.map((check) => (
+                    <li key={check}>{check}</li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="evidence-limitations">
+                <span>Honest limits</span>
+                <ul>
+                  {dashboard.activeBuild.evidenceBundle.limitations.map(
+                    (limitation) => (
+                      <li key={limitation}>{limitation}</li>
+                    ),
+                  )}
+                </ul>
+              </div>
+
+              <div className="evidence-links evidence-bundle-links">
+                <a href={dashboard.activeBuild.evidenceBundle.s01.path}>
+                  Open S01
+                </a>
+                <a href={dashboard.activeBuild.evidenceBundle.turntable.path}>
+                  Open turntable
+                </a>
+                <a href={dashboard.activeBuild.evidenceBundle.manifestPath}>
+                  Open P10 manifest
+                </a>
+              </div>
+            </div>
+          </article>
         </section>
 
         <section
@@ -592,7 +734,10 @@ export default function Home() {
 
           <div className="round-list">
             {dashboard.rounds.map((round) => (
-              <article className="round-card" key={round.round}>
+              <article
+                className="round-card"
+                key={`${round.pieceId}-${round.round}`}
+              >
                 <div className="round-index" aria-hidden="true">
                   {String(round.round).padStart(2, "0")}
                 </div>
@@ -613,11 +758,11 @@ export default function Home() {
                     <strong>{round.evidence}</strong>
                   </div>
                   <div className="round-file-links">
-                    <a href={capture.capturePath}>{capture.capturePath}</a>
-                    <a href={capture.manifestPath}>{capture.manifestPath}</a>
-                    <a href={capture.latestManifestPath}>
-                      {capture.latestManifestPath}
-                    </a>
+                    {round.evidenceLinks.map((path) => (
+                      <a href={path} key={path}>
+                        {path}
+                      </a>
+                    ))}
                   </div>
                 </div>
 
@@ -627,12 +772,10 @@ export default function Home() {
                     <dd>{round.critic.status}</dd>
                   </div>
                   <div>
-                    <dt>Score</dt>
-                    <dd>
-                      {round.critic.score === null
-                        ? "— Not scored"
-                        : `${round.critic.score}/100`}
-                    </dd>
+                  <dt>Score</dt>
+                  <dd>
+                      {round.critic.scoreLabel ?? "— Not scored"}
+                  </dd>
                   </div>
                   <div>
                     <dt>Preference</dt>

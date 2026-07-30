@@ -11,10 +11,19 @@ and passed all 4 dashboard tests. Its anonymous visual baseline comparison was
 an honest loss: the current Unity frame scored `28.33/100` against Reference
 09 at `76.67/100`. No visual win is claimed.
 
-P10 round 1 is now building: a fresh builder is replacing the mannequin hero
-proxy with one original authored anime-style hero mesh and coherent material
-set while freezing the S01 seed, camera, arena, and render settings. P01–P09
-and P11–P25 remain queued; no P10 score or visual win is claimed.
+P10 round 1 is mechanically reproducible but visually rejected. A fresh blind
+judge scored our S01 still `9/60` against Reference 09 at `49/60`; the critic
+independently scored it `10/60` against `51/60`. Both preferred the reference,
+and no `/100` score is claimed because motion, contact, crowd behavior, and
+audio were not scoreable from the filed stills.
+
+P10 round 2 is now revising the critic's one locked gap: replace the
+disconnected plastic-mannequin hero with one continuous, anatomically credible
+authored shell whose face, hands, feet, joints, layered costume, weapon, and
+skin/hair/cloth/metal responses survive the frozen S01 and turntable cameras.
+The same evidence must be refiled with S02 and S06, and character/material
+quality must clear at least `8/13` before another blind review. P01–P09 and
+P11–P25 remain queued; no P10 visual win is claimed.
 
 ## Requirements
 

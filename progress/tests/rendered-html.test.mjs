@@ -49,9 +49,13 @@ test("server-renders the production evidence ledger", async () => {
 
   assert.match(
     html,
-    /href="\/captures\/P00\/round-001\/S01_Explore\.png"/,
+    /href="\/captures\/P10\/round-001\/S01_Explore\.png"/,
   );
-  assert.match(html, /href="\/data\/P00-round-001-manifest\.json"/);
+  assert.match(
+    html,
+    /href="\/captures\/P10\/round-001\/Turntable_ContactSheet\.png"/,
+  );
+  assert.match(html, /href="\/data\/P10-round-001-manifest\.json"/);
   assert.match(html, /href="\/data\/capture-manifest-latest\.json"/);
   assert.doesNotMatch(
     html,
@@ -62,6 +66,25 @@ test("server-renders the production evidence ledger", async () => {
   assert.match(html, /Low shoulder/);
   assert.match(html, /24–32%/);
   assert.match(html, /Reference 09/);
+  assert.match(html, /29\.82%/);
+  assert.match(html, /82,906/);
+  assert.match(html, /P10 · Round 002/);
+  assert.match(html, /Round rejected\. Rebuild in progress\./);
+  assert.match(html, /Round 001 rejected · mechanically reproducible/);
+  assert.match(
+    html,
+    /5c7317c59b610f2d6ae4c2c6e89cf6828a964f336a20176592100435eb180dcf/,
+  );
+  assert.match(
+    html,
+    /c4acdf3d6a3e206d4181735831c59a9d05e7a9f3247692fd146e38cb3f1378b9/,
+  );
+  assert.match(html, /all six image hashes/i);
+  assert.match(html, /Focused EditMode 8\/8 · full suite 14\/14/);
+  assert.match(html, /Blind visual subtotal: ours 9\/60 · Reference 09 49\/60/);
+  assert.match(html, /Critic visual subtotal: ours 10\/60 · Reference 09 51\/60/);
+  assert.match(html, /Character\/material: 2\/13 · required floor 8\/13/);
+  assert.match(html, /Static lookdev only; no rig, S02, or S06/);
   assert.match(html, /80/);
   assert.match(compactHtml, /100 minimum total/);
   assert.match(html, /P00 exception/);
@@ -72,6 +95,13 @@ test("server-renders the production evidence ledger", async () => {
   assert.match(html, /28\.33/);
   assert.match(html, /Reference 09 \(B\) over current Unity \(A\)/);
   assert.match(html, /raw blockout/);
+  assert.match(html, /Blind 9\/60 · critic 10\/60/);
+  assert.match(
+    html,
+    /Reference 09 \(B\) over P10 round-001 \(A\)/,
+  );
+  assert.match(html, /continuous, anatomically credible authored shell/i);
+  assert.match(html, /No round-002 capture or score is filed/);
   assert.doesNotMatch(html, /codex-preview|Building your site/i);
   assert.doesNotMatch(html, /react-loading-skeleton/);
 
@@ -131,9 +161,9 @@ test("checked-in data contains the complete, honest P00–P25 ledger", async () 
     (piece) => piece.id !== "P00" && piece.id !== "P10",
   );
   assert.equal(p00.status, "accepted");
-  assert.equal(p10.status, "building");
+  assert.equal(p10.status, "revising");
   assert.equal(dashboard.activeBuild.pieceId, "P10");
-  assert.equal(dashboard.activeBuild.round, 1);
+  assert.equal(dashboard.activeBuild.round, 2);
   assert.equal(dashboard.activeBuild.status, p10.status);
   assert.ok(queuedPieces.every((piece) => piece.status === "queued"));
 
@@ -145,11 +175,11 @@ test("checked-in data contains the complete, honest P00–P25 ledger", async () 
   assert.equal(dashboard.canonicalCapture.benchmarkId, "Reference 09");
   assert.equal(
     dashboard.canonicalCapture.capturePath,
-    "/captures/P00/round-001/S01_Explore.png",
+    "/captures/P10/round-001/S01_Explore.png",
   );
   assert.equal(
     dashboard.canonicalCapture.manifestPath,
-    "/data/P00-round-001-manifest.json",
+    "/data/P10-round-001-manifest.json",
   );
   assert.equal(
     dashboard.canonicalCapture.latestManifestPath,
@@ -161,7 +191,7 @@ test("checked-in data contains the complete, honest P00–P25 ledger", async () 
   assert.equal(dashboard.acceptance.maximum, 100);
   assert.match(dashboard.acceptance.p00Exception, /visual loss does not block/i);
 
-  assert.equal(dashboard.rounds.length, 2);
+  assert.equal(dashboard.rounds.length, 3);
   assert.equal(dashboard.rounds[0].pieceId, "P00");
   assert.equal(
     dashboard.rounds[0].critic.status,
@@ -174,18 +204,53 @@ test("checked-in data contains the complete, honest P00–P25 ledger", async () 
   );
   assert.match(dashboard.rounds[0].critic.primaryGap, /raw blockout/i);
   assert.equal(dashboard.rounds[1].pieceId, "P10");
-  assert.equal(dashboard.rounds[1].status, "building");
-  assert.equal(dashboard.rounds[1].critic.status, "Not started");
-  assert.equal(dashboard.rounds[1].critic.score, null);
-  assert.equal(dashboard.rounds[1].critic.preference, null);
-  assert.equal(dashboard.rounds[1].critic.primaryGap, null);
+  assert.equal(dashboard.rounds[1].status, "criticized");
+  assert.equal(
+    dashboard.rounds[1].critic.status,
+    "Rejected · fresh blind judge and critic agree",
+  );
+  assert.equal(dashboard.rounds[1].critic.score, 9);
+  assert.equal(
+    dashboard.rounds[1].critic.scoreLabel,
+    "Blind 9/60 · critic 10/60",
+  );
+  assert.equal(
+    dashboard.rounds[1].critic.preference,
+    "Reference 09 (B) over P10 round-001 (A)",
+  );
+  assert.match(
+    dashboard.rounds[1].critic.primaryGap,
+    /continuous, anatomically credible authored shell/i,
+  );
+  assert.equal(dashboard.rounds[2].pieceId, "P10");
+  assert.equal(dashboard.rounds[2].round, 2);
+  assert.equal(dashboard.rounds[2].status, "building");
+  assert.equal(
+    dashboard.rounds[2].critic.status,
+    "Not started · builder active",
+  );
+  assert.equal(dashboard.rounds[2].critic.score, null);
+  assert.equal(dashboard.rounds[2].critic.scoreLabel, null);
+  assert.equal(dashboard.rounds[2].critic.preference, null);
+  assert.equal(dashboard.rounds[2].critic.primaryGap, null);
 });
 
-test("ledger fingerprint matches the filed Unity evidence", async () => {
-  const [dashboard, manifest, latestManifest, screenshot] = await Promise.all([
+test("P10 evidence is filed while the global latest manifest remains P00-pinned", async () => {
+  const [
+    dashboard,
+    p00Manifest,
+    p10Manifest,
+    latestManifest,
+    p10Screenshot,
+    turntableContact,
+  ] = await Promise.all([
     readFile(dataUrl, "utf8").then(JSON.parse),
     readFile(
       new URL("../public/data/P00-round-001-manifest.json", import.meta.url),
+      "utf8",
+    ).then(JSON.parse),
+    readFile(
+      new URL("../public/data/P10-round-001-manifest.json", import.meta.url),
       "utf8",
     ).then(JSON.parse),
     readFile(
@@ -194,29 +259,69 @@ test("ledger fingerprint matches the filed Unity evidence", async () => {
     ).then(JSON.parse),
     readFile(
       new URL(
-        "../public/captures/P00/round-001/S01_Explore.png",
+        "../public/captures/P10/round-001/S01_Explore.png",
+        import.meta.url,
+      ),
+    ),
+    readFile(
+      new URL(
+        "../public/captures/P10/round-001/Turntable_ContactSheet.png",
         import.meta.url,
       ),
     ),
   ]);
   const fingerprint = dashboard.activeBuild.evidenceFingerprint;
-  const screenshotHash = createHash("sha256").update(screenshot).digest("hex");
+  const screenshotHash = createHash("sha256")
+    .update(p10Screenshot)
+    .digest("hex");
+  const turntableHash = createHash("sha256")
+    .update(turntableContact)
+    .digest("hex");
 
-  assert.deepEqual(latestManifest, manifest);
-  assert.equal(manifest.piece, "P00");
-  assert.equal(manifest.round, 1);
-  assert.equal(manifest.preset, "S01_Explore");
-  assert.deepEqual(manifest.resolution, { width: 1600, height: 900 });
-  assert.equal(manifest.screenshotRelativePath, dashboard.canonicalCapture.capturePath.slice(1));
-  assert.equal(screenshotHash, manifest.screenshotSha256);
-  assert.equal(fingerprint.screenshotSha256, manifest.screenshotSha256);
-  assert.equal(fingerprint.captureContractSha256, manifest.captureContractSha256);
-  assert.equal(fingerprint.renderSettingsSha256, manifest.renderSettingsSha256);
-  assert.equal(fingerprint.gitRevision, manifest.gitRevision);
-  assert.equal(fingerprint.gitState, manifest.gitState);
-  assert.equal(fingerprint.seed, manifest.seed);
-  assert.equal(fingerprint.preset, manifest.preset);
-  assert.equal(fingerprint.capturedAtUtc, manifest.capturedAtUtc);
+  assert.deepEqual(latestManifest, p00Manifest);
+  assert.equal(latestManifest.piece, "P00");
+  assert.equal(p10Manifest.piece, "P10");
+  assert.equal(p10Manifest.round, 1);
+  assert.equal(p10Manifest.preset, "S01_Explore");
+  assert.deepEqual(p10Manifest.resolution, { width: 1600, height: 900 });
+  assert.equal(
+    p10Manifest.screenshotRelativePath,
+    dashboard.canonicalCapture.capturePath.slice(1),
+  );
+  assert.equal(screenshotHash, p10Manifest.screenshotSha256);
+  assert.equal(
+    turntableHash,
+    dashboard.activeBuild.evidenceBundle.turntable.sha256,
+  );
+  assert.equal(fingerprint.screenshotSha256, p10Manifest.screenshotSha256);
+  assert.equal(
+    fingerprint.captureContractSha256,
+    p10Manifest.captureContractSha256,
+  );
+  assert.equal(
+    fingerprint.renderSettingsSha256,
+    p10Manifest.renderSettingsSha256,
+  );
+  assert.equal(fingerprint.gitRevision, p10Manifest.gitRevision);
+  assert.equal(fingerprint.gitState, p10Manifest.gitState);
+  assert.equal(fingerprint.seed, p10Manifest.seed);
+  assert.equal(fingerprint.preset, p10Manifest.preset);
+  assert.equal(fingerprint.capturedAtUtc, p10Manifest.capturedAtUtc);
+  assert.equal(p10Manifest.heroScreenHeightFraction, 0.29820388555526736);
+  assert.equal(p10Manifest.heroMeshCount, 2);
+  assert.equal(p10Manifest.heroRendererCount, 2);
+  assert.equal(p10Manifest.heroTriangleCount, 82906);
+  assert.equal(p10Manifest.heroMaterialCount, 5);
+
+  for (const turntableImage of p10Manifest.turntableImages) {
+    const image = await readFile(
+      new URL(`../public/${turntableImage.relativePath}`, import.meta.url),
+    );
+    assert.equal(
+      createHash("sha256").update(image).digest("hex"),
+      turntableImage.sha256,
+    );
+  }
 });
 
 test("starter-only preview code and dependency are gone", async () => {

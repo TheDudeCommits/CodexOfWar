@@ -13,6 +13,23 @@ A failed blind comparison always returns the piece to `revising` with exactly
 one primary gap. Secondary observations stay in the review record but do not
 expand that round's assignment.
 
+## Current round
+
+P10 round 001 passed its mechanical gates but failed its visual gate on
+2026-07-31. Two fresh critic captures reproduced all six PNG hashes; standalone
+validation passed, focused EditMode passed 8/8, the full suite passed 14/14,
+and P00 stayed byte-identical. The randomized blind judge scored ours `9/60`
+and Reference 09 `49/60`; the critic scored ours `10/60` and the reference
+`51/60`. Both preferred the reference.
+
+P10 is therefore `revising` in round 002 with one assignment only: replace the
+disconnected plastic-mannequin hero with one continuous, anatomically credible
+authored shell whose face, hands, feet, joints, layered costume, weapon, and
+distinct skin, hair, cloth, and metal responses survive the frozen S01 and
+four-view cameras without clipped highlights. Round 002 must also file S02 and
+S06, and the next fresh blind review must score character/material quality at
+least `8/13`. No `/100` score or visual win is claimed from round 001.
+
 ## Vertical-slice pieces
 
 | ID | Piece | Independently judgeable outcome | Required evidence |

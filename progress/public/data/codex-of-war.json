@@ -2,7 +2,7 @@
   "project": {
     "name": "Codex of War",
     "surface": "Production evidence ledger",
-    "updated": "2026-07-30",
+    "updated": "2026-07-31",
     "platform": "Native Apple Silicon / macOS",
     "engine": "Unity 6 URP",
     "simulation": "60 Hz",
@@ -19,34 +19,81 @@
   ],
   "activeBuild": {
     "pieceId": "P10",
-    "round": 1,
-    "roundLabel": "P10 · Round 001",
-    "status": "building",
-    "builder": "Fresh P10 round-1 builder",
-    "brief": "Replace only the mannequin hero proxy with one original authored anime-style hero mesh and coherent material set while the S01 seed, camera, arena, and render settings stay frozen.",
+    "round": 2,
+    "roundLabel": "P10 · Round 002",
+    "status": "revising",
+    "builder": "Fresh P10 round-002 builder active",
+    "brief": "Replace the disconnected plastic-mannequin hero with one continuous, anatomically credible authored shell whose face, hands, feet, joints, layered costume, weapon, and distinct skin, hair, cloth, and metal responses survive the locked cameras without clipped highlights.",
     "facts": [
       "P00 is accepted as infrastructure; its blind visual baseline remains an explicit 28.33–76.67 loss.",
-      "The critic assigned P10 only: the raw mannequin hero and untextured focal read are the single gap under construction.",
-      "The builder is authoring one original fighter with layered hair, cloth, armor, leather, metal, skin, and a distinct weapon; no paid or restricted source asset is being republished.",
-      "Seed 24007001, the low-shoulder S01 camera, arena geometry, lighting, and render settings are frozen against the filed P00 baseline.",
-      "Required proof is a deterministic 1600×900 S01 capture, a neutral turntable, matching manifests and hashes, validation, and a fresh blind A/B.",
-      "No P10 score or preference exists yet; a separate fresh critic will judge only after the evidence bundle is filed."
+      "Round 001 is mechanically reproducible: two independent critic reruns matched all six filed image hashes, P10 validation passed, focused EditMode passed 8/8, the full suite passed 14/14, and the P00 aggregate stayed byte-identical.",
+      "The randomized blind judge scored our round-001 frame 9/60 and Reference 09 49/60; the independent critic scored ours 10/60 and the reference 51/60.",
+      "Both judges preferred Reference 09. P10 round 001 is rejected and no /100 score is claimed because timing, contact, crowd behavior, and audio were not scoreable from the still evidence.",
+      "The single locked gap is the hero shell: toy-like disconnected anatomy, mannequin joints, flat materials, and weak authored costume and weapon detail fail the character/material bar at 2/13.",
+      "Round 002 is rebuilding only that gap while the S01 seed, camera, arena, render contract, and immutable round-001 evidence remain frozen.",
+      "Round 001 remains static look development with no rig and no S02 or S06 evidence; round 002 must file those missing views."
     ],
     "evidenceFingerprint": {
-      "gitRevision": "7fe9b937249a053f9c0d986e02d556eada33f733",
-      "gitState": "clean",
+      "gitRevision": "2dedf617ace47ea5dbb2cde1817d6119604842d2",
+      "gitState": "working-tree",
       "unityVersion": "6000.5.4f1",
       "urpVersion": "17.5.0",
-      "scene": "Assets/CodexOfWar/Review/Scenes/P00_EvidenceSpine.unity",
+      "scene": "Assets/CodexOfWar/Review/Scenes/P10_HeroLookdev.unity",
       "seed": 24007001,
       "preset": "S01_Explore",
       "resolution": "1600×900",
-      "capturedAtUtc": "2026-07-30T17:52:25.741Z",
+      "capturedAtUtc": "2026-07-30T19:46:51.517Z",
       "renderSettingsSha256": "44c656be7394557e9bc93929faa2256ac71fe0f208d0e1206901f58ae73acc12",
-      "screenshotSha256": "a54a917a70b537ed34f57f9cdf13b877dc58b9d9579e2b2ec10f1e184a525aab",
-      "captureContractSha256": "abf2238fa56fcb07030ce88f33adc45db2932c31e7a24a427d267bab5599f914"
+      "screenshotSha256": "5c7317c59b610f2d6ae4c2c6e89cf6828a964f336a20176592100435eb180dcf",
+      "captureContractSha256": "4b0cbf30a29fa7ca0824780d9de90ce29ed78d10572fd2b98c7665b1fc91efa3"
     },
-    "nextGate": "Builder files the P10 S01 and neutral turntable with validation; then a fresh critic runs the game, randomizes the comparison, and locks its preference before reveal."
+    "evidenceBundle": {
+      "roundLabel": "P10 · Round 001 evidence",
+      "status": "Round 001 rejected · mechanically reproducible",
+      "manifestPath": "/data/P10-round-001-manifest.json",
+      "s01": {
+        "label": "S01 Explore",
+        "path": "/captures/P10/round-001/S01_Explore.png",
+        "sha256": "5c7317c59b610f2d6ae4c2c6e89cf6828a964f336a20176592100435eb180dcf"
+      },
+      "turntable": {
+        "label": "Four-view turntable contact sheet",
+        "path": "/captures/P10/round-001/Turntable_ContactSheet.png",
+        "sha256": "c4acdf3d6a3e206d4181735831c59a9d05e7a9f3247692fd146e38cb3f1378b9"
+      },
+      "metrics": [
+        {
+          "label": "Frame height",
+          "value": "29.82%"
+        },
+        {
+          "label": "Meshes / renderers",
+          "value": "2 / 2"
+        },
+        {
+          "label": "Triangles",
+          "value": "82,906"
+        },
+        {
+          "label": "Materials",
+          "value": "5"
+        }
+      ],
+      "checks": [
+        "Two fresh critic captures matched all six filed image hashes",
+        "P10 validation PASS",
+        "Focused EditMode 8/8 · full suite 14/14",
+        "Progress tests/build 4/4",
+        "P00 standalone and byte-hash gate PASS"
+      ],
+      "limitations": [
+        "Blind visual subtotal: ours 9/60 · Reference 09 49/60",
+        "Critic visual subtotal: ours 10/60 · Reference 09 51/60",
+        "Character/material: 2/13 · required floor 8/13",
+        "Static lookdev only; no rig, S02, or S06"
+      ]
+    },
+    "nextGate": "Round 002 must file the same S01 and four-view evidence plus S02 and S06, preserve every frozen P00/P10 contract, clear at least 8/13 for character/material quality, and then face a new fresh-context blind critic."
   },
   "canonicalCapture": {
     "shotId": "S01",
@@ -54,11 +101,12 @@
     "purpose": "World composition and locomotion",
     "camera": "Low shoulder",
     "heroHeight": "24–32% of image height",
+    "measuredHeroHeight": "29.82% of image height",
     "sceneRead": "Foreground, playable stage, and distant silhouette visible",
     "benchmarkId": "Reference 09",
     "benchmarkPolicy": "ID only — the local benchmark image is never published",
-    "capturePath": "/captures/P00/round-001/S01_Explore.png",
-    "manifestPath": "/data/P00-round-001-manifest.json",
+    "capturePath": "/captures/P10/round-001/S01_Explore.png",
+    "manifestPath": "/data/P10-round-001-manifest.json",
     "latestManifestPath": "/data/capture-manifest-latest.json",
     "captureAvailable": true,
     "manifestAvailable": true
@@ -109,9 +157,15 @@
       "date": "2026-07-30",
       "builderBrief": "Wire the deterministic evidence path end to end and produce the first canonical S01 bundle.",
       "evidence": "Two independent Unity reruns matched screenshot and render-settings hashes; validator, 6/6 EditMode tests, and 4/4 dashboard tests passed. The blind visual baseline still lost 28.33–76.67.",
+      "evidenceLinks": [
+        "/captures/P00/round-001/S01_Explore.png",
+        "/data/P00-round-001-manifest.json",
+        "/data/capture-manifest-latest.json"
+      ],
       "critic": {
         "status": "Infrastructure accepted · visual baseline lost",
         "score": 28.33,
+        "scoreLabel": "28.33/100",
         "preference": "Reference 09 (B) over current Unity (A)",
         "primaryGap": "The current Unity frame remains a raw blockout: untextured primitive geometry and a mannequin-like hero prevent the focal character and world from reading as production-quality rendered content."
       }
@@ -120,14 +174,38 @@
       "round": 1,
       "label": "P10 · Round 001",
       "pieceId": "P10",
-      "phase": "Builder in progress",
-      "status": "building",
-      "date": "2026-07-30",
+      "phase": "Fresh critic complete",
+      "status": "criticized",
+      "date": "2026-07-31",
       "builderBrief": "Replace only the central hero proxy with one authored hero mesh and coherent material set while freezing the S01 seed, camera, arena, and render settings.",
-      "evidence": "Builder is authoring the hero and P10-specific S01 plus neutral-turntable evidence. No capture has been filed yet.",
+      "evidence": "S01 and the four-view turntable are filed. Two fresh critic reruns matched all six image hashes; P10 validation passed, focused EditMode passed 8/8, full tests passed 14/14, and the P00 aggregate stayed byte-identical. Static lookdev only: no rig, S02, or S06.",
+      "evidenceLinks": [
+        "/captures/P10/round-001/S01_Explore.png",
+        "/captures/P10/round-001/Turntable_ContactSheet.png",
+        "/data/P10-round-001-manifest.json"
+      ],
       "critic": {
-        "status": "Not started",
+        "status": "Rejected · fresh blind judge and critic agree",
+        "score": 9,
+        "scoreLabel": "Blind 9/60 · critic 10/60",
+        "preference": "Reference 09 (B) over P10 round-001 (A)",
+        "primaryGap": "Replace the disconnected sphere, cylinder, and cuboid plastic-mannequin hero with one continuous, anatomically credible authored shell whose face, hands, feet, joints, layered costume, weapon, and distinct skin, hair, cloth, and metal responses survive the locked S01 and four-view cameras without clipped highlights."
+      }
+    },
+    {
+      "round": 2,
+      "label": "P10 · Round 002",
+      "pieceId": "P10",
+      "phase": "Fresh builder active",
+      "status": "building",
+      "date": "2026-07-31",
+      "builderBrief": "Replace only the rejected plastic-mannequin hero with one continuous anatomically credible authored shell, while every locked camera, arena, seed, and render contract stays frozen.",
+      "evidence": "In progress. No round-002 capture or score is filed; the latest visible P10 evidence remains immutable round 001.",
+      "evidenceLinks": [],
+      "critic": {
+        "status": "Not started · builder active",
         "score": null,
+        "scoreLabel": null,
         "preference": null,
         "primaryGap": null
       }
@@ -253,7 +331,7 @@
       "id": "P10",
       "name": "Hero look development",
       "group": "Vertical slice",
-      "status": "building",
+      "status": "revising",
       "outcome": "The first anime-style fighter reads as a premium authored character at gameplay and finisher distance, with coherent skin, hair, cloth, metal, and weapon materials.",
       "requiredEvidence": [
         "S01, S02, and S06",
