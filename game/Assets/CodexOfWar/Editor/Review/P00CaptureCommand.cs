@@ -26,8 +26,13 @@ namespace CodexOfWar.Editor.Review
             RunCommand(
                 () =>
                 {
+                    // Capture source provenance before the checked-in builder
+                    // rewrites generated scene YAML. Unity assigns fresh local
+                    // file IDs on every rebuild even when the rendered result
+                    // is byte-identical.
+                    var sourceGitState = ReadGitState(GetRepositoryRoot());
                     var camera = P00ReviewSceneBuilder.BuildAndSave();
-                    var manifest = Capture(camera);
+                    var manifest = Capture(camera, sourceGitState);
                     var errors = ValidateCaptureBundle();
                     if (errors.Count > 0)
                     {
@@ -63,7 +68,9 @@ namespace CodexOfWar.Editor.Review
                 });
         }
 
-        private static CaptureManifest Capture(Camera camera)
+        private static CaptureManifest Capture(
+            Camera camera,
+            GitState sourceGitState)
         {
             if (camera == null)
             {
@@ -132,7 +139,7 @@ namespace CodexOfWar.Editor.Review
                     P00CaptureContract.CaptureRelativePath);
                 WriteBytesAtomically(screenshotPath, pngBytes);
 
-                var manifest = BuildManifest(pngBytes);
+                var manifest = BuildManifest(pngBytes, sourceGitState);
                 var json = JsonUtility.ToJson(manifest, true) + "\n";
                 var jsonBytes = new UTF8Encoding(false).GetBytes(json);
                 WriteBytesAtomically(
@@ -170,9 +177,15 @@ namespace CodexOfWar.Editor.Review
             }
         }
 
-        private static CaptureManifest BuildManifest(byte[] pngBytes)
+        private static CaptureManifest BuildManifest(
+            byte[] pngBytes,
+            GitState sourceGitState)
         {
-            var git = ReadGitState(GetRepositoryRoot());
+            if (sourceGitState == null)
+            {
+                throw new ArgumentNullException(nameof(sourceGitState));
+            }
+
             var pipeline = GraphicsSettings.currentRenderPipeline;
             if (pipeline == null)
             {
@@ -195,9 +208,9 @@ namespace CodexOfWar.Editor.Review
                 schemaVersion = P00CaptureContract.SchemaVersion,
                 piece = P00CaptureContract.Piece,
                 round = P00CaptureContract.Round,
-                gitRevision = git.Revision,
-                workingTree = git.IsDirty,
-                gitState = git.IsDirty ? "working-tree" : "clean",
+                gitRevision = sourceGitState.Revision,
+                workingTree = sourceGitState.IsDirty,
+                gitState = sourceGitState.IsDirty ? "working-tree" : "clean",
                 unityVersion = Application.unityVersion,
                 urpVersion = urpVersion,
                 renderPipelineAsset = pipelineAssetPath,

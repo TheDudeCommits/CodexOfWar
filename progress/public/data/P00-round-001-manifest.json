@@ -2,7 +2,7 @@
     "schemaVersion": "1.0",
     "piece": "P00",
     "round": 1,
-    "gitRevision": "aa395f556eb6863885d219437d48b719daa5a49f",
+    "gitRevision": "724dfca998cab4e8397b5139f23b052a71aba06c",
     "workingTree": true,
     "gitState": "working-tree",
     "unityVersion": "6000.5.4f1",
@@ -16,7 +16,7 @@
         "width": 1600,
         "height": 900
     },
-    "capturedAtUtc": "2026-07-30T17:22:46.617Z",
+    "capturedAtUtc": "2026-07-30T17:48:09.491Z",
     "machineProfile": {
         "operatingSystem": "Mac OS X 26.5.1",
         "deviceModel": "Mac14,2",
