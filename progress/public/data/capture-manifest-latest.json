@@ -2,9 +2,9 @@
     "schemaVersion": "1.0",
     "piece": "P00",
     "round": 1,
-    "gitRevision": "724dfca998cab4e8397b5139f23b052a71aba06c",
-    "workingTree": true,
-    "gitState": "working-tree",
+    "gitRevision": "7fe9b937249a053f9c0d986e02d556eada33f733",
+    "workingTree": false,
+    "gitState": "clean",
     "unityVersion": "6000.5.4f1",
     "urpVersion": "17.5.0",
     "renderPipelineAsset": "Assets/Settings/PC_RPAsset.asset",
@@ -16,7 +16,7 @@
         "width": 1600,
         "height": 900
     },
-    "capturedAtUtc": "2026-07-30T17:48:09.491Z",
+    "capturedAtUtc": "2026-07-30T17:52:25.741Z",
     "machineProfile": {
         "operatingSystem": "Mac OS X 26.5.1",
         "deviceModel": "Mac14,2",

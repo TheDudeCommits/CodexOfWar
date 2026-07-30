@@ -78,6 +78,9 @@ The command writes:
 
 The current PNG SHA-256 is
 `a54a917a70b537ed34f57f9cdf13b877dc58b9d9579e2b2ec10f1e184a525aab`.
+Its filed manifest anchors the source invocation to clean revision
+`7fe9b937249a053f9c0d986e02d556eada33f733`; generated scene YAML may receive
+fresh Unity local file IDs without changing the rendered bytes.
 
 ## Validate
 
