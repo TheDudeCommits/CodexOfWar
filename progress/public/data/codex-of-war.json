@@ -1,0 +1,399 @@
+{
+  "project": {
+    "name": "Codex of War",
+    "surface": "Production evidence ledger",
+    "updated": "2026-07-30",
+    "platform": "Native Apple Silicon / macOS",
+    "engine": "Unity 6 URP",
+    "simulation": "60 Hz",
+    "captureResolution": "1600×900",
+    "tagline": "Build what the camera can judge."
+  },
+  "stateModel": [
+    "queued",
+    "building",
+    "review-ready",
+    "criticized",
+    "revising",
+    "accepted"
+  ],
+  "activeBuild": {
+    "pieceId": "P00",
+    "round": 1,
+    "roundLabel": "Round 001",
+    "status": "accepted",
+    "builder": "Round-1 builder + fresh critic",
+    "brief": "P00 is accepted as review infrastructure after independent Unity reruns, validation, dashboard checks, and a locked blind baseline comparison.",
+    "facts": [
+      "Two fresh Unity capture-command runs produced the same screenshot SHA-256 a54a917a…4a525aab and render-settings SHA-256 44c656be…73acc12.",
+      "Capture self-validation, the standalone validator, all 6 focused EditMode tests, dashboard lint/build, and all 4 dashboard tests passed.",
+      "The filed S01 bundle is a 1600×900 Unity 6000.5.4f1 / URP 17.5.0 capture produced with fixed seed 24007001 on Apple M2 / Metal.",
+      "The anonymous judge locked Reference 09 (B) over the current Unity frame (A): 76.67 versus 28.33 normalized visual score.",
+      "The visual loss is recorded without calling it a win. P00 passes only under its infrastructure exception; every later visual piece must satisfy the full blind-win gate.",
+      "The critic assigned exactly one next piece: P10 hero look development, replacing the mannequin proxy with one authored hero mesh and coherent material set."
+    ],
+    "evidenceFingerprint": {
+      "gitRevision": "aa395f556eb6863885d219437d48b719daa5a49f",
+      "gitState": "working-tree",
+      "unityVersion": "6000.5.4f1",
+      "urpVersion": "17.5.0",
+      "scene": "Assets/CodexOfWar/Review/Scenes/P00_EvidenceSpine.unity",
+      "seed": 24007001,
+      "preset": "S01_Explore",
+      "resolution": "1600×900",
+      "capturedAtUtc": "2026-07-30T17:22:46.617Z",
+      "renderSettingsSha256": "44c656be7394557e9bc93929faa2256ac71fe0f208d0e1206901f58ae73acc12",
+      "screenshotSha256": "a54a917a70b537ed34f57f9cdf13b877dc58b9d9579e2b2ec10f1e184a525aab",
+      "captureContractSha256": "abf2238fa56fcb07030ce88f33adc45db2932c31e7a24a427d267bab5599f914"
+    },
+    "nextGate": "Start P10 only: replace the central hero proxy while freezing the S01 seed, camera, arena, and render settings; file a neutral turntable and fresh deterministic blind-test evidence."
+  },
+  "canonicalCapture": {
+    "shotId": "S01",
+    "name": "Explore",
+    "purpose": "World composition and locomotion",
+    "camera": "Low shoulder",
+    "heroHeight": "24–32% of image height",
+    "sceneRead": "Foreground, playable stage, and distant silhouette visible",
+    "benchmarkId": "Reference 09",
+    "benchmarkPolicy": "ID only — the local benchmark image is never published",
+    "capturePath": "/captures/P00/round-001/S01_Explore.png",
+    "manifestPath": "/data/P00-round-001-manifest.json",
+    "latestManifestPath": "/data/capture-manifest-latest.json",
+    "captureAvailable": true,
+    "manifestAvailable": true
+  },
+  "acceptance": {
+    "threshold": 80,
+    "maximum": 100,
+    "visualMinimum": "48/60",
+    "combatMinimum": "30/40 where applicable",
+    "criterionFloor": "No applicable criterion below 60%",
+    "blindPreference": "New result must win anonymous A/B",
+    "hardFailurePolicy": "No hard failure",
+    "p00Exception": "P00 is an infrastructure gate: its visual baseline comparison is recorded, but a visual loss does not block acceptance when reproducibility, provenance, dashboard delivery, and validation pass."
+  },
+  "machineConstraints": [
+    {
+      "label": "Primary target",
+      "value": "Native Apple Silicon / macOS"
+    },
+    {
+      "label": "Renderer",
+      "value": "Unity 6 URP"
+    },
+    {
+      "label": "Simulation",
+      "value": "Fixed 60 Hz"
+    },
+    {
+      "label": "Capture",
+      "value": "1600×900"
+    },
+    {
+      "label": "Median frame",
+      "value": "≤ 16.7 ms"
+    },
+    {
+      "label": "p95 frame",
+      "value": "≤ 22 ms"
+    }
+  ],
+  "rounds": [
+    {
+      "round": 1,
+      "label": "Round 001",
+      "pieceId": "P00",
+      "phase": "Fresh critic complete",
+      "status": "accepted",
+      "date": "2026-07-30",
+      "builderBrief": "Wire the deterministic evidence path end to end and produce the first canonical S01 bundle.",
+      "evidence": "Two independent Unity reruns matched screenshot and render-settings hashes; validator, 6/6 EditMode tests, and 4/4 dashboard tests passed. The blind visual baseline still lost 28.33–76.67.",
+      "critic": {
+        "status": "Infrastructure accepted · visual baseline lost",
+        "score": 28.33,
+        "preference": "Reference 09 (B) over current Unity (A)",
+        "primaryGap": "The current Unity frame remains a raw blockout: untextured primitive geometry and a mannequin-like hero prevent the focal character and world from reading as production-quality rendered content."
+      }
+    }
+  ],
+  "pieces": [
+    {
+      "id": "P00",
+      "name": "Evidence spine",
+      "group": "Vertical slice",
+      "status": "accepted",
+      "outcome": "A deterministic review scene, fixed-seed capture command, manifest, round ledger, and live progress surface work end to end.",
+      "requiredEvidence": [
+        "One reproducible 1600×900 capture",
+        "Manifest and hash",
+        "Dashboard entry",
+        "Clean import"
+      ]
+    },
+    {
+      "id": "P01",
+      "name": "Shoulder camera",
+      "group": "Vertical slice",
+      "status": "queued",
+      "outcome": "Exploration and combat framings preserve subject scale, sightline, collision, target legibility, and authored camera presets.",
+      "requiredEvidence": [
+        "S01 and S02",
+        "Camera telemetry",
+        "Obstruction replay"
+      ]
+    },
+    {
+      "id": "P02",
+      "name": "Ground locomotion",
+      "group": "Vertical slice",
+      "status": "queued",
+      "outcome": "Walk, run, pivot, stop, strafe, slope handling, and camera-relative control have grounded acceleration and readable weight.",
+      "requiredEvidence": [
+        "S01",
+        "12-second orbit / movement clip"
+      ]
+    },
+    {
+      "id": "P03",
+      "name": "Hero animation foundation",
+      "group": "Vertical slice",
+      "status": "queued",
+      "outcome": "Idle, locomotion, pivots, combat stance, weapon handling, additive aim, and transitions share coherent body mechanics.",
+      "requiredEvidence": [
+        "S01 and S02",
+        "Transition contact sheet"
+      ]
+    },
+    {
+      "id": "P04",
+      "name": "Light combo",
+      "group": "Vertical slice",
+      "status": "queued",
+      "outcome": "Buffered three-hit chain has authored startup, active, recovery, and cancel windows with one-hit-per-target resolution.",
+      "requiredEvidence": [
+        "S04 for each strike",
+        "Telemetry",
+        "Slow-motion replay"
+      ]
+    },
+    {
+      "id": "P05",
+      "name": "Heavy attack",
+      "group": "Vertical slice",
+      "status": "queued",
+      "outcome": "Heavy strike communicates commitment, displacement, contact, hitstop, camera impulse, and enemy reaction.",
+      "requiredEvidence": [
+        "S04",
+        "240 fps equivalent stepped replay"
+      ]
+    },
+    {
+      "id": "P06",
+      "name": "Dodge and evasion",
+      "group": "Vertical slice",
+      "status": "queued",
+      "outcome": "Directional dodge, invulnerability window, recovery, and camera continuity are predictable and readable.",
+      "requiredEvidence": [
+        "Telegraph-to-dodge replay",
+        "Frame ledger"
+      ]
+    },
+    {
+      "id": "P07",
+      "name": "Hit reaction and death",
+      "group": "Vertical slice",
+      "status": "queued",
+      "outcome": "Zombies react by hit direction and severity, preserve contact, stagger, collapse, and settle without foot sliding or explosive ragdolls.",
+      "requiredEvidence": [
+        "S04 and S06",
+        "Reaction matrix"
+      ]
+    },
+    {
+      "id": "P08",
+      "name": "Zombie navigation",
+      "group": "Vertical slice",
+      "status": "queued",
+      "outcome": "One zombie can acquire, approach, flank, telegraph, attack, recover, lose or reacquire, and die without navigation jitter.",
+      "requiredEvidence": [
+        "S03",
+        "20-second deterministic replay"
+      ]
+    },
+    {
+      "id": "P09",
+      "name": "Crowd combat director",
+      "group": "Vertical slice",
+      "status": "queued",
+      "outcome": "Four-to-six zombies surround without dog-piling; attack tokens, spacing, off-screen pressure, and threat cues create readable crowd combat.",
+      "requiredEvidence": [
+        "S05",
+        "Occupancy plot",
+        "Attack-token log"
+      ]
+    },
+    {
+      "id": "P10",
+      "name": "Hero look development",
+      "group": "Vertical slice",
+      "status": "queued",
+      "outcome": "The first anime-style fighter reads as a premium authored character at gameplay and finisher distance, with coherent skin, hair, cloth, metal, and weapon materials.",
+      "requiredEvidence": [
+        "S01, S02, and S06",
+        "Neutral turntable"
+      ]
+    },
+    {
+      "id": "P11",
+      "name": "Zombie look development",
+      "group": "Vertical slice",
+      "status": "queued",
+      "outcome": "The zombie archetype and variants have layered anatomy, clothing history, damage language, silhouette variation, and material response.",
+      "requiredEvidence": [
+        "S02, S03, and S06",
+        "Neutral turntable"
+      ]
+    },
+    {
+      "id": "P12",
+      "name": "Arena composition",
+      "group": "Vertical slice",
+      "status": "queued",
+      "outcome": "A compact arena has foreground framing, combat stage, silhouette depth, traversal logic, landmarks, and no empty test-level read.",
+      "requiredEvidence": [
+        "S01 and S05",
+        "Overhead plan"
+      ]
+    },
+    {
+      "id": "P13",
+      "name": "Lighting and atmosphere",
+      "group": "Vertical slice",
+      "status": "queued",
+      "outcome": "Key, fill, rim, exposure, fog, shadows, grading, and local reactive light keep faces and contact readable while creating depth.",
+      "requiredEvidence": [
+        "All canonical stills",
+        "Luminance scopes"
+      ]
+    },
+    {
+      "id": "P14",
+      "name": "Combat VFX",
+      "group": "Vertical slice",
+      "status": "queued",
+      "outcome": "Weapon trails, contact flash, sparks, debris, blood or dust, and lingering particles form a restrained macro, impact, and decay stack anchored to motion.",
+      "requiredEvidence": [
+        "S04 and S06",
+        "Frame-stepped replay",
+        "Overdraw check"
+      ]
+    },
+    {
+      "id": "P15",
+      "name": "Combat audio",
+      "group": "Vertical slice",
+      "status": "queued",
+      "outcome": "Foley, effort, weapon movement, contact, zombie vocals, ambience, music, ducking, and spatial mix support timing and impact.",
+      "requiredEvidence": [
+        "Capture with stems",
+        "Loudness report"
+      ]
+    },
+    {
+      "id": "P16",
+      "name": "HUD and threat language",
+      "group": "Vertical slice",
+      "status": "queued",
+      "outcome": "Minimal health, ability, lock-on, and threat information remains legible without weakening the cinematic frame.",
+      "requiredEvidence": [
+        "S02 and S05",
+        "Accessibility contrast checks"
+      ]
+    },
+    {
+      "id": "P17",
+      "name": "Finisher vignette",
+      "group": "Vertical slice",
+      "status": "queued",
+      "outcome": "A contextual finisher has reliable setup, three-character blocking when relevant, facial and contact framing, camera choreography, and clean return to play.",
+      "requiredEvidence": [
+        "S06",
+        "Full finisher replay"
+      ]
+    },
+    {
+      "id": "P18",
+      "name": "Integrated encounter",
+      "group": "Vertical slice",
+      "status": "queued",
+      "outcome": "A polished 45–90 second encounter combines the accepted systems into one authored dramatic arc.",
+      "requiredEvidence": [
+        "All canonical stills",
+        "Full replay",
+        "Telemetry"
+      ]
+    },
+    {
+      "id": "P19",
+      "name": "Performance and delivery",
+      "group": "Vertical slice",
+      "status": "queued",
+      "outcome": "The native macOS target runs reliably, captures deterministically, meets frame budgets, and ships with reproducible build instructions.",
+      "requiredEvidence": [
+        "Player build",
+        "Profiler summary",
+        "License manifest",
+        "Release checklist"
+      ]
+    },
+    {
+      "id": "P20",
+      "name": "Fighter contract",
+      "group": "Roster expansion",
+      "status": "queued",
+      "outcome": "Data-driven fighter, weapon, and ability definitions support selection without branching the shared combat core.",
+      "requiredEvidence": []
+    },
+    {
+      "id": "P21",
+      "name": "Fighter two",
+      "group": "Roster expansion",
+      "status": "queued",
+      "outcome": "A distinct weapon silhouette, rhythm, traversal or combat ability, animation set, VFX identity, and finisher.",
+      "requiredEvidence": []
+    },
+    {
+      "id": "P22",
+      "name": "Fighter three",
+      "group": "Roster expansion",
+      "status": "queued",
+      "outcome": "A distinct weapon silhouette, rhythm, traversal or combat ability, animation set, VFX identity, and finisher.",
+      "requiredEvidence": []
+    },
+    {
+      "id": "P23",
+      "name": "Fighter four",
+      "group": "Roster expansion",
+      "status": "queued",
+      "outcome": "A distinct weapon silhouette, rhythm, traversal or combat ability, animation set, VFX identity, and finisher.",
+      "requiredEvidence": []
+    },
+    {
+      "id": "P24",
+      "name": "Roster select and persistence",
+      "group": "Roster expansion",
+      "status": "queued",
+      "outcome": "Selection, preview, input, save or load, and per-fighter progression work coherently.",
+      "requiredEvidence": []
+    },
+    {
+      "id": "P25",
+      "name": "Roster encounter balance",
+      "group": "Roster expansion",
+      "status": "queued",
+      "outcome": "All fighters can complete the benchmark encounter while remaining mechanically and audiovisually distinct.",
+      "requiredEvidence": []
+    }
+  ]
+}

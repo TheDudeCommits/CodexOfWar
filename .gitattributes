@@ -1,0 +1,27 @@
+* text=auto
+*.cs text eol=lf
+*.json text eol=lf
+*.md text eol=lf
+*.shader text eol=lf
+*.uss text eol=lf
+*.uxml text eol=lf
+*.unity text eol=lf -whitespace
+*.prefab text eol=lf
+*.mat text eol=lf -whitespace
+*.asset text eol=lf -whitespace
+*.meta text eol=lf -whitespace
+*.wlt text eol=lf -whitespace
+game/Assets/TutorialInfo/** -whitespace
+
+# Large authored source and delivery media belong in Git LFS.
+*.blend filter=lfs diff=lfs merge=lfs -text
+*.fbx filter=lfs diff=lfs merge=lfs -text
+*.glb filter=lfs diff=lfs merge=lfs -text
+*.gltf filter=lfs diff=lfs merge=lfs -text
+*.psd filter=lfs diff=lfs merge=lfs -text
+*.exr filter=lfs diff=lfs merge=lfs -text
+*.tga filter=lfs diff=lfs merge=lfs -text
+*.wav filter=lfs diff=lfs merge=lfs -text
+*.aiff filter=lfs diff=lfs merge=lfs -text
+*.mp4 filter=lfs diff=lfs merge=lfs -text
+*.mov filter=lfs diff=lfs merge=lfs -text

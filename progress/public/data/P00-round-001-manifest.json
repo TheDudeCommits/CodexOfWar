@@ -1,0 +1,31 @@
+{
+    "schemaVersion": "1.0",
+    "piece": "P00",
+    "round": 1,
+    "gitRevision": "aa395f556eb6863885d219437d48b719daa5a49f",
+    "workingTree": true,
+    "gitState": "working-tree",
+    "unityVersion": "6000.5.4f1",
+    "urpVersion": "17.5.0",
+    "renderPipelineAsset": "Assets/Settings/PC_RPAsset.asset",
+    "renderSettingsSha256": "44c656be7394557e9bc93929faa2256ac71fe0f208d0e1206901f58ae73acc12",
+    "scene": "Assets/CodexOfWar/Review/Scenes/P00_EvidenceSpine.unity",
+    "seed": 24007001,
+    "preset": "S01_Explore",
+    "resolution": {
+        "width": 1600,
+        "height": 900
+    },
+    "capturedAtUtc": "2026-07-30T17:22:46.617Z",
+    "machineProfile": {
+        "operatingSystem": "Mac OS X 26.5.1",
+        "deviceModel": "Mac14,2",
+        "processor": "Apple M2",
+        "systemMemoryMb": 8192,
+        "graphicsDevice": "Apple M2",
+        "graphicsApi": "Metal"
+    },
+    "screenshotRelativePath": "captures/P00/round-001/S01_Explore.png",
+    "screenshotSha256": "a54a917a70b537ed34f57f9cdf13b877dc58b9d9579e2b2ec10f1e184a525aab",
+    "captureContractSha256": "abf2238fa56fcb07030ce88f33adc45db2932c31e7a24a427d267bab5599f914"
+}

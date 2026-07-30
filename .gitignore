@@ -1,0 +1,36 @@
+.DS_Store
+.idea/
+.vscode/
+
+# Unity generated state
+game/[Ll]ibrary/
+game/[Tt]emp/
+game/[Oo]bj/
+game/[Ll]ogs/
+game/[Uu]ser[Ss]ettings/
+game/[Mm]emoryCaptures/
+game/[Rr]ecordings/
+game/[Bb]uilds/
+game/*.csproj
+game/*.sln
+game/*.slnx
+
+# Progress site generated state
+progress/node_modules/
+progress/.next/
+progress/.vinext/
+progress/dist/
+progress/out/
+progress/.wrangler/
+progress/outputs/
+progress/work/
+progress/.env*
+
+# Local benchmark material is intentionally not redistributed.
+Reference/
+Reference.zip
+
+# Local review and build output
+Artifacts/
+Builds/
+*.log
