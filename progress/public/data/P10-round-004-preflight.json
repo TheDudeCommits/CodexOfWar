@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 1,
+  "piece": "P10",
+  "round": 4,
+  "status": "rejected-pre-unity",
+  "reviewType": "fresh-context source-bound visual preflight",
+  "reviewedAt": "2026-07-31T15:53:45+07:00",
+  "engineRun": false,
+  "unityCaptureFiled": false,
+  "goAttestationFiled": false,
+  "source": {
+    "name": "Astra Vale Rain-derived round-004 static warrior source",
+    "foundation": "Rain v3 by Blender Studio / Blender Foundation",
+    "license": "CC-BY-4.0",
+    "requiredCredit": "Rain Rig (CC) Blender Foundation | studio.blender.org",
+    "generatorPath": "Tools/Blender/P10_Round004_AstraValeWarrior.py",
+    "generatorSha256": "b2ea48ee89de0808d487dcf1f22ecca1b8689ea64001d4e62ab67ae36bc7cb90",
+    "validatorPath": "Tools/Blender/P10_Round004_ValidateExports.py",
+    "validatorSha256": "8d9de441e0cbc5a1719276c904163818c8b846248f0f851ac65b53e53b876daf",
+    "blendPath": "ArtSource/P10/Round004/P10_Round004_AstraValeWarrior.blend",
+    "blendSha256": "8a38c2b63c6c4d534fd174a5058de89a88dfc47c031da31d1234a624250a8d4d",
+    "reviewPath": "ArtSource/P10/Round004/Preflight/P10_Round004_FreshVisualPreflightReview.json",
+    "reviewSha256": "94b43c10b68b77edec16f27f01c79b04ad358fbd3364f22df9a53e100f05a9a3"
+  },
+  "visualReview": {
+    "score": 7,
+    "maximum": 13,
+    "mandatoryPasses": 4,
+    "mandatoryMaximum": 8,
+    "verdict": "NO-GO",
+    "unityDisposition": "LOCKED",
+    "passedChecks": [
+      "Continuous credible anatomy",
+      "Authored face, eyes, and hair",
+      "Feet and grounded stance",
+      "Continuous joint transitions",
+      "LOD0 production budget",
+      "Neutral four-view coverage",
+      "Diagnostic face, hands, feet, and grip coverage"
+    ],
+    "failedChecks": [
+      "Both visible hands physically enclose the hilt",
+      "Genuinely premium layered warrior costume",
+      "Functional weapon scale, mount, grip, and contact",
+      "Premium material separation without plastic, chrome, or clipping",
+      "Combat line of action, balance, and attack intent",
+      "Unmistakable close-range AAA anime-warrior identity"
+    ],
+    "singleBiggestGap": "The delivered costume's construction language is still a toy-like procedural slab-and-tube assembly rather than believable, layered, worn, functional AAA warrior gear.",
+    "secondaryGaps": [
+      "The lower hand is not an unambiguous complete enclosure and the grip contains occluding or intersecting hardware",
+      "The oversized flat weapon and crude mount read as presentation geometry",
+      "Glossy homogeneous response collapses cloth, leather, and metal into plastic or chrome",
+      "The upright crossed-foot combat pose has no committed attack intent or readable line of action",
+      "Every FBX has one nonportable unresolved texture reference",
+      "Generated artifact bytes are not reproducible even though canonical geometry and decoded imagery are effectively stable"
+    ]
+  },
+  "mechanicalValidation": {
+    "repositoryReportStatus": "PASS",
+    "repositoryReportSha256": "ecc8aa38c11147242b7f15a23936f7af4fdd3e56135982753b33c6c91df1579d",
+    "meshObjectsPerFbx": 96,
+    "armaturesPerFbx": 0,
+    "civilianNameHitsPerFbx": 0,
+    "triangles": {
+      "neutral": 92324,
+      "combat": 92324,
+      "lod0": 88036,
+      "lod1": 61951,
+      "lod2": 41158
+    },
+    "interpretation": "Geometry, broad bounds, triangle counts, and source renderer-name removal pass. The supplied validator does not inspect texture resolution after FBX import."
+  },
+  "reproducibility": {
+    "result": "semantic-pass-exact-hash-fail",
+    "cleanGeneratorRuns": 2,
+    "frozenInputMatches": "26/26",
+    "physicalOutputMatches": "22/39",
+    "physicalOutputDifferences": "17/39",
+    "semanticStructureMatched": true,
+    "maximumChangedPixelsPerDiagnostic": 15,
+    "pixelsPerDiagnostic": 2560000,
+    "maximumChannelDelta": 2,
+    "interpretation": "The authored blend, five FBXs, nine PNGs, audit JSON, and reimport JSON differ byte-for-byte across isolated runs. Canonical world-space geometry, oriented topology, UV mapping, materials, assignments, transforms, counts, and bounds match; decoded image drift is visually negligible."
+  },
+  "integrityFindings": {
+    "sourceHashesVerified": 26,
+    "sourceHashMismatches": 0,
+    "licenseVerification": "PASS",
+    "vendorTextureHashesVerified": 22,
+    "stagedTextureHashesVerified": 22,
+    "fbxTextureResolution": "FAIL",
+    "fbxBrokenTextureReferences": "5/5",
+    "brokenTexture": "TEX-rain_body_roughness.1001.png",
+    "fbxSourcePathLeakage": "5/5",
+    "validatorBlindSpot": "The validator checks file-backed images only in the authored blend and therefore reports PASS despite every FBX carrying one broken absolute texture reference.",
+    "auditRegenerationGap": "Five repository audit sections were added outside the generator with no frozen postprocessor: build_receipt, clean_reimport_validation, diagnostic_images, known_gaps, and warnings."
+  },
+  "diagnostics": [
+    {
+      "label": "Decisive full-body front",
+      "publicPath": "/captures/P10/round-004-preflight/Front_Decisive.png",
+      "sha256": "ae3c1f06a51160d52996e38c77d2b17b8d61402fd49291c160411fd02db53d02"
+    },
+    {
+      "label": "Failed grip close-up",
+      "publicPath": "/captures/P10/round-004-preflight/Grip_Failure.png",
+      "sha256": "d5de456d4d3558e20692c2be0958272670ca6ee379eef75113d0ba3f81424c05"
+    },
+    {
+      "label": "Failed combat presentation",
+      "publicPath": "/captures/P10/round-004-preflight/Combat_Failure.png",
+      "sha256": "21b917ea1b45efd1281f9ec7d525952795601be38940efb1f789878dd6cf7d13"
+    }
+  ],
+  "nextRound": {
+    "round": 5,
+    "target": "Replace the procedural costume pipeline with a cohesive, professionally authored, lawfully sourced warrior character or costume whose construction, wear, material history, fastening logic, and silhouette are already credible before any adaptation.",
+    "status": "source-triage"
+  }
+}

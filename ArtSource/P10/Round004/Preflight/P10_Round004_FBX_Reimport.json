@@ -1,0 +1,273 @@
+{
+  "authored_blend": {
+    "bytes": 9537408,
+    "civilian_source_state": {
+      "GEO-rain-jeans": {
+        "exists": false,
+        "hide_render": false
+      },
+      "GEO-rain-scarf": {
+        "exists": false,
+        "hide_render": false
+      },
+      "GEO-rain-shoes": {
+        "exists": false,
+        "hide_render": false
+      },
+      "GEO-rain-top": {
+        "exists": false,
+        "hide_render": false
+      }
+    },
+    "file_backed_images": 17,
+    "missing_texture_probes": [],
+    "path": "ArtSource/P10/Round004/P10_Round004_AstraValeWarrior.blend",
+    "sha256": "8a38c2b63c6c4d534fd174a5058de89a88dfc47c031da31d1234a624250a8d4d",
+    "status": "PASS",
+    "texture_paths": [
+      {
+        "exists": true,
+        "image": "TEX-rain_body_diffuse.1001.png",
+        "resolved_probe": "/Users/amir/Documents/Gauntlet Loop/ArtSource/P10/Round004/ThirdParty/BlenderStudioRain/textures/TEX-rain_body_diffuse.1001.png",
+        "stored_path": "//ThirdParty/BlenderStudioRain/textures/TEX-rain_body_diffuse.<UDIM>.png"
+      },
+      {
+        "exists": true,
+        "image": "TEX-rain_body_roughness.1001.png",
+        "resolved_probe": "/Users/amir/Documents/Gauntlet Loop/ArtSource/P10/Round004/ThirdParty/BlenderStudioRain/textures/TEX-rain_body_roughness.1001.png",
+        "stored_path": "//ThirdParty/BlenderStudioRain/textures/TEX-rain_body_roughness.<UDIM>.png"
+      },
+      {
+        "exists": true,
+        "image": "TEX-rain_eyes.png.000",
+        "resolved_probe": "/Users/amir/Documents/Gauntlet Loop/ArtSource/P10/Round004/ThirdParty/BlenderStudioRain/textures/TEX-rain_eyes.png",
+        "stored_path": "//ThirdParty/BlenderStudioRain/textures/TEX-rain_eyes.png"
+      },
+      {
+        "exists": true,
+        "image": "TEX-rain_eyes.png.002",
+        "resolved_probe": "/Users/amir/Documents/Gauntlet Loop/ArtSource/P10/Round004/ThirdParty/BlenderStudioRain/textures/TEX-rain_eyes.png",
+        "stored_path": "//ThirdParty/BlenderStudioRain/textures/TEX-rain_eyes.png"
+      },
+      {
+        "exists": true,
+        "image": "TEX-rain_hair_diffuse.png",
+        "resolved_probe": "/Users/amir/Documents/Gauntlet Loop/ArtSource/P10/Round004/ThirdParty/BlenderStudioRain/textures/TEX-rain_hair_diffuse.png",
+        "stored_path": "//ThirdParty/BlenderStudioRain/textures/TEX-rain_hair_diffuse.png"
+      },
+      {
+        "exists": true,
+        "image": "TEX-rain_hair_direction.png",
+        "resolved_probe": "/Users/amir/Documents/Gauntlet Loop/ArtSource/P10/Round004/ThirdParty/BlenderStudioRain/textures/TEX-rain_hair_direction.png",
+        "stored_path": "//ThirdParty/BlenderStudioRain/textures/TEX-rain_hair_direction.png"
+      },
+      {
+        "exists": true,
+        "image": "TEX-rain_hair_direction_bw.png",
+        "resolved_probe": "/Users/amir/Documents/Gauntlet Loop/ArtSource/P10/Round004/ThirdParty/BlenderStudioRain/textures/TEX-rain_hair_direction_bw.png",
+        "stored_path": "//ThirdParty/BlenderStudioRain/textures/TEX-rain_hair_direction_bw.png"
+      },
+      {
+        "exists": true,
+        "image": "TEX-rain_hands_diffuse.png",
+        "resolved_probe": "/Users/amir/Documents/Gauntlet Loop/ArtSource/P10/Round004/ThirdParty/BlenderStudioRain/textures/TEX-rain_hands_diffuse.png",
+        "stored_path": "//ThirdParty/BlenderStudioRain/textures/TEX-rain_hands_diffuse.png"
+      },
+      {
+        "exists": true,
+        "image": "TEX-rain_hands_roughness.png",
+        "resolved_probe": "/Users/amir/Documents/Gauntlet Loop/ArtSource/P10/Round004/ThirdParty/BlenderStudioRain/textures/TEX-rain_hands_roughness.png",
+        "stored_path": "//ThirdParty/BlenderStudioRain/textures/TEX-rain_hands_roughness.png"
+      },
+      {
+        "exists": true,
+        "image": "TEX-rain_jeans_diffuse.png",
+        "resolved_probe": "/Users/amir/Documents/Gauntlet Loop/ArtSource/P10/Round004/ThirdParty/BlenderStudioRain/textures/TEX-rain_jeans_diffuse.png",
+        "stored_path": "//ThirdParty/BlenderStudioRain/textures/TEX-rain_jeans_diffuse.png"
+      },
+      {
+        "exists": true,
+        "image": "TEX-rain_jeans_normal.png",
+        "resolved_probe": "/Users/amir/Documents/Gauntlet Loop/ArtSource/P10/Round004/ThirdParty/BlenderStudioRain/textures/TEX-rain_jeans_normal.png",
+        "stored_path": "//ThirdParty/BlenderStudioRain/textures/TEX-rain_jeans_normal.png"
+      },
+      {
+        "exists": true,
+        "image": "TEX-rain_jeans_roughness.png",
+        "resolved_probe": "/Users/amir/Documents/Gauntlet Loop/ArtSource/P10/Round004/ThirdParty/BlenderStudioRain/textures/TEX-rain_jeans_roughness.png",
+        "stored_path": "//ThirdParty/BlenderStudioRain/textures/TEX-rain_jeans_roughness.png"
+      },
+      {
+        "exists": true,
+        "image": "TEX-rain_scarf_cavity.png",
+        "resolved_probe": "/Users/amir/Documents/Gauntlet Loop/ArtSource/P10/Round004/ThirdParty/BlenderStudioRain/textures/TEX-rain_scarf_cavity.png",
+        "stored_path": "//ThirdParty/BlenderStudioRain/textures/TEX-rain_scarf_cavity.png"
+      },
+      {
+        "exists": true,
+        "image": "TEX-rain_socks_bump.png",
+        "resolved_probe": "/Users/amir/Documents/Gauntlet Loop/ArtSource/P10/Round004/ThirdParty/BlenderStudioRain/textures/TEX-rain_socks_bump.png",
+        "stored_path": "//ThirdParty/BlenderStudioRain/textures/TEX-rain_socks_bump.png"
+      },
+      {
+        "exists": true,
+        "image": "TEX-rain_socks_roughness.png",
+        "resolved_probe": "/Users/amir/Documents/Gauntlet Loop/ArtSource/P10/Round004/ThirdParty/BlenderStudioRain/textures/TEX-rain_socks_roughness.png",
+        "stored_path": "//ThirdParty/BlenderStudioRain/textures/TEX-rain_socks_roughness.png"
+      },
+      {
+        "exists": true,
+        "image": "TEX-rain_top_bump.png",
+        "resolved_probe": "/Users/amir/Documents/Gauntlet Loop/ArtSource/P10/Round004/ThirdParty/BlenderStudioRain/textures/TEX-rain_top_bump.png",
+        "stored_path": "//ThirdParty/BlenderStudioRain/textures/TEX-rain_top_bump.png"
+      },
+      {
+        "exists": true,
+        "image": "TEX-rain_top_roughness.png",
+        "resolved_probe": "/Users/amir/Documents/Gauntlet Loop/ArtSource/P10/Round004/ThirdParty/BlenderStudioRain/textures/TEX-rain_top_roughness.png",
+        "stored_path": "//ThirdParty/BlenderStudioRain/textures/TEX-rain_top_roughness.png"
+      }
+    ]
+  },
+  "blender_version": "5.2.0 LTS",
+  "fbx": [
+    {
+      "armature_objects": 0,
+      "bounds": {
+        "dimensions": [
+          0.759933,
+          0.734837,
+          1.652036
+        ],
+        "max": [
+          0.388347,
+          0.50914,
+          1.649953
+        ],
+        "min": [
+          -0.371586,
+          -0.225698,
+          -0.002083
+        ]
+      },
+      "bytes": 6893244,
+      "civilian_renderer_hits": [],
+      "mesh_objects": 96,
+      "path": "game/Assets/CodexOfWar/Heroes/P10/Round004/Models/P10_AstraVale_Round004_Neutral.fbx",
+      "sha256": "356e04b78fad5e44b82da0df3ba41ea3a575fd203029992d515b50733a44d099",
+      "status": "PASS",
+      "triangles": 92324
+    },
+    {
+      "armature_objects": 0,
+      "bounds": {
+        "dimensions": [
+          0.997619,
+          0.765571,
+          1.803924
+        ],
+        "max": [
+          0.303367,
+          0.417,
+          1.787625
+        ],
+        "min": [
+          -0.694251,
+          -0.348571,
+          -0.016299
+        ]
+      },
+      "bytes": 6909532,
+      "civilian_renderer_hits": [],
+      "mesh_objects": 96,
+      "path": "game/Assets/CodexOfWar/Heroes/P10/Round004/Models/P10_AstraVale_Round004_Combat.fbx",
+      "sha256": "dc0c328a5bcaf43a8f7d70d47519a3c00c6e4facb9d0d96bbab0cc1893f5dc10",
+      "status": "PASS",
+      "triangles": 92324
+    },
+    {
+      "armature_objects": 0,
+      "bounds": {
+        "dimensions": [
+          0.759933,
+          0.734837,
+          1.652036
+        ],
+        "max": [
+          0.388347,
+          0.50914,
+          1.649953
+        ],
+        "min": [
+          -0.371586,
+          -0.225698,
+          -0.002083
+        ]
+      },
+      "bytes": 6589452,
+      "civilian_renderer_hits": [],
+      "mesh_objects": 96,
+      "path": "game/Assets/CodexOfWar/Heroes/P10/Round004/Models/P10_AstraVale_Round004_LOD0.fbx",
+      "sha256": "4cd8c6c93ef26f308ebf116964655b29f2eb3a5f459503052daf863f7e94b5d2",
+      "status": "PASS",
+      "triangles": 88036
+    },
+    {
+      "armature_objects": 0,
+      "bounds": {
+        "dimensions": [
+          0.760038,
+          0.734591,
+          1.651951
+        ],
+        "max": [
+          0.388347,
+          0.508783,
+          1.650095
+        ],
+        "min": [
+          -0.37169,
+          -0.225808,
+          -0.001855
+        ]
+      },
+      "bytes": 4766332,
+      "civilian_renderer_hits": [],
+      "mesh_objects": 96,
+      "path": "game/Assets/CodexOfWar/Heroes/P10/Round004/Models/P10_AstraVale_Round004_LOD1.fbx",
+      "sha256": "3eefde4c054f9a1a4ab6c9ea3a5935c25e18258d999a1da73baf02cfe9b51cfd",
+      "status": "PASS",
+      "triangles": 61951
+    },
+    {
+      "armature_objects": 0,
+      "bounds": {
+        "dimensions": [
+          0.760038,
+          0.73463,
+          1.651536
+        ],
+        "max": [
+          0.388347,
+          0.509061,
+          1.650095
+        ],
+        "min": [
+          -0.37169,
+          -0.225569,
+          -0.001441
+        ]
+      },
+      "bytes": 3330828,
+      "civilian_renderer_hits": [],
+      "mesh_objects": 96,
+      "path": "game/Assets/CodexOfWar/Heroes/P10/Round004/Models/P10_AstraVale_Round004_LOD2.fbx",
+      "sha256": "2e08fd78e154712d8bb4d7b34dd26af911531c3ae9589f69e5c94e4a2fbf676e",
+      "status": "PASS",
+      "triangles": 41158
+    }
+  ],
+  "pipeline": "P10_Round004_AstraValeWarrior",
+  "status": "PASS",
+  "validation_mode": "Blender factory-startup, one clean reimport per FBX"
+}

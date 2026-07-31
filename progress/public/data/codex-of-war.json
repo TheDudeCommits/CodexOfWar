@@ -19,11 +19,11 @@
   ],
   "activeBuild": {
     "pieceId": "P10",
-    "round": 4,
-    "roundLabel": "P10 · Round 004",
+    "round": 5,
+    "roundLabel": "P10 · Round 005",
     "status": "revising",
-    "builder": "Head-to-toe warrior redesign active",
-    "brief": "Remove the dominant stock-civilian Rain read with a genuinely authored head-to-toe anime-warrior identity: tailored underlayer, layered cloth and leather harness, asymmetric coat or tabard, bracers, gauntlets, thigh guards, greaves, boots, restrained metalwork, and a coherent weapon harness.",
+    "builder": "Professional-source pipeline pivot active",
+    "brief": "Replace the rejected procedural costume pipeline with a cohesive, professionally authored, lawfully sourced warrior character or costume. Source triage must prove a visible macro-quality upgrade before any derivative build begins; no account gate, asset name, or technical metric can substitute for the pixels.",
     "facts": [
       "P00 is accepted as infrastructure; its blind visual baseline remains an explicit 28.33–76.67 loss.",
       "Round 001 is mechanically reproducible: two independent critic reruns matched all six filed image hashes, P10 validation passed, focused EditMode passed 8/8, the full suite passed 14/14, and the P00 aggregate stayed byte-identical.",
@@ -31,10 +31,14 @@
       "Round 002 passed its mechanical export gates but failed visual preflight at 5/13. The decisive frame exposed torn and detached combat hands, so it never entered Unity.",
       "A fresh-context critic scored round 003 at 6/13 with only 4/8 mandatory checks. The source package is a visual NO-GO and Unity was never launched.",
       "Round 003 passed anatomy, face, feet, joint continuity, neutral coverage, and diagnostic coverage; it failed hands and grip, costume, weapon contact, materials, LOD0 budget, combat pose, and authored identity.",
-      "The single biggest gap is exact: the character still reads as stock Blender Studio Rain in a tank, scarf, jeans, and sneakers with thin cyan shells, not as a premium authored anime warrior.",
       "Two isolated Blender reruns matched semantic structure, topology, materials, and weights, but exact artifact determinism failed at 0/16 hashes for repository-to-run and 0/16 between runs. The round-003 audit also omitted its Combat FBX because its record key collided with the combat PNG.",
       "A separate 80-deform-bone export prototype proved structural rig feasibility, but shoulder, elbow, wrist, thumb, finger, and facial-deformation hard gates remain unresolved; it is not combat-ready.",
-      "Round 004 changes only the rejected design identity. Round 001 remains the latest filed in-engine evidence until a source round clears every mandatory preflight gate."
+      "Round 004 mechanically delivered a lawful static Rain-derived source, five FBXs, nine diagnostics, and an 88,036-triangle LOD0, but a fresh critic rejected it at 7/13 with only 4/8 mandatory checks. Unity was never launched.",
+      "Round 004 passed anatomy, face, feet, joint continuity, LOD0, neutral coverage, and diagnostic coverage. It failed the second complete hand enclosure, premium costume construction, weapon function, material separation, combat intent, and unmistakable close-range AAA identity.",
+      "The single biggest gap is exact: the costume still reads as a toy-like procedural slab-and-tube assembly rather than believable, layered, worn, functional AAA warrior gear.",
+      "Two isolated Round 004 reruns matched all 26 frozen input hashes and canonical geometry, topology, UVs, materials, assignments, transforms, bounds, and near-pixel imagery. Exact output determinism still failed: only the 22 copied textures matched among 39 physical outputs.",
+      "All five Round 004 FBXs contain one broken absolute texture reference and leak the source path. The supplied validator missed this because it checks image resolution only in the authored blend.",
+      "Round 005 is a pipeline pivot, not another procedural armor polish pass. Round 001 remains the latest filed in-engine evidence until a source round clears every mandatory preflight gate."
     ],
     "evidenceFingerprint": {
       "gitRevision": "2dedf617ace47ea5dbb2cde1817d6119604842d2",
@@ -96,7 +100,7 @@
         "Static lookdev only; no rig, S02, or S06"
       ]
     },
-    "nextGate": "Round 004 must pass all 8 mandatory source checks and score at least 10/13 in a separate fresh-context preflight before Unity may be opened. Only then may it file reproducible S01, S02, S06, and four-view in-engine evidence for a blind comparison."
+    "nextGate": "Round 005 must first establish a lawful professional source that is a clear visible macro-quality upgrade, then pass all 8 mandatory source checks and score at least 10/13 in a separate fresh-context preflight before Unity may be opened. Only then may it file reproducible S01, S02, S06, and four-view in-engine evidence for a blind comparison."
   },
   "canonicalCapture": {
     "shotId": "S01",
@@ -244,14 +248,37 @@
       "round": 4,
       "label": "P10 · Round 004",
       "pieceId": "P10",
-      "phase": "Focused builder active",
-      "status": "building",
+      "phase": "Fresh source critic complete",
+      "status": "criticized",
       "date": "2026-07-31",
       "builderBrief": "Replace the rejected civilian silhouette with a cohesive head-to-toe warrior costume and material identity while preserving Rain's credible anatomy, face, hands, feet, and joint continuity.",
-      "evidence": "Building. This round is bounded to the critic's single biggest gap. It may not enter Unity until an independent fresh-context critic passes all 8 mandatory source checks and at least 10/13 overall.",
+      "evidence": "The lawful static source, generator, validator, authored blend, five FBXs, nine 1600px diagnostics, clean-import report, and fresh independent review are filed. Mechanical import checks pass, but the visual source gate scored only 7/13 and 4/8 mandatory. Two isolated reruns matched canonical geometry and near-pixel imagery, not exact generated bytes; all five FBXs carry one broken absolute texture reference. Unity was never launched.",
+      "evidenceLinks": [
+        "/captures/P10/round-004-preflight/Front_Decisive.png",
+        "/captures/P10/round-004-preflight/Grip_Failure.png",
+        "/captures/P10/round-004-preflight/Combat_Failure.png",
+        "/data/P10-round-004-preflight.json"
+      ],
+      "critic": {
+        "status": "Rejected before Unity · fresh visual gate failed closed",
+        "score": 7,
+        "scoreLabel": "Source preflight 7/13 · mandatory 4/8",
+        "preference": "Do not advance round 004 to Unity",
+        "primaryGap": "The delivered costume's construction language is still a toy-like procedural slab-and-tube assembly rather than believable, layered, worn, functional AAA warrior gear."
+      }
+    },
+    {
+      "round": 5,
+      "label": "P10 · Round 005",
+      "pieceId": "P10",
+      "phase": "Professional-source derivative build active",
+      "status": "building",
+      "date": "2026-07-31",
+      "builderBrief": "Pivot away from procedural armor construction. Start only from a lawful, cohesive, professionally authored character or costume whose fastening logic, wear, thickness, material response, and silhouette are already credible before adaptation.",
+      "evidence": "Source triage found Blender Studio Einar v1: an anonymous official CC-BY payload with production layered clothing, weathered PBR surfaces, a full rig, 95 materials, and substantial 4K texture coverage. The builder verified its source receipt and is preparing a bounded Round005 visual proof. Unity remains locked.",
       "evidenceLinks": [],
       "critic": {
-        "status": "Not started · focused source rebuild active",
+        "status": "Not started · source derivative build active",
         "score": null,
         "scoreLabel": null,
         "preference": null,

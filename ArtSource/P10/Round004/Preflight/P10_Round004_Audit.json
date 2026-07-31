@@ -1,0 +1,358 @@
+{
+  "authored_costume_triangles_neutral_rest": 40917,
+  "authored_materials": [
+    "P10R4_Boot_Sole",
+    "P10R4_Cloth_Charcoal",
+    "P10R4_Cloth_WarmIvory",
+    "P10R4_Emission_Aether",
+    "P10R4_Enamel_MutedAether",
+    "P10R4_Leather_Obsidian",
+    "P10R4_Leather_Oxblood",
+    "P10R4_Metal_AgedBronze",
+    "P10R4_Metal_BlackenedSteel",
+    "P10R4_Metal_MutedSteel",
+    "P10R4_Thread_Ivory"
+  ],
+  "build_receipt": {
+    "blender": "5.2.0 LTS",
+    "builder_path": "Tools/Blender/P10_Round004_AstraValeWarrior.py",
+    "builder_sha256": "b2ea48ee89de0808d487dcf1f22ecca1b8689ea64001d4e62ab67ae36bc7cb90",
+    "factory_startup": true,
+    "invocation": "Blender --background --disable-autoexec --factory-startup --python Tools/Blender/P10_Round004_AstraValeWarrior.py",
+    "validator_path": "Tools/Blender/P10_Round004_ValidateExports.py",
+    "validator_sha256": "8d9de441e0cbc5a1719276c904163818c8b846248f0f851ac65b53e53b876daf"
+  },
+  "clean_reimport_validation": {
+    "authored_blend": {
+      "civilian_source_objects_present": 0,
+      "file_backed_images": 17,
+      "missing_texture_probes": 0,
+      "status": "PASS"
+    },
+    "blender": "5.2.0 LTS",
+    "fbx": {
+      "combat": {
+        "armatures": 0,
+        "civilian_renderer_hits": 0,
+        "mesh_objects": 96,
+        "triangles": 92324
+      },
+      "lod0": {
+        "armatures": 0,
+        "civilian_renderer_hits": 0,
+        "mesh_objects": 96,
+        "triangles": 88036
+      },
+      "lod1": {
+        "armatures": 0,
+        "civilian_renderer_hits": 0,
+        "mesh_objects": 96,
+        "triangles": 61951
+      },
+      "lod2": {
+        "armatures": 0,
+        "civilian_renderer_hits": 0,
+        "mesh_objects": 96,
+        "triangles": 41158
+      },
+      "neutral": {
+        "armatures": 0,
+        "civilian_renderer_hits": 0,
+        "mesh_objects": 96,
+        "triangles": 92324
+      }
+    },
+    "report_path": "ArtSource/P10/Round004/Preflight/P10_Round004_FBX_Reimport.json",
+    "report_sha256": "ecc8aa38c11147242b7f15a23936f7af4fdd3e56135982753b33c6c91df1579d",
+    "status": "PASS"
+  },
+  "civilian_source_action": {
+    "action": "removed from derivative scene to defeat source visibility drivers",
+    "objects": [
+      "GEO-rain-top",
+      "GEO-rain-scarf",
+      "GEO-rain-jeans",
+      "GEO-rain-shoes"
+    ],
+    "stage": "after continuous fitted top/jeans donor copies"
+  },
+  "combat_grip": {
+    "left_hand_proxy": [
+      -0.018572,
+      -0.192727,
+      1.071684
+    ],
+    "left_proxy_distance_m": 0.070114,
+    "lower_grip": [
+      -0.00764,
+      -0.194354,
+      0.943993
+    ],
+    "right_hand_proxy": [
+      -0.062801,
+      -0.198354,
+      0.900897
+    ],
+    "right_proxy_distance_m": 0.070114,
+    "upper_grip": [
+      -0.073733,
+      -0.188728,
+      1.028588
+    ]
+  },
+  "costume_objects": [
+    "P10R4_BackHarness_CrossStraps",
+    "P10R4_BackHarness_LockingBracket",
+    "P10R4_BackHarness_MountPlate",
+    "P10R4_BackHarness_WeaponLoop_0",
+    "P10R4_BackHarness_WeaponLoop_1",
+    "P10R4_BodySuit_Fitted",
+    "P10R4_BootBuckle_L_0",
+    "P10R4_BootBuckle_L_1",
+    "P10R4_BootBuckle_R_0",
+    "P10R4_BootBuckle_R_1",
+    "P10R4_BootFoot_L",
+    "P10R4_BootFoot_R",
+    "P10R4_BootShaft_L",
+    "P10R4_BootShaft_R",
+    "P10R4_BootSole_L",
+    "P10R4_BootSole_R",
+    "P10R4_BootStrap_L_0",
+    "P10R4_BootStrap_L_1",
+    "P10R4_BootStrap_R_0",
+    "P10R4_BootStrap_R_1",
+    "P10R4_BracerLower_L",
+    "P10R4_BracerLower_R",
+    "P10R4_BracerRidge_L",
+    "P10R4_BracerRidge_R",
+    "P10R4_BracerUpper_L",
+    "P10R4_BracerUpper_R",
+    "P10R4_Coat_AsymmetricFrontTabard",
+    "P10R4_Coat_LongLeftBinding",
+    "P10R4_Coat_LongLeftTail",
+    "P10R4_Coat_MutedTealSash",
+    "P10R4_Coat_ShortRightBinding",
+    "P10R4_Coat_ShortRightTail",
+    "P10R4_Coat_TabardEngraving",
+    "P10R4_Coat_TabardLeatherBinding",
+    "P10R4_Cuirass_ArticulatedRibs",
+    "P10R4_Cuirass_EdgeBinding",
+    "P10R4_Cuirass_LeatherFoundation",
+    "P10R4_Cuirass_PlanarChestBinding_L",
+    "P10R4_Cuirass_PlanarChestBinding_R",
+    "P10R4_Cuirass_PlanarChest_L",
+    "P10R4_Cuirass_PlanarChest_R",
+    "P10R4_GauntletCuff_L",
+    "P10R4_GauntletCuff_R",
+    "P10R4_GreaveBinding_L",
+    "P10R4_GreaveBinding_R",
+    "P10R4_GreaveEngraving_L",
+    "P10R4_GreaveEngraving_R",
+    "P10R4_Greave_L",
+    "P10R4_Greave_R",
+    "P10R4_Harness_ChestClosure",
+    "P10R4_Harness_ContrastStitching",
+    "P10R4_Harness_DiagonalLeather",
+    "P10R4_Harness_Rivet_00",
+    "P10R4_Harness_Rivet_01",
+    "P10R4_Harness_Rivet_02",
+    "P10R4_KneeGuard_L",
+    "P10R4_KneeGuard_R",
+    "P10R4_Pauldron_LeftSteel",
+    "P10R4_Pauldron_RightLeather",
+    "P10R4_Sleeve_L",
+    "P10R4_Sleeve_R",
+    "P10R4_ThighGuard_L",
+    "P10R4_ThighGuard_R",
+    "P10R4_ThighStrap_L_0",
+    "P10R4_ThighStrap_L_1",
+    "P10R4_ThighStrap_R_0",
+    "P10R4_ThighStrap_R_1",
+    "P10R4_Tunic_HighCollar",
+    "P10R4_Tunic_HighCollarBinding",
+    "P10R4_Tunic_ShoulderSaddleBinding_L",
+    "P10R4_Tunic_ShoulderSaddleBinding_R",
+    "P10R4_Tunic_ShoulderSaddle_L",
+    "P10R4_Tunic_ShoulderSaddle_R",
+    "P10R4_UnderTunic_Fitted",
+    "P10R4_Waist_BeltEdgeUpper",
+    "P10R4_Waist_MainBuckle",
+    "P10R4_Waist_WarBelt"
+  ],
+  "diagnostic_images": {
+    "count": 9,
+    "height_px": 1600,
+    "keys_are_unique": true,
+    "names": [
+      "front_png",
+      "three_quarter_png",
+      "back_png",
+      "profile_png",
+      "face_png",
+      "hands_png",
+      "feet_png",
+      "combat_png",
+      "grip_png"
+    ],
+    "width_px": 1600
+  },
+  "excluded_civilian_objects": [
+    "GEO-rain-top",
+    "GEO-rain-scarf",
+    "GEO-rain-jeans",
+    "GEO-rain-shoes"
+  ],
+  "license": "CC BY 4.0",
+  "outputs": {
+    "authored_blend": {
+      "bytes": 9537408,
+      "path": "ArtSource/P10/Round004/P10_Round004_AstraValeWarrior.blend",
+      "sha256": "8a38c2b63c6c4d534fd174a5058de89a88dfc47c031da31d1234a624250a8d4d"
+    },
+    "back_png": {
+      "bytes": 2825020,
+      "path": "ArtSource/P10/Round004/Preflight/P10_Round004_Back.png",
+      "sha256": "6470294d04a752d8a75a811b028650f785cb20daf793e5e256fe282facac733b"
+    },
+    "combat_fbx": {
+      "bytes": 6909532,
+      "path": "game/Assets/CodexOfWar/Heroes/P10/Round004/Models/P10_AstraVale_Round004_Combat.fbx",
+      "sha256": "dc0c328a5bcaf43a8f7d70d47519a3c00c6e4facb9d0d96bbab0cc1893f5dc10"
+    },
+    "combat_png": {
+      "bytes": 2827172,
+      "path": "ArtSource/P10/Round004/Preflight/P10_Round004_Combat.png",
+      "sha256": "21b917ea1b45efd1281f9ec7d525952795601be38940efb1f789878dd6cf7d13"
+    },
+    "face_png": {
+      "bytes": 2946320,
+      "path": "ArtSource/P10/Round004/Preflight/P10_Round004_Face.png",
+      "sha256": "c90c6a797007003bcecc6011f08a6af8ab7ff98d4b3f91c53fba5c088eb37244"
+    },
+    "feet_png": {
+      "bytes": 3314595,
+      "path": "ArtSource/P10/Round004/Preflight/P10_Round004_Feet.png",
+      "sha256": "c092b12dd7dc0df3fde83590e7a8d8f11e65324f66024e5463627f07f9d3e43f"
+    },
+    "front_png": {
+      "bytes": 2904958,
+      "path": "ArtSource/P10/Round004/Preflight/P10_Round004_Front.png",
+      "sha256": "ae3c1f06a51160d52996e38c77d2b17b8d61402fd49291c160411fd02db53d02"
+    },
+    "grip_png": {
+      "bytes": 3676358,
+      "path": "ArtSource/P10/Round004/Preflight/P10_Round004_Grip.png",
+      "sha256": "d5de456d4d3558e20692c2be0958272670ca6ee379eef75113d0ba3f81424c05"
+    },
+    "hands_png": {
+      "bytes": 3289758,
+      "path": "ArtSource/P10/Round004/Preflight/P10_Round004_Hands.png",
+      "sha256": "7cd9fd962e07a9020d8418a257b1c52c2267d33f20d9d096fb8b14bc2d901264"
+    },
+    "lod0_fbx": {
+      "bytes": 6589452,
+      "path": "game/Assets/CodexOfWar/Heroes/P10/Round004/Models/P10_AstraVale_Round004_LOD0.fbx",
+      "sha256": "4cd8c6c93ef26f308ebf116964655b29f2eb3a5f459503052daf863f7e94b5d2"
+    },
+    "lod1_fbx": {
+      "bytes": 4766332,
+      "path": "game/Assets/CodexOfWar/Heroes/P10/Round004/Models/P10_AstraVale_Round004_LOD1.fbx",
+      "sha256": "3eefde4c054f9a1a4ab6c9ea3a5935c25e18258d999a1da73baf02cfe9b51cfd"
+    },
+    "lod2_fbx": {
+      "bytes": 3330828,
+      "path": "game/Assets/CodexOfWar/Heroes/P10/Round004/Models/P10_AstraVale_Round004_LOD2.fbx",
+      "sha256": "2e08fd78e154712d8bb4d7b34dd26af911531c3ae9589f69e5c94e4a2fbf676e"
+    },
+    "neutral_fbx": {
+      "bytes": 6893244,
+      "path": "game/Assets/CodexOfWar/Heroes/P10/Round004/Models/P10_AstraVale_Round004_Neutral.fbx",
+      "sha256": "356e04b78fad5e44b82da0df3ba41ea3a575fd203029992d515b50733a44d099"
+    },
+    "profile_png": {
+      "bytes": 2834608,
+      "path": "ArtSource/P10/Round004/Preflight/P10_Round004_Profile.png",
+      "sha256": "7113c8be225ee44c0a7416ab913d81fbd8dd9e5f13e4c68351731c4a544c8048"
+    },
+    "three_quarter_png": {
+      "bytes": 2849256,
+      "path": "ArtSource/P10/Round004/Preflight/P10_Round004_ThreeQuarter.png",
+      "sha256": "7094cd104d4aa2c773c37bb0841d755c75e1141c40d90422b02014799041523a"
+    }
+  },
+  "known_gaps": [
+    "Round004 is a static presentation-mesh proof: FBXs intentionally contain no armature, animation clips, runtime controller, Unity prefab, or playable deformation claim.",
+    "Authored costume surfaces use procedural color, roughness, and bump response rather than a baked unique 4K costume atlas; the staged Rain anatomy textures are the only image texture payload.",
+    "LOD1 (61951 triangles) and LOD2 (41158 triangles) are monotonic but exceed the aspirational 48-55k and 22-28k bands because face, hands, hair, and eye geometry were protected from aggressive generic collapse.",
+    "Rigid armor and cloth presentation pieces were judged in neutral and one combat pose only; production extreme-pose collision, cloth simulation, and skin-weight cleanup remain outside this round.",
+    "The supporting blade and back harness establish silhouette and two-hand contact, but are not a production scabbard, draw system, or weapon gameplay asset."
+  ],
+  "pipeline": "P10_Round004_AstraValeWarrior",
+  "required_credit": "Rain Rig (CC) Blender Foundation | studio.blender.org",
+  "scope": "Static premium-costume visual proof; no playable rig, animation-set, Unity, or four-weight delivery claim.",
+  "seed": 1004,
+  "source_deform_bones": 392,
+  "source_material_treatments": {
+    "MAT-rain.eyebrows": "P10R4_Brows_BlueBlack",
+    "MAT-rain.eyelashes": "P10R4_Lashes",
+    "MAT-rain.eyes": "P10R4_Eyes_Aether",
+    "MAT-rain.hair": "P10R4_Hair_BlueBlack",
+    "MAT-rain.hairband": "P10R4_Hairband_Bronze"
+  },
+  "source_total_bones": 2166,
+  "source_visible_triangles": 49875,
+  "staged_texture_count": 22,
+  "supporting_weapon": {
+    "authored_length_m": 1.265,
+    "delivered_scale": [
+      0.76,
+      0.88,
+      0.86
+    ],
+    "purpose": "Supporting silhouette; costume/identity remains formal target."
+  },
+  "supporting_weapon_triangles": 1532,
+  "triangle_budgets": {
+    "combat_native": 92324,
+    "lod0": 88036,
+    "lod0_decimation_ratio": 0.953165,
+    "lod0_limit": 90000,
+    "lod1": 61951,
+    "lod1_decimation_ratio": 0.553052,
+    "lod2": 41158,
+    "lod2_decimation_ratio": 0.286058,
+    "neutral_native": 92324,
+    "tradeoff": "Rain face/hands/hair are protected at higher ratios; costume surfaces absorb most simplification."
+  },
+  "warnings": [
+    "Blender 5.2 emitted only forward-looking Blender 6.0 deprecation warnings for Material.use_nodes and World.use_nodes.",
+    "Vendor startup scripts cloudrig.py and rain_shading.py were deliberately disabled by --disable-autoexec; geometry, rig controls, textures, renders, exports, and clean reimports completed.",
+    "Rain source color management is Filmic, for which the source-context valid look enum is Medium High Contrast."
+  ],
+  "verified_source_hashes": {
+    "LICENSE-CC-BY-4.0.txt": "9ba9550ad48438d0836ddab3da480b3b69ffa0aac7b7878b5a0039e7ab429411",
+    "rain_v3.2.blend": "831ab6d837c679040285862b15dc9ee5180b018442a88aeaf92aaa7509b80258",
+    "textures/TEX-rain_body_diffuse.1001.png": "79294db9cccc7c395b3c95c5692eae454554611e8cad89e898f8b325b504bad5",
+    "textures/TEX-rain_body_diffuse.1002.png": "d4abb09a50d846f57179d61bb0a72431cc57d261b1646b6439de1724afce4afc",
+    "textures/TEX-rain_body_diffuse.1003.png": "64e0f179a1a872758801ce433b2b5b20ba0e9a399e01574b5a0f9266868c86ca",
+    "textures/TEX-rain_body_diffuse.png": "79294db9cccc7c395b3c95c5692eae454554611e8cad89e898f8b325b504bad5",
+    "textures/TEX-rain_body_roughness.1001.png": "22becb2fe72f49931f3dd278c78ae94f182da956f0ba2c77e324f7d3fca2f179",
+    "textures/TEX-rain_body_roughness.1002.png": "12a6d25dc64fa1b31fade64f64ca7568e3f11f691de1ffd1be59c9c92ffa2378",
+    "textures/TEX-rain_body_roughness.1003.png": "ab8a673417a762a78a0db1ae1489b13016799da8c24bfe9fea57763dedff9962",
+    "textures/TEX-rain_body_roughness.png": "22becb2fe72f49931f3dd278c78ae94f182da956f0ba2c77e324f7d3fca2f179",
+    "textures/TEX-rain_eyes.png": "fb2d509abe4bfa3aa4093272e81a25ddd9bbc3e4d03248fe7f213f9cda38a005",
+    "textures/TEX-rain_hair_diffuse.png": "01c35d3fc4b3e961acf3446fdc4a5de83937e09c1b05b074b27c87e511d50ad6",
+    "textures/TEX-rain_hair_direction.png": "3b17c6caeb953c6931aa6ccbaf8a082f236e66f7df2fcc1d54376d928ba7af0f",
+    "textures/TEX-rain_hair_direction_bw.png": "099063769a7e132e93e2d5d93d9af5548f0c1b9e56b6098d47ce8cae8cf7c1bc",
+    "textures/TEX-rain_hands_diffuse.png": "d4abb09a50d846f57179d61bb0a72431cc57d261b1646b6439de1724afce4afc",
+    "textures/TEX-rain_hands_roughness.png": "12a6d25dc64fa1b31fade64f64ca7568e3f11f691de1ffd1be59c9c92ffa2378",
+    "textures/TEX-rain_jeans_diffuse.png": "863b131b700ba189808c66970ad3abfcfa63b3d017676cd7dc5646f20f23305b",
+    "textures/TEX-rain_jeans_normal.png": "e09126c3f5283e772bfe04a08daa0fa20688878a755abd5e88b9e0bf471e1337",
+    "textures/TEX-rain_jeans_roughness.png": "d509abb985ec1d1b6571955f8596bc629cf03938c385536c2f992bfcd57e3a74",
+    "textures/TEX-rain_scarf_cavity.png": "203a77498f163116f697100effaf20f0fbbaed70fbaed2b68ab9d7cb7c398a8a",
+    "textures/TEX-rain_socks_bump.png": "bf71806f0b9e3cef029f46b6cb24a90633498622244c4dc88747a2dbb168a049",
+    "textures/TEX-rain_socks_roughness.png": "fe9f0876fa41391091e91d6aa7c9cf40681a7544128d71519ef6fff0413e2f1c",
+    "textures/TEX-rain_top_bump.png": "61f8ffdbde13c9fada97e9c45906426c9d92f1b94cb75ce718f498b9dadb5d1c",
+    "textures/TEX-rain_top_roughness.png": "fb00f4f18e808dcb7a20a1732298e7252fee4502f797fd4299ce2cc88f39c42b"
+  }
+}

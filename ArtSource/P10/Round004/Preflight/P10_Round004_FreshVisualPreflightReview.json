@@ -1,0 +1,676 @@
+{
+  "schema_version": 1,
+  "review_id": "P10_Round004_FreshVisualPreflightReview",
+  "timestamp": "2026-07-31T15:53:45+07:00",
+  "timezone": "Asia/Bangkok (UTC+07:00)",
+  "review_context": "Fresh-context, independent, source-bound source-preflight review. Prior-round narrative and claimed improvements were not used as scoring evidence.",
+  "score": 7,
+  "max_score": 13,
+  "mandatory_passes": 4,
+  "mandatory_max": 8,
+  "gate_rule": "GO requires all 8 mandatory checks and at least 10 of 13 total checks. Visual evidence overrides metrics.",
+  "verdict": "NO-GO",
+  "unity_disposition": "LOCKED",
+  "go_attestation": {
+    "exists": false,
+    "reason": "The source gate fails four mandatory visual checks and totals only 7 of 13. The builder and repository evidence also explicitly disclaim Unity integration and do not contain a GO attestation."
+  },
+  "checks": [
+    {
+      "id": 1,
+      "name": "continuous credible anatomy",
+      "mandatory": true,
+      "pass": true,
+      "rationale": "The licensed Blender Studio Rain body provides a continuous, coherent stylized anatomy foundation. Head, torso, limbs, hands, and feet form a readable complete figure in the neutral and combat renders."
+    },
+    {
+      "id": 2,
+      "name": "authored face, eyes, and hair",
+      "mandatory": true,
+      "pass": true,
+      "rationale": "The face close-up shows complete, professionally authored facial forms, eyes, brows, lashes, and modeled hair. Provenance is the licensed Rain foundation; Round004 mainly changes palette/material treatment and does not establish a unique new facial sculpt."
+    },
+    {
+      "id": 3,
+      "name": "both visible hands physically enclose the hilt in the rendered grip close-up, with palm/finger contact and no deformation",
+      "mandatory": true,
+      "pass": false,
+      "rationale": "The upper hand shows curled digits, but the lower hand is presented chiefly as a palm/thumb mass behind the pommel with no unambiguous visible finger enclosure. Intersecting and occluding bracer, harness, guard, and rod forms prevent certification of two clean palm-and-finger contacts. The audit's 0.070114 m proxy distances and README claim cannot override the visible ambiguity."
+    },
+    {
+      "id": 4,
+      "name": "feet and grounded stance",
+      "mandatory": true,
+      "pass": true,
+      "rationale": "Both feet are modeled, explicitly covered by a close diagnostic, and visibly contact the floor plane. The boot design is crude and the combat balance is weak, but ground contact itself is present; combat intent and balance are scored separately in check 10."
+    },
+    {
+      "id": 5,
+      "name": "continuous joint transitions",
+      "mandatory": true,
+      "pass": true,
+      "rationale": "The Rain anatomy deforms continuously through shoulders, elbows, wrists, hips, knees, and ankles in the supplied poses. The surrounding armor has poor construction transitions, but the underlying anatomical joints do not visibly break apart."
+    },
+    {
+      "id": 6,
+      "name": "genuinely premium layered warrior costume, not civilian clothing covered by floating, slab, or procedural pieces",
+      "mandatory": true,
+      "pass": false,
+      "rationale": "The delivered costume reads as smooth procedural tubes, thin bordered sheets, oversized cylinders, and planar plates attached over a fitted top-and-jeans-derived underlayer. Shoulder gaps, ring-like straps, flat tabards, and near-uniform edge piping do not form believable tailored, load-bearing, layered warrior gear. The benchmark's construction density, wear, fastening logic, and material thickness are absent."
+    },
+    {
+      "id": 7,
+      "name": "functional weapon scale, mount, grip, and contact",
+      "mandatory": true,
+      "pass": false,
+      "rationale": "The weapon is a very broad, flat slab with a simple glowing stripe and blocky guard. Its back presentation, harness loops, two-hand contact, and oversized combat silhouette read as presentation geometry rather than a functional weapon, scabbard, draw system, or credible grip assembly."
+    },
+    {
+      "id": 8,
+      "name": "premium material separation without plastic, chrome, or clipping",
+      "mandatory": true,
+      "pass": false,
+      "rationale": "Cloth, leather, steel, bronze, and enamel are labeled separately in source, but the renders collapse them into similarly smooth, glossy, plastic/chrome responses. Large specular blobs, clean procedural noise, no authored wear, and visible interpenetration around the grip, torso hardware, cuffs, straps, and plates destroy premium material credibility. All five FBXs also reimport with one unresolved texture reference."
+    },
+    {
+      "id": 9,
+      "name": "LOD0 production budget 60k to 90k triangles",
+      "mandatory": false,
+      "pass": true,
+      "rationale": "Independent clean import reports 88,036 LOD0 triangles, inside the required 60,000 to 90,000 range."
+    },
+    {
+      "id": 10,
+      "name": "combat line of action, balance, and attack intent",
+      "mandatory": false,
+      "pass": false,
+      "rationale": "The combat render is essentially an upright presentation pose with crossed or narrowly stacked feet, elbows folded into the torso, a vertical blade, and no committed weight transfer, target, swing arc, recoil, or attack line. It does not approach the benchmark's force, asymmetry, or readable combat mechanics."
+    },
+    {
+      "id": 11,
+      "name": "neutral front, back, profile, and three-quarter coverage",
+      "mandatory": false,
+      "pass": true,
+      "rationale": "Distinct 1600 by 1600 front, back, profile, and three-quarter renders exist and expose the full figure."
+    },
+    {
+      "id": 12,
+      "name": "diagnostic face, hands, feet, and grip coverage",
+      "mandatory": false,
+      "pass": true,
+      "rationale": "Distinct 1600 by 1600 face, neutral-hands, feet, and combat-grip diagnostics exist. Coverage passes even though the grip content itself fails check 3."
+    },
+    {
+      "id": 13,
+      "name": "unmistakable premium authored anime-warrior identity at close-range AAA quality",
+      "mandatory": false,
+      "pass": false,
+      "rationale": "The licensed Rain face remains recognizable as a polished stylized base, but the Round004 delivery does not establish a distinctive premium warrior identity. At close range the costume, weapon, trim, boots, and materials read as a procedural prototype and are radically below the benchmark's authored detail, functional storytelling, surface history, and production finish."
+    }
+  ],
+  "single_biggest_remaining_gap": "The delivered costume's construction language is still a toy-like procedural slab-and-tube assembly rather than believable, layered, worn, functional AAA warrior gear.",
+  "secondary_gaps": [
+    "The grip render does not visually prove two clean hand enclosures and contains occluding or intersecting hardware.",
+    "The weapon is an oversized flat presentation slab with crude mount and contact logic.",
+    "Material response is glossy and homogeneous, with plastic or chrome reads instead of convincing cloth, leather, and metal separation.",
+    "The combat pose lacks attack intent, dynamic balance, and a readable line of action.",
+    "Every FBX contains one nonportable, unresolved texture reference that the supplied validator does not test.",
+    "Generated artifact bytes are not reproducible even though canonical geometry and decoded imagery are effectively stable."
+  ],
+  "benchmark_comparison": {
+    "method": "All 21 physical image files in Reference.zip were extracted only under /tmp and personally inspected at their original dimensions. Decisive Round004 full-body, combat, and grip renders were then inspected at their original 1600 by 1600 resolution without using prior-round claims.",
+    "result": "The Round004 full-body and combat views cannot plausibly be mistaken for the benchmark fidelity tier. The benchmark shows layered equipment with believable thickness, wear, fastening and load paths, distinct roughness, grounded weight, and forceful combat silhouettes. Round004 shows a smooth toy-like base, bordered slabs and tubes, broad specular highlights, a flat oversized weapon, and a static crossed-foot presentation pose.",
+    "framing_limit": "The corpus is mostly in-game combat imagery with differing characters, cameras, lighting, environments, motion, and effects, so the comparison is blind only as far as the available framings permit.",
+    "actual_matched_in_game_blind_test_performed": false,
+    "actual_matched_in_game_blind_test_status": "Cannot occur before this source gate passes and Unity integration exists.",
+    "in_engine_run_claimed": false,
+    "numeric_100_point_score_claimed": false
+  },
+  "decisive_diagnostics": {
+    "front": {
+      "path": "ArtSource/P10/Round004/Preflight/P10_Round004_Front.png",
+      "sha256": "ae3c1f06a51160d52996e38c77d2b17b8d61402fd49291c160411fd02db53d02"
+    },
+    "three_quarter": {
+      "path": "ArtSource/P10/Round004/Preflight/P10_Round004_ThreeQuarter.png",
+      "sha256": "7094cd104d4aa2c773c37bb0841d755c75e1141c40d90422b02014799041523a"
+    },
+    "profile": {
+      "path": "ArtSource/P10/Round004/Preflight/P10_Round004_Profile.png",
+      "sha256": "7113c8be225ee44c0a7416ab913d81fbd8dd9e5f13e4c68351731c4a544c8048"
+    },
+    "combat": {
+      "path": "ArtSource/P10/Round004/Preflight/P10_Round004_Combat.png",
+      "sha256": "21b917ea1b45efd1281f9ec7d525952795601be38940efb1f789878dd6cf7d13"
+    },
+    "grip": {
+      "path": "ArtSource/P10/Round004/Preflight/P10_Round004_Grip.png",
+      "sha256": "d5de456d4d3558e20692c2be0958272670ca6ee379eef75113d0ba3f81424c05"
+    },
+    "face": {
+      "path": "ArtSource/P10/Round004/Preflight/P10_Round004_Face.png",
+      "sha256": "c90c6a797007003bcecc6011f08a6af8ab7ff98d4b3f91c53fba5c088eb37244"
+    },
+    "hands": {
+      "path": "ArtSource/P10/Round004/Preflight/P10_Round004_Hands.png",
+      "sha256": "7cd9fd962e07a9020d8418a257b1c52c2267d33f20d9d096fb8b14bc2d901264"
+    },
+    "feet": {
+      "path": "ArtSource/P10/Round004/Preflight/P10_Round004_Feet.png",
+      "sha256": "c092b12dd7dc0df3fde83590e7a8d8f11e65324f66024e5463627f07f9d3e43f"
+    },
+    "back": {
+      "path": "ArtSource/P10/Round004/Preflight/P10_Round004_Back.png",
+      "sha256": "6470294d04a752d8a75a811b028650f785cb20daf793e5e256fe282facac733b"
+    }
+  },
+  "concept_guidance_status": {
+    "path": "ArtSource/P10/Round004/Concept/P10_Round004_HeadToToe_Concept_v1.png",
+    "sha256": "7236e01210e82785e1657e133c52eddd4f9db6182f8c2a63151127ba81177a98",
+    "guidance_only": true,
+    "counted_as_rendered_evidence": false,
+    "finding": "The bitmap is absent from the generator and validator source references and absent from the generated-output manifest. It was inspected only to confirm status and was not used to rescue the rendered delivery."
+  },
+  "reference_corpus_verification": {
+    "archive_path": "/Users/amir/Downloads/Reference.zip",
+    "archive_sha256": "4653a7a92d6f6bde910f39d3190df0adb112677851815443144505b8b420a6dd",
+    "temporary_extraction_root": "/tmp/p10_r4_fresh.TY7EZ0/reference",
+    "physical_image_files_inspected": 21,
+    "unique_file_hashes": 20,
+    "duplicate_note": "Gow5.jpg and Gow5 (1).jpg are byte-identical but both physical files were opened and inspected.",
+    "benchmark_pixels_copied_to_repository": false,
+    "pixels_embedded_in_this_review": false,
+    "entries": [
+      {
+        "name": "God-of-War-Ragnarok-770x433.jpg",
+        "dimensions": [770, 433],
+        "sha256": "05048268b96a7ea20e52ab4f0c01fbc312b37d7d4b3ae4fd40752ca4f497e71e"
+      },
+      {
+        "name": "Gow5 (1).jpg",
+        "dimensions": [1400, 787],
+        "sha256": "06ac0710130fe19f7c844ecc453bca2d27bcc72b25fef3a2615f8877b53c9778"
+      },
+      {
+        "name": "Gow5.jpg",
+        "dimensions": [1400, 787],
+        "sha256": "06ac0710130fe19f7c844ecc453bca2d27bcc72b25fef3a2615f8877b53c9778"
+      },
+      {
+        "name": "god-of-war-ragnarok-pc-screenshot-pitmine-combat-02-en-10may24-1.webp",
+        "dimensions": [1920, 1080],
+        "sha256": "a0161b955a1947fcabccc34c8e22ee0ebcb6ade357b51aa974c0057caf9294c9"
+      },
+      {
+        "name": "images (1).jpeg",
+        "dimensions": [739, 415],
+        "sha256": "1e99a94f8efbbdd9d4811e2706f84616ea9cc379909caee873d212ecfb9a68b0"
+      },
+      {
+        "name": "images (10).jpeg",
+        "dimensions": [766, 400],
+        "sha256": "1af9ad3cd30a4f90dd97d8fcdced94eee8afcc2828aff1013bf24f90721112b7"
+      },
+      {
+        "name": "images (11).jpeg",
+        "dimensions": [739, 415],
+        "sha256": "d208c98d2ea91b654fb11070616887e0f8564fe3c5040ae854e3aab8645be98d"
+      },
+      {
+        "name": "images (12).jpeg",
+        "dimensions": [596, 335],
+        "sha256": "41d924111330b7ead3bb85e85ee8d16d3a66f376939ede3fa3227d6cb591f76a"
+      },
+      {
+        "name": "images (13).jpeg",
+        "dimensions": [720, 404],
+        "sha256": "d18f1a8f98bfaf720d4400cd3252688ff3200a5585c31d48112a003656c4d41a"
+      },
+      {
+        "name": "images (14).jpeg",
+        "dimensions": [596, 335],
+        "sha256": "3c5ced3dea47f3197adbcd323e4f7fb1f6b46f56ef79c5575ede85b72f32eb7e"
+      },
+      {
+        "name": "images (15).jpeg",
+        "dimensions": [679, 452],
+        "sha256": "0293135a1aa7dae0a92f73e018d5f046cd8aa45b9b0e1727e8538ae951276869"
+      },
+      {
+        "name": "images (2).jpeg",
+        "dimensions": [596, 335],
+        "sha256": "1f7ee6c436dee9599e2ff1191fde973f20c864548881b1cf7f6d483e3e15c1aa"
+      },
+      {
+        "name": "images (3).jpeg",
+        "dimensions": [739, 415],
+        "sha256": "a57bd1e7251e57eda6e246b45fce3ddc168a89e9b406db78ad261a9513f7df3f"
+      },
+      {
+        "name": "images (4).jpeg",
+        "dimensions": [739, 415],
+        "sha256": "c4693a135a8f66b17759349dd81e126001989aac894db1714d2d2cad89ae8fe0"
+      },
+      {
+        "name": "images (5).jpeg",
+        "dimensions": [596, 335],
+        "sha256": "21858656b7887cc37f92c2bab4ed56f6cb273f45fd75193c0cb1c1b37456bc33"
+      },
+      {
+        "name": "images (6).jpeg",
+        "dimensions": [739, 415],
+        "sha256": "aab7f2b4d72b8d2ffc4faea302e7f8e51a799aaad8ea213351e1de72c2526c8b"
+      },
+      {
+        "name": "images (7).jpeg",
+        "dimensions": [600, 337],
+        "sha256": "a96d9bf819821b0730be51f5ac4f916e55118b521280e737941b9be868fd0ad2"
+      },
+      {
+        "name": "images (8).jpeg",
+        "dimensions": [596, 335],
+        "sha256": "c0e6f548000b49247e740c300db014be846c73f4cfdd6ac09246b49ca0c5eb5c"
+      },
+      {
+        "name": "images (9).jpeg",
+        "dimensions": [739, 415],
+        "sha256": "be4dc9c541780492ad20d96d0afdf64f20478d2b6f52cabcb25b5edb3d2ee597"
+      },
+      {
+        "name": "images.jpeg",
+        "dimensions": [596, 335],
+        "sha256": "3db321cbdd218f19f9834e7ba81432cc94bfd9fb5cf0933af2664d26d61f34f2"
+      },
+      {
+        "name": "the-god-of-war-universe-is-on-the-right-track-v0-0ua2tv5snadh1.jpg",
+        "dimensions": [1948, 1080],
+        "sha256": "e894db229df4c7bc0be9e01e16a668158a4ae900e1b3749d42f9e47662bb7a62"
+      }
+    ]
+  },
+  "exact_input_hashes": {
+    "generator": {
+      "path": "Tools/Blender/P10_Round004_AstraValeWarrior.py",
+      "sha256": "b2ea48ee89de0808d487dcf1f22ecca1b8689ea64001d4e62ab67ae36bc7cb90"
+    },
+    "validator": {
+      "path": "Tools/Blender/P10_Round004_ValidateExports.py",
+      "sha256": "8d9de441e0cbc5a1719276c904163818c8b846248f0f851ac65b53e53b876daf"
+    },
+    "readme": {
+      "path": "ArtSource/P10/Round004/README.md",
+      "sha256": "dfdc68442c6532eddf5af56d699d53d9159f27c91c30d67ec9f9eb9e513c9ff4"
+    },
+    "concept": {
+      "path": "ArtSource/P10/Round004/Concept/P10_Round004_HeadToToe_Concept_v1.png",
+      "sha256": "7236e01210e82785e1657e133c52eddd4f9db6182f8c2a63151127ba81177a98"
+    },
+    "repository_audit": {
+      "path": "ArtSource/P10/Round004/Preflight/P10_Round004_Audit.json",
+      "sha256": "cd2746d1eb26fb7eb0dba28951b47799db84c2e4614f2a340ef9ec7dd8eeaf16"
+    },
+    "repository_fbx_reimport_report": {
+      "path": "ArtSource/P10/Round004/Preflight/P10_Round004_FBX_Reimport.json",
+      "sha256": "ecc8aa38c11147242b7f15a23936f7af4fdd3e56135982753b33c6c91df1579d"
+    },
+    "vendor_blend": {
+      "path": "ArtSource/P10/Round004/ThirdParty/BlenderStudioRain/rain_v3.2.blend",
+      "sha256": "831ab6d837c679040285862b15dc9ee5180b018442a88aeaf92aaa7509b80258"
+    },
+    "vendor_license": {
+      "path": "ArtSource/P10/Round004/ThirdParty/BlenderStudioRain/LICENSE-CC-BY-4.0.txt",
+      "sha256": "9ba9550ad48438d0836ddab3da480b3b69ffa0aac7b7878b5a0039e7ab429411"
+    },
+    "reference_archive": {
+      "path": "/Users/amir/Downloads/Reference.zip",
+      "sha256": "4653a7a92d6f6bde910f39d3190df0adb112677851815443144505b8b420a6dd"
+    },
+    "vendor_texture_sha256": {
+      "TEX-rain_body_diffuse.1001.png": "79294db9cccc7c395b3c95c5692eae454554611e8cad89e898f8b325b504bad5",
+      "TEX-rain_body_diffuse.1002.png": "d4abb09a50d846f57179d61bb0a72431cc57d261b1646b6439de1724afce4afc",
+      "TEX-rain_body_diffuse.1003.png": "64e0f179a1a872758801ce433b2b5b20ba0e9a399e01574b5a0f9266868c86ca",
+      "TEX-rain_body_diffuse.png": "79294db9cccc7c395b3c95c5692eae454554611e8cad89e898f8b325b504bad5",
+      "TEX-rain_body_roughness.1001.png": "22becb2fe72f49931f3dd278c78ae94f182da956f0ba2c77e324f7d3fca2f179",
+      "TEX-rain_body_roughness.1002.png": "12a6d25dc64fa1b31fade64f64ca7568e3f11f691de1ffd1be59c9c92ffa2378",
+      "TEX-rain_body_roughness.1003.png": "ab8a673417a762a78a0db1ae1489b13016799da8c24bfe9fea57763dedff9962",
+      "TEX-rain_body_roughness.png": "22becb2fe72f49931f3dd278c78ae94f182da956f0ba2c77e324f7d3fca2f179",
+      "TEX-rain_eyes.png": "fb2d509abe4bfa3aa4093272e81a25ddd9bbc3e4d03248fe7f213f9cda38a005",
+      "TEX-rain_hair_diffuse.png": "01c35d3fc4b3e961acf3446fdc4a5de83937e09c1b05b074b27c87e511d50ad6",
+      "TEX-rain_hair_direction.png": "3b17c6caeb953c6931aa6ccbaf8a082f236e66f7df2fcc1d54376d928ba7af0f",
+      "TEX-rain_hair_direction_bw.png": "099063769a7e132e93e2d5d93d9af5548f0c1b9e56b6098d47ce8cae8cf7c1bc",
+      "TEX-rain_hands_diffuse.png": "d4abb09a50d846f57179d61bb0a72431cc57d261b1646b6439de1724afce4afc",
+      "TEX-rain_hands_roughness.png": "12a6d25dc64fa1b31fade64f64ca7568e3f11f691de1ffd1be59c9c92ffa2378",
+      "TEX-rain_jeans_diffuse.png": "863b131b700ba189808c66970ad3abfcfa63b3d017676cd7dc5646f20f23305b",
+      "TEX-rain_jeans_normal.png": "e09126c3f5283e772bfe04a08daa0fa20688878a755abd5e88b9e0bf471e1337",
+      "TEX-rain_jeans_roughness.png": "d509abb985ec1d1b6571955f8596bc629cf03938c385536c2f992bfcd57e3a74",
+      "TEX-rain_scarf_cavity.png": "203a77498f163116f697100effaf20f0fbbaed70fbaed2b68ab9d7cb7c398a8a",
+      "TEX-rain_socks_bump.png": "bf71806f0b9e3cef029f46b6cb24a90633498622244c4dc88747a2dbb168a049",
+      "TEX-rain_socks_roughness.png": "fe9f0876fa41391091e91d6aa7c9cf40681a7544128d71519ef6fff0413e2f1c",
+      "TEX-rain_top_bump.png": "61f8ffdbde13c9fada97e9c45906426c9d92f1b94cb75ce718f498b9dadb5d1c",
+      "TEX-rain_top_roughness.png": "fb00f4f18e808dcb7a20a1732298e7252fee4502f797fd4299ce2cc88f39c42b"
+    }
+  },
+  "repository_physical_output_hashes": {
+    "generated_artifacts": {
+      "ArtSource/P10/Round004/P10_Round004_AstraValeWarrior.blend": {
+        "bytes": 9537408,
+        "sha256": "8a38c2b63c6c4d534fd174a5058de89a88dfc47c031da31d1234a624250a8d4d"
+      },
+      "ArtSource/P10/Round004/Preflight/P10_Round004_Back.png": {
+        "bytes": 2825020,
+        "sha256": "6470294d04a752d8a75a811b028650f785cb20daf793e5e256fe282facac733b"
+      },
+      "ArtSource/P10/Round004/Preflight/P10_Round004_Combat.png": {
+        "bytes": 2827172,
+        "sha256": "21b917ea1b45efd1281f9ec7d525952795601be38940efb1f789878dd6cf7d13"
+      },
+      "ArtSource/P10/Round004/Preflight/P10_Round004_Face.png": {
+        "bytes": 2946320,
+        "sha256": "c90c6a797007003bcecc6011f08a6af8ab7ff98d4b3f91c53fba5c088eb37244"
+      },
+      "ArtSource/P10/Round004/Preflight/P10_Round004_Feet.png": {
+        "bytes": 3314595,
+        "sha256": "c092b12dd7dc0df3fde83590e7a8d8f11e65324f66024e5463627f07f9d3e43f"
+      },
+      "ArtSource/P10/Round004/Preflight/P10_Round004_Front.png": {
+        "bytes": 2904958,
+        "sha256": "ae3c1f06a51160d52996e38c77d2b17b8d61402fd49291c160411fd02db53d02"
+      },
+      "ArtSource/P10/Round004/Preflight/P10_Round004_Grip.png": {
+        "bytes": 3676358,
+        "sha256": "d5de456d4d3558e20692c2be0958272670ca6ee379eef75113d0ba3f81424c05"
+      },
+      "ArtSource/P10/Round004/Preflight/P10_Round004_Hands.png": {
+        "bytes": 3289758,
+        "sha256": "7cd9fd962e07a9020d8418a257b1c52c2267d33f20d9d096fb8b14bc2d901264"
+      },
+      "ArtSource/P10/Round004/Preflight/P10_Round004_Profile.png": {
+        "bytes": 2834608,
+        "sha256": "7113c8be225ee44c0a7416ab913d81fbd8dd9e5f13e4c68351731c4a544c8048"
+      },
+      "ArtSource/P10/Round004/Preflight/P10_Round004_ThreeQuarter.png": {
+        "bytes": 2849256,
+        "sha256": "7094cd104d4aa2c773c37bb0841d755c75e1141c40d90422b02014799041523a"
+      },
+      "game/Assets/CodexOfWar/Heroes/P10/Round004/Models/P10_AstraVale_Round004_Combat.fbx": {
+        "bytes": 6909532,
+        "sha256": "dc0c328a5bcaf43a8f7d70d47519a3c00c6e4facb9d0d96bbab0cc1893f5dc10"
+      },
+      "game/Assets/CodexOfWar/Heroes/P10/Round004/Models/P10_AstraVale_Round004_LOD0.fbx": {
+        "bytes": 6589452,
+        "sha256": "4cd8c6c93ef26f308ebf116964655b29f2eb3a5f459503052daf863f7e94b5d2"
+      },
+      "game/Assets/CodexOfWar/Heroes/P10/Round004/Models/P10_AstraVale_Round004_LOD1.fbx": {
+        "bytes": 4766332,
+        "sha256": "3eefde4c054f9a1a4ab6c9ea3a5935c25e18258d999a1da73baf02cfe9b51cfd"
+      },
+      "game/Assets/CodexOfWar/Heroes/P10/Round004/Models/P10_AstraVale_Round004_LOD2.fbx": {
+        "bytes": 3330828,
+        "sha256": "2e08fd78e154712d8bb4d7b34dd26af911531c3ae9589f69e5c94e4a2fbf676e"
+      },
+      "game/Assets/CodexOfWar/Heroes/P10/Round004/Models/P10_AstraVale_Round004_Neutral.fbx": {
+        "bytes": 6893244,
+        "sha256": "356e04b78fad5e44b82da0df3ba41ea3a575fd203029992d515b50733a44d099"
+      }
+    },
+    "staged_textures": {
+      "count": 22,
+      "all_staged_hashes_match_vendor_sources": true,
+      "sha256_by_filename": {
+        "TEX-rain_body_diffuse.1001.png": "79294db9cccc7c395b3c95c5692eae454554611e8cad89e898f8b325b504bad5",
+        "TEX-rain_body_diffuse.1002.png": "d4abb09a50d846f57179d61bb0a72431cc57d261b1646b6439de1724afce4afc",
+        "TEX-rain_body_diffuse.1003.png": "64e0f179a1a872758801ce433b2b5b20ba0e9a399e01574b5a0f9266868c86ca",
+        "TEX-rain_body_diffuse.png": "79294db9cccc7c395b3c95c5692eae454554611e8cad89e898f8b325b504bad5",
+        "TEX-rain_body_roughness.1001.png": "22becb2fe72f49931f3dd278c78ae94f182da956f0ba2c77e324f7d3fca2f179",
+        "TEX-rain_body_roughness.1002.png": "12a6d25dc64fa1b31fade64f64ca7568e3f11f691de1ffd1be59c9c92ffa2378",
+        "TEX-rain_body_roughness.1003.png": "ab8a673417a762a78a0db1ae1489b13016799da8c24bfe9fea57763dedff9962",
+        "TEX-rain_body_roughness.png": "22becb2fe72f49931f3dd278c78ae94f182da956f0ba2c77e324f7d3fca2f179",
+        "TEX-rain_eyes.png": "fb2d509abe4bfa3aa4093272e81a25ddd9bbc3e4d03248fe7f213f9cda38a005",
+        "TEX-rain_hair_diffuse.png": "01c35d3fc4b3e961acf3446fdc4a5de83937e09c1b05b074b27c87e511d50ad6",
+        "TEX-rain_hair_direction.png": "3b17c6caeb953c6931aa6ccbaf8a082f236e66f7df2fcc1d54376d928ba7af0f",
+        "TEX-rain_hair_direction_bw.png": "099063769a7e132e93e2d5d93d9af5548f0c1b9e56b6098d47ce8cae8cf7c1bc",
+        "TEX-rain_hands_diffuse.png": "d4abb09a50d846f57179d61bb0a72431cc57d261b1646b6439de1724afce4afc",
+        "TEX-rain_hands_roughness.png": "12a6d25dc64fa1b31fade64f64ca7568e3f11f691de1ffd1be59c9c92ffa2378",
+        "TEX-rain_jeans_diffuse.png": "863b131b700ba189808c66970ad3abfcfa63b3d017676cd7dc5646f20f23305b",
+        "TEX-rain_jeans_normal.png": "e09126c3f5283e772bfe04a08daa0fa20688878a755abd5e88b9e0bf471e1337",
+        "TEX-rain_jeans_roughness.png": "d509abb985ec1d1b6571955f8596bc629cf03938c385536c2f992bfcd57e3a74",
+        "TEX-rain_scarf_cavity.png": "203a77498f163116f697100effaf20f0fbbaed70fbaed2b68ab9d7cb7c398a8a",
+        "TEX-rain_socks_bump.png": "bf71806f0b9e3cef029f46b6cb24a90633498622244c4dc88747a2dbb168a049",
+        "TEX-rain_socks_roughness.png": "fe9f0876fa41391091e91d6aa7c9cf40681a7544128d71519ef6fff0413e2f1c",
+        "TEX-rain_top_bump.png": "61f8ffdbde13c9fada97e9c45906426c9d92f1b94cb75ce718f498b9dadb5d1c",
+        "TEX-rain_top_roughness.png": "fb00f4f18e808dcb7a20a1732298e7252fee4502f797fd4299ce2cc88f39c42b"
+      }
+    }
+  },
+  "audit_and_provenance_findings": {
+    "license": "CC BY 4.0",
+    "required_credit": "Rain Rig (CC) Blender Foundation | studio.blender.org",
+    "source_blend_hash_matches_declared": true,
+    "license_hash_matches_declared": true,
+    "all_22_vendor_texture_hashes_match_declared": true,
+    "all_22_staged_texture_hashes_match_vendor": true,
+    "frozen_input_reproducibility": "26 of 26 frozen inputs are byte-identical across repository, isolated Run A, and isolated Run B: two scripts plus vendor blend, license, and 22 vendor textures.",
+    "authored_blend_file_backed_images": 17,
+    "authored_blend_missing_texture_probes": 0,
+    "fbx_no_missing_textures": false,
+    "fbx_missing_texture_finding": "Each of the five clean-imported FBXs has exactly one serialized image record and it is unresolved: TEX-rain_body_roughness.1001.png. The stored absolute source path is malformed on import by being appended below the Models directory, for example Models/Users/amir/Documents/Gauntlet Loop/ArtSource/.../TEX-rain_body_roughness.1001.png. Each FBX also serializes the absolute source .blend path. The staged texture payload is therefore byte-correct but the FBX reference is nonportable and broken.",
+    "supplied_validator_texture_coverage_gap": "The supplied validator checks texture existence only in the authored .blend. It does not inspect image records or texture resolution after FBX import, so its PASS does not establish texture completeness for the FBXs.",
+    "original_civilian_renderer_state": "GEO-rain-top, GEO-rain-scarf, GEO-rain-jeans, and GEO-rain-shoes are removed from the derivative .blend, and independent clean imports find zero civilian-name hits in all five FBXs.",
+    "civilian_derivation_caveat": "The source deliberately duplicates GEO-rain-top and GEO-rain-jeans as renamed fitted underlayers before deleting the original renderers. This is not original-renderer leakage, but the validator's name-only check cannot prove that the resulting silhouette no longer reads as civilian clothing beneath procedural armor.",
+    "benchmark_ingestion": "No generator or validator source reference points to Reference.zip or its images. No benchmark pixel was copied into the repository during this review.",
+    "concept_ingestion": "The concept bitmap is not referenced by the generator or validator and is not listed as a generated output."
+    ,
+    "repository_audit_regeneration_gap": "The repository audit JSON contains five manually added top-level sections absent from both directly regenerated audit files: build_receipt, clean_reimport_validation, diagnostic_images, known_gaps, and warnings. No frozen postprocessor that adds those sections is present in the inspected Round004 source."
+  },
+  "clean_fbx_reimport_validation": {
+    "repository_report_sha256": "ecc8aa38c11147242b7f15a23936f7af4fdd3e56135982753b33c6c91df1579d",
+    "repository_report_status": "PASS",
+    "isolated_run_A_report_sha256": "e1f176c397cd2057ebd71af6ddc244e10ce6f5302f5f1fcaca938fa06a86a599",
+    "isolated_run_A_status": "PASS",
+    "isolated_run_B_report_sha256": "64618c4e2a441c3291a506af4419b70b5a054a9137206687d08aae249859cdac",
+    "isolated_run_B_status": "PASS",
+    "blender": "5.2.0 LTS",
+    "mesh_objects_per_fbx": 96,
+    "armatures_per_fbx": 0,
+    "civilian_name_hits_per_fbx": 0,
+    "triangles": {
+      "neutral": 92324,
+      "combat": 92324,
+      "lod0": 88036,
+      "lod1": 61951,
+      "lod2": 41158
+    },
+    "status_interpretation": "Geometry, bounds, triangle counts, absence of armatures, and absence of original civilian renderer names pass. Texture completeness does not pass because the validator omits FBX image-path checks."
+  },
+  "isolated_run_reproducibility": {
+    "temporary_root": "/tmp/p10r4_round004_audit.ymiBGB",
+    "run_count": 2,
+    "generator_invocation": "/Applications/Blender.app/Contents/MacOS/Blender --background --disable-autoexec --factory-startup --python Tools/Blender/P10_Round004_AstraValeWarrior.py",
+    "validator_invocation": "/Applications/Blender.app/Contents/MacOS/Blender --background --disable-autoexec --factory-startup --python Tools/Blender/P10_Round004_ValidateExports.py",
+    "generator_run_A_status": "PASS",
+    "generator_run_B_status": "PASS",
+    "validator_run_A_status": "PASS",
+    "validator_run_B_status": "PASS",
+    "repository_to_run_A_exact_generated_bytes": false,
+    "run_A_to_run_B_exact_generated_bytes": false,
+    "input_bytes_exact_across_repository_run_A_run_B": true,
+    "frozen_inputs_exact_count": "26/26",
+    "physical_outputs_exact_count": "22/39",
+    "physical_outputs_different_count": "17/39",
+    "physical_output_count_interpretation": "Only the 22 copied texture outputs are byte-identical. The authored blend, five FBXs, nine PNGs, audit JSON, and FBX reimport JSON differ repository to Run A and Run A to Run B.",
+    "input_bytes_detail": "Both scripts, the vendor .blend, the license, all 22 vendor textures, and all 22 staged texture copies are exact across repository, Run A, and Run B.",
+    "generated_artifact_sha256_repository_run_A_run_B": {
+      "authored_blend": [
+        "8a38c2b63c6c4d534fd174a5058de89a88dfc47c031da31d1234a624250a8d4d",
+        "49605a0a92e3514d3c1be06c1f7ce2c075a408968a9a05da93681299355de501",
+        "ad65fbe981e860e7d80e8e757958350b65aa63dc3da325ec4292189bda5a0609"
+      ],
+      "audit_json": [
+        "cd2746d1eb26fb7eb0dba28951b47799db84c2e4614f2a340ef9ec7dd8eeaf16",
+        "bf8b4cf2d10601778127194e8c86aef23a39e32a4a052341d9dfea067e080a77",
+        "d3dda3204b098e1f6aedc310c3c226216fb5e92af56aaf82092bdae0a7f1ca9c"
+      ],
+      "fbx_reimport_json": [
+        "ecc8aa38c11147242b7f15a23936f7af4fdd3e56135982753b33c6c91df1579d",
+        "e1f176c397cd2057ebd71af6ddc244e10ce6f5302f5f1fcaca938fa06a86a599",
+        "64618c4e2a441c3291a506af4419b70b5a054a9137206687d08aae249859cdac"
+      ],
+      "neutral_fbx": [
+        "356e04b78fad5e44b82da0df3ba41ea3a575fd203029992d515b50733a44d099",
+        "5c467e129b5f8496ff02efd8d40b724ee59bc440cbf554f1f0c7983f9b1466df",
+        "7d2e83feaf2eda2663376fce994fcaf193049773ea3ca51cc5ea6765785cfff7"
+      ],
+      "combat_fbx": [
+        "dc0c328a5bcaf43a8f7d70d47519a3c00c6e4facb9d0d96bbab0cc1893f5dc10",
+        "cfef94d72f83e6973b5cc3c304a5a6ea5acc32b80700263984efa2c1fd512167",
+        "806fdbd69eca000dc43670f8a9b71cbff3e2874d4cb48e2ea8fe9cf1d0f998b5"
+      ],
+      "lod0_fbx": [
+        "4cd8c6c93ef26f308ebf116964655b29f2eb3a5f459503052daf863f7e94b5d2",
+        "38d081f403e2f0f9a01a054b7e7197bc390203aa79b2ba1df595cb4ccd57895a",
+        "1dd96a91b2309a666bb0e9a2ceb65ff88580ca5ee88badb9848bb4f15ed53ac7"
+      ],
+      "lod1_fbx": [
+        "3eefde4c054f9a1a4ab6c9ea3a5935c25e18258d999a1da73baf02cfe9b51cfd",
+        "08b4f7547639dba627c41612b06bdeeff220b627e072c9a5373285c6eafa97e1",
+        "89a11e83406010a15fc3b8f635138e5bfb301930f55079f2870a8b98b1c99d7a"
+      ],
+      "lod2_fbx": [
+        "2e08fd78e154712d8bb4d7b34dd26af911531c3ae9589f69e5c94e4a2fbf676e",
+        "57d4ec259430502301a54390556f1ff4c9716f55f2788a61b39aa311a1410a36",
+        "958d28de3e2f8658e4eac7a69cc6803ff8c8ee7a560e8119e8efec3ffe0d57ad"
+      ],
+      "back_png": [
+        "6470294d04a752d8a75a811b028650f785cb20daf793e5e256fe282facac733b",
+        "72fea39b55a46e3f3215189df168d9e8c2b637c36dc0403c0fb5ab140e61afe7",
+        "5a77482072ab6563d328ed550f5e2ccc912c376472ba7a58c73218fffe37e616"
+      ],
+      "combat_png": [
+        "21b917ea1b45efd1281f9ec7d525952795601be38940efb1f789878dd6cf7d13",
+        "cdf07d862f4f304e7128df8e4e0fb7f35222f477e20803f1c751dc2f2635e469",
+        "c204b0284983e87a42c8266e279bc1c1ccbe90bdff85eb300b43fe99201339b0"
+      ],
+      "face_png": [
+        "c90c6a797007003bcecc6011f08a6af8ab7ff98d4b3f91c53fba5c088eb37244",
+        "a8560d25c3dcc6e7bf1af688829f7765754954ce3f6a06fcafa458e445f79bb3",
+        "d2f8eb8ac937a392921bdf4a481fcee2049af297def2ba4bc1cdcf3996896855"
+      ],
+      "feet_png": [
+        "c092b12dd7dc0df3fde83590e7a8d8f11e65324f66024e5463627f07f9d3e43f",
+        "ce04b34fb21c6e82ecf88e40df8bdec3989282410850bc31011576b9e579f2c7",
+        "dab49c0932a157316e3d67c42402a29e9275a6aecedb71102ee0145889c9b6a9"
+      ],
+      "front_png": [
+        "ae3c1f06a51160d52996e38c77d2b17b8d61402fd49291c160411fd02db53d02",
+        "36bcdbca892da31a7694349fad964a4ce7a90bed1e1649f3f290ee96050a0ac3",
+        "95b46e165e6b9fc3a4db295dd32b45c2d409659d234e27e7928bcf497808edd8"
+      ],
+      "grip_png": [
+        "d5de456d4d3558e20692c2be0958272670ca6ee379eef75113d0ba3f81424c05",
+        "e8f52a5f975aa1853375ef84c8e8881291fdbfb4909736ad492422e128c2df91",
+        "7e00c4a292de88ff989dea623a0c2c554f1234974ad7c4e6e63a59900c00ac14"
+      ],
+      "hands_png": [
+        "7cd9fd962e07a9020d8418a257b1c52c2267d33f20d9d096fb8b14bc2d901264",
+        "075f76ccedff5897002722188b9f3f4ea96e0016cdb82b1b4a77597770eb3869",
+        "33e5994ef4bd3ccfb7b112e2a6b59994f160a3ecee1c3b02e47aa60fd435baf2"
+      ],
+      "profile_png": [
+        "7113c8be225ee44c0a7416ab913d81fbd8dd9e5f13e4c68351731c4a544c8048",
+        "a3b392ac0292c8ec6b465deceea245e63828012dc478ee85a82a1c36b9b06f82",
+        "b0850f29d7e6e209b29d81102d98656e32f9040f1eddc006ff60303a308b7091"
+      ],
+      "three_quarter_png": [
+        "7094cd104d4aa2c773c37bb0841d755c75e1141c40d90422b02014799041523a",
+        "d361c0ec1a5631ba56e938a6842fda6aba3e9c5467db3d5e66bbeb424d472dc5",
+        "006192fb83729314d54f74a257c193a281a8541e3d37c1c29f3c3d81f4c96c61"
+      ]
+    },
+    "semantic_comparison": {
+      "summary": "Despite binary inequality, repository, Run A, and Run B have exact-equal canonical world-space geometry, order-invariant oriented and unoriented topology, canonical UV mapping, material definitions and assignments, object names and transforms, counts, and bounds for all five FBXs and the authored blend. Raw face-loop and raw UV stream hashes differ only because export/import face and loop ordering varies.",
+      "neutral_canonical_examples": {
+        "geometry_exact_sha256": "875c0ca59c03850313a1660f7aae4a5f6811a09ae7be36a5fa50d6386bb0226b",
+        "topology_canonical_oriented_sha256": "35e74e3dd13349321cc8597232dc414052e239405c65c9cd85b53333119ccc2d",
+        "uv_canonical_quantized_1e6_sha256": "c33611eb0d8127b593f30692c8fe18272b6497cf4870ad45528a376cf409bad3",
+        "material_semantics_sha256": "8c6c741a719511797b975e4e2735074d1279490f8406caf1527959ad5ac5f35f"
+      },
+      "variants": {
+        "neutral": {
+          "mesh_objects": 96,
+          "vertices": 47802,
+          "triangles": 92324,
+          "bounds_min": [-0.371585637, -0.225697786, -0.002082887],
+          "bounds_max": [0.388347328, 0.509139597, 1.649953246]
+        },
+        "combat": {
+          "mesh_objects": 96,
+          "vertices": 47802,
+          "triangles": 92324,
+          "bounds_min": [-0.628513098, -0.348570883, -0.016299093],
+          "bounds_max": [0.303367376, 0.416999668, 1.738515377]
+        },
+        "lod0": {
+          "mesh_objects": 96,
+          "vertices": 45631,
+          "triangles": 88036,
+          "bounds_min": [-0.371585637, -0.225697786, -0.002082887],
+          "bounds_max": [0.388347328, 0.509139597, 1.649953246]
+        },
+        "lod1": {
+          "mesh_objects": 96,
+          "vertices": 32448,
+          "triangles": 61951,
+          "bounds_min": [-0.371690303, -0.225807846, -0.00185507],
+          "bounds_max": [0.388347328, 0.508782983, 1.650095463]
+        },
+        "lod2": {
+          "mesh_objects": 96,
+          "vertices": 21907,
+          "triangles": 41158,
+          "bounds_min": [-0.371690303, -0.225568667, -0.001440978],
+          "bounds_max": [0.388347328, 0.50906086, 1.650095463]
+        }
+      }
+    },
+    "pixel_drift": {
+      "repository_to_run_A": "0 to 15 changed RGB pixels per 2,560,000-pixel image; maximum channel delta 2; Grip decoded pixels are exact; minimum finite PSNR 102.83 dB.",
+      "repository_to_run_B": "0 to 14 changed RGB pixels per image; maximum channel delta 1; Profile decoded pixels are exact; minimum finite PSNR 105.22 dB.",
+      "run_A_to_run_B": "1 to 11 changed RGB pixels per image, or 0.000039 to 0.000430 percent; maximum channel delta 1 except Feet at 2; PSNR at least 103.76 dB.",
+      "interpretation": "The PNG byte hashes are not reproducible, but decoded image drift is visually negligible and bounded. This does not improve the visual score."
+    },
+    "evidence_logs": {
+      "run_A_generator_log": {
+        "path": "/tmp/p10r4_round004_audit.ymiBGB/runA_generator.log",
+        "sha256": "436ea4f4cac6567b089679f357707fc071488544d09bc3726ab86e9fb90b1fc8"
+      },
+      "run_B_generator_log": {
+        "path": "/tmp/p10r4_round004_audit.ymiBGB/runB_generator.log",
+        "sha256": "72d8609f2f941c35803db396fe7ac9bfc0993f652bbaafd59378eae9b7f36d83"
+      },
+      "run_A_validator_log": {
+        "path": "/tmp/p10r4_round004_audit.ymiBGB/runA_validator.log",
+        "sha256": "c45aebb63998394d642b43f085f74c63bcdd2839e5134f00175ef79a83a66392"
+      },
+      "run_B_validator_log": {
+        "path": "/tmp/p10r4_round004_audit.ymiBGB/runB_validator.log",
+        "sha256": "4e8e7968da439c3322812f6d90dd328c412a9a063450c4e06b9e1d826575830f"
+      },
+      "pixel_drift_json": {
+        "path": "/tmp/p10r4_round004_audit.ymiBGB/pixel_drift.json",
+        "sha256": "178916f40412173ff2a3f7f19ccf2c03ba98e60c51e60676bb33a6c196e85e5f"
+      },
+      "semantic_summary": {
+        "path": "/tmp/p10r4_round004_audit.ymiBGB/fbx_semantic_summary.tsv"
+      }
+    }
+  },
+  "hard_evidence_limitations": [
+    "Round004 is a static presentation delivery with no Unity integration, runtime prefab, animation set, production skin weights, or playable deformation evidence.",
+    "No actual matched in-game blind test is possible before this source gate passes and Unity integration exists.",
+    "The benchmark corpus and Round004 diagnostics are not matched for character, camera, lighting, background, motion, effects, or gameplay state.",
+    "The clean FBX validator proves mesh presence, counts, broad bounds, no armatures, and no civilian-name hits, but omits FBX texture-resolution checks and cannot detect renamed donor-derived civilian silhouettes.",
+    "Static neutral and one combat pose cannot establish extreme-pose collision, cloth behavior, draw or sheath behavior, animation quality, or runtime material response.",
+    "The licensed Rain face, anatomy, hair, and image textures are high-quality source assets; they do not by themselves prove unique Round004 authorship or premium Astra Vale identity.",
+    "The review file cannot include a hash of itself without a circular definition; its external SHA-256 is reported after writing."
+  ]
+}
