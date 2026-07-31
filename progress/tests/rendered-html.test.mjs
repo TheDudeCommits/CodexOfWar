@@ -91,7 +91,7 @@ test("server-renders the production evidence ledger", async () => {
   assert.match(html, /Reference 09/);
   assert.match(html, /29\.82%/);
   assert.match(html, /82,906/);
-  assert.match(html, /P10 · Round 007/);
+  assert.match(html, /P10 · Round 008/);
   assert.match(html, /Round rejected\. Rebuild in progress\./);
   assert.match(html, /Round 001 rejected · mechanically reproducible/);
   assert.match(
@@ -224,9 +224,29 @@ test("server-renders the production evidence ledger", async () => {
     /href="\/captures\/P10\/round-006-concept\/NyraKestrel_CombatGrip\.png"/,
   );
   assert.match(html, /href="\/data\/P10-round-006-concept\.json"/);
-  assert.match(html, /Function-led identity redesign/i);
-  assert.match(html, /no result, capture, or evidence filed yet/i);
-  assert.match(html, /at least 5 of 6 blinded comparisons/i);
+  assert.match(html, /Concept preflight 62\/100 · threshold 85 · category floor failed/);
+  assert.match(html, /Candidate met benchmark bar in 2\/6 blinded comparisons · 5\/6 required/);
+  assert.match(html, /DENY_PAID_3D_GENERATION · no accepted combat grip/);
+  assert.match(
+    html,
+    /absence of one accepted identity-preserving combat image that unambiguously proves both complete hands closed on separated regions of the same hilt/i,
+  );
+  assert.match(
+    html,
+    /href="\/captures\/P10\/round-007-concept\/NyraKestrel_Turnaround_ACCEPTED\.png"/,
+  );
+  assert.match(
+    html,
+    /href="\/captures\/P10\/round-007-concept\/StormcageOdachi_ACCEPTED\.png"/,
+  );
+  assert.match(
+    html,
+    /href="\/captures\/P10\/round-007-concept\/NyraKestrel_CombatGrip_Revision02_REJECTED\.png"/,
+  );
+  assert.match(html, /href="\/data\/P10-round-007-concept\.json"/);
+  assert.match(html, /Identity-preserving two-hand contact proof/i);
+  assert.match(html, /no result, capture, or history entry filed yet/i);
+  assert.match(html, /complete concept pack must then earn at least 85\/100/i);
   assert.doesNotMatch(html, /Reference\.zip|Reference\/[^"<]+\.(?:png|jpe?g|webp)/i);
   assert.doesNotMatch(
     html,
@@ -293,11 +313,15 @@ test("checked-in data contains the complete, honest P00–P25 ledger", async () 
   assert.equal(p00.status, "accepted");
   assert.equal(p10.status, "revising");
   assert.equal(dashboard.activeBuild.pieceId, "P10");
-  assert.equal(dashboard.activeBuild.round, 7);
-  assert.equal(dashboard.activeBuild.roundLabel, "P10 · Round 007");
-  assert.equal(dashboard.activeBuild.builder, "Function-led identity redesign");
+  assert.equal(dashboard.activeBuild.round, 8);
+  assert.equal(dashboard.activeBuild.roundLabel, "P10 · Round 008");
+  assert.equal(
+    dashboard.activeBuild.builder,
+    "Identity-preserving two-hand contact proof",
+  );
   assert.equal(dashboard.activeBuild.status, p10.status);
-  assert.match(dashboard.activeBuild.brief, /no result, capture, or evidence filed yet/i);
+  assert.match(dashboard.activeBuild.brief, /no result, capture, or history entry filed yet/i);
+  assert.match(dashboard.activeBuild.brief, /paid 3D generation and Unity remain locked/i);
   assert.ok(queuedPieces.every((piece) => piece.status === "queued"));
 
   assert.equal(dashboard.canonicalCapture.camera, "Low shoulder");
@@ -324,7 +348,7 @@ test("checked-in data contains the complete, honest P00–P25 ledger", async () 
   assert.equal(dashboard.acceptance.maximum, 100);
   assert.match(dashboard.acceptance.p00Exception, /visual loss does not block/i);
 
-  assert.equal(dashboard.rounds.length, 7);
+  assert.equal(dashboard.rounds.length, 8);
   assert.equal(dashboard.rounds[0].pieceId, "P00");
   assert.equal(
     dashboard.rounds[0].critic.status,
@@ -461,9 +485,35 @@ test("checked-in data contains the complete, honest P00–P25 ledger", async () 
     "/captures/P10/round-006-concept/NyraKestrel_CombatGrip.png",
     "/data/P10-round-006-concept.json",
   ]);
+  assert.equal(dashboard.rounds[7].pieceId, "P10");
+  assert.equal(dashboard.rounds[7].round, 7);
+  assert.equal(dashboard.rounds[7].status, "criticized");
+  assert.equal(
+    dashboard.rounds[7].critic.status,
+    "DENY_PAID_3D_GENERATION · no accepted combat grip",
+  );
+  assert.equal(dashboard.rounds[7].critic.score, 62);
+  assert.equal(
+    dashboard.rounds[7].critic.scoreLabel,
+    "Concept preflight 62/100 · threshold 85 · category floor failed",
+  );
+  assert.equal(
+    dashboard.rounds[7].critic.preference,
+    "Candidate met benchmark bar in 2/6 blinded comparisons · 5/6 required",
+  );
+  assert.match(
+    dashboard.rounds[7].critic.primaryGap,
+    /both complete hands closed on separated regions of the same hilt/i,
+  );
+  assert.deepEqual(dashboard.rounds[7].evidenceLinks, [
+    "/captures/P10/round-007-concept/NyraKestrel_Turnaround_ACCEPTED.png",
+    "/captures/P10/round-007-concept/StormcageOdachi_ACCEPTED.png",
+    "/captures/P10/round-007-concept/NyraKestrel_CombatGrip_Revision02_REJECTED.png",
+    "/data/P10-round-007-concept.json",
+  ]);
   assert.equal(
     dashboard.rounds.some(
-      (round) => round.pieceId === "P10" && round.round === 7,
+      (round) => round.pieceId === "P10" && round.round === 8,
     ),
     false,
   );
@@ -479,6 +529,7 @@ test("P10 evidence is filed while the global latest manifest remains P00-pinned"
     p10Round004Preflight,
     p10Round005Preflight,
     p10Round006Concept,
+    p10Round007Concept,
     latestManifest,
     p10Screenshot,
     turntableContact,
@@ -497,6 +548,9 @@ test("P10 evidence is filed while the global latest manifest remains P00-pinned"
     round006Turnaround,
     round006Weapon,
     round006Grip,
+    round007Turnaround,
+    round007Weapon,
+    round007RejectedGrip,
   ] = await Promise.all([
     readFile(dataUrl, "utf8").then(JSON.parse),
     readFile(
@@ -525,6 +579,10 @@ test("P10 evidence is filed while the global latest manifest remains P00-pinned"
     ).then(JSON.parse),
     readFile(
       new URL("../public/data/P10-round-006-concept.json", import.meta.url),
+      "utf8",
+    ).then(JSON.parse),
+    readFile(
+      new URL("../public/data/P10-round-007-concept.json", import.meta.url),
       "utf8",
     ).then(JSON.parse),
     readFile(
@@ -630,6 +688,24 @@ test("P10 evidence is filed while the global latest manifest remains P00-pinned"
     readFile(
       new URL(
         "../public/captures/P10/round-006-concept/NyraKestrel_CombatGrip.png",
+        import.meta.url,
+      ),
+    ),
+    readFile(
+      new URL(
+        "../public/captures/P10/round-007-concept/NyraKestrel_Turnaround_ACCEPTED.png",
+        import.meta.url,
+      ),
+    ),
+    readFile(
+      new URL(
+        "../public/captures/P10/round-007-concept/StormcageOdachi_ACCEPTED.png",
+        import.meta.url,
+      ),
+    ),
+    readFile(
+      new URL(
+        "../public/captures/P10/round-007-concept/NyraKestrel_CombatGrip_Revision02_REJECTED.png",
         import.meta.url,
       ),
     ),
@@ -979,6 +1055,120 @@ test("P10 evidence is filed while the global latest manifest remains P00-pinned"
   }
   assert.doesNotMatch(
     JSON.stringify(p10Round006Concept),
+    /Reference\.zip|Reference\/[^"']+\.(?:png|jpe?g|webp)|\/Users\/|\/home\/|[A-Za-z]:\\Users\\|\/tmp\/|\/private\/var\/folders\//i,
+  );
+
+  assert.equal(p10Round007Concept.piece, "P10");
+  assert.equal(p10Round007Concept.round, 7);
+  assert.equal(p10Round007Concept.status, "rejected-concept-preflight");
+  assert.equal(p10Round007Concept.artifactClass, "original 2D concept art");
+  assert.equal(p10Round007Concept.engineRun, false);
+  assert.equal(p10Round007Concept.actualGameCapturePerformed, false);
+  assert.equal(p10Round007Concept.unityCaptureFiled, false);
+  assert.equal(p10Round007Concept.threeDimensionalAssetFiled, false);
+  assert.equal(p10Round007Concept.gameReadyEvidenceFiled, false);
+  assert.equal(p10Round007Concept.acceptedCombatGripFiled, false);
+  assert.equal(p10Round007Concept.paid3DGenerationAuthorized, false);
+  assert.equal(p10Round007Concept.source.referencePixelsSuppliedToGeneration, false);
+  assert.equal(
+    p10Round007Concept.source.receiptSha256,
+    "1ed2cf94707f977ec7486cda080adfc919ca61deaafc673599efbbb4dccb6fb0",
+  );
+  assert.equal(
+    p10Round007Concept.source.readmeSha256,
+    "967e748665fdb595232ba329f89bafc6dc643dcb2ddfc245f031dc3d1c7cc396",
+  );
+  assert.equal(
+    p10Round007Concept.source.reviewSha256,
+    "a765d3523d730caa99424f76cf4891068d71c4c35a154259407da16d2af4d24b",
+  );
+  assert.equal(p10Round007Concept.visualReview.score, 62);
+  assert.equal(p10Round007Concept.visualReview.maximum, 100);
+  assert.equal(p10Round007Concept.visualReview.passThreshold, 85);
+  assert.equal(p10Round007Concept.visualReview.criticalFloorPerCategory, 7);
+  assert.equal(p10Round007Concept.visualReview.observedMinimumCategoryScore, 2);
+  assert.equal(p10Round007Concept.visualReview.thresholdResult, "FAIL");
+  assert.equal(p10Round007Concept.visualReview.criticalFloorResult, "FAIL");
+  assert.equal(
+    p10Round007Concept.visualReview.verdict,
+    "DENY_PAID_3D_GENERATION",
+  );
+  assert.equal(p10Round007Concept.visualReview.comparisonCount, 6);
+  assert.equal(p10Round007Concept.visualReview.candidateMetBenchmarkBarCount, 2);
+  assert.equal(p10Round007Concept.visualReview.candidateBelowBenchmarkBarCount, 4);
+  assert.equal(
+    p10Round007Concept.visualReview.requiredCandidateMetBenchmarkBarCount,
+    5,
+  );
+  assert.equal(p10Round007Concept.visualReview.benchmarkGateResult, "FAIL");
+  assert.match(
+    p10Round007Concept.visualReview.singleBiggestGap,
+    /both complete hands closed on separated regions of the same hilt/i,
+  );
+  assert.equal(
+    p10Round007Concept.decision.result,
+    "DENY_PAID_3D_GENERATION",
+  );
+  assert.equal(p10Round007Concept.decision.paid3DGenerationAuthorized, false);
+  assert.equal(p10Round007Concept.nextRound.round, 8);
+  assert.equal(
+    p10Round007Concept.nextRound.status,
+    "identity-preserving-two-hand-contact-proof",
+  );
+  assert.match(p10Round007Concept.nextRound.target, /induction yoke/i);
+  assert.match(p10Round007Concept.nextRound.target, /both complete hands closed/i);
+  assert.deepEqual(p10Round007Concept.nextRound.compositePackGate, {
+    minimumTotalScore: 85,
+    minimumScorePerCategory: 7,
+    blindComparisonCount: 6,
+    minimumComparisonsMeetingBenchmarkBar: 5,
+    paid3DGenerationRequiresFullPass: true,
+  });
+  assert.deepEqual(
+    p10Round007Concept.conceptArt.map((artifact) => artifact.publicPath),
+    [
+      "/captures/P10/round-007-concept/NyraKestrel_Turnaround_ACCEPTED.png",
+      "/captures/P10/round-007-concept/StormcageOdachi_ACCEPTED.png",
+      "/captures/P10/round-007-concept/NyraKestrel_CombatGrip_Revision02_REJECTED.png",
+    ],
+  );
+  assert.deepEqual(
+    p10Round007Concept.conceptArt.map((artifact) => artifact.disposition),
+    [
+      "accepted-round-asset",
+      "accepted-round-asset",
+      "rejected-failure-evidence-only",
+    ],
+  );
+  assert.match(p10Round007Concept.conceptArt[2].label, /^REJECTED/);
+  assert.match(
+    p10Round007Concept.conceptArt[2].failure,
+    /trailing hand grips a separate copper element/i,
+  );
+  assert.deepEqual(
+    p10Round007Concept.rejectedGripIterations.map((iteration) => iteration.sha256),
+    [
+      "a21a9c24e713ebec62290cebfc75abe4088a80fe87f7e0c53cf5b4fc3b7710ae",
+      "bfeaf5acadfff5fe960d5ce0d4abc24cc061448c763010c44a197eda62eceae4",
+      "79535d7d7ec1d0959ad2c039d2594ad687e39ebeb52edf066a716dece21a0cc3",
+    ],
+  );
+  const round007Images = [
+    round007Turnaround,
+    round007Weapon,
+    round007RejectedGrip,
+  ];
+  for (const [index, image] of round007Images.entries()) {
+    assert.equal(
+      createHash("sha256").update(image).digest("hex"),
+      p10Round007Concept.conceptArt[index].sha256,
+    );
+    assert.equal(image.subarray(1, 4).toString("ascii"), "PNG");
+    assert.equal(image.readUInt32BE(16), 1536);
+    assert.equal(image.readUInt32BE(20), 1024);
+  }
+  assert.doesNotMatch(
+    JSON.stringify(p10Round007Concept),
     /Reference\.zip|Reference\/[^"']+\.(?:png|jpe?g|webp)|\/Users\/|\/home\/|[A-Za-z]:\\Users\\|\/tmp\/|\/private\/var\/folders\//i,
   );
 

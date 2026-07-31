@@ -1,0 +1,357 @@
+{
+  "schema": "codexofwar.original-2d-concept-receipt",
+  "version": "1.0.0",
+  "receipt_id": "P10-Round007-ConceptReceipt",
+  "generated_utc": "2026-07-31T12:39:25Z",
+  "scope": {
+    "project_asset": "P10 Nyra Kestrel identity iteration",
+    "round": "Round007",
+    "scope_class": "original 2D concept only",
+    "paid_3d_generation_authorized": false,
+    "claims_not_made": [
+      "benchmark victory",
+      "3D authorization",
+      "production-ready game asset",
+      "mesh, rig, UV, deformation, collision, animation, LOD, or performance readiness",
+      "legal originality, exclusivity, copyright clearance, or trademark clearance"
+    ]
+  },
+  "bounded_input_policy": {
+    "read_inputs": [
+      {
+        "document_id": "round006-fresh-concept-review",
+        "sha256": "f80e5864495b50c312dd375b1ec9eb41e152d73386ec5e661e254c4bb94ed7a4"
+      },
+      {
+        "asset_id": "round006-accepted-turnaround",
+        "sha256": "3dbca4057a6b80738106cd10d907b670085fb5637733673de2451027f2860eaa"
+      },
+      {
+        "asset_id": "round006-accepted-weapon",
+        "sha256": "b0d751ad479357bc92645ed7157c1dde1ea37ffe8068b944c02373fa77f9254f"
+      },
+      {
+        "asset_id": "round006-accepted-grip",
+        "sha256": "108db4be83f97cab739f3c9e08b5e69f654183451f191776e484023c1b6d551f"
+      }
+    ],
+    "excluded_inputs": [
+      "all private visual benchmarks",
+      "all benchmark pixels",
+      "all third-party franchise art",
+      "all other concept rounds and unrelated project imagery"
+    ],
+    "third_party_visual_reference_used": false
+  },
+  "design_thesis": {
+    "role": "storm-harvesting close-combat warden",
+    "silhouette_anchors": [
+      "one split warm-ivory ceramic induction yoke behind and around the left shoulder",
+      "one exposed oxidized-copper conductor path crossing diagonally into a compact right-hip capacitor",
+      "one heavier right grounding greave with broad flat sole and copper shunts, opposed by a lighter left leg",
+      "one blackened-steel odachi with a physically caged pale mineral capacitor only at the blade base and a substantial two-hand insulated hilt"
+    ],
+    "material_blocks": [
+      "warm ivory ceramic",
+      "deep cobalt woven underlayer",
+      "oxidized copper",
+      "blackened steel",
+      "tiny desaturated pale stormglass"
+    ]
+  },
+  "generator": {
+    "service": "OpenAI image generation tool",
+    "backend_model": "not exposed by the tool response",
+    "native_resolution_inspection": true,
+    "all_persisted_outputs_inspected": true
+  },
+  "prompt_encoding": {
+    "field": "exact_prompt_lines",
+    "reconstruction": "Join array entries with a single LF newline character.",
+    "trailing_newline": false
+  },
+  "generation_lineage": [
+    {
+      "generation_id": "turnaround-candidate-01",
+      "mode": "generate",
+      "taxonomy": "stylized-concept",
+      "edit_inputs": [],
+      "output": "Iterations/P10_Round007_NyraKestrel_Turnaround_candidate01.png",
+      "sha256": "f54d6f4b4bc7707841b623148f522c1c60730bd8c6c620d4698531d928f2545a",
+      "dimensions_px": {"width": 1536, "height": 1024},
+      "byte_size": 2095539,
+      "status": "accepted-and-copied",
+      "accepted_copy": "P10_Round007_NyraKestrel_Turnaround_v1.png",
+      "acceptance_basis": "The left induction yoke, diagonal conductor, right-hip capacitor, and heavy right greave read together in the front and back silhouettes with clear ivory/cobalt/copper/steel material blocks.",
+      "observed_defects": [
+        "The right-side profile visually favors the lighter leg and does not prove the heavy right greave as clearly as the front and back views.",
+        "The cobalt work-suit and industrial hardware can read as a utilitarian science-fiction technician rather than a fully premium mythic-anime hero.",
+        "Some braid volume, seam, and small bracket details drift between views."
+      ],
+      "exact_prompt_lines": [
+        "Use case: stylized-concept",
+        "Asset type: original 2D character design turnaround sheet for production preflight",
+        "Primary request: Create a decisive function-led identity for Nyra Kestrel, an adult woman who is a storm-harvesting close-combat warden. Show the SAME exact full-body character in four evenly spaced orthographic views, ordered front, character's right side, back, character's left side. Neutral A-pose in every view, arms about 25 degrees away from torso, hands relaxed and fully visible, feet flat and parallel, shared horizontal baseline, identical scale and proportions. No weapon, no scabbard.",
+        "Design thesis and load path: one single asymmetrical split IVORY CERAMIC induction yoke rises behind and wraps around the character's LEFT shoulder only. It is a thick engineered C-shaped split apparatus with two blunt rectangular ceramic collector prongs separated by a narrow gap; it is mounted to a blackened-steel back frame. It must read as industrial induction hardware, NOT horns, wings, antlers, fins, or pauldrons. From that left yoke, one exposed but mechanically protected OXIDIZED-COPPER conductor path travels diagonally across the upper back and torso through sparse blackened-steel standoffs into one compact boxy capacitor belt at the character's RIGHT hip. From the right-hip capacitor, copper bus links descend into one visibly heavier RIGHT grounding greave: broad slab geometry, much wider than the left boot, broad flat rectangular sole, low zero heel, branching oxidized-copper shunts visible along the exterior calf and sole edge. The LEFT leg has a much lighter deep-cobalt articulated gaiter and simple flat boot for mobility. Every asymmetry must visibly serve the electrical load path.",
+        "Body and identity: mature adult woman, athletic weight-bearing body, broad capable shoulders, solid waist, powerful thighs, realistic hands and feet, no pin-up anatomy. Mature lived-in face with a slightly crooked nose, faint under-eye fatigue, one small healed brow notch, calm vigilant expression. Practical short asymmetric braid ending above shoulder blade on the character's RIGHT side, with a few small matte ceramic static-dissipation beads; hair does not hide the yoke or conductor.",
+        "Clothing and protection: large readable blocks, macro hierarchy first. Deep cobalt woven underlayer, wrap-front work jacket with straight non-bust-sculpted torso; warm ivory ceramic protective slabs only where insulation is needed at left shoulder, upper sternum, forearms, and around the right-hip capacitor; restrained blackened-steel braces and fasteners; oxidized copper only for the continuous conductor/shunts. Flat grounded boots. Selective wear only at yoke rims, belt corners, right sole contact edge, and forearm work zones.",
+        "Style/medium: premium original 2D industrial-fantasy concept art, crisp hand-authored painted rendering, restrained linework, matte material response, design-sheet clarity, believable assembly.",
+        "Composition/framing: landscape sheet, four complete figures from head/yoke tip to soles with generous clear separation, nothing cropped, pale neutral warm-gray background, subtle shared baseline, no dramatic perspective, no action pose.",
+        "Color palette: warm ivory ceramic is the dominant outer material block; deep cobalt woven cloth second; oxidized copper diagonal load path third; blackened steel structural accents; only tiny desaturated pale stormglass indicators. High value separation, no dark fog.",
+        "Constraints: exact same design, face, braid, proportions, yoke geometry, conductor route, capacitor placement, and right-greave asymmetry in all four views; front/right/back/left views only; no weapon; no extra limbs; no duplicated people; no text labels; no logo; no watermark.",
+        "Avoid: generic dark-armored anime swordswoman; monochrome dark armor; soulslike plate accumulation; corset or bust sculpting; cleavage; narrow fashion waist; high heels; fetish or pin-up anatomy; decorative spikes; horns; wings; antlers; capes; skirts; long coat tails; neon glow; floating electricity; excessive pouches; tiny noisy microdetail; franchise cues; photoreal cosplay."
+      ]
+    },
+    {
+      "generation_id": "turnaround-candidate-02",
+      "mode": "generate",
+      "taxonomy": "stylized-concept",
+      "edit_inputs": [],
+      "output": "Iterations/P10_Round007_NyraKestrel_Turnaround_candidate02_reject.png",
+      "sha256": "f427668a9d491906007fe1a9eaf8d7a9761b81af8f88027da44fca95c793c9c0",
+      "dimensions_px": {"width": 1693, "height": 929},
+      "byte_size": 2332996,
+      "status": "rejected",
+      "rejection_reasons": [
+        "The back view drops the heavy right grounding greave and shows two light legs, breaking the handed load-path thesis.",
+        "The yoke geometry and garment panels drift between the side and back views."
+      ],
+      "exact_prompt_lines": [
+        "Use case: stylized-concept",
+        "Asset type: original 2D character turnaround sheet, second bounded identity candidate",
+        "Primary request: Design Nyra Kestrel, a mature adult woman storm-harvesting close-combat warden, through one unmistakable functional asymmetry. Present exactly FOUR complete orthographic full-body views of the SAME person and equipment, left-to-right: FRONT, RIGHT-SIDE, BACK, LEFT-SIDE. Neutral A-pose, arms held 25 degrees out, palms relaxed, feet flat, shared baseline, identical scale. No weapon or scabbard.",
+        "Silhouette lock: a single asymmetrical split induction yoke rises behind and partly around her LEFT shoulder only. This is an engineered IVORY CERAMIC apparatus on a blackened-steel backpack bracket: two thick squared rectangular ceramic rails form a broken angular C / open squared horseshoe with a visible insulating gap and blunt terminals above the shoulder. Industrial hardware, not a decorative crescent. Absolutely no horn, wing, antler, halo, or second yoke.",
+        "Visible power route: the left yoke connects to exactly one thumb-thick OXIDIZED-COPPER conductor, exposed inside sparse protective blackened-steel standoffs. It crosses diagonally over the upper BACK, wraps visibly across the torso, and terminates in one compact rectangular capacitor belt module at the RIGHT hip. Copper bus bars then continue down only the RIGHT leg into a dramatically heavier grounding greave with broad slab calf armor, branching copper shunts, and an extra-wide flat rectangular zero-heel sole. The LEFT leg is intentionally light: flexible deep-cobalt articulated gaiter, simple flat work boot, no shin plate. The front view must show heavy greave on the character's right (image-left). In the RIGHT-SIDE view, the near right leg must wear the heavy grounding greave. In the BACK view, heavy greave must be on character's right (image-right). In the LEFT-SIDE view, the light left boot is near and the larger right greave remains visibly behind it. Keep this exact handedness in every view.",
+        "Macro material hierarchy: large warm-ivory ceramic blocks on yoke, plain diagonal chest insulation bib, forearm guards, and capacitor casing; large deep-cobalt woven underlayer and straight utility wrap jacket/trousers; oxidized copper only along continuous load path; blackened steel only for supports, standoffs, and right grounding greave; tiny desaturated pale stormglass status slit on the capacitor. Keep the ivory dominant and easy to read at thumbnail size. No overall dark look.",
+        "Person: athletic weight-bearing build, thick practical waist, strong shoulders, muscular thighs, realistic hand and foot scale. Mature weathered face, low brows, slightly crooked nose, subtle crow's feet, healed notch through left eyebrow, unsmiling attentive expression. Practical asymmetric short braid tied to her RIGHT side ending above the shoulder blade, with three small matte ceramic static-dissipation beads. No long ponytail.",
+        "Construction: straight workwear shaping, clear seam logic, no molded breasts, no corset, no skirt panels. Flat grounded boots. Selective contact wear only on yoke terminals, right-sole edges, belt corners, and forearm work surfaces.",
+        "Style/medium: premium original 2D industrial-fantasy concept painting, hand-authored clarity, crisp controlled edges, restrained linework, matte surfaces, clear material blocks, realistic functional construction, sparse detail.",
+        "Composition/framing: landscape, pale warm-neutral studio background, exactly four figures evenly spaced with clear negative space, all yoke tips and soles fully inside frame, no perspective, no dynamic pose, no cast shadows that obscure the baseline.",
+        "Constraints: same face, body, braid, clothing, exact yoke geometry, conductor route, right-hip capacitor and left/right greave assignment in every view; no text, no annotations, no logo, no watermark.",
+        "Avoid: generic anime face; dark armored swordswoman; monochrome; black fog; soulslike layered plates; bust sculpting; cleavage; corset waist; long legs/small hands fashion anatomy; heels; fetish or pin-up presentation; decorative spikes; horns; wings; antlers; cape; skirt; tails; neon; glowing electricity; weapons; microdetail noise; franchise cues; 3D render; cosplay photo."
+      ]
+    },
+    {
+      "generation_id": "stormcage-odachi-initial",
+      "mode": "edit",
+      "taxonomy": "precise-object-edit",
+      "edit_inputs": [
+        {
+          "role": "accepted Round007 character material and engineering language",
+          "file": "P10_Round007_NyraKestrel_Turnaround_v1.png",
+          "sha256": "f54d6f4b4bc7707841b623148f522c1c60730bd8c6c620d4698531d928f2545a"
+        }
+      ],
+      "output": "Iterations/P10_Round007_StormcageOdachi_initial.png",
+      "sha256": "6b604c69bf417e33e211366a006c800275b1ca3dda7a168bd84dcba054fff48b",
+      "dimensions_px": {"width": 1536, "height": 1024},
+      "byte_size": 1965133,
+      "status": "accepted-and-copied",
+      "accepted_copy": "P10_Round007_StormcageOdachi_v1.png",
+      "acceptance_basis": "The same weapon is legible in front, back, thin profile, scabbard, and enlarged grip construction. The mineral capacitor is small, physically caged, and restricted to the blade base; the hilt is materially insulated and long enough for two hands.",
+      "observed_defects": [
+        "The broad front and back studies are close but not perfectly identical in tiny cage fasteners and copper routing.",
+        "The large grip detail is an assembled cutaway-like view rather than a dimensioned fabrication drawing.",
+        "The blade and hilt balance remains a visual plausibility proposal, not a measured engineering validation."
+      ],
+      "exact_prompt_lines": [
+        "Use case: precise-object-edit",
+        "Asset type: original 2D production concept sheet for the character's storm-cage odachi",
+        "Input image role: use the supplied accepted Nyra Kestrel turnaround ONLY to inherit its warm ivory ceramic, deep cobalt woven insulation, oxidized copper, blackened steel, matte rendering language, and practical storm-harvesting engineering. Do not show the character. Replace the scene with a weapon sheet.",
+        "Primary request: Design one physically plausible, exact same storm-cage odachi shown as five coordinated studies: full weapon FRONT, full weapon BACK, true thin PROFILE, matching complete SCABBARD, and a larger GRIP/GUARD CONSTRUCTION detail. Every view must describe the same dimensions, blade curve, tip, guard, hilt, fittings, fasteners, and material locations.",
+        "Weapon thesis: this is a close-combat storm-harvesting tool, not a glowing fantasy katana. The blade is a single long gently curved blackened-steel odachi, approximately 105 cm blade plus a substantial 38 cm two-hand hilt. The blade has a thick structural spine, a clearly sharpened steel edge, credible distal taper, and full tang. ONLY near the blade base / ricasso is one small desaturated pale stormglass MINERAL CAPACITOR, no longer than one human palm. It is a rough translucent mineral billet physically enclosed on both broad faces by a stout blackened-steel rectangular cage with crossbars, bolted cheeks, and a protective raised rim so the crystal cannot take an edge strike. Short oxidized-copper bus bars leave this caged base capacitor, pass safely through the guard, and enter the tang/hilt. No crystal anywhere else on the blade.",
+        "Guard and hilt: a broad low rectangular warm-ivory ceramic guard with rounded corners and blackened-steel core, large enough to protect both hands but not oversized. A substantial straight two-hand hilt with an oval indexable cross-section, long enough for two complete adult hands separated by a small flared insulating collar. Deep-cobalt woven insulation over a solid core; warm-ivory ceramic ferrules at guard, hand separator, and pommel; copper is recessed and never touches the gripping surfaces. The grip must communicate full tang, compression pinning, and torque resistance. Practical capped pommel, no spikes.",
+        "Scabbard: matching rigid blackened-steel-and-deep-cobalt scabbard with a widened protective housing only around the blade-base stormglass cage; ivory ceramic throat isolates the charged guard; copper bleed strip terminates in a covered grounding stud. Scabbard follows the exact blade curve and length, with believable clearance and retention, not a plain tube.",
+        "Style/medium: premium original 2D industrial-fantasy object concept art, crisp orthographic presentation, controlled hand-painted rendering, restrained linework, matte material separation, sparse wear only at edge, scabbard mouth, guard corners, and grip contact zones.",
+        "Composition/framing: landscape weapon sheet on clean pale warm-gray background. Arrange front, back, and profile full weapons vertically blade-up, all tips and pommels fully visible. Place the complete scabbard beside them. Use the right third for one enlarged exploded-looking but still assembled grip/guard construction detail showing cage, ceramic guard, copper bus route, tang entry, hand separator, and pommel. Clear spacing; no overlaps.",
+        "Palette: warm ivory ceramic, deep cobalt woven insulation, oxidized copper, blackened steel, tiny desaturated pale stormglass only.",
+        "Constraints: one exact weapon repeated consistently; physically caged mineral capacitor only near blade base; clearly substantial two-hand hilt; front/back/profile plus complete scabbard plus grip construction; no person; no hands; no text labels; no logo; no watermark.",
+        "Avoid: generic katana; long glowing crystal channel; crystal blade; neon cyan; lightning effects; floating electricity; huge gem; blade holes; impossible unsupported inset; ultra-thick slab blade; absurdly long handle; circular tsuba; decorative spikes; skulls; soulslike ornament accumulation; franchise cues; 3D render; dark fog; clutter."
+      ]
+    },
+    {
+      "generation_id": "combat-grip-initial",
+      "mode": "edit",
+      "taxonomy": "identity-preserve",
+      "edit_inputs": [
+        {
+          "role": "accepted Round007 character authority",
+          "file": "P10_Round007_NyraKestrel_Turnaround_v1.png",
+          "sha256": "f54d6f4b4bc7707841b623148f522c1c60730bd8c6c620d4698531d928f2545a"
+        },
+        {
+          "role": "accepted Round007 weapon authority",
+          "file": "P10_Round007_StormcageOdachi_v1.png",
+          "sha256": "6b604c69bf417e33e211366a006c800275b1ca3dda7a168bd84dcba054fff48b"
+        }
+      ],
+      "output": "Iterations/P10_Round007_NyraKestrel_CombatGrip_initial_reject.png",
+      "sha256": "a21a9c24e713ebec62290cebfc75abe4088a80fe87f7e0c53cf5b4fc3b7710ae",
+      "dimensions_px": {"width": 1536, "height": 1024},
+      "byte_size": 1928231,
+      "status": "rejected",
+      "rejection_reasons": [
+        "The defining left induction yoke is completely absent.",
+        "The braid is longer than the accepted turnaround design.",
+        "Because the primary silhouette anchor disappears, the storm-harvesting thesis does not survive this combat view even though the same-hilt grip is broadly readable."
+      ],
+      "exact_prompt_lines": [
+        "Use case: identity-preserve",
+        "Asset type: original 2D combat-grip proof sheet",
+        "Input images: Image 1 is the accepted Round007 Nyra Kestrel turnaround and is the only authority for her face, athletic adult body, short asymmetric braid, warm-ivory left-shoulder induction yoke, diagonal oxidized-copper conductor, right-hip capacitor belt, deep-cobalt workwear, and heavier right grounding greave. Image 2 is the accepted Round007 storm-cage odachi sheet and is the only authority for the weapon's blade curve, small physically caged mineral capacitor only at the blade base, rectangular ivory guard, substantial two-hand cobalt-insulated hilt, separator collar, and pommel. Preserve those identities exactly; do not invent replacement costume or weapon features.",
+        "Primary request: Create ONE complete full-body three-quarter combat stance of Nyra Kestrel holding the exact same storm-cage odachi in a mechanically credible two-handed force-bearing grip. This is a clear grip/anatomy proof, not a cinematic scene.",
+        "Pose and load: Nyra stands in a low grounded diagonal stance, torso turned three-quarter toward camera and facing viewer-left. Her visibly heavier RIGHT grounding greave is the forward planted load-bearing leg with its broad flat sole completely on the ground; her lighter LEFT leg is one step back, knee flexed, flat boot grounded. Hips and shoulders oppose slightly under real torque. Spine neutral, shoulders down, elbows softly bent. Her LEFT shoulder induction yoke remains fully visible and clearly separate from head and hair; conductor route and right-hip capacitor remain readable.",
+        "Exact grip: place the sword guard in clear open space just to the viewer-left of her waist, several centimeters away from her clothing. The blade leaves the guard toward the upper-left into empty background. The entire blade, tip, base cage, guard, hilt, and pommel are fully visible and never cross or penetrate her torso, arms, yoke, capacitor, belt, thighs, greaves, or boots. ONLY her hands contact the weapon.",
+        "Both complete hands must be unobstructed and anatomically readable. Her RIGHT hand is the leading hand immediately behind the guard on the upper grip region; her LEFT hand is the trailing hand near the pommel on the lower grip region. A clearly visible gap and the ivory separator collar lie between the two hands. Each hand has exactly four fingers and one thumb visibly wrapping and closing around the same single long hilt, with opposing thumbs, compressed grip cloth, aligned knuckles, and no open or hovering fingers. Both wrists remain straight and force-bearing in line with forearms—no broken wrist angles. Hands do not overlap each other or the guard. No extra fingers, merged fingers, hidden palm, or duplicated hilt.",
+        "Weapon continuity: exact same gently curved blackened-steel odachi from Image 2, exact same small rectangular blackened-steel cage enclosing one pale stormglass billet only at the blade base, exact same wide low rectangular ivory ceramic guard, exact same two-section deep-cobalt insulated hilt, three ivory ferrules, recessed copper route, and capped pommel. Keep plausible scale: blade about torso-to-floor length plus, hilt long enough for the two separate hands without excess unused length.",
+        "Character continuity: exact same mature lived-in face, crooked nose, brow notch, asymmetric short braid with ceramic beads, body proportions, left yoke silhouette, large material blocks, right-hip capacitor, right heavy greave with copper shunts, left light gaiter and flat boot. No new armor. No chest sculpting, no corset, no heels.",
+        "Style/medium: premium original 2D industrial-fantasy concept painting, crisp controlled hand-painted rendering, restrained detail, matte material response, strong readable silhouette, pale warm-neutral studio background, subtle ground shadow only.",
+        "Composition/framing: landscape. One character only, center-right, complete from yoke tip and head to both soles with generous margins. Complete sword diagonally across open left side with tip and pommel inside frame. Camera at waist-to-chest height, restrained three-quarter perspective that does not distort hands or weapon. Hands and hilt large enough to inspect.",
+        "Constraints: use only the accepted supplied character and weapon identities; one complete adult woman; one complete sword; both complete hands closed on separate regions of the same hilt; right hand near guard, left hand near pommel; straight loaded wrists; no intersections; no cropping; no text; no logo; no watermark.",
+        "Avoid: one-handed grip; hand touching blade; hands stacked together; hands fused; extra or missing fingers; open fingers; hidden hands; broken wrists; weapon through body; blade behind torso; cropped tip or feet; weapon design drift; generic katana; added crystal channel; neon electricity; dark fog; anime pin-up proportions; heels; chest armor; cape; skirt; franchise cues; cinematic VFX; 3D render."
+      ]
+    },
+    {
+      "generation_id": "combat-grip-revision-01",
+      "mode": "edit",
+      "taxonomy": "identity-preserve",
+      "edit_inputs": [
+        {
+          "role": "accepted Round007 character authority",
+          "file": "P10_Round007_NyraKestrel_Turnaround_v1.png",
+          "sha256": "f54d6f4b4bc7707841b623148f522c1c60730bd8c6c620d4698531d928f2545a"
+        },
+        {
+          "role": "accepted Round007 weapon authority",
+          "file": "P10_Round007_StormcageOdachi_v1.png",
+          "sha256": "6b604c69bf417e33e211366a006c800275b1ca3dda7a168bd84dcba054fff48b"
+        }
+      ],
+      "output": "Iterations/P10_Round007_NyraKestrel_CombatGrip_revision01_reject.png",
+      "sha256": "bfeaf5acadfff5fe960d5ce0d4abc24cc061448c763010c44a197eda62eceae4",
+      "dimensions_px": {"width": 1536, "height": 1024},
+      "byte_size": 1981574,
+      "status": "rejected",
+      "rejection_reasons": [
+        "The yoke, conductor, capacitor, and heavy greave are restored, but the upper leading hand is a closed fist hovering above or beside the hilt rather than enclosing it.",
+        "Only the lower hand clearly grips the sword, so this is not a valid two-hand same-hilt proof."
+      ],
+      "exact_prompt_lines": [
+        "Use case: identity-preserve",
+        "Asset type: targeted combat-grip identity correction, revision 1",
+        "Input authority: Image 1 is the accepted Nyra Kestrel turnaround; Image 2 is the accepted storm-cage odachi. Use ONLY these two accepted images. Preserve their exact character and exact weapon. Do not omit or redesign any of the four silhouette/load-path anchors.",
+        "Primary request: ONE complete full-body three-quarter stance proving an exact two-hand same-hilt grip. Nyra faces viewer-RIGHT with her character LEFT shoulder closer to camera so the accepted induction yoke cannot be hidden. Place her center-left and the complete blade into open space toward upper-right.",
+        "NON-NEGOTIABLE CHARACTER IDENTITY: reproduce the single large split warm-IVORY CERAMIC C-shaped induction yoke from Image 1, rising behind and around her character LEFT shoulder only. It must be the second-largest silhouette shape after the body, fully visible above/behind the left shoulder, with its open gap, blunt terminals, blackened-steel mount, and no overlap with head or hair. Restore the exact short asymmetric braid from Image 1, ending above the shoulder blade with small ceramic beads. Show the oxidized-copper conductor leaving the left yoke, crossing the torso/back through black standoffs, entering the compact RIGHT-hip ivory capacitor, then continuing to the one heavy RIGHT grounding greave. Preserve the accepted mature face, athletic thick-waisted body, cobalt workwear, ivory bib/forearm guards, and flat boots. No added armor.",
+        "Grounded stance: the dramatically heavier RIGHT grounding greave is the forward planted foot with full broad flat sole on ground; the light LEFT boot is back and also flat. Flexed knees, loaded hips, slight shoulder/hip counter-rotation, stable center of mass. No heels.",
+        "WEAPON PLACEMENT: exact accepted odachi from Image 2. Place guard several centimeters in front of and to viewer-right of her waist, in clear background. Blade exits guard diagonally upward-right, entirely in empty background; tip fully inside frame. Hilt exits guard diagonally downward-left into empty space in front of body; pommel fully inside frame. Sword never passes behind or penetrates torso, arms, yoke, capacitor, thighs, greaves, or boots. Only hands touch it.",
+        "EXACT TWO-HAND GRIP: RIGHT hand is immediately behind guard on the upper cobalt-insulated grip. LEFT hand is near pommel on the lower cobalt-insulated grip. Preserve a visible several-centimeter separation and the accepted warm-ivory separator collar between hands. Both full hands and all digits face the camera enough to inspect. Each hand has exactly one thumb and four fingers fully closed around the SAME single hilt; thumbs oppose fingers; knuckles align; cloth compresses. No open, hovering, merged, hidden, extra, or missing digits. Both wrists are straight and force-bearing continuations of forearms. Hands do not overlap each other, the guard, separator collar, or pommel.",
+        "WEAPON IDENTITY: exact gently curved blackened-steel blade, one small pale mineral billet physically caged by a black rectangular frame ONLY at blade base, broad low rectangular ivory ceramic guard, recessed copper entering tang, long oval two-part deep-cobalt insulated hilt, ivory ferrules and capped pommel. No design drift.",
+        "Style: premium original 2D industrial-fantasy character concept painting, crisp hand-authored edges, large matte material blocks, restrained wear, subtle warm-neutral studio background and ground shadow. Make the ivory yoke and the copper load path visually dominant enough to read at thumbnail size; avoid flat technician catalog styling.",
+        "Composition: landscape 1536:1024 feeling, exactly one complete adult woman and one complete sword, yoke tip/head/sword tip/pommel/both soles all inside generous margins. Hands large and unobstructed.",
+        "Constraints: no text, logo, watermark, VFX, extra people, extra weapons, scabbard, intersections, cropping.",
+        "Avoid: missing yoke; hidden yoke; smaller yoke; long braid; one-handed grip; fused hands; broken wrists; weapon through body; generic katana; crystal channel beyond base; neon; cape; skirt; chest sculpting; corset; pin-up anatomy; dark fog; franchise cues; 3D render."
+      ]
+    },
+    {
+      "generation_id": "combat-grip-revision-02",
+      "mode": "edit",
+      "taxonomy": "identity-preserve",
+      "edit_inputs": [
+        {
+          "role": "accepted Round007 character authority",
+          "file": "P10_Round007_NyraKestrel_Turnaround_v1.png",
+          "sha256": "f54d6f4b4bc7707841b623148f522c1c60730bd8c6c620d4698531d928f2545a"
+        },
+        {
+          "role": "accepted Round007 weapon authority",
+          "file": "P10_Round007_StormcageOdachi_v1.png",
+          "sha256": "6b604c69bf417e33e211366a006c800275b1ca3dda7a168bd84dcba054fff48b"
+        }
+      ],
+      "output": "Iterations/P10_Round007_NyraKestrel_CombatGrip_revision02_reject.png",
+      "sha256": "79535d7d7ec1d0959ad2c039d2594ad687e39ebeb52edf066a716dece21a0cc3",
+      "dimensions_px": {"width": 1536, "height": 1024},
+      "byte_size": 1953533,
+      "status": "rejected-final-bounded-attempt",
+      "rejection_reasons": [
+        "The yoke/circuit/greave identity survives, but the trailing hand grips a separate copper conductor-like element instead of the sword hilt.",
+        "Only one hand closes on the actual hilt.",
+        "The hilt crosses the leg silhouette, violating the no-intersection requirement.",
+        "The two-revision limit was reached; no accepted combat-grip asset was promoted."
+      ],
+      "exact_prompt_lines": [
+        "Use case: identity-preserve",
+        "Asset type: final bounded combat-grip correction, revision 2 of 2",
+        "Input authority: Image 1 accepted Nyra Kestrel turnaround; Image 2 accepted storm-cage odachi. Use ONLY these accepted Round007 inputs and preserve them exactly.",
+        "Primary request: ONE complete full-body three-quarter low-guard stance in which BOTH HANDS UNAMBIGUOUSLY ENCIRCLE TWO SEPARATED SECTIONS OF THE SAME SINGLE LONG HILT. This final image must simultaneously preserve the induction-yoke circuit identity and prove the grip.",
+        "Character identity lock: exact mature athletic woman from Image 1; exact single large split warm-IVORY CERAMIC C-shaped induction yoke rising behind/around character LEFT shoulder, completely visible with open gap and blunt terminals; exact oxidized-copper conductor from yoke diagonally across torso/back into compact RIGHT-hip ivory capacitor, continuing down to the one heavy blackened-steel RIGHT grounding greave with copper shunts and broad flat sole; exact lighter LEFT gaiter/flat boot; deep cobalt underlayer; ivory chest/forearm insulation; exact short asymmetric bead braid. Do not hide, shrink, remove, mirror, or redesign any of these.",
+        "Pose: center-left, facing viewer-RIGHT in three-quarter view so left yoke and right-hip circuit remain visible. Heavy RIGHT greave is forward and fully planted; light LEFT boot is back and flat. Knees flexed, hips loaded, spine stable. Shoulders relaxed. The two forearms stay visibly SEPARATE and roughly parallel; they do not cross, touch, or merge.",
+        "Sword placement: exact accepted odachi. Guard floats in clear background just in front of viewer-right side of waist. Blade runs diagonally upward-right entirely through empty background, tip fully visible. Hilt runs diagonally downward-left entirely through empty background, pommel fully visible. No sword part crosses or penetrates body, yoke, belt, capacitor, limbs, greaves, or boots. Only the two hands touch it.",
+        "Grip construction, make this the visual priority:",
+        "- Exactly TWO arms, exactly TWO hands, one hand at the end of each visible forearm. No other hand-like form.",
+        "- Character RIGHT hand grips the upper hilt section immediately behind the guard. The hilt visibly enters one side of this closed fist and exits the other side.",
+        "- Character LEFT hand grips the lower hilt section close to the pommel. The hilt visibly enters one side of this closed fist and exits the other side.",
+        "- Leave one full hand-width of exposed deep-cobalt grip and the warm-ivory separator collar clearly visible BETWEEN the hands. Hands must not touch or overlap.",
+        "- Each hand shows one thumb crossing over exactly four fingers; every finger curls fully around the cylindrical/oval grip. No clenched fist beside or above the hilt, no hovering hand, no palm merely resting on the grip.",
+        "- Show slight cloth compression under both sets of fingertips. Straight force-bearing wrists align with forearms. Right hand near guard, left hand near pommel. Guard, separator collar, and pommel remain unobstructed.",
+        "Weapon identity lock: same blackened-steel curved blade and tip; same small rectangular cage enclosing one pale mineral billet ONLY at blade base; same broad low rectangular ivory guard; same recessed copper route; same long deep-cobalt woven-insulated two-section hilt, ivory ferrules, capped pommel. No scabbard, no second weapon.",
+        "Style: premium original 2D industrial-fantasy concept painting, crisp hand-authored matte rendering, selective wear, strong ivory/cobalt/copper blocks, pale warm-gray studio background, subtle grounding shadow. One readable silhouette; no cinematic effects.",
+        "Framing: landscape, one complete woman and one complete sword, generous margin around yoke tip, head, blade tip, pommel, both soles. Hands face camera and are large enough to inspect.",
+        "Hard rejection conditions: any missing/hidden yoke; broken conductor chain; wrong heavy leg; any open/hovering/fused/extra/missing hand or finger; hands touching each other; no visible grip segment between hands; one hand not enclosing hilt; crossed forearms; wrist kink; weapon/body intersection; crop; weapon drift.",
+        "Avoid: one-handed pose; fists beside hilt; stacked hands; generic katana; long crystal channel; neon; lightning; chest sculpting; corset; heels; cape; skirt; pin-up anatomy; dark fog; franchise cues; 3D render; text; logo; watermark."
+      ]
+    }
+  ],
+  "accepted_assets": [
+    {
+      "file": "P10_Round007_NyraKestrel_Turnaround_v1.png",
+      "sha256": "f54d6f4b4bc7707841b623148f522c1c60730bd8c6c620d4698531d928f2545a",
+      "dimensions_px": {"width": 1536, "height": 1024},
+      "byte_size": 2095539,
+      "scope": "original 2D concept only"
+    },
+    {
+      "file": "P10_Round007_StormcageOdachi_v1.png",
+      "sha256": "6b604c69bf417e33e211366a006c800275b1ca3dda7a168bd84dcba054fff48b",
+      "dimensions_px": {"width": 1536, "height": 1024},
+      "byte_size": 1965133,
+      "scope": "original 2D concept only"
+    }
+  ],
+  "required_but_not_accepted": [
+    {
+      "intended_file": "P10_Round007_NyraKestrel_CombatGrip_v1.png",
+      "status": "not-created-fail-closed",
+      "reason": "No bounded edit simultaneously preserved the signature yoke/circuit/greave identity and produced two complete hands clearly closed on separated regions of the same hilt without weapon/body intersections."
+    }
+  ],
+  "thesis_survival_assessment": {
+    "turnaround": "partial-pass",
+    "weapon": "pass-as-2d-concept",
+    "combat_grip": "fail",
+    "survived_all_required_views": false,
+    "summary": "The function-led identity is materially stronger and clearly visible in the accepted turnaround and weapon sheet, but it is not proven across the full required set because no combat-grip edit passes both identity and grip constraints."
+  },
+  "limitations": [
+    "The accepted turnaround does not prove the heavy right greave equally clearly in both side profiles.",
+    "The visual language remains close to utilitarian industrial science fiction and may not yet reach a premium mythic-anime hero identity ceiling.",
+    "Small multi-view construction details are not dimensionally locked.",
+    "The weapon sheet is a visual construction proposal, not a fabricated, mass-balanced, or stress-tested object.",
+    "No accepted combat-grip proof exists in this round.",
+    "These images are original 2D concept studies only and do not authorize 3D production."
+  ],
+  "privacy_audit": {
+    "public_safe": true,
+    "absolute_paths_present": false,
+    "usernames_present": false,
+    "private_archive_name_present": false,
+    "benchmark_filenames_present": false,
+    "temporary_paths_present": false,
+    "benchmark_pixels_embedded_or_retained": false
+  },
+  "freeze": {
+    "status": "frozen-for-separate-fresh-critic",
+    "self_authorized_3d": false,
+    "benchmark_victory_claimed": false
+  }
+}

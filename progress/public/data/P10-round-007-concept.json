@@ -1,0 +1,138 @@
+{
+  "schemaVersion": 1,
+  "piece": "P10",
+  "round": 7,
+  "status": "rejected-concept-preflight",
+  "reviewType": "fresh-context original 2D concept preflight",
+  "reviewedAt": "2026-07-31T12:51:49Z",
+  "artifactClass": "original 2D concept art",
+  "engineRun": false,
+  "actualGameCapturePerformed": false,
+  "unityCaptureFiled": false,
+  "threeDimensionalAssetFiled": false,
+  "gameReadyEvidenceFiled": false,
+  "acceptedCombatGripFiled": false,
+  "paid3DGenerationAuthorized": false,
+  "source": {
+    "name": "Nyra Kestrel function-led identity concept preflight",
+    "scope": "Original 2D concept preflight only; no gameplay, 3D model, finished game asset, or production-ready implementation claim.",
+    "creator": "OpenAI image generation via Codex",
+    "referencePixelsSuppliedToGeneration": false,
+    "receiptPath": "ArtSource/P10/Round007/Concept/P10_Round007_ConceptReceipt.json",
+    "receiptSha256": "1ed2cf94707f977ec7486cda080adfc919ca61deaafc673599efbbb4dccb6fb0",
+    "readmePath": "ArtSource/P10/Round007/Concept/README.md",
+    "readmeSha256": "967e748665fdb595232ba329f89bafc6dc643dcb2ddfc245f031dc3d1c7cc396",
+    "reviewPath": "ArtSource/P10/Round007/Concept/P10_Round007_FreshConceptReview.json",
+    "reviewSha256": "a765d3523d730caa99424f76cf4891068d71c4c35a154259407da16d2af4d24b"
+  },
+  "visualReview": {
+    "score": 62,
+    "maximum": 100,
+    "passThreshold": 85,
+    "criticalFloorPerCategory": 7,
+    "observedMinimumCategoryScore": 2,
+    "thresholdResult": "FAIL",
+    "criticalFloorResult": "FAIL",
+    "verdict": "DENY_PAID_3D_GENERATION",
+    "comparisonCount": 6,
+    "candidateMetBenchmarkBarCount": 2,
+    "candidateBelowBenchmarkBarCount": 4,
+    "requiredCandidateMetBenchmarkBarCount": 5,
+    "benchmarkGateResult": "FAIL",
+    "benchmarkPolicy": "Aggregate blinded-comparison results only; no benchmark image, crop, comparison sheet, filename, path, or other benchmark pixel is published.",
+    "singleBiggestGap": "The absence of one accepted identity-preserving combat image that unambiguously proves both complete hands closed on separated regions of the same hilt.",
+    "categoryScores": {
+      "multiViewIdentityConsistency": 7,
+      "neutralModelingUtility": 8,
+      "anatomy": 7,
+      "faceEyesHair": 7,
+      "premiumLayeredCostumeAndMaterialSeparation": 6,
+      "silhouetteAndRoleRead": 7,
+      "functionalSameHiltTwoHandGrip": 2,
+      "weaponPlausibility": 7,
+      "avoidanceOfGenericCivilianPlasticFetishAndFranchiseCues": 6,
+      "benchmarkLevelAuthorship": 5
+    }
+  },
+  "decision": {
+    "result": "DENY_PAID_3D_GENERATION",
+    "paid3DGenerationAuthorized": false,
+    "instruction": "Do not begin paid 3D generation from this concept set."
+  },
+  "limitations": [
+    "The filed images are original 2D concept art, not gameplay or game capture.",
+    "No 3D mesh, topology, rig, deformation, UV, collision, animation, LOD, texture, performance, or game-ready claim is made.",
+    "No accepted identity-preserving two-hand same-hilt combat proof exists in Round007.",
+    "The decisive grip image is published only as rejected failure evidence; it is not accepted pack content.",
+    "The concept review cannot establish legal originality, exclusivity, copyright status, trademark clearance, or absence of all third-party similarity.",
+    "Paid 3D generation was denied because the total-score, category-floor, and blinded-comparison gates all failed."
+  ],
+  "conceptArt": [
+    {
+      "label": "Accepted character turnaround concept art",
+      "disposition": "accepted-round-asset",
+      "evidenceType": "2D concept art — not gameplay, 3D, or game-ready evidence",
+      "publicPath": "/captures/P10/round-007-concept/NyraKestrel_Turnaround_ACCEPTED.png",
+      "sha256": "f54d6f4b4bc7707841b623148f522c1c60730bd8c6c620d4698531d928f2545a",
+      "dimensions": {
+        "width": 1536,
+        "height": 1024
+      },
+      "format": "PNG"
+    },
+    {
+      "label": "Accepted Stormcage odachi concept art",
+      "disposition": "accepted-round-asset",
+      "evidenceType": "2D concept art — not gameplay, 3D, or game-ready evidence",
+      "publicPath": "/captures/P10/round-007-concept/StormcageOdachi_ACCEPTED.png",
+      "sha256": "6b604c69bf417e33e211366a006c800275b1ca3dda7a168bd84dcba054fff48b",
+      "dimensions": {
+        "width": 1536,
+        "height": 1024
+      },
+      "format": "PNG"
+    },
+    {
+      "label": "REJECTED — decisive combat-grip revision 02",
+      "disposition": "rejected-failure-evidence-only",
+      "evidenceType": "Rejected 2D concept diagnostic — not accepted pack content, gameplay, 3D, or game-ready evidence",
+      "publicPath": "/captures/P10/round-007-concept/NyraKestrel_CombatGrip_Revision02_REJECTED.png",
+      "sha256": "79535d7d7ec1d0959ad2c039d2594ad687e39ebeb52edf066a716dece21a0cc3",
+      "dimensions": {
+        "width": 1536,
+        "height": 1024
+      },
+      "format": "PNG",
+      "failure": "The trailing hand grips a separate copper element rather than the sword hilt, and the hilt crosses the leg silhouette."
+    }
+  ],
+  "rejectedGripIterations": [
+    {
+      "iteration": "initial",
+      "sha256": "a21a9c24e713ebec62290cebfc75abe4088a80fe87f7e0c53cf5b4fc3b7710ae",
+      "reason": "The defining induction yoke is absent."
+    },
+    {
+      "iteration": "revision01",
+      "sha256": "bfeaf5acadfff5fe960d5ce0d4abc24cc061448c763010c44a197eda62eceae4",
+      "reason": "The leading fist hovers and does not enclose the hilt."
+    },
+    {
+      "iteration": "revision02",
+      "sha256": "79535d7d7ec1d0959ad2c039d2594ad687e39ebeb52edf066a716dece21a0cc3",
+      "reason": "The trailing hand grips a separate copper element and the hilt crosses the leg silhouette."
+    }
+  ],
+  "nextRound": {
+    "round": 8,
+    "status": "identity-preserving-two-hand-contact-proof",
+    "target": "Produce one accepted image that preserves the induction yoke, conductor circuit, right-hip capacitor, heavy right grounding greave, and accepted weapon while unambiguously showing both complete hands closed on separated regions of the same hilt.",
+    "compositePackGate": {
+      "minimumTotalScore": 85,
+      "minimumScorePerCategory": 7,
+      "blindComparisonCount": 6,
+      "minimumComparisonsMeetingBenchmarkBar": 5,
+      "paid3DGenerationRequiresFullPass": true
+    }
+  }
+}

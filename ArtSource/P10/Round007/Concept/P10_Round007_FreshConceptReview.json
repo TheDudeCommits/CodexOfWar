@@ -1,0 +1,361 @@
+{
+  "schema": "codexofwar.fresh-2d-concept-preflight-review",
+  "version": "1.0.0",
+  "review_id": "P10-Round007-FreshConceptReview",
+  "reviewed_utc": "2026-07-31T12:51:49Z",
+  "reviewer_mode": "independent hostile AAA concept preflight",
+  "scope": {
+    "project_asset": "P10 Nyra Kestrel",
+    "round": "Round007",
+    "evaluated_material": "original 2D concept pack only",
+    "accepted_pack_contents": [
+      "one neutral four-view character turnaround",
+      "one multi-study weapon concept sheet"
+    ],
+    "rejected_material_use": "inspected as failure evidence only and not counted as accepted pack content",
+    "claims_not_made": [
+      "3D readiness",
+      "production readiness",
+      "gameplay readiness",
+      "engine or Unity readiness",
+      "rig, mesh, UV, deformation, collision, animation, LOD, or performance readiness",
+      "legal originality, exclusivity, copyright clearance, or trademark clearance"
+    ]
+  },
+  "inspection": {
+    "native_resolution_visual_inspection": true,
+    "all_round_images_inspected": true,
+    "receipt_inspected": true,
+    "readme_inspected": true,
+    "documents": [
+      {
+        "document_id": "round007-readme",
+        "sha256": "967e748665fdb595232ba329f89bafc6dc643dcb2ddfc245f031dc3d1c7cc396",
+        "byte_size": 3898,
+        "format": "markdown"
+      },
+      {
+        "document_id": "round007-concept-receipt",
+        "sha256": "1ed2cf94707f977ec7486cda080adfc919ca61deaafc673599efbbb4dccb6fb0",
+        "byte_size": 39191,
+        "format": "json"
+      }
+    ]
+  },
+  "candidate_images": [
+    {
+      "asset_id": "accepted-turnaround",
+      "round_location": "P10_Round007_NyraKestrel_Turnaround_v1.png",
+      "sha256": "f54d6f4b4bc7707841b623148f522c1c60730bd8c6c620d4698531d928f2545a",
+      "dimensions_px": {
+        "width": 1536,
+        "height": 1024
+      },
+      "format": "png",
+      "disposition": "accepted-round-asset",
+      "counted_in_pack": true
+    },
+    {
+      "asset_id": "accepted-weapon",
+      "round_location": "P10_Round007_StormcageOdachi_v1.png",
+      "sha256": "6b604c69bf417e33e211366a006c800275b1ca3dda7a168bd84dcba054fff48b",
+      "dimensions_px": {
+        "width": 1536,
+        "height": 1024
+      },
+      "format": "png",
+      "disposition": "accepted-round-asset",
+      "counted_in_pack": true
+    },
+    {
+      "asset_id": "turnaround-generation-source",
+      "round_location": "Iterations/P10_Round007_NyraKestrel_Turnaround_candidate01.png",
+      "sha256": "f54d6f4b4bc7707841b623148f522c1c60730bd8c6c620d4698531d928f2545a",
+      "dimensions_px": {
+        "width": 1536,
+        "height": 1024
+      },
+      "format": "png",
+      "disposition": "accepted-source-identical-to-accepted-turnaround",
+      "counted_in_pack": false
+    },
+    {
+      "asset_id": "rejected-turnaround-alternative",
+      "round_location": "Iterations/P10_Round007_NyraKestrel_Turnaround_candidate02_reject.png",
+      "sha256": "f427668a9d491906007fe1a9eaf8d7a9761b81af8f88027da44fca95c793c9c0",
+      "dimensions_px": {
+        "width": 1693,
+        "height": 929
+      },
+      "format": "png",
+      "disposition": "rejected",
+      "counted_in_pack": false
+    },
+    {
+      "asset_id": "weapon-generation-source",
+      "round_location": "Iterations/P10_Round007_StormcageOdachi_initial.png",
+      "sha256": "6b604c69bf417e33e211366a006c800275b1ca3dda7a168bd84dcba054fff48b",
+      "dimensions_px": {
+        "width": 1536,
+        "height": 1024
+      },
+      "format": "png",
+      "disposition": "accepted-source-identical-to-accepted-weapon",
+      "counted_in_pack": false
+    },
+    {
+      "asset_id": "rejected-combat-initial",
+      "round_location": "Iterations/P10_Round007_NyraKestrel_CombatGrip_initial_reject.png",
+      "sha256": "a21a9c24e713ebec62290cebfc75abe4088a80fe87f7e0c53cf5b4fc3b7710ae",
+      "dimensions_px": {
+        "width": 1536,
+        "height": 1024
+      },
+      "format": "png",
+      "disposition": "rejected-missing-defining-induction-yoke",
+      "counted_in_pack": false
+    },
+    {
+      "asset_id": "rejected-combat-revision-01",
+      "round_location": "Iterations/P10_Round007_NyraKestrel_CombatGrip_revision01_reject.png",
+      "sha256": "bfeaf5acadfff5fe960d5ce0d4abc24cc061448c763010c44a197eda62eceae4",
+      "dimensions_px": {
+        "width": 1536,
+        "height": 1024
+      },
+      "format": "png",
+      "disposition": "rejected-leading-hand-does-not-enclose-hilt",
+      "counted_in_pack": false
+    },
+    {
+      "asset_id": "rejected-combat-revision-02",
+      "round_location": "Iterations/P10_Round007_NyraKestrel_CombatGrip_revision02_reject.png",
+      "sha256": "79535d7d7ec1d0959ad2c039d2594ad687e39ebeb52edf066a716dece21a0cc3",
+      "dimensions_px": {
+        "width": 1536,
+        "height": 1024
+      },
+      "format": "png",
+      "disposition": "rejected-trailing-hand-on-separate-element-and-hilt-crosses-leg",
+      "counted_in_pack": false
+    }
+  ],
+  "accepted_vs_rejected_finding": {
+    "accepted_turnaround": "The four-view neutral sheet establishes the mature face, ivory shoulder apparatus, diagonal copper route, right-hip module, and heavy right greave with useful front/back clarity, though small construction and hair details drift and the heavy-leg asymmetry is weak in the side views.",
+    "accepted_weapon": "The weapon sheet communicates one long two-hand odachi, base-only caged mineral element, insulated hilt, profile, scabbard, and enlarged guard/grip construction with good 2D design-sheet clarity, while small routing details drift and the blade-base cage remains only visually plausible.",
+    "rejected_combat_attempts": "The initial image has the clearest same-hilt two-hand grasp but deletes the defining shoulder apparatus; revision 01 restores identity but leaves the leading fist hovering off the hilt; revision 02 restores identity but places the trailing hand on a separate copper form and crosses the hilt through the leg silhouette. None is accepted evidence.",
+    "accepted_combat_grip_proof_present": false
+  },
+  "benchmark_comparison": {
+    "method": "The private archive was extracted into a random disposable workspace. All 20 unique decodable benchmark visuals were inspected at native resolution; one additional decodable file was an exact visual duplicate. Six relevant character, weapon, and combat comparisons were then built as unlabeled 1600x900 two-panel sheets. Each pair used native sources, framing-only crops where needed, aspect-preserving scale and neutral padding, independently randomized left/right placement, and no retouching. The sheets were judged without provenance labels and destroyed after inspection.",
+    "benchmark_inventory": {
+      "decodable_visual_file_count": 21,
+      "unique_visual_hash_count": 20,
+      "exact_duplicate_visual_file_count": 1
+    },
+    "required_candidate_meets_count": 5,
+    "comparison_count": 6,
+    "candidate_meets_count": 2,
+    "candidate_below_count": 4,
+    "gate_passed": false,
+    "comparisons": [
+      {
+        "comparison_id": "BC01",
+        "focus": "character silhouette and hero identity",
+        "candidate_evidence": "accepted-turnaround",
+        "benchmark": {
+          "benchmark_id": "BM-R7-11",
+          "sha256": "a0161b955a1947fcabccc34c8e22ee0ebcb6ade357b51aa974c0057caf9294c9",
+          "dimensions_px": {
+            "width": 1920,
+            "height": 1080
+          },
+          "format": "webp"
+        },
+        "result": "candidate-below-benchmark",
+        "candidate_meets_bar": false,
+        "finding": "The candidate has a readable asymmetric apparatus and greave, but the comparison reads as a capable industrial technician beside a more mythic, iconic, emotionally authored hero silhouette."
+      },
+      {
+        "comparison_id": "BC02",
+        "focus": "face, hair, and upper-body material authorship",
+        "candidate_evidence": "accepted-turnaround",
+        "benchmark": {
+          "benchmark_id": "BM-R7-20",
+          "sha256": "e894db229df4c7bc0be9e01e16a668158a4ae900e1b3749d42f9e47662bb7a62",
+          "dimensions_px": {
+            "width": 1948,
+            "height": 1080
+          },
+          "format": "jpeg"
+        },
+        "result": "candidate-meets-benchmark",
+        "candidate_meets_bar": true,
+        "finding": "The mature facial construction, asymmetrical hair, and ivory-cobalt-copper separation remain unusually legible in the controlled upper-body framing."
+      },
+      {
+        "comparison_id": "BC03",
+        "focus": "rear silhouette and costume construction read",
+        "candidate_evidence": "accepted-turnaround",
+        "benchmark": {
+          "benchmark_id": "BM-R7-03",
+          "sha256": "06ac0710130fe19f7c844ecc453bca2d27bcc72b25fef3a2615f8877b53c9778",
+          "dimensions_px": {
+            "width": 1400,
+            "height": 787
+          },
+          "format": "jpeg"
+        },
+        "result": "candidate-meets-benchmark",
+        "candidate_meets_bar": true,
+        "finding": "The back view clearly communicates the apparatus-to-conductor-to-hip-to-greave load path and large material blocks at a glance."
+      },
+      {
+        "comparison_id": "BC04",
+        "focus": "weapon silhouette, construction, and plausibility",
+        "candidate_evidence": "accepted-weapon",
+        "benchmark": {
+          "benchmark_id": "BM-R7-04",
+          "sha256": "1af9ad3cd30a4f90dd97d8fcdced94eee8afcc2828aff1013bf24f90721112b7",
+          "dimensions_px": {
+            "width": 766,
+            "height": 400
+          },
+          "format": "jpeg"
+        },
+        "result": "candidate-below-benchmark",
+        "candidate_meets_bar": false,
+        "finding": "The sheet is clear, but the mostly conventional dark odachi plus rectangular base cage does not achieve the benchmark's iconic weapon authorship or convincing combat integration."
+      },
+      {
+        "comparison_id": "BC05",
+        "focus": "combat weapon integration and grip credibility",
+        "candidate_evidence": "rejected-combat-initial",
+        "benchmark": {
+          "benchmark_id": "BM-R7-19",
+          "sha256": "d208c98d2ea91b654fb11070616887e0f8564fe3c5040ae854e3aab8645be98d",
+          "dimensions_px": {
+            "width": 739,
+            "height": 415
+          },
+          "format": "jpeg"
+        },
+        "result": "candidate-below-benchmark",
+        "candidate_meets_bar": false,
+        "finding": "The rejected image has a readable grasp, but it cannot prove the accepted character identity and lacks the benchmark's authored weapon-body relationship and force."
+      },
+      {
+        "comparison_id": "BC06",
+        "focus": "combat role read and authored action impact",
+        "candidate_evidence": "rejected-combat-revision-01",
+        "benchmark": {
+          "benchmark_id": "BM-R7-17",
+          "sha256": "c4693a135a8f66b17759349dd81e126001989aac894db1714d2d2cad89ae8fe0",
+          "dimensions_px": {
+            "width": 739,
+            "height": 415
+          },
+          "format": "jpeg"
+        },
+        "result": "candidate-below-benchmark",
+        "candidate_meets_bar": false,
+        "finding": "The candidate pose is a readable studio stance, but the hovering leading hand invalidates the grip and the image remains far below the benchmark's mythic action authorship."
+      }
+    ]
+  },
+  "scorecard": {
+    "scale": "0-10 per category; 100 total",
+    "categories": [
+      {
+        "category": "multiview identity consistency",
+        "score": 7,
+        "finding": "The large identity anchors survive front and back, but side-view heavy-greave proof, braid volume, small brackets, and seam logic are not fully locked."
+      },
+      {
+        "category": "neutral modeling utility",
+        "score": 8,
+        "finding": "Four complete neutral views share a baseline, scale, readable hands, and uncropped feet; imperfect orthographic consistency and weak side-view asymmetry keep it below a top production preflight sheet."
+      },
+      {
+        "category": "anatomy",
+        "score": 7,
+        "finding": "The accepted neutral body is mature, weight-bearing, and proportionally credible, while the rejected combat hands show that anatomy is not reliably preserved under pose pressure."
+      },
+      {
+        "category": "face/eyes/hair",
+        "score": 7,
+        "finding": "The face is mature and specific with stable overall identity; eye, hairline, braid placement, and braid volume drift enough across views and combat attempts to prevent premium lock."
+      },
+      {
+        "category": "premium layered costume/material separation",
+        "score": 6,
+        "finding": "Ivory, cobalt, copper, and blackened steel separate cleanly, but the layering remains simple industrial workwear with attached hardware rather than premium mythic-anime AAA costume authorship."
+      },
+      {
+        "category": "silhouette/role read",
+        "score": 7,
+        "finding": "The shoulder apparatus and heavy grounding leg create a distinct functional asymmetry, yet the overall read remains closer to a science-fiction field technician than an apex mythic combat lead."
+      },
+      {
+        "category": "functional same-hilt two-hand grip",
+        "score": 2,
+        "finding": "No accepted combat-grip image exists. The only clearly two-handed rejected attempt omits the defining shoulder identity; the identity-preserving revisions leave one hand off the hilt or on a separate element."
+      },
+      {
+        "category": "weapon plausibility",
+        "score": 7,
+        "finding": "The blade, long hilt, profile, scabbard, and grip construction are visually coherent, but base-cage stresses, mass balance, fastener continuity, and copper routing remain unresolved visual proposals."
+      },
+      {
+        "category": "avoidance generic/civilian/plastic/fetish/franchise",
+        "score": 6,
+        "finding": "The pack avoids fetish anatomy, heels, glossy plastic, and direct franchise mimicry, but the cobalt work suit and bolt-on industrial modules retain a generic civilian-technician ceiling."
+      },
+      {
+        "category": "benchmark-level authorship",
+        "score": 5,
+        "finding": "The work is clean and distinctive as science-fiction concept art, but it lacks the benchmark's iconic mythic hierarchy, authored costume storytelling, weapon-body integration, and combat force."
+      }
+    ],
+    "total_score": 62,
+    "maximum_score": 100,
+    "authorization_threshold": 85,
+    "minimum_category_score_required": 7,
+    "observed_minimum_category_score": 2,
+    "all_categories_meet_minimum": false,
+    "score_gate_passed": false
+  },
+  "decision": {
+    "verdict": "DENY_PAID_3D_GENERATION",
+    "paid_3d_generation_authorized": false,
+    "score": 62,
+    "score_threshold": 85,
+    "category_floor_passed": false,
+    "benchmark_result": "2/6 candidate-meets comparisons; 5/6 required",
+    "benchmark_gate_passed": false,
+    "biggest_remaining_gap": "The absence of one accepted identity-preserving combat image that unambiguously proves both complete hands closed on separated regions of the same hilt."
+  },
+  "integrity_validation": {
+    "candidate_hashes_recomputed": true,
+    "candidate_dimensions_and_formats_recomputed": true,
+    "receipt_hash_matches_current_file": true,
+    "readme_hash_matches_current_file": true,
+    "accepted-copy_hashes_match_their_generation-sources": true,
+    "json_validated": true
+  },
+  "privacy_cleanup_audit": {
+    "public_safe": true,
+    "benchmark_pixels_embedded_or_retained": false,
+    "benchmark_filenames_present": false,
+    "archive_name_present": false,
+    "absolute_paths_present": false,
+    "usernames_present": false,
+    "temporary_paths_present": false,
+    "private_identifiers_present": false,
+    "extracted_benchmark_material_deleted": true,
+    "blind_comparison_sheets_deleted": true,
+    "intermediate_crops_deleted": true,
+    "cleanup_verified_after_deletion": true,
+    "benchmark_source_modified": false
+  }
+}
