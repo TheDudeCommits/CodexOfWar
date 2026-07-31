@@ -19,11 +19,11 @@
   ],
   "activeBuild": {
     "pieceId": "P10",
-    "round": 8,
-    "roundLabel": "P10 · Round 008",
+    "round": 9,
+    "roundLabel": "P10 · Round 009",
     "status": "revising",
-    "builder": "Identity-preserving two-hand contact proof",
-    "brief": "Round 008 is an isolated 2D contact-proof build with no result, capture, or history entry filed yet. It must preserve the accepted induction yoke, conductor circuit, heavy right grounding greave, and weapon while proving both complete hands closed on separated regions of the same hilt; paid 3D generation and Unity remain locked.",
+    "builder": "Mythic silhouette under combat load",
+    "brief": "Round 009 is one bounded original 2D concept-sheet build with no result or capture filed yet. It must preserve Nyra's accepted identity, engineering anchors, weapon, and solved same-hilt contact while replacing the industrial-technician read with an ownable mythic storm-warden silhouette expressed through convincing full-body combat force; paid 3D generation and Unity remain locked.",
     "facts": [
       "P00 is accepted as infrastructure; its blind visual baseline remains an explicit 28.33–76.67 loss.",
       "Round 001 is mechanically reproducible: two independent critic reruns matched all six filed image hashes, P10 validation passed, focused EditMode passed 8/8, the full suite passed 14/14, and the P00 aggregate stayed byte-identical.",
@@ -48,7 +48,10 @@
       "Paid 3D generation was not authorized and Unity was not entered for Round 006. The single biggest gap is benchmark-level authored identity: the generic dark armored-anime swordswoman lacks a unique, function-led visual thesis.",
       "Round 007 filed two accepted original 2D concept sheets and one clearly labeled rejected grip diagnostic only. A fresh critic denied paid 3D generation at 62/100 against an 85 threshold, failed the category floor, and found the candidate met the benchmark bar in 2/6 comparisons against 5/6 required.",
       "Round 007 has no accepted combat-grip proof, gameplay, 3D asset, game-ready evidence, or Unity capture. Its single biggest gap is the absence of one accepted identity-preserving combat image that unambiguously proves both complete hands closed on separated regions of the same hilt.",
-      "Round 008 is now an isolated identity-preserving two-hand contact-proof build with no result, capture, or history entry filed. Round 001 remains the latest filed in-engine P10 evidence, while the global latest manifest remains pinned to accepted P00."
+      "Round 008 generated four bounded original 2D contact candidates. The builder froze them fail-closed under a strict clean-negative-space rule, but a fresh critic independently found candidate 04 visually unambiguous and promoted a byte-identical accepted contact copy without regenerating the art.",
+      "Round 008 passed its isolated same-hilt contact objective, raising functional grip to 8/10, but the complete pack still failed at 68/100, a 5/10 observed category floor, and only 3/6 benchmark-level comparisons against 5/6 required. Paid 3D generation and Unity remain locked.",
+      "The single biggest remaining gap is an iconic mythic combat-lead read: the costume and weapon still lack one singular authored silhouette expressed through convincing full-body combat force.",
+      "Round 009 is now a bounded original 2D mythic-silhouette-under-combat-load build with no result or capture filed. Round 001 remains the latest filed in-engine P10 evidence, while the global latest manifest remains pinned to accepted P00."
     ],
     "evidenceFingerprint": {
       "gitRevision": "2dedf617ace47ea5dbb2cde1817d6119604842d2",
@@ -110,7 +113,7 @@
         "Static lookdev only; no rig, S02, or S06"
       ]
     },
-    "nextGate": "Round 008 must first produce one accepted identity-preserving image with both complete hands closed on separated regions of the same hilt. The complete concept pack must then earn at least 85/100 from a fresh critic, keep every category at or above 7, and meet the benchmark bar in at least 5 of 6 blinded comparisons before any paid 3D generation."
+    "nextGate": "Round 009 must preserve the fresh-critic accepted same-hilt contact while replacing the industrial-technician read with one ownable mythic storm-warden silhouette and convincing full-body combat force. The complete concept pack must earn at least 85/100 from a fresh critic, keep every category at or above 7, and meet the benchmark bar in at least 5 of 6 blinded comparisons before any paid 3D generation."
   },
   "canonicalCapture": {
     "shotId": "S01",
@@ -345,6 +348,27 @@
         "scoreLabel": "Concept preflight 62/100 · threshold 85 · category floor failed",
         "preference": "Candidate met benchmark bar in 2/6 blinded comparisons · 5/6 required",
         "primaryGap": "The absence of one accepted identity-preserving combat image that unambiguously proves both complete hands closed on separated regions of the same hilt."
+      }
+    },
+    {
+      "round": 8,
+      "label": "P10 · Round 008",
+      "pieceId": "P10",
+      "phase": "Fresh contact and composite critic complete",
+      "status": "criticized",
+      "date": "2026-07-31",
+      "builderBrief": "Isolate the rejected pack's contact defect and produce one identity-preserving image that visibly proves two complete hands closed on separated regions of the same continuous hilt.",
+      "evidence": "Four bounded original 1536×1024 contact candidates were filed as 2D concept evidence only. The builder froze the set fail-closed because the hilt crossed clothing, but the fresh critic found candidate 04 visually unambiguous and accepted a byte-identical promoted copy: one connected weapon and two separated enclosing hands on the same hilt. The isolated objective passed, while the composite pack still failed at 68/100, a 5/10 category floor, and 3/6 benchmark-level comparisons against 5/6 required. No gameplay, 3D model, game-ready asset, or Unity capture is claimed; paid 3D generation remains denied.",
+      "evidenceLinks": [
+        "/captures/P10/round-008-contact/NyraKestrel_CombatGrip_FRESH_CRITIC_ACCEPTED.png",
+        "/data/P10-round-008-contact.json"
+      ],
+      "critic": {
+        "status": "CONTACT PASS · DENY_PAID_3D_GENERATION",
+        "score": 68,
+        "scoreLabel": "Composite concept preflight 68/100 · threshold 85 · category floor 5/10",
+        "preference": "Candidate met benchmark bar in 3/6 blinded comparisons · 5/6 required",
+        "primaryGap": "The pack still reads as polished industrial-technician concept art rather than an iconic benchmark-level mythic combat lead: the costume and weapon lack one singular authored silhouette expressed through convincing full-body combat force."
       }
     }
   ],

@@ -91,7 +91,7 @@ test("server-renders the production evidence ledger", async () => {
   assert.match(html, /Reference 09/);
   assert.match(html, /29\.82%/);
   assert.match(html, /82,906/);
-  assert.match(html, /P10 · Round 008/);
+  assert.match(html, /P10 · Round 009/);
   assert.match(html, /Round rejected\. Rebuild in progress\./);
   assert.match(html, /Round 001 rejected · mechanically reproducible/);
   assert.match(
@@ -244,9 +244,19 @@ test("server-renders the production evidence ledger", async () => {
     /href="\/captures\/P10\/round-007-concept\/NyraKestrel_CombatGrip_Revision02_REJECTED\.png"/,
   );
   assert.match(html, /href="\/data\/P10-round-007-concept\.json"/);
-  assert.match(html, /Identity-preserving two-hand contact proof/i);
-  assert.match(html, /no result, capture, or history entry filed yet/i);
-  assert.match(html, /complete concept pack must then earn at least 85\/100/i);
+  assert.match(html, /CONTACT PASS · DENY_PAID_3D_GENERATION/);
+  assert.match(html, /Composite concept preflight 68\/100 · threshold 85 · category floor 5\/10/);
+  assert.match(html, /Candidate met benchmark bar in 3\/6 blinded comparisons · 5\/6 required/);
+  assert.match(
+    html,
+    /href="\/captures\/P10\/round-008-contact\/NyraKestrel_CombatGrip_FRESH_CRITIC_ACCEPTED\.png"/,
+  );
+  assert.match(html, /href="\/data\/P10-round-008-contact\.json"/);
+  assert.match(html, /Mythic silhouette under combat load/i);
+  assert.match(html, /one bounded original 2D concept-sheet build with no result or capture filed yet/i);
+  assert.match(html, /complete concept pack must earn at least 85\/100/i);
+  assert.match(html, /industrial-technician/i);
+  assert.match(html, /convincing full-body combat force/i);
   assert.doesNotMatch(html, /Reference\.zip|Reference\/[^"<]+\.(?:png|jpe?g|webp)/i);
   assert.doesNotMatch(
     html,
@@ -313,14 +323,15 @@ test("checked-in data contains the complete, honest P00–P25 ledger", async () 
   assert.equal(p00.status, "accepted");
   assert.equal(p10.status, "revising");
   assert.equal(dashboard.activeBuild.pieceId, "P10");
-  assert.equal(dashboard.activeBuild.round, 8);
-  assert.equal(dashboard.activeBuild.roundLabel, "P10 · Round 008");
+  assert.equal(dashboard.activeBuild.round, 9);
+  assert.equal(dashboard.activeBuild.roundLabel, "P10 · Round 009");
   assert.equal(
     dashboard.activeBuild.builder,
-    "Identity-preserving two-hand contact proof",
+    "Mythic silhouette under combat load",
   );
   assert.equal(dashboard.activeBuild.status, p10.status);
-  assert.match(dashboard.activeBuild.brief, /no result, capture, or history entry filed yet/i);
+  assert.match(dashboard.activeBuild.brief, /no result or capture filed yet/i);
+  assert.match(dashboard.activeBuild.brief, /ownable mythic storm-warden silhouette/i);
   assert.match(dashboard.activeBuild.brief, /paid 3D generation and Unity remain locked/i);
   assert.ok(queuedPieces.every((piece) => piece.status === "queued"));
 
@@ -348,7 +359,7 @@ test("checked-in data contains the complete, honest P00–P25 ledger", async () 
   assert.equal(dashboard.acceptance.maximum, 100);
   assert.match(dashboard.acceptance.p00Exception, /visual loss does not block/i);
 
-  assert.equal(dashboard.rounds.length, 8);
+  assert.equal(dashboard.rounds.length, 9);
   assert.equal(dashboard.rounds[0].pieceId, "P00");
   assert.equal(
     dashboard.rounds[0].critic.status,
@@ -511,12 +522,30 @@ test("checked-in data contains the complete, honest P00–P25 ledger", async () 
     "/captures/P10/round-007-concept/NyraKestrel_CombatGrip_Revision02_REJECTED.png",
     "/data/P10-round-007-concept.json",
   ]);
+  assert.equal(dashboard.rounds[8].pieceId, "P10");
+  assert.equal(dashboard.rounds[8].round, 8);
+  assert.equal(dashboard.rounds[8].status, "criticized");
   assert.equal(
-    dashboard.rounds.some(
-      (round) => round.pieceId === "P10" && round.round === 8,
-    ),
-    false,
+    dashboard.rounds[8].critic.status,
+    "CONTACT PASS · DENY_PAID_3D_GENERATION",
   );
+  assert.equal(dashboard.rounds[8].critic.score, 68);
+  assert.equal(
+    dashboard.rounds[8].critic.scoreLabel,
+    "Composite concept preflight 68/100 · threshold 85 · category floor 5/10",
+  );
+  assert.equal(
+    dashboard.rounds[8].critic.preference,
+    "Candidate met benchmark bar in 3/6 blinded comparisons · 5/6 required",
+  );
+  assert.match(
+    dashboard.rounds[8].critic.primaryGap,
+    /singular authored silhouette expressed through convincing full-body combat force/i,
+  );
+  assert.deepEqual(dashboard.rounds[8].evidenceLinks, [
+    "/captures/P10/round-008-contact/NyraKestrel_CombatGrip_FRESH_CRITIC_ACCEPTED.png",
+    "/data/P10-round-008-contact.json",
+  ]);
 });
 
 test("P10 evidence is filed while the global latest manifest remains P00-pinned", async () => {
@@ -530,6 +559,7 @@ test("P10 evidence is filed while the global latest manifest remains P00-pinned"
     p10Round005Preflight,
     p10Round006Concept,
     p10Round007Concept,
+    p10Round008Contact,
     latestManifest,
     p10Screenshot,
     turntableContact,
@@ -551,6 +581,7 @@ test("P10 evidence is filed while the global latest manifest remains P00-pinned"
     round007Turnaround,
     round007Weapon,
     round007RejectedGrip,
+    round008AcceptedContact,
   ] = await Promise.all([
     readFile(dataUrl, "utf8").then(JSON.parse),
     readFile(
@@ -583,6 +614,10 @@ test("P10 evidence is filed while the global latest manifest remains P00-pinned"
     ).then(JSON.parse),
     readFile(
       new URL("../public/data/P10-round-007-concept.json", import.meta.url),
+      "utf8",
+    ).then(JSON.parse),
+    readFile(
+      new URL("../public/data/P10-round-008-contact.json", import.meta.url),
       "utf8",
     ).then(JSON.parse),
     readFile(
@@ -706,6 +741,12 @@ test("P10 evidence is filed while the global latest manifest remains P00-pinned"
     readFile(
       new URL(
         "../public/captures/P10/round-007-concept/NyraKestrel_CombatGrip_Revision02_REJECTED.png",
+        import.meta.url,
+      ),
+    ),
+    readFile(
+      new URL(
+        "../public/captures/P10/round-008-contact/NyraKestrel_CombatGrip_FRESH_CRITIC_ACCEPTED.png",
         import.meta.url,
       ),
     ),
@@ -1169,6 +1210,156 @@ test("P10 evidence is filed while the global latest manifest remains P00-pinned"
   }
   assert.doesNotMatch(
     JSON.stringify(p10Round007Concept),
+    /Reference\.zip|Reference\/[^"']+\.(?:png|jpe?g|webp)|\/Users\/|\/home\/|[A-Za-z]:\\Users\\|\/tmp\/|\/private\/var\/folders\//i,
+  );
+
+  assert.equal(p10Round008Contact.piece, "P10");
+  assert.equal(p10Round008Contact.round, 8);
+  assert.equal(
+    p10Round008Contact.status,
+    "contact-passed-composite-rejected",
+  );
+  assert.equal(
+    p10Round008Contact.artifactClass,
+    "original 2D combat-contact concept art",
+  );
+  assert.equal(p10Round008Contact.engineRun, false);
+  assert.equal(p10Round008Contact.actualGameCapturePerformed, false);
+  assert.equal(p10Round008Contact.unityCaptureFiled, false);
+  assert.equal(p10Round008Contact.threeDimensionalAssetFiled, false);
+  assert.equal(p10Round008Contact.gameReadyEvidenceFiled, false);
+  assert.equal(p10Round008Contact.acceptedContactProofFiled, true);
+  assert.equal(p10Round008Contact.paid3DGenerationAuthorized, false);
+  assert.equal(
+    p10Round008Contact.source.referencePixelsSuppliedToGeneration,
+    false,
+  );
+  assert.equal(
+    p10Round008Contact.source.receiptSha256,
+    "ccd7141fd24a51ee8d382100a6c8fe328363927cb47898addcc209ba5cea66dd",
+  );
+  assert.equal(
+    p10Round008Contact.source.readmeSha256,
+    "11fabf630ee0cd23c60ce7f6ba6a7dd8d866c535460962265c7caa18321fdede",
+  );
+  assert.equal(
+    p10Round008Contact.source.reviewSha256,
+    "8c2f60c255316ed2298967f553790e29eef62d4b7528fc788f5f9433529e0e53",
+  );
+  assert.equal(
+    p10Round008Contact.source.promotionSha256,
+    "e8313a59d01150113b44693977c2c6b1b2b951e449eb06a58375adbeed9177e9",
+  );
+  assert.equal(
+    p10Round008Contact.contactDecision.verdict,
+    "PASS_ISOLATED_CONTACT_PROOF",
+  );
+  assert.equal(
+    p10Round008Contact.contactDecision.strongestCandidateId,
+    "combat-contact-candidate-04",
+  );
+  assert.equal(
+    p10Round008Contact.contactDecision.strongestCandidateSha256,
+    "06249a9cf8fcc94c4d531ebb6ffa835c4b7be8cc77202836069dd42d9e27692d",
+  );
+  assert.equal(p10Round008Contact.contactDecision.identityPreserved, true);
+  assert.equal(p10Round008Contact.contactDecision.oneCompleteWeapon, true);
+  assert.equal(
+    p10Round008Contact.contactDecision.twoSeparatedSameHiltClosures,
+    true,
+  );
+  assert.equal(
+    p10Round008Contact.contactDecision.contactAndObjectContinuityAuditable,
+    true,
+  );
+  assert.equal(
+    p10Round008Contact.contactDecision.hiltClothingOverlapFatal,
+    false,
+  );
+  assert.equal(p10Round008Contact.visualReview.score, 68);
+  assert.equal(p10Round008Contact.visualReview.maximum, 100);
+  assert.equal(p10Round008Contact.visualReview.passThreshold, 85);
+  assert.equal(p10Round008Contact.visualReview.criticalFloorPerCategory, 7);
+  assert.equal(
+    p10Round008Contact.visualReview.observedMinimumCategoryScore,
+    5,
+  );
+  assert.equal(p10Round008Contact.visualReview.thresholdResult, "FAIL");
+  assert.equal(p10Round008Contact.visualReview.criticalFloorResult, "FAIL");
+  assert.equal(
+    p10Round008Contact.visualReview.verdict,
+    "DENY_PAID_3D_GENERATION",
+  );
+  assert.equal(p10Round008Contact.visualReview.comparisonCount, 6);
+  assert.equal(
+    p10Round008Contact.visualReview.candidateMetBenchmarkBarCount,
+    3,
+  );
+  assert.equal(
+    p10Round008Contact.visualReview.candidateBelowBenchmarkBarCount,
+    3,
+  );
+  assert.equal(
+    p10Round008Contact.visualReview.requiredCandidateMetBenchmarkBarCount,
+    5,
+  );
+  assert.equal(p10Round008Contact.visualReview.benchmarkGateResult, "FAIL");
+  assert.match(
+    p10Round008Contact.visualReview.singleBiggestGap,
+    /singular authored silhouette expressed through convincing full-body combat force/i,
+  );
+  assert.equal(
+    p10Round008Contact.visualReview.categoryScores.functionalSameHiltTwoHandGrip,
+    8,
+  );
+  assert.equal(
+    p10Round008Contact.decision.result,
+    "DENY_PAID_3D_GENERATION",
+  );
+  assert.equal(p10Round008Contact.decision.paid3DGenerationAuthorized, false);
+  assert.equal(p10Round008Contact.builderAttempts.outputLimit, 4);
+  assert.equal(p10Round008Contact.builderAttempts.outputsGenerated, 4);
+  assert.equal(
+    p10Round008Contact.builderAttempts.builderFreezeState,
+    "fail-closed",
+  );
+  assert.equal(
+    p10Round008Contact.builderAttempts.freshCriticPromotedCandidate,
+    "combat-contact-candidate-04",
+  );
+  assert.equal(p10Round008Contact.builderAttempts.artRegeneratedForPromotion, false);
+  assert.equal(p10Round008Contact.nextRound.round, 9);
+  assert.equal(
+    p10Round008Contact.nextRound.status,
+    "mythic-silhouette-under-combat-load",
+  );
+  assert.match(p10Round008Contact.nextRound.target, /mythic storm-warden/i);
+  assert.match(p10Round008Contact.nextRound.target, /full-body combat force/i);
+  assert.deepEqual(p10Round008Contact.nextRound.compositePackGate, {
+    minimumTotalScore: 85,
+    minimumScorePerCategory: 7,
+    blindComparisonCount: 6,
+    minimumComparisonsMeetingBenchmarkBar: 5,
+    paid3DGenerationRequiresFullPass: true,
+  });
+  assert.equal(p10Round008Contact.conceptArt.length, 1);
+  assert.equal(
+    p10Round008Contact.conceptArt[0].publicPath,
+    "/captures/P10/round-008-contact/NyraKestrel_CombatGrip_FRESH_CRITIC_ACCEPTED.png",
+  );
+  assert.equal(
+    p10Round008Contact.conceptArt[0].disposition,
+    "accepted-isolated-contact-proof",
+  );
+  assert.equal(
+    createHash("sha256").update(round008AcceptedContact).digest("hex"),
+    p10Round008Contact.conceptArt[0].sha256,
+  );
+  assert.equal(round008AcceptedContact.subarray(1, 4).toString("ascii"), "PNG");
+  assert.equal(round008AcceptedContact.readUInt32BE(16), 1536);
+  assert.equal(round008AcceptedContact.readUInt32BE(20), 1024);
+  assert.doesNotMatch(
+    JSON.stringify(p10Round008Contact),
     /Reference\.zip|Reference\/[^"']+\.(?:png|jpe?g|webp)|\/Users\/|\/home\/|[A-Za-z]:\\Users\\|\/tmp\/|\/private\/var\/folders\//i,
   );
 

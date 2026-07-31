@@ -1,0 +1,356 @@
+{
+  "schema": "codexofwar.fresh-combat-contact-composite-review",
+  "version": "1.0.0",
+  "review_id": "P10-Round008-FreshContactReview",
+  "reviewed_utc": "2026-07-31T19:47:59Z",
+  "reviewer_mode": "independent hostile AAA contact and composite preflight",
+  "scope": {
+    "project_asset": "P10 Nyra Kestrel",
+    "round": "Round008",
+    "question_a": "Whether any persisted Round008 candidate visually proves an identity-preserving two-hand grasp on one continuous hilt, independent of builder labels or promotion status.",
+    "question_b": "Whether the Round007 accepted turnaround and weapon plus the strongest persisted Round008 frame pass the complete 2D concept gate for paid 3D authorization.",
+    "evaluated_pack": [
+      "Round007 accepted four-view turnaround",
+      "Round007 accepted weapon study",
+      "strongest persisted Round008 combat-contact frame"
+    ],
+    "claims_not_made": [
+      "3D, rig, mesh, UV, deformation, collision, animation, LOD, engine, or production readiness",
+      "legal originality, exclusivity, copyright clearance, or trademark clearance"
+    ]
+  },
+  "inspection": {
+    "native_resolution_visual_inspection": true,
+    "all_round008_candidates_inspected": true,
+    "round007_accepted_assets_inspected": true,
+    "round007_fresh_review_inspected": true,
+    "round008_receipt_and_readme_inspected": true,
+    "documents": [
+      {
+        "document_id": "round007-fresh-concept-review",
+        "sha256": "a765d3523d730caa99424f76cf4891068d71c4c35a154259407da16d2af4d24b",
+        "byte_size": 16025,
+        "format": "json"
+      },
+      {
+        "document_id": "round007-concept-receipt",
+        "sha256": "1ed2cf94707f977ec7486cda080adfc919ca61deaafc673599efbbb4dccb6fb0",
+        "byte_size": 39191,
+        "format": "json"
+      },
+      {
+        "document_id": "round007-readme",
+        "sha256": "967e748665fdb595232ba329f89bafc6dc643dcb2ddfc245f031dc3d1c7cc396",
+        "byte_size": 3898,
+        "format": "markdown"
+      },
+      {
+        "document_id": "round008-contact-receipt",
+        "sha256": "ccd7141fd24a51ee8d382100a6c8fe328363927cb47898addcc209ba5cea66dd",
+        "byte_size": 29905,
+        "format": "json"
+      },
+      {
+        "document_id": "round008-readme",
+        "sha256": "11fabf630ee0cd23c60ce7f6ba6a7dd8d866c535460962265c7caa18321fdede",
+        "byte_size": 23215,
+        "format": "markdown"
+      }
+    ],
+    "round007_accepted_assets": [
+      {
+        "asset_id": "accepted-turnaround",
+        "sha256": "f54d6f4b4bc7707841b623148f522c1c60730bd8c6c620d4698531d928f2545a",
+        "dimensions_px": {
+          "width": 1536,
+          "height": 1024
+        },
+        "format": "png"
+      },
+      {
+        "asset_id": "accepted-weapon",
+        "sha256": "6b604c69bf417e33e211366a006c800275b1ca3dda7a168bd84dcba054fff48b",
+        "dimensions_px": {
+          "width": 1536,
+          "height": 1024
+        },
+        "format": "png"
+      }
+    ]
+  },
+  "round008_candidates": [
+    {
+      "candidate_id": "combat-contact-candidate-01",
+      "sha256": "d5443f74852dd5b85ddf06d6132c6e7bf98ead02acbb448517688d873a94c96b",
+      "dimensions_px": {
+        "width": 1536,
+        "height": 1024
+      },
+      "format": "png",
+      "builder_label": "rejected",
+      "fresh_disposition": "credible same-hilt contact evidence but not strongest",
+      "finding": "One complete sword and two separated closed-hand contacts are readable. The hilt overlays lower-body clothing, but its woven edges and axis remain auditable; guard-area clutter and weaker trailing-thumb visibility make this less decisive than candidate 04."
+    },
+    {
+      "candidate_id": "combat-contact-candidate-02",
+      "sha256": "7d3aae6fa152387803fed1941a1ab590792fbee450e9a4320dcd139d11b1ce78",
+      "dimensions_px": {
+        "width": 1536,
+        "height": 1024
+      },
+      "format": "png",
+      "builder_label": "rejected",
+      "fresh_disposition": "fails one-object continuity",
+      "finding": "A complete unheld sword floats apart from the short hilt-like object in both hands. The hands therefore do not contact the one complete weapon."
+    },
+    {
+      "candidate_id": "combat-contact-candidate-03",
+      "sha256": "22d36fb8fd248e20e465b3297c9a118624f60d4f86f55841871d5c971b85fd10",
+      "dimensions_px": {
+        "width": 1536,
+        "height": 1024
+      },
+      "format": "png",
+      "builder_label": "rejected",
+      "fresh_disposition": "connected same-hilt contact present but anatomy is less decisive",
+      "finding": "The weapon is single and connected, and both hands contact its hilt. The guard-side palm and the other hand's opposed-thumb read are less clean, and the wrists form a less convincing load chain than candidate 04."
+    },
+    {
+      "candidate_id": "combat-contact-candidate-04",
+      "sha256": "06249a9cf8fcc94c4d531ebb6ffa835c4b7be8cc77202836069dd42d9e27692d",
+      "dimensions_px": {
+        "width": 1536,
+        "height": 1024
+      },
+      "format": "png",
+      "builder_label": "rejected-final-bounded-attempt",
+      "fresh_disposition": "strongest; visually passes isolated identity-preserving same-hilt contact proof",
+      "finding": "Exactly one connected blade, blade-base cage, guard, continuous cobalt-wrapped hilt, separator, and pommel are visible. Both hands close around separated portions of that same hilt, exposed wrap remains visible between them, contact shadows and finger curl communicate pressure, and both wrists align credibly with their forearms. The guard-side hand presents an opposed thumb and four curled finger forms; the pommel-side hand presents four separated curled fingers with its thumb largely occluded on the far side, but the enclosing fist silhouette and hilt ingress and egress are unambiguous. The hilt lies in front of the tunic and upper thigh rather than in clean negative space, yet high-contrast wrap edges and uninterrupted object continuity remain fully auditable, with no material sword-body penetration. The mature face, asymmetric braid, attached split yoke, copper route, right-hip module, heavy right greave, lighter left leg, full blade tip, pommel, yoke, and both boots remain readable in frame."
+    }
+  ],
+  "decision_a": {
+    "verdict": "PASS_ISOLATED_CONTACT_PROOF",
+    "any_persisted_candidate_provides_unambiguous_proof": true,
+    "strongest_candidate_id": "combat-contact-candidate-04",
+    "strongest_candidate_sha256": "06249a9cf8fcc94c4d531ebb6ffa835c4b7be8cc77202836069dd42d9e27692d",
+    "identity_preserved": true,
+    "one_complete_weapon": true,
+    "two_separated_same_hilt_closures": true,
+    "contact_and_object_continuity_auditable": true,
+    "hilt_clothing_overlap_fatal": false,
+    "finding": "Candidate 04 is an unambiguous identity-preserving same-hilt two-hand proof. Its builder rejection enforced a clean-negative-space composition preference more strictly than the actual auditability requirement; the clothing overlap does not conceal contact or break object continuity.",
+    "administrative_status": "The visual proof passes even though no accepted copy was promoted. The next builder should correct that status without reopening an artificial contact defect."
+  },
+  "private_benchmark_comparison": {
+    "method": "Private material was unpacked only into a random disposable workspace. Twenty-one decodable visual files representing 20 unique pixel hashes were inventoried. Six relevant weapon-hand and combat crops were placed into unlabeled 1600 by 900 two-panel sheets against native candidate evidence, with aspect-preserving scaling, neutral padding, no retouching, and independently randomized left-right placement. The comparisons were judged blind to side and destroyed after inspection.",
+    "benchmark_inventory": {
+      "decodable_visual_file_count": 21,
+      "unique_visual_hash_count": 20,
+      "exact_duplicate_visual_file_count": 1
+    },
+    "comparison_count": 6,
+    "required_candidate_meets_count": 5,
+    "candidate_meets_count": 3,
+    "candidate_below_count": 3,
+    "gate_passed": false,
+    "comparisons": [
+      {
+        "comparison_id": "PC01",
+        "focus": "local hand closure, contact visibility, and grip readability",
+        "candidate_evidence": "combat-contact-candidate-04 contact crop",
+        "benchmark": {
+          "benchmark_id": "BM-R8-01",
+          "sha256": "1af9ad3cd30a4f90dd97d8fcdced94eee8afcc2828aff1013bf24f90721112b7",
+          "dimensions_px": {
+            "width": 766,
+            "height": 400
+          },
+          "format": "jpeg"
+        },
+        "result": "candidate-meets-benchmark",
+        "candidate_meets_bar": true,
+        "finding": "Both candidate hands, the wrap entering and exiting each fist, finger curl, and contact pressure are more immediately auditable than the benchmark crop."
+      },
+      {
+        "comparison_id": "PC02",
+        "focus": "one-object continuity through the hands into the weapon",
+        "candidate_evidence": "combat-contact-candidate-04 grip-to-blade crop",
+        "benchmark": {
+          "benchmark_id": "BM-R8-02",
+          "sha256": "d208c98d2ea91b654fb11070616887e0f8564fe3c5040ae854e3aab8645be98d",
+          "dimensions_px": {
+            "width": 739,
+            "height": 415
+          },
+          "format": "jpeg"
+        },
+        "result": "candidate-meets-benchmark",
+        "candidate_meets_bar": true,
+        "finding": "The candidate provides a cleaner single visual chain from pommel through both hands, guard, cage, and blade, although the benchmark carries much greater action force."
+      },
+      {
+        "comparison_id": "PC03",
+        "focus": "wrist and forearm load alignment at weapon contact",
+        "candidate_evidence": "combat-contact-candidate-04 upper-body contact crop",
+        "benchmark": {
+          "benchmark_id": "BM-R8-03",
+          "sha256": "0293135a1aa7dae0a92f73e018d5f046cd8aa45b9b0e1727e8538ae951276869",
+          "dimensions_px": {
+            "width": 679,
+            "height": 452
+          },
+          "format": "jpeg"
+        },
+        "result": "candidate-meets-benchmark",
+        "candidate_meets_bar": true,
+        "finding": "The candidate wrists remain credible continuations of the forearms and visibly support the shared hilt without a hover, fusion, or broken load line."
+      },
+      {
+        "comparison_id": "PC04",
+        "focus": "full-body weapon-body combat integration and mass",
+        "candidate_evidence": "combat-contact-candidate-04 full frame",
+        "benchmark": {
+          "benchmark_id": "BM-R8-04",
+          "sha256": "21858656b7887cc37f92c2bab4ed56f6cb273f45fd75193c0cb1c1b37456bc33",
+          "dimensions_px": {
+            "width": 596,
+            "height": 335
+          },
+          "format": "jpeg"
+        },
+        "result": "candidate-below-benchmark",
+        "candidate_meets_bar": false,
+        "finding": "The candidate clearly holds its weapon, but the stance does not convey the benchmark's weapon mass, acceleration, and whole-body kinetic chain."
+      },
+      {
+        "comparison_id": "PC05",
+        "focus": "combat intent, force, and authored motion",
+        "candidate_evidence": "combat-contact-candidate-04 full frame",
+        "benchmark": {
+          "benchmark_id": "BM-R8-05",
+          "sha256": "c4693a135a8f66b17759349dd81e126001989aac894db1714d2d2cad89ae8fe0",
+          "dimensions_px": {
+            "width": 739,
+            "height": 415
+          },
+          "format": "jpeg"
+        },
+        "result": "candidate-below-benchmark",
+        "candidate_meets_bar": false,
+        "finding": "The candidate remains a controlled technical studio pose beside a benchmark with decisive weight shift, directional force, threat response, and authored action rhythm."
+      },
+      {
+        "comparison_id": "PC06",
+        "focus": "stance readiness and equipment-body interaction",
+        "candidate_evidence": "combat-contact-candidate-04 full frame",
+        "benchmark": {
+          "benchmark_id": "BM-R8-06",
+          "sha256": "1e99a94f8efbbdd9d4811e2706f84616ea9cc379909caee873d212ecfb9a68b0",
+          "dimensions_px": {
+            "width": 739,
+            "height": 415
+          },
+          "format": "jpeg"
+        },
+        "result": "candidate-below-benchmark",
+        "candidate_meets_bar": false,
+        "finding": "The candidate has a readable base and intact asymmetry, but the equipment still feels presented rather than bodily integrated under combat load."
+      }
+    ]
+  },
+  "scorecard": {
+    "scale": "0-10 per category; 100 total",
+    "categories": [
+      {
+        "category": "multiview identity consistency",
+        "score": 7,
+        "finding": "The turnaround retains its useful front/back anchors and candidate 04 preserves the face, yoke, circuit, hip module, and heavy-right-leg identity in pose; side-view greave and small-detail consistency remain only adequate."
+      },
+      {
+        "category": "neutral modeling utility",
+        "score": 8,
+        "finding": "The four complete neutral views remain clean, consistently scaled, and practical for model planning, with minor orthographic and construction drift."
+      },
+      {
+        "category": "anatomy",
+        "score": 7,
+        "finding": "The body is mature and weight-bearing, and candidate 04 supplies credible hands, wrists, and forearm alignment; some digit definition and the studio stance remain less than top-tier production reference."
+      },
+      {
+        "category": "face/eyes/hair",
+        "score": 7,
+        "finding": "The mature face and asymmetric braided identity survive the contact frame, while smaller eye, hairline, and braid details still drift across views."
+      },
+      {
+        "category": "premium layered costume/material separation",
+        "score": 6,
+        "finding": "Ivory, cobalt, copper, and blackened steel are crisp and readable, but the outfit remains simple industrial workwear with applied hardware rather than premium layered mythic costume authorship."
+      },
+      {
+        "category": "silhouette/role read",
+        "score": 7,
+        "finding": "The split yoke and grounding greave produce clear functional asymmetry, but the broader silhouette still reads more as a field technician than an iconic apex combat lead."
+      },
+      {
+        "category": "functional same-hilt two-hand grip",
+        "score": 8,
+        "finding": "Candidate 04 supplies the missing visual proof: two separated enclosing hands on one continuous hilt, readable contact pressure, credible wrists, one weapon, and auditable guard-to-pommel continuity. Its lack of administrative promotion does not reduce the visual score."
+      },
+      {
+        "category": "weapon plausibility",
+        "score": 7,
+        "finding": "The long hilt, guard, blade-base cage, blade, and scabbard studies are coherent, and candidate 04 confirms wieldability; mass balance, cage stresses, fastening, and conductor routing remain concept-level proposals."
+      },
+      {
+        "category": "avoidance generic/civilian/plastic/fetish/franchise",
+        "score": 6,
+        "finding": "The pack avoids fetish anatomy, heels, glossy plastic, and direct imitation, but the work-suit base and bolt-on industrial modules retain a generic civilian-technician ceiling."
+      },
+      {
+        "category": "benchmark-level authorship",
+        "score": 5,
+        "finding": "The work is polished and the technical contact is now solved, yet only 3 of 6 private comparisons meet the bar; combat force, iconic hierarchy, costume storytelling, and weapon-body integration remain substantially below benchmark."
+      }
+    ],
+    "total_score": 68,
+    "maximum_score": 100,
+    "authorization_threshold": 85,
+    "minimum_category_score_required": 7,
+    "observed_minimum_category_score": 5,
+    "all_categories_meet_minimum": false,
+    "score_gate_passed": false
+  },
+  "decision_b": {
+    "verdict": "DENY_PAID_3D_GENERATION",
+    "paid_3d_generation_authorized": false,
+    "composite_score": 68,
+    "score_threshold": 85,
+    "score_threshold_passed": false,
+    "category_floor_passed": false,
+    "benchmark_result": "3/6 candidate-meets comparisons; 5/6 required",
+    "benchmark_gate_passed": false,
+    "finding": "The strongest Round008 frame repairs the isolated contact proof and raises the functional-grip category, but the complete pack still fails the total-score, category-floor, and benchmark gates. It remains good concept art rather than paid-3D-ready benchmark-level preproduction evidence."
+  },
+  "single_biggest_remaining_visual_gap": "The pack still reads as polished industrial-technician concept art rather than an iconic benchmark-level mythic combat lead: the costume and weapon lack one singular authored silhouette expressed through convincing full-body combat force.",
+  "administrative_handoff": "Treat candidate 04 as the visually passing contact frame and correct its promotion status in the next bounded builder step; direct further art iteration toward the single remaining authorship gap rather than regenerating the solved grip.",
+  "integrity_validation": {
+    "source_hashes_recomputed": true,
+    "candidate_dimensions_and_formats_recomputed": true,
+    "native_candidate_pixels_inspected": true,
+    "randomized_private_comparisons_completed": true,
+    "json_validated": true,
+    "review_hash_reported_externally": true
+  },
+  "scope_privacy_cleanup": {
+    "public_safe": true,
+    "absolute_paths_present": false,
+    "usernames_present": false,
+    "private_archive_filename_present": false,
+    "private_benchmark_filenames_or_paths_present": false,
+    "benchmark_pixels_embedded": false,
+    "benchmark_identifiers_limited_to_ids_hashes_dimensions_and_formats": true,
+    "temporary_extraction_deleted": true,
+    "temporary_comparison_sheets_deleted": true,
+    "non_review_repository_files_modified": false
+  }
+}

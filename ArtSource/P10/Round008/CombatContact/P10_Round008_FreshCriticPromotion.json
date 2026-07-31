@@ -1,0 +1,63 @@
+{
+  "schema": "codexofwar.fresh-critic-promotion-record",
+  "version": "1.0.0",
+  "promotion_id": "P10-Round008-FreshCriticPromotion",
+  "promoted_utc": "2026-07-31T20:37:28Z",
+  "piece": "P10",
+  "round": "Round008",
+  "artifact_class": "original 2D combat-contact proof",
+  "source": {
+    "path": "Iterations/P10_Round008_NyraKestrel_CombatGrip_candidate04_reject.png",
+    "sha256": "06249a9cf8fcc94c4d531ebb6ffa835c4b7be8cc77202836069dd42d9e27692d",
+    "byte_size": 1961681,
+    "dimensions_px": {
+      "width": 1536,
+      "height": 1024
+    },
+    "historical_builder_disposition": "rejected-final-bounded-attempt"
+  },
+  "promoted_copy": {
+    "path": "P10_Round008_NyraKestrel_CombatGrip_v1.png",
+    "sha256": "06249a9cf8fcc94c4d531ebb6ffa835c4b7be8cc77202836069dd42d9e27692d",
+    "byte_size": 1961681,
+    "dimensions_px": {
+      "width": 1536,
+      "height": 1024
+    },
+    "copy_is_byte_identical": true,
+    "visual_disposition": "accepted-isolated-contact-proof"
+  },
+  "authorization_basis": {
+    "review_path": "P10_Round008_FreshContactReview.json",
+    "review_sha256": "8c2f60c255316ed2298967f553790e29eef62d4b7528fc788f5f9433529e0e53",
+    "verdict": "PASS_ISOLATED_CONTACT_PROOF",
+    "finding": "The fresh critic found candidate 04 visually unambiguous: one connected weapon and two separated enclosing hands on the same continuous hilt. The builder's clean-negative-space preference was stricter than the actual auditability requirement."
+  },
+  "chronology": {
+    "builder_receipt_remains_immutable": true,
+    "builder_readme_remains_immutable": true,
+    "art_was_not_regenerated_or_modified": true,
+    "promotion_occurred_after_fresh_review": true
+  },
+  "composite_gate": {
+    "score": 68,
+    "score_threshold": 85,
+    "benchmark_meets_count": 3,
+    "benchmark_required_count": 5,
+    "paid_3d_generation_authorized": false,
+    "verdict": "DENY_PAID_3D_GENERATION"
+  },
+  "claims_not_made": [
+    "benchmark victory",
+    "3D, rig, mesh, UV, deformation, collision, animation, LOD, engine, or production readiness",
+    "gameplay or game capture",
+    "legal originality, exclusivity, copyright clearance, or trademark clearance"
+  ],
+  "privacy_cleanup": {
+    "public_safe": true,
+    "absolute_paths_present": false,
+    "usernames_present": false,
+    "private_benchmark_filenames_or_paths_present": false,
+    "benchmark_pixels_embedded": false
+  }
+}
