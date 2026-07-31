@@ -19,19 +19,21 @@
   ],
   "activeBuild": {
     "pieceId": "P10",
-    "round": 2,
-    "roundLabel": "P10 · Round 002",
+    "round": 3,
+    "roundLabel": "P10 · Round 003",
     "status": "revising",
-    "builder": "Fresh P10 round-002 builder active",
-    "brief": "Replace the disconnected plastic-mannequin hero with one continuous, anatomically credible authored shell whose face, hands, feet, joints, layered costume, weapon, and distinct skin, hair, cloth, and metal responses survive the locked cameras without clipped highlights.",
+    "builder": "Rain visual builder + gameplay-rig prototype active",
+    "brief": "Pivot the hero to Blender Studio Rain v3 as a professionally authored visual foundation, preserve its face, hands, feet, cloth fit, folds, and PBR response, then apply an anime-warrior hair, eye, palette, fitted-armor, and refined Aether Greatblade pass without repeating the floating-slab failure.",
     "facts": [
       "P00 is accepted as infrastructure; its blind visual baseline remains an explicit 28.33–76.67 loss.",
       "Round 001 is mechanically reproducible: two independent critic reruns matched all six filed image hashes, P10 validation passed, focused EditMode passed 8/8, the full suite passed 14/14, and the P00 aggregate stayed byte-identical.",
       "The randomized blind judge scored our round-001 frame 9/60 and Reference 09 49/60; the independent critic scored ours 10/60 and the reference 51/60.",
       "Both judges preferred Reference 09. P10 round 001 is rejected and no /100 score is claimed because timing, contact, crowd behavior, and audio were not scoreable from the still evidence.",
-      "The single locked gap is the hero shell: toy-like disconnected anatomy, mannequin joints, flat materials, and weak authored costume and weapon detail fail the character/material bar at 2/13.",
-      "Round 002 is rebuilding only that gap while the S01 seed, camera, arena, render contract, and immutable round-001 evidence remain frozen.",
-      "Round 001 remains static look development with no rig and no S02 or S06 evidence; round 002 must file those missing views."
+      "Round 002 passed its mechanical export gates but failed visual preflight. Its final bounded revision scored 5/13 and never entered Unity.",
+      "The decisive round-002 frame exposes severed and elongated hand skin, divergent gauntlet and grip spaces, and no readable weapon enclosure. The 1.3 mm skeletal contact metric was therefore a false visual proxy.",
+      "Round 003 now uses Blender Studio Rain v3 under CC-BY-4.0. The unmodified source starts materially closer to the bar with professional face planes, hands, shoes, cloth folds, and high-resolution PBR maps.",
+      "Rain's film control rig is not being mislabeled as game-ready. A separate prototype is testing a reduced deform export or a transfer onto a 96-bone humanoid donor while the visual builder works in parallel.",
+      "The latest filed in-engine evidence remains immutable round 001 until the round-003 source passes a fresh independent preflight."
     ],
     "evidenceFingerprint": {
       "gitRevision": "2dedf617ace47ea5dbb2cde1817d6119604842d2",
@@ -93,7 +95,7 @@
         "Static lookdev only; no rig, S02, or S06"
       ]
     },
-    "nextGate": "Round 002 must file the same S01 and four-view evidence plus S02 and S06, preserve every frozen P00/P10 contract, clear at least 8/13 for character/material quality, and then face a new fresh-context blind critic."
+    "nextGate": "Round 003 must clear a fresh source-bound 10/13 visual preflight with mandatory anatomy, face, hands/grip, feet, joints, costume, weapon, and material checks, then file deterministic S01, S02, S06, and four-view Unity evidence before a new blind critic."
   },
   "canonicalCapture": {
     "shotId": "S01",
@@ -196,14 +198,36 @@
       "round": 2,
       "label": "P10 · Round 002",
       "pieceId": "P10",
-      "phase": "Fresh builder active",
-      "status": "building",
+      "phase": "Independent pre-Unity review complete",
+      "status": "criticized",
       "date": "2026-07-31",
       "builderBrief": "Replace only the rejected plastic-mannequin hero with one continuous anatomically credible authored shell, while every locked camera, arena, seed, and render contract stays frozen.",
-      "evidence": "In progress. No round-002 capture or score is filed; the latest visible P10 evidence remains immutable round 001.",
+      "evidence": "Mechanical export passed at 65 deform bones, at most four weights, exactly two render meshes, seven material families, and 69,088 / 38,000 / 16,000 LOD triangles. Visual preflight rejected the source before Unity: the final combat proof tears and detaches both hands and does not show a physically readable grip.",
+      "evidenceLinks": [
+        "/captures/P10/round-002-preflight/Neutral_Front.png",
+        "/captures/P10/round-002-preflight/Combat_Failure.png",
+        "/data/P10-round-002-preflight.json"
+      ],
+      "critic": {
+        "status": "Rejected before Unity · visual gate failed closed",
+        "score": 5,
+        "scoreLabel": "Source preflight 5/13",
+        "preference": "Do not advance round 002 to an in-engine blind test",
+        "primaryGap": "The visible combat hands tear, detach, and diverge from the rendered grip, so the weapon hold is not physically readable even though the skeletal distance proxy passes."
+      }
+    },
+    {
+      "round": 3,
+      "label": "P10 · Round 003",
+      "pieceId": "P10",
+      "phase": "Fresh builders active",
+      "status": "building",
+      "date": "2026-07-31",
+      "builderBrief": "Use Blender Studio Rain v3 as the high-fidelity visual foundation, apply an anime-warrior look and conforming armor/weapon pass, and prototype a truthful gameplay rig without degrading the visible source.",
+      "evidence": "Building. The official CC-BY-4.0 source and textures are being ingested with exact provenance. No round-003 result or score is filed yet.",
       "evidenceLinks": [],
       "critic": {
-        "status": "Not started · builder active",
+        "status": "Not started · source and rig builders active",
         "score": null,
         "scoreLabel": null,
         "preference": null,

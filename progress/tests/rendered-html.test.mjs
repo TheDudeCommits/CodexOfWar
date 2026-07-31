@@ -68,7 +68,7 @@ test("server-renders the production evidence ledger", async () => {
   assert.match(html, /Reference 09/);
   assert.match(html, /29\.82%/);
   assert.match(html, /82,906/);
-  assert.match(html, /P10 · Round 002/);
+  assert.match(html, /P10 · Round 003/);
   assert.match(html, /Round rejected\. Rebuild in progress\./);
   assert.match(html, /Round 001 rejected · mechanically reproducible/);
   assert.match(
@@ -101,7 +101,17 @@ test("server-renders the production evidence ledger", async () => {
     /Reference 09 \(B\) over P10 round-001 \(A\)/,
   );
   assert.match(html, /continuous, anatomically credible authored shell/i);
-  assert.match(html, /No round-002 capture or score is filed/);
+  assert.match(html, /Source preflight 5\/13/);
+  assert.match(html, /Rejected before Unity · visual gate failed closed/);
+  assert.match(
+    html,
+    /href="\/captures\/P10\/round-002-preflight\/Combat_Failure\.png"/,
+  );
+  assert.match(
+    html,
+    /href="\/data\/P10-round-002-preflight\.json"/,
+  );
+  assert.match(html, /Blender Studio Rain v3/);
   assert.doesNotMatch(html, /codex-preview|Building your site/i);
   assert.doesNotMatch(html, /react-loading-skeleton/);
 
@@ -163,7 +173,7 @@ test("checked-in data contains the complete, honest P00–P25 ledger", async () 
   assert.equal(p00.status, "accepted");
   assert.equal(p10.status, "revising");
   assert.equal(dashboard.activeBuild.pieceId, "P10");
-  assert.equal(dashboard.activeBuild.round, 2);
+  assert.equal(dashboard.activeBuild.round, 3);
   assert.equal(dashboard.activeBuild.status, p10.status);
   assert.ok(queuedPieces.every((piece) => piece.status === "queued"));
 
@@ -191,7 +201,7 @@ test("checked-in data contains the complete, honest P00–P25 ledger", async () 
   assert.equal(dashboard.acceptance.maximum, 100);
   assert.match(dashboard.acceptance.p00Exception, /visual loss does not block/i);
 
-  assert.equal(dashboard.rounds.length, 3);
+  assert.equal(dashboard.rounds.length, 4);
   assert.equal(dashboard.rounds[0].pieceId, "P00");
   assert.equal(
     dashboard.rounds[0].critic.status,
@@ -224,15 +234,28 @@ test("checked-in data contains the complete, honest P00–P25 ledger", async () 
   );
   assert.equal(dashboard.rounds[2].pieceId, "P10");
   assert.equal(dashboard.rounds[2].round, 2);
-  assert.equal(dashboard.rounds[2].status, "building");
+  assert.equal(dashboard.rounds[2].status, "criticized");
   assert.equal(
     dashboard.rounds[2].critic.status,
-    "Not started · builder active",
+    "Rejected before Unity · visual gate failed closed",
   );
-  assert.equal(dashboard.rounds[2].critic.score, null);
-  assert.equal(dashboard.rounds[2].critic.scoreLabel, null);
-  assert.equal(dashboard.rounds[2].critic.preference, null);
-  assert.equal(dashboard.rounds[2].critic.primaryGap, null);
+  assert.equal(dashboard.rounds[2].critic.score, 5);
+  assert.equal(dashboard.rounds[2].critic.scoreLabel, "Source preflight 5/13");
+  assert.match(
+    dashboard.rounds[2].critic.primaryGap,
+    /combat hands tear, detach/i,
+  );
+  assert.equal(dashboard.rounds[3].pieceId, "P10");
+  assert.equal(dashboard.rounds[3].round, 3);
+  assert.equal(dashboard.rounds[3].status, "building");
+  assert.equal(
+    dashboard.rounds[3].critic.status,
+    "Not started · source and rig builders active",
+  );
+  assert.equal(dashboard.rounds[3].critic.score, null);
+  assert.equal(dashboard.rounds[3].critic.scoreLabel, null);
+  assert.equal(dashboard.rounds[3].critic.preference, null);
+  assert.equal(dashboard.rounds[3].critic.primaryGap, null);
 });
 
 test("P10 evidence is filed while the global latest manifest remains P00-pinned", async () => {
@@ -240,9 +263,12 @@ test("P10 evidence is filed while the global latest manifest remains P00-pinned"
     dashboard,
     p00Manifest,
     p10Manifest,
+    p10Round002Preflight,
     latestManifest,
     p10Screenshot,
     turntableContact,
+    round002Neutral,
+    round002CombatFailure,
   ] = await Promise.all([
     readFile(dataUrl, "utf8").then(JSON.parse),
     readFile(
@@ -251,6 +277,10 @@ test("P10 evidence is filed while the global latest manifest remains P00-pinned"
     ).then(JSON.parse),
     readFile(
       new URL("../public/data/P10-round-001-manifest.json", import.meta.url),
+      "utf8",
+    ).then(JSON.parse),
+    readFile(
+      new URL("../public/data/P10-round-002-preflight.json", import.meta.url),
       "utf8",
     ).then(JSON.parse),
     readFile(
@@ -266,6 +296,18 @@ test("P10 evidence is filed while the global latest manifest remains P00-pinned"
     readFile(
       new URL(
         "../public/captures/P10/round-001/Turntable_ContactSheet.png",
+        import.meta.url,
+      ),
+    ),
+    readFile(
+      new URL(
+        "../public/captures/P10/round-002-preflight/Neutral_Front.png",
+        import.meta.url,
+      ),
+    ),
+    readFile(
+      new URL(
+        "../public/captures/P10/round-002-preflight/Combat_Failure.png",
         import.meta.url,
       ),
     ),
@@ -312,6 +354,22 @@ test("P10 evidence is filed while the global latest manifest remains P00-pinned"
   assert.equal(p10Manifest.heroRendererCount, 2);
   assert.equal(p10Manifest.heroTriangleCount, 82906);
   assert.equal(p10Manifest.heroMaterialCount, 5);
+  assert.equal(p10Round002Preflight.piece, "P10");
+  assert.equal(p10Round002Preflight.round, 2);
+  assert.equal(p10Round002Preflight.status, "rejected-pre-unity");
+  assert.equal(p10Round002Preflight.engineRun, false);
+  assert.equal(p10Round002Preflight.goAttestationFiled, false);
+  assert.equal(p10Round002Preflight.visualReview.score, 5);
+  assert.equal(p10Round002Preflight.visualReview.maximum, 13);
+  assert.equal(p10Round002Preflight.visualReview.verdict, "NO-GO");
+  assert.equal(
+    createHash("sha256").update(round002Neutral).digest("hex"),
+    p10Round002Preflight.diagnostics[0].sha256,
+  );
+  assert.equal(
+    createHash("sha256").update(round002CombatFailure).digest("hex"),
+    p10Round002Preflight.diagnostics[1].sha256,
+  );
 
   for (const turntableImage of p10Manifest.turntableImages) {
     const image = await readFile(
