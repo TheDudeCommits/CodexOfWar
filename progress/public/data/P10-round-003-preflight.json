@@ -1,0 +1,99 @@
+{
+  "schemaVersion": 1,
+  "piece": "P10",
+  "round": 3,
+  "status": "rejected-pre-unity",
+  "reviewType": "fresh-context source-bound visual preflight",
+  "reviewedAt": "2026-07-31T14:15:31+07:00",
+  "engineRun": false,
+  "unityCaptureFiled": false,
+  "goAttestationFiled": false,
+  "source": {
+    "name": "Astra Vale Rain-derived round-003 source",
+    "foundation": "Rain v3 by Blender Studio / Blender Foundation",
+    "license": "CC-BY-4.0",
+    "requiredCredit": "Rain Rig (CC) Blender Foundation | studio.blender.org",
+    "generatorPath": "Tools/Blender/P10_Round003_RainHero.py",
+    "generatorSha256": "fc115c4efca095b79b5f9a6b4085a0c51e96f81fcd563ad6ac03faf5951de6a6",
+    "blendPath": "ArtSource/P10/Round003/P10_Round003_AstraVale_Rain.blend",
+    "blendSha256": "234c1ef7cd56f13c3915e9e592805d448c0273fd7a5cfef54e2d597d6b6530ac",
+    "reviewPath": "ArtSource/P10/Round003/Preflight/P10_Round003_FreshVisualPreflightReview.json",
+    "reviewSha256": "b5261bb3d802ff096b10d6208fb49ebcbf708b51e7531c8bfd3aa4949b54cf4c"
+  },
+  "visualReview": {
+    "score": 6,
+    "maximum": 13,
+    "mandatoryPasses": 4,
+    "mandatoryMaximum": 8,
+    "verdict": "NO-GO",
+    "unityDisposition": "DO NOT ADVANCE TO UNITY",
+    "passedChecks": [
+      "Continuous credible anatomy",
+      "Authored face, eyes, and hair",
+      "Feet and grounded stance",
+      "Continuous combat joint transitions",
+      "Neutral four-view coverage",
+      "Diagnostic face, hands, feet, and grip close-ups"
+    ],
+    "failedChecks": [
+      "Both hands physically enclose the weapon",
+      "Premium layered warrior costume",
+      "Functional weapon scale, grip, and contact",
+      "Premium material separation without plastic or chrome clipping",
+      "LOD0 production budget",
+      "Combat line of action, balance, and attack intent",
+      "Unmistakable premium anime-warrior authorship"
+    ],
+    "singleBiggestGap": "The asset has not undergone a true premium character-design transformation: it still reads as Blender Studio Rain in a civilian tank, scarf, jeans, and sneakers with thin mask-cut cyan shells, rather than an unmistakable authored anime warrior.",
+    "secondaryGaps": [
+      "Neither visible hand encloses the hilt",
+      "Combat pose lacks balance and attack intent",
+      "Cyan armor and blade clip toward chrome while skin and hair remain plastic",
+      "LOD0 is 109,240 triangles against the 60,000–90,000 target"
+    ]
+  },
+  "reproducibility": {
+    "result": "semantic-pass-exact-hash-fail",
+    "cleanGeneratorRuns": 2,
+    "artifactCountPerRun": 16,
+    "repositoryToFirstRunHashMatches": 0,
+    "firstToSecondRunHashMatches": 0,
+    "semanticStructureMatched": true,
+    "maximumChangedPixelFraction": 0.00110117,
+    "worstDiagnostic": "P10_Round003_Grip.png"
+  },
+  "integrityFindings": {
+    "sourceHashesVerified": 24,
+    "sourceHashMismatches": 0,
+    "licenseVerification": "PASS",
+    "physicalGeneratedArtifacts": 16,
+    "auditOutputRecords": 15,
+    "missingAuditRecord": {
+      "path": "game/Assets/CodexOfWar/Heroes/P10/Round003/Models/P10_AstraVale_Round003_Combat.fbx",
+      "sha256": "e825cfbe0119c1c00328e4a6c17c73ade35866e8dc81db90a22eae6e5dc989c1",
+      "cause": "The combat PNG overwrites the Combat FBX entry when the two maps are merged under the same key."
+    }
+  },
+  "diagnostics": [
+    {
+      "label": "Decisive full-body front",
+      "publicPath": "/captures/P10/round-003-preflight/Front_Decisive.png",
+      "sha256": "df24d4d4ac40b66ce828f5aaef46ce833e933bf2529dae4e4ed63513e8e3839d"
+    },
+    {
+      "label": "Failed grip close-up",
+      "publicPath": "/captures/P10/round-003-preflight/Grip_Failure.png",
+      "sha256": "6d0897c9cebf8909a022bea325e28ffebbd513606345f0edf46f052472eecf48"
+    },
+    {
+      "label": "Combat presentation",
+      "publicPath": "/captures/P10/round-003-preflight/Combat.png",
+      "sha256": "dad2efb8bab91da6d57087d0351e476055e00d311a8c077ddfbfa910b1788bfc"
+    }
+  ],
+  "nextRound": {
+    "round": 4,
+    "target": "Replace the dominant civilian Rain read with a genuinely authored head-to-toe premium anime-warrior costume and material identity.",
+    "status": "building"
+  }
+}

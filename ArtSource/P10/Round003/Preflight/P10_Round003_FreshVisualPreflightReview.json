@@ -1,0 +1,330 @@
+{
+  "review": "P10 Round003 Fresh Visual Preflight Review",
+  "reviewedAt": "2026-07-31T14:15:31+07:00",
+  "scope": {
+    "piece": "P10 hero asset",
+    "round": "Round003",
+    "sourceBound": true,
+    "repositoryModified": false,
+    "temporaryEvidenceRoots": [
+      "/tmp/p10-r3-visual-audit.Gvd27U",
+      "/tmp/p10-r3-audit.T0JAUm",
+      "/tmp/p10-r3-repro.Xc2R6z"
+    ]
+  },
+  "benchmarkInspection": {
+    "archive": "/Users/amir/Downloads/Reference.zip",
+    "archiveSha256": "4653a7a92d6f6bde910f39d3190df0adb112677851815443144505b8b420a6dd",
+    "archiveBytes": 1336123,
+    "extractedImageCount": 21,
+    "allExtractedImagesInspected": true,
+    "candidateDiagnosticsInspectedAtOriginalResolution": [
+      "P10_Round003_Front.png",
+      "P10_Round003_ThreeQuarter.png",
+      "P10_Round003_Back.png",
+      "P10_Round003_Profile.png",
+      "P10_Round003_Face.png",
+      "P10_Round003_Hands.png",
+      "P10_Round003_Feet.png",
+      "P10_Round003_Combat.png",
+      "P10_Round003_Grip.png"
+    ],
+    "calibration": "The supplied God of War Ragnarok gameplay references consistently show readable weight and attack intent, complete hand-to-weapon contact, dense fitted layers with straps/fasteners/engraving/wear, and materially separate skin, hair, textile, leather, metal, and effects at gameplay distance. The candidate is judged against that premium gameplay bar, not a stylized, web, or indie bar."
+  },
+  "candidateHashes": {
+    "generator": {
+      "path": "Tools/Blender/P10_Round003_RainHero.py",
+      "bytes": 49851,
+      "sha256": "fc115c4efca095b79b5f9a6b4085a0c51e96f81fcd563ad6ac03faf5951de6a6"
+    },
+    "authoredBlend": {
+      "path": "ArtSource/P10/Round003/P10_Round003_AstraVale_Rain.blend",
+      "bytes": 12435838,
+      "sha256": "234c1ef7cd56f13c3915e9e592805d448c0273fd7a5cfef54e2d597d6b6530ac"
+    },
+    "audit": {
+      "path": "ArtSource/P10/Round003/Preflight/P10_Round003_Audit.json",
+      "bytes": 12378,
+      "sha256": "b19cb4b1fd9dfa91383a8b716e5a2138f6ffe441955323c2784a601862ea2ef9"
+    },
+    "sourceReceipt": {
+      "path": "ArtSource/P10/Round003/README.md",
+      "bytes": 5592,
+      "sha256": "607de00db2c2b132e33df7760cc5668b1425326ff00170ba5e4f9581ab8ceab7"
+    },
+    "thirdParty": {
+      "LICENSE-CC-BY-4.0.txt": "9ba9550ad48438d0836ddab3da480b3b69ffa0aac7b7878b5a0039e7ab429411",
+      "rain_v3.2.blend": "831ab6d837c679040285862b15dc9ee5180b018442a88aeaf92aaa7509b80258",
+      "textures/TEX-rain_body_diffuse.1001.png": "79294db9cccc7c395b3c95c5692eae454554611e8cad89e898f8b325b504bad5",
+      "textures/TEX-rain_body_diffuse.1002.png": "d4abb09a50d846f57179d61bb0a72431cc57d261b1646b6439de1724afce4afc",
+      "textures/TEX-rain_body_diffuse.1003.png": "64e0f179a1a872758801ce433b2b5b20ba0e9a399e01574b5a0f9266868c86ca",
+      "textures/TEX-rain_body_diffuse.png": "79294db9cccc7c395b3c95c5692eae454554611e8cad89e898f8b325b504bad5",
+      "textures/TEX-rain_body_roughness.1001.png": "22becb2fe72f49931f3dd278c78ae94f182da956f0ba2c77e324f7d3fca2f179",
+      "textures/TEX-rain_body_roughness.1002.png": "12a6d25dc64fa1b31fade64f64ca7568e3f11f691de1ffd1be59c9c92ffa2378",
+      "textures/TEX-rain_body_roughness.1003.png": "ab8a673417a762a78a0db1ae1489b13016799da8c24bfe9fea57763dedff9962",
+      "textures/TEX-rain_body_roughness.png": "22becb2fe72f49931f3dd278c78ae94f182da956f0ba2c77e324f7d3fca2f179",
+      "textures/TEX-rain_eyes.png": "fb2d509abe4bfa3aa4093272e81a25ddd9bbc3e4d03248fe7f213f9cda38a005",
+      "textures/TEX-rain_hair_diffuse.png": "01c35d3fc4b3e961acf3446fdc4a5de83937e09c1b05b074b27c87e511d50ad6",
+      "textures/TEX-rain_hair_direction.png": "3b17c6caeb953c6931aa6ccbaf8a082f236e66f7df2fcc1d54376d928ba7af0f",
+      "textures/TEX-rain_hair_direction_bw.png": "099063769a7e132e93e2d5d93d9af5548f0c1b9e56b6098d47ce8cae8cf7c1bc",
+      "textures/TEX-rain_hands_diffuse.png": "d4abb09a50d846f57179d61bb0a72431cc57d261b1646b6439de1724afce4afc",
+      "textures/TEX-rain_hands_roughness.png": "12a6d25dc64fa1b31fade64f64ca7568e3f11f691de1ffd1be59c9c92ffa2378",
+      "textures/TEX-rain_jeans_diffuse.png": "863b131b700ba189808c66970ad3abfcfa63b3d017676cd7dc5646f20f23305b",
+      "textures/TEX-rain_jeans_normal.png": "e09126c3f5283e772bfe04a08daa0fa20688878a755abd5e88b9e0bf471e1337",
+      "textures/TEX-rain_jeans_roughness.png": "d509abb985ec1d1b6571955f8596bc629cf03938c385536c2f992bfcd57e3a74",
+      "textures/TEX-rain_scarf_cavity.png": "203a77498f163116f697100effaf20f0fbbaed70fbaed2b68ab9d7cb7c398a8a",
+      "textures/TEX-rain_socks_bump.png": "bf71806f0b9e3cef029f46b6cb24a90633498622244c4dc88747a2dbb168a049",
+      "textures/TEX-rain_socks_roughness.png": "fe9f0876fa41391091e91d6aa7c9cf40681a7544128d71519ef6fff0413e2f1c",
+      "textures/TEX-rain_top_bump.png": "61f8ffdbde13c9fada97e9c45906426c9d92f1b94cb75ce718f498b9dadb5d1c",
+      "textures/TEX-rain_top_roughness.png": "fb00f4f18e808dcb7a20a1732298e7252fee4502f797fd4299ce2cc88f39c42b"
+    },
+    "diagnostics": {
+      "P10_Round003_Back.png": "b2498c4052b179955ee4b045322ecd402e2e342d8bdd4348b325ede39d0b7093",
+      "P10_Round003_Combat.png": "dad2efb8bab91da6d57087d0351e476055e00d311a8c077ddfbfa910b1788bfc",
+      "P10_Round003_Face.png": "4854e637695a12153739e58faa4f6c62336af5f99ea570dba481bc518a0293ce",
+      "P10_Round003_Feet.png": "4e55f1ec4cea3089419755f5eb84118bc2726c2c6bbfc9e87dedec623358b49e",
+      "P10_Round003_Front.png": "df24d4d4ac40b66ce828f5aaef46ce833e933bf2529dae4e4ed63513e8e3839d",
+      "P10_Round003_Grip.png": "6d0897c9cebf8909a022bea325e28ffebbd513606345f0edf46f052472eecf48",
+      "P10_Round003_Hands.png": "ddce1fe9e662e34fe5711950800f40051ba049e10e44219013c6bd5ce13d9906",
+      "P10_Round003_Profile.png": "e3726f8094fd5abe5b5a96eccb43900bc102f71660d63ce1d5a4f7b60efd7b19",
+      "P10_Round003_ThreeQuarter.png": "6d3c9fa48844a031a6f3f9ef16b40dfb0938223d866f0a8b56b793b36ccc4b6c"
+    },
+    "fbx": {
+      "P10_AstraVale_Round003_CloudRig_DeformOnly_Proof.fbx": "9204f3a9da93388800e55f51643cf797ee623a6a6f4bdf10ff35c73d6000777e",
+      "P10_AstraVale_Round003_Combat.fbx": "e825cfbe0119c1c00328e4a6c17c73ade35866e8dc81db90a22eae6e5dc989c1",
+      "P10_AstraVale_Round003_LOD0.fbx": "3fa8b39ca47aa3228faa176e1b4376010c560e70048b06027e68c72ce8b4d045",
+      "P10_AstraVale_Round003_LOD1.fbx": "058f522790f9ce77ee306f98b8862a4bdfa667d8c2ff2d4f209fff680840077f",
+      "P10_AstraVale_Round003_LOD2.fbx": "118b35bb0591b21a5cafc51050efe787c7a24639c9401bf57bc48de188b4b78f",
+      "P10_AstraVale_Round003_Neutral.fbx": "eaf17ac6022af9e83b850e2e907b6334584bd04e8da14691c9560c6177038724"
+    }
+  },
+  "hashAndLicenseVerification": {
+    "sourceEntriesChecked": 24,
+    "sourceEntriesMatchingDeclaredHashes": 24,
+    "licenseResult": "PASS",
+    "licenseEvidence": "The local legal code is byte-identical to the official CC BY 4.0 legal code. The live official rain-v33.zip is 67,579,177 bytes with SHA-256 80217f163f6392dc829233d63c2cfb5e1376775bc34101ad14f39631fea70d24; its selected blend and 22 textures are byte-identical to the repository copies. README.md records Blender Foundation attribution, source URL, license URL, exact required credit, and modification disclosure.",
+    "recordedAuditOutputsChecked": 15,
+    "recordedAuditOutputsMatchingHashAndBytes": 15,
+    "expectedPhysicalGeneratedArtifacts": 16,
+    "physicalGeneratedArtifactsPresent": 16,
+    "auditOutputRecordsPresent": 15,
+    "missingFiledOutputRecord": {
+      "path": "game/Assets/CodexOfWar/Heroes/P10/Round003/Models/P10_AstraVale_Round003_Combat.fbx",
+      "bytes": 10129932,
+      "sha256": "e825cfbe0119c1c00328e4a6c17c73ade35866e8dc81db90a22eae6e5dc989c1",
+      "cause": "OUTPUT_FILES and DIAGNOSTICS both use the key combat; write_audit merges the maps with the diagnostics map last, so the PNG overwrites the FBX record."
+    },
+    "physicalArtifactMissing": false,
+    "standalonePackagingRisk": "Repo-level attribution is adequate, but distributing the game Models directory by itself would shed the adjacent credit and license trail."
+  },
+  "reproducibility": {
+    "result": "SEMANTIC_REPRODUCTION_PASS__EXACT_HASH_REPRODUCTION_FAIL",
+    "exactHashReproducible": false,
+    "semanticAndStructuralReproducible": true,
+    "blender": {
+      "binary": "/Applications/Blender.app/Contents/MacOS/Blender",
+      "version": "5.2.0 LTS",
+      "buildHash": "fbe6228777e7",
+      "binarySha256": "60ba7a9b6743f7acf101274361fa76409e382ae07cd2007ce07dea30f6b129f2"
+    },
+    "command": "env BLENDER_USER_CONFIG=/tmp/p10-r3-repro.Xc2R6z/blender-user/config BLENDER_USER_DATAFILES=/tmp/p10-r3-repro.Xc2R6z/blender-user/datafiles BLENDER_USER_SCRIPTS=/tmp/p10-r3-repro.Xc2R6z/blender-user/scripts /Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup --disable-autoexec --python /tmp/p10-r3-repro.Xc2R6z/mirror/Tools/Blender/P10_Round003_RainHero.py",
+    "isolatedMirror": "/tmp/p10-r3-repro.Xc2R6z/mirror",
+    "fullGeneratorRunSucceeded": true,
+    "repoVsFirstCleanRunHashMatches": 0,
+    "repoVsFirstCleanRunArtifactCount": 16,
+    "firstVsSecondCleanRunHashMatches": 0,
+    "firstVsSecondCleanRunArtifactCount": 16,
+    "firstCleanRunHashes": {
+      "P10_Round003_AstraVale_Rain.blend": "ce48c5e63ca9eee75df6e9c68a3c2294ff246bb43fa013c00fa2d041a9da378a",
+      "P10_Round003_Back.png": "0cc79ac7b498ad69a12d19f33cfbb24dc703c9986965f8b4dadabf89a0b93e46",
+      "P10_Round003_Combat.png": "a473c4831a2a4964c7db0597be562c0dd59fb5e13422740ce5ad467c748ad356",
+      "P10_Round003_Face.png": "70a76b3b56a9c35546423dbe4779ae7b15f17b6d2bc599fe8ecfc8ba285cd48a",
+      "P10_Round003_Feet.png": "dd33ba076dd69370a9ce4736aa138d3371b80d2aa0e5190e6cd89d68eda18ff0",
+      "P10_Round003_Front.png": "a9f34ffc1c79bb51a67b640c266297916223f00cdce5d474a4dbd5ba88a1e01a",
+      "P10_Round003_Grip.png": "ff2ae3d7b688e00cb5dc5c339ae06b75357140da45887e73a22b1c2caad5540c",
+      "P10_Round003_Hands.png": "e7aec95f27b70b6aa1631218346bec4096272d4cba03a3cd8115dc8b3d8bf26d",
+      "P10_Round003_Profile.png": "63139b42937a6cac33f992f2b92448faa194e5c7f2d7d3b589aebb139412d51e",
+      "P10_Round003_ThreeQuarter.png": "85206715fa4c487bef15273ab38bc72c683d0c9ecd7b796dee7eaf47932ff2b0",
+      "P10_AstraVale_Round003_CloudRig_DeformOnly_Proof.fbx": "311c93d79a6d361453106cf946fb54676d8719a73e663e65414fa04e8acb9c01",
+      "P10_AstraVale_Round003_Combat.fbx": "a18574b94c894cd65ed237c6547823be8b6414287591fdc67ab07f6e45eaee52",
+      "P10_AstraVale_Round003_LOD0.fbx": "1beaa8b285fd648633b1fed9760956285e58dda1327219e8887106ce82ee0d61",
+      "P10_AstraVale_Round003_LOD1.fbx": "6b5f2fedabe68392250b4d930495a45b409890841df37d04655ed0a7ae961269",
+      "P10_AstraVale_Round003_LOD2.fbx": "ef9ac19b526a299992d6fa8952a7b6cd3349305209061641c092176446beb976",
+      "P10_AstraVale_Round003_Neutral.fbx": "e0897d0347e54a643c268735382837a34808800f0471e99d20c9cee8397e5c0c"
+    },
+    "cleanReimport": {
+      "P10_AstraVale_Round003_Neutral.fbx": {
+        "meshes": 29,
+        "armatures": 0,
+        "vertices": 56206,
+        "triangles": 109240,
+        "materials": 24,
+        "operatorResult": "FINISHED"
+      },
+      "P10_AstraVale_Round003_Combat.fbx": {
+        "meshes": 29,
+        "armatures": 0,
+        "vertices": 59972,
+        "triangles": 116772,
+        "materials": 24,
+        "operatorResult": "FINISHED"
+      },
+      "P10_AstraVale_Round003_LOD0.fbx": {
+        "meshes": 29,
+        "armatures": 0,
+        "vertices": 56206,
+        "triangles": 109240,
+        "materials": 24,
+        "operatorResult": "FINISHED"
+      },
+      "P10_AstraVale_Round003_LOD1.fbx": {
+        "meshes": 29,
+        "armatures": 0,
+        "vertices": 29696,
+        "triangles": 56809,
+        "materials": 24,
+        "operatorResult": "FINISHED"
+      },
+      "P10_AstraVale_Round003_LOD2.fbx": {
+        "meshes": 29,
+        "armatures": 0,
+        "vertices": 14321,
+        "triangles": 26780,
+        "materials": 24,
+        "operatorResult": "FINISHED"
+      },
+      "P10_AstraVale_Round003_CloudRig_DeformOnly_Proof.fbx": {
+        "meshes": 21,
+        "armatures": 1,
+        "vertices": 54432,
+        "triangles": 105724,
+        "materials": 20,
+        "importedBonesIncludingRequiredAncestors": 894,
+        "sourceDeformBones": 392,
+        "operatorResult": "FINISHED"
+      }
+    },
+    "semanticComparison": "Repo and rerun FBXs have identical geometry, topology, transforms, material assignments, weights, bounds, and armature data. Only UV floats on the three authored armor panels vary, by at most 1.91e-6. PNGs are visually near-identical but numerically unstable: 0 to 0.11 percent of pixels change per view and Grip has the largest channel delta, 27/255.",
+    "authoredBlendComparison": "The repo blend clean-opens with 78 objects, 70 meshes, 29 materials, 17/17 external images resolved, and two text blocks. The fresh generated blend retains an extra cloudrig.py text block and saved Render Result image, proving the filed blend underwent a cleanup step absent from the generator.",
+    "auditComparison": "Repo Audit SHA-256 is b19cb4b1fd9dfa91383a8b716e5a2138f6ffe441955323c2784a601862ea2ef9; first-run Audit SHA-256 is f36a868d6858aaab1d8f691d62a431cf3fc83e168f41e1387a596c5b6d9a0a41. After removing outputs, clean_reimport_validation, and pipeline_script_sha256, the audit cores match exactly. The generator does not emit the latter two repository fields.",
+    "warnings": [
+      "Three Blender 6.0 use_nodes deprecation warnings.",
+      "Two transient doubled ThirdParty texture-directory messages; the saved blend still resolves 17/17 checked external image paths.",
+      "Vendor cloudrig.py and rain_shading.py were skipped because auto-execution was disabled."
+    ],
+    "repositoryIntegrityConfirmed": true
+  },
+  "checks": [
+    {
+      "id": 1,
+      "mandatory": true,
+      "criterion": "Continuous credible anatomy with no tears or impossible intersections",
+      "pass": true,
+      "evidence": "Front, three-quarter, back, profile, and combat views show one continuous head, torso, limbs, hands, and feet without a body tear. Fresh FBX imports confirm identical geometry/topology across repo and rerun. Weapon contact is judged separately in check 3."
+    },
+    {
+      "id": 2,
+      "mandatory": true,
+      "criterion": "Authored face, eyes, and hair at hero close range",
+      "pass": true,
+      "evidence": "The 1600px Face proof resolves modeled eyelids, lashes, brows, corneas, textured irises, nose, lips, ears, freckles, sculpted hair masses, strand, and ponytail. It is source-derived and materially too plastic, but it is complete close-range facial construction; source identity and material quality are judged separately in checks 13 and 8."
+    },
+    {
+      "id": 3,
+      "mandatory": true,
+      "criterion": "Both visible hands and fingers physically enclose the weapon with credible wrists and contact",
+      "pass": false,
+      "evidence": "P10_Round003_Grip.png shows the upper fingers curling beside/around empty space while the thumb remains extended, and the lower fingertips sit on one side of the hilt instead of closing around it. The hilt remains visibly exposed through both supposed grasps, the wrists are sharply flexed, and the audit reports only hand-bone origins 0.072111m from target points rather than surface contact."
+    },
+    {
+      "id": 4,
+      "mandatory": true,
+      "criterion": "Feet and grounded stance",
+      "pass": true,
+      "evidence": "The 1600px Feet proof shows both complete shoes with broad soles flush to the floor; neutral front, three-quarter, profile, and back views preserve visible floor contact. Combat balance is judged separately in check 12."
+    },
+    {
+      "id": 5,
+      "mandatory": true,
+      "criterion": "Shoulder, elbow, hip, and knee transitions in combat",
+      "pass": true,
+      "evidence": "In the full-resolution Combat proof, shoulder-to-arm, elbow, hip, and knee surfaces remain continuous and do not split or collapse; the jeans retain readable knee folds. The pose is weak and unbalanced, but the named joint transitions themselves survive."
+    },
+    {
+      "id": 6,
+      "mandatory": true,
+      "criterion": "Layered fitted warrior costume with premium detail and coherent identity",
+      "pass": false,
+      "evidence": "Front, three-quarter, and back views read as Rain's civilian tank top, scarf, jeans, and sneakers under three thin, mask-cut cyan/blue shells. The shells have jagged sampled boundaries and no convincing closures, straps, buckles, fasteners, edge binding, engraving, wear, or construction logic. This is far below the layered leather, fur, textile, metal, and authored surface storytelling visible in the supplied Ragnarok gameplay references."
+    },
+    {
+      "id": 7,
+      "mandatory": true,
+      "criterion": "Functional weapon scale, silhouette, guard, grip, and contact",
+      "pass": false,
+      "evidence": "A guard and silhouette exist, but the 1.21m delivered greatblade visually dominates the small character, its two-hand usable grip is only 0.151m, and the Grip proof does not establish either hand's enclosure or leverage. The combat image therefore reads as a blade placed through an arm arrangement, not a weapon being controlled."
+    },
+    {
+      "id": 8,
+      "mandatory": true,
+      "criterion": "Distinct physically readable skin, eye, hair, cloth, leather, metal, and emissive materials without plastic or chrome clipping",
+      "pass": false,
+      "evidence": "Material categories are assigned, but the Face and Front proofs show waxy/plastic skin and hair, while cyan armor and blade surfaces blow toward white/chrome highlights. Cloth, armor, and weapon share broad glossy responses, and the emissive cyan overwhelms edge/material separation. The required physically readable separation without plastic/chrome clipping is not achieved."
+    },
+    {
+      "id": 9,
+      "mandatory": false,
+      "criterion": "LOD0 production budget and monotonic LODs, targeting 60k to 90k presentation triangles unless exceptional detail justifies more",
+      "pass": false,
+      "evidence": "Fresh imports confirm LOD0 109,240 triangles, LOD1 56,809, and LOD2 26,780. The chain is monotonic, but LOD0 exceeds the 90k target by 19,240 triangles (21.4 percent) and the visible costume/weapon detail is not exceptional enough to justify the overage."
+    },
+    {
+      "id": 10,
+      "mandatory": false,
+      "criterion": "Neutral front, three-quarter, back, and profile inspection coverage",
+      "pass": true,
+      "evidence": "All four required neutral views are present as valid 1600x1600 RGBA PNGs and show the complete character at useful scale."
+    },
+    {
+      "id": 11,
+      "mandatory": false,
+      "criterion": "Face, hands, and feet close proofs are actually diagnostic",
+      "pass": true,
+      "evidence": "Face, Hands, Feet, and the additional Grip view are all 1600x1600 and tightly enough framed to resolve eyes, hair, individual fingers, shoe construction/floor contact, and the failed hilt contact. They expose rather than conceal the defects."
+    },
+    {
+      "id": 12,
+      "mandatory": false,
+      "criterion": "Combat pose has credible line of action, balance, and attack intent",
+      "pass": false,
+      "evidence": "Combat.png shows an upright torso, inward-collapsing knees, nearly crossed/pigeon-toed feet, neutral facial intent, and a blade mass projecting high to camera-left without counter-rotation or a recoverable attack path. There is no convincing load transfer from ground through hips, torso, wrists, and blade."
+    },
+    {
+      "id": 13,
+      "mandatory": false,
+      "criterion": "Unmistakable premium anime-warrior authorship rather than stock or civilian source identity",
+      "pass": false,
+      "evidence": "The retained Rain face, hair, scarf, tank, jeans, and brown lace-up sneakers remain the dominant read in Front, Face, ThreeQuarter, and Feet. Palette tinting, three duplicated surface masks, and a generic cyan blade do not displace the recognizable stock/civilian source identity or create a specific premium anime-warrior design."
+    }
+  ],
+  "score": 6,
+  "scoreMaximum": 13,
+  "mandatoryPassed": 4,
+  "mandatoryMaximum": 8,
+  "goRule": "GO requires all 8 mandatory checks and at least 10 of 13 total.",
+  "verdict": "NO-GO",
+  "unityDisposition": "DO NOT ADVANCE TO UNITY",
+  "singleBiggestGap": "The asset has not undergone a true premium character-design transformation: at gameplay and hero-close distance it still reads as Blender Studio Rain in a civilian tank, scarf, jeans, and sneakers with thin mask-cut cyan shells, rather than an unmistakable authored anime warrior.",
+  "secondaryObservations": [
+    "The tight Grip proof is a direct functional failure: neither hand visibly encloses the hilt, and the wrists do not communicate a load-bearing two-handed grasp.",
+    "The combat pose lacks balance, line of action, and attack intent even before animation is considered.",
+    "The armor and weapon are dominated by chrome-like cyan clipping, while skin and hair remain plastic, erasing premium material separation.",
+    "The monotonic LOD chain is structurally valid, but LOD0 is 109,240 triangles against the 60k to 90k target.",
+    "The filed audit omits the existing Combat FBX because of a combat-key collision, and the full generator is structurally reproducible but not hash-deterministic."
+  ],
+  "decisiveEvidence": {
+    "image": "ArtSource/P10/Round003/Preflight/P10_Round003_Front.png",
+    "sha256": "df24d4d4ac40b66ce828f5aaef46ce833e933bf2529dae4e4ed63513e8e3839d",
+    "finding": "The full-body front view makes the unresolved source identity decisive: civilian Rain clothing and sneakers remain dominant, while the added shells read as thin jagged overlays rather than premium warrior construction."
+  }
+}

@@ -1,0 +1,337 @@
+{
+  "armor_panels": {
+    "P10R3_Armor_Cuirass": {
+      "base_polygons": 1556,
+      "base_vertices": 1632,
+      "source": "Duplicated fitted surface from GEO-rain-top; face-filtered, armature-deformed, shrinkwrapped, solidified, and beveled."
+    },
+    "P10R3_Armor_HipTassets": {
+      "base_polygons": 4464,
+      "base_vertices": 4531,
+      "source": "Duplicated fitted surface from GEO-rain-jeans; face-filtered, armature-deformed, shrinkwrapped, solidified, and beveled."
+    },
+    "P10R3_Armor_ShoulderMantle": {
+      "base_polygons": 10232,
+      "base_vertices": 10256,
+      "source": "Duplicated fitted surface from GEO-rain-body; face-filtered, armature-deformed, shrinkwrapped, solidified, and beveled."
+    }
+  },
+  "authored_armor_triangles": 25678,
+  "authored_weapon_triangles": 3168,
+  "cloudrig_deform_only_proof": {
+    "deform_bones": 392,
+    "max_deform_influences": 30,
+    "per_mesh": {
+      "GEO-rain-body": {
+        "max_deform_influences": 9,
+        "vertices": 10256,
+        "vertices_over_four": 651
+      },
+      "GEO-rain-eye_cornea": {
+        "max_deform_influences": 1,
+        "vertices": 642,
+        "vertices_over_four": 0
+      },
+      "GEO-rain-eye_dots": {
+        "max_deform_influences": 1,
+        "vertices": 32,
+        "vertices_over_four": 0
+      },
+      "GEO-rain-eyebrows": {
+        "max_deform_influences": 18,
+        "vertices": 148,
+        "vertices_over_four": 141
+      },
+      "GEO-rain-eyelashes": {
+        "max_deform_influences": 3,
+        "vertices": 120,
+        "vertices_over_four": 0
+      },
+      "GEO-rain-eyes": {
+        "max_deform_influences": 1,
+        "vertices": 1418,
+        "vertices_over_four": 0
+      },
+      "GEO-rain-gums_lower": {
+        "max_deform_influences": 2,
+        "vertices": 1542,
+        "vertices_over_four": 0
+      },
+      "GEO-rain-gums_upper": {
+        "max_deform_influences": 3,
+        "vertices": 1542,
+        "vertices_over_four": 0
+      },
+      "GEO-rain-hair_main": {
+        "max_deform_influences": 12,
+        "vertices": 2204,
+        "vertices_over_four": 669
+      },
+      "GEO-rain-hair_ponytail": {
+        "max_deform_influences": 3,
+        "vertices": 579,
+        "vertices_over_four": 0
+      },
+      "GEO-rain-hair_strand": {
+        "max_deform_influences": 3,
+        "vertices": 400,
+        "vertices_over_four": 0
+      },
+      "GEO-rain-hairband": {
+        "max_deform_influences": 1,
+        "vertices": 480,
+        "vertices_over_four": 0
+      },
+      "GEO-rain-head": {
+        "max_deform_influences": 30,
+        "vertices": 6395,
+        "vertices_over_four": 2345
+      },
+      "GEO-rain-jeans": {
+        "max_deform_influences": 5,
+        "vertices": 4531,
+        "vertices_over_four": 107
+      },
+      "GEO-rain-scarf": {
+        "max_deform_influences": 5,
+        "vertices": 1285,
+        "vertices_over_four": 3
+      },
+      "GEO-rain-shoes": {
+        "max_deform_influences": 3,
+        "vertices": 6634,
+        "vertices_over_four": 0
+      },
+      "GEO-rain-tongue": {
+        "max_deform_influences": 2,
+        "vertices": 275,
+        "vertices_over_four": 0
+      },
+      "GEO-rain-top": {
+        "max_deform_influences": 7,
+        "vertices": 1632,
+        "vertices_over_four": 204
+      },
+      "P10R3_Armor_Cuirass": {
+        "max_deform_influences": 7,
+        "vertices": 1632,
+        "vertices_over_four": 204
+      },
+      "P10R3_Armor_HipTassets": {
+        "max_deform_influences": 5,
+        "vertices": 4531,
+        "vertices_over_four": 107
+      },
+      "P10R3_Armor_ShoulderMantle": {
+        "max_deform_influences": 9,
+        "vertices": 10256,
+        "vertices_over_four": 651
+      }
+    },
+    "playable_four_weight_claim": false,
+    "vertices_over_four": 5082
+  },
+  "clean_reimport_validation": {
+    "authored_blend_texture_paths_checked": 17,
+    "authored_blend_texture_paths_resolved": 17,
+    "fbx": {
+      "combat": {
+        "armatures": 0,
+        "meshes": 29,
+        "triangles": 116772
+      },
+      "cloudrig_deform_only_proof": {
+        "armatures": 1,
+        "imported_total_bones_including_required_ancestors": 894,
+        "meshes": 21,
+        "source_deform_bones": 392,
+        "triangles": 105724
+      },
+      "lod0": {
+        "armatures": 0,
+        "meshes": 29,
+        "triangles": 109240
+      },
+      "lod1": {
+        "armatures": 0,
+        "meshes": 29,
+        "triangles": 56809
+      },
+      "lod2": {
+        "armatures": 0,
+        "meshes": 29,
+        "triangles": 26780
+      },
+      "neutral": {
+        "armatures": 0,
+        "meshes": 29,
+        "triangles": 109240
+      }
+    }
+  },
+  "combat_grip": {
+    "def_hand_left": [
+      -0.068417,
+      -0.188235,
+      1.065073
+    ],
+    "def_hand_right": [
+      -0.123021,
+      -0.194306,
+      0.888513
+    ],
+    "left_distance_to_upper_m": 0.072111,
+    "lower_grip": [
+      -0.063331,
+      -0.190306,
+      0.928774
+    ],
+    "right_distance_to_lower_m": 0.072111,
+    "upper_grip": [
+      -0.128108,
+      -0.184235,
+      1.024811
+    ]
+  },
+  "deterministic_seed": 1003,
+  "greatblade": {
+    "authored_geometry_length_m": 1.513,
+    "authored_mesh_count": 8,
+    "delivered_grip_length_m": 0.151,
+    "delivered_total_length_m": 1.21,
+    "primitive_torso_parts": 0
+  },
+  "license": "CC BY 4.0",
+  "native_visible_triangles_before_authorship": 79594,
+  "outputs": {
+    "authored_blend": {
+      "bytes": 12435838,
+      "path": "ArtSource/P10/Round003/P10_Round003_AstraVale_Rain.blend",
+      "sha256": "234c1ef7cd56f13c3915e9e592805d448c0273fd7a5cfef54e2d597d6b6530ac"
+    },
+    "back": {
+      "bytes": 2880947,
+      "path": "ArtSource/P10/Round003/Preflight/P10_Round003_Back.png",
+      "sha256": "b2498c4052b179955ee4b045322ecd402e2e342d8bdd4348b325ede39d0b7093"
+    },
+    "combat": {
+      "bytes": 2802444,
+      "path": "ArtSource/P10/Round003/Preflight/P10_Round003_Combat.png",
+      "sha256": "dad2efb8bab91da6d57087d0351e476055e00d311a8c077ddfbfa910b1788bfc"
+    },
+    "face": {
+      "bytes": 2920233,
+      "path": "ArtSource/P10/Round003/Preflight/P10_Round003_Face.png",
+      "sha256": "4854e637695a12153739e58faa4f6c62336af5f99ea570dba481bc518a0293ce"
+    },
+    "feet": {
+      "bytes": 3037820,
+      "path": "ArtSource/P10/Round003/Preflight/P10_Round003_Feet.png",
+      "sha256": "4e55f1ec4cea3089419755f5eb84118bc2726c2c6bbfc9e87dedec623358b49e"
+    },
+    "front": {
+      "bytes": 2868349,
+      "path": "ArtSource/P10/Round003/Preflight/P10_Round003_Front.png",
+      "sha256": "df24d4d4ac40b66ce828f5aaef46ce833e933bf2529dae4e4ed63513e8e3839d"
+    },
+    "grip": {
+      "bytes": 3705279,
+      "path": "ArtSource/P10/Round003/Preflight/P10_Round003_Grip.png",
+      "sha256": "6d0897c9cebf8909a022bea325e28ffebbd513606345f0edf46f052472eecf48"
+    },
+    "hands": {
+      "bytes": 3324675,
+      "path": "ArtSource/P10/Round003/Preflight/P10_Round003_Hands.png",
+      "sha256": "ddce1fe9e662e34fe5711950800f40051ba049e10e44219013c6bd5ce13d9906"
+    },
+    "lod0": {
+      "bytes": 9382460,
+      "path": "game/Assets/CodexOfWar/Heroes/P10/Round003/Models/P10_AstraVale_Round003_LOD0.fbx",
+      "sha256": "3fa8b39ca47aa3228faa176e1b4376010c560e70048b06027e68c72ce8b4d045"
+    },
+    "lod1": {
+      "bytes": 4871532,
+      "path": "game/Assets/CodexOfWar/Heroes/P10/Round003/Models/P10_AstraVale_Round003_LOD1.fbx",
+      "sha256": "058f522790f9ce77ee306f98b8862a4bdfa667d8c2ff2d4f209fff680840077f"
+    },
+    "lod2": {
+      "bytes": 2365244,
+      "path": "game/Assets/CodexOfWar/Heroes/P10/Round003/Models/P10_AstraVale_Round003_LOD2.fbx",
+      "sha256": "118b35bb0591b21a5cafc51050efe787c7a24639c9401bf57bc48de188b4b78f"
+    },
+    "neutral": {
+      "bytes": 9381948,
+      "path": "game/Assets/CodexOfWar/Heroes/P10/Round003/Models/P10_AstraVale_Round003_Neutral.fbx",
+      "sha256": "eaf17ac6022af9e83b850e2e907b6334584bd04e8da14691c9560c6177038724"
+    },
+    "profile": {
+      "bytes": 2746802,
+      "path": "ArtSource/P10/Round003/Preflight/P10_Round003_Profile.png",
+      "sha256": "e3726f8094fd5abe5b5a96eccb43900bc102f71660d63ce1d5a4f7b60efd7b19"
+    },
+    "rig_proof": {
+      "bytes": 28748476,
+      "path": "game/Assets/CodexOfWar/Heroes/P10/Round003/Models/P10_AstraVale_Round003_CloudRig_DeformOnly_Proof.fbx",
+      "sha256": "9204f3a9da93388800e55f51643cf797ee623a6a6f4bdf10ff35c73d6000777e"
+    },
+    "three_quarter": {
+      "bytes": 2766928,
+      "path": "ArtSource/P10/Round003/Preflight/P10_Round003_ThreeQuarter.png",
+      "sha256": "6d3c9fa48844a031a6f3f9ef16b40dfb0938223d866f0a8b56b793b36ccc4b6c"
+    }
+  },
+  "palette_material_replacements": {
+    "MAT-rain.eyebrows": "P10R3_eyebrows",
+    "MAT-rain.eyelashes": "P10R3_eyelashes",
+    "MAT-rain.eyes": "P10R3_eyes",
+    "MAT-rain.hair": "P10R3_hair",
+    "MAT-rain.hairband": "P10R3_hairband",
+    "MAT-rain.jeans": "P10R3_jeans",
+    "MAT-rain.laces": "P10R3_laces",
+    "MAT-rain.metal": "P10R3_metal",
+    "MAT-rain.scarf": "P10R3_scarf",
+    "MAT-rain.shoes": "P10R3_shoes",
+    "MAT-rain.socks": "P10R3_socks",
+    "MAT-rain.top": "P10R3_top"
+  },
+  "pipeline": "P10_Round003_RainHero",
+  "pipeline_script_sha256": "fc115c4efca095b79b5f9a6b4085a0c51e96f81fcd563ad6ac03faf5951de6a6",
+  "presentation_triangles": {
+    "combat": 116772,
+    "lod0": 109240,
+    "lod1": 56809,
+    "lod2": 26780,
+    "neutral": 109240
+  },
+  "runtime_boundary": "The deform-only CloudRig export is an audit proof. It is not a playable four-weight character delivery.",
+  "source_credit": "Rain Rig (CC) Blender Foundation | studio.blender.org",
+  "source_deform_bones": 392,
+  "source_total_bones": 2166,
+  "staged_texture_count": 22,
+  "verified_source_hashes": {
+    "LICENSE-CC-BY-4.0.txt": "9ba9550ad48438d0836ddab3da480b3b69ffa0aac7b7878b5a0039e7ab429411",
+    "rain_v3.2.blend": "831ab6d837c679040285862b15dc9ee5180b018442a88aeaf92aaa7509b80258",
+    "textures/TEX-rain_body_diffuse.1001.png": "79294db9cccc7c395b3c95c5692eae454554611e8cad89e898f8b325b504bad5",
+    "textures/TEX-rain_body_diffuse.1002.png": "d4abb09a50d846f57179d61bb0a72431cc57d261b1646b6439de1724afce4afc",
+    "textures/TEX-rain_body_diffuse.1003.png": "64e0f179a1a872758801ce433b2b5b20ba0e9a399e01574b5a0f9266868c86ca",
+    "textures/TEX-rain_body_diffuse.png": "79294db9cccc7c395b3c95c5692eae454554611e8cad89e898f8b325b504bad5",
+    "textures/TEX-rain_body_roughness.1001.png": "22becb2fe72f49931f3dd278c78ae94f182da956f0ba2c77e324f7d3fca2f179",
+    "textures/TEX-rain_body_roughness.1002.png": "12a6d25dc64fa1b31fade64f64ca7568e3f11f691de1ffd1be59c9c92ffa2378",
+    "textures/TEX-rain_body_roughness.1003.png": "ab8a673417a762a78a0db1ae1489b13016799da8c24bfe9fea57763dedff9962",
+    "textures/TEX-rain_body_roughness.png": "22becb2fe72f49931f3dd278c78ae94f182da956f0ba2c77e324f7d3fca2f179",
+    "textures/TEX-rain_eyes.png": "fb2d509abe4bfa3aa4093272e81a25ddd9bbc3e4d03248fe7f213f9cda38a005",
+    "textures/TEX-rain_hair_diffuse.png": "01c35d3fc4b3e961acf3446fdc4a5de83937e09c1b05b074b27c87e511d50ad6",
+    "textures/TEX-rain_hair_direction.png": "3b17c6caeb953c6931aa6ccbaf8a082f236e66f7df2fcc1d54376d928ba7af0f",
+    "textures/TEX-rain_hair_direction_bw.png": "099063769a7e132e93e2d5d93d9af5548f0c1b9e56b6098d47ce8cae8cf7c1bc",
+    "textures/TEX-rain_hands_diffuse.png": "d4abb09a50d846f57179d61bb0a72431cc57d261b1646b6439de1724afce4afc",
+    "textures/TEX-rain_hands_roughness.png": "12a6d25dc64fa1b31fade64f64ca7568e3f11f691de1ffd1be59c9c92ffa2378",
+    "textures/TEX-rain_jeans_diffuse.png": "863b131b700ba189808c66970ad3abfcfa63b3d017676cd7dc5646f20f23305b",
+    "textures/TEX-rain_jeans_normal.png": "e09126c3f5283e772bfe04a08daa0fa20688878a755abd5e88b9e0bf471e1337",
+    "textures/TEX-rain_jeans_roughness.png": "d509abb985ec1d1b6571955f8596bc629cf03938c385536c2f992bfcd57e3a74",
+    "textures/TEX-rain_scarf_cavity.png": "203a77498f163116f697100effaf20f0fbbaed70fbaed2b68ab9d7cb7c398a8a",
+    "textures/TEX-rain_socks_bump.png": "bf71806f0b9e3cef029f46b6cb24a90633498622244c4dc88747a2dbb168a049",
+    "textures/TEX-rain_socks_roughness.png": "fe9f0876fa41391091e91d6aa7c9cf40681a7544128d71519ef6fff0413e2f1c",
+    "textures/TEX-rain_top_bump.png": "61f8ffdbde13c9fada97e9c45906426c9d92f1b94cb75ce718f498b9dadb5d1c",
+    "textures/TEX-rain_top_roughness.png": "fb00f4f18e808dcb7a20a1732298e7252fee4502f797fd4299ce2cc88f39c42b"
+  }
+}

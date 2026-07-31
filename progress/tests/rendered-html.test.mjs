@@ -68,7 +68,7 @@ test("server-renders the production evidence ledger", async () => {
   assert.match(html, /Reference 09/);
   assert.match(html, /29\.82%/);
   assert.match(html, /82,906/);
-  assert.match(html, /P10 · Round 003/);
+  assert.match(html, /P10 · Round 004/);
   assert.match(html, /Round rejected\. Rebuild in progress\./);
   assert.match(html, /Round 001 rejected · mechanically reproducible/);
   assert.match(
@@ -111,7 +111,30 @@ test("server-renders the production evidence ledger", async () => {
     html,
     /href="\/data\/P10-round-002-preflight\.json"/,
   );
-  assert.match(html, /Blender Studio Rain v3/);
+  assert.match(html, /Source preflight 6\/13 · mandatory 4\/8/);
+  assert.match(
+    html,
+    /Rejected before Unity · fresh visual gate failed closed/,
+  );
+  assert.match(
+    html,
+    /href="\/captures\/P10\/round-003-preflight\/Front_Decisive\.png"/,
+  );
+  assert.match(
+    html,
+    /href="\/captures\/P10\/round-003-preflight\/Grip_Failure\.png"/,
+  );
+  assert.match(
+    html,
+    /href="\/captures\/P10\/round-003-preflight\/Combat\.png"/,
+  );
+  assert.match(
+    html,
+    /href="\/data\/P10-round-003-preflight\.json"/,
+  );
+  assert.match(html, /stock Blender Studio Rain/i);
+  assert.match(html, /head-to-toe warrior redesign active/i);
+  assert.match(html, /all 8 mandatory source checks/i);
   assert.doesNotMatch(html, /codex-preview|Building your site/i);
   assert.doesNotMatch(html, /react-loading-skeleton/);
 
@@ -173,7 +196,7 @@ test("checked-in data contains the complete, honest P00–P25 ledger", async () 
   assert.equal(p00.status, "accepted");
   assert.equal(p10.status, "revising");
   assert.equal(dashboard.activeBuild.pieceId, "P10");
-  assert.equal(dashboard.activeBuild.round, 3);
+  assert.equal(dashboard.activeBuild.round, 4);
   assert.equal(dashboard.activeBuild.status, p10.status);
   assert.ok(queuedPieces.every((piece) => piece.status === "queued"));
 
@@ -201,7 +224,7 @@ test("checked-in data contains the complete, honest P00–P25 ledger", async () 
   assert.equal(dashboard.acceptance.maximum, 100);
   assert.match(dashboard.acceptance.p00Exception, /visual loss does not block/i);
 
-  assert.equal(dashboard.rounds.length, 4);
+  assert.equal(dashboard.rounds.length, 5);
   assert.equal(dashboard.rounds[0].pieceId, "P00");
   assert.equal(
     dashboard.rounds[0].critic.status,
@@ -247,15 +270,35 @@ test("checked-in data contains the complete, honest P00–P25 ledger", async () 
   );
   assert.equal(dashboard.rounds[3].pieceId, "P10");
   assert.equal(dashboard.rounds[3].round, 3);
-  assert.equal(dashboard.rounds[3].status, "building");
+  assert.equal(dashboard.rounds[3].status, "criticized");
   assert.equal(
     dashboard.rounds[3].critic.status,
-    "Not started · source and rig builders active",
+    "Rejected before Unity · fresh visual gate failed closed",
   );
-  assert.equal(dashboard.rounds[3].critic.score, null);
-  assert.equal(dashboard.rounds[3].critic.scoreLabel, null);
-  assert.equal(dashboard.rounds[3].critic.preference, null);
-  assert.equal(dashboard.rounds[3].critic.primaryGap, null);
+  assert.equal(dashboard.rounds[3].critic.score, 6);
+  assert.equal(
+    dashboard.rounds[3].critic.scoreLabel,
+    "Source preflight 6/13 · mandatory 4/8",
+  );
+  assert.equal(
+    dashboard.rounds[3].critic.preference,
+    "Do not advance round 003 to Unity",
+  );
+  assert.match(
+    dashboard.rounds[3].critic.primaryGap,
+    /civilian tank, scarf, jeans, and sneakers/i,
+  );
+  assert.equal(dashboard.rounds[4].pieceId, "P10");
+  assert.equal(dashboard.rounds[4].round, 4);
+  assert.equal(dashboard.rounds[4].status, "building");
+  assert.equal(
+    dashboard.rounds[4].critic.status,
+    "Not started · focused source rebuild active",
+  );
+  assert.equal(dashboard.rounds[4].critic.score, null);
+  assert.equal(dashboard.rounds[4].critic.scoreLabel, null);
+  assert.equal(dashboard.rounds[4].critic.preference, null);
+  assert.equal(dashboard.rounds[4].critic.primaryGap, null);
 });
 
 test("P10 evidence is filed while the global latest manifest remains P00-pinned", async () => {
@@ -264,11 +307,15 @@ test("P10 evidence is filed while the global latest manifest remains P00-pinned"
     p00Manifest,
     p10Manifest,
     p10Round002Preflight,
+    p10Round003Preflight,
     latestManifest,
     p10Screenshot,
     turntableContact,
     round002Neutral,
     round002CombatFailure,
+    round003Front,
+    round003GripFailure,
+    round003Combat,
   ] = await Promise.all([
     readFile(dataUrl, "utf8").then(JSON.parse),
     readFile(
@@ -281,6 +328,10 @@ test("P10 evidence is filed while the global latest manifest remains P00-pinned"
     ).then(JSON.parse),
     readFile(
       new URL("../public/data/P10-round-002-preflight.json", import.meta.url),
+      "utf8",
+    ).then(JSON.parse),
+    readFile(
+      new URL("../public/data/P10-round-003-preflight.json", import.meta.url),
       "utf8",
     ).then(JSON.parse),
     readFile(
@@ -308,6 +359,24 @@ test("P10 evidence is filed while the global latest manifest remains P00-pinned"
     readFile(
       new URL(
         "../public/captures/P10/round-002-preflight/Combat_Failure.png",
+        import.meta.url,
+      ),
+    ),
+    readFile(
+      new URL(
+        "../public/captures/P10/round-003-preflight/Front_Decisive.png",
+        import.meta.url,
+      ),
+    ),
+    readFile(
+      new URL(
+        "../public/captures/P10/round-003-preflight/Grip_Failure.png",
+        import.meta.url,
+      ),
+    ),
+    readFile(
+      new URL(
+        "../public/captures/P10/round-003-preflight/Combat.png",
         import.meta.url,
       ),
     ),
@@ -369,6 +438,47 @@ test("P10 evidence is filed while the global latest manifest remains P00-pinned"
   assert.equal(
     createHash("sha256").update(round002CombatFailure).digest("hex"),
     p10Round002Preflight.diagnostics[1].sha256,
+  );
+  assert.equal(p10Round003Preflight.piece, "P10");
+  assert.equal(p10Round003Preflight.round, 3);
+  assert.equal(p10Round003Preflight.status, "rejected-pre-unity");
+  assert.equal(p10Round003Preflight.engineRun, false);
+  assert.equal(p10Round003Preflight.unityCaptureFiled, false);
+  assert.equal(p10Round003Preflight.goAttestationFiled, false);
+  assert.equal(p10Round003Preflight.visualReview.score, 6);
+  assert.equal(p10Round003Preflight.visualReview.maximum, 13);
+  assert.equal(p10Round003Preflight.visualReview.mandatoryPasses, 4);
+  assert.equal(p10Round003Preflight.visualReview.mandatoryMaximum, 8);
+  assert.equal(p10Round003Preflight.visualReview.verdict, "NO-GO");
+  assert.equal(
+    p10Round003Preflight.reproducibility.result,
+    "semantic-pass-exact-hash-fail",
+  );
+  assert.equal(
+    p10Round003Preflight.reproducibility.repositoryToFirstRunHashMatches,
+    0,
+  );
+  assert.equal(
+    p10Round003Preflight.reproducibility.firstToSecondRunHashMatches,
+    0,
+  );
+  assert.equal(p10Round003Preflight.integrityFindings.sourceHashMismatches, 0);
+  assert.equal(p10Round003Preflight.integrityFindings.auditOutputRecords, 15);
+  assert.equal(
+    p10Round003Preflight.integrityFindings.physicalGeneratedArtifacts,
+    16,
+  );
+  assert.equal(
+    createHash("sha256").update(round003Front).digest("hex"),
+    p10Round003Preflight.diagnostics[0].sha256,
+  );
+  assert.equal(
+    createHash("sha256").update(round003GripFailure).digest("hex"),
+    p10Round003Preflight.diagnostics[1].sha256,
+  );
+  assert.equal(
+    createHash("sha256").update(round003Combat).digest("hex"),
+    p10Round003Preflight.diagnostics[2].sha256,
   );
 
   for (const turntableImage of p10Manifest.turntableImages) {

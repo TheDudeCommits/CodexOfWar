@@ -19,21 +19,22 @@
   ],
   "activeBuild": {
     "pieceId": "P10",
-    "round": 3,
-    "roundLabel": "P10 · Round 003",
+    "round": 4,
+    "roundLabel": "P10 · Round 004",
     "status": "revising",
-    "builder": "Rain visual builder + gameplay-rig prototype active",
-    "brief": "Pivot the hero to Blender Studio Rain v3 as a professionally authored visual foundation, preserve its face, hands, feet, cloth fit, folds, and PBR response, then apply an anime-warrior hair, eye, palette, fitted-armor, and refined Aether Greatblade pass without repeating the floating-slab failure.",
+    "builder": "Head-to-toe warrior redesign active",
+    "brief": "Remove the dominant stock-civilian Rain read with a genuinely authored head-to-toe anime-warrior identity: tailored underlayer, layered cloth and leather harness, asymmetric coat or tabard, bracers, gauntlets, thigh guards, greaves, boots, restrained metalwork, and a coherent weapon harness.",
     "facts": [
       "P00 is accepted as infrastructure; its blind visual baseline remains an explicit 28.33–76.67 loss.",
       "Round 001 is mechanically reproducible: two independent critic reruns matched all six filed image hashes, P10 validation passed, focused EditMode passed 8/8, the full suite passed 14/14, and the P00 aggregate stayed byte-identical.",
       "The randomized blind judge scored our round-001 frame 9/60 and Reference 09 49/60; the independent critic scored ours 10/60 and the reference 51/60.",
-      "Both judges preferred Reference 09. P10 round 001 is rejected and no /100 score is claimed because timing, contact, crowd behavior, and audio were not scoreable from the still evidence.",
-      "Round 002 passed its mechanical export gates but failed visual preflight. Its final bounded revision scored 5/13 and never entered Unity.",
-      "The decisive round-002 frame exposes severed and elongated hand skin, divergent gauntlet and grip spaces, and no readable weapon enclosure. The 1.3 mm skeletal contact metric was therefore a false visual proxy.",
-      "Round 003 now uses Blender Studio Rain v3 under CC-BY-4.0. The unmodified source starts materially closer to the bar with professional face planes, hands, shoes, cloth folds, and high-resolution PBR maps.",
-      "Rain's film control rig is not being mislabeled as game-ready. A separate prototype is testing a reduced deform export or a transfer onto a 96-bone humanoid donor while the visual builder works in parallel.",
-      "The latest filed in-engine evidence remains immutable round 001 until the round-003 source passes a fresh independent preflight."
+      "Round 002 passed its mechanical export gates but failed visual preflight at 5/13. The decisive frame exposed torn and detached combat hands, so it never entered Unity.",
+      "A fresh-context critic scored round 003 at 6/13 with only 4/8 mandatory checks. The source package is a visual NO-GO and Unity was never launched.",
+      "Round 003 passed anatomy, face, feet, joint continuity, neutral coverage, and diagnostic coverage; it failed hands and grip, costume, weapon contact, materials, LOD0 budget, combat pose, and authored identity.",
+      "The single biggest gap is exact: the character still reads as stock Blender Studio Rain in a tank, scarf, jeans, and sneakers with thin cyan shells, not as a premium authored anime warrior.",
+      "Two isolated Blender reruns matched semantic structure, topology, materials, and weights, but exact artifact determinism failed at 0/16 hashes for repository-to-run and 0/16 between runs. The round-003 audit also omitted its Combat FBX because its record key collided with the combat PNG.",
+      "A separate 80-deform-bone export prototype proved structural rig feasibility, but shoulder, elbow, wrist, thumb, finger, and facial-deformation hard gates remain unresolved; it is not combat-ready.",
+      "Round 004 changes only the rejected design identity. Round 001 remains the latest filed in-engine evidence until a source round clears every mandatory preflight gate."
     ],
     "evidenceFingerprint": {
       "gitRevision": "2dedf617ace47ea5dbb2cde1817d6119604842d2",
@@ -95,7 +96,7 @@
         "Static lookdev only; no rig, S02, or S06"
       ]
     },
-    "nextGate": "Round 003 must clear a fresh source-bound 10/13 visual preflight with mandatory anatomy, face, hands/grip, feet, joints, costume, weapon, and material checks, then file deterministic S01, S02, S06, and four-view Unity evidence before a new blind critic."
+    "nextGate": "Round 004 must pass all 8 mandatory source checks and score at least 10/13 in a separate fresh-context preflight before Unity may be opened. Only then may it file reproducible S01, S02, S06, and four-view in-engine evidence for a blind comparison."
   },
   "canonicalCapture": {
     "shotId": "S01",
@@ -220,14 +221,37 @@
       "round": 3,
       "label": "P10 · Round 003",
       "pieceId": "P10",
-      "phase": "Fresh builders active",
-      "status": "building",
+      "phase": "Fresh source critic complete",
+      "status": "criticized",
       "date": "2026-07-31",
       "builderBrief": "Use Blender Studio Rain v3 as the high-fidelity visual foundation, apply an anime-warrior look and conforming armor/weapon pass, and prototype a truthful gameplay rig without degrading the visible source.",
-      "evidence": "Building. The official CC-BY-4.0 source and textures are being ingested with exact provenance. No round-003 result or score is filed yet.",
+      "evidence": "The CC-BY-4.0 source, generator, authored blend, exports, nine 1600px diagnostics, and independent review are filed. The critic scored 6/13 and only 4/8 mandatory checks. Two isolated Blender reruns matched semantic structure but matched 0/16 exact hashes in both comparisons. Unity was never launched.",
+      "evidenceLinks": [
+        "/captures/P10/round-003-preflight/Front_Decisive.png",
+        "/captures/P10/round-003-preflight/Grip_Failure.png",
+        "/captures/P10/round-003-preflight/Combat.png",
+        "/data/P10-round-003-preflight.json"
+      ],
+      "critic": {
+        "status": "Rejected before Unity · fresh visual gate failed closed",
+        "score": 6,
+        "scoreLabel": "Source preflight 6/13 · mandatory 4/8",
+        "preference": "Do not advance round 003 to Unity",
+        "primaryGap": "The asset has not undergone a true premium character-design transformation: it still reads as Blender Studio Rain in a civilian tank, scarf, jeans, and sneakers with thin mask-cut cyan shells, rather than an unmistakable authored anime warrior."
+      }
+    },
+    {
+      "round": 4,
+      "label": "P10 · Round 004",
+      "pieceId": "P10",
+      "phase": "Focused builder active",
+      "status": "building",
+      "date": "2026-07-31",
+      "builderBrief": "Replace the rejected civilian silhouette with a cohesive head-to-toe warrior costume and material identity while preserving Rain's credible anatomy, face, hands, feet, and joint continuity.",
+      "evidence": "Building. This round is bounded to the critic's single biggest gap. It may not enter Unity until an independent fresh-context critic passes all 8 mandatory source checks and at least 10/13 overall.",
       "evidenceLinks": [],
       "critic": {
-        "status": "Not started · source and rig builders active",
+        "status": "Not started · focused source rebuild active",
         "score": null,
         "scoreLabel": null,
         "preference": null,
