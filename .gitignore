@@ -34,3 +34,8 @@ Reference.zip
 Artifacts/
 Builds/
 *.log
+*.blend[0-9]*
+*.blend~
+*.blend@
+__pycache__/
+*.py[cod]

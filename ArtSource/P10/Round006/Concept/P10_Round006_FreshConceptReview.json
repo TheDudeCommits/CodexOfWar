@@ -1,0 +1,263 @@
+{
+  "schema": "codexofwar.fresh-2d-concept-review",
+  "version": "1.0.0",
+  "review_id": "P10-Round006-FreshConceptReview",
+  "generated_utc": "2026-07-31T12:06:37Z",
+  "independence": {
+    "fresh_review": true,
+    "builder_acceptance_claims_adopted_as_evidence": false,
+    "persisted_pixels_reviewed_directly": true,
+    "original_resolution_candidate_inspection": true,
+    "review_stance": "Hostile AAA visual preflight for authorization of paid 3D generation. Polished AI concept-art adequacy is not a passing standard."
+  },
+  "scope": {
+    "decision_question": "Is this original 2D concept strong and resolved enough to authorize paid 3D generation?",
+    "asset_status": "Original 2D concept preflight only",
+    "not_claimed": [
+      "gameplay",
+      "finished game asset",
+      "3D model",
+      "production-ready implementation"
+    ],
+    "reviewed_materials": {
+      "accepted_candidate_images": 3,
+      "rejected_candidate_images": 1,
+      "receipt_reviewed": true,
+      "readme_reviewed": true
+    },
+    "limitations": [
+      "This is a visual authorization review of persisted 2D images; it cannot validate mesh topology, rigging, deformation, UVs, collision, animation, LODs, performance, or fabrication.",
+      "The benchmark frames are production screenshots with different purposes and framing from neutral concept sheets; they were used only as a quality and authorship bar, never as design input.",
+      "Visual review cannot establish legal originality, exclusivity, copyright status, trademark clearance, or absence of all third-party similarity."
+    ]
+  },
+  "source_documents": [
+    {
+      "document_id": "concept-receipt",
+      "sha256": "0914db7e7dcf12a44a0fcf944b581a49370ef9b7a9c122555c2147779dac65a6",
+      "byte_size": 21630
+    },
+    {
+      "document_id": "concept-readme",
+      "sha256": "0af62c326aea2dd10835e615751d36ec2ce458bde16c7c7c267b9d62ec3d7642",
+      "byte_size": 1424
+    }
+  ],
+  "candidate_assets": [
+    {
+      "asset_id": "nyra-turnaround-v1",
+      "review_status": "accepted-set",
+      "sha256": "3dbca4057a6b80738106cd10d907b670085fb5637733673de2451027f2860eaa",
+      "dimensions_px": {
+        "width": 1536,
+        "height": 1024
+      },
+      "format": "PNG",
+      "byte_size": 2461373
+    },
+    {
+      "asset_id": "stormglass-odachi-v1",
+      "review_status": "accepted-set",
+      "sha256": "b0d751ad479357bc92645ed7157c1dde1ea37ffe8068b944c02373fa77f9254f",
+      "dimensions_px": {
+        "width": 1536,
+        "height": 1024
+      },
+      "format": "PNG",
+      "byte_size": 1672588
+    },
+    {
+      "asset_id": "nyra-combat-grip-v1",
+      "review_status": "accepted-set",
+      "sha256": "108db4be83f97cab739f3c9e08b5e69f654183451f191776e484023c1b6d551f",
+      "dimensions_px": {
+        "width": 1536,
+        "height": 1024
+      },
+      "format": "PNG",
+      "byte_size": 2034156
+    },
+    {
+      "asset_id": "nyra-combat-grip-reject01",
+      "review_status": "rejected-iteration",
+      "sha256": "9369e2154ee3023e3f9685afa7664bd59f146780380af8e10b676cabf6ab90de",
+      "dimensions_px": {
+        "width": 1536,
+        "height": 1024
+      },
+      "format": "PNG",
+      "byte_size": 1964868
+    }
+  ],
+  "benchmark_evidence": {
+    "private_visual_use_only": true,
+    "benchmark_records": [
+      {
+        "benchmark_id": "benchmark-001",
+        "sha256": "05048268b96a7ea20e52ab4f0c01fbc312b37d7d4b3ae4fd40752ca4f497e71e",
+        "dimensions_px": {
+          "width": 770,
+          "height": 433
+        },
+        "format": "JPEG"
+      },
+      {
+        "benchmark_id": "benchmark-004",
+        "sha256": "a0161b955a1947fcabccc34c8e22ee0ebcb6ade357b51aa974c0057caf9294c9",
+        "dimensions_px": {
+          "width": 1920,
+          "height": 1080
+        },
+        "format": "WEBP"
+      },
+      {
+        "benchmark_id": "benchmark-015",
+        "sha256": "21858656b7887cc37f92c2bab4ed56f6cb273f45fd75193c0cb1c1b37456bc33",
+        "dimensions_px": {
+          "width": 596,
+          "height": 335
+        },
+        "format": "JPEG"
+      },
+      {
+        "benchmark_id": "benchmark-021",
+        "sha256": "e894db229df4c7bc0be9e01e16a668158a4ae900e1b3749d42f9e47662bb7a62",
+        "dimensions_px": {
+          "width": 1948,
+          "height": 1080
+        },
+        "format": "JPEG"
+      }
+    ]
+  },
+  "blind_comparison": {
+    "comparison_count": 6,
+    "presentation_labels_removed": true,
+    "left_right_randomized": true,
+    "candidate_side_distribution": {
+      "left": 3,
+      "right": 3
+    },
+    "candidate_met_benchmark_bar_count": 0,
+    "candidate_below_benchmark_bar_count": 6,
+    "comparisons": [
+      {
+        "comparison_id": "blind-001",
+        "candidate_asset_id": "nyra-combat-grip-v1",
+        "benchmark_id": "benchmark-001",
+        "result": "candidate-below-benchmark-bar"
+      },
+      {
+        "comparison_id": "blind-002",
+        "candidate_asset_id": "nyra-combat-grip-v1",
+        "benchmark_id": "benchmark-004",
+        "result": "candidate-below-benchmark-bar"
+      },
+      {
+        "comparison_id": "blind-003",
+        "candidate_asset_id": "nyra-combat-grip-v1",
+        "benchmark_id": "benchmark-015",
+        "result": "candidate-below-benchmark-bar"
+      },
+      {
+        "comparison_id": "blind-004",
+        "candidate_asset_id": "nyra-combat-grip-v1",
+        "benchmark_id": "benchmark-021",
+        "result": "candidate-below-benchmark-bar"
+      },
+      {
+        "comparison_id": "blind-005",
+        "candidate_asset_id": "nyra-turnaround-v1",
+        "benchmark_id": "benchmark-004",
+        "result": "candidate-below-benchmark-bar"
+      },
+      {
+        "comparison_id": "blind-006",
+        "candidate_asset_id": "stormglass-odachi-v1",
+        "benchmark_id": "benchmark-015",
+        "result": "candidate-below-benchmark-bar"
+      }
+    ],
+    "result_summary": "Across six randomized-side comparisons, the candidate never reached the benchmark's level of authored identity, functional silhouette, material storytelling, or role-specific visual hierarchy."
+  },
+  "scored_gate": {
+    "scale": "0-10 per equally weighted category",
+    "pass_threshold_total": 85,
+    "critical_floor_per_category": 7,
+    "scores": [
+      {
+        "category": "multi-view identity consistency",
+        "score": 6.0,
+        "finding": "The four-view subject is recognizable, but braid mass and hang, shoulder treatment, strap paths, panel shapes, and some armor topology drift between views; the combat image further shifts face and costume specifics."
+      },
+      {
+        "category": "neutral modeling utility",
+        "score": 7.0,
+        "finding": "Complete orthographic coverage and a shared baseline are useful, but topology drift and dense unresolved surface detail would force a modeler to invent authoritative construction choices."
+      },
+      {
+        "category": "anatomy",
+        "score": 6.0,
+        "finding": "The body is broadly coherent, yet the very narrow waist, idealized bust, long legs, small hands, heeled combat boots, and fashion-model proportions undermine grounded warrior credibility."
+      },
+      {
+        "category": "face eyes hair",
+        "score": 5.0,
+        "finding": "The face is polished but reads as a generic doll-like anime beauty with weak lived-in specificity; eye and facial identity shift in the combat image, while braid design and volume are not stable across views."
+      },
+      {
+        "category": "premium layered costume and material separation",
+        "score": 5.0,
+        "finding": "Steel, leather, cloth, and trim collapse into one dark, uniformly scratched value family. Dense micro-detail substitutes for a clear construction hierarchy, distinct material response, and premium role storytelling."
+      },
+      {
+        "category": "silhouette and role read",
+        "score": 4.0,
+        "finding": "At distance this is a familiar dark armored anime swordswoman: small head, corseted torso, layered skirt panels, tall heeled boots, and long katana. The stormglass idea is too minor to own the silhouette."
+      },
+      {
+        "category": "functional two-hand same-hilt grip",
+        "score": 7.0,
+        "finding": "Both hands visibly close on separate regions of the same hilt with readable thumb opposition. However, the trailing hand leaves excessive unused grip, the leading hand crowds the guard, and wrist-load evidence remains posed rather than convincingly force-bearing."
+      },
+      {
+        "category": "weapon plausibility",
+        "score": 5.5,
+        "finding": "The weapon has readable front, back, profile, grip, and scabbard evidence, but the extremely long hilt, thick blade, inset stress logic, plain block guard, and design drift in the combat view leave mass, balance, tang, and handling insufficiently authored."
+      },
+      {
+        "category": "avoidance of generic civilian plastic fetish and franchise cues",
+        "score": 5.5,
+        "finding": "No direct benchmark-franchise copy is evident and the costume is not civilian, but generic soulslike-anime armor language, bust-sculpting, corseting, high heels, and uniformly glossy wear preserve fashion and synthetic concept-art cues."
+      },
+      {
+        "category": "benchmark-level authorship",
+        "score": 4.0,
+        "finding": "The rendering is clean, but the concept lacks the benchmark's selective specificity, readable material hierarchy, role history, bodily weight, and iconic design thesis. It reads as generated detail accumulation rather than decisive AAA authorship."
+      }
+    ],
+    "total_score": 55.0,
+    "total_possible": 100,
+    "threshold_result": "FAIL",
+    "critical_floor_result": "FAIL"
+  },
+  "biggest_remaining_gap": "Benchmark-level authored character identity: the generic dark armored-anime swordswoman silhouette and costume do not express a unique, function-led visual thesis strong enough to justify paid 3D translation.",
+  "decision": {
+    "verdict": "NO-GO",
+    "paid_3d_generation_authorized": false,
+    "instruction": "Do not begin paid 3D generation from this concept set.",
+    "rationale": "The set is coherent enough to discuss and the accepted grip is visibly two-handed, but the 55/100 gate score, six-of-six blind benchmark shortfall, sub-floor silhouette/authorship scores, and unresolved design identity make 3D spend premature."
+  },
+  "public_privacy_audit": {
+    "public_safe": true,
+    "absolute_user_paths_present": false,
+    "usernames_present": false,
+    "source_archive_name_present": false,
+    "source_archive_internal_paths_or_filenames_present": false,
+    "temporary_paths_present": false,
+    "benchmark_pixels_embedded_or_retained": false,
+    "benchmark_metadata_limited_to_ids_hashes_dimensions_and_formats": true,
+    "private_comparison_sheets_retained": false,
+    "private_extraction_retained": false
+  }
+}

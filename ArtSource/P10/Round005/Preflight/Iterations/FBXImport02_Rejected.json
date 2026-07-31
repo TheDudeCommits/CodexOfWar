@@ -1,0 +1,34 @@
+{
+  "status": "rejected",
+  "gate_pass": false,
+  "validator_invocation": "/Applications/Blender.app/Contents/MacOS/Blender --factory-startup --disable-autoexec -b --python Tools/Blender/P10_Round005_ValidateFBX.py",
+  "single_biggest_technical_gap": "Post-decimation duplicate triangle faces remained in lower LODs and the FBX exporter discarded them, making imported counts diverge from authored counts.",
+  "exact_failures": {
+    "P10R5_LOD1_MECH_duplicate_faces": 31,
+    "P10R5_LOD2_CLOTHING_duplicate_faces": 2,
+    "P10R5_LOD2_MECH_duplicate_faces": 39,
+    "lod1_triangle_count": {
+      "expected": 47646,
+      "imported": 47615,
+      "delta": -31
+    },
+    "lod2_triangle_count": {
+      "expected": 25525,
+      "imported": 25484,
+      "delta": -41
+    }
+  },
+  "passing_imports": {
+    "combat": 85096,
+    "lod0": 85096
+  },
+  "zero_area_faces_on_import": 0,
+  "preserved_full_report": {
+    "path": "ArtSource/P10/Round005/Preflight/Iterations/FBXImport02_Rejected_FullReport.json",
+    "sha256": "abb40253e39daea51954fb7d01d6738d7986a278311f7bbb4fdf211332a99985"
+  },
+  "preserved_diagnostic_render": {
+    "path": "ArtSource/P10/Round005/Preflight/Iterations/FBXImport02_Rejected.png",
+    "sha256": "8c4155adc15e9291b060883a463fb06a91ac9f7e90f267378e2a9876ea7a7321"
+  }
+}

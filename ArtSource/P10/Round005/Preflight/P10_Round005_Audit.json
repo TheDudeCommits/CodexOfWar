@@ -1,0 +1,3696 @@
+{
+  "archive_bytes": 579834421,
+  "archive_sha256": "3cbb5a1dd9ffd3ca39edab420a83ea7f7db337b435a78ef27a0c87ff3e6977f7",
+  "combat_pose_targets": {
+    "left_ankle": [
+      0.31,
+      0.17,
+      0.087
+    ],
+    "mechanical_wrist": [
+      0.2,
+      -0.52,
+      1.38
+    ],
+    "right_ankle": [
+      -0.31,
+      -0.18,
+      0.087
+    ],
+    "weapon_grip_left": [
+      0.330826,
+      -0.504308,
+      1.332283
+    ],
+    "weapon_grip_right": [
+      -0.195617,
+      -0.465794,
+      1.084706
+    ]
+  },
+  "delivery": {
+    "claims_explicitly_not_made": [
+      "God of War-quality gate pass",
+      "premium anime-warrior identity",
+      "production deform rig",
+      "animation-ready FBX",
+      "portable baked PBR atlas",
+      "Unity integration",
+      "runtime performance"
+    ],
+    "dominant_remaining_gap": "The lawful professional source is an elderly mechanic in civilian workwear, not a coherently authored premium anime warrior.",
+    "files": [
+      {
+        "bytes": 92413739,
+        "path": "ArtSource/P10/Round005/P10_Round005_EinarForgeWarrior.blend",
+        "sha256": "ff22a8ac7e18e979e70393364454ffd13b14a6063ed77b941de8ab92166047ca"
+      },
+      {
+        "bytes": 1919,
+        "path": "ArtSource/P10/Round005/README.md",
+        "sha256": "b2f9557def89f317442e103868f852d5753e8a871760fc264e2cba3a856d4cdc"
+      },
+      {
+        "bytes": 2902555,
+        "path": "ArtSource/P10/Round005/Preflight/P10_Round005_Front.png",
+        "sha256": "1004bb824c937d0b748ffa90cd71cfcd90c5af50ae0bbfdb4cbd0ba455f80ca6"
+      },
+      {
+        "bytes": 2636120,
+        "path": "ArtSource/P10/Round005/Preflight/P10_Round005_ThreeQuarter.png",
+        "sha256": "f5ff458673ab18928ca38a2ae4a74f3811a470d286f3fa2578b611d29b090e21"
+      },
+      {
+        "bytes": 2657786,
+        "path": "ArtSource/P10/Round005/Preflight/P10_Round005_Back.png",
+        "sha256": "bbd319358429a6ad0345f224dc6d374a9da7907a57af764731e1a5f8247d5d5f"
+      },
+      {
+        "bytes": 2828647,
+        "path": "ArtSource/P10/Round005/Preflight/P10_Round005_Profile.png",
+        "sha256": "0564852f8372b7e8b57b484b5557976427d017b078d5589978e35f94a88ccc72"
+      },
+      {
+        "bytes": 3383254,
+        "path": "ArtSource/P10/Round005/Preflight/P10_Round005_Face.png",
+        "sha256": "f7cf5a0cd41e140fcee8bd787a65bfefaf153296629439c6f8a4de3387918477"
+      },
+      {
+        "bytes": 4418304,
+        "path": "ArtSource/P10/Round005/Preflight/P10_Round005_Hands.png",
+        "sha256": "e1db317b7619dd9c7866fa164f4dd3189e2753667e7332ed9959fb69844385cf"
+      },
+      {
+        "bytes": 3619660,
+        "path": "ArtSource/P10/Round005/Preflight/P10_Round005_Feet.png",
+        "sha256": "2120cadc2ef2d21a3e5fb5f5db57d45835feb65b1529dbdb14f7a6c35105027d"
+      },
+      {
+        "bytes": 2636103,
+        "path": "ArtSource/P10/Round005/Preflight/P10_Round005_Combat.png",
+        "sha256": "081636378eec8fe2651a35e5395553f1dc374c5028c6428455a114e3b0d5c655"
+      },
+      {
+        "bytes": 5845693,
+        "path": "ArtSource/P10/Round005/Preflight/P10_Round005_Grip.png",
+        "sha256": "5784aea14bf995dae9b18f96a40639ddbfb46f344c4787ebada09eabbde4b09e"
+      },
+      {
+        "bytes": 5039116,
+        "path": "game/Assets/CodexOfWar/Heroes/P10/Round005/Models/P10_EinarForgeWarrior_Round005_Combat.fbx",
+        "sha256": "b8311caf2dc6c6075ac66bcec4d058c1d7a487f4817b74bc1426d6abc11bdc47"
+      },
+      {
+        "bytes": 5039116,
+        "path": "game/Assets/CodexOfWar/Heroes/P10/Round005/Models/P10_EinarForgeWarrior_Round005_LOD0.fbx",
+        "sha256": "b8311caf2dc6c6075ac66bcec4d058c1d7a487f4817b74bc1426d6abc11bdc47"
+      },
+      {
+        "bytes": 2882316,
+        "path": "game/Assets/CodexOfWar/Heroes/P10/Round005/Models/P10_EinarForgeWarrior_Round005_LOD1.fbx",
+        "sha256": "c41f5ce315fce6a5b796c9a7805612b0e5de72fd98662e2ddc8cf530a383a4ba"
+      },
+      {
+        "bytes": 1642076,
+        "path": "game/Assets/CodexOfWar/Heroes/P10/Round005/Models/P10_EinarForgeWarrior_Round005_LOD2.fbx",
+        "sha256": "fe21f51564c04e0358df87ba14166ee61c0a9beb85a13fce7dbe0741d47671de"
+      }
+    ],
+    "type": "static source-preflight and audited static mesh LOD proof"
+  },
+  "evidence_pose": {
+    "all_nine_images": "same frozen combat pose",
+    "front_back_profile_labels": "view direction only; not neutral-pose evidence",
+    "neutral_modeling_coverage_check_11": "unsupported"
+  },
+  "fbx_clean_import_validation": {
+    "all_clean_static_imports_pass": true,
+    "diagnostic_render": "ArtSource/P10/Round005/Preflight/P10_Round005_FBX_Reimport.png",
+    "diagnostic_render_sha256": "708f105b3c02119b440d5139c7ae12279e50ff29acbe703a2815f3a050f76f07",
+    "report": "ArtSource/P10/Round005/Preflight/P10_Round005_FBXCleanImport.json",
+    "report_sha256": "54c8716c7f91e932752d60c460921a8a6bda0838e770eab304adfefe5adb0a10",
+    "texture_portability_supported": false
+  },
+  "license": "CC BY 4.0",
+  "pipeline": "P10_Round005_EinarForgeWarrior",
+  "pre_freeze_subdivision_mutation": false,
+  "relative_vendor_image_paths": [
+    {
+      "image": "canvas_01.disp",
+      "stored_path": "//ThirdParty/BlenderStudioEinar/textures/tileable/canvas_01.disp.tif"
+    },
+    {
+      "image": "canvas_01.normal",
+      "stored_path": "//ThirdParty/BlenderStudioEinar/textures/tileable/canvas_01.normal.tif"
+    },
+    {
+      "image": "dents_01.normal",
+      "stored_path": "//ThirdParty/BlenderStudioEinar/textures/tileable/dents_01.normal.tif"
+    },
+    {
+      "image": "disp_clothing_default",
+      "stored_path": "//ThirdParty/BlenderStudioEinar/textures/displacement/clothing/disp_clothing_default.exr"
+    },
+    {
+      "image": "disp_clothing_shapes_A",
+      "stored_path": "//ThirdParty/BlenderStudioEinar/textures/displacement/clothing/disp_clothing_shapes_A.exr"
+    },
+    {
+      "image": "disp_clothing_shapes_B",
+      "stored_path": "//ThirdParty/BlenderStudioEinar/textures/displacement/clothing/disp_clothing_shapes_B.exr"
+    },
+    {
+      "image": "disp_clothing_shapes_C",
+      "stored_path": "//ThirdParty/BlenderStudioEinar/textures/displacement/clothing/disp_clothing_shapes_C.exr"
+    },
+    {
+      "image": "disp_clothing_shapes_D",
+      "stored_path": "//ThirdParty/BlenderStudioEinar/textures/displacement/clothing/disp_clothing_shapes_D.exr"
+    },
+    {
+      "image": "disp_clothing_shapes_E",
+      "stored_path": "//ThirdParty/BlenderStudioEinar/textures/displacement/clothing/disp_clothing_shapes_E.exr"
+    },
+    {
+      "image": "disp_default",
+      "stored_path": "//ThirdParty/BlenderStudioEinar/textures/displacement/face/disp_default.exr"
+    },
+    {
+      "image": "disp_facial_shapes_A",
+      "stored_path": "//ThirdParty/BlenderStudioEinar/textures/displacement/face/disp_facial_shapes_A.exr"
+    },
+    {
+      "image": "disp_facial_shapes_B",
+      "stored_path": "//ThirdParty/BlenderStudioEinar/textures/displacement/face/disp_facial_shapes_B.exr"
+    },
+    {
+      "image": "disp_facial_shapes_C",
+      "stored_path": "//ThirdParty/BlenderStudioEinar/textures/displacement/face/disp_facial_shapes_C.exr"
+    },
+    {
+      "image": "disp_facial_shapes_D",
+      "stored_path": "//ThirdParty/BlenderStudioEinar/textures/displacement/face/disp_facial_shapes_D.exr"
+    },
+    {
+      "image": "disp_facial_shapes_E",
+      "stored_path": "//ThirdParty/BlenderStudioEinar/textures/displacement/face/disp_facial_shapes_E.exr"
+    },
+    {
+      "image": "disp_facial_shapes_F",
+      "stored_path": "//ThirdParty/BlenderStudioEinar/textures/displacement/face/disp_facial_shapes_F.exr"
+    },
+    {
+      "image": "distress_stages",
+      "stored_path": "//ThirdParty/BlenderStudioEinar/textures/face/distress_stages.tif"
+    },
+    {
+      "image": "einar.beard.dirt",
+      "stored_path": "//ThirdParty/BlenderStudioEinar/textures/face/einar.beard.dirt.tif"
+    },
+    {
+      "image": "einar.bruises.albedo",
+      "stored_path": "//ThirdParty/BlenderStudioEinar/textures/face/einar.bruises.albedo.tif"
+    },
+    {
+      "image": "einar.clothing.color_base",
+      "stored_path": "//ThirdParty/BlenderStudioEinar/textures/einar.clothing.color_base.tif"
+    },
+    {
+      "image": "einar.clothing.normal_base",
+      "stored_path": "//ThirdParty/BlenderStudioEinar/textures/einar.clothing.normal_base.tif"
+    },
+    {
+      "image": "einar.clothing.pointiness",
+      "stored_path": "//ThirdParty/BlenderStudioEinar/textures/einar.clothing.pointiness.tif"
+    },
+    {
+      "image": "einar.fingers.normal",
+      "stored_path": "//ThirdParty/BlenderStudioEinar/textures/einar.fingers.normal.tif"
+    },
+    {
+      "image": "einar.fingers.pointiness",
+      "stored_path": "//ThirdParty/BlenderStudioEinar/textures/einar.fingers.pointiness.tif"
+    },
+    {
+      "image": "einar.fingers.vector_displacement",
+      "stored_path": "//ThirdParty/BlenderStudioEinar/textures/einar.fingers.vector_displacement.tif"
+    },
+    {
+      "image": "einar.hair.color",
+      "stored_path": "//ThirdParty/BlenderStudioEinar/textures/einar.hair.color.tif"
+    },
+    {
+      "image": "einar.robot_arm.normal_base.",
+      "stored_path": "//ThirdParty/BlenderStudioEinar/textures/einar.robot_arm.normal_base.<UDIM>.tif"
+    },
+    {
+      "image": "einar.robot_arm.pointiness.",
+      "stored_path": "//ThirdParty/BlenderStudioEinar/textures/einar.robot_arm.pointiness.<UDIM>.tif"
+    },
+    {
+      "image": "einar.shoes.bump",
+      "stored_path": "//ThirdParty/BlenderStudioEinar/textures/einar.shoes.bump.tif"
+    },
+    {
+      "image": "einar_skin.albedo",
+      "stored_path": "//ThirdParty/BlenderStudioEinar/textures/face/einar_skin.albedo.tif"
+    },
+    {
+      "image": "einar_skin.dirt",
+      "stored_path": "//ThirdParty/BlenderStudioEinar/textures/face/einar_skin.dirt.tif"
+    },
+    {
+      "image": "einar_skin.roughness",
+      "stored_path": "//ThirdParty/BlenderStudioEinar/textures/face/einar_skin.roughness.tif"
+    },
+    {
+      "image": "eyes.albedo",
+      "stored_path": "//ThirdParty/BlenderStudioEinar/textures/face/eyes.albedo.tif"
+    },
+    {
+      "image": "grime_01",
+      "stored_path": "//ThirdParty/BlenderStudioEinar/textures/tileable/grime_01.tif"
+    },
+    {
+      "image": "iris_depth",
+      "stored_path": "//ThirdParty/BlenderStudioEinar/textures/face/iris_depth.tif"
+    },
+    {
+      "image": "knit_01.disp",
+      "stored_path": "//ThirdParty/BlenderStudioEinar/textures/tileable/knit_01.disp.tif"
+    },
+    {
+      "image": "knit_01.normal",
+      "stored_path": "//ThirdParty/BlenderStudioEinar/textures/tileable/knit_01.normal.tif"
+    },
+    {
+      "image": "knit_01.tile_uv",
+      "stored_path": "//ThirdParty/BlenderStudioEinar/textures/tileable/knit_01.tile_uv.tif"
+    },
+    {
+      "image": "noise_01",
+      "stored_path": "//ThirdParty/BlenderStudioEinar/textures/tileable/noise_01.tif"
+    },
+    {
+      "image": "noise_03",
+      "stored_path": "//ThirdParty/BlenderStudioEinar/textures/tileable/noise_03.tif"
+    },
+    {
+      "image": "noise_04",
+      "stored_path": "//ThirdParty/BlenderStudioEinar/textures/tileable/noise_04.tif"
+    },
+    {
+      "image": "noise_06",
+      "stored_path": "//ThirdParty/BlenderStudioEinar/textures/tileable/noise_06.tif"
+    },
+    {
+      "image": "road_sign.color",
+      "stored_path": "//ThirdParty/BlenderStudioEinar/textures/road_sign.color.tif"
+    },
+    {
+      "image": "road_sign.distance",
+      "stored_path": "//ThirdParty/BlenderStudioEinar/textures/road_sign.distance.tif"
+    },
+    {
+      "image": "road_sign.normal",
+      "stored_path": "//ThirdParty/BlenderStudioEinar/textures/road_sign.normal.tif"
+    },
+    {
+      "image": "satchel.base",
+      "stored_path": "//ThirdParty/BlenderStudioEinar/textures/satchel.base.tif"
+    },
+    {
+      "image": "scratches_01.disp",
+      "stored_path": "//ThirdParty/BlenderStudioEinar/textures/tileable/scratches_01.disp.tif"
+    },
+    {
+      "image": "scratches_01.normal",
+      "stored_path": "//ThirdParty/BlenderStudioEinar/textures/tileable/scratches_01.normal.tif"
+    },
+    {
+      "image": "seams.disp",
+      "stored_path": "//ThirdParty/BlenderStudioEinar/textures/tileable/seams.disp.tif"
+    },
+    {
+      "image": "seams.normal",
+      "stored_path": "//ThirdParty/BlenderStudioEinar/textures/tileable/seams.normal.tif"
+    },
+    {
+      "image": "shapes-A-B-C-D",
+      "stored_path": "//ThirdParty/BlenderStudioEinar/textures/displacement/face/shapes-A-B-C-D.tif"
+    },
+    {
+      "image": "shapes-E-F-DEFAULT-DETAIL",
+      "stored_path": "//ThirdParty/BlenderStudioEinar/textures/displacement/face/shapes-E-F-DEFAULT-DETAIL.tif"
+    },
+    {
+      "image": "sweater.pattern",
+      "stored_path": "//ThirdParty/BlenderStudioEinar/textures/sweater.pattern.tif"
+    },
+    {
+      "image": "textile_01.disp",
+      "stored_path": "//ThirdParty/BlenderStudioEinar/textures/tileable/textile_01.disp.tif"
+    },
+    {
+      "image": "textile_01.normal",
+      "stored_path": "//ThirdParty/BlenderStudioEinar/textures/tileable/textile_01.normal.tif"
+    },
+    {
+      "image": "textile_02.disp",
+      "stored_path": "//ThirdParty/BlenderStudioEinar/textures/tileable/textile_02.disp.tif"
+    },
+    {
+      "image": "textile_02.normal",
+      "stored_path": "//ThirdParty/BlenderStudioEinar/textures/tileable/textile_02.normal.tif"
+    },
+    {
+      "image": "textile_02.tile_uv",
+      "stored_path": "//ThirdParty/BlenderStudioEinar/textures/tileable/textile_02.tile_uv.tif"
+    }
+  ],
+  "release_sanitization": {
+    "fbx_native_file_fields": [
+      {
+        "bytes": 5039116,
+        "native_file_field_sanitized": true,
+        "native_file_label": "CodexOfWar/P10/Round005/EinarSource.blend",
+        "path": "game/Assets/CodexOfWar/Heroes/P10/Round005/Models/P10_EinarForgeWarrior_Round005_Combat.fbx",
+        "sha256": "b8311caf2dc6c6075ac66bcec4d058c1d7a487f4817b74bc1426d6abc11bdc47"
+      },
+      {
+        "bytes": 5039116,
+        "native_file_field_sanitized": true,
+        "native_file_label": "CodexOfWar/P10/Round005/EinarSource.blend",
+        "path": "game/Assets/CodexOfWar/Heroes/P10/Round005/Models/P10_EinarForgeWarrior_Round005_LOD0.fbx",
+        "sha256": "b8311caf2dc6c6075ac66bcec4d058c1d7a487f4817b74bc1426d6abc11bdc47"
+      },
+      {
+        "bytes": 2882316,
+        "native_file_field_sanitized": true,
+        "native_file_label": "CodexOfWar/P10/Round005/EinarSource.blend",
+        "path": "game/Assets/CodexOfWar/Heroes/P10/Round005/Models/P10_EinarForgeWarrior_Round005_LOD1.fbx",
+        "sha256": "c41f5ce315fce6a5b796c9a7805612b0e5de72fd98662e2ddc8cf530a383a4ba"
+      },
+      {
+        "bytes": 1642076,
+        "native_file_field_sanitized": true,
+        "native_file_label": "CodexOfWar/P10/Round005/EinarSource.blend",
+        "path": "game/Assets/CodexOfWar/Heroes/P10/Round005/Models/P10_EinarForgeWarrior_Round005_LOD2.fbx",
+        "sha256": "fe21f51564c04e0358df87ba14166ee61c0a9beb85a13fce7dbe0741d47671de"
+      }
+    ],
+    "json_path_receipts": [
+      {
+        "bytes": 41495,
+        "path": "ArtSource/P10/Round005/Preflight/P10_Round005_FBXCleanImport.json",
+        "sha256": "54c8716c7f91e932752d60c460921a8a6bda0838e770eab304adfefe5adb0a10"
+      },
+      {
+        "bytes": 41514,
+        "path": "ArtSource/P10/Round005/Preflight/Iterations/FBXImport01_Rejected_FullReport.json",
+        "sha256": "2825793d27f2087703e9792fff5437303b9bbabda301f0daa4093c75a1932820"
+      },
+      {
+        "bytes": 41500,
+        "path": "ArtSource/P10/Round005/Preflight/Iterations/FBXImport02_Rejected_FullReport.json",
+        "sha256": "abb40253e39daea51954fb7d01d6738d7986a278311f7bbb4fdf211332a99985"
+      }
+    ],
+    "pipeline": "Tools/Blender/P10_Round005_SanitizeRelease.py",
+    "pipeline_sha256": "fdaf18bae796ed300459213d27e7745ea35e6e259c92da7cf3956534b492167a",
+    "png_metadata": [
+      {
+        "bytes": 2902555,
+        "path": "ArtSource/P10/Round005/Preflight/P10_Round005_Front.png",
+        "sha256": "1004bb824c937d0b748ffa90cd71cfcd90c5af50ae0bbfdb4cbd0ba455f80ca6",
+        "stripped_chunk_types_by_policy": [
+          "eXIf",
+          "iTXt",
+          "oFFs",
+          "tEXt",
+          "zTXt"
+        ],
+        "visual_payload_sha256": "a8b7db2eba75b2f93fc7f7677cedd17c5e32e14e9cdc0d7cbf0d7e074eaf7768"
+      },
+      {
+        "bytes": 2636120,
+        "path": "ArtSource/P10/Round005/Preflight/P10_Round005_ThreeQuarter.png",
+        "sha256": "f5ff458673ab18928ca38a2ae4a74f3811a470d286f3fa2578b611d29b090e21",
+        "stripped_chunk_types_by_policy": [
+          "eXIf",
+          "iTXt",
+          "oFFs",
+          "tEXt",
+          "zTXt"
+        ],
+        "visual_payload_sha256": "53d1b69c214d88d01c1813fa236c7f64841c468bf5a7a7c05d11d7c2458663fe"
+      },
+      {
+        "bytes": 2657786,
+        "path": "ArtSource/P10/Round005/Preflight/P10_Round005_Back.png",
+        "sha256": "bbd319358429a6ad0345f224dc6d374a9da7907a57af764731e1a5f8247d5d5f",
+        "stripped_chunk_types_by_policy": [
+          "eXIf",
+          "iTXt",
+          "oFFs",
+          "tEXt",
+          "zTXt"
+        ],
+        "visual_payload_sha256": "f48128f5b5b7d926486fa09226bb2ba89a6a342639c8e7082eeae1f8446bc060"
+      },
+      {
+        "bytes": 2828647,
+        "path": "ArtSource/P10/Round005/Preflight/P10_Round005_Profile.png",
+        "sha256": "0564852f8372b7e8b57b484b5557976427d017b078d5589978e35f94a88ccc72",
+        "stripped_chunk_types_by_policy": [
+          "eXIf",
+          "iTXt",
+          "oFFs",
+          "tEXt",
+          "zTXt"
+        ],
+        "visual_payload_sha256": "4859b60f8608463a928d55a0ffd70b27bd2b9e2b4aae4fac76f8cdf39a4ca1e4"
+      },
+      {
+        "bytes": 3383254,
+        "path": "ArtSource/P10/Round005/Preflight/P10_Round005_Face.png",
+        "sha256": "f7cf5a0cd41e140fcee8bd787a65bfefaf153296629439c6f8a4de3387918477",
+        "stripped_chunk_types_by_policy": [
+          "eXIf",
+          "iTXt",
+          "oFFs",
+          "tEXt",
+          "zTXt"
+        ],
+        "visual_payload_sha256": "bbb521f95b04fb6ce1f67421a3ed3adc8b3b919683e7e6b15f0f3a24143b85f4"
+      },
+      {
+        "bytes": 4418304,
+        "path": "ArtSource/P10/Round005/Preflight/P10_Round005_Hands.png",
+        "sha256": "e1db317b7619dd9c7866fa164f4dd3189e2753667e7332ed9959fb69844385cf",
+        "stripped_chunk_types_by_policy": [
+          "eXIf",
+          "iTXt",
+          "oFFs",
+          "tEXt",
+          "zTXt"
+        ],
+        "visual_payload_sha256": "8eaeab7adc12436f5852bc36a413980cb469e01e63cb872a4d2b9f28d27d8aec"
+      },
+      {
+        "bytes": 3619660,
+        "path": "ArtSource/P10/Round005/Preflight/P10_Round005_Feet.png",
+        "sha256": "2120cadc2ef2d21a3e5fb5f5db57d45835feb65b1529dbdb14f7a6c35105027d",
+        "stripped_chunk_types_by_policy": [
+          "eXIf",
+          "iTXt",
+          "oFFs",
+          "tEXt",
+          "zTXt"
+        ],
+        "visual_payload_sha256": "e0d275be83627b63062ee7ea4f6f5520e5b46208c43e00f4f04131f7f97b2887"
+      },
+      {
+        "bytes": 2636103,
+        "path": "ArtSource/P10/Round005/Preflight/P10_Round005_Combat.png",
+        "sha256": "081636378eec8fe2651a35e5395553f1dc374c5028c6428455a114e3b0d5c655",
+        "stripped_chunk_types_by_policy": [
+          "eXIf",
+          "iTXt",
+          "oFFs",
+          "tEXt",
+          "zTXt"
+        ],
+        "visual_payload_sha256": "890d87f208dca0fcd606299a7d93df78d49b79da8cff0ac62fcebfcec50d70e6"
+      },
+      {
+        "bytes": 5845693,
+        "path": "ArtSource/P10/Round005/Preflight/P10_Round005_Grip.png",
+        "sha256": "5784aea14bf995dae9b18f96a40639ddbfb46f344c4787ebada09eabbde4b09e",
+        "stripped_chunk_types_by_policy": [
+          "eXIf",
+          "iTXt",
+          "oFFs",
+          "tEXt",
+          "zTXt"
+        ],
+        "visual_payload_sha256": "f7fa2c158f84e1202c6772bb597b17566a0e500948533d46cc3e6f31ec198d20"
+      },
+      {
+        "bytes": 347045,
+        "path": "ArtSource/P10/Round005/Preflight/Iterations/Probe01_Rejected.png",
+        "sha256": "7873b45780d260fad01cbeea6acdcfb8a217f1a0f31f937780718b93a6328c2f",
+        "stripped_chunk_types_by_policy": [
+          "eXIf",
+          "iTXt",
+          "oFFs",
+          "tEXt",
+          "zTXt"
+        ],
+        "visual_payload_sha256": "9d334d05974dadedd51ceeabc4e754f5023b68016c72342e2b3aeba6918d79b8"
+      },
+      {
+        "bytes": 306032,
+        "path": "ArtSource/P10/Round005/Preflight/Iterations/Probe02_AcceptedForFreeze.png",
+        "sha256": "13278b182bfcf525981ea435668752c685d7ac95aaa638fa11d2616b9c3f5e0e",
+        "stripped_chunk_types_by_policy": [
+          "eXIf",
+          "iTXt",
+          "oFFs",
+          "tEXt",
+          "zTXt"
+        ],
+        "visual_payload_sha256": "aeedeb9ced7174edc63e26b214646d30e5d829fb13cce16544e15e227cf2a12c"
+      }
+    ],
+    "policy": "Remove checkout-specific or volatile metadata while preserving PNG critical image chunks and FBX geometry/material payloads.",
+    "rendered_pixels_changed": false
+  },
+  "required_credit": "Einar Rig (CC-BY) Blender Foundation | studio.blender.org",
+  "scope": "Source-first static fighter-identity visual proof and static LOD exports; no production animation, deform-rig, or Unity integration claim.",
+  "source_driven_warrior_adaptation": {
+    "hidden_civilian_identifiers": [
+      "GEO-einar_hat",
+      "GEO-satchel_button1",
+      "GEO-satchel_button1_base",
+      "GEO-satchel_button1_base_surfdef",
+      "GEO-satchel_button2",
+      "GEO-satchel_button2_base",
+      "GEO-satchel_button2_base_surfdef",
+      "GEO-satchel_inner",
+      "GEO-satchel_metal",
+      "GEO-satchel_openers",
+      "GEO-satchel_outer",
+      "GEO-satchel_strap1",
+      "GEO-satchel_strap2",
+      "GEO-satchel_strap3",
+      "GEO-satchel_strap4",
+      "GEO-satchel_strap5",
+      "GEO-satchel_strap6",
+      "GEO-satchel_strap_surfdef"
+    ],
+    "principle": "Only existing asymmetric production Einar geometry is exposed. No mirrored armor and no primitive armor geometry is introduced.",
+    "visible_clean_and_messy_groom_layers": [
+      "GEO-einar_hair",
+      "GEO-einar_hair.messy",
+      "GEO-einar_mustache",
+      "GEO-einar_mustache.messy",
+      "GEO-einar_beard",
+      "GEO-einar_beard.messy"
+    ],
+    "visible_human_right_tire_pauldron": [
+      {
+        "materials": [
+          "einar.rubber_tires"
+        ],
+        "object": "GEO-einar_tire_shoulder"
+      },
+      {
+        "materials": [
+          "einar.pants_fabric"
+        ],
+        "object": "GEO-einar_tire_shoulder_padding"
+      },
+      {
+        "materials": [
+          "einar.metal_rust3.generic"
+        ],
+        "object": "GEO-einar_tire_shoulder_bolt1"
+      },
+      {
+        "materials": [
+          "einar.metal_rust3.generic"
+        ],
+        "object": "GEO-einar_tire_shoulder_bolt2"
+      },
+      {
+        "materials": [
+          "einar.metal_rust3.generic"
+        ],
+        "object": "GEO-einar_tire_shoulder_bolt3"
+      },
+      {
+        "materials": [
+          "einar.metal_rust3.generic"
+        ],
+        "object": "GEO-einar_tire_shoulder_bolt4"
+      }
+    ],
+    "visible_load_path": [
+      "GEO-satchel_strap",
+      "GEO-body_anchor_straps",
+      "GEO-einar_tire_knee",
+      "GEO-einar_tire_knee_straps"
+    ],
+    "visible_restrained_blood_cuts_only": [
+      "GEO-blood_cheek_R.cut",
+      "GEO-blood_brow_R.cut"
+    ]
+  },
+  "source_material_palette_treatments": {
+    "einar.fabric": {
+      "factor": 0.16,
+      "multiply_color": [
+        0.16,
+        0.27,
+        0.42
+      ],
+      "principled_inputs_treated": 1
+    },
+    "einar.jacket.canvas": {
+      "factor": 0.24,
+      "multiply_color": [
+        0.22,
+        0.38,
+        0.55
+      ],
+      "principled_inputs_treated": 0
+    },
+    "einar.jacket.collar": {
+      "factor": 0.2,
+      "multiply_color": [
+        0.22,
+        0.34,
+        0.5
+      ],
+      "principled_inputs_treated": 1
+    },
+    "einar.jacket.rim": {
+      "factor": 0.22,
+      "multiply_color": [
+        0.18,
+        0.3,
+        0.45
+      ],
+      "principled_inputs_treated": 1
+    },
+    "einar.pants_fabric": {
+      "factor": 0.16,
+      "multiply_color": [
+        0.17,
+        0.28,
+        0.43
+      ],
+      "principled_inputs_treated": 1
+    },
+    "einar.pants_tarp": {
+      "factor": 0.13,
+      "multiply_color": [
+        0.15,
+        0.28,
+        0.39
+      ],
+      "principled_inputs_treated": 1
+    },
+    "einar.sweater": {
+      "factor": 0.18,
+      "multiply_color": [
+        0.18,
+        0.33,
+        0.48
+      ],
+      "principled_inputs_treated": 1
+    },
+    "satchel": {
+      "factor": 0.08,
+      "multiply_color": [
+        0.3,
+        0.24,
+        0.18
+      ],
+      "principled_inputs_treated": 1
+    }
+  },
+  "source_pose_actions": {
+    "face": {
+      "action": "Face_angry2",
+      "bones_touched": [
+        "ACT-CheekRaise.L",
+        "ACT-CheekRaise.R",
+        "ACT-Cheek_Lower.L",
+        "ACT-Cheek_Lower.R",
+        "ACT-Eyebrow_Inner.L",
+        "ACT-Eyebrow_Inner.R",
+        "ACT-Eyebrow_Mid",
+        "ACT-Eyebrow_Outer.L",
+        "ACT-Eyebrow_Outer.R",
+        "ACT-Lip_Lower_Sneer.L",
+        "ACT-Lip_Lower_Sneer.R",
+        "ACT-Lip_Upper_Sneer.L",
+        "ACT-Lip_Upper_Sneer.R",
+        "ACT-Mouth_Corner.L",
+        "ACT-Mouth_Corner.R",
+        "ACT-Nose_Sneer.L",
+        "ACT-Nose_Sneer.R",
+        "Blink.L",
+        "Blink.R",
+        "Ear1.L",
+        "Ear1.R",
+        "EyeRing.L",
+        "EyeRing.R",
+        "Eyelid_Lower.L",
+        "Eyelid_Lower.R",
+        "Eyelid_Lower_1.L",
+        "Eyelid_Lower_1.R",
+        "Eyelid_Lower_2.L",
+        "Eyelid_Lower_2.R",
+        "Eyelid_Lower_3.L",
+        "Eyelid_Lower_3.R",
+        "Eyelid_Lower_4.L",
+        "Eyelid_Lower_4.R",
+        "Eyelid_Outer_Upper2.L",
+        "Eyelid_Outer_Upper2.R",
+        "Eyelid_Outer_Upper3.L",
+        "Eyelid_Outer_Upper3.R",
+        "Eyelid_Upper.L",
+        "Eyelid_Upper.R",
+        "Eyelid_Upper_1.L",
+        "Eyelid_Upper_1.R",
+        "Eyelid_Upper_2.L",
+        "Eyelid_Upper_2.R",
+        "Eyelid_Upper_3.L",
+        "Eyelid_Upper_3.R",
+        "Eyelid_Upper_4.L",
+        "Eyelid_Upper_4.R",
+        "Lip_Bot.L",
+        "Lip_Bot.R",
+        "Lip_Center_Bot",
+        "Lip_Center_Top",
+        "Lip_Corner.L",
+        "Lip_Corner.R",
+        "Lip_Corner_Lower.L",
+        "Lip_Corner_Lower.R",
+        "Lip_Corner_Upper.L",
+        "Lip_Corner_Upper.R",
+        "Lip_Top.L",
+        "Lip_Top.R",
+        "MSTR-Jaw"
+      ],
+      "source_frame": 120.0
+    },
+    "human_hand_grip": {
+      "action": "AnimTest_Fingers",
+      "bones_touched": [
+        "FK-Finger_Index1.R",
+        "FK-Finger_Index2.R",
+        "FK-Finger_Index3.R",
+        "FK-Finger_Index_Carpal.R",
+        "FK-Finger_Middle1.R",
+        "FK-Finger_Middle2.R",
+        "FK-Finger_Middle3.R",
+        "FK-Finger_Middle_Carpal.R",
+        "FK-Finger_Pinky1.R",
+        "FK-Finger_Pinky2.R",
+        "FK-Finger_Pinky3.R",
+        "FK-Finger_Pinky_Carpal.R",
+        "FK-Finger_Ring1.R",
+        "FK-Finger_Ring2.R",
+        "FK-Finger_Ring3.R",
+        "FK-Finger_Ring_Carpal.R",
+        "FK-Finger_Thumb1.R",
+        "FK-Finger_Thumb2.R",
+        "FK-Finger_Thumb3.R"
+      ],
+      "source_frame": 54.0
+    },
+    "mechanical_claw": "Round005 static pose edit on existing FK finger controls; no animation claim.",
+    "rig_quality_for_evidence": 3
+  },
+  "static_freeze_unsupported": [
+    "Requested blood cut CURVE objects evaluate to zero mesh geometry with scripts disabled and are not claimed in the static FBX.",
+    "FBX texture/material portability is unsupported; vendor image paths are made relative only for the authored .blend after FBX export.",
+    "Opaque solid ribbon cards are a disclosed 5,538-triangle fallback, not visual parity with the source Curves groom."
+  ],
+  "static_lod_build": {
+    "category_decimation": [
+      {
+        "object": "P10R5_LOD0_HEAD",
+        "ratio_applied": 0.06765396,
+        "target_triangles": 22500,
+        "triangles_after": 22499,
+        "triangles_before": 332560
+      },
+      {
+        "object": "P10R5_LOD0_CLOTHING",
+        "ratio_applied": 0.0243133,
+        "target_triangles": 19006,
+        "triangles_after": 19006,
+        "triangles_before": 781712
+      },
+      {
+        "object": "P10R5_LOD0_ARMOR",
+        "ratio_applied": 0.02048312,
+        "target_triangles": 7000,
+        "triangles_after": 6999,
+        "triangles_before": 341696
+      },
+      {
+        "object": "P10R5_LOD0_MECH",
+        "ratio_applied": 0.0576995,
+        "target_triangles": 25000,
+        "triangles_after": 24999,
+        "triangles_before": 433262
+      },
+      {
+        "object": "P10R5_LOD0_WEAPON",
+        "ratio_applied": 0.38160999,
+        "target_triangles": 5500,
+        "triangles_after": 5499,
+        "triangles_before": 14410
+      },
+      {
+        "object": "P10R5_LOD0_STRAP",
+        "ratio_applied": 0.328722,
+        "target_triangles": 1000,
+        "triangles_after": 998,
+        "triangles_before": 3036
+      }
+    ],
+    "degenerate_triangle_cleanup": [
+      {
+        "duplicate_triangles_removed": 0,
+        "object": "P10R5_LOD0_HEAD",
+        "triangles_after": 22499,
+        "triangles_before": 22499,
+        "zero_area_triangles_removed": 0
+      },
+      {
+        "duplicate_triangles_removed": 0,
+        "object": "P10R5_LOD0_CLOTHING",
+        "triangles_after": 19006,
+        "triangles_before": 19006,
+        "zero_area_triangles_removed": 0
+      },
+      {
+        "duplicate_triangles_removed": 0,
+        "object": "P10R5_LOD0_ARMOR",
+        "triangles_after": 6993,
+        "triangles_before": 6999,
+        "zero_area_triangles_removed": 6
+      },
+      {
+        "duplicate_triangles_removed": 0,
+        "object": "P10R5_LOD0_MECH",
+        "triangles_after": 24569,
+        "triangles_before": 24999,
+        "zero_area_triangles_removed": 430
+      },
+      {
+        "duplicate_triangles_removed": 0,
+        "object": "P10R5_LOD0_WEAPON",
+        "triangles_after": 5499,
+        "triangles_before": 5499,
+        "zero_area_triangles_removed": 0
+      },
+      {
+        "duplicate_triangles_removed": 0,
+        "object": "P10R5_LOD0_STRAP",
+        "triangles_after": 998,
+        "triangles_before": 998,
+        "zero_area_triangles_removed": 0
+      },
+      {
+        "duplicate_triangles_removed": 0,
+        "object": "P10R5_LOD0_HAIR_CARDS",
+        "triangles_after": 5532,
+        "triangles_before": 5538,
+        "zero_area_triangles_removed": 6
+      },
+      {
+        "duplicate_triangles_removed": 0,
+        "object": "P10R5_LOD1_HEAD",
+        "triangles_after": 12599,
+        "triangles_before": 12599,
+        "zero_area_triangles_removed": 0
+      },
+      {
+        "duplicate_triangles_removed": 0,
+        "object": "P10R5_LOD1_CLOTHING",
+        "triangles_after": 10642,
+        "triangles_before": 10642,
+        "zero_area_triangles_removed": 0
+      },
+      {
+        "duplicate_triangles_removed": 0,
+        "object": "P10R5_LOD1_ARMOR",
+        "triangles_after": 3913,
+        "triangles_before": 3915,
+        "zero_area_triangles_removed": 2
+      },
+      {
+        "duplicate_triangles_removed": 31,
+        "object": "P10R5_LOD1_MECH",
+        "triangles_after": 13727,
+        "triangles_before": 13758,
+        "zero_area_triangles_removed": 0
+      },
+      {
+        "duplicate_triangles_removed": 0,
+        "object": "P10R5_LOD1_WEAPON",
+        "triangles_after": 3078,
+        "triangles_before": 3078,
+        "zero_area_triangles_removed": 0
+      },
+      {
+        "duplicate_triangles_removed": 0,
+        "object": "P10R5_LOD1_STRAP",
+        "triangles_after": 558,
+        "triangles_before": 558,
+        "zero_area_triangles_removed": 0
+      },
+      {
+        "duplicate_triangles_removed": 0,
+        "object": "P10R5_LOD1_HAIR_CARDS",
+        "triangles_after": 3098,
+        "triangles_before": 3098,
+        "zero_area_triangles_removed": 0
+      },
+      {
+        "duplicate_triangles_removed": 0,
+        "object": "P10R5_LOD2_HEAD",
+        "triangles_after": 6750,
+        "triangles_before": 6750,
+        "zero_area_triangles_removed": 0
+      },
+      {
+        "duplicate_triangles_removed": 2,
+        "object": "P10R5_LOD2_CLOTHING",
+        "triangles_after": 5699,
+        "triangles_before": 5701,
+        "zero_area_triangles_removed": 0
+      },
+      {
+        "duplicate_triangles_removed": 0,
+        "object": "P10R5_LOD2_ARMOR",
+        "triangles_after": 2095,
+        "triangles_before": 2097,
+        "zero_area_triangles_removed": 2
+      },
+      {
+        "duplicate_triangles_removed": 39,
+        "object": "P10R5_LOD2_MECH",
+        "triangles_after": 7332,
+        "triangles_before": 7371,
+        "zero_area_triangles_removed": 0
+      },
+      {
+        "duplicate_triangles_removed": 0,
+        "object": "P10R5_LOD2_WEAPON",
+        "triangles_after": 1650,
+        "triangles_before": 1650,
+        "zero_area_triangles_removed": 0
+      },
+      {
+        "duplicate_triangles_removed": 0,
+        "object": "P10R5_LOD2_STRAP",
+        "triangles_after": 298,
+        "triangles_before": 298,
+        "zero_area_triangles_removed": 0
+      },
+      {
+        "duplicate_triangles_removed": 0,
+        "object": "P10R5_LOD2_HAIR_CARDS",
+        "triangles_after": 1660,
+        "triangles_before": 1660,
+        "zero_area_triangles_removed": 0
+      }
+    ],
+    "disabled_dense_detail_modifiers": [],
+    "freeze_order": "Full authored topology posed/evaluated first; explicit meshes frozen from depsgraph; category decimation only after freeze.",
+    "frozen_sources": [
+      {
+        "category": "mech",
+        "collections": [
+          "arm_guard"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-arm_guard",
+        "frozen_triangles": 3620,
+        "source_object": "GEO-arm_guard",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "einar.geometry.arm"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-arm_guard_fastener",
+        "frozen_triangles": 2160,
+        "source_object": "GEO-arm_guard_fastener",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "einar.geometry.arm"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-arm_guard_fastener_grid",
+        "frozen_triangles": 15512,
+        "source_object": "GEO-arm_guard_fastener_grid",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "arm_guard"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-arm_guard_sign",
+        "frozen_triangles": 1296,
+        "source_object": "GEO-arm_guard_sign",
+        "source_type": "MESH"
+      },
+      {
+        "category": "armor",
+        "collections": [
+          "einar.geometry.arm"
+        ],
+        "frozen_object": "P10R5_FREEZE_ARMOR_GEO-body_anchor_bottom",
+        "frozen_triangles": 4368,
+        "source_object": "GEO-body_anchor_bottom",
+        "source_type": "MESH"
+      },
+      {
+        "category": "armor",
+        "collections": [
+          "einar.geometry.arm"
+        ],
+        "frozen_object": "P10R5_FREEZE_ARMOR_GEO-body_anchor_membrane",
+        "frozen_triangles": 1120,
+        "source_object": "GEO-body_anchor_membrane",
+        "source_type": "MESH"
+      },
+      {
+        "category": "armor",
+        "collections": [
+          "einar.geometry.arm"
+        ],
+        "frozen_object": "P10R5_FREEZE_ARMOR_GEO-body_anchor_straps",
+        "frozen_triangles": 1344,
+        "source_object": "GEO-body_anchor_straps",
+        "source_type": "MESH"
+      },
+      {
+        "category": "armor",
+        "collections": [
+          "einar.geometry.arm"
+        ],
+        "frozen_object": "P10R5_FREEZE_ARMOR_GEO-body_anchor_top",
+        "frozen_triangles": 3584,
+        "source_object": "GEO-body_anchor_top",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "bolts"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-bolt_hexnut",
+        "frozen_triangles": 610,
+        "source_object": "GEO-bolt_hexnut",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "bolts"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-bolt_hexnut.001",
+        "frozen_triangles": 610,
+        "source_object": "GEO-bolt_hexnut.001",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "bolts"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-bolt_hexnut.002",
+        "frozen_triangles": 610,
+        "source_object": "GEO-bolt_hexnut.002",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "bolts"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-bolt_hexnut.003",
+        "frozen_triangles": 610,
+        "source_object": "GEO-bolt_hexnut.003",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "bolts"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-bolt_hexnut.004",
+        "frozen_triangles": 610,
+        "source_object": "GEO-bolt_hexnut.004",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "bolts"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-bolt_hexnut.005",
+        "frozen_triangles": 610,
+        "source_object": "GEO-bolt_hexnut.005",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "bolts"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-bolt_hexnut.006",
+        "frozen_triangles": 610,
+        "source_object": "GEO-bolt_hexnut.006",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "bolts"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-bolt_hexnut.007",
+        "frozen_triangles": 610,
+        "source_object": "GEO-bolt_hexnut.007",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "bolts"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-bolt_hexnut.008",
+        "frozen_triangles": 610,
+        "source_object": "GEO-bolt_hexnut.008",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "bolts"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-bolt_hexnut.009",
+        "frozen_triangles": 610,
+        "source_object": "GEO-bolt_hexnut.009",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "bolts"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-bolt_hexnut.010",
+        "frozen_triangles": 610,
+        "source_object": "GEO-bolt_hexnut.010",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "bolts"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-bolt_hexnut.011",
+        "frozen_triangles": 610,
+        "source_object": "GEO-bolt_hexnut.011",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "bolts"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-bolt_hexnut.012",
+        "frozen_triangles": 610,
+        "source_object": "GEO-bolt_hexnut.012",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "bolts"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-bolt_torx",
+        "frozen_triangles": 682,
+        "source_object": "GEO-bolt_torx",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "hand"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-cushion_index",
+        "frozen_triangles": 368,
+        "source_object": "GEO-cushion_index",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "hand"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-cushion_middle",
+        "frozen_triangles": 544,
+        "source_object": "GEO-cushion_middle",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "hand"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-cushion_pinkie",
+        "frozen_triangles": 368,
+        "source_object": "GEO-cushion_pinkie",
+        "source_type": "MESH"
+      },
+      {
+        "category": "clothing",
+        "collections": [
+          "boots"
+        ],
+        "frozen_object": "P10R5_FREEZE_CLOTHING_GEO-einar_boot_main.L",
+        "frozen_triangles": 14144,
+        "source_object": "GEO-einar_boot_main.L",
+        "source_type": "MESH"
+      },
+      {
+        "category": "clothing",
+        "collections": [
+          "boots"
+        ],
+        "frozen_object": "P10R5_FREEZE_CLOTHING_GEO-einar_boot_main.R",
+        "frozen_triangles": 14240,
+        "source_object": "GEO-einar_boot_main.R",
+        "source_type": "MESH"
+      },
+      {
+        "category": "clothing",
+        "collections": [
+          "boots"
+        ],
+        "frozen_object": "P10R5_FREEZE_CLOTHING_GEO-einar_boot_sole.L",
+        "frozen_triangles": 107904,
+        "source_object": "GEO-einar_boot_sole.L",
+        "source_type": "MESH"
+      },
+      {
+        "category": "clothing",
+        "collections": [
+          "boots"
+        ],
+        "frozen_object": "P10R5_FREEZE_CLOTHING_GEO-einar_boot_sole.R",
+        "frozen_triangles": 107904,
+        "source_object": "GEO-einar_boot_sole.R",
+        "source_type": "MESH"
+      },
+      {
+        "category": "head",
+        "collections": [
+          "human_hand"
+        ],
+        "frozen_object": "P10R5_FREEZE_HEAD_GEO-einar_fingers",
+        "frozen_triangles": 44416,
+        "source_object": "GEO-einar_fingers",
+        "source_type": "MESH"
+      },
+      {
+        "category": "head",
+        "collections": [
+          "human_hand"
+        ],
+        "frozen_object": "P10R5_FREEZE_HEAD_GEO-einar_glove",
+        "frozen_triangles": 24160,
+        "source_object": "GEO-einar_glove",
+        "source_type": "MESH"
+      },
+      {
+        "category": "head",
+        "collections": [
+          "einar.geometry.retopo"
+        ],
+        "frozen_object": "P10R5_FREEZE_HEAD_GEO-einar_head",
+        "frozen_triangles": 144704,
+        "source_object": "GEO-einar_head",
+        "source_type": "MESH"
+      },
+      {
+        "category": "clothing",
+        "collections": [
+          "jacket"
+        ],
+        "frozen_object": "P10R5_FREEZE_CLOTHING_GEO-einar_jacket_backstrap",
+        "frozen_triangles": 5568,
+        "source_object": "GEO-einar_jacket_backstrap",
+        "source_type": "MESH"
+      },
+      {
+        "category": "clothing",
+        "collections": [
+          "jacket"
+        ],
+        "frozen_object": "P10R5_FREEZE_CLOTHING_GEO-einar_jacket_belts",
+        "frozen_triangles": 25920,
+        "source_object": "GEO-einar_jacket_belts",
+        "source_type": "MESH"
+      },
+      {
+        "category": "clothing",
+        "collections": [
+          "jacket"
+        ],
+        "frozen_object": "P10R5_FREEZE_CLOTHING_GEO-einar_jacket_button1_14cm",
+        "frozen_triangles": 4512,
+        "source_object": "GEO-einar_jacket_button1_14cm",
+        "source_type": "MESH"
+      },
+      {
+        "category": "clothing",
+        "collections": [
+          "jacket"
+        ],
+        "frozen_object": "P10R5_FREEZE_CLOTHING_GEO-einar_jacket_button1_16cm",
+        "frozen_triangles": 4512,
+        "source_object": "GEO-einar_jacket_button1_16cm",
+        "source_type": "MESH"
+      },
+      {
+        "category": "clothing",
+        "collections": [
+          "jacket"
+        ],
+        "frozen_object": "P10R5_FREEZE_CLOTHING_GEO-einar_jacket_button1_18cm",
+        "frozen_triangles": 6432,
+        "source_object": "GEO-einar_jacket_button1_18cm",
+        "source_type": "MESH"
+      },
+      {
+        "category": "clothing",
+        "collections": [
+          "jacket"
+        ],
+        "frozen_object": "P10R5_FREEZE_CLOTHING_GEO-einar_jacket_button1_5cm",
+        "frozen_triangles": 4512,
+        "source_object": "GEO-einar_jacket_button1_5cm",
+        "source_type": "MESH"
+      },
+      {
+        "category": "clothing",
+        "collections": [
+          "jacket"
+        ],
+        "frozen_object": "P10R5_FREEZE_CLOTHING_GEO-einar_jacket_button2_18cm",
+        "frozen_triangles": 6432,
+        "source_object": "GEO-einar_jacket_button2_18cm",
+        "source_type": "MESH"
+      },
+      {
+        "category": "clothing",
+        "collections": [
+          "jacket"
+        ],
+        "frozen_object": "P10R5_FREEZE_CLOTHING_GEO-einar_jacket_button2_5cm",
+        "frozen_triangles": 4512,
+        "source_object": "GEO-einar_jacket_button2_5cm",
+        "source_type": "MESH"
+      },
+      {
+        "category": "clothing",
+        "collections": [
+          "jacket"
+        ],
+        "frozen_object": "P10R5_FREEZE_CLOTHING_GEO-einar_jacket_button3_18cm",
+        "frozen_triangles": 4512,
+        "source_object": "GEO-einar_jacket_button3_18cm",
+        "source_type": "MESH"
+      },
+      {
+        "category": "clothing",
+        "collections": [
+          "jacket"
+        ],
+        "frozen_object": "P10R5_FREEZE_CLOTHING_GEO-einar_jacket_collar1",
+        "frozen_triangles": 9696,
+        "source_object": "GEO-einar_jacket_collar1",
+        "source_type": "MESH"
+      },
+      {
+        "category": "clothing",
+        "collections": [
+          "jacket"
+        ],
+        "frozen_object": "P10R5_FREEZE_CLOTHING_GEO-einar_jacket_collar2",
+        "frozen_triangles": 21696,
+        "source_object": "GEO-einar_jacket_collar2",
+        "source_type": "MESH"
+      },
+      {
+        "category": "clothing",
+        "collections": [
+          "jacket"
+        ],
+        "frozen_object": "P10R5_FREEZE_CLOTHING_GEO-einar_jacket_loop",
+        "frozen_triangles": 2816,
+        "source_object": "GEO-einar_jacket_loop",
+        "source_type": "MESH"
+      },
+      {
+        "category": "clothing",
+        "collections": [
+          "jacket"
+        ],
+        "frozen_object": "P10R5_FREEZE_CLOTHING_GEO-einar_jacket_loop_connection",
+        "frozen_triangles": 4416,
+        "source_object": "GEO-einar_jacket_loop_connection",
+        "source_type": "MESH"
+      },
+      {
+        "category": "clothing",
+        "collections": [
+          "jacket"
+        ],
+        "frozen_object": "P10R5_FREEZE_CLOTHING_GEO-einar_jacket_main",
+        "frozen_triangles": 85008,
+        "source_object": "GEO-einar_jacket_main",
+        "source_type": "MESH"
+      },
+      {
+        "category": "clothing",
+        "collections": [
+          "jacket"
+        ],
+        "frozen_object": "P10R5_FREEZE_CLOTHING_GEO-einar_jacket_pocket1",
+        "frozen_triangles": 12656,
+        "source_object": "GEO-einar_jacket_pocket1",
+        "source_type": "MESH"
+      },
+      {
+        "category": "clothing",
+        "collections": [
+          "jacket"
+        ],
+        "frozen_object": "P10R5_FREEZE_CLOTHING_GEO-einar_jacket_pocket2",
+        "frozen_triangles": 6336,
+        "source_object": "GEO-einar_jacket_pocket2",
+        "source_type": "MESH"
+      },
+      {
+        "category": "clothing",
+        "collections": [
+          "jacket"
+        ],
+        "frozen_object": "P10R5_FREEZE_CLOTHING_GEO-einar_jacket_strap_shoulder",
+        "frozen_triangles": 7264,
+        "source_object": "GEO-einar_jacket_strap_shoulder",
+        "source_type": "MESH"
+      },
+      {
+        "category": "clothing",
+        "collections": [
+          "jacket"
+        ],
+        "frozen_object": "P10R5_FREEZE_CLOTHING_GEO-einar_jacket_tape",
+        "frozen_triangles": 27456,
+        "source_object": "GEO-einar_jacket_tape",
+        "source_type": "MESH"
+      },
+      {
+        "category": "clothing",
+        "collections": [
+          "jacket"
+        ],
+        "frozen_object": "P10R5_FREEZE_CLOTHING_GEO-einar_jacket_zipper",
+        "frozen_triangles": 29984,
+        "source_object": "GEO-einar_jacket_zipper",
+        "source_type": "MESH"
+      },
+      {
+        "category": "clothing",
+        "collections": [
+          "jacket"
+        ],
+        "frozen_object": "P10R5_FREEZE_CLOTHING_GEO-einar_jacket_zipper_connection",
+        "frozen_triangles": 1184,
+        "source_object": "GEO-einar_jacket_zipper_connection",
+        "source_type": "MESH"
+      },
+      {
+        "category": "clothing",
+        "collections": [
+          "pants"
+        ],
+        "frozen_object": "P10R5_FREEZE_CLOTHING_GEO-einar_pants_belt",
+        "frozen_triangles": 20416,
+        "source_object": "GEO-einar_pants_belt",
+        "source_type": "MESH"
+      },
+      {
+        "category": "clothing",
+        "collections": [
+          "pants"
+        ],
+        "frozen_object": "P10R5_FREEZE_CLOTHING_GEO-einar_pants_belt_buckle",
+        "frozen_triangles": 3520,
+        "source_object": "GEO-einar_pants_belt_buckle",
+        "source_type": "MESH"
+      },
+      {
+        "category": "clothing",
+        "collections": [
+          "pants"
+        ],
+        "frozen_object": "P10R5_FREEZE_CLOTHING_GEO-einar_pants_belt_straps",
+        "frozen_triangles": 18816,
+        "source_object": "GEO-einar_pants_belt_straps",
+        "source_type": "MESH"
+      },
+      {
+        "category": "clothing",
+        "collections": [
+          "pants"
+        ],
+        "frozen_object": "P10R5_FREEZE_CLOTHING_GEO-einar_pants_button1_14cm",
+        "frozen_triangles": 4512,
+        "source_object": "GEO-einar_pants_button1_14cm",
+        "source_type": "MESH"
+      },
+      {
+        "category": "clothing",
+        "collections": [
+          "pants"
+        ],
+        "frozen_object": "P10R5_FREEZE_CLOTHING_GEO-einar_pants_button1_16cm",
+        "frozen_triangles": 4512,
+        "source_object": "GEO-einar_pants_button1_16cm",
+        "source_type": "MESH"
+      },
+      {
+        "category": "clothing",
+        "collections": [
+          "pants"
+        ],
+        "frozen_object": "P10R5_FREEZE_CLOTHING_GEO-einar_pants_button1_18cm",
+        "frozen_triangles": 6432,
+        "source_object": "GEO-einar_pants_button1_18cm",
+        "source_type": "MESH"
+      },
+      {
+        "category": "clothing",
+        "collections": [
+          "pants"
+        ],
+        "frozen_object": "P10R5_FREEZE_CLOTHING_GEO-einar_pants_button2_18cm",
+        "frozen_triangles": 6432,
+        "source_object": "GEO-einar_pants_button2_18cm",
+        "source_type": "MESH"
+      },
+      {
+        "category": "clothing",
+        "collections": [
+          "pants"
+        ],
+        "frozen_object": "P10R5_FREEZE_CLOTHING_GEO-einar_pants_button3_18cm",
+        "frozen_triangles": 6432,
+        "source_object": "GEO-einar_pants_button3_18cm",
+        "source_type": "MESH"
+      },
+      {
+        "category": "clothing",
+        "collections": [
+          "pants"
+        ],
+        "frozen_object": "P10R5_FREEZE_CLOTHING_GEO-einar_pants_carabiner",
+        "frozen_triangles": 8992,
+        "source_object": "GEO-einar_pants_carabiner",
+        "source_type": "MESH"
+      },
+      {
+        "category": "clothing",
+        "collections": [
+          "pants"
+        ],
+        "frozen_object": "P10R5_FREEZE_CLOTHING_GEO-einar_pants_loop_connection",
+        "frozen_triangles": 3008,
+        "source_object": "GEO-einar_pants_loop_connection",
+        "source_type": "MESH"
+      },
+      {
+        "category": "clothing",
+        "collections": [
+          "pants"
+        ],
+        "frozen_object": "P10R5_FREEZE_CLOTHING_GEO-einar_pants_main",
+        "frozen_triangles": 69632,
+        "source_object": "GEO-einar_pants_main",
+        "source_type": "MESH"
+      },
+      {
+        "category": "clothing",
+        "collections": [
+          "pants"
+        ],
+        "frozen_object": "P10R5_FREEZE_CLOTHING_GEO-einar_pants_pockets",
+        "frozen_triangles": 43952,
+        "source_object": "GEO-einar_pants_pockets",
+        "source_type": "MESH"
+      },
+      {
+        "category": "clothing",
+        "collections": [
+          "pants"
+        ],
+        "frozen_object": "P10R5_FREEZE_CLOTHING_GEO-einar_pants_tape",
+        "frozen_triangles": 40704,
+        "source_object": "GEO-einar_pants_tape",
+        "source_type": "MESH"
+      },
+      {
+        "category": "clothing",
+        "collections": [
+          "sweater"
+        ],
+        "frozen_object": "P10R5_FREEZE_CLOTHING_GEO-einar_sweater",
+        "frozen_triangles": 24736,
+        "source_object": "GEO-einar_sweater",
+        "source_type": "MESH"
+      },
+      {
+        "category": "head",
+        "collections": [
+          "new_inner_mouth"
+        ],
+        "frozen_object": "P10R5_FREEZE_HEAD_GEO-einar_teeth_lower",
+        "frozen_triangles": 7248,
+        "source_object": "GEO-einar_teeth_lower",
+        "source_type": "MESH"
+      },
+      {
+        "category": "head",
+        "collections": [
+          "new_inner_mouth"
+        ],
+        "frozen_object": "P10R5_FREEZE_HEAD_GEO-einar_teeth_upper",
+        "frozen_triangles": 7184,
+        "source_object": "GEO-einar_teeth_upper",
+        "source_type": "MESH"
+      },
+      {
+        "category": "armor",
+        "collections": [
+          "pants"
+        ],
+        "frozen_object": "P10R5_FREEZE_ARMOR_GEO-einar_tire_knee",
+        "frozen_triangles": 67104,
+        "source_object": "GEO-einar_tire_knee",
+        "source_type": "MESH"
+      },
+      {
+        "category": "armor",
+        "collections": [
+          "pants"
+        ],
+        "frozen_object": "P10R5_FREEZE_ARMOR_GEO-einar_tire_knee_bolt1",
+        "frozen_triangles": 21648,
+        "source_object": "GEO-einar_tire_knee_bolt1",
+        "source_type": "MESH"
+      },
+      {
+        "category": "armor",
+        "collections": [
+          "pants"
+        ],
+        "frozen_object": "P10R5_FREEZE_ARMOR_GEO-einar_tire_knee_bolt2",
+        "frozen_triangles": 21648,
+        "source_object": "GEO-einar_tire_knee_bolt2",
+        "source_type": "MESH"
+      },
+      {
+        "category": "armor",
+        "collections": [
+          "pants"
+        ],
+        "frozen_object": "P10R5_FREEZE_ARMOR_GEO-einar_tire_knee_bolt3",
+        "frozen_triangles": 21648,
+        "source_object": "GEO-einar_tire_knee_bolt3",
+        "source_type": "MESH"
+      },
+      {
+        "category": "armor",
+        "collections": [
+          "pants"
+        ],
+        "frozen_object": "P10R5_FREEZE_ARMOR_GEO-einar_tire_knee_bolt4",
+        "frozen_triangles": 21648,
+        "source_object": "GEO-einar_tire_knee_bolt4",
+        "source_type": "MESH"
+      },
+      {
+        "category": "armor",
+        "collections": [
+          "pants"
+        ],
+        "frozen_object": "P10R5_FREEZE_ARMOR_GEO-einar_tire_knee_straps",
+        "frozen_triangles": 17792,
+        "source_object": "GEO-einar_tire_knee_straps",
+        "source_type": "MESH"
+      },
+      {
+        "category": "armor",
+        "collections": [
+          "jacket"
+        ],
+        "frozen_object": "P10R5_FREEZE_ARMOR_GEO-einar_tire_shoulder",
+        "frozen_triangles": 67056,
+        "source_object": "GEO-einar_tire_shoulder",
+        "source_type": "MESH"
+      },
+      {
+        "category": "armor",
+        "collections": [
+          "jacket"
+        ],
+        "frozen_object": "P10R5_FREEZE_ARMOR_GEO-einar_tire_shoulder_bolt1",
+        "frozen_triangles": 21648,
+        "source_object": "GEO-einar_tire_shoulder_bolt1",
+        "source_type": "MESH"
+      },
+      {
+        "category": "armor",
+        "collections": [
+          "jacket"
+        ],
+        "frozen_object": "P10R5_FREEZE_ARMOR_GEO-einar_tire_shoulder_bolt2",
+        "frozen_triangles": 21648,
+        "source_object": "GEO-einar_tire_shoulder_bolt2",
+        "source_type": "MESH"
+      },
+      {
+        "category": "armor",
+        "collections": [
+          "jacket"
+        ],
+        "frozen_object": "P10R5_FREEZE_ARMOR_GEO-einar_tire_shoulder_bolt3",
+        "frozen_triangles": 21648,
+        "source_object": "GEO-einar_tire_shoulder_bolt3",
+        "source_type": "MESH"
+      },
+      {
+        "category": "armor",
+        "collections": [
+          "jacket"
+        ],
+        "frozen_object": "P10R5_FREEZE_ARMOR_GEO-einar_tire_shoulder_bolt4",
+        "frozen_triangles": 21648,
+        "source_object": "GEO-einar_tire_shoulder_bolt4",
+        "source_type": "MESH"
+      },
+      {
+        "category": "armor",
+        "collections": [
+          "jacket"
+        ],
+        "frozen_object": "P10R5_FREEZE_ARMOR_GEO-einar_tire_shoulder_padding",
+        "frozen_triangles": 6144,
+        "source_object": "GEO-einar_tire_shoulder_padding",
+        "source_type": "MESH"
+      },
+      {
+        "category": "head",
+        "collections": [
+          "new_inner_mouth"
+        ],
+        "frozen_object": "P10R5_FREEZE_HEAD_GEO-einar_tongue",
+        "frozen_triangles": 528,
+        "source_object": "GEO-einar_tongue",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "einar.geometry.arm"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-elbow_joint",
+        "frozen_triangles": 2068,
+        "source_object": "GEO-elbow_joint",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "einar.geometry.arm"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-elbow_joint.001",
+        "frozen_triangles": 502,
+        "source_object": "GEO-elbow_joint.001",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "einar.geometry.arm"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-electrical_wires.001.mesh",
+        "frozen_triangles": 576,
+        "source_object": "GEO-electrical_wires.001.mesh",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "einar.geometry.arm"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-electrical_wires.002.mesh",
+        "frozen_triangles": 576,
+        "source_object": "GEO-electrical_wires.002.mesh",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "einar.geometry.arm"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-electrical_wires.003.mesh",
+        "frozen_triangles": 552,
+        "source_object": "GEO-electrical_wires.003.mesh",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "einar.geometry.arm"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-electrical_wires.004.mesh",
+        "frozen_triangles": 2856,
+        "source_object": "GEO-electrical_wires.004.mesh",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "einar.geometry.arm"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-electrical_wires.mesh",
+        "frozen_triangles": 2856,
+        "source_object": "GEO-electrical_wires.mesh",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "einar.geometry.arm"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-electrical_wires_forearm.001.mesh",
+        "frozen_triangles": 2016,
+        "source_object": "GEO-electrical_wires_forearm.001.mesh",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "einar.geometry.arm"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-electrical_wires_forearm.002.mesh",
+        "frozen_triangles": 1536,
+        "source_object": "GEO-electrical_wires_forearm.002.mesh",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "einar.geometry.arm"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-electrical_wires_forearm.003.mesh",
+        "frozen_triangles": 1560,
+        "source_object": "GEO-electrical_wires_forearm.003.mesh",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "einar.geometry.arm"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-electrical_wires_forearm_thick.001.mesh",
+        "frozen_triangles": 1536,
+        "source_object": "GEO-electrical_wires_forearm_thick.001.mesh",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "einar.geometry.arm"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-electrical_wires_hand.001.mesh",
+        "frozen_triangles": 360,
+        "source_object": "GEO-electrical_wires_hand.001.mesh",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "einar.geometry.arm"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-electrical_wires_hand.002.mesh",
+        "frozen_triangles": 264,
+        "source_object": "GEO-electrical_wires_hand.002.mesh",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "einar.geometry.arm"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-electrical_wires_hand.mesh",
+        "frozen_triangles": 264,
+        "source_object": "GEO-electrical_wires_hand.mesh",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "einar.geometry.arm"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-electrical_wires_hand_broken",
+        "frozen_triangles": 3040,
+        "source_object": "GEO-electrical_wires_hand_broken",
+        "source_type": "MESH"
+      },
+      {
+        "category": "head",
+        "collections": [
+          "einar.geometry.retopo"
+        ],
+        "frozen_object": "P10R5_FREEZE_HEAD_GEO-eye.L",
+        "frozen_triangles": 26112,
+        "source_object": "GEO-eye.L",
+        "source_type": "MESH"
+      },
+      {
+        "category": "head",
+        "collections": [
+          "einar.geometry.retopo"
+        ],
+        "frozen_object": "P10R5_FREEZE_HEAD_GEO-eye.R",
+        "frozen_triangles": 26112,
+        "source_object": "GEO-eye.R",
+        "source_type": "MESH"
+      },
+      {
+        "category": "head",
+        "collections": [
+          "einar.geometry.retopo"
+        ],
+        "frozen_object": "P10R5_FREEZE_HEAD_GEO-eye.cornea.L",
+        "frozen_triangles": 22272,
+        "source_object": "GEO-eye.cornea.L",
+        "source_type": "MESH"
+      },
+      {
+        "category": "head",
+        "collections": [
+          "einar.geometry.retopo"
+        ],
+        "frozen_object": "P10R5_FREEZE_HEAD_GEO-eye.cornea.R",
+        "frozen_triangles": 22272,
+        "source_object": "GEO-eye.cornea.R",
+        "source_type": "MESH"
+      },
+      {
+        "category": "head",
+        "collections": [
+          "einar.geometry.retopo"
+        ],
+        "frozen_object": "P10R5_FREEZE_HEAD_GEO-eye.meniscus.L",
+        "frozen_triangles": 2240,
+        "source_object": "GEO-eye.meniscus.L",
+        "source_type": "MESH"
+      },
+      {
+        "category": "head",
+        "collections": [
+          "einar.geometry.retopo"
+        ],
+        "frozen_object": "P10R5_FREEZE_HEAD_GEO-eye.meniscus.R",
+        "frozen_triangles": 2240,
+        "source_object": "GEO-eye.meniscus.R",
+        "source_type": "MESH"
+      },
+      {
+        "category": "head",
+        "collections": [
+          "einar.geometry.retopo"
+        ],
+        "frozen_object": "P10R5_FREEZE_HEAD_GEO-eye.plica_semilunaris.L",
+        "frozen_triangles": 1536,
+        "source_object": "GEO-eye.plica_semilunaris.L",
+        "source_type": "MESH"
+      },
+      {
+        "category": "head",
+        "collections": [
+          "einar.geometry.retopo"
+        ],
+        "frozen_object": "P10R5_FREEZE_HEAD_GEO-eye.plica_semilunaris.R",
+        "frozen_triangles": 1536,
+        "source_object": "GEO-eye.plica_semilunaris.R",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "einar.geometry.arm"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-hand_wrist_connection",
+        "frozen_triangles": 2048,
+        "source_object": "GEO-hand_wrist_connection",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "einar.geometry.arm"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-hyd_compressor",
+        "frozen_triangles": 52192,
+        "source_object": "GEO-hyd_compressor",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "einar.geometry.arm"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-hyd_compressor_fasteners",
+        "frozen_triangles": 1744,
+        "source_object": "GEO-hyd_compressor_fasteners",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "hydraulics"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-hyd_hose_connector.001",
+        "frozen_triangles": 1492,
+        "source_object": "GEO-hyd_hose_connector.001",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "hydraulics"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-hyd_hose_connector.002",
+        "frozen_triangles": 1492,
+        "source_object": "GEO-hyd_hose_connector.002",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "hydraulics"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-hyd_hose_connector.003",
+        "frozen_triangles": 1492,
+        "source_object": "GEO-hyd_hose_connector.003",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "hydraulics"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-hyd_hose_connector.004",
+        "frozen_triangles": 1492,
+        "source_object": "GEO-hyd_hose_connector.004",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "hydraulics"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-hyd_hose_connector.005",
+        "frozen_triangles": 1492,
+        "source_object": "GEO-hyd_hose_connector.005",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "hydraulics"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-hyd_hose_connector_nut.001",
+        "frozen_triangles": 682,
+        "source_object": "GEO-hyd_hose_connector_nut.001",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "hydraulics"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-hyd_hose_connector_nut.002",
+        "frozen_triangles": 682,
+        "source_object": "GEO-hyd_hose_connector_nut.002",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "hydraulics"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-hyd_hose_connector_nut.003",
+        "frozen_triangles": 682,
+        "source_object": "GEO-hyd_hose_connector_nut.003",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "hydraulics"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-hyd_hose_connector_nut.004",
+        "frozen_triangles": 682,
+        "source_object": "GEO-hyd_hose_connector_nut.004",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "hydraulics"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-hyd_hose_connector_nut.005",
+        "frozen_triangles": 682,
+        "source_object": "GEO-hyd_hose_connector_nut.005",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "einar.geometry.arm"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-hyd_hose_connector_straight.001",
+        "frozen_triangles": 1126,
+        "source_object": "GEO-hyd_hose_connector_straight.001",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "einar.geometry.arm"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-hyd_hose_connector_straight.002",
+        "frozen_triangles": 1126,
+        "source_object": "GEO-hyd_hose_connector_straight.002",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "einar.geometry.arm"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-hyd_hose_connector_straight.003",
+        "frozen_triangles": 1126,
+        "source_object": "GEO-hyd_hose_connector_straight.003",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "einar.geometry.arm"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-hyd_hose_connector_straight_nut.001",
+        "frozen_triangles": 682,
+        "source_object": "GEO-hyd_hose_connector_straight_nut.001",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "einar.geometry.arm"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-hyd_hose_connector_straight_nut.002",
+        "frozen_triangles": 682,
+        "source_object": "GEO-hyd_hose_connector_straight_nut.002",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "einar.geometry.arm"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-hyd_hose_connector_straight_nut.003",
+        "frozen_triangles": 682,
+        "source_object": "GEO-hyd_hose_connector_straight_nut.003",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "hydraulics"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-hyd_hose_shoulder_back.001.mesh",
+        "frozen_triangles": 552,
+        "source_object": "GEO-hyd_hose_shoulder_back.001.mesh",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "hydraulics"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-hyd_hose_shoulder_back.mesh",
+        "frozen_triangles": 552,
+        "source_object": "GEO-hyd_hose_shoulder_back.mesh",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "hydraulics"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-hyd_hose_shoulder_front.001.mesh",
+        "frozen_triangles": 744,
+        "source_object": "GEO-hyd_hose_shoulder_front.001.mesh",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "hydraulics"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-hyd_hose_shoulder_front.mesh",
+        "frozen_triangles": 792,
+        "source_object": "GEO-hyd_hose_shoulder_front.mesh",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "einar.geometry.arm"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-hyd_hoses_junction_box",
+        "frozen_triangles": 1440,
+        "source_object": "GEO-hyd_hoses_junction_box",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "hydraulics"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-hyd_hoses_lower_arm.001.mesh",
+        "frozen_triangles": 1560,
+        "source_object": "GEO-hyd_hoses_lower_arm.001.mesh",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "hydraulics"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-hyd_hoses_lower_arm.mesh",
+        "frozen_triangles": 1560,
+        "source_object": "GEO-hyd_hoses_lower_arm.mesh",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "hydraulics"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-hyd_hoses_upper_arm.001.mesh",
+        "frozen_triangles": 1536,
+        "source_object": "GEO-hyd_hoses_upper_arm.001.mesh",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "hydraulics"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-hyd_hoses_upper_arm.mesh",
+        "frozen_triangles": 1536,
+        "source_object": "GEO-hyd_hoses_upper_arm.mesh",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "hydraulics"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-hyd_piston_lower_arm",
+        "frozen_triangles": 538,
+        "source_object": "GEO-hyd_piston_lower_arm",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "hydraulics"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-hyd_piston_shoulder_back",
+        "frozen_triangles": 1974,
+        "source_object": "GEO-hyd_piston_shoulder_back",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "hydraulics"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-hyd_piston_shoulder_front",
+        "frozen_triangles": 1974,
+        "source_object": "GEO-hyd_piston_shoulder_front",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "hydraulics"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-hyd_piston_shoulder_lift",
+        "frozen_triangles": 252,
+        "source_object": "GEO-hyd_piston_shoulder_lift",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "hydraulics"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-hyd_piston_upper_arm",
+        "frozen_triangles": 2080,
+        "source_object": "GEO-hyd_piston_upper_arm",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "einar.geometry.arm"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-hyd_rod_hinge",
+        "frozen_triangles": 980,
+        "source_object": "GEO-hyd_rod_hinge",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "hydraulics"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-hyd_rod_lower_arm",
+        "frozen_triangles": 856,
+        "source_object": "GEO-hyd_rod_lower_arm",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "hydraulics"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-hyd_rod_shoulder_back",
+        "frozen_triangles": 224,
+        "source_object": "GEO-hyd_rod_shoulder_back",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "hydraulics"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-hyd_rod_shoulder_front",
+        "frozen_triangles": 224,
+        "source_object": "GEO-hyd_rod_shoulder_front",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "hydraulics"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-hyd_rod_shoulder_lift",
+        "frozen_triangles": 270,
+        "source_object": "GEO-hyd_rod_shoulder_lift",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "hydraulics"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-hyd_rod_upper_arm",
+        "frozen_triangles": 224,
+        "source_object": "GEO-hyd_rod_upper_arm",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "hand"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-index.1",
+        "frozen_triangles": 10016,
+        "source_object": "GEO-index.1",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "hand"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-index.2",
+        "frozen_triangles": 10016,
+        "source_object": "GEO-index.2",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "hand"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-index.3",
+        "frozen_triangles": 13536,
+        "source_object": "GEO-index.3",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "einar.geometry.arm"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-lower_arm_cable_fastener",
+        "frozen_triangles": 896,
+        "source_object": "GEO-lower_arm_cable_fastener",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "einar.geometry.arm"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-lower_arm_cable_fastener.001",
+        "frozen_triangles": 896,
+        "source_object": "GEO-lower_arm_cable_fastener.001",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "einar.geometry.arm"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-lower_arm_frame",
+        "frozen_triangles": 8364,
+        "source_object": "GEO-lower_arm_frame",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "einar.geometry.arm"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-lower_arm_frame_bolt",
+        "frozen_triangles": 1944,
+        "source_object": "GEO-lower_arm_frame_bolt",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "hand"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-middle.1",
+        "frozen_triangles": 10016,
+        "source_object": "GEO-middle.1",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "hand"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-middle.2",
+        "frozen_triangles": 10016,
+        "source_object": "GEO-middle.2",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "hand"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-middle.3",
+        "frozen_triangles": 13536,
+        "source_object": "GEO-middle.3",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "einar.geometry.arm"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-motor_wrist",
+        "frozen_triangles": 2548,
+        "source_object": "GEO-motor_wrist",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "hand"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-palm_index",
+        "frozen_triangles": 11124,
+        "source_object": "GEO-palm_index",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "hand"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-palm_middle",
+        "frozen_triangles": 11124,
+        "source_object": "GEO-palm_middle",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "hand"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-palm_pinkie",
+        "frozen_triangles": 11124,
+        "source_object": "GEO-palm_pinkie",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "hand"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-pinkie.1",
+        "frozen_triangles": 10016,
+        "source_object": "GEO-pinkie.1",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "hand"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-pinkie.2",
+        "frozen_triangles": 10016,
+        "source_object": "GEO-pinkie.2",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "hand"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-pinkie.3",
+        "frozen_triangles": 13536,
+        "source_object": "GEO-pinkie.3",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "hand"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-plate_index",
+        "frozen_triangles": 1824,
+        "source_object": "GEO-plate_index",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "hand"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-plate_middle",
+        "frozen_triangles": 2048,
+        "source_object": "GEO-plate_middle",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "hand"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-plate_pinkie",
+        "frozen_triangles": 1584,
+        "source_object": "GEO-plate_pinkie",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "hand"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-plate_thumb",
+        "frozen_triangles": 944,
+        "source_object": "GEO-plate_thumb",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "einar.geometry.arm"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-plate_wrist",
+        "frozen_triangles": 2880,
+        "source_object": "GEO-plate_wrist",
+        "source_type": "MESH"
+      },
+      {
+        "category": "strap",
+        "collections": [
+          "PR-satchel",
+          "einar.geometry.satchel"
+        ],
+        "frozen_object": "P10R5_FREEZE_STRAP_GEO-satchel_strap",
+        "frozen_triangles": 3036,
+        "source_object": "GEO-satchel_strap",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "einar.geometry.arm"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-shoulder_bicep_joint",
+        "frozen_triangles": 4832,
+        "source_object": "GEO-shoulder_bicep_joint",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "einar.geometry.arm"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-shoulder_guard",
+        "frozen_triangles": 20256,
+        "source_object": "GEO-shoulder_guard",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "einar.geometry.arm"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-shoulder_guard_hinge",
+        "frozen_triangles": 320,
+        "source_object": "GEO-shoulder_guard_hinge",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "einar.geometry.arm"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-shoulder_lift_rod",
+        "frozen_triangles": 1084,
+        "source_object": "GEO-shoulder_lift_rod",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "einar.geometry.arm"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-shoulder_motor",
+        "frozen_triangles": 4576,
+        "source_object": "GEO-shoulder_motor",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "einar.geometry.arm"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-shoulder_motor_housing",
+        "frozen_triangles": 6680,
+        "source_object": "GEO-shoulder_motor_housing",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "einar.geometry.arm"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-shoulder_motor_pitch",
+        "frozen_triangles": 36608,
+        "source_object": "GEO-shoulder_motor_pitch",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "einar.geometry.arm"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-shoulder_rod",
+        "frozen_triangles": 1084,
+        "source_object": "GEO-shoulder_rod",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "hand"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-thumb.1",
+        "frozen_triangles": 11124,
+        "source_object": "GEO-thumb.1",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "hand"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-thumb.2",
+        "frozen_triangles": 10016,
+        "source_object": "GEO-thumb.2",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "hand"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-thumb.3",
+        "frozen_triangles": 13536,
+        "source_object": "GEO-thumb.3",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "einar.geometry.arm"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-upper_arm_frame",
+        "frozen_triangles": 5784,
+        "source_object": "GEO-upper_arm_frame",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "einar.geometry.arm"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-wires_motor_shoulder.001.mesh",
+        "frozen_triangles": 1080,
+        "source_object": "GEO-wires_motor_shoulder.001.mesh",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "einar.geometry.arm"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-wires_motor_shoulder.002.mesh",
+        "frozen_triangles": 552,
+        "source_object": "GEO-wires_motor_shoulder.002.mesh",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "einar.geometry.arm"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-wires_motor_shoulder.003.mesh",
+        "frozen_triangles": 600,
+        "source_object": "GEO-wires_motor_shoulder.003.mesh",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "einar.geometry.arm"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-wires_motor_shoulder.004.mesh",
+        "frozen_triangles": 1536,
+        "source_object": "GEO-wires_motor_shoulder.004.mesh",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "einar.geometry.arm",
+          "hydraulics"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-wires_motor_shoulder.005.mesh",
+        "frozen_triangles": 744,
+        "source_object": "GEO-wires_motor_shoulder.005.mesh",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "einar.geometry.arm"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-wires_motor_shoulder.006.mesh",
+        "frozen_triangles": 1536,
+        "source_object": "GEO-wires_motor_shoulder.006.mesh",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "einar.geometry.arm"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-wrist",
+        "frozen_triangles": 5952,
+        "source_object": "GEO-wrist",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "einar.geometry.arm"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-wrist_knob",
+        "frozen_triangles": 880,
+        "source_object": "GEO-wrist_knob",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "hydraulics"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-zip_tie.001",
+        "frozen_triangles": 430,
+        "source_object": "GEO-zip_tie.001",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "hydraulics"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-zip_tie.004",
+        "frozen_triangles": 430,
+        "source_object": "GEO-zip_tie.004",
+        "source_type": "MESH"
+      },
+      {
+        "category": "mech",
+        "collections": [
+          "einar.geometry.arm"
+        ],
+        "frozen_object": "P10R5_FREEZE_MECH_GEO-zip_tie.006",
+        "frozen_triangles": 430,
+        "source_object": "GEO-zip_tie.006",
+        "source_type": "MESH"
+      },
+      {
+        "category": "weapon",
+        "collections": [
+          "P10_Round005_AUTHORED"
+        ],
+        "frozen_object": "P10R5_FREEZE_WEAPON_P10R5_RiftWrench_handle",
+        "frozen_triangles": 3384,
+        "source_object": "P10R5_RiftWrench_handle",
+        "source_type": "MESH"
+      },
+      {
+        "category": "weapon",
+        "collections": [
+          "P10_Round005_AUTHORED"
+        ],
+        "frozen_object": "P10R5_FREEZE_WEAPON_P10R5_RiftWrench_heel_jaw",
+        "frozen_triangles": 1548,
+        "source_object": "P10R5_RiftWrench_heel_jaw",
+        "source_type": "MESH"
+      },
+      {
+        "category": "weapon",
+        "collections": [
+          "P10_Round005_AUTHORED"
+        ],
+        "frozen_object": "P10R5_FREEZE_WEAPON_P10R5_RiftWrench_heel_jaw.pin",
+        "frozen_triangles": 316,
+        "source_object": "P10R5_RiftWrench_heel_jaw.pin",
+        "source_type": "MESH"
+      },
+      {
+        "category": "weapon",
+        "collections": [
+          "P10_Round005_AUTHORED"
+        ],
+        "frozen_object": "P10R5_FREEZE_WEAPON_P10R5_RiftWrench_hook_jaw",
+        "frozen_triangles": 7242,
+        "source_object": "P10R5_RiftWrench_hook_jaw",
+        "source_type": "MESH"
+      },
+      {
+        "category": "weapon",
+        "collections": [
+          "P10_Round005_AUTHORED"
+        ],
+        "frozen_object": "P10R5_FREEZE_WEAPON_P10R5_RiftWrench_nut",
+        "frozen_triangles": 1920,
+        "source_object": "P10R5_RiftWrench_nut",
+        "source_type": "MESH"
+      }
+    ],
+    "hair_cards": {
+      "material_strategy": "Two opaque, solid, two-sided Principled ribbon materials; exact triangle/material disclosure is required. This is not alpha-card parity with the full Curves groom and not an animation claim.",
+      "objects": [
+        {
+          "available_curves_after_25pct_source_thinning": 5493,
+          "deterministic_stride": 24,
+          "guides_built": 229,
+          "quads_per_guide": 5,
+          "ribbons_per_guide": 1,
+          "source": "GEO-einar_beard",
+          "width_m": 0.0032
+        },
+        {
+          "available_curves_after_25pct_source_thinning": 973,
+          "deterministic_stride": 16,
+          "guides_built": 61,
+          "quads_per_guide": 5,
+          "ribbons_per_guide": 1,
+          "source": "GEO-einar_beard.messy",
+          "width_m": 0.003
+        },
+        {
+          "available_curves_after_25pct_source_thinning": 2575,
+          "deterministic_stride": 16,
+          "guides_built": 161,
+          "quads_per_guide": 3,
+          "ribbons_per_guide": 1,
+          "source": "GEO-einar_hair",
+          "width_m": 0.0032
+        },
+        {
+          "available_curves_after_25pct_source_thinning": 273,
+          "deterministic_stride": 8,
+          "guides_built": 35,
+          "quads_per_guide": 3,
+          "ribbons_per_guide": 1,
+          "source": "GEO-einar_hair.messy",
+          "width_m": 0.003
+        },
+        {
+          "available_curves_after_25pct_source_thinning": 1492,
+          "deterministic_stride": 16,
+          "guides_built": 94,
+          "quads_per_guide": 3,
+          "ribbons_per_guide": 1,
+          "source": "GEO-einar_mustache",
+          "width_m": 0.0018
+        },
+        {
+          "available_curves_after_25pct_source_thinning": 401,
+          "deterministic_stride": 8,
+          "guides_built": 51,
+          "quads_per_guide": 3,
+          "ribbons_per_guide": 1,
+          "source": "GEO-einar_mustache.messy",
+          "width_m": 0.0018
+        },
+        {
+          "available_curves_after_25pct_source_thinning": 684,
+          "deterministic_stride": 6,
+          "guides_built": 114,
+          "quads_per_guide": 2,
+          "ribbons_per_guide": 1,
+          "source": "GEO-einar_eyebrows",
+          "width_m": 0.0017
+        },
+        {
+          "available_curves_after_25pct_source_thinning": 156,
+          "deterministic_stride": 3,
+          "guides_built": 52,
+          "quads_per_guide": 1,
+          "ribbons_per_guide": 1,
+          "source": "GEO-einar_eyelashes",
+          "width_m": 0.0008
+        },
+        {
+          "available_curves_after_25pct_source_thinning": 25,
+          "deterministic_stride": 5,
+          "guides_built": 5,
+          "quads_per_guide": 2,
+          "ribbons_per_guide": 1,
+          "source": "GEO-einar_hair_ears",
+          "width_m": 0.0016
+        },
+        {
+          "available_curves_after_25pct_source_thinning": 42,
+          "deterministic_stride": 5,
+          "guides_built": 6,
+          "quads_per_guide": 1,
+          "ribbons_per_guide": 1,
+          "source": "GEO-einar_hair_nose",
+          "width_m": 0.0014
+        }
+      ],
+      "triangles": 5538,
+      "vertices": 7154
+    },
+    "limitations": [
+      "Static frozen mesh only; no deform rig or animation delivery.",
+      "Portable high-to-low texture atlases are not claimed unless a separate validated bake receipt is present.",
+      "Hair is deterministic ribbon-card fallback, not full source groom."
+    ],
+    "lod0": {
+      "bounds": {
+        "dimensions": [
+          1.186545,
+          0.831875,
+          1.716316
+        ],
+        "max": [
+          0.718972,
+          0.230765,
+          1.691251
+        ],
+        "min": [
+          -0.467573,
+          -0.60111,
+          -0.025065
+        ]
+      },
+      "objects": [
+        {
+          "materials": [
+            "einar.skin.fingers",
+            "einar.glove",
+            "einar.skin",
+            "eianar.gums",
+            "einar.teeth",
+            "einar.tongue",
+            "eyes.pupil",
+            "eyes.iris",
+            "eyes.white",
+            "eyes_shell",
+            "eyes.meniscus",
+            "eye.plica_semilunaris"
+          ],
+          "name": "P10R5_LOD0_HEAD",
+          "triangles": 22499
+        },
+        {
+          "materials": [
+            "einar.boots",
+            "einar.boots_soles",
+            "einar.jacket.canvas",
+            "einar.fabric",
+            "einar.metal_rust3.generic",
+            "einar.metal_rust2.generic",
+            "einar.jacket.collar",
+            "einar.jacket.rim",
+            "einar.pants_leather",
+            "einar.duct_tape",
+            "einar.zipper_textile",
+            "einar.pants_fabric",
+            "einar.pants_tarp",
+            "einar.sweater"
+          ],
+          "name": "P10R5_LOD0_CLOTHING",
+          "triangles": 19006
+        },
+        {
+          "materials": [
+            "metal_rust2.002",
+            "einar.cover",
+            "rubber_blue",
+            "einar.rubber_tires",
+            "einar.metal_rust3.generic",
+            "einar.fabric",
+            "einar.pants_fabric"
+          ],
+          "name": "P10R5_LOD0_ARMOR",
+          "triangles": 6993
+        },
+        {
+          "materials": [
+            "metal_rust2.002",
+            "metal_rust3",
+            "metal_rust2.009",
+            "metal_yellow",
+            "metal_black",
+            "metal_rust",
+            "rubber_black.002",
+            "rubber_dark",
+            "rubber_light_brown.001",
+            "rubber_hoses.light",
+            "cable_black.deform",
+            "cable_red.curve",
+            "rubber_black.005",
+            "rubber_red.002",
+            "rubber_dark.006",
+            "cable_red",
+            "cable_black",
+            "rust",
+            "metal_rust4",
+            "metal_rust5",
+            "rubber_hoses.dark",
+            "piston",
+            "metal_rust3.004",
+            "rubber_white",
+            "rubber_white.001"
+          ],
+          "name": "P10R5_LOD0_MECH",
+          "triangles": 24569
+        },
+        {
+          "materials": [
+            "einar.rubber_tires",
+            "einar.metal_rust2.generic",
+            "einar.metal_rust3.generic"
+          ],
+          "name": "P10R5_LOD0_WEAPON",
+          "triangles": 5499
+        },
+        {
+          "materials": [
+            "satchel"
+          ],
+          "name": "P10R5_LOD0_STRAP",
+          "triangles": 998
+        },
+        {
+          "materials": [
+            "P10R5_HairCards_Dark",
+            "P10R5_HairCards_Silver"
+          ],
+          "name": "P10R5_LOD0_HAIR_CARDS",
+          "triangles": 5532
+        }
+      ],
+      "triangles": 85096
+    },
+    "lod1": {
+      "bounds": {
+        "dimensions": [
+          1.186528,
+          0.829715,
+          1.716244
+        ],
+        "max": [
+          0.718954,
+          0.229758,
+          1.691178
+        ],
+        "min": [
+          -0.467573,
+          -0.599957,
+          -0.025065
+        ]
+      },
+      "objects": [
+        "P10R5_LOD1_HEAD",
+        "P10R5_LOD1_CLOTHING",
+        "P10R5_LOD1_ARMOR",
+        "P10R5_LOD1_MECH",
+        "P10R5_LOD1_WEAPON",
+        "P10R5_LOD1_STRAP",
+        "P10R5_LOD1_HAIR_CARDS"
+      ],
+      "triangles": 47615
+    },
+    "lod2": {
+      "bounds": {
+        "dimensions": [
+          1.186921,
+          0.831518,
+          1.715709
+        ],
+        "max": [
+          0.719348,
+          0.22919,
+          1.691178
+        ],
+        "min": [
+          -0.467573,
+          -0.602328,
+          -0.02453
+        ]
+      },
+      "objects": [
+        "P10R5_LOD2_HEAD",
+        "P10R5_LOD2_CLOTHING",
+        "P10R5_LOD2_ARMOR",
+        "P10R5_LOD2_MECH",
+        "P10R5_LOD2_WEAPON",
+        "P10R5_LOD2_STRAP",
+        "P10R5_LOD2_HAIR_CARDS"
+      ],
+      "triangles": 25484
+    },
+    "selection": {
+      "driven_hide_render_used_for_membership": false,
+      "excluded_by_construction": [
+        "all GEO-satchel_* except exact GEO-satchel_strap",
+        "GEO-dart_*",
+        "original GEO-pipe_wrench_*",
+        "GEO-einar_hat",
+        "*.proxy",
+        "*_preview*",
+        "*surfdef*",
+        "GEO-blood_*droplets*"
+      ],
+      "explicit_mesh_allow_patterns": [
+        "^GEO-einar_(head|teeth_(lower|upper)|tongue|fingers|glove|boot_.*|jacket_.*|pants_.*|sweater|tire_.*)$",
+        "^GEO-eye.*$",
+        "^GEO-body_anchor_.*$",
+        "^GEO-(arm_guard.*|bolt_.*|cushion_.*|elbow_joint(?:\\.\\d+)?|electrical_wires.*|hand_wrist_connection|hyd_.*|index\\.[123]|lower_arm_.*|middle\\.[123]|motor_wrist|palm_.*|pinkie\\.[123]|plate_.*|shoulder_.*|thumb\\.[123]|upper_arm_.*|wires_motor_.*|wrist(?:_.*)?|zip_tie\\..*)$"
+      ],
+      "explicit_mesh_exact_allow": [
+        "GEO-satchel_strap"
+      ],
+      "uses_viewport_visibility": false
+    }
+  },
+  "true_hair_reduction": {
+    "GEO-einar_beard": {
+      "curves_after": 5493,
+      "curves_before": 21970,
+      "deterministic_keep_rule": "curve_index % 4 == 0",
+      "points_after": 84910,
+      "points_before": 339716
+    },
+    "GEO-einar_beard.messy": {
+      "curves_after": 973,
+      "curves_before": 3889,
+      "deterministic_keep_rule": "curve_index % 4 == 0",
+      "points_after": 14934,
+      "points_before": 59949
+    },
+    "GEO-einar_eyebrows": {
+      "curves_after": 684,
+      "curves_before": 2735,
+      "deterministic_keep_rule": "curve_index % 4 == 0",
+      "points_after": 11030,
+      "points_before": 44068
+    },
+    "GEO-einar_eyelashes": {
+      "curves_after": 156,
+      "curves_before": 624,
+      "deterministic_keep_rule": "curve_index % 4 == 0",
+      "points_after": 3120,
+      "points_before": 12480
+    },
+    "GEO-einar_hair": {
+      "curves_after": 2575,
+      "curves_before": 10299,
+      "deterministic_keep_rule": "curve_index % 4 == 0",
+      "points_after": 36055,
+      "points_before": 144284
+    },
+    "GEO-einar_hair.messy": {
+      "curves_after": 273,
+      "curves_before": 1091,
+      "deterministic_keep_rule": "curve_index % 4 == 0",
+      "points_after": 3816,
+      "points_before": 15247
+    },
+    "GEO-einar_hair_ears": {
+      "curves_after": 25,
+      "curves_before": 100,
+      "deterministic_keep_rule": "curve_index % 4 == 0",
+      "points_after": 500,
+      "points_before": 2000
+    },
+    "GEO-einar_hair_nose": {
+      "curves_after": 42,
+      "curves_before": 165,
+      "deterministic_keep_rule": "curve_index % 4 == 0",
+      "points_after": 415,
+      "points_before": 1492
+    },
+    "GEO-einar_mustache": {
+      "curves_after": 1492,
+      "curves_before": 5965,
+      "deterministic_keep_rule": "curve_index % 4 == 0",
+      "points_after": 14920,
+      "points_before": 59650
+    },
+    "GEO-einar_mustache.messy": {
+      "curves_after": 401,
+      "curves_before": 1601,
+      "deterministic_keep_rule": "curve_index % 4 == 0",
+      "points_after": 4010,
+      "points_before": 16010
+    }
+  },
+  "verified_source_files": [
+    {
+      "bytes": 91323760,
+      "path": "einar_release_v1.blend",
+      "sha256": "1c6663da0a2e9d6822978467c244e9186edc76083bae2414e02f9e695e711f7b"
+    },
+    {
+      "bytes": 3465390,
+      "path": "textures/displacement/clothing/disp_clothing_default.exr",
+      "sha256": "382a1a05a0e35a163021d744910b660e2fb82dc47d65800a221af4cd763525ae"
+    },
+    {
+      "bytes": 3667799,
+      "path": "textures/displacement/clothing/disp_clothing_shapes_A.exr",
+      "sha256": "d9520005291b59a83afa564efbe14913fc86d6929f1d79f827c0a49d550c1b69"
+    },
+    {
+      "bytes": 3501817,
+      "path": "textures/displacement/clothing/disp_clothing_shapes_B.exr",
+      "sha256": "e9aa4ee9887d9709f8d2b82e7db4c895dcce7337b0773785b3567751c1fd947f"
+    },
+    {
+      "bytes": 3539328,
+      "path": "textures/displacement/clothing/disp_clothing_shapes_C.exr",
+      "sha256": "ebf1544f895ce0826fce411f8fc40b71e773d4a9c8914f28ff8d3b7aa1a349f2"
+    },
+    {
+      "bytes": 3468853,
+      "path": "textures/displacement/clothing/disp_clothing_shapes_D.exr",
+      "sha256": "24462afb8695e42c28302e88fbb1ac0aec634cf793f7466b39e33908d5d90fed"
+    },
+    {
+      "bytes": 3489396,
+      "path": "textures/displacement/clothing/disp_clothing_shapes_E.exr",
+      "sha256": "89da98afe9705dee7ba2eb89c248823c1adb81f8b82d3131522a599336064a92"
+    },
+    {
+      "bytes": 3351552,
+      "path": "textures/displacement/face/disp_default.exr",
+      "sha256": "782488ea8f9107c41a93465a0dcdf31894ce18885cc65c0e2e88241a7d6fe116"
+    },
+    {
+      "bytes": 3420824,
+      "path": "textures/displacement/face/disp_facial_shapes_A.exr",
+      "sha256": "ffbd1a8ecf04d319f9b1b9c71a95814c270c3f25a9d075ca2f68b4e9a5762255"
+    },
+    {
+      "bytes": 3373479,
+      "path": "textures/displacement/face/disp_facial_shapes_B.exr",
+      "sha256": "2fde161c4d2876d703bc12c74abbcc87ad91293ad45ee522b2239bdaf9468a76"
+    },
+    {
+      "bytes": 3385990,
+      "path": "textures/displacement/face/disp_facial_shapes_C.exr",
+      "sha256": "6454b77ae02686b809d6ce2e5377030f02c0aa35b4216bd31518c08e7fe10442"
+    },
+    {
+      "bytes": 3367862,
+      "path": "textures/displacement/face/disp_facial_shapes_D.exr",
+      "sha256": "c43549bf6853d8491c84e7b037e366dff3ca1f59a4fb2d8d7f5bf75235d21bc0"
+    },
+    {
+      "bytes": 3480125,
+      "path": "textures/displacement/face/disp_facial_shapes_E.exr",
+      "sha256": "e2d1c9e7a22e9e6ad96676eaa2836dc693d4c5742b2ba6da6fd5d7472d6ccd0a"
+    },
+    {
+      "bytes": 3405600,
+      "path": "textures/displacement/face/disp_facial_shapes_F.exr",
+      "sha256": "57602b83193efee09adfa8d00513b50a09920b42eafd7d95eb5810ba7813c1f5"
+    },
+    {
+      "bytes": 63992578,
+      "path": "textures/displacement/face/shapes-A-B-C-D.tif",
+      "sha256": "5e41e600bce906e23cfc641fe7a573c73384d136967c5532185f4b3e5fbc1ac1"
+    },
+    {
+      "bytes": 72356430,
+      "path": "textures/displacement/face/shapes-E-F-DEFAULT-DETAIL.tif",
+      "sha256": "28dab7a1dd6cdad9056c1413b2b8459d2fbe231ec7f664feb34980824b3bc638"
+    },
+    {
+      "bytes": 1248466,
+      "path": "textures/einar.clothing.color_base.tif",
+      "sha256": "b15a6419326dba8fd8dfe581100c81c36f0228a2ffb88b6dd660ae5dc1d7733b"
+    },
+    {
+      "bytes": 17831598,
+      "path": "textures/einar.clothing.normal_base.tif",
+      "sha256": "e6dcf88e032270c9ab31b69c6d10257343832e3ce9ad16dc2c6127b6bdde9688"
+    },
+    {
+      "bytes": 7717336,
+      "path": "textures/einar.clothing.pointiness.tif",
+      "sha256": "dd693f72d17a4f0e820e67e025bf2f5a24061d234cc979b5bfec73acf8778ed0"
+    },
+    {
+      "bytes": 874228,
+      "path": "textures/einar.fingers.normal.tif",
+      "sha256": "4c3f00dd34bbae113282b0c05a21455f8f8f42b8ff531d6d210204a01912e392"
+    },
+    {
+      "bytes": 116966,
+      "path": "textures/einar.fingers.pointiness.tif",
+      "sha256": "7fc3b64060c7244546d45c7bb6e6b54e5ab3b149abadc0e4eacf22cb1b18868a"
+    },
+    {
+      "bytes": 942366,
+      "path": "textures/einar.fingers.vector_displacement.tif",
+      "sha256": "6150045232f0fdcbfc0db0e6a19f539dc8403513c3ff1e8f3935218102451a69"
+    },
+    {
+      "bytes": 107628,
+      "path": "textures/einar.hair.color.tif",
+      "sha256": "981d152ea5cc45875ef7e0a6736f847c7f541f7e75dc7939cadf4d545a104a4b"
+    },
+    {
+      "bytes": 74198808,
+      "path": "textures/einar.robot_arm.normal_base.1001.tif",
+      "sha256": "5b8ad24446c1c530e3d632da5340cc95dd0262186b7c6d42a33bf19827af4c15"
+    },
+    {
+      "bytes": 59056942,
+      "path": "textures/einar.robot_arm.normal_base.1002.tif",
+      "sha256": "a645b2d0260fed72474cea1664795135af71fa492e554ad77805da69567262c3"
+    },
+    {
+      "bytes": 55457316,
+      "path": "textures/einar.robot_arm.normal_base.1003.tif",
+      "sha256": "5b08341eb028d7be7e5eaafe2220055ded8793e8c32886f3d8c17ce9b818711a"
+    },
+    {
+      "bytes": 2073408,
+      "path": "textures/einar.robot_arm.pointiness.1001.tif",
+      "sha256": "7da66485d76e2905bb56c6955acde4315bca6e123b396a59f89895b0f8e64c61"
+    },
+    {
+      "bytes": 1843174,
+      "path": "textures/einar.robot_arm.pointiness.1002.tif",
+      "sha256": "84ee72b4c160eab6def9040da63e6d81644beb5c983b20ba873b468db2cf863d"
+    },
+    {
+      "bytes": 1894968,
+      "path": "textures/einar.robot_arm.pointiness.1003.tif",
+      "sha256": "d19af4a56dfe35f3b497ffea15d51797fdadf5bc8612715078269723c18f4099"
+    },
+    {
+      "bytes": 353850,
+      "path": "textures/einar.robot_arm.pointiness.1004.tif",
+      "sha256": "42e7cab51c3269998df6682ac5879acf5fcea94e6af507d356a21a8e4bb9641b"
+    },
+    {
+      "bytes": 857858,
+      "path": "textures/einar.shoes.bump.tif",
+      "sha256": "a9a39cf3613fa6f0bcd0c78e8f9ec67c21885921a88e148db1f6201262a2dbe9"
+    },
+    {
+      "bytes": 64278,
+      "path": "textures/face/distress_stages.tif",
+      "sha256": "83a9d86658c42677e97bccd3ebe6c8f394b47e8359beb996b7616fde313ca101"
+    },
+    {
+      "bytes": 82764,
+      "path": "textures/face/einar.beard.dirt.tif",
+      "sha256": "ea426a525ed923f0ef86c31ad9686e3c773f5a0f9df854239e4ab109bcb2a540"
+    },
+    {
+      "bytes": 5022924,
+      "path": "textures/face/einar.bruises.albedo.tif",
+      "sha256": "b426cf24c48cc9392fa21c4ada85b2f17d76c5287cf96cea78b6f5d5262709fd"
+    },
+    {
+      "bytes": 10533376,
+      "path": "textures/face/einar_skin.albedo.tif",
+      "sha256": "c0ec5e11fae8e516f3a0dd18e612ab4b9a9ab810bf01f63d098a401fe05af7a4"
+    },
+    {
+      "bytes": 170710,
+      "path": "textures/face/einar_skin.dirt.tif",
+      "sha256": "e85b6ff460a91e0d74a24f7e93f37456bb99302be553a74ea07adf1d58e08533"
+    },
+    {
+      "bytes": 66630,
+      "path": "textures/face/einar_skin.roughness.tif",
+      "sha256": "e35cb48cd5b62918682b9f1d8064493b587304a0efc254520991e25efd0766b7"
+    },
+    {
+      "bytes": 2723828,
+      "path": "textures/face/eyes.albedo.tif",
+      "sha256": "71b34e20f7041108f2e1d0dbe3183d3126c157dde7f88b631d2a88ede527829e"
+    },
+    {
+      "bytes": 517662,
+      "path": "textures/face/iris_depth.tif",
+      "sha256": "57d00aabf3a12a720b50a67876fdb88758d39bb85e702b81d8a34efe7de920dc"
+    },
+    {
+      "bytes": 14684,
+      "path": "textures/road_sign.color.tif",
+      "sha256": "069a2f2f4e783e79c442012a51922de948bdfe5b4ab1481878ebb1ee3896862a"
+    },
+    {
+      "bytes": 62136,
+      "path": "textures/road_sign.distance.tif",
+      "sha256": "4b21daa43a06b91e6f7babdafc251366c572cb126e99e7400a7e26c903e919da"
+    },
+    {
+      "bytes": 150892,
+      "path": "textures/road_sign.normal.tif",
+      "sha256": "6705071456fd745f885255b0e090d684f8a2d98f452a34923dadc6394dfa04ec"
+    },
+    {
+      "bytes": 254406,
+      "path": "textures/satchel.base.tif",
+      "sha256": "c96b6b2f3f33db8f4cfaafcf6e0324bcb3d6fdcde82fdcf84964785358f3bef2"
+    },
+    {
+      "bytes": 820,
+      "path": "textures/sweater.pattern.tif",
+      "sha256": "de968f5d9a8a8f1a24bf04a3ef5f3adeef25b9fce55e08cec156c21afc6bf42e"
+    },
+    {
+      "bytes": 2060368,
+      "path": "textures/tileable/canvas_01.disp.tif",
+      "sha256": "50fdd43c7003ef6181cb2d5476ae0d7b25ca671b165633d10134fd72f46eb7e9"
+    },
+    {
+      "bytes": 6269982,
+      "path": "textures/tileable/canvas_01.normal.tif",
+      "sha256": "aed8ee49f4f6ff77695d263e998733ceb90bc19a775aab85ee3230279f0a8e93"
+    },
+    {
+      "bytes": 344014,
+      "path": "textures/tileable/dents_01.normal.tif",
+      "sha256": "cc285e2b4bc9607faca452aaf32dc4fdc777271e5daee364923598139fc912bb"
+    },
+    {
+      "bytes": 2052658,
+      "path": "textures/tileable/grime_01.tif",
+      "sha256": "4086baedd73bc03dd8ca05768cfef177ded4444e3b62c5ac2754a1662526ed9c"
+    },
+    {
+      "bytes": 2037980,
+      "path": "textures/tileable/knit_01.disp.tif",
+      "sha256": "bd6e6659ca3230d9788864f7b4fdc31040e048bc0d17547afce6cd05c0b5ba5d"
+    },
+    {
+      "bytes": 6290060,
+      "path": "textures/tileable/knit_01.normal.tif",
+      "sha256": "25de366896c9d04595f2c9ce017834557571606e12d382dded2afb291cd782ed"
+    },
+    {
+      "bytes": 1496626,
+      "path": "textures/tileable/knit_01.tile_uv.tif",
+      "sha256": "0ac310656208d3dad414f61a302fb94f833c3a26b6d7ccc6e0039c852bb69e97"
+    },
+    {
+      "bytes": 1542264,
+      "path": "textures/tileable/noise_01.tif",
+      "sha256": "76792bf7aff765dd77ded49bf55797d49bbf65991c08317504b1a1b957346460"
+    },
+    {
+      "bytes": 6151092,
+      "path": "textures/tileable/noise_03.tif",
+      "sha256": "d443a9a2990c88ffd3d991d53f8b0a14504bf501dab8d63a843eb38d7aa595a4"
+    },
+    {
+      "bytes": 6162662,
+      "path": "textures/tileable/noise_04.tif",
+      "sha256": "325887d12dbe7ca0a37bdd1e67491ca0e325b27f3e9b476fa6505d6867084238"
+    },
+    {
+      "bytes": 1559162,
+      "path": "textures/tileable/noise_06.tif",
+      "sha256": "4a3a34e3de87dfd3248ca3b338680c12738212b9e2c502f895464301e27c7067"
+    },
+    {
+      "bytes": 1919118,
+      "path": "textures/tileable/scratches_01.disp.tif",
+      "sha256": "efad77cf6cd66a0166f3b7ce56deaa8d6ccb49d277fe00ddb1a93a65d774520e"
+    },
+    {
+      "bytes": 5657578,
+      "path": "textures/tileable/scratches_01.normal.tif",
+      "sha256": "0b051c01c054e82501c4f935c1b866a5e4e865f596f448ea1e49947c463cbc7d"
+    },
+    {
+      "bytes": 357926,
+      "path": "textures/tileable/seams.disp.tif",
+      "sha256": "6af1fc063752a4f6bee3b185a16c3d9050976eab3c5c3d408001723d0b5de431"
+    },
+    {
+      "bytes": 1042446,
+      "path": "textures/tileable/seams.normal.tif",
+      "sha256": "1fa10aaf3b27f2219be19af01a54372f61e6176858efadd4a1223a03a4c7b76c"
+    },
+    {
+      "bytes": 2036036,
+      "path": "textures/tileable/textile_01.disp.tif",
+      "sha256": "9cc9b50f5041143b29edf65d339e3949a2f0c50d1fb04fb6302f341b71948133"
+    },
+    {
+      "bytes": 6269742,
+      "path": "textures/tileable/textile_01.normal.tif",
+      "sha256": "4fd5f950c4119b3f8321437a392ab1bd80bfdee4ae1be04159c9959d9cd7ed68"
+    },
+    {
+      "bytes": 2020112,
+      "path": "textures/tileable/textile_02.disp.tif",
+      "sha256": "ee09aa2625f73ffe98521cf96e0fb11c6680b0a54b91e693de3ff8838c2574db"
+    },
+    {
+      "bytes": 6272712,
+      "path": "textures/tileable/textile_02.normal.tif",
+      "sha256": "8f1e8e0c595d3c0968530ad8099039a07b9353c61cee5984f2afc3182065588b"
+    },
+    {
+      "bytes": 3143352,
+      "path": "textures/tileable/textile_02.tile_uv.tif",
+      "sha256": "e899c28daef393f4c5e7fb6d48aeba1d86fbf0b8484daa73639fc4426f9617c8"
+    }
+  ],
+  "verified_source_tree_sha256": "75c418c15b73cf61d961cb1f31d5b97ade4e520fe4e84555d232b3ddd35c4d17",
+  "weapon": {
+    "display_scale": 2.18,
+    "material_strategy": "Exact resolved production Einar materials replace the five absent pipe-wrench/tool-prop maps for this probe. No flat-value authored wear and no missing vendor map is claimed.",
+    "name": "Rift Wrench",
+    "resolved_source_materials": {
+      "grip": "einar.rubber_tires",
+      "metal": "einar.metal_rust2.generic",
+      "nut": "einar.metal_rust3.generic"
+    },
+    "source_geometry_objects": [
+      "GEO-pipe_wrench_handle",
+      "GEO-pipe_wrench_heel_jaw",
+      "GEO-pipe_wrench_heel_jaw.pin",
+      "GEO-pipe_wrench_hook_jaw",
+      "GEO-pipe_wrench_nut"
+    ],
+    "source_geometry_triangles": 14410,
+    "vendor_maps_intentionally_not_claimed": [
+      "pipe_wrench.normal",
+      "pipe_wrench.pointiness",
+      "tool_props.color",
+      "tool_props.metal_rough_spec",
+      "tool_props.normal"
+    ]
+  }
+}

@@ -1,0 +1,161 @@
+{
+  "schema": "codexofwar.2d-concept-receipt",
+  "version": "1.0.0",
+  "generated_utc": "2026-07-31T11:57:08Z",
+  "creator": "OpenAI image generation via Codex",
+  "generator": {
+    "tool": "image_gen.imagegen",
+    "model": "not exposed",
+    "provider_generation_id": "not exposed"
+  },
+  "scope": "2D concept preflight only",
+  "character": {
+    "working_name": "Nyra Kestrel, Stormglass Warden",
+    "originality_intent": "Entirely original adult anime-realism warrior concept authored for this Round006 preflight."
+  },
+  "provenance_statement": {
+    "benchmark_or_reference_pixels_supplied": false,
+    "statement": "No benchmark, user-provided reference, God of War, franchise, or other third-party/proprietary input pixels were supplied to image generation. The combat-grip edits used only original images generated during this Round006 build: the accepted turnaround, the accepted weapon sheet, and, for the targeted revision, the rejected first combat-grip output.",
+    "excluded_sources": [
+      "private benchmark archive",
+      "God of War images",
+      "Round004 concept"
+    ],
+    "excluded_sources_inspected_or_used": false
+  },
+  "assets": [
+    {
+      "asset_id": "nyra_turnaround_v1",
+      "path": "P10_Round006_NyraKestrel_Turnaround_v1.png",
+      "use_case": "stylized-concept",
+      "operation": "generation",
+      "prompt": "Use case: stylized-concept\nAsset type: original 2D character concept preflight turnaround sheet\nPrimary request: Create one clean premium current-generation anime-realism character turnaround sheet for an entirely original adult woman warrior, Nyra Kestrel, Stormglass Warden. She must read immediately as an authored professional anime warrior, never a civilian wearing props.\nScene/background: uniform neutral 18% gray studio background, empty and seamless, one straight shared baseline.\nSubject: the same exact adult woman shown four times, complete full body, neutral A-pose: FRONT, RIGHT SIDE, BACK, LEFT SIDE, in that visual order. No weapon, sheath, or loose prop on her body. Dark indigo hair in one practical braided high tail with a clean natural hairline and a few controlled face-framing strands; mature restrained anime facial proportions with realistic skin, complete eyes and face. Adult realistic anatomy. Complete articulated hands with all five fingers visible per hand wherever anatomically visible; complete grounded boots, no cropping.\nCostume/design: fully covered layered functional combat costume. Asymmetrical but mechanically coherent armor built from matte forged steel plates, charcoal leather harness and reinforced panels, deep blue-gray woven underlayers, braided cord lacing, and only small weathered stormglass mineral inserts. Protected hips, thighs, knees, shins, forearms, shoulders and torso. Clearly believable buckles, straps, seams, closures, articulation gaps, fastening points, gravity and load paths. Articulated gauntlets and grounded reinforced boots. Consistent construction, silhouette, plate count, straps, lacing, materials, damage and wear across all four views. Show subtle material history: edge scuffs, burnished contact zones, repaired stitching, softened leather, restrained oxidation; still maintained and premium.\nStyle/medium: polished original anime-realism concept art, realistic fabric and skin, restrained anime proportions, crisp neutral production rendering, high detail, no 3D/game-readiness claim.\nComposition/framing: landscape four-panel orthographic sheet without visible panel borders; four equally scaled figures, same exact height and proportions, evenly spaced, feet on one baseline; true orthographic presentation with no perspective, no action pose, no foreshortening, no cropped hair/fingers/boots. Flat-neutral presentation lighting that reveals construction without drama.\nColor palette: deep blue-gray, charcoal, dark indigo, matte gunmetal steel, tiny desaturated stormglass accents.\nQuality: high; prioritize exact multi-view consistency, legible anatomy, hands, footwear, armor construction and premium finish.\nConstraints: adult woman; full coverage from neck through boots; same identity, costume, hairstyle, armor topology and material placement across every view; clean negative space between limbs and torso; fingers readable; no text, labels, letters, numbers, logos, watermark, decorative border, callouts, icons, runes, symbols, target, environment, VFX or glow.\nAvoid: cleavage, bare thighs, exposed midriff, fetish styling, pin-up proportions, transparent fabric, plastic toy surfaces, chrome, neon overload, glowing tubes, floating slabs, floating tubes, civilian jacket, civilian pants, streetwear, franchise motifs, copied shapes, horns, wings, guns, axes, chainsaws, weapons, sheath, perspective view, dynamic pose, inconsistent turnaround details, missing fingers, fused hands, cropped boots.",
+      "revisions": [],
+      "edit_inputs": [],
+      "output": {
+        "byte_size": 2461373,
+        "sha256": "3dbca4057a6b80738106cd10d907b670085fb5637733673de2451027f2860eaa",
+        "dimensions_px": {
+          "width": 1536,
+          "height": 1024
+        },
+        "format": "PNG",
+        "mode": "RGB"
+      },
+      "inspection": {
+        "accepted": true,
+        "notes": "Four complete same-scale full-body views on one baseline; authored fully covered combat armor, face, hair, hands and boots are legible. Minor residual limitation: braid volume projection and micro-lacing/strap marks are not mathematically identical between opposing side views."
+      }
+    },
+    {
+      "asset_id": "stormglass_odachi_v1",
+      "path": "P10_Round006_StormglassOdachi_v1.png",
+      "use_case": "stylized-concept",
+      "operation": "generation",
+      "prompt": "Use case: stylized-concept\nAsset type: original 2D weapon concept preflight orthographic sheet\nPrimary request: Create a clean premium current-generation anime-realism orthographic construction sheet for one entirely original two-handed weapon: the Stormglass Odachi. It must be a long, functional single-edged forged blade, mechanically plausible and immediately readable as one consistent physical object.\nScene/background: uniform neutral 18% gray studio background, empty and seamless, flat-neutral presentation lighting.\nSubject/views: show the same exact complete unsheathed odachi in three large, evenly scaled orthographic views—blade-face FRONT, opposite blade-face BACK, and thin edge-on PROFILE—plus one separate close grip-section detail showing guard, collar, leather wrapping, pins, tang logic and pommel. Arrange views cleanly with generous separation. Every main view includes the complete blade tip, full guard, full hilt and pommel; no cropping. No hands, no character, no stand.\nWeapon design: a very long believable single-edged forged steel blade with restrained distal taper, subtle curvature, clear sharpened edge, thicker spine and believable center of mass. A narrow subtle translucent stormglass mineral spine inset is mechanically seated into part of the thick upper spine, desaturated blue-gray and only faintly luminous from material depth—not a glowing stick, tube, energy blade, or full-length neon strip. Substantial original forged guard sized to protect hands, with no franchise silhouette. Clearly defined dark charcoal leather-wrapped hilt long enough for two adult armored hands with separation and leverage; visible wrap overlap and compression, structural pins, durable collar, end cap and substantial pommel. Show restrained wear: sharpening history, edge nicks, darkened grip contact, scuffed guard, patinated recesses.\nSheath/mount logic: include a separate small complete empty sheath/scabbard alongside the weapon views, constructed from dark lacquered wood or leather-over-wood with metal throat and chape, two plausible braided-cord suspension bands and attachment rings; its dimensions match the blade curvature and length. It is supporting construction evidence, not a fantasy floating prop.\nStyle/medium: polished original anime-realism weapon concept art, realistic steel, leather, wood and mineral; crisp neutral production rendering, high material specificity, no 3D/game-readiness claim.\nComposition/framing: landscape orthographic sheet, straight true views, no perspective, no action, no dramatic angle, no visible panel borders, no callouts. Keep all objects fully inside frame.\nColor palette: matte forged steel, charcoal leather, blackened fittings, dark wood, tiny desaturated weathered stormglass accent.\nQuality: high; prioritize exact view consistency, clean functional construction, readable grip length, plausible weight, wear and restraint.\nConstraints: the front/back/profile depictions must have the exact same silhouette, proportions, guard, grip, pommel, spine inset placement and wear; blade must remain a solid forged steel sword; grip must fit two adult gauntleted hands; no text, labels, letters, numbers, dimensions, logos, watermark, decorative border, icons, runes, symbols, VFX or environment.\nAvoid: guns, axes, chainsaws, chain weapons, saw teeth, copied franchise shapes, recognizable branded motifs, impossible oversized slab blade, chrome, plastic toy surface, neon overload, glowing tube, energy sword, floating components, disconnected guard, tiny one-hand grip, ambiguous hilt, missing pommel, cropped tip, hands, character, perspective view, duplicated inconsistent weapon designs.",
+      "revisions": [],
+      "edit_inputs": [],
+      "output": {
+        "byte_size": 1672588,
+        "sha256": "b0d751ad479357bc92645ed7157c1dde1ea37ffe8068b944c02373fa77f9254f",
+        "dimensions_px": {
+          "width": 1536,
+          "height": 1024
+        },
+        "format": "PNG",
+        "mode": "RGB"
+      },
+      "inspection": {
+        "accepted": true,
+        "notes": "Three complete consistent main views show blade, guard, long two-hand hilt and pommel; the sheet also includes a matching scabbard with suspension logic and a dedicated grip detail. Minor residual limitation: the edge-on profile cannot fully communicate the inset depth, and the intentionally enlarged grip detail is cropped to its stated detail scope."
+      }
+    },
+    {
+      "asset_id": "nyra_combat_grip_v1",
+      "path": "P10_Round006_NyraKestrel_CombatGrip_v1.png",
+      "use_case": "compositing",
+      "operation": "multi-image edit followed by one targeted revision",
+      "initial_prompt": "Use case: compositing\nAsset type: original 2D character-and-weapon combat grip proof for concept preflight\nInput images: Image 1 is the accepted Nyra Kestrel four-view turnaround and is the sole identity/costume reference. Image 2 is the accepted Stormglass Odachi orthographic sheet and is the sole weapon-design reference.\nPrimary request: Create one polished full-body three-quarter studio view of the exact same adult woman warrior from Image 1, wearing the exact same complete costume, in a grounded ready-to-strike stance while holding the exact same odachi from Image 2 with a physically correct two-handed combat grip. This is a contact and design-consistency proof, not an action illustration.\nSubject identity invariants: preserve Image 1’s exact mature face, restrained anime-realism proportions, realistic skin, dark indigo braided high tail, clean hairline, face-framing strands, stature, armor silhouette, matte forged steel plate topology, charcoal leather straps, deep blue-gray woven underlayers, braided cord lacing, small weathered stormglass inserts, protected hips/thighs/knees, articulated gauntlets and grounded boots. Keep full coverage and the same material wear. Do not simplify into civilian clothing or redesign any armor.\nWeapon invariants: preserve Image 2’s exact blade silhouette, length, subtle curvature, single sharpened edge, forged steel construction, narrow translucent mineral spine inset, substantial guard, long charcoal leather-wrapped two-hand hilt, structural pins and pommel. Do not redesign, shorten, thicken, duplicate, crop or glow the weapon.\nPose/contact: full body, head through both boots visible, three-quarter view, stable low ready-to-strike stance with weight over both grounded feet and believable balance. The long blade travels diagonally through clear negative space and the complete tip, blade, guard, hilt and pommel are fully inside frame and legible. BOTH hands are in front/three-quarter orientation so both palms and all ten articulated fingers are visibly readable. Each hand physically closes around a different section of the same leather-wrapped hilt, with realistic finger overlap, thumb opposition, knuckle bend, pressure and contact shadows. Hands separated enough for leverage; no gap between skin/gauntlet and grip. Guard remains immediately above the leading hand; trailing hand remains immediately above the pommel. Wrists align naturally with forearms. No body/armor/blade intersections, no floating contact, no fused fingers, no extra digits, no missing digits. No sheath on body.\nScene/background: uniform neutral 18% gray studio background, empty and seamless, one ground baseline, soft flat-neutral presentation lighting, restrained floor contact shadows only.\nStyle/medium: premium current-generation original anime-realism concept art with realistic materials and anatomy, crisp production rendering, no 3D/game-readiness claim.\nComposition/framing: landscape, complete full-body figure centered with sufficient room for the complete diagonal blade; no perspective distortion, no extreme foreshortening, no camera crop, no target or environment, no VFX.\nQuality: high; prioritize exact input fidelity, face/costume/weapon identity, complete anatomy and indisputable two-hand contact.\nConstraints: one character, one weapon, one blade; all hair, fingers, boots, sword tip and pommel visible; fully covered functional combat costume; no text, labels, letters, numbers, logos, watermark, runes, symbols, decorative border, callouts, target, scenery or glow.\nAvoid: civilian jacket or pants, bare thighs, cleavage, fetish styling, pin-up pose, plastic or chrome surfaces, neon, energy blade, floating slabs/tubes, copied franchise motifs, guns, axes, chainsaws, duplicate weapon, impossible grip, hands near rather than around hilt, palm hidden by blade, fused fingers, malformed hands, extra fingers, missing fingers, blade-body intersection, cropped blade, action VFX, dramatic environment.",
+      "edit_inputs": [
+        {
+          "role": "identity_and_costume_reference",
+          "path": "P10_Round006_NyraKestrel_Turnaround_v1.png",
+          "sha256": "3dbca4057a6b80738106cd10d907b670085fb5637733673de2451027f2860eaa"
+        },
+        {
+          "role": "weapon_design_reference",
+          "path": "P10_Round006_StormglassOdachi_v1.png",
+          "sha256": "b0d751ad479357bc92645ed7157c1dde1ea37ffe8068b944c02373fa77f9254f"
+        }
+      ],
+      "revisions": [
+        {
+          "revision_id": "combat_grip_targeted_revision_01",
+          "status": "accepted",
+          "prompt": "Use case: precise-object-edit\nAsset type: targeted revision of original 2D combat grip proof\nInput images: Image 1 is the rejected first combat-grip composition whose character identity, costume, full-body framing, grounded stance, background, one complete weapon and material rendering must be preserved. Image 2 is the accepted Nyra Kestrel turnaround and remains authoritative for face, hair, body and costume. Image 3 is the accepted Stormglass Odachi sheet and remains authoritative for the weapon.\nPrimary request: Revise only the forearm/wrist/hand presentation and the nearby weapon orientation enough to make BOTH two-handed grips physically auditable from the palm side. Preserve the successful full-body three-quarter grounded ready stance, exact adult woman identity, exact armor, exact one weapon, complete blade framing and neutral gray studio presentation.\nTargeted correction: shift the camera-relative hilt angle and forearm rotation so both hands are viewed from a clear three-quarter palm-side angle rather than a dorsal/knuckle-side angle. For EACH hand, visibly show the palm heel/thenar area, thumb web, opposed thumb, and four separate articulated fingers curling in a complete closed loop around its own separated section of the same leather-wrapped long hilt. Ten digits total, anatomically correct. Leading hand directly behind the guard; trailing hand directly ahead of the pommel. Real pressure compression and contact shadows. Both wrists neutral and aligned to forearms. No gap, no floating contact, no hand-blade intersection, no fused fingers, no extra or missing digits. A slight low diagonal guard position is acceptable if it makes both palm-side grips visible while retaining a credible ready-to-strike posture.\nInvariants: exact mature face, dark indigo braided high tail, restrained anime-realism proportions and complete fully covered layered armor from Image 2; exact matte forged steel blade silhouette, mineral spine inset, guard, long wrapped hilt and pommel from Image 3; one character, one weapon; complete head, hair, boots, blade tip and pommel inside frame; protected hips/thighs/knees; grounded feet; neutral 18% gray background; flat-neutral lighting; no sheath.\nQuality: high; prioritize palm-side contact evidence and all ten fingers without sacrificing identity or weapon design.\nConstraints: no text, labels, letters, numbers, logos, watermark, runes, VFX, target, scenery or dramatic effects.\nAvoid: dorsal-only hand view, hidden thumbs, missing fingers, extra fingers, fused fingers, open or hovering grip, fingers resting beside handle, duplicated weapon, altered blade, altered costume, cropped tip, cropped boots, action blur, impossible wrists, intersecting geometry, civilian clothing, cleavage, bare thighs, fetish styling, chrome, plastic, neon.",
+          "edit_inputs": [
+            {
+              "role": "composition_to_correct",
+              "path": "Iterations/P10_Round006_NyraKestrel_CombatGrip_reject01_palm_visibility.png",
+              "sha256": "9369e2154ee3023e3f9685afa7664bd59f146780380af8e10b676cabf6ab90de"
+            },
+            {
+              "role": "authoritative_identity_and_costume_reference",
+              "path": "P10_Round006_NyraKestrel_Turnaround_v1.png",
+              "sha256": "3dbca4057a6b80738106cd10d907b670085fb5637733673de2451027f2860eaa"
+            },
+            {
+              "role": "authoritative_weapon_reference",
+              "path": "P10_Round006_StormglassOdachi_v1.png",
+              "sha256": "b0d751ad479357bc92645ed7157c1dde1ea37ffe8068b944c02373fa77f9254f"
+            }
+          ]
+        }
+      ],
+      "output": {
+        "byte_size": 2034156,
+        "sha256": "108db4be83f97cab739f3c9e08b5e69f654183451f191776e484023c1b6d551f",
+        "dimensions_px": {
+          "width": 1536,
+          "height": 1024
+        },
+        "format": "PNG",
+        "mode": "RGB"
+      },
+      "inspection": {
+        "accepted": true,
+        "notes": "Complete character and complete one-blade weapon are legible. Both grounded boots contact the floor; two separated hands close around the same long hilt with visible thumb-web/finger articulation and contact shadows; no visible floating contact or intersections. Minor residual limitation: a mechanically closed grip necessarily occludes the center of each palm, so palm evidence is three-quarter thenar/thumb-web visibility rather than flat open-palm visibility."
+      }
+    }
+  ],
+  "rejected_iterations": [
+    {
+      "path": "Iterations/P10_Round006_NyraKestrel_CombatGrip_reject01_palm_visibility.png",
+      "asset_id": "nyra_combat_grip_v1",
+      "byte_size": 1964868,
+      "sha256": "9369e2154ee3023e3f9685afa7664bd59f146780380af8e10b676cabf6ab90de",
+      "dimensions_px": {
+        "width": 1536,
+        "height": 1024
+      },
+      "format": "PNG",
+      "mode": "RGB",
+      "reason": "Rejected despite strong identity, framing, blade legibility and two-hand contact because both grips were shown predominantly from the dorsal/knuckle side; the stricter brief required more auditable palm-side/thenar and thumb-web visibility."
+    }
+  ],
+  "inspection": {
+    "original_resolution_checked": true,
+    "method": "Each generated PNG was displayed and checked at its native 1536 x 1024 resolution; accepted files were then hashed and their dimensions/color space queried from the persisted bytes.",
+    "revision_policy": "At most two targeted revisions per asset were permitted. Turnaround revisions used: 0. Weapon revisions used: 0. Combat-grip revisions used: 1."
+  },
+  "rights_and_provenance_limitations": [
+    "This receipt records the supplied inputs and observed tool workflow; it is not a legal opinion, copyright registration, trademark clearance, or guarantee of exclusivity.",
+    "Generative systems can produce incidental similarities even without reference pixels. A fresh human originality, franchise-similarity, trademark, and publication review is required before release.",
+    "Rights and permitted uses remain subject to applicable law and the image-generation provider's terms.",
+    "The accepted PNGs are 2D concept preflight images only. They do not establish mesh topology, dimensions, rigging, deformation, UVs, textures, collision, animation, LODs, performance budgets, manufacturing feasibility, or game readiness."
+  ],
+  "freeze": {
+    "status": "frozen_for_separate_fresh_critic",
+    "instruction": "Do not revise or reinterpret this concept inside the builder pass; assess the persisted accepted PNG bytes and this receipt in a separate fresh critic pass."
+  }
+}

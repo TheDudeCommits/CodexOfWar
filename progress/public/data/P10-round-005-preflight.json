@@ -1,0 +1,142 @@
+{
+  "schemaVersion": 1,
+  "piece": "P10",
+  "round": 5,
+  "status": "rejected-pre-unity",
+  "reviewType": "fresh-context source-bound visual preflight",
+  "reviewedAt": "2026-07-31T12:03:26Z",
+  "engineRun": false,
+  "actualGameCapturePerformed": false,
+  "unityCaptureFiled": false,
+  "goAttestationFiled": false,
+  "source": {
+    "name": "Einar Forge Warrior round-005 static source",
+    "foundation": "Einar v1 by Blender Studio / Blender Foundation",
+    "license": "CC BY 4.0",
+    "requiredCredit": "Einar Rig (CC-BY) Blender Foundation | studio.blender.org",
+    "scope": "Source-first static fighter-identity visual proof and static LOD exports; no production animation, deform-rig, or Unity integration claim.",
+    "sourceArchiveSha256": "3cbb5a1dd9ffd3ca39edab420a83ea7f7db337b435a78ef27a0c87ff3e6977f7",
+    "verifiedSourceTreeSha256": "75c418c15b73cf61d961cb1f31d5b97ade4e520fe4e84555d232b3ddd35c4d17",
+    "generatorPath": "Tools/Blender/P10_Round005_EinarForgeWarrior.py",
+    "generatorSha256": "4d7db99bbdd4825ec3cd1ab43f2d09536728855e8a0a4a83a345bbcca4d3c40c",
+    "validatorPath": "Tools/Blender/P10_Round005_ValidateFBX.py",
+    "validatorSha256": "c5869cd5cc491e25cde1df1edb42ebe4e6a996456e8db6dca326637310b27212",
+    "blendPath": "ArtSource/P10/Round005/P10_Round005_EinarForgeWarrior.blend",
+    "blendSha256": "ff22a8ac7e18e979e70393364454ffd13b14a6063ed77b941de8ab92166047ca",
+    "auditPath": "ArtSource/P10/Round005/Preflight/P10_Round005_Audit.json",
+    "auditSha256": "51901339a376bea219512fc7c378e2c206243e70878e82cbdae3ac9131d2b0d9",
+    "cleanImportReportPath": "ArtSource/P10/Round005/Preflight/P10_Round005_FBXCleanImport.json",
+    "cleanImportReportSha256": "54c8716c7f91e932752d60c460921a8a6bda0838e770eab304adfefe5adb0a10",
+    "reimportDiagnosticPath": "ArtSource/P10/Round005/Preflight/P10_Round005_FBX_Reimport.png",
+    "reimportDiagnosticSha256": "708f105b3c02119b440d5139c7ae12279e50ff29acbe703a2815f3a050f76f07",
+    "reviewPath": "ArtSource/P10/Round005/Preflight/P10_Round005_FreshVisualPreflightReview.json",
+    "reviewSha256": "8908f058b99d4107d7996e22070cc886b898e473d0388fb4a77e2654ca8ebd06"
+  },
+  "visualReview": {
+    "score": 6,
+    "maximum": 13,
+    "mandatoryPasses": 4,
+    "mandatoryMaximum": 8,
+    "verdict": "NO-GO",
+    "unityDisposition": "LOCKED",
+    "candidatePreferredCount": 0,
+    "benchmarkPreferredCount": 7,
+    "blindComparisonCount": 7,
+    "benchmarkPolicy": "Aggregate preference metadata only; no benchmark image, crop, comparison sheet, or other benchmark pixel is published.",
+    "passedChecks": [
+      "Continuous credible anatomy",
+      "Authored face, eyes, and hair",
+      "Feet and grounded stance",
+      "Continuous joint transitions",
+      "LOD0 production budget",
+      "Diagnostic face, hands, feet, and grip coverage"
+    ],
+    "failedChecks": [
+      "Both visible hands physically enclose one hilt",
+      "Premium layered warrior costume rather than civilian workwear",
+      "Functional weapon scale, mount, grip, and contact",
+      "Premium portable material separation",
+      "Combat line of action, balance, and attack intent",
+      "Neutral front, back, profile, and three-quarter modeling coverage",
+      "Unmistakable premium authored anime-warrior identity"
+    ],
+    "singleBiggestGap": "Core character authorship and identity: the delivery still reads as the licensed Einar civilian mechanic in workwear with attached props, not an unmistakable premium authored anime warrior at the God of War Ragnarok benchmark level."
+  },
+  "mechanicalValidation": {
+    "result": "semantic-and-byte-idempotence-pass",
+    "factoryStartup": true,
+    "autoexecDisabled": true,
+    "blenderVersion": "5.2.0 LTS",
+    "commandExitCode": 0,
+    "semanticClaimsVerified": true,
+    "cleanStaticImports": "4/4",
+    "allCleanStaticImportsPass": true,
+    "meshObjectsPerFbx": 7,
+    "triangles": {
+      "combat": 85096,
+      "lod0": 85096,
+      "lod1": 47615,
+      "lod2": 25484
+    },
+    "maximumBoundsDeltaMeters": 0.0000010000000000287557,
+    "textureReferencesPerFbx": 0,
+    "texturePortabilitySupported": false,
+    "freshReimportMaterialParity": false,
+    "byteIdempotent": true,
+    "byteIdempotenceStatus": "PASS",
+    "postValidatorHashes": {
+      "auditSha256": "51901339a376bea219512fc7c378e2c206243e70878e82cbdae3ac9131d2b0d9",
+      "cleanImportReportSha256": "54c8716c7f91e932752d60c460921a8a6bda0838e770eab304adfefe5adb0a10",
+      "diagnosticRenderSha256": "708f105b3c02119b440d5139c7ae12279e50ff29acbe703a2815f3a050f76f07"
+    },
+    "interpretation": "All four static FBX imports preserve the filed object, triangle, bounds, finite-geometry, UV, and material-index claims. A factory-state follow-up reproduced the audit, report, and diagnostic render byte-for-byte. Zero FBX texture references still confirms absent texture payload rather than portability, so source-to-reimport material parity remains false."
+  },
+  "integrityFindings": {
+    "sourceFilesVerified": 64,
+    "licenseVerification": "PASS",
+    "actualGameCapturePerformed": false,
+    "staticOnly": true,
+    "armaturesPerFbx": 0,
+    "actionsPerFbx": 0,
+    "shapeKeysPerFbx": 0,
+    "texturePortability": "FAIL",
+    "releaseSanitization": "PASS",
+    "privacyAudit": "PASS",
+    "visualPayloadPreserved": true,
+    "validatorByteIdempotence": "PASS"
+  },
+  "limitations": [
+    "The supplied images are Blender source/preflight renders, not game footage.",
+    "All nine source views use the same frozen combat pose; genuine neutral modeling coverage is unsupported.",
+    "The static FBXs contain no armatures, actions, modifiers, shape keys, vertex groups, or texture references.",
+    "No production deform rig, animation-ready FBX, portable baked PBR atlas, Unity integration, or runtime-performance claim is made.",
+    "Release sanitization removed checkout-specific metadata without changing the judged visual payload; the validator is now byte-idempotent, but material portability remains unsupported."
+  ],
+  "diagnostics": [
+    {
+      "label": "Decisive full-body front",
+      "publicPath": "/captures/P10/round-005-preflight/Front_Decisive.png",
+      "sha256": "1004bb824c937d0b748ffa90cd71cfcd90c5af50ae0bbfdb4cbd0ba455f80ca6"
+    },
+    {
+      "label": "Face diagnostic",
+      "publicPath": "/captures/P10/round-005-preflight/Face_Diagnostic.png",
+      "sha256": "f7cf5a0cd41e140fcee8bd787a65bfefaf153296629439c6f8a4de3387918477"
+    },
+    {
+      "label": "Grip diagnostic",
+      "publicPath": "/captures/P10/round-005-preflight/Grip_Diagnostic.png",
+      "sha256": "5784aea14bf995dae9b18f96a40639ddbfb46f344c4787ebada09eabbde4b09e"
+    },
+    {
+      "label": "Decisive combat presentation",
+      "publicPath": "/captures/P10/round-005-preflight/Combat_Decisive.png",
+      "sha256": "081636378eec8fe2651a35e5395553f1dc374c5028c6428455a114e3b0d5c655"
+    }
+  ],
+  "nextRound": {
+    "round": 6,
+    "status": "source-pipeline-triage",
+    "target": "Before Unity integration, submit a materially portable, fully redesigned warrior source in the same seven matched evidence categories plus genuine neutral front, back, profile, and three-quarter views and a fresh clean-FBX reimport. A new independent reviewer must prefer the candidate in at least 5 of 7 blinded comparisons, verify both hands enclose one functional hilt, find source-to-reimport material parity, pass all eight mandatory checks, and score at least 10/13 overall."
+  }
+}

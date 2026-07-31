@@ -1,0 +1,41 @@
+{
+  "status": "rejected",
+  "gate_pass": false,
+  "validator_invocation": "/Applications/Blender.app/Contents/MacOS/Blender --factory-startup --disable-autoexec -b --python Tools/Blender/P10_Round005_ValidateFBX.py",
+  "single_biggest_technical_gap": "Degenerate zero-area faces survived in every FBX; the lower-LOD FBX export also discarded faces, so imported triangle counts diverged from the authored audit.",
+  "exact_failures": {
+    "lod0_zero_area_triangles": {
+      "P10R5_LOD0_ARMOR": 6,
+      "P10R5_LOD0_HAIR_CARDS": 6,
+      "P10R5_LOD0_MECH": 430
+    },
+    "lod1_triangle_count": {
+      "expected": 47895,
+      "imported": 47864,
+      "delta": -31
+    },
+    "lod2_triangle_count": {
+      "expected": 25658,
+      "imported": 25613,
+      "delta": -45
+    }
+  },
+  "passing_checks": [
+    "exact object names",
+    "LOD0 exact triangle count",
+    "bounds within 0.0001 m",
+    "finite geometry, normals, and UVs",
+    "no armatures, actions, cameras, lights, modifiers, parents, shape keys, or vertex groups",
+    "positive transforms",
+    "valid material indices",
+    "UV0 on meshes with image-textured materials"
+  ],
+  "preserved_full_report": {
+    "path": "ArtSource/P10/Round005/Preflight/Iterations/FBXImport01_Rejected_FullReport.json",
+    "sha256": "2825793d27f2087703e9792fff5437303b9bbabda301f0daa4093c75a1932820"
+  },
+  "preserved_diagnostic_render": {
+    "path": "ArtSource/P10/Round005/Preflight/Iterations/FBXImport01_Rejected.png",
+    "sha256": "853bab7b587410c323c44d4b6c81f8fad12bcee28d3c77c5287deb7270bd4536"
+  }
+}

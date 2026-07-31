@@ -1,13 +1,36 @@
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
-import { access, readFile } from "node:fs/promises";
+import { access, readFile, readdir } from "node:fs/promises";
 import test from "node:test";
 
 const projectRoot = new URL("../", import.meta.url);
+const publicRoot = new URL("../public/", import.meta.url);
 const dataUrl = new URL(
   "../public/data/codex-of-war.json",
   import.meta.url,
 );
+const benchmarkImageHashes = new Set([
+  "05048268b96a7ea20e52ab4f0c01fbc312b37d7d4b3ae4fd40752ca4f497e71e",
+  "06ac0710130fe19f7c844ecc453bca2d27bcc72b25fef3a2615f8877b53c9778",
+  "a0161b955a1947fcabccc34c8e22ee0ebcb6ade357b51aa974c0057caf9294c9",
+  "1e99a94f8efbbdd9d4811e2706f84616ea9cc379909caee873d212ecfb9a68b0",
+  "1af9ad3cd30a4f90dd97d8fcdced94eee8afcc2828aff1013bf24f90721112b7",
+  "d208c98d2ea91b654fb11070616887e0f8564fe3c5040ae854e3aab8645be98d",
+  "41d924111330b7ead3bb85e85ee8d16d3a66f376939ede3fa3227d6cb591f76a",
+  "d18f1a8f98bfaf720d4400cd3252688ff3200a5585c31d48112a003656c4d41a",
+  "3c5ced3dea47f3197adbcd323e4f7fb1f6b46f56ef79c5575ede85b72f32eb7e",
+  "0293135a1aa7dae0a92f73e018d5f046cd8aa45b9b0e1727e8538ae951276869",
+  "1f7ee6c436dee9599e2ff1191fde973f20c864548881b1cf7f6d483e3e15c1aa",
+  "a57bd1e7251e57eda6e246b45fce3ddc168a89e9b406db78ad261a9513f7df3f",
+  "c4693a135a8f66b17759349dd81e126001989aac894db1714d2d2cad89ae8fe0",
+  "21858656b7887cc37f92c2bab4ed56f6cb273f45fd75193c0cb1c1b37456bc33",
+  "aab7f2b4d72b8d2ffc4faea302e7f8e51a799aaad8ea213351e1de72c2526c8b",
+  "a96d9bf819821b0730be51f5ac4f916e55118b521280e737941b9be868fd0ad2",
+  "c0e6f548000b49247e740c300db014be846c73f4cfdd6ac09246b49ca0c5eb5c",
+  "be4dc9c541780492ad20d96d0afdf64f20478d2b6f52cabcb25b5edb3d2ee597",
+  "3db321cbdd218f19f9834e7ba81432cc94bfd9fb5cf0933af2664d26d61f34f2",
+  "e894db229df4c7bc0be9e01e16a668158a4ae900e1b3749d42f9e47662bb7a62",
+]);
 
 async function render() {
   const workerUrl = new URL("../dist/server/index.js", import.meta.url);
@@ -68,7 +91,7 @@ test("server-renders the production evidence ledger", async () => {
   assert.match(html, /Reference 09/);
   assert.match(html, /29\.82%/);
   assert.match(html, /82,906/);
-  assert.match(html, /P10 · Round 005/);
+  assert.match(html, /P10 · Round 007/);
   assert.match(html, /Round rejected\. Rebuild in progress\./);
   assert.match(html, /Round 001 rejected · mechanically reproducible/);
   assert.match(
@@ -155,8 +178,60 @@ test("server-renders the production evidence ledger", async () => {
     /href="\/data\/P10-round-004-preflight\.json"/,
   );
   assert.match(html, /toy-like procedural slab-and-tube assembly/i);
-  assert.match(html, /professional-source pipeline pivot active/i);
-  assert.match(html, /all 8 mandatory source checks/i);
+  assert.match(html, /Source preflight 6\/13 · mandatory 4\/8/);
+  assert.match(html, /NO-GO · rejected before Unity/i);
+  assert.match(html, /Benchmark preferred 7\/7 blinded comparisons/);
+  assert.match(html, /licensed Einar civilian mechanic in workwear/i);
+  assert.match(html, /4\/4 static imports at 85,096 \/ 47,615 \/ 25,484/);
+  assert.match(html, /no actual game capture was performed/i);
+  assert.match(html, /Einar Rig \(CC-BY\) Blender Foundation/);
+  assert.match(
+    html,
+    /href="\/captures\/P10\/round-005-preflight\/Front_Decisive\.png"/,
+  );
+  assert.match(
+    html,
+    /href="\/captures\/P10\/round-005-preflight\/Face_Diagnostic\.png"/,
+  );
+  assert.match(
+    html,
+    /href="\/captures\/P10\/round-005-preflight\/Grip_Diagnostic\.png"/,
+  );
+  assert.match(
+    html,
+    /href="\/captures\/P10\/round-005-preflight\/Combat_Decisive\.png"/,
+  );
+  assert.match(
+    html,
+    /href="\/data\/P10-round-005-preflight\.json"/,
+  );
+  assert.match(html, /release-sanitization follow-up passed/i);
+  assert.match(html, /reproduces the audit, clean-import report, and reimport diagnostic byte-for-byte/i);
+  assert.match(html, /Concept preflight 55\/100 · threshold 85 · critical floor failed/);
+  assert.match(html, /Candidate met benchmark bar in 0\/6 blinded comparisons/);
+  assert.match(html, /rejected before paid 3D and Unity/i);
+  assert.match(html, /generic dark armored-anime swordswoman/i);
+  assert.match(
+    html,
+    /href="\/captures\/P10\/round-006-concept\/NyraKestrel_Turnaround\.png"/,
+  );
+  assert.match(
+    html,
+    /href="\/captures\/P10\/round-006-concept\/StormglassOdachi\.png"/,
+  );
+  assert.match(
+    html,
+    /href="\/captures\/P10\/round-006-concept\/NyraKestrel_CombatGrip\.png"/,
+  );
+  assert.match(html, /href="\/data\/P10-round-006-concept\.json"/);
+  assert.match(html, /Function-led identity redesign/i);
+  assert.match(html, /no result, capture, or evidence filed yet/i);
+  assert.match(html, /at least 5 of 6 blinded comparisons/i);
+  assert.doesNotMatch(html, /Reference\.zip|Reference\/[^"<]+\.(?:png|jpe?g|webp)/i);
+  assert.doesNotMatch(
+    html,
+    /\/Users\/|\/home\/|[A-Za-z]:\\Users\\|\/tmp\/|\/private\/var\/folders\//i,
+  );
   assert.doesNotMatch(html, /codex-preview|Building your site/i);
   assert.doesNotMatch(html, /react-loading-skeleton/);
 
@@ -218,8 +293,11 @@ test("checked-in data contains the complete, honest P00–P25 ledger", async () 
   assert.equal(p00.status, "accepted");
   assert.equal(p10.status, "revising");
   assert.equal(dashboard.activeBuild.pieceId, "P10");
-  assert.equal(dashboard.activeBuild.round, 5);
+  assert.equal(dashboard.activeBuild.round, 7);
+  assert.equal(dashboard.activeBuild.roundLabel, "P10 · Round 007");
+  assert.equal(dashboard.activeBuild.builder, "Function-led identity redesign");
   assert.equal(dashboard.activeBuild.status, p10.status);
+  assert.match(dashboard.activeBuild.brief, /no result, capture, or evidence filed yet/i);
   assert.ok(queuedPieces.every((piece) => piece.status === "queued"));
 
   assert.equal(dashboard.canonicalCapture.camera, "Low shoulder");
@@ -246,7 +324,7 @@ test("checked-in data contains the complete, honest P00–P25 ledger", async () 
   assert.equal(dashboard.acceptance.maximum, 100);
   assert.match(dashboard.acceptance.p00Exception, /visual loss does not block/i);
 
-  assert.equal(dashboard.rounds.length, 6);
+  assert.equal(dashboard.rounds.length, 7);
   assert.equal(dashboard.rounds[0].pieceId, "P00");
   assert.equal(
     dashboard.rounds[0].critic.status,
@@ -332,15 +410,63 @@ test("checked-in data contains the complete, honest P00–P25 ledger", async () 
   );
   assert.equal(dashboard.rounds[5].pieceId, "P10");
   assert.equal(dashboard.rounds[5].round, 5);
-  assert.equal(dashboard.rounds[5].status, "building");
+  assert.equal(dashboard.rounds[5].status, "criticized");
   assert.equal(
     dashboard.rounds[5].critic.status,
-    "Not started · source derivative build active",
+    "NO-GO · rejected before Unity · fresh visual gate failed closed",
   );
-  assert.equal(dashboard.rounds[5].critic.score, null);
-  assert.equal(dashboard.rounds[5].critic.scoreLabel, null);
-  assert.equal(dashboard.rounds[5].critic.preference, null);
-  assert.equal(dashboard.rounds[5].critic.primaryGap, null);
+  assert.equal(dashboard.rounds[5].critic.score, 6);
+  assert.equal(
+    dashboard.rounds[5].critic.scoreLabel,
+    "Source preflight 6/13 · mandatory 4/8",
+  );
+  assert.equal(
+    dashboard.rounds[5].critic.preference,
+    "Benchmark preferred 7/7 blinded comparisons",
+  );
+  assert.match(
+    dashboard.rounds[5].critic.primaryGap,
+    /licensed Einar civilian mechanic in workwear/i,
+  );
+  assert.deepEqual(dashboard.rounds[5].evidenceLinks, [
+    "/captures/P10/round-005-preflight/Front_Decisive.png",
+    "/captures/P10/round-005-preflight/Face_Diagnostic.png",
+    "/captures/P10/round-005-preflight/Grip_Diagnostic.png",
+    "/captures/P10/round-005-preflight/Combat_Decisive.png",
+    "/data/P10-round-005-preflight.json",
+  ]);
+  assert.equal(dashboard.rounds[6].pieceId, "P10");
+  assert.equal(dashboard.rounds[6].round, 6);
+  assert.equal(dashboard.rounds[6].status, "criticized");
+  assert.equal(
+    dashboard.rounds[6].critic.status,
+    "NO-GO · rejected before paid 3D and Unity",
+  );
+  assert.equal(dashboard.rounds[6].critic.score, 55);
+  assert.equal(
+    dashboard.rounds[6].critic.scoreLabel,
+    "Concept preflight 55/100 · threshold 85 · critical floor failed",
+  );
+  assert.equal(
+    dashboard.rounds[6].critic.preference,
+    "Candidate met benchmark bar in 0/6 blinded comparisons",
+  );
+  assert.match(
+    dashboard.rounds[6].critic.primaryGap,
+    /unique, function-led visual thesis/i,
+  );
+  assert.deepEqual(dashboard.rounds[6].evidenceLinks, [
+    "/captures/P10/round-006-concept/NyraKestrel_Turnaround.png",
+    "/captures/P10/round-006-concept/StormglassOdachi.png",
+    "/captures/P10/round-006-concept/NyraKestrel_CombatGrip.png",
+    "/data/P10-round-006-concept.json",
+  ]);
+  assert.equal(
+    dashboard.rounds.some(
+      (round) => round.pieceId === "P10" && round.round === 7,
+    ),
+    false,
+  );
 });
 
 test("P10 evidence is filed while the global latest manifest remains P00-pinned", async () => {
@@ -351,6 +477,8 @@ test("P10 evidence is filed while the global latest manifest remains P00-pinned"
     p10Round002Preflight,
     p10Round003Preflight,
     p10Round004Preflight,
+    p10Round005Preflight,
+    p10Round006Concept,
     latestManifest,
     p10Screenshot,
     turntableContact,
@@ -362,6 +490,13 @@ test("P10 evidence is filed while the global latest manifest remains P00-pinned"
     round004Front,
     round004GripFailure,
     round004CombatFailure,
+    round005Front,
+    round005Face,
+    round005Grip,
+    round005Combat,
+    round006Turnaround,
+    round006Weapon,
+    round006Grip,
   ] = await Promise.all([
     readFile(dataUrl, "utf8").then(JSON.parse),
     readFile(
@@ -382,6 +517,14 @@ test("P10 evidence is filed while the global latest manifest remains P00-pinned"
     ).then(JSON.parse),
     readFile(
       new URL("../public/data/P10-round-004-preflight.json", import.meta.url),
+      "utf8",
+    ).then(JSON.parse),
+    readFile(
+      new URL("../public/data/P10-round-005-preflight.json", import.meta.url),
+      "utf8",
+    ).then(JSON.parse),
+    readFile(
+      new URL("../public/data/P10-round-006-concept.json", import.meta.url),
       "utf8",
     ).then(JSON.parse),
     readFile(
@@ -445,6 +588,48 @@ test("P10 evidence is filed while the global latest manifest remains P00-pinned"
     readFile(
       new URL(
         "../public/captures/P10/round-004-preflight/Combat_Failure.png",
+        import.meta.url,
+      ),
+    ),
+    readFile(
+      new URL(
+        "../public/captures/P10/round-005-preflight/Front_Decisive.png",
+        import.meta.url,
+      ),
+    ),
+    readFile(
+      new URL(
+        "../public/captures/P10/round-005-preflight/Face_Diagnostic.png",
+        import.meta.url,
+      ),
+    ),
+    readFile(
+      new URL(
+        "../public/captures/P10/round-005-preflight/Grip_Diagnostic.png",
+        import.meta.url,
+      ),
+    ),
+    readFile(
+      new URL(
+        "../public/captures/P10/round-005-preflight/Combat_Decisive.png",
+        import.meta.url,
+      ),
+    ),
+    readFile(
+      new URL(
+        "../public/captures/P10/round-006-concept/NyraKestrel_Turnaround.png",
+        import.meta.url,
+      ),
+    ),
+    readFile(
+      new URL(
+        "../public/captures/P10/round-006-concept/StormglassOdachi.png",
+        import.meta.url,
+      ),
+    ),
+    readFile(
+      new URL(
+        "../public/captures/P10/round-006-concept/NyraKestrel_CombatGrip.png",
         import.meta.url,
       ),
     ),
@@ -592,6 +777,210 @@ test("P10 evidence is filed while the global latest manifest remains P00-pinned"
     createHash("sha256").update(round004CombatFailure).digest("hex"),
     p10Round004Preflight.diagnostics[2].sha256,
   );
+  assert.equal(p10Round005Preflight.piece, "P10");
+  assert.equal(p10Round005Preflight.round, 5);
+  assert.equal(p10Round005Preflight.status, "rejected-pre-unity");
+  assert.equal(p10Round005Preflight.engineRun, false);
+  assert.equal(p10Round005Preflight.actualGameCapturePerformed, false);
+  assert.equal(p10Round005Preflight.unityCaptureFiled, false);
+  assert.equal(p10Round005Preflight.goAttestationFiled, false);
+  assert.equal(p10Round005Preflight.visualReview.score, 6);
+  assert.equal(p10Round005Preflight.visualReview.maximum, 13);
+  assert.equal(p10Round005Preflight.visualReview.mandatoryPasses, 4);
+  assert.equal(p10Round005Preflight.visualReview.mandatoryMaximum, 8);
+  assert.equal(p10Round005Preflight.visualReview.verdict, "NO-GO");
+  assert.equal(p10Round005Preflight.visualReview.unityDisposition, "LOCKED");
+  assert.equal(p10Round005Preflight.visualReview.candidatePreferredCount, 0);
+  assert.equal(p10Round005Preflight.visualReview.benchmarkPreferredCount, 7);
+  assert.equal(p10Round005Preflight.visualReview.blindComparisonCount, 7);
+  assert.match(
+    p10Round005Preflight.visualReview.singleBiggestGap,
+    /licensed Einar civilian mechanic in workwear/i,
+  );
+  assert.equal(
+    p10Round005Preflight.source.requiredCredit,
+    "Einar Rig (CC-BY) Blender Foundation | studio.blender.org",
+  );
+  assert.equal(
+    p10Round005Preflight.source.reviewSha256,
+    "8908f058b99d4107d7996e22070cc886b898e473d0388fb4a77e2654ca8ebd06",
+  );
+  assert.equal(
+    p10Round005Preflight.source.auditSha256,
+    "51901339a376bea219512fc7c378e2c206243e70878e82cbdae3ac9131d2b0d9",
+  );
+  assert.equal(
+    p10Round005Preflight.source.cleanImportReportSha256,
+    "54c8716c7f91e932752d60c460921a8a6bda0838e770eab304adfefe5adb0a10",
+  );
+  assert.equal(
+    p10Round005Preflight.source.reimportDiagnosticSha256,
+    "708f105b3c02119b440d5139c7ae12279e50ff29acbe703a2815f3a050f76f07",
+  );
+  assert.equal(
+    p10Round005Preflight.mechanicalValidation.result,
+    "semantic-and-byte-idempotence-pass",
+  );
+  assert.equal(p10Round005Preflight.mechanicalValidation.cleanStaticImports, "4/4");
+  assert.equal(
+    p10Round005Preflight.mechanicalValidation.allCleanStaticImportsPass,
+    true,
+  );
+  assert.deepEqual(p10Round005Preflight.mechanicalValidation.triangles, {
+    combat: 85096,
+    lod0: 85096,
+    lod1: 47615,
+    lod2: 25484,
+  });
+  assert.equal(
+    p10Round005Preflight.mechanicalValidation.texturePortabilitySupported,
+    false,
+  );
+  assert.equal(
+    p10Round005Preflight.mechanicalValidation.freshReimportMaterialParity,
+    false,
+  );
+  assert.equal(
+    p10Round005Preflight.mechanicalValidation.byteIdempotent,
+    true,
+  );
+  assert.equal(
+    p10Round005Preflight.mechanicalValidation.byteIdempotenceStatus,
+    "PASS",
+  );
+  assert.deepEqual(
+    p10Round005Preflight.mechanicalValidation.postValidatorHashes,
+    {
+      auditSha256:
+        "51901339a376bea219512fc7c378e2c206243e70878e82cbdae3ac9131d2b0d9",
+      cleanImportReportSha256:
+        "54c8716c7f91e932752d60c460921a8a6bda0838e770eab304adfefe5adb0a10",
+      diagnosticRenderSha256:
+        "708f105b3c02119b440d5139c7ae12279e50ff29acbe703a2815f3a050f76f07",
+    },
+  );
+  assert.equal(p10Round005Preflight.integrityFindings.sourceFilesVerified, 64);
+  assert.equal(p10Round005Preflight.integrityFindings.releaseSanitization, "PASS");
+  assert.equal(p10Round005Preflight.integrityFindings.privacyAudit, "PASS");
+  assert.equal(p10Round005Preflight.integrityFindings.visualPayloadPreserved, true);
+  assert.equal(
+    p10Round005Preflight.integrityFindings.validatorByteIdempotence,
+    "PASS",
+  );
+  assert.equal(p10Round005Preflight.nextRound.round, 6);
+  assert.equal(p10Round005Preflight.nextRound.status, "source-pipeline-triage");
+  assert.doesNotMatch(
+    JSON.stringify(p10Round005Preflight),
+    /Reference\.zip|Reference\/[^"']+\.(?:png|jpe?g|webp)/i,
+  );
+
+  const round005Images = [
+    round005Front,
+    round005Face,
+    round005Grip,
+    round005Combat,
+  ];
+  assert.deepEqual(
+    p10Round005Preflight.diagnostics.map((diagnostic) => diagnostic.publicPath),
+    [
+      "/captures/P10/round-005-preflight/Front_Decisive.png",
+      "/captures/P10/round-005-preflight/Face_Diagnostic.png",
+      "/captures/P10/round-005-preflight/Grip_Diagnostic.png",
+      "/captures/P10/round-005-preflight/Combat_Decisive.png",
+    ],
+  );
+  for (const [index, image] of round005Images.entries()) {
+    assert.equal(
+      createHash("sha256").update(image).digest("hex"),
+      p10Round005Preflight.diagnostics[index].sha256,
+    );
+    assert.equal(image.subarray(1, 4).toString("ascii"), "PNG");
+    assert.equal(image.readUInt32BE(16), 1600);
+    assert.equal(image.readUInt32BE(20), 1600);
+  }
+
+  assert.equal(p10Round006Concept.piece, "P10");
+  assert.equal(p10Round006Concept.round, 6);
+  assert.equal(p10Round006Concept.status, "rejected-concept-preflight");
+  assert.equal(p10Round006Concept.artifactClass, "original 2D concept art");
+  assert.equal(p10Round006Concept.engineRun, false);
+  assert.equal(p10Round006Concept.actualGameCapturePerformed, false);
+  assert.equal(p10Round006Concept.unityCaptureFiled, false);
+  assert.equal(p10Round006Concept.threeDimensionalAssetFiled, false);
+  assert.equal(p10Round006Concept.gameReadyEvidenceFiled, false);
+  assert.equal(p10Round006Concept.paid3DGenerationAuthorized, false);
+  assert.equal(p10Round006Concept.source.referencePixelsSuppliedToGeneration, false);
+  assert.equal(
+    p10Round006Concept.source.receiptSha256,
+    "0914db7e7dcf12a44a0fcf944b581a49370ef9b7a9c122555c2147779dac65a6",
+  );
+  assert.equal(
+    p10Round006Concept.source.reviewSha256,
+    "f80e5864495b50c312dd375b1ec9eb41e152d73386ec5e661e254c4bb94ed7a4",
+  );
+  assert.equal(p10Round006Concept.visualReview.score, 55);
+  assert.equal(p10Round006Concept.visualReview.maximum, 100);
+  assert.equal(p10Round006Concept.visualReview.passThreshold, 85);
+  assert.equal(p10Round006Concept.visualReview.criticalFloorPerCategory, 7);
+  assert.equal(p10Round006Concept.visualReview.thresholdResult, "FAIL");
+  assert.equal(p10Round006Concept.visualReview.criticalFloorResult, "FAIL");
+  assert.equal(p10Round006Concept.visualReview.verdict, "NO-GO");
+  assert.equal(p10Round006Concept.visualReview.comparisonCount, 6);
+  assert.equal(p10Round006Concept.visualReview.candidateMetBenchmarkBarCount, 0);
+  assert.equal(p10Round006Concept.visualReview.candidateBelowBenchmarkBarCount, 6);
+  assert.match(
+    p10Round006Concept.visualReview.singleBiggestGap,
+    /unique, function-led visual thesis/i,
+  );
+  assert.equal(p10Round006Concept.decision.paid3DGenerationAuthorized, false);
+  assert.equal(p10Round006Concept.nextRound.round, 7);
+  assert.equal(p10Round006Concept.nextRound.status, "identity-redesign");
+  assert.deepEqual(p10Round006Concept.nextRound.gate, {
+    minimumTotalScore: 85,
+    minimumScorePerCategory: 7,
+    blindComparisonCount: 6,
+    minimumComparisonsMeetingBenchmarkBar: 5,
+    paid3DGenerationRequiresFullPass: true,
+  });
+  assert.match(p10Round006Concept.nextRound.target, /at least 85\/100/i);
+  assert.match(p10Round006Concept.nextRound.target, /at or above 7/i);
+  assert.match(p10Round006Concept.nextRound.target, /at least 5 of 6/i);
+  assert.deepEqual(
+    p10Round006Concept.conceptArt.map((artifact) => artifact.publicPath),
+    [
+      "/captures/P10/round-006-concept/NyraKestrel_Turnaround.png",
+      "/captures/P10/round-006-concept/StormglassOdachi.png",
+      "/captures/P10/round-006-concept/NyraKestrel_CombatGrip.png",
+    ],
+  );
+  assert.ok(
+    p10Round006Concept.conceptArt.every(
+      (artifact) =>
+        artifact.evidenceType ===
+          "2D concept art — not gameplay, 3D, or game-ready evidence" &&
+        artifact.dimensions.width === 1536 &&
+        artifact.dimensions.height === 1024 &&
+        artifact.format === "PNG",
+    ),
+  );
+  const round006Images = [
+    round006Turnaround,
+    round006Weapon,
+    round006Grip,
+  ];
+  for (const [index, image] of round006Images.entries()) {
+    assert.equal(
+      createHash("sha256").update(image).digest("hex"),
+      p10Round006Concept.conceptArt[index].sha256,
+    );
+    assert.equal(image.subarray(1, 4).toString("ascii"), "PNG");
+    assert.equal(image.readUInt32BE(16), 1536);
+    assert.equal(image.readUInt32BE(20), 1024);
+  }
+  assert.doesNotMatch(
+    JSON.stringify(p10Round006Concept),
+    /Reference\.zip|Reference\/[^"']+\.(?:png|jpe?g|webp)|\/Users\/|\/home\/|[A-Za-z]:\\Users\\|\/tmp\/|\/private\/var\/folders\//i,
+  );
 
   for (const turntableImage of p10Manifest.turntableImages) {
     const image = await readFile(
@@ -600,6 +989,37 @@ test("P10 evidence is filed while the global latest manifest remains P00-pinned"
     assert.equal(
       createHash("sha256").update(image).digest("hex"),
       turntableImage.sha256,
+    );
+  }
+});
+
+test("public artifacts exclude all supplied benchmark image bytes", async () => {
+  const publicEntries = await readdir(publicRoot, { recursive: true });
+  assert.ok(
+    publicEntries.every((entry) => !entry.toLowerCase().endsWith(".zip")),
+  );
+
+  const publicImages = publicEntries.filter((entry) =>
+    /\.(?:png|jpe?g|webp)$/i.test(entry),
+  );
+  for (const imagePath of publicImages) {
+    const image = await readFile(new URL(imagePath, publicRoot));
+    const imageHash = createHash("sha256").update(image).digest("hex");
+    assert.equal(
+      benchmarkImageHashes.has(imageHash),
+      false,
+      `${imagePath} must not contain a supplied benchmark image`,
+    );
+  }
+
+  const publicDataFiles = publicEntries.filter((entry) =>
+    /^data\/.*\.json$/i.test(entry),
+  );
+  for (const dataPath of publicDataFiles) {
+    const data = await readFile(new URL(dataPath, publicRoot), "utf8");
+    assert.doesNotMatch(
+      data,
+      /Reference\.zip|Reference\/[^"']+\.(?:png|jpe?g|webp)|\/Users\/|\/home\/|[A-Za-z]:\\Users\\|\/tmp\/|\/private\/var\/folders\//i,
     );
   }
 });

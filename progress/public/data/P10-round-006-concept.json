@@ -1,0 +1,109 @@
+{
+  "schemaVersion": 1,
+  "piece": "P10",
+  "round": 6,
+  "status": "rejected-concept-preflight",
+  "reviewType": "fresh-context original 2D concept preflight",
+  "reviewedAt": "2026-07-31T12:06:37Z",
+  "artifactClass": "original 2D concept art",
+  "engineRun": false,
+  "actualGameCapturePerformed": false,
+  "unityCaptureFiled": false,
+  "threeDimensionalAssetFiled": false,
+  "gameReadyEvidenceFiled": false,
+  "paid3DGenerationAuthorized": false,
+  "source": {
+    "name": "Nyra Kestrel, Stormglass Warden concept preflight",
+    "scope": "Original 2D concept preflight only; no gameplay, 3D model, finished game asset, or production-ready implementation claim.",
+    "creator": "OpenAI image generation via Codex",
+    "referencePixelsSuppliedToGeneration": false,
+    "receiptPath": "ArtSource/P10/Round006/Concept/P10_Round006_ConceptReceipt.json",
+    "receiptSha256": "0914db7e7dcf12a44a0fcf944b581a49370ef9b7a9c122555c2147779dac65a6",
+    "reviewPath": "ArtSource/P10/Round006/Concept/P10_Round006_FreshConceptReview.json",
+    "reviewSha256": "f80e5864495b50c312dd375b1ec9eb41e152d73386ec5e661e254c4bb94ed7a4"
+  },
+  "visualReview": {
+    "score": 55,
+    "maximum": 100,
+    "passThreshold": 85,
+    "criticalFloorPerCategory": 7,
+    "thresholdResult": "FAIL",
+    "criticalFloorResult": "FAIL",
+    "verdict": "NO-GO",
+    "comparisonCount": 6,
+    "candidateMetBenchmarkBarCount": 0,
+    "candidateBelowBenchmarkBarCount": 6,
+    "benchmarkPolicy": "Aggregate blinded-comparison results only; no benchmark image, crop, comparison sheet, filename, archive path, or other benchmark pixel is published.",
+    "singleBiggestGap": "Benchmark-level authored character identity: the generic dark armored-anime swordswoman silhouette and costume do not express a unique, function-led visual thesis strong enough to justify paid 3D translation.",
+    "categoryScores": {
+      "multiViewIdentityConsistency": 6,
+      "neutralModelingUtility": 7,
+      "anatomy": 6,
+      "faceEyesHair": 5,
+      "premiumLayeredCostumeAndMaterialSeparation": 5,
+      "silhouetteAndRoleRead": 4,
+      "functionalTwoHandSameHiltGrip": 7,
+      "weaponPlausibility": 5.5,
+      "avoidanceOfGenericCivilianPlasticFetishAndFranchiseCues": 5.5,
+      "benchmarkLevelAuthorship": 4
+    }
+  },
+  "decision": {
+    "result": "NO-GO",
+    "paid3DGenerationAuthorized": false,
+    "instruction": "Do not begin paid 3D generation from this concept set."
+  },
+  "limitations": [
+    "All three supplied images are original 2D concept art, not gameplay or game capture.",
+    "No 3D mesh, topology, rig, deformation, UV, collision, animation, LOD, texture, performance, or game-ready claim is made.",
+    "The concept review cannot establish legal originality, exclusivity, copyright status, trademark clearance, or absence of all third-party similarity.",
+    "Paid 3D generation was not authorized because the visual gate failed."
+  ],
+  "conceptArt": [
+    {
+      "label": "Character turnaround concept art",
+      "evidenceType": "2D concept art — not gameplay, 3D, or game-ready evidence",
+      "publicPath": "/captures/P10/round-006-concept/NyraKestrel_Turnaround.png",
+      "sha256": "3dbca4057a6b80738106cd10d907b670085fb5637733673de2451027f2860eaa",
+      "dimensions": {
+        "width": 1536,
+        "height": 1024
+      },
+      "format": "PNG"
+    },
+    {
+      "label": "Weapon orthographic concept art",
+      "evidenceType": "2D concept art — not gameplay, 3D, or game-ready evidence",
+      "publicPath": "/captures/P10/round-006-concept/StormglassOdachi.png",
+      "sha256": "b0d751ad479357bc92645ed7157c1dde1ea37ffe8068b944c02373fa77f9254f",
+      "dimensions": {
+        "width": 1536,
+        "height": 1024
+      },
+      "format": "PNG"
+    },
+    {
+      "label": "Two-hand grip concept art",
+      "evidenceType": "2D concept art — not gameplay, 3D, or game-ready evidence",
+      "publicPath": "/captures/P10/round-006-concept/NyraKestrel_CombatGrip.png",
+      "sha256": "108db4be83f97cab739f3c9e08b5e69f654183451f191776e484023c1b6d551f",
+      "dimensions": {
+        "width": 1536,
+        "height": 1024
+      },
+      "format": "PNG"
+    }
+  ],
+  "nextRound": {
+    "round": 7,
+    "status": "identity-redesign",
+    "gate": {
+      "minimumTotalScore": 85,
+      "minimumScorePerCategory": 7,
+      "blindComparisonCount": 6,
+      "minimumComparisonsMeetingBenchmarkBar": 5,
+      "paid3DGenerationRequiresFullPass": true
+    },
+    "target": "A fresh concept critic must score at least 85/100 with every category at or above 7 and find that the candidate meets the benchmark bar in at least 5 of 6 blinded comparisons before any paid 3D generation."
+  }
+}

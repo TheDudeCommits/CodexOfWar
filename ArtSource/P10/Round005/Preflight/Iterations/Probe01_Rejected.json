@@ -1,0 +1,7 @@
+{
+  "status": "rejected_pre_freeze_iteration",
+  "image": "Probe01_Rejected.png",
+  "sha256": "7873b45780d260fad01cbeea6acdcfb8a217f1a0f31f937780718b93a6328c2f",
+  "reason": "Hard fail: no readable two-hand weapon contact; the underscaled wrench crosses behind the torso, the human palm is open, the mechanical claw does not enclose the handle, the stance reads as a walk, and mirrored parts create floating silhouette noise.",
+  "not_final_gate_evidence": true
+}

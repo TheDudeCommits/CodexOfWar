@@ -19,11 +19,11 @@
   ],
   "activeBuild": {
     "pieceId": "P10",
-    "round": 5,
-    "roundLabel": "P10 · Round 005",
+    "round": 7,
+    "roundLabel": "P10 · Round 007",
     "status": "revising",
-    "builder": "Professional-source pipeline pivot active",
-    "brief": "Replace the rejected procedural costume pipeline with a cohesive, professionally authored, lawfully sourced warrior character or costume. Source triage must prove a visible macro-quality upgrade before any derivative build begins; no account gate, asset name, or technical metric can substitute for the pixels.",
+    "builder": "Function-led identity redesign",
+    "brief": "Round 007 is an identity-redesign build with no result, capture, or evidence filed yet. It must establish one unique function-led character thesis in fresh 2D concept evidence before any paid 3D generation; Unity remains locked.",
     "facts": [
       "P00 is accepted as infrastructure; its blind visual baseline remains an explicit 28.33–76.67 loss.",
       "Round 001 is mechanically reproducible: two independent critic reruns matched all six filed image hashes, P10 validation passed, focused EditMode passed 8/8, the full suite passed 14/14, and the P00 aggregate stayed byte-identical.",
@@ -38,7 +38,15 @@
       "The single biggest gap is exact: the costume still reads as a toy-like procedural slab-and-tube assembly rather than believable, layered, worn, functional AAA warrior gear.",
       "Two isolated Round 004 reruns matched all 26 frozen input hashes and canonical geometry, topology, UVs, materials, assignments, transforms, bounds, and near-pixel imagery. Exact output determinism still failed: only the 22 copied textures matched among 39 physical outputs.",
       "All five Round 004 FBXs contain one broken absolute texture reference and leak the source path. The supplied validator missed this because it checks image resolution only in the authored blend.",
-      "Round 005 is a pipeline pivot, not another procedural armor polish pass. Round 001 remains the latest filed in-engine evidence until a source round clears every mandatory preflight gate."
+      "Round 005 delivered a lawful Blender Studio Einar-derived static source, four static FBXs, nine 1600px diagnostics, and a fresh clean-import proof. Required credit is Einar Rig (CC-BY) Blender Foundation | studio.blender.org.",
+      "A fresh-context critic rejected Round 005 at 6/13 with only 4/8 mandatory checks. The benchmark was preferred in all 7/7 blinded comparisons, Unity remained locked, and no actual game capture was performed.",
+      "Round 005 passed anatomy, authored face and hair, grounded feet, joint continuity, LOD0 budget, and diagnostic coverage. It failed the two-hand hilt enclosure, premium warrior costume, weapon function, portable materials, combat intent, neutral modeling coverage, and unmistakable premium anime-warrior identity.",
+      "The single biggest gap is core authorship and identity: the delivery still reads as the licensed Einar civilian mechanic in workwear with attached props, not an unmistakable premium authored anime warrior at the God of War Ragnarok benchmark level.",
+      "Factory-state validation semantically passed all 4/4 static imports at 85,096 / 47,615 / 25,484 LOD triangles, but texture portability and source-to-reimport material parity both failed.",
+      "The Round 005 release-sanitization follow-up passed: checkout-specific metadata was removed without changing the judged visual payload, and factory-state validation now reproduces the audit, clean-import report, and reimport diagnostic byte-for-byte.",
+      "Round 006 filed three original 2D concept images only, not gameplay, 3D, or game-ready evidence. A fresh critic rejected the set at 55/100 against an 85 threshold, the critical category floor failed, and the candidate met the benchmark bar in 0/6 blinded comparisons.",
+      "Paid 3D generation was not authorized and Unity was not entered for Round 006. The single biggest gap is benchmark-level authored identity: the generic dark armored-anime swordswoman lacks a unique, function-led visual thesis.",
+      "Round 007 is now an identity-redesign build with no result, capture, or evidence filed. Round 001 remains the latest filed in-engine P10 evidence, while the global latest manifest remains pinned to accepted P00."
     ],
     "evidenceFingerprint": {
       "gitRevision": "2dedf617ace47ea5dbb2cde1817d6119604842d2",
@@ -100,7 +108,7 @@
         "Static lookdev only; no rig, S02, or S06"
       ]
     },
-    "nextGate": "Round 005 must first establish a lawful professional source that is a clear visible macro-quality upgrade, then pass all 8 mandatory source checks and score at least 10/13 in a separate fresh-context preflight before Unity may be opened. Only then may it file reproducible S01, S02, S06, and four-view in-engine evidence for a blind comparison."
+    "nextGate": "Before any paid 3D generation, a fresh Round 007 concept critic must score the redesigned identity at least 85/100, keep every category at or above 7, and find that it meets the benchmark bar in at least 5 of 6 blinded comparisons."
   },
   "canonicalCapture": {
     "shotId": "S01",
@@ -271,18 +279,47 @@
       "round": 5,
       "label": "P10 · Round 005",
       "pieceId": "P10",
-      "phase": "Professional-source derivative build active",
-      "status": "building",
+      "phase": "Fresh source critic complete",
+      "status": "criticized",
       "date": "2026-07-31",
       "builderBrief": "Pivot away from procedural armor construction. Start only from a lawful, cohesive, professionally authored character or costume whose fastening logic, wear, thickness, material response, and silhouette are already credible before adaptation.",
-      "evidence": "Source triage found Blender Studio Einar v1: an anonymous official CC-BY payload with production layered clothing, weathered PBR surfaces, a full rig, 95 materials, and substantial 4K texture coverage. The builder verified its source receipt and is preparing a bounded Round005 visual proof. Unity remains locked.",
-      "evidenceLinks": [],
+      "evidence": "The lawful CC BY Einar-derived source, generator, authored blend, four static FBXs, nine 1600px diagnostics, clean-import report, and fresh independent review are filed. Factory-state validation passed 4/4 static imports at 85,096 / 47,615 / 25,484 LOD triangles and a release follow-up proved the validator byte-idempotent after sanitization; texture portability and source-to-reimport material parity remain false. The visual source gate scored 6/13 with only 4/8 mandatory checks; the benchmark won all 7/7 blinded comparisons. Unity remained locked and no actual game capture was performed.",
+      "evidenceLinks": [
+        "/captures/P10/round-005-preflight/Front_Decisive.png",
+        "/captures/P10/round-005-preflight/Face_Diagnostic.png",
+        "/captures/P10/round-005-preflight/Grip_Diagnostic.png",
+        "/captures/P10/round-005-preflight/Combat_Decisive.png",
+        "/data/P10-round-005-preflight.json"
+      ],
       "critic": {
-        "status": "Not started · source derivative build active",
-        "score": null,
-        "scoreLabel": null,
-        "preference": null,
-        "primaryGap": null
+        "status": "NO-GO · rejected before Unity · fresh visual gate failed closed",
+        "score": 6,
+        "scoreLabel": "Source preflight 6/13 · mandatory 4/8",
+        "preference": "Benchmark preferred 7/7 blinded comparisons",
+        "primaryGap": "Core character authorship and identity: the delivery still reads as the licensed Einar civilian mechanic in workwear with attached props, not an unmistakable premium authored anime warrior at the God of War Ragnarok benchmark level."
+      }
+    },
+    {
+      "round": 6,
+      "label": "P10 · Round 006",
+      "pieceId": "P10",
+      "phase": "Fresh concept critic complete",
+      "status": "criticized",
+      "date": "2026-07-31",
+      "builderBrief": "Create an original 2D character turnaround, weapon orthographic sheet, and physically auditable two-hand grip proof, then stop before paid 3D unless a fresh concept critic clears the authorization gate.",
+      "evidence": "Three original 1536×1024 concept images and bounded receipt/review hashes are filed as 2D concept art only. No gameplay, 3D model, game-ready asset, or Unity capture is claimed. The fresh critic scored the set 55/100 against an 85 threshold, failed the critical category floor, and found it met the benchmark bar in 0/6 blinded comparisons. Paid 3D generation was not authorized.",
+      "evidenceLinks": [
+        "/captures/P10/round-006-concept/NyraKestrel_Turnaround.png",
+        "/captures/P10/round-006-concept/StormglassOdachi.png",
+        "/captures/P10/round-006-concept/NyraKestrel_CombatGrip.png",
+        "/data/P10-round-006-concept.json"
+      ],
+      "critic": {
+        "status": "NO-GO · rejected before paid 3D and Unity",
+        "score": 55,
+        "scoreLabel": "Concept preflight 55/100 · threshold 85 · critical floor failed",
+        "preference": "Candidate met benchmark bar in 0/6 blinded comparisons",
+        "primaryGap": "Benchmark-level authored character identity: the generic dark armored-anime swordswoman silhouette and costume do not express a unique, function-led visual thesis strong enough to justify paid 3D translation."
       }
     }
   ],

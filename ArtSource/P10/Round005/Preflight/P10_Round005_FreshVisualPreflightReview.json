@@ -1,0 +1,729 @@
+{
+  "schema": "codex-of-war.p10.fresh-visual-preflight-review",
+  "version": "1.1.0",
+  "reviewedUtc": "2026-07-31T12:03:26Z",
+  "criticIndependenceStatement": "This public-safe follow-up was performed by the same independent source-gate critic against the newly frozen release state. I did not trust the sanitization or reproducibility claims: I rechecked current release artifacts, independently verified PNG critical-payload receipts and privacy state, reconstructed all seven prior blinded comparisons and matched them byte-for-byte, captured validator-output hashes, ran the factory-state validator exactly once, captured a second hash observation without another run, compiled all five Round005 scripts, and recomputed every listed artifact hash. The unchanged visual payload preserves the original uncompromising AAA verdict.",
+  "commands": [
+    {
+      "purpose": "Enumerate the supplied benchmark archive",
+      "command": "unzip -Z1 <LOCAL_BENCHMARK_ARCHIVE>",
+      "exitCode": 0,
+      "result": "Twenty-one image entries were enumerated; twenty were unique by SHA-256."
+    },
+    {
+      "purpose": "Extract benchmark pixels outside the release tree",
+      "command": "unzip -q <LOCAL_BENCHMARK_ARCHIVE> -d <ISOLATED_TEMP_DIR>",
+      "exitCode": 0,
+      "result": "Benchmark pixels and comparison crops remained outside the repository and dashboard."
+    },
+    {
+      "purpose": "Run one independent factory-state validator observation",
+      "command": "<BLENDER_EXECUTABLE> --factory-startup --disable-autoexec --background --python Tools/Blender/P10_Round005_ValidateFBX.py",
+      "exitCode": 0,
+      "result": "Blender 5.2.0 LTS; all four static FBX results passed. Pre-run and post-run audit, report, and diagnostic-render hashes were identical."
+    },
+    {
+      "purpose": "Compile every Round005 Python script outside the repository",
+      "command": "PYTHONPYCACHEPREFIX=<ISOLATED_TEMP_DIR> python3 -m py_compile Tools/Blender/P10_Round005_*.py",
+      "exitCode": 0,
+      "result": "All five scripts compiled: builder, two inspectors, release sanitizer, and validator."
+    },
+    {
+      "purpose": "Verify release-artifact privacy",
+      "command": "binary and text scan over the release-artifact scope for absolute home paths, local download paths, benchmark-source names, and concrete user identifiers",
+      "exitCode": 0,
+      "result": "Zero matching release artifacts for every forbidden category. Clean and rejected JSON reports expose repository-relative paths only."
+    },
+    {
+      "purpose": "Verify PNG critical visual payloads and prior comparison output",
+      "command": "read-only PNG chunk fingerprint audit plus deterministic reconstruction of the seven original A/B sheets in <ISOLATED_TEMP_DIR>",
+      "exitCode": 0,
+      "result": "All eleven sanitization receipts matched live bytes and critical-payload hashes, all volatile/private PNG chunk classes were absent, and all seven reconstructed A/B sheets matched their original SHA-256 values exactly."
+    },
+    {
+      "purpose": "Verify FBX texture-reference and native-file metadata state",
+      "command": "read-only binary-token scan over game/Assets/CodexOfWar/Heroes/P10/Round005/Models/*.fbx",
+      "exitCode": 0,
+      "result": "No private native-file path remained; the stable repository label was present. Texture, video, and relative-filename reference counts remained zero in each FBX."
+    },
+    {
+      "purpose": "Hash the final critic-observed release state",
+      "command": "byte-size and SHA-256 manifest over all artifacts listed in artifactHashes",
+      "exitCode": 0,
+      "result": "Twenty-three current artifacts were independently measured after the validator observation."
+    }
+  ],
+  "releaseSanitizationFollowup": {
+    "status": "PASS",
+    "defectDisposition": "A release-sanitization and reproducibility defect exposed during the first critic execution was fixed. Checkout-specific/private PNG, FBX, and report metadata was removed or normalized; validator-generated receipts and the diagnostic render are now byte-idempotent. The fix changes release metadata and file hashes but not the nine judged source-render visual payloads, so it does not alter the visual gate verdict.",
+    "sanitizer": {
+      "path": "Tools/Blender/P10_Round005_SanitizeRelease.py",
+      "bytes": 9574,
+      "sha256": "fdaf18bae796ed300459213d27e7745ea35e6e259c92da7cf3956534b492167a",
+      "liveReceiptConsistencyPass": true
+    },
+    "privacyAudit": {
+      "pass": true,
+      "releaseArtifactScope": [
+        "Round005 source blend and README",
+        "Round005 source/preflight and iteration PNG/JSON evidence",
+        "four Round005 FBXs",
+        "clean and rejected import reports"
+      ],
+      "absoluteHomePathMatchingFiles": 0,
+      "localDownloadPathMatchingFiles": 0,
+      "benchmarkSourceNameMatchingFiles": 0,
+      "concreteUserIdentifierMatchingFiles": 0,
+      "absolutePathsInCleanOrRejectedJsonReports": 0,
+      "finalReviewSelfScanPass": true,
+      "toolSourceNote": "Generic defensive detection literals and isolated diagnostic defaults in tool source are not captured user identities or release-artifact metadata."
+    },
+    "visualPayloadPreservation": {
+      "pass": true,
+      "renderedPixelsChanged": false,
+      "criticalChunkClassesFingerprinted": [
+        "IHDR",
+        "PLTE",
+        "tRNS",
+        "IDAT"
+      ],
+      "volatileChunkClassesAbsent": [
+        "tEXt",
+        "zTXt",
+        "iTXt",
+        "eXIf",
+        "oFFs"
+      ],
+      "livePngReceiptsChecked": 11,
+      "livePngReceiptMismatches": 0,
+      "originalBlindSheetsReconstructed": 7,
+      "originalBlindSheetHashMatches": 7,
+      "candidateEvidenceFingerprints": [
+        {
+          "frame": "P10_Round005_Front.png",
+          "visualPayloadSha256": "a8b7db2eba75b2f93fc7f7677cedd17c5e32e14e9cdc0d7cbf0d7e074eaf7768"
+        },
+        {
+          "frame": "P10_Round005_ThreeQuarter.png",
+          "visualPayloadSha256": "53d1b69c214d88d01c1813fa236c7f64841c468bf5a7a7c05d11d7c2458663fe"
+        },
+        {
+          "frame": "P10_Round005_Back.png",
+          "visualPayloadSha256": "f48128f5b5b7d926486fa09226bb2ba89a6a342639c8e7082eeae1f8446bc060"
+        },
+        {
+          "frame": "P10_Round005_Profile.png",
+          "visualPayloadSha256": "4859b60f8608463a928d55a0ffd70b27bd2b9e2b4aae4fac76f8cdf39a4ca1e4"
+        },
+        {
+          "frame": "P10_Round005_Face.png",
+          "visualPayloadSha256": "bbb521f95b04fb6ce1f67421a3ed3adc8b3b919683e7e6b15f0f3a24143b85f4"
+        },
+        {
+          "frame": "P10_Round005_Hands.png",
+          "visualPayloadSha256": "8eaeab7adc12436f5852bc36a413980cb469e01e63cb872a4d2b9f28d27d8aec"
+        },
+        {
+          "frame": "P10_Round005_Feet.png",
+          "visualPayloadSha256": "e0d275be83627b63062ee7ea4f6f5520e5b46208c43e00f4f04131f7f97b2887"
+        },
+        {
+          "frame": "P10_Round005_Combat.png",
+          "visualPayloadSha256": "890d87f208dca0fcd606299a7d93df78d49b79da8cff0ac62fcebfcec50d70e6"
+        },
+        {
+          "frame": "P10_Round005_Grip.png",
+          "visualPayloadSha256": "f7fa2c158f84e1202c6772bb597b17566a0e500948533d46cc3e6f31ec198d20"
+        }
+      ]
+    },
+    "fbxMetadataAndGeometry": {
+      "privateNativeFileFieldsRemaining": 0,
+      "stableNativeFileLabel": "CodexOfWar/P10/Round005/EinarSource.blend",
+      "sanitizedFbxCount": 4,
+      "fileSizesPreserved": true,
+      "geometryValidationStillPasses": true,
+      "triangleCountsPreserved": {
+        "combat": 85096,
+        "lod0": 85096,
+        "lod1": 47615,
+        "lod2": 25484
+      }
+    },
+    "jsonPathNormalization": {
+      "pass": true,
+      "cleanReportRepoRelative": true,
+      "rejectedReportsRepoRelative": true
+    },
+    "licenseNotice": {
+      "pass": true,
+      "readmeIncludesAttribution": true,
+      "readmeIncludesModificationNotice": true,
+      "readmeIncludesNoEndorsementNotice": true
+    }
+  },
+  "visualInspection": {
+    "benchmarkImagesInspectedAtOriginalResolution": 21,
+    "benchmarkUniqueImagesInspected": 20,
+    "candidateSourceFramesInspectedAtOriginalResolution": 9,
+    "freshFbxReimportInspectedAfterFinalValidator": true,
+    "sanitizedCandidatePixelsDifferFromOriginalReview": false
+  },
+  "benchmark": {
+    "archiveId": "benchmark-source-archive",
+    "archiveBytes": 1336123,
+    "archiveSha256": "4653a7a92d6f6bde910f39d3190df0adb112677851815443144505b8b420a6dd",
+    "imageCount": 21,
+    "uniqueImageCount": 20,
+    "duplicateSummary": {
+      "duplicateGroupCount": 1,
+      "duplicateEntryCount": 2,
+      "groups": [
+        {
+          "sha256": "06ac0710130fe19f7c844ecc453bca2d27bcc72b25fef3a2615f8877b53c9778",
+          "ids": [
+            "benchmark-002",
+            "benchmark-003"
+          ]
+        }
+      ]
+    },
+    "inventory": [
+      {
+        "id": "benchmark-001",
+        "sha256": "05048268b96a7ea20e52ab4f0c01fbc312b37d7d4b3ae4fd40752ca4f497e71e",
+        "width": 770,
+        "height": 433,
+        "format": "jpeg"
+      },
+      {
+        "id": "benchmark-002",
+        "sha256": "06ac0710130fe19f7c844ecc453bca2d27bcc72b25fef3a2615f8877b53c9778",
+        "width": 1400,
+        "height": 787,
+        "format": "jpeg"
+      },
+      {
+        "id": "benchmark-003",
+        "sha256": "06ac0710130fe19f7c844ecc453bca2d27bcc72b25fef3a2615f8877b53c9778",
+        "width": 1400,
+        "height": 787,
+        "format": "jpeg"
+      },
+      {
+        "id": "benchmark-004",
+        "sha256": "a0161b955a1947fcabccc34c8e22ee0ebcb6ade357b51aa974c0057caf9294c9",
+        "width": 1920,
+        "height": 1080,
+        "format": "webp"
+      },
+      {
+        "id": "benchmark-005",
+        "sha256": "1e99a94f8efbbdd9d4811e2706f84616ea9cc379909caee873d212ecfb9a68b0",
+        "width": 739,
+        "height": 415,
+        "format": "jpeg"
+      },
+      {
+        "id": "benchmark-006",
+        "sha256": "1af9ad3cd30a4f90dd97d8fcdced94eee8afcc2828aff1013bf24f90721112b7",
+        "width": 766,
+        "height": 400,
+        "format": "jpeg"
+      },
+      {
+        "id": "benchmark-007",
+        "sha256": "d208c98d2ea91b654fb11070616887e0f8564fe3c5040ae854e3aab8645be98d",
+        "width": 739,
+        "height": 415,
+        "format": "jpeg"
+      },
+      {
+        "id": "benchmark-008",
+        "sha256": "41d924111330b7ead3bb85e85ee8d16d3a66f376939ede3fa3227d6cb591f76a",
+        "width": 596,
+        "height": 335,
+        "format": "jpeg"
+      },
+      {
+        "id": "benchmark-009",
+        "sha256": "d18f1a8f98bfaf720d4400cd3252688ff3200a5585c31d48112a003656c4d41a",
+        "width": 720,
+        "height": 404,
+        "format": "jpeg"
+      },
+      {
+        "id": "benchmark-010",
+        "sha256": "3c5ced3dea47f3197adbcd323e4f7fb1f6b46f56ef79c5575ede85b72f32eb7e",
+        "width": 596,
+        "height": 335,
+        "format": "jpeg"
+      },
+      {
+        "id": "benchmark-011",
+        "sha256": "0293135a1aa7dae0a92f73e018d5f046cd8aa45b9b0e1727e8538ae951276869",
+        "width": 679,
+        "height": 452,
+        "format": "jpeg"
+      },
+      {
+        "id": "benchmark-012",
+        "sha256": "1f7ee6c436dee9599e2ff1191fde973f20c864548881b1cf7f6d483e3e15c1aa",
+        "width": 596,
+        "height": 335,
+        "format": "jpeg"
+      },
+      {
+        "id": "benchmark-013",
+        "sha256": "a57bd1e7251e57eda6e246b45fce3ddc168a89e9b406db78ad261a9513f7df3f",
+        "width": 739,
+        "height": 415,
+        "format": "jpeg"
+      },
+      {
+        "id": "benchmark-014",
+        "sha256": "c4693a135a8f66b17759349dd81e126001989aac894db1714d2d2cad89ae8fe0",
+        "width": 739,
+        "height": 415,
+        "format": "jpeg"
+      },
+      {
+        "id": "benchmark-015",
+        "sha256": "21858656b7887cc37f92c2bab4ed56f6cb273f45fd75193c0cb1c1b37456bc33",
+        "width": 596,
+        "height": 335,
+        "format": "jpeg"
+      },
+      {
+        "id": "benchmark-016",
+        "sha256": "aab7f2b4d72b8d2ffc4faea302e7f8e51a799aaad8ea213351e1de72c2526c8b",
+        "width": 739,
+        "height": 415,
+        "format": "jpeg"
+      },
+      {
+        "id": "benchmark-017",
+        "sha256": "a96d9bf819821b0730be51f5ac4f916e55118b521280e737941b9be868fd0ad2",
+        "width": 600,
+        "height": 337,
+        "format": "jpeg"
+      },
+      {
+        "id": "benchmark-018",
+        "sha256": "c0e6f548000b49247e740c300db014be846c73f4cfdd6ac09246b49ca0c5eb5c",
+        "width": 596,
+        "height": 335,
+        "format": "jpeg"
+      },
+      {
+        "id": "benchmark-019",
+        "sha256": "be4dc9c541780492ad20d96d0afdf64f20478d2b6f52cabcb25b5edb3d2ee597",
+        "width": 739,
+        "height": 415,
+        "format": "jpeg"
+      },
+      {
+        "id": "benchmark-020",
+        "sha256": "3db321cbdd218f19f9834e7ba81432cc94bfd9fb5cf0933af2664d26d61f34f2",
+        "width": 596,
+        "height": 335,
+        "format": "jpeg"
+      },
+      {
+        "id": "benchmark-021",
+        "sha256": "e894db229df4c7bc0be9e01e16a668158a4ae900e1b3749d42f9e47662bb7a62",
+        "width": 1948,
+        "height": 1080,
+        "format": "jpeg"
+      }
+    ],
+    "pixelHandling": "Benchmark pixels were used only in isolated inspection and comparison workspaces outside the release tree; only stable IDs, dimensions, formats, and hashes are retained here."
+  },
+  "blindComparisons": {
+    "method": "For each required category, the closest available benchmark framing was selected after full benchmark inspection. Candidate and benchmark/crop were scaled to equal neutral cells and stacked. A random byte selected side order; side identity was hidden while preferences and reasons were recorded, then decoded. The release-sanitization follow-up reconstructed the same seven sheets from sanitized candidate files and obtained the same seven sheet hashes, proving the judged pixel input and preferences are unchanged.",
+    "candidatePreferredCount": 0,
+    "benchmarkPreferredCount": 7,
+    "sanitizedReconstructionHashMatches": 7,
+    "comparisons": [
+      {
+        "category": "front",
+        "candidateFrame": "P10_Round005_Front.png",
+        "benchmarkId": "benchmark-004",
+        "benchmarkCrop": "800x980 at x=80,y=100",
+        "sheetSha256": "899ff3f4b45b8b1c3d75252ee288f3f6d2474b1d39f4dd4289bda133ef1c6fff",
+        "mappingAfterDecode": "A(left)=candidate, B(right)=benchmark",
+        "preferredSideBeforeDecode": "B(right)",
+        "decodedPreference": "benchmark",
+        "evidence": "The preferred side had a stronger authored silhouette, armor layering, face, stance, and combat authority."
+      },
+      {
+        "category": "three-quarter",
+        "candidateFrame": "P10_Round005_ThreeQuarter.png",
+        "benchmarkId": "benchmark-005",
+        "benchmarkCrop": "full frame",
+        "sheetSha256": "d4c2bfd7032637de8abdc47359288faec5e11218c32dd48c8dcce6be17b5665e",
+        "mappingAfterDecode": "A(left)=benchmark, B(right)=candidate",
+        "preferredSideBeforeDecode": "A(left)",
+        "decodedPreference": "benchmark",
+        "evidence": "The preferred side had a clearer combat read, functional defensive posture, grounded weight, and premium costume hierarchy."
+      },
+      {
+        "category": "combat",
+        "candidateFrame": "P10_Round005_Combat.png",
+        "benchmarkId": "benchmark-003",
+        "benchmarkCrop": "full frame",
+        "sheetSha256": "cc169b60f09dbeaac009c12d131d1b68dbb0184ce3520a730afa69ab0d7850a2",
+        "mappingAfterDecode": "A(left)=candidate, B(right)=benchmark",
+        "preferredSideBeforeDecode": "B(right)",
+        "decodedPreference": "benchmark",
+        "evidence": "The preferred side had a decisive attack line, environmental integration, impact, balance, and gameplay intent."
+      },
+      {
+        "category": "face",
+        "candidateFrame": "P10_Round005_Face.png",
+        "benchmarkId": "benchmark-004",
+        "benchmarkCrop": "550x550 at x=250,y=100",
+        "sheetSha256": "3132b8a208b199f82371c93a736d239e0dc21f486f8a31d884f47d607117f11f",
+        "mappingAfterDecode": "A(left)=candidate, B(right)=benchmark",
+        "preferredSideBeforeDecode": "B(right)",
+        "decodedPreference": "benchmark",
+        "evidence": "The preferred side had stronger eye focus, facial planes, hair/beard integration, expression, and character authority."
+      },
+      {
+        "category": "hands",
+        "candidateFrame": "P10_Round005_Hands.png",
+        "benchmarkId": "benchmark-011",
+        "benchmarkCrop": "420x230 at x=250,y=220",
+        "sheetSha256": "3cfe113b19c9bef807ac214750edb0b0b9061b9abdc081109d5b31c84beb1739",
+        "mappingAfterDecode": "A(left)=benchmark, B(right)=candidate",
+        "preferredSideBeforeDecode": "A(left)",
+        "decodedPreference": "benchmark",
+        "evidence": "The preferred side showed credible articulated fingers visibly wrapping a weapon handle; the opposing frame did not establish two-hand hilt contact."
+      },
+      {
+        "category": "feet",
+        "candidateFrame": "P10_Round005_Feet.png",
+        "benchmarkId": "benchmark-014",
+        "benchmarkCrop": "400x175 at x=0,y=240",
+        "sheetSha256": "2d7a6d32d6c765fea7fd85d964513f3b3804dda91ce7b4b0af818f412c78d4cb",
+        "mappingAfterDecode": "A(left)=candidate, B(right)=benchmark",
+        "preferredSideBeforeDecode": "B(right)",
+        "decodedPreference": "benchmark",
+        "evidence": "The preferred feet belonged to an active, weight-bearing combat action on a textured ground plane; the opposing boots read posed and weakly weighted."
+      },
+      {
+        "category": "grip",
+        "candidateFrame": "P10_Round005_Grip.png",
+        "benchmarkId": "benchmark-006",
+        "benchmarkCrop": "400x300 at x=200,y=100",
+        "sheetSha256": "4bf1481c7cdf36ec5b4466b573d04c1c6fd4398e6c83806132f0761e346e8aea",
+        "mappingAfterDecode": "A(left)=benchmark, B(right)=candidate",
+        "preferredSideBeforeDecode": "A(left)",
+        "decodedPreference": "benchmark",
+        "evidence": "The preferred side showed clear palm/finger enclosure of a functional axe haft with convincing scale and leverage."
+      }
+    ]
+  },
+  "validatorVerification": {
+    "factoryStartup": true,
+    "autoexecDisabled": true,
+    "blenderVersion": "5.2.0 LTS",
+    "independentRunCountThisFollowup": 1,
+    "commandExitCode": 0,
+    "secondHashObservationWithoutSecondRun": true,
+    "byteIdempotent": true,
+    "byteIdempotenceStatus": "PASS",
+    "preRunHashes": {
+      "auditSha256": "51901339a376bea219512fc7c378e2c206243e70878e82cbdae3ac9131d2b0d9",
+      "cleanImportReportSha256": "54c8716c7f91e932752d60c460921a8a6bda0838e770eab304adfefe5adb0a10",
+      "diagnosticRenderSha256": "708f105b3c02119b440d5139c7ae12279e50ff29acbe703a2815f3a050f76f07"
+    },
+    "postRunHashes": {
+      "auditSha256": "51901339a376bea219512fc7c378e2c206243e70878e82cbdae3ac9131d2b0d9",
+      "cleanImportReportSha256": "54c8716c7f91e932752d60c460921a8a6bda0838e770eab304adfefe5adb0a10",
+      "diagnosticRenderSha256": "708f105b3c02119b440d5139c7ae12279e50ff29acbe703a2815f3a050f76f07"
+    },
+    "allCleanStaticImportsPass": true,
+    "imports": [
+      {
+        "key": "combat",
+        "triangles": 85096,
+        "cleanStaticImportPass": true,
+        "textureReferences": 0,
+        "allStaticChecksPass": true
+      },
+      {
+        "key": "lod0",
+        "triangles": 85096,
+        "cleanStaticImportPass": true,
+        "textureReferences": 0,
+        "allStaticChecksPass": true
+      },
+      {
+        "key": "lod1",
+        "triangles": 47615,
+        "cleanStaticImportPass": true,
+        "textureReferences": 0,
+        "allStaticChecksPass": true
+      },
+      {
+        "key": "lod2",
+        "triangles": 25484,
+        "cleanStaticImportPass": true,
+        "textureReferences": 0,
+        "allStaticChecksPass": true
+      }
+    ],
+    "semanticClaimsVerified": true
+  },
+  "artifactHashes": [
+    {
+      "path": "ArtSource/P10/Round005/P10_Round005_EinarForgeWarrior.blend",
+      "bytes": 92413739,
+      "sha256": "ff22a8ac7e18e979e70393364454ffd13b14a6063ed77b941de8ab92166047ca"
+    },
+    {
+      "path": "ArtSource/P10/Round005/README.md",
+      "bytes": 1919,
+      "sha256": "b2f9557def89f317442e103868f852d5753e8a871760fc264e2cba3a856d4cdc"
+    },
+    {
+      "path": "ArtSource/P10/Round005/Preflight/P10_Round005_Front.png",
+      "bytes": 2902555,
+      "sha256": "1004bb824c937d0b748ffa90cd71cfcd90c5af50ae0bbfdb4cbd0ba455f80ca6"
+    },
+    {
+      "path": "ArtSource/P10/Round005/Preflight/P10_Round005_ThreeQuarter.png",
+      "bytes": 2636120,
+      "sha256": "f5ff458673ab18928ca38a2ae4a74f3811a470d286f3fa2578b611d29b090e21"
+    },
+    {
+      "path": "ArtSource/P10/Round005/Preflight/P10_Round005_Back.png",
+      "bytes": 2657786,
+      "sha256": "bbd319358429a6ad0345f224dc6d374a9da7907a57af764731e1a5f8247d5d5f"
+    },
+    {
+      "path": "ArtSource/P10/Round005/Preflight/P10_Round005_Profile.png",
+      "bytes": 2828647,
+      "sha256": "0564852f8372b7e8b57b484b5557976427d017b078d5589978e35f94a88ccc72"
+    },
+    {
+      "path": "ArtSource/P10/Round005/Preflight/P10_Round005_Face.png",
+      "bytes": 3383254,
+      "sha256": "f7cf5a0cd41e140fcee8bd787a65bfefaf153296629439c6f8a4de3387918477"
+    },
+    {
+      "path": "ArtSource/P10/Round005/Preflight/P10_Round005_Hands.png",
+      "bytes": 4418304,
+      "sha256": "e1db317b7619dd9c7866fa164f4dd3189e2753667e7332ed9959fb69844385cf"
+    },
+    {
+      "path": "ArtSource/P10/Round005/Preflight/P10_Round005_Feet.png",
+      "bytes": 3619660,
+      "sha256": "2120cadc2ef2d21a3e5fb5f5db57d45835feb65b1529dbdb14f7a6c35105027d"
+    },
+    {
+      "path": "ArtSource/P10/Round005/Preflight/P10_Round005_Combat.png",
+      "bytes": 2636103,
+      "sha256": "081636378eec8fe2651a35e5395553f1dc374c5028c6428455a114e3b0d5c655"
+    },
+    {
+      "path": "ArtSource/P10/Round005/Preflight/P10_Round005_Grip.png",
+      "bytes": 5845693,
+      "sha256": "5784aea14bf995dae9b18f96a40639ddbfb46f344c4787ebada09eabbde4b09e"
+    },
+    {
+      "path": "ArtSource/P10/Round005/Preflight/P10_Round005_FBX_Reimport.png",
+      "bytes": 501685,
+      "sha256": "708f105b3c02119b440d5139c7ae12279e50ff29acbe703a2815f3a050f76f07"
+    },
+    {
+      "path": "ArtSource/P10/Round005/Preflight/P10_Round005_Audit.json",
+      "bytes": 113987,
+      "sha256": "51901339a376bea219512fc7c378e2c206243e70878e82cbdae3ac9131d2b0d9"
+    },
+    {
+      "path": "ArtSource/P10/Round005/Preflight/P10_Round005_FBXCleanImport.json",
+      "bytes": 41495,
+      "sha256": "54c8716c7f91e932752d60c460921a8a6bda0838e770eab304adfefe5adb0a10"
+    },
+    {
+      "path": "game/Assets/CodexOfWar/Heroes/P10/Round005/Models/P10_EinarForgeWarrior_Round005_Combat.fbx",
+      "bytes": 5039116,
+      "sha256": "b8311caf2dc6c6075ac66bcec4d058c1d7a487f4817b74bc1426d6abc11bdc47"
+    },
+    {
+      "path": "game/Assets/CodexOfWar/Heroes/P10/Round005/Models/P10_EinarForgeWarrior_Round005_LOD0.fbx",
+      "bytes": 5039116,
+      "sha256": "b8311caf2dc6c6075ac66bcec4d058c1d7a487f4817b74bc1426d6abc11bdc47"
+    },
+    {
+      "path": "game/Assets/CodexOfWar/Heroes/P10/Round005/Models/P10_EinarForgeWarrior_Round005_LOD1.fbx",
+      "bytes": 2882316,
+      "sha256": "c41f5ce315fce6a5b796c9a7805612b0e5de72fd98662e2ddc8cf530a383a4ba"
+    },
+    {
+      "path": "game/Assets/CodexOfWar/Heroes/P10/Round005/Models/P10_EinarForgeWarrior_Round005_LOD2.fbx",
+      "bytes": 1642076,
+      "sha256": "fe21f51564c04e0358df87ba14166ee61c0a9beb85a13fce7dbe0741d47671de"
+    },
+    {
+      "path": "Tools/Blender/P10_Round005_EinarForgeWarrior.py",
+      "bytes": 68308,
+      "sha256": "4d7db99bbdd4825ec3cd1ab43f2d09536728855e8a0a4a83a345bbcca4d3c40c"
+    },
+    {
+      "path": "Tools/Blender/P10_Round005_InspectEinar.py",
+      "bytes": 7895,
+      "sha256": "c03a07c36b885c7d1b7e0342f2319d1de6c44c07d25306e3d82f322c1173b450"
+    },
+    {
+      "path": "Tools/Blender/P10_Round005_InspectTinyFaces.py",
+      "bytes": 1317,
+      "sha256": "f037e6f5fedfc525f5b8194c350e2425e4a2113fe5e6b1a83088204b5227776a"
+    },
+    {
+      "path": "Tools/Blender/P10_Round005_SanitizeRelease.py",
+      "bytes": 9574,
+      "sha256": "fdaf18bae796ed300459213d27e7745ea35e6e259c92da7cf3956534b492167a"
+    },
+    {
+      "path": "Tools/Blender/P10_Round005_ValidateFBX.py",
+      "bytes": 15338,
+      "sha256": "c5869cd5cc491e25cde1df1edb42ebe4e6a996456e8db6dca326637310b27212"
+    }
+  ],
+  "materialPortability": {
+    "supported": false,
+    "fbxTextureReferences": {
+      "combat": 0,
+      "lod0": 0,
+      "lod1": 0,
+      "lod2": 0
+    },
+    "independentRawFbxScan": {
+      "textureObjectsPerFbx": 0,
+      "videoObjectsPerFbx": 0,
+      "relativeFilenameTokensPerFbx": 0
+    },
+    "freshReimportMaterialParity": false,
+    "evidence": "The deterministic fresh LOD0 reimport retains object-level base-color differences but does not reproduce the source renders' textured skin, cloth, leather, dirt, or mechanical surface response. Large regions collapse to flat tan/white blocks and the blade remains plain light gray. Zero texture references confirms absent texture payload/references, not portability. Release sanitization fixed metadata and reproducibility only; it did not fix material parity."
+  },
+  "checks": [
+    {
+      "id": 1,
+      "name": "continuous credible anatomy",
+      "mandatory": true,
+      "pass": true,
+      "evidence": "Front, three-quarter, back, and profile views show a continuous adult humanoid silhouette with plausible torso/leg proportions and no detached organic body region. The mechanical-arm substitution remains visibly attached at the shoulder."
+    },
+    {
+      "id": 2,
+      "name": "authored face/eyes/hair",
+      "mandatory": true,
+      "pass": true,
+      "evidence": "The face frame shows deliberately sculpted wrinkles, eyelids/eyeballs, irises, teeth, tongue, expression, and authored beard/hair cards. Its harsh white cards, overexposure, and weaker eye life lose the blind comparison, but the face/eyes/hair are clearly authored rather than placeholders."
+    },
+    {
+      "id": 3,
+      "name": "both visible hands physically enclose hilt with palm/finger contact",
+      "mandatory": true,
+      "pass": false,
+      "evidence": "Both visible hands do not physically enclose one hilt. The organic right hand reads as a mitten-like cap around a separate gun/cleaver grip, while the mechanical hand sits around the gauntlet/saw assembly. The hands and grip closeups never show two palms and articulated fingers contacting the same hilt."
+    },
+    {
+      "id": 4,
+      "name": "feet/grounded stance",
+      "mandatory": true,
+      "pass": true,
+      "evidence": "The feet diagnostic clearly shows both boot soles contacting the floor with local contact/cast shadows. The stance is generic and loses the blind comparison, but the feet are modeled, planted, and not visibly floating."
+    },
+    {
+      "id": 5,
+      "name": "continuous joint transitions",
+      "mandatory": true,
+      "pass": true,
+      "evidence": "Elbows, knees, ankles, and the mechanical shoulder/wrist assembly remain visually connected across the turn views; there is no major detached limb or floating joint transition in the supplied static pose."
+    },
+    {
+      "id": 6,
+      "name": "premium layered warrior costume, not civilian/floating procedural",
+      "mandatory": true,
+      "pass": false,
+      "evidence": "The silhouette is dominated by a civilian canvas toggle jacket, work pants, work boots, satchel, fabric patches, and duct-tape language inherited from the mechanic source. Sparse shoulder/mechanical additions do not create a premium layered warrior costume or authored anime-warrior hierarchy."
+    },
+    {
+      "id": 7,
+      "name": "functional weapon scale/mount/grip/contact",
+      "mandatory": true,
+      "pass": false,
+      "evidence": "Weapon function is unresolved: a large plain-gray L-shaped saw projects from the gauntlet while a separate gun/cleaver-like object is held in the mitten hand. Mounting, leverage, two-hand control, hilt location, and contact are ambiguous; benchmark weapons have immediately legible hafts, edges, scale, and grip mechanics."
+    },
+    {
+      "id": 8,
+      "name": "premium material separation without plastic/chrome/clipping",
+      "mandatory": true,
+      "pass": false,
+      "evidence": "The source render separates several civilian fabrics and mechanical materials, but the saw/blade is conspicuously flat and unfinished, skin/hair are overexposed, and the fresh FBX reimport collapses much of the authored look to flat base-color blocks. There is no premium portable material parity, and portability is explicitly unsupported."
+    },
+    {
+      "id": 9,
+      "name": "LOD0 60-90k",
+      "mandatory": false,
+      "pass": true,
+      "evidence": "The clean factory import independently reports LOD0 at exactly 85,096 triangles, inside the required 60,000-90,000 range. LOD1 is 47,615 and LOD2 is 25,484."
+    },
+    {
+      "id": 10,
+      "name": "combat line/balance/attack intent",
+      "mandatory": false,
+      "pass": false,
+      "evidence": "The combat frame repeats a static studio pose with no target, strike arc, recoil, anticipation, or decisive attack line. Crossed/retracted legs and competing weapon directions read as posing rather than balanced attack intent; the blind combat preference was the benchmark."
+    },
+    {
+      "id": 11,
+      "name": "neutral front/back/profile/three-quarter modeling coverage",
+      "mandatory": false,
+      "pass": false,
+      "evidence": "Front, back, profile, and three-quarter labels are camera directions on the same frozen combat pose, not neutral modeling views. Neutral front/back/profile/three-quarter modeling coverage is therefore unsupported."
+    },
+    {
+      "id": 12,
+      "name": "diagnostic face/hands/feet/grip coverage",
+      "mandatory": false,
+      "pass": true,
+      "evidence": "Dedicated 1600x1600 face, hands, feet, and grip frames are present and were inspected at original resolution, in addition to the wider pose views."
+    },
+    {
+      "id": 13,
+      "name": "unmistakable premium authored anime-warrior identity at AAA level",
+      "mandatory": false,
+      "pass": false,
+      "evidence": "This remains unmistakably an elderly civilian mechanic source with ad hoc weapon/mechanical grafts, not a premium authored anime warrior. It lacks an authored heroic costume silhouette, anime design language, coherent signature weapon, and benchmark-level combat identity. The benchmark was preferred in all seven blinded comparisons."
+    }
+  ],
+  "mandatoryPass": false,
+  "mandatoryPassCount": 4,
+  "mandatoryRequiredCount": 8,
+  "totalPass": 6,
+  "totalChecks": 13,
+  "threshold": {
+    "allEightMandatoryRequired": true,
+    "minimumTotalPass": 10,
+    "met": false
+  },
+  "verdict": "NO-GO",
+  "unityStatus": "LOCKED",
+  "actualGameCapturePerformed": false,
+  "actualGameCaptureReason": "An actual Unity gameplay/camera capture was not performed because this mandatory source gate failed before integration. The supplied images are Blender source/preflight renders and a Blender FBX reimport diagnostic, not game footage.",
+  "singleBiggestGap": "Core character authorship and identity: the delivery still reads as a licensed civilian mechanic in workwear with attached props, not an unmistakable premium authored anime warrior at the benchmark AAA level.",
+  "nextRoundAcceptanceTest": "Before Unity integration, submit a materially portable, fully redesigned warrior source in the same seven matched evidence categories plus genuine neutral front/back/profile/three-quarter views and a fresh clean-FBX reimport. A new independent reviewer must identify the character unambiguously as a premium anime warrior, prefer the candidate in at least five of seven blinded benchmark comparisons, verify that both hands enclose one functional hilt in the grip closeup, find source-to-reimport material parity, pass all eight mandatory checks, and score at least 10/13 overall.",
+  "limitations": [
+    "The benchmark is gameplay-oriented, varies in resolution and compression, and provides no neutral character turntable; closest-framing crops were therefore used for neutral and diagnostic comparison categories.",
+    "Still renders can establish visible static continuity, contact, silhouette, and materials but cannot prove deformation quality, animation behavior, runtime camera composition, input response, hit timing, or performance.",
+    "The validator proves clean static FBX imports only. The report shows no armatures, actions, modifiers, shape keys, vertex groups, or texture references, so it is not animation-readiness or texture-portability proof.",
+    "The critic did not rerun the mutating release sanitizer during this follow-up. Instead, live sanitized bytes, receipts, privacy scans, PNG critical-payload hashes, deterministic comparison reconstructions, and the one permitted validator observation were independently checked.",
+    "No Unity integration or actual gameplay/reference-matched camera capture was attempted because the mandatory source gate failed.",
+    "No benchmark image or crop is embedded in this review, repository, or dashboard."
+  ]
+}
