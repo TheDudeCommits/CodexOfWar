@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1536" height="1024" viewBox="0 0 1536 1024">
+  <title>P10 Round014 Original Trailing Return Wedge Guide</title>
+  <desc>Original public-safe vector mechanics guide. A far down-left lowest trailing elbow returns sharply up-right to an inward hand on the existing diagonal hilt, preserving a clean head-sized pale triangular wedge. No third-party pose pixels.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#25333b"/>
+    </marker>
+    <style>
+      .label{font:700 28px system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;fill:#182229}
+      .small{font:600 23px system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;fill:#25333b}
+      .note{font:500 21px system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;fill:#44545c}
+      .leader{fill:none;stroke:#25333b;stroke-width:4;marker-end:url(#arrow)}
+    </style>
+  </defs>
+
+  <rect width="1536" height="1024" fill="#f3eddf"/>
+  <rect x="48" y="46" width="1440" height="932" rx="28" fill="#faf6eb" stroke="#c9bfa9" stroke-width="4"/>
+  <text x="88" y="105" class="label">TRAILING RETURN WEDGE — ORIGINAL 2D MECHANICS GUIDE</text>
+  <text x="88" y="143" class="note">Only the trailing elbow → forearm → hand path changes. Leading arm and every other judged fact stay frozen.</text>
+
+  <!-- simplified full-body mass, not traced from any supplied image -->
+  <circle cx="784" cy="278" r="76" fill="#53656d"/>
+  <path d="M 704 356 C 754 326 833 331 880 386 L 932 598 C 853 663 748 649 694 592 L 690 526 L 690 390 Z" fill="#53656d"/>
+  <path d="M 701 582 L 584 866 L 486 909 L 535 573 Z" fill="#53656d"/>
+  <path d="M 821 596 L 1038 842 L 1184 889 L 946 576 Z" fill="#53656d"/>
+  <path d="M 470 892 L 586 865" stroke="#35444b" stroke-width="54" stroke-linecap="round"/>
+  <path d="M 1029 842 L 1194 891" stroke="#35444b" stroke-width="68" stroke-linecap="round"/>
+
+  <!-- existing hilt and upper-right blade axis -->
+  <path d="M 150 840 L 1117 311" stroke="#335f79" stroke-width="34" stroke-linecap="round"/>
+  <path d="M 1006 385 L 1404 178" stroke="#2e3538" stroke-width="112" stroke-linejoin="round"/>
+  <path d="M 986 407 L 1035 377" stroke="#d2c7ad" stroke-width="74" stroke-linecap="round"/>
+
+  <!-- frozen compact leading arm, clearly retained -->
+  <path d="M 824 366 C 844 411 847 462 817 494" fill="none" stroke="#74878e" stroke-width="76" stroke-linecap="round"/>
+  <path d="M 817 494 C 851 462 891 430 944 418" fill="none" stroke="#74878e" stroke-width="64" stroke-linecap="round"/>
+  <circle cx="944" cy="418" r="34" fill="#26343b"/>
+  <text x="984" y="468" class="small">FROZEN LEADING ARM</text>
+
+  <!-- untouched pale wedge, drawn before limbs so its edges sit behind anatomy -->
+  <path d="M 690 325 L 260 780 L 690 545 Z" fill="#fffaf0" stroke="#d7a52a" stroke-width="9" stroke-dasharray="18 13"/>
+
+  <!-- exact targeted trailing path -->
+  <path d="M 690 325 L 260 780" fill="none" stroke="#a13b38" stroke-width="76" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 260 780 L 690 545" fill="none" stroke="#c85046" stroke-width="64" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="260" cy="780" r="50" fill="#7d272a" stroke="#fffaf0" stroke-width="9"/>
+  <circle cx="690" cy="545" r="41" fill="#26343b" stroke="#fffaf0" stroke-width="8"/>
+
+  <!-- labels and direction cues -->
+  <path d="M 242 831 C 245 812 249 800 253 794" class="leader"/>
+  <text x="87" y="865" class="label">FAR DOWN-LEFT</text>
+  <text x="87" y="900" class="label">LOWEST EXTERNAL ELBOW</text>
+
+  <path d="M 815 676 C 767 632 730 590 702 566" class="leader"/>
+  <text x="824" y="692" class="label">INWARD HAND</text>
+  <text x="824" y="727" class="small">on the existing hilt—not its endpoint</text>
+
+  <path d="M 386 769 C 478 707 565 643 641 592" fill="none" stroke="#fffaf0" stroke-width="15" marker-end="url(#arrow)"/>
+  <text x="448" y="811" class="small">SHARP UP-RIGHT FOREARM RETURN</text>
+
+  <path d="M 1087 537 C 932 501 806 489 703 481" class="leader"/>
+  <text x="1018" y="583" class="label">CLEAN HEAD-SIZED</text>
+  <text x="1063" y="618" class="label">PALE TRIANGLE</text>
+
+  <!-- concise acceptance strip -->
+  <rect x="88" y="925" width="1360" height="35" rx="17" fill="#d9e2df"/>
+  <text x="110" y="951" class="note">ACCEPTANCE SILHOUETTE: elbow is the outer lowest vertex • hand stays inward • forearm reverses up-right • pale triangle remains empty</text>
+</svg>

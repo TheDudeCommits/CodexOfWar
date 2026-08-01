@@ -1,0 +1,275 @@
+{
+  "schema": "codexofwar.original-2d-trailing-return-wedge-receipt",
+  "version": "1.0.0",
+  "receipt_id": "P10-Round014-TrailingReturnWedgeReceipt",
+  "generated_utc": "2026-08-01T07:17:18Z",
+  "scope": {
+    "project_asset": "P10 Nyra Kestrel",
+    "round": "Round014",
+    "judged_unit": "Trailing Return Wedge only",
+    "scope_class": "one bounded original 2D targeted trailing-arm path edit only",
+    "builder_target_result": "FAIL",
+    "eligibility": "INELIGIBLE_FOR_TRAILING_RETURN_WEDGE",
+    "final_disposition": "PROMOTED_STRONGEST_BOUNDED_TARGET_PROGRESS_EVIDENCE_WITH_TARGET_FAIL",
+    "attempt_cap": 4,
+    "generated_outputs_spent": 4,
+    "cap_exhausted": true,
+    "original_2d_only": true,
+    "paid_3d_generation_authorized": false,
+    "engine_integration_authorized": false,
+    "claims_not_made": [
+      "benchmark victory, benchmark comparison, or benchmark pass",
+      "successful Trailing Return Wedge",
+      "3D, rig, mesh, UV, deformation, collision, animation, LOD, engine, game-ready, or production-ready status",
+      "legal originality, exclusivity, copyright clearance, or trademark clearance"
+    ]
+  },
+  "exact_critic_prescription": "Freeze candidate 04's leading arm and every other judged fact; re-author only the trailing elbow, forearm, and hand path so the elbow becomes the far down-left lowest external vertex, the hand stays inward on the existing hilt, and the forearm returns sharply up-right, leaving a clean head-sized pale triangle untouched.",
+  "bounded_input_policy": {
+    "private_benchmark_archive_accessed": false,
+    "franchise_pixels_used": false,
+    "third_party_pose_pixels_used": false,
+    "additional_visual_source_used": false,
+    "authoritative_round013_candidate": {
+      "role": "sole source baseline and complete frozen visual authority",
+      "path": "../../Round013/ElbowReturnTriangle/Iterations/P10_Round013_ElbowReturnTriangle_candidate04.png",
+      "sha256": "c88489f7af2c0a5d223f431fb322f72ac549283819c3c9b6281a20c1b39fbcd6",
+      "byte_size": 1750551,
+      "dimensions_px": {"width": 1536, "height": 1024},
+      "format": "png"
+    },
+    "round013_accepted_duplicate": {
+      "role": "byte-identical accepted-copy verification only; not an independent visual source and not separately supplied to generation",
+      "path": "../../Round013/ElbowReturnTriangle/P10_Round013_NyraKestrel_ElbowReturnTriangle_v1.png",
+      "sha256": "c88489f7af2c0a5d223f431fb322f72ac549283819c3c9b6281a20c1b39fbcd6",
+      "byte_size": 1750551,
+      "dimensions_px": {"width": 1536, "height": 1024},
+      "format": "png",
+      "byte_identical_to_authoritative_candidate": true
+    },
+    "administrative_metadata_read": {
+      "role": "Round013 receipt used only to resolve candidate04 authority and verify hash, dimensions, byte count, and accepted equality",
+      "path": "../../Round013/ElbowReturnTriangle/P10_Round013_ElbowReturnTriangleReceipt.json",
+      "sha256": "2ebff0f4c747e05a9054aa23a9f59d3ef2cdb19bd9b5afed6255a9437251b8cb",
+      "byte_size": 28504,
+      "dimensions_px": null,
+      "format": "json"
+    },
+    "frozen_invariants": [
+      "candidate04's complete compact leading arm and leading hand",
+      "face, identity, expression, gaze, hair, head, shoulders, torso, and pelvis",
+      "costume, armor, palette, materials, and equipment",
+      "both legs, boots, stance, dominant right-side load, and left skid marks",
+      "one complete weapon, blade, guard, existing diagonal hilt axis, pommel, and all non-target weapon construction",
+      "pale warm background, restrained studio lighting, shadows, framing, scale, and one full person plus one full weapon"
+    ],
+    "only_targeted_change": "Trailing elbow, forearm, and hand path: far down-left lowest external elbow; sharply up-right returning forearm; inward hand on the existing hilt; clean untouched head-sized pale triangular wedge."
+  },
+  "original_round014_guide": {
+    "authorship": "original public-safe SVG authored and rendered before any Round014 generation; no supplied-image pixels, embedded raster, external image reference, third-party pose image, or third-party pose pixels",
+    "intent": "Human-readable mechanics diagram explicitly isolating the far down-left lowest external elbow, inward existing-hilt hand, sharp up-right forearm return, frozen leading arm, and empty head-sized pale triangle.",
+    "canvas_px": {"width": 1536, "height": 1024},
+    "svg": {
+      "path": "P10_Round014_OriginalTrailingReturnWedgeGuide.svg",
+      "sha256": "9adf2c0ab04f97566463129cdec69680f97b24d2bb6e3489a4620d25674031ce",
+      "byte_size": 4620,
+      "format": "svg"
+    },
+    "rendered_png": {
+      "path": "P10_Round014_OriginalTrailingReturnWedgeGuide.png",
+      "sha256": "8b740824ba90fe9bb844054c6a1782451391022528bcd44295219d4ac2e693c0",
+      "byte_size": 180384,
+      "dimensions_px": {"width": 1536, "height": 1024},
+      "format": "png"
+    },
+    "exact_authored_geometry": {
+      "trailing_upper_arm_path": "M 690 325 L 260 780",
+      "trailing_forearm_path": "M 260 780 L 690 545",
+      "trailing_elbow_center": [260, 780],
+      "inward_hand_center": [690, 545],
+      "pale_triangle_path": "M 690 325 L 260 780 L 690 545 Z",
+      "existing_hilt_axis": [[150, 840], [1117, 311]]
+    }
+  },
+  "generator": {
+    "execution_path": "managed image-generation/edit tool",
+    "model": "not exposed by managed tool",
+    "native_output_size": "1536x1024",
+    "output_format": "png",
+    "workflow": "bounded identity-preserving multi-image edits; no mask; one targeted prompt adjustment per attempt",
+    "attempts": [
+      {
+        "candidate_id": "trailing-return-wedge-candidate-01",
+        "mode": "identity-preserve multi-image edit",
+        "input_roles": [
+          "Round013 candidate04: sole complete visual baseline and frozen authority",
+          "Round014 original public-safe guide: trailing return geometry only"
+        ],
+        "input_sha256": [
+          "c88489f7af2c0a5d223f431fb322f72ac549283819c3c9b6281a20c1b39fbcd6",
+          "8b740824ba90fe9bb844054c6a1782451391022528bcd44295219d4ac2e693c0"
+        ],
+        "output": "Iterations/P10_Round014_TrailingReturnWedge_candidate01.png",
+        "sha256": "ecc3402484fd64e9d1a0ee78173dc0b6091b5c61ad6823b676f649f25247704e",
+        "byte_size": 1999931,
+        "dimensions_px": {"width": 1536, "height": 1024},
+        "format": "png",
+        "native_builder_disposition": "REJECT",
+        "native_reason": "Best inward-hand placement among candidates 01-03 and broad continuity preservation, but the trailing elbow remains close to the torso, the arm reads as a monotonic hilt-aligned reach, there is no sharp up-right return, and no head-sized pale triangle opens.",
+        "exact_prompt_lines": [
+          "Use case: identity-preserve",
+          "Asset type: original 2D targeted pose-path correction, P10 Round014 Trailing Return Wedge, candidate 01 of at most 04",
+          "Input roles: Image 1 is the authoritative Round013 candidate04 and absolute visual authority for the complete image. Image 2 is the ORIGINAL public-safe Round014 mechanics guide and authority only for the trailing elbow, forearm, hand return path, and clean pale triangular wedge. Translate the guide into natural anatomy; do not render its text, labels, arrows, outlines, circles, colors, or diagram marks.",
+          "Primary request, exact critic prescription: Freeze candidate 04's leading arm and every other judged fact; re-author only the trailing elbow, forearm, and hand path so the elbow becomes the far down-left lowest external vertex, the hand stays inward on the existing hilt, and the forearm returns sharply up-right, leaving a clean head-sized pale triangle untouched.",
+          "Trailing path: keep the trailing shoulder attachment fixed. Rebuild its upper arm down-left to a visibly articulated elbow that is the farthest down-left and lowest external point of that arm. From this elbow, reverse direction sharply and run the forearm up-right to a complete hand gripping an inward section of the unchanged existing cobalt hilt. The hand must not sit at the hilt endpoint.",
+          "Negative space: the trailing upper arm, returning forearm, and torso edge must bound a clean, empty, unmistakable pale warm-background triangle at least the size of the character's head. No cloth, armor, hair, hand, hilt, blade, body, cable, shadow, or added element may enter or cross it.",
+          "Absolute freeze from Image 1: preserve the leading arm pixel-composition and compact fold; face, identity, expression, gaze, hair; head and torso; all costume, armor, palette, materials and equipment; both legs, boots, stance, load and skid marks; the exact complete weapon, blade, guard, existing diagonal hilt axis and all non-target hilt construction; pale warm background, lighting, shadows, framing, scale, and one full person plus one full weapon. Make only minimum sleeve deformation required around the re-authored trailing arm.",
+          "Constraints: final original 2D illustration only; no text, labels, arrows, circles, guide marks, logo, watermark, environment, extra person, duplicate or detached weapon, particles, glow, blur, crop, redesign, added prop, bare or fetish amplification.",
+          "Hard reject: any change to the leading arm or another frozen fact; elbow not the far down-left lowest external vertex; hand at hilt endpoint; forearm not returning sharply up-right; triangle absent, smaller than the head, crossed, filled, or unclear; anatomical breakage; weapon drift."
+        ]
+      },
+      {
+        "candidate_id": "trailing-return-wedge-candidate-02",
+        "mode": "identity-preserve multi-image edit",
+        "input_roles": [
+          "candidate01: immediate art base and inward-hand progress",
+          "Round013 candidate04: complete frozen authority",
+          "Round014 original public-safe guide: return geometry only"
+        ],
+        "input_sha256": [
+          "ecc3402484fd64e9d1a0ee78173dc0b6091b5c61ad6823b676f649f25247704e",
+          "c88489f7af2c0a5d223f431fb322f72ac549283819c3c9b6281a20c1b39fbcd6",
+          "8b740824ba90fe9bb844054c6a1782451391022528bcd44295219d4ac2e693c0"
+        ],
+        "output": "Iterations/P10_Round014_TrailingReturnWedge_candidate02.png",
+        "sha256": "f5589c3ca6c0f7316d794782a79e26acd651a29d006eb51caf4a19355f4e0cb0",
+        "byte_size": 1995436,
+        "dimensions_px": {"width": 1536, "height": 1024},
+        "format": "png",
+        "native_builder_disposition": "REJECT",
+        "native_reason": "The trailing hand regresses outward/down-left and the arm remains a monotonic reach. The elbow is neither far down-left nor the lowest external arm vertex; there is no direction reversal and no clean triangular wedge.",
+        "exact_prompt_lines": [
+          "Use case: identity-preserve",
+          "Asset type: original 2D targeted pose-path correction, P10 Round014 Trailing Return Wedge, candidate 02 of at most 04",
+          "Input roles: Image 1 is candidate01 and immediate art base because it already moves the trailing hand inward. Image 2 is authoritative Round013 candidate04 and absolute freeze authority for the leading arm and every other judged visual fact. Image 3 is the ORIGINAL public-safe Round014 guide and absolute authority only for the trailing-arm deep return geometry and empty pale wedge. Render none of the guide's text, labels, arrows, outlines, circles, colors, or diagram marks.",
+          "Primary request: keep candidate01's inward trailing hand on the same existing hilt, but completely replace the trailing upper-arm/elbow/forearm path. Freeze candidate04's leading arm and every other judged fact.",
+          "Exact 1536x1024 screen topology: trailing shoulder attachment remains around x640,y410. The trailing upper arm must visibly travel DOWN-LEFT to an external elbow centered around x330,y710. This elbow must be the farthest down-left and lowest external vertex of the entire trailing arm, clearly below the shoulder and below the hand. Then the forearm must reverse direction at that visible elbow and travel steeply UP-RIGHT to the complete trailing hand around x665,y505 on an inward section of the unchanged diagonal cobalt hilt. The hand does not move to the hilt endpoint. Build a deep open V with a sharp readable elbow, not a nearly straight reach and not an arm aligned monotonically along the hilt.",
+          "Negative-space test: shoulder, far down-left elbow, inward hand and torso edge must leave a clean untouched triangle of pale warm background between upper arm and returning forearm, at least as large as Nyra's head. No torso, skirt, armor, hair, weapon, hilt, body, cable, shadow, or extra element may cross or fill this triangle. It must read at thumbnail scale.",
+          "Freeze exactly from Image 2: the complete compact leading arm and hand; mature face, gaze, hair, head and torso; all clothing, armor, materials, equipment; lower-body pose, both boots, right load and left skid marks; one complete weapon, exact blade/guard/hilt axis; background, lighting, shadows, framing and scale. Only minimum trailing-sleeve deformation is permitted.",
+          "Constraints: coherent anatomy; exactly two arms and two hands; original 2D illustration only; no text, labels, arrows, circles, guide marks, logo, watermark, environment, extra person, duplicate weapon, particles, crop, redesign, or added prop.",
+          "Hard reject: elbow remains near torso, is above the hand, or is not far down-left; arm stays straight or hilt-aligned; hand leaves the inward hilt position; no sharp up-right forearm return; triangle absent, crossed, filled, or smaller than the head; any leading-arm or frozen-fact drift."
+        ]
+      },
+      {
+        "candidate_id": "trailing-return-wedge-candidate-03",
+        "mode": "identity-preserve multi-image edit",
+        "input_roles": [
+          "Round014 original public-safe guide: first-position target-geometry authority only",
+          "Round013 candidate04: complete final-art identity and frozen authority"
+        ],
+        "input_sha256": [
+          "8b740824ba90fe9bb844054c6a1782451391022528bcd44295219d4ac2e693c0",
+          "c88489f7af2c0a5d223f431fb322f72ac549283819c3c9b6281a20c1b39fbcd6"
+        ],
+        "output": "Iterations/P10_Round014_TrailingReturnWedge_candidate03.png",
+        "sha256": "40cdc254f47601f2d5355927fa34110f48cbdb6f5c7be98dbc9899b318945fea",
+        "byte_size": 2012045,
+        "dimensions_px": {"width": 1536, "height": 1024},
+        "format": "png",
+        "native_builder_disposition": "REJECT",
+        "native_reason": "Guide-first authority preserves broad continuity but still yields an endpoint-biased monotonic arm. No far external low elbow, sharp up-right return, or head-sized untouched wedge is present.",
+        "exact_prompt_lines": [
+          "Use case: identity-preserve",
+          "Asset type: original 2D targeted trailing-arm reconstruction, P10 Round014 Trailing Return Wedge, candidate 03 of at most 04",
+          "Input roles and authority: Image 1 is the ORIGINAL public-safe Round014 mechanics guide and absolute authority only for the exact trailing-arm deep-V silhouette: far down-left lowest external elbow, sharply up-right returning forearm, inward same-hilt hand, and empty head-sized pale triangle. Translate only this red trailing arm geometry into natural anatomy; render none of the guide's text, labels, arrows, outlines, circles, flat colors, or diagram marks. Image 2 is authoritative Round013 candidate04 and absolute authority for the complete final-art identity, compact leading arm, costume, weapon, body, background, lighting, framing, scale and every other judged fact.",
+          "Exact critic prescription: Freeze candidate 04's leading arm and every other judged fact; re-author only the trailing elbow, forearm, and hand path so the elbow becomes the far down-left lowest external vertex, the hand stays inward on the existing hilt, and the forearm returns sharply up-right, leaving a clean head-sized pale triangle untouched.",
+          "Mandatory target silhouette: from the unchanged trailing shoulder near the torso, a thick sleeved upper arm descends diagonally far down-left to a clearly bent elbow outside the body's silhouette near screen x300,y730. That elbow is visibly below the hand and is the lowest/down-left arm point. A separate thick armored forearm reverses direction at the elbow and ascends steeply up-right to a complete trailing hand near screen x670,y510, gripping an inward section of the unchanged cobalt hilt. The long hilt continues visibly down-left beyond that hand toward its existing pommel endpoint. Do not place the hand at the endpoint.",
+          "Mandatory negative space: preserve a large empty triangle of untouched pale warm background inside this deep V, bounded by trailing upper arm, returning forearm and torso edge. It must be at least as large as the head and contain no fabric, armor, hair, hilt, weapon, body, hand, cable, shadow, or prop.",
+          "Absolute pixel-composition freeze from Image 2 except the trailing arm/hand: do not alter the complete compact leading arm; face, hair, expression, gaze; shoulders, torso, pelvis; costume, armor, palette, materials, equipment; both legs, boots, stance, right load, left skid marks; exact complete blade, guard, diagonal hilt axis and pommel; pale studio background, light and shadow; full 1536x1024 framing. Preserve exactly one woman, one weapon, two arms and two hands.",
+          "Constraints: natural anatomy, minimum sleeve deformation, original 2D illustration only, no text, labels, arrows, circles, marks, logo, watermark, environment, extra subject, extra limb, duplicate weapon, glow, blur, crop, redesign, or added prop.",
+          "Priority: trailing deep-V topology and pale wedge first, then exact Image 2 continuity. Hard reject a straight or monotonic trailing reach, elbow near torso, elbow above hand, endpoint hand, missing up-right return, missing or crossed head-sized pale triangle, altered leading arm, or drift elsewhere."
+        ]
+      },
+      {
+        "candidate_id": "trailing-return-wedge-candidate-04",
+        "mode": "identity-preserve multi-image edit",
+        "input_roles": [
+          "candidate01: immediate base and inward-hand progress",
+          "Round014 original public-safe guide: deep-V and wedge authority only",
+          "Round013 candidate04: complete non-target freeze authority"
+        ],
+        "input_sha256": [
+          "ecc3402484fd64e9d1a0ee78173dc0b6091b5c61ad6823b676f649f25247704e",
+          "8b740824ba90fe9bb844054c6a1782451391022528bcd44295219d4ac2e693c0",
+          "c88489f7af2c0a5d223f431fb322f72ac549283819c3c9b6281a20c1b39fbcd6"
+        ],
+        "output": "Iterations/P10_Round014_TrailingReturnWedge_candidate04.png",
+        "sha256": "3b4244040c27fc1d3410090c59eea52c5d6f369c38dc38aba88cad4a4353bd42",
+        "byte_size": 2036932,
+        "dimensions_px": {"width": 1536, "height": 1024},
+        "format": "png",
+        "native_builder_disposition": "PROMOTE BYTE-IDENTICALLY AS STRONGEST BOUNDED TARGET-PROGRESS EVIDENCE; TARGET REMAINS FAIL",
+        "native_reason": "Only attempt that creates a conspicuous far down-left, lower external elbow and a visible short up-right forearm return. It still fails because the hand drifts outward/down toward the hilt tail, the prior pommel-tail construction changes, the return is too short, and the would-be triangle is crossed or filled by the hilt and rear leg rather than remaining a clean untouched head-sized pale wedge.",
+        "exact_prompt_lines": [
+          "Use case: identity-preserve",
+          "Asset type: final bounded original 2D trailing-elbow edit, P10 Round014 Trailing Return Wedge, candidate 04 of 04 FINAL CAP",
+          "Input roles: Image 1 is candidate01 and the immediate base. Keep its complete inward trailing hand exactly where it already grips the cobalt hilt. Image 2 is the ORIGINAL public-safe Round014 guide and authority only for the large red deep-V trailing arm and untouched pale wedge; never render its diagram styling or text. Image 3 is authoritative Round013 candidate04 and absolute freeze authority for the compact leading arm and every non-target judged fact.",
+          "ONE CHANGE ONLY: replace the trailing sleeve path between its fixed shoulder and fixed inward hand with a deeply bent two-segment arm. Do not move either attachment endpoint. Push the elbow dramatically FAR DOWN-LEFT into the empty pale background around x300,y730 so it becomes a new unmistakable lowest external arm vertex. The thick upper arm goes from shoulder down-left to that elbow. The thick forearm makes an obvious sharp corner there and returns steeply UP-RIGHT to the already-inward hand on the hilt. Make the elbow silhouette protrude clearly; a nearly straight arm is forbidden.",
+          "Wedge requirement: the deep bend must open a clean triangular window of untouched pale background at least as large as the head, bounded by torso edge, upper arm and returning forearm. Keep the triangle completely empty: hilt and long pommel tail may follow below the forearm boundary but may not cross the triangle. No cloth, armor, hair, weapon, body, cable, shadow or new element inside it.",
+          "Exact critic prescription: Freeze candidate 04's leading arm and every other judged fact; re-author only the trailing elbow, forearm, and hand path so the elbow becomes the far down-left lowest external vertex, the hand stays inward on the existing hilt, and the forearm returns sharply up-right, leaving a clean head-sized pale triangle untouched.",
+          "Absolute freeze: leading shoulder, leading upper arm, leading elbow, leading forearm and leading hand; face, hair, expression, torso, costume, armor, equipment, legs, boots, stance, skid marks; one complete weapon, blade, guard, existing hilt axis and pommel; background, lighting, shadows, framing and scale. Exactly one woman, one weapon, two arms and two hands.",
+          "Constraints: original 2D illustration only; natural anatomy; minimum sleeve deformation; no text, label, arrow, circle, guide marks, logo, watermark, crop, environment, extra subject, extra limb, duplicate weapon, redesign, effect or prop.",
+          "Final acceptance order: (1) elbow is far down-left and below hand, (2) forearm returns sharply up-right to fixed inward hand, (3) clean head-sized pale triangle, (4) every other fact frozen. Hard reject any monotonic hilt-aligned reach or near-torso elbow."
+        ]
+      }
+    ]
+  },
+  "accepted_copy": {
+    "path": "P10_Round014_NyraKestrel_TrailingReturnWedge_v1.png",
+    "source_candidate": "Iterations/P10_Round014_TrailingReturnWedge_candidate04.png",
+    "sha256": "3b4244040c27fc1d3410090c59eea52c5d6f369c38dc38aba88cad4a4353bd42",
+    "byte_size": 2036932,
+    "dimensions_px": {"width": 1536, "height": 1024},
+    "format": "png",
+    "byte_identical_to_source": true,
+    "promotion_authority": "builder native-resolution visual judgment, not independent criticism",
+    "promotion_reason": "Strongest bounded target-progress evidence because it alone establishes a conspicuous low external elbow and short direction reversal; promotion is evidence preservation only and does not convert the FAIL disposition into acceptance."
+  },
+  "candid_limitations": [
+    "Trailing Return Wedge target failed and is ineligible.",
+    "The promoted hand drifts outward/down toward the hilt tail instead of remaining at candidate01's inward grip position.",
+    "The promoted hilt/pommel tail construction changes and does not preserve the exact prior weapon fact.",
+    "The returning forearm segment is present but too short and shallow to produce the prescribed sharp return geometry.",
+    "No clean untouched head-sized pale triangular wedge remains; hilt and rear-leg content occupy or cross the would-be negative space.",
+    "The promoted trailing arm is excessively elongated and its anatomy is not a clean solution.",
+    "Candidates 01-03 preserve broader continuity but fail to establish any far external low elbow or return wedge.",
+    "The four-output cap is exhausted; no further builder generation was made.",
+    "Promotion records the strongest bounded evidence and is not builder self-acceptance or an independent critic result."
+  ],
+  "privacy_checks": {
+    "original_guide_contains_supplied_pixels": false,
+    "original_guide_contains_embedded_raster": false,
+    "original_guide_contains_external_image_reference": false,
+    "third_party_pose_imagery_used": false,
+    "private_benchmark_archive_accessed": false,
+    "franchise_pixels_used": false,
+    "only_visual_inputs": [
+      "authoritative Round013 candidate04 or a Round014 derivative candidate",
+      "original public-safe Round014 SVG-derived guide"
+    ],
+    "reference_privacy_preserved": true
+  },
+  "validation": {
+    "all_four_attempts_preserved": true,
+    "all_four_attempts_inspected_at_native_resolution": true,
+    "all_hashes_sizes_and_dimensions_recomputed": true,
+    "accepted_copy_hash_size_and_dimensions_recomputed": true,
+    "accepted_copy_byte_equality_recomputed": true,
+    "round013_candidate_and_accepted_byte_equality_recomputed": true,
+    "json_parse_validated": true,
+    "privacy_validated": true,
+    "round014_only_write_scope_validated": true,
+    "original_2d_only_scope_validated": true,
+    "independent_fresh_critic_run": false
+  }
+}

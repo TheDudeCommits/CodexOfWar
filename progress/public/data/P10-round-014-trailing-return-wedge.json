@@ -1,0 +1,170 @@
+{
+  "schemaVersion": 1,
+  "piece": "P10",
+  "round": 14,
+  "status": "rejected-trailing-return-wedge-preflight",
+  "reviewType": "fresh-context Trailing Return Wedge and composite 2D concept preflight",
+  "reviewedAt": "2026-08-01T07:33:41Z",
+  "artifactClass": "original 2D guide-driven trailing-arm topology concept art",
+  "engineRun": false,
+  "actualGameCapturePerformed": false,
+  "unityProjectShellPresent": true,
+  "runnableReviewedGameplayDetected": false,
+  "unityCaptureFiled": false,
+  "threeDimensionalAssetFiled": false,
+  "gameReadyEvidenceFiled": false,
+  "builderAcceptedFrameFiled": true,
+  "isolatedTrailingReturnWedgeTargetPassed": false,
+  "paid3DGenerationAuthorized": false,
+  "source": {
+    "name": "Nyra Kestrel Trailing Return Wedge mechanics proof",
+    "scope": "Original 2D guide-driven trailing-arm topology evidence only; no gameplay, 3D model, finished game asset, or production-ready implementation claim.",
+    "creator": "OpenAI image generation via Codex",
+    "referencePixelsSuppliedToGeneration": false,
+    "receiptPath": "ArtSource/P10/Round014/TrailingReturnWedge/P10_Round014_TrailingReturnWedgeReceipt.json",
+    "receiptSha256": "187df17af0a776c4736fe8c9fe7f87c7b77d603a618da03326249dfbc9363126",
+    "readmePath": "ArtSource/P10/Round014/TrailingReturnWedge/README.md",
+    "readmeSha256": "6fdf781400a5fe9ba207a4444042d29e847a99269922dc9a2b7a9191bb6a4ac1",
+    "reviewPath": "ArtSource/P10/Round014/TrailingReturnWedge/P10_Round014_FreshTrailingReturnWedgeReview.json",
+    "reviewSha256": "4ebe93583384e483fb38bb7e1d694412821e0fab3d7abc0498c2977ba42af1cd",
+    "guidePngPath": "ArtSource/P10/Round014/TrailingReturnWedge/P10_Round014_OriginalTrailingReturnWedgeGuide.png",
+    "guidePngSha256": "8b740824ba90fe9bb844054c6a1782451391022528bcd44295219d4ac2e693c0",
+    "guideSvgPath": "ArtSource/P10/Round014/TrailingReturnWedge/P10_Round014_OriginalTrailingReturnWedgeGuide.svg",
+    "guideSvgSha256": "9adf2c0ab04f97566463129cdec69680f97b24d2bb6e3489a4620d25674031ce"
+  },
+  "isolatedDecision": {
+    "verdict": "FAIL_TRAILING_RETURN_WEDGE_VISUAL_ONLY_GATE",
+    "strongestCandidate": "trailing-return-wedge-candidate-04",
+    "leadingArmFrozen": true,
+    "allOtherJudgedFactsFrozen": "partial",
+    "farDownLeftLowestExternalElbowAchieved": true,
+    "upperArmAndElbowAnatomicalCredibilityAchieved": false,
+    "sharpUpRightForearmReturnAchieved": false,
+    "inwardHandOnExistingHiltAchieved": false,
+    "cleanUntouchedHeadSizedPaleTriangleAchieved": false,
+    "sameWeaponContactAndHiltContinuityAchieved": false,
+    "thumbnailTargetReadabilityAchieved": false,
+    "finding": "Candidate 04 finally creates a far-low-left outer bend, but the overlong upper arm and abbreviated return collapse into an altered hilt. The hand remains outward and low, the hilt and rear leg occupy the required negative space, and no clean arm-bounded wedge exists."
+  },
+  "visualReview": {
+    "score": 41,
+    "maximum": 100,
+    "passThreshold": 85,
+    "criticalFloorPerCategory": 7,
+    "observedMinimumCategoryScore": 0,
+    "thresholdResult": "FAIL",
+    "criticalFloorResult": "FAIL",
+    "verdict": "DENY_PAID_3D_GENERATION",
+    "comparisonCount": 6,
+    "candidateMetBenchmarkBarCount": 2,
+    "candidateBelowBenchmarkBarCount": 4,
+    "requiredCandidateMetBenchmarkBarCount": 5,
+    "benchmarkGateResult": "FAIL",
+    "benchmarkPolicy": "Aggregate blinded-comparison results only; no benchmark image, crop, comparison sheet, filename, path, or other benchmark pixel is published.",
+    "singleBiggestGap": "The arm-bounded return wedge is absent: candidate04 has a low outer bend, but its abbreviated forearm collapses into the altered hilt and rear leg, leaving the hand outward and no clean untouched head-sized pale triangle.",
+    "categoryScores": {
+      "leadingArmFreeze": 8,
+      "allOtherJudgedFactsFrozen": 6,
+      "farDownLeftLowestExternalElbow": 8,
+      "upperArmAndElbowAnatomicalCredibility": 4,
+      "sharpUpRightForearmReturn": 3,
+      "inwardHandOnExistingHilt": 2,
+      "cleanUntouchedHeadSizedPaleTriangle": 0,
+      "sameWeaponContactAndHiltContinuity": 3,
+      "thumbnailAndGameplayScaleTargetReadability": 3,
+      "aaaBenchmarkActionAuthorship": 4
+    }
+  },
+  "engineTruth": {
+    "unityProjectShellPresent": true,
+    "declaredUnityVersion": "6000.5.4f1",
+    "reviewedRound014AssetIntegratedInUnity": false,
+    "reviewedAssetMetaOrSymlinkPresent": false,
+    "reviewedAssetBytesPresentUnderUnityAssets": false,
+    "enabledBuildScene": "template sample scene only",
+    "runtimeGameplayArchitectureDetected": false,
+    "playerBuildDetected": false,
+    "runnableGameForReviewedAssetDetected": false,
+    "engineRun": false,
+    "actualGameCapturePerformed": false,
+    "finding": "The workspace contains a Unity template and unrelated review/lookdev material, but no Nyra Round014 import, reference, gameplay controller, encounter/build scene, or player build. No unrelated content was run and no fabricated gameplay capture was filed."
+  },
+  "decision": {
+    "result": "DENY_PAID_3D_GENERATION",
+    "paid3DGenerationAuthorized": false,
+    "unityLocked": true,
+    "instruction": "Do not use Round014's altered hilt or outward hand as a new base; paid 3D generation and Unity integration remain locked."
+  },
+  "limitations": [
+    "The filed image is original 2D concept art, not gameplay or game capture.",
+    "No actual game run was performed because no runnable gameplay integrating the reviewed asset exists.",
+    "The workspace has a Unity template/review shell and unrelated Round001 evidence, not a player build or integrated combat encounter for this asset.",
+    "No 3D mesh, topology, rig, deformation, UV, collision, animation, LOD, texture, performance, or game-ready claim is made.",
+    "The builder marked the target failed and promoted candidate 04 only for critic handoff; the independent critic also rejected the isolated Trailing Return Wedge and complete composite gate.",
+    "Candidate 04 changes the hilt and pommel-tail construction, leaves the hand outward, and allows the hilt and rear leg to occupy the required pale wedge.",
+    "The concept review cannot establish legal originality, exclusivity, copyright status, trademark clearance, or absence of all third-party similarity.",
+    "Paid 3D generation and Unity remain locked because the isolated target, total-score, category-floor, and blinded-comparison gates all failed."
+  ],
+  "conceptArt": [
+    {
+      "label": "CRITIC-REJECTED — builder-promoted Trailing Return Wedge frame",
+      "disposition": "builder-failed-promoted-for-critic-and-critic-rejected-evidence",
+      "evidenceType": "Rejected 2D mechanics evidence — not gameplay, 3D, or game-ready evidence",
+      "publicPath": "/captures/P10/round-014-trailing-return-wedge/NyraKestrel_TrailingReturnWedge_CRITIC_REJECTED.png",
+      "sha256": "3b4244040c27fc1d3410090c59eea52c5d6f369c38dc38aba88cad4a4353bd42",
+      "dimensions": {
+        "width": 1536,
+        "height": 1024
+      },
+      "format": "PNG",
+      "finding": "The far-low-left bend reads clearly. The short weapon-confused return, outward hand, altered hilt, occupied wedge, and hose-like upper arm make the frame ineligible."
+    }
+  ],
+  "guide": {
+    "authorship": "Original public-safe SVG authored for Round014; no third-party pose image.",
+    "pngSha256": "8b740824ba90fe9bb844054c6a1782451391022528bcd44295219d4ac2e693c0",
+    "svgSha256": "9adf2c0ab04f97566463129cdec69680f97b24d2bb6e3489a4620d25674031ce",
+    "dimensions": {
+      "width": 1536,
+      "height": 1024
+    }
+  },
+  "builderAttempts": [
+    {
+      "candidate": 1,
+      "sha256": "ecc3402484fd64e9d1a0ee78173dc0b6091b5c61ad6823b676f649f25247704e",
+      "disposition": "rejected",
+      "reason": "The hand is most inward among attempts 01–03, but the elbow remains near the torso and no sharp return or pale triangle appears."
+    },
+    {
+      "candidate": 2,
+      "sha256": "f5589c3ca6c0f7316d794782a79e26acd651a29d006eb51caf4a19355f4e0cb0",
+      "disposition": "rejected",
+      "reason": "The hand regresses outward and down-left in a monotonic reach with no low external elbow, return, or wedge."
+    },
+    {
+      "candidate": 3,
+      "sha256": "40cdc254f47601f2d5355927fa34110f48cbdb6f5c7be98dbc9899b318945fea",
+      "disposition": "rejected",
+      "reason": "Guide-first authority still yields endpoint-biased monotonic arm geometry with no return wedge."
+    },
+    {
+      "candidate": 4,
+      "sha256": "3b4244040c27fc1d3410090c59eea52c5d6f369c38dc38aba88cad4a4353bd42",
+      "disposition": "builder-target-failed-promoted-for-critic-critic-rejected",
+      "reason": "Only attempt with a far-low-left bend and short up-right reversal, but the hand stays outward, hilt construction changes, and hilt/rear-leg content occupies the would-be triangle."
+    }
+  ],
+  "nextRound": {
+    "round": 15,
+    "status": "inward-return-mask",
+    "target": "Use the authoritative Round013 candidate04 as the untouched base and hard-mask only the trailing elbow, forearm, and hand: place the elbow at Round014 candidate04's successful far-low-left vertex, then draw one separately silhouetted forearm steeply up-right to the original inward hilt grip so the unchanged hilt and rear leg remain outside one uninterrupted head-sized pale wedge; regenerate nothing else.",
+    "compositePackGate": {
+      "minimumTotalScore": 85,
+      "minimumScorePerCategory": 7,
+      "blindComparisonCount": 6,
+      "minimumComparisonsMeetingBenchmarkBar": 5,
+      "paid3DGenerationRequiresFullPass": true
+    }
+  }
+}

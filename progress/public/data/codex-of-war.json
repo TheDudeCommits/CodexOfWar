@@ -19,11 +19,11 @@
   ],
   "activeBuild": {
     "pieceId": "P10",
-    "round": 14,
-    "roundLabel": "P10 · Round 014",
+    "round": 15,
+    "roundLabel": "P10 · Round 015",
     "status": "revising",
-    "builder": "Trailing Return Wedge",
-    "brief": "Round 014 is one bounded original 2D trailing-arm topology build with no result or capture filed yet. It freezes candidate 04's compact leading arm and every other judged fact, then re-authors only the trailing elbow, forearm, and hand path so the elbow becomes the far down-left lowest external vertex, the inward hand remains on the existing hilt, and the forearm reverses sharply up-right around one clean head-sized pale triangle; paid 3D generation and Unity remain locked.",
+    "builder": "Inward Return Mask",
+    "brief": "Round 015 is one bounded original 2D hard-masked forearm-and-hand repair with no result or capture filed yet. It returns to the authoritative Round013 candidate 04 as the untouched base, imports only Round014 candidate 04's successful far-low-left elbow vertex, and redraws only one separately silhouetted trailing forearm steeply up-right to the original inward hilt contact so the unchanged hilt and rear leg stay outside one uninterrupted head-sized pale wedge; paid 3D generation and Unity remain locked.",
     "facts": [
       "P00 is accepted as infrastructure; its blind visual baseline remains an explicit 28.33–76.67 loss.",
       "Round 001 is mechanically reproducible: two independent critic reruns matched all six filed image hashes, P10 validation passed, focused EditMode passed 8/8, the full suite passed 14/14, and the P00 aggregate stayed byte-identical.",
@@ -59,7 +59,9 @@
       "The fresh Round 012 critic rejected the isolated Scapular Counterforce Lock at 56/100, a 3/10 category floor, and 1/6 benchmark comparisons against 5/6 required. The leading elbow stays long and the trailing elbow never drops down-left and returns, so the triangular push-pull mechanism is absent and the pose reads as paired hauling. No integrated gameplay or player build exists for this asset; engine run and actual gameplay capture are false.",
       "Round 013 filed four bounded original 2D elbow-topology attempts and an original public-safe guide. Candidate 04 alone produced a compact leading-elbow fold beneath the high shoulder, but it was promoted only as failed critic evidence because the trailing arm still descends monotonically and the guide-only reconstruction materially drifted identity, design, stance, toe skid, proportions, and framing.",
       "The fresh Round 013 critic rejected the isolated Elbow Return Triangle at 41/100, a 1/10 category floor, and 2/6 benchmark comparisons against 5/6 required. The trailing elbow never becomes the far down-left lowest external vertex, the forearm never reverses up-right to the inward hand, and the pale triangle cannot exist. No integrated gameplay or player build exists for this asset; engine run and actual gameplay capture are false.",
-      "Round 014 is now one bounded original 2D Trailing Return Wedge build with no result or capture filed. Round 001 remains the latest filed in-engine P10 evidence, while the global latest manifest remains pinned to accepted P00."
+      "Round 014 filed four bounded original 2D trailing-arm attempts and an original public-safe guide. Candidate 04 alone created a conspicuous far-low-left outer bend and a short up-right reversal, but the builder marked it failed because the hand drifted outward, the hilt construction changed, and hilt/rear-leg content occupied the required pale wedge.",
+      "The fresh Round 014 critic rejected the isolated Trailing Return Wedge at 41/100, a 0/10 category floor, and 2/6 benchmark comparisons against 5/6 required. The arm-bounded return wedge is absent: the abbreviated forearm collapses into the altered hilt and rear leg, leaving the hand outward and no clean untouched head-sized pale triangle. No integrated gameplay or player build exists for this asset; engine run and actual gameplay capture are false.",
+      "Round 015 is now one bounded original 2D Inward Return Mask build with no result or capture filed. Round 001 remains the latest filed in-engine P10 evidence, while the global latest manifest remains pinned to accepted P00."
     ],
     "evidenceFingerprint": {
       "gitRevision": "2dedf617ace47ea5dbb2cde1817d6119604842d2",
@@ -121,7 +123,7 @@
         "Static lookdev only; no rig, S02, or S06"
       ]
     },
-    "nextGate": "Round 014 must freeze candidate 04's compact leading arm and every other judged fact, then re-author only the trailing elbow, forearm, and hand path so the elbow becomes the far down-left lowest external vertex, the inward hand stays on the existing hilt, and the forearm reverses sharply up-right around one clean head-sized pale triangle. The complete concept pack must earn at least 85/100 from a fresh critic, keep every category at or above 7, and meet the benchmark bar in at least 5 of 6 blinded comparisons before any paid 3D generation."
+    "nextGate": "Round 015 must use the authoritative Round013 candidate 04 as the untouched base, import only Round014 candidate 04's successful far-low-left elbow vertex, and hard-mask only the trailing elbow, forearm, and hand so one separately silhouetted anatomical forearm returns steeply up-right to the original inward hilt contact while the unchanged hilt and rear leg remain outside one uninterrupted head-sized pale wedge. The complete concept pack must earn at least 85/100 from a fresh critic, keep every category at or above 7, and meet the benchmark bar in at least 5 of 6 blinded comparisons before any paid 3D generation."
   },
   "canonicalCapture": {
     "shotId": "S01",
@@ -482,6 +484,27 @@
         "scoreLabel": "Composite concept preflight 41/100 · threshold 85 · category floor 1/10",
         "preference": "Candidate met benchmark bar in 2/6 blinded comparisons · 5/6 required",
         "primaryGap": "The trailing-arm return topology is absent: the elbow never becomes the far down-left lowest vertex and the forearm never reverses up-right to the inward hand, so the required pale triangle cannot exist."
+      }
+    },
+    {
+      "round": 14,
+      "label": "P10 · Round 014",
+      "pieceId": "P10",
+      "phase": "Fresh Trailing Return Wedge and composite critic complete",
+      "status": "criticized",
+      "date": "2026-08-01",
+      "builderBrief": "Freeze candidate 04's compact leading arm and every other judged fact, then re-author only the trailing elbow, forearm, and hand path so the elbow becomes the far down-left lowest external vertex, the inward hand remains on the existing hilt, and the forearm reverses sharply up-right around one clean head-sized pale triangle.",
+      "evidence": "The builder filed one strongest original 1536×1024 Trailing Return Wedge frame after four bounded attempts and an original public-safe guide, while explicitly marking the target failed. Candidate 04 finally creates a conspicuous far-low-left outer bend and short up-right reversal, but its overlong upper arm and abbreviated return collapse into an altered hilt; the hand remains outward and the hilt and rear leg occupy the required negative space. A fresh critic rejected the isolated target because no clean arm-bounded head-sized pale wedge exists. The composite scored 41/100, failed the category floor at 0/10, and met the benchmark bar in 2/6 comparisons against 5/6 required. A Unity template/review shell and unrelated Round001 captures exist, but the reviewed asset is not integrated and no gameplay controller, encounter/build scene, or player build exists; engine run and actual gameplay capture are false, and paid 3D generation remains denied.",
+      "evidenceLinks": [
+        "/captures/P10/round-014-trailing-return-wedge/NyraKestrel_TrailingReturnWedge_CRITIC_REJECTED.png",
+        "/data/P10-round-014-trailing-return-wedge.json"
+      ],
+      "critic": {
+        "status": "TRAILING RETURN WEDGE FAIL · DENY_PAID_3D_GENERATION",
+        "score": 41,
+        "scoreLabel": "Composite concept preflight 41/100 · threshold 85 · category floor 0/10",
+        "preference": "Candidate met benchmark bar in 2/6 blinded comparisons · 5/6 required",
+        "primaryGap": "The arm-bounded return wedge is absent: candidate04 has a low outer bend, but its abbreviated forearm collapses into the altered hilt and rear leg, leaving the hand outward and no clean untouched head-sized pale triangle."
       }
     }
   ],
