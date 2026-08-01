@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Codex of War — Production Evidence Ledger",
   description:
-    "Track every judgeable Codex of War build piece, canonical Unity capture, acceptance contract, and blind review round.",
+    "Track every judgeable Codex of War build piece, canonical engine capture, acceptance contract, and blind review round.",
   icons: {
     icon: "/favicon.svg",
     shortcut: "/favicon.svg",
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Codex of War — Production Evidence Ledger",
     description:
-      "Every build claim is tied to a deterministic Unity capture and a blind critic round.",
+      "Every build claim is tied to a deterministic runtime capture and a blind critic round.",
     type: "website",
     images: [
       {
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Codex of War — Production Evidence Ledger",
     description:
-      "Every build claim is tied to a deterministic Unity capture and a blind critic round.",
+      "Every build claim is tied to a deterministic runtime capture and a blind critic round.",
     images: ["/social-card.png"],
   },
 };

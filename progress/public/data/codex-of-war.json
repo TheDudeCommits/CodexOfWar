@@ -3,9 +3,9 @@
     "name": "Codex of War",
     "surface": "Production evidence ledger",
     "updated": "2026-08-01",
-    "platform": "Native Apple Silicon / macOS",
-    "engine": "Unity 6 URP",
-    "simulation": "60 Hz",
+    "platform": "Desktop browser / WebGL2",
+    "engine": "Three.js + Rapier",
+    "simulation": "60 Hz fixed step",
     "captureResolution": "1600×900",
     "tagline": "Build what the camera can judge."
   },
@@ -20,10 +20,10 @@
   "activeBuild": {
     "pieceId": "P10",
     "round": 18,
-    "roundLabel": "P10 · Round 018",
+    "roundLabel": "P10 · Three.js Pivot 001",
     "status": "revising",
-    "builder": "Elbow Anchor Revision",
-    "brief": "Round 018 changes exactly one constraint: move elbow E from (370,845) to (484,894). Keep shoulder S=(604,472), grip G=(450,625), the exact r24 grip restore, segment widths of at least 70/64px, and an uninterrupted pale component of at least 5,525px. Recompute the closed S-E'-G triangle dilated 62px; allow no socket disk, halo, or unauthorized overwrite. A target-relevant actual 3D Nyra game asset and fresh matched Unity capture are required; 2D proof cannot qualify.",
+    "builder": "Three.js Playable Foundation",
+    "brief": "Unity Round 018 was halted unfiled at user direction. The active build is a vanilla Three.js, TypeScript, Vite, and Rapier vertical slice with simulation state outside the renderer, an explicit third-person and lock-on camera, movement, sprint, dodge, one light attack, one zombie target, a GLB asset manifest, a low-chrome DOM HUD, and deterministic browser capture hooks. Procedural placeholders are allowed only for this foundation gate; a coherent free licensed GLB stack replaces them next.",
     "facts": [
       "P00 is accepted as infrastructure; its blind visual baseline remains an explicit 28.33–76.67 loss.",
       "Round 001 is mechanically reproducible: two independent critic reruns matched all six filed image hashes, P10 validation passed, focused EditMode passed 8/8, the full suite passed 14/14, and the P00 aggregate stayed byte-identical.",
@@ -67,7 +67,8 @@
       "The fresh Round 016 critic ran Unity 6000.5.4f1 successfully in an isolated copy and captured a new S01 frame and turntable. That real capture shows the obsolete low-poly Astra Vale Round001 proxy because Nyra Round016 is absent from Unity; the gate failed at 33/100, a 0/10 floor, and 0/6 blind wins.",
       "Round 017 filed one deterministic local-constraint proof and one original judge panel. The builder preserved locality and mechanical connectivity, but the accepted proof became a fused third-leg or shield mass; all 23 PNGs remained byte-identical through release sanitation.",
       "The fresh Round 017 critic rejected the round at 31/100, a 0/10 floor, and 0/6 blind wins. Unity 6000.5.4f1 ran successfully, but the actual fresh S01 afff193d2efeff8d092df787ccb9af69f2b7dad93268806c0539cf3cd0436c81 was moved to private Trash after review and not published; it showed obsolete Round001 Astra Vale rather than Nyra.",
-      "Round 018 is active with exactly one constraint change: E (370,845) moves to (484,894) while S, G, r24 grip restoration, local-mask authority, anatomical widths, pale-wedge area, and the target-matched 3D Unity gate remain fixed. The global latest manifest remains pinned to accepted P00."
+      "The user stopped the Unity Round 018 path before it was filed, staged, or reviewed; its untracked diagnostic evidence is preserved but earns no progress credit. The tracked release remains Round 017.",
+      "The active path is now a web-native Three.js and Rapier playable foundation, followed by a legally shippable free GLB asset pass and a fresh real-browser blind critic. The global latest manifest remains pinned to accepted P00."
     ],
     "evidenceFingerprint": {
       "gitRevision": "37b29d5a7892c75b7da204f98aaf85c92365d90b",
@@ -128,7 +129,7 @@
         "No target-matched Nyra gameplay frame exists"
       ]
     },
-    "nextGate": "Round 018 changes only E (370,845)->(484,894). Keep S=(604,472), G=(450,625), the exact r24 grip restore, >=70/64px segment widths, and an independently measured uninterrupted pale component >=5525px. Recompute the closed S-E'-G triangle dilated62 local mask; permit no socket disk, halo, or unauthorized overwrite. Deliver a target-relevant actual 3D Nyra game asset and fresh matched Unity capture; 2D proof cannot qualify. Then clear 95/100, a 9/10 floor, and 5/6 blind wins."
+    "nextGate": "The first Three.js gate must build and run in a real browser, expose deterministic 1600×900 capture hooks, sustain a fixed 60 Hz simulation boundary, and prove movement, sprint, dodge, light-attack hit timing, zombie damage and reaction, and lock-on camera behavior. Build, simulation tests, and browser smoke capture must pass. Procedural geometry may qualify only the foundation mechanics; the visual gate still requires a free licensed GLB asset pass, at least 95/100, a 9/10 category floor, and 5/6 blind wins."
   },
   "canonicalCapture": {
     "shotId": "S01",
@@ -159,15 +160,15 @@
   "machineConstraints": [
     {
       "label": "Primary target",
-      "value": "Native Apple Silicon / macOS"
+      "value": "Desktop browser / WebGL2"
     },
     {
       "label": "Renderer",
-      "value": "Unity 6 URP"
+      "value": "Three.js + Rapier"
     },
     {
       "label": "Simulation",
-      "value": "Fixed 60 Hz"
+      "value": "Fixed 60 Hz simulation"
     },
     {
       "label": "Capture",

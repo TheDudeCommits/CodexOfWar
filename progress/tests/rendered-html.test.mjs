@@ -99,7 +99,7 @@ test("server-renders the production evidence ledger", async () => {
   assert.match(html, /Reference 09/);
   assert.match(html, /29\.82%/);
   assert.match(html, /Astra Vale/);
-  assert.match(html, /P10 · Round 018/);
+  assert.match(html, /P10 · Three\.js Pivot 001/);
   assert.match(html, /Round rejected\. Rebuild in progress\./);
   assert.match(html, /Round 017 rejected · real engine run, target absent/);
   assert.match(
@@ -347,17 +347,15 @@ test("server-renders the production evidence ledger", async () => {
     /href="\/captures\/P10\/round-017-local-constraint-release\/P10_Round017_JudgePanel\.png"/,
   );
   assert.match(html, /href="\/data\/P10-round-017-local-constraint-release\.json"/);
-  assert.match(html, /Elbow Anchor Revision/i);
-  assert.match(html, /move elbow E from \(370,845\) to \(484,894\)/i);
-  assert.match(html, /S=\(604,472\)/);
-  assert.match(html, /G=\(450,625\)/);
-  assert.match(html, /r24 grip restore/i);
-  assert.match(html, /70\/64px/i);
-  assert.match(html, /5,525px/i);
-  assert.match(html, /triangle dilated 62px/i);
-  assert.match(html, /no socket disk, halo, or unauthorized overwrite/i);
-  assert.match(html, /actual 3D Nyra game asset/i);
-  assert.match(html, /2D proof cannot qualify/i);
+  assert.match(html, /Three\.js Playable Foundation/i);
+  assert.match(html, /Unity Round 018 was halted unfiled/i);
+  assert.match(html, /simulation state outside the renderer/i);
+  assert.match(html, /third-person and lock-on camera/i);
+  assert.match(html, /one light attack/i);
+  assert.match(html, /one zombie target/i);
+  assert.match(html, /GLB asset manifest/i);
+  assert.match(html, /deterministic browser capture hooks/i);
+  assert.match(html, /free licensed GLB stack/i);
   assert.doesNotMatch(html, /Reference\.zip|Reference\/[^"<]+\.(?:png|jpe?g|webp)/i);
   assert.doesNotMatch(
     html,
@@ -425,23 +423,20 @@ test("checked-in data contains the complete, honest P00–P25 ledger", async () 
   assert.equal(p10.status, "revising");
   assert.equal(dashboard.activeBuild.pieceId, "P10");
   assert.equal(dashboard.activeBuild.round, 18);
-  assert.equal(dashboard.activeBuild.roundLabel, "P10 · Round 018");
+  assert.equal(dashboard.activeBuild.roundLabel, "P10 · Three.js Pivot 001");
   assert.equal(
     dashboard.activeBuild.builder,
-    "Elbow Anchor Revision",
+    "Three.js Playable Foundation",
   );
   assert.equal(dashboard.activeBuild.status, p10.status);
-  assert.match(dashboard.activeBuild.brief, /changes exactly one constraint/i);
-  assert.match(dashboard.activeBuild.brief, /E from \(370,845\) to \(484,894\)/i);
-  assert.match(dashboard.activeBuild.brief, /S=\(604,472\)/);
-  assert.match(dashboard.activeBuild.brief, /G=\(450,625\)/);
-  assert.match(dashboard.activeBuild.brief, /r24 grip restore/i);
-  assert.match(dashboard.activeBuild.brief, /70\/64px/i);
-  assert.match(dashboard.activeBuild.brief, /5,525px/i);
-  assert.match(dashboard.activeBuild.brief, /dilated 62px/i);
-  assert.match(dashboard.activeBuild.brief, /no socket disk, halo, or unauthorized overwrite/i);
-  assert.match(dashboard.activeBuild.brief, /actual 3D Nyra game asset/i);
-  assert.match(dashboard.activeBuild.brief, /2D proof cannot qualify/i);
+  assert.match(dashboard.activeBuild.brief, /Unity Round 018 was halted unfiled/i);
+  assert.match(dashboard.activeBuild.brief, /simulation state outside the renderer/i);
+  assert.match(dashboard.activeBuild.brief, /third-person and lock-on camera/i);
+  assert.match(dashboard.activeBuild.brief, /one light attack/i);
+  assert.match(dashboard.activeBuild.brief, /one zombie target/i);
+  assert.match(dashboard.activeBuild.brief, /GLB asset manifest/i);
+  assert.match(dashboard.activeBuild.brief, /deterministic browser capture hooks/i);
+  assert.match(dashboard.activeBuild.brief, /free licensed GLB stack/i);
   assert.ok(queuedPieces.every((piece) => piece.status === "queued"));
 
   assert.equal(dashboard.canonicalCapture.camera, "Low shoulder");

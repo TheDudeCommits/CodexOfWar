@@ -276,7 +276,8 @@ export default function Home() {
             </p>
             <h1 id="page-title">{dashboard.project.tagline}</h1>
             <p className="hero-intro">
-              A live production surface for a native Unity combat benchmark.
+              A live production surface for a browser-native Three.js combat
+              benchmark.
               Every piece advances through deterministic evidence; P00 proves
               the review infrastructure before later pieces must clear the
               visual bar.
@@ -313,7 +314,7 @@ export default function Home() {
           <aside className="capture-panel" aria-labelledby="capture-heading">
             <div className="capture-header">
               <div>
-                <p className="panel-label">Public Unity context</p>
+                <p className="panel-label">Latest filed engine context</p>
                 <h2 id="capture-heading">
                   {capture.shotId} <span>{capture.name}</span>
                 </h2>
@@ -331,13 +332,13 @@ export default function Home() {
             <figure>
               <div className="capture-viewport">
                 <object
-                  aria-label={`${capture.shotId} ${capture.name} Unity capture`}
+                  aria-label={`${capture.shotId} ${capture.name} engine capture`}
                   data={capture.capturePath}
                   type="image/png"
                 >
                   <div className="capture-fallback">
                     <span className="fallback-reticle" aria-hidden="true" />
-                    <p>Unity evidence slot</p>
+                    <p>Engine evidence slot</p>
                     <strong>Awaiting deterministic capture</strong>
                     <small>{capture.capturePath}</small>
                   </div>
