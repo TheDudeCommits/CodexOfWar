@@ -1,0 +1,189 @@
+{
+  "schemaVersion": 1,
+  "piece": "P10",
+  "round": 15,
+  "status": "rejected-inward-return-mask-preflight",
+  "reviewType": "fresh-context Inward Return Mask and composite 2D concept preflight",
+  "reviewedAt": "2026-08-01T08:20:02Z",
+  "artifactClass": "original 2D hard-masked trailing-arm concept art",
+  "engineRun": false,
+  "actualGameCapturePerformed": false,
+  "unityProjectShellPresent": true,
+  "runnableReviewedGameplayDetected": false,
+  "unityCaptureFiled": false,
+  "threeDimensionalAssetFiled": false,
+  "gameReadyEvidenceFiled": false,
+  "builderAcceptedFrameFiled": true,
+  "isolatedInwardReturnMaskTargetPassed": false,
+  "paid3DGenerationAuthorized": false,
+  "source": {
+    "name": "Nyra Kestrel Inward Return Mask mechanics proof",
+    "scope": "Original 2D hard-masked arm-topology evidence only; no gameplay, 3D model, finished game asset, or production-ready implementation claim.",
+    "creator": "OpenAI image generation and deterministic pixel compositing via Codex",
+    "referencePixelsSuppliedToGeneration": false,
+    "receiptPath": "ArtSource/P10/Round015/InwardReturnMask/P10_Round015_InwardReturnMaskReceipt.json",
+    "receiptSha256": "eda3a823aa510d2b96de8c77ace4ec0a580039c31c9bbb3747ad026dbbd204cf",
+    "readmePath": "ArtSource/P10/Round015/InwardReturnMask/README.md",
+    "readmeSha256": "df03fb1f8a49c0983fcc80c371c8f2536fb6d7d59f145a71a1db65138c709400",
+    "reviewPath": "ArtSource/P10/Round015/InwardReturnMask/P10_Round015_FreshInwardReturnMaskReview.json",
+    "reviewSha256": "a69e0d2d28f2204681f7e0e4059ec3ab1dfef111aedce967b957f6ca64de9f2f",
+    "guidePngPath": "ArtSource/P10/Round015/InwardReturnMask/P10_Round015_OriginalInwardReturnMaskGuide.png",
+    "guidePngSha256": "847f323f2c37a36870b54ae568a75f3482d859100b1b3b99e8963975cbe78cc7",
+    "guideSvgPath": "ArtSource/P10/Round015/InwardReturnMask/P10_Round015_OriginalInwardReturnMaskGuide.svg",
+    "guideSvgSha256": "62f8bbdad3c74420eed2b4bfb3f233354732fb76044e6d95d0ad0565935a8d1a",
+    "protectedMaskBinaryPath": "ArtSource/P10/Round015/InwardReturnMask/P10_Round015_InwardReturnHardMask_Protected_binary.png",
+    "protectedMaskBinarySha256": "2077be0160dcb8cbe11c72e65c45bdeafa500f2f3606bfa7fd0646abdd0e45ac"
+  },
+  "isolatedDecision": {
+    "verdict": "FAIL_INWARD_RETURN_MASK_VISUAL_ONLY_GATE",
+    "strongestCandidate": "inward-return-mask-candidate-04-protected",
+    "authoritativeOutsideMaskPixelPreservationAchieved": true,
+    "leadingArmAndNonTargetPoseFreezeAchieved": true,
+    "round014FarLowLeftElbowImportAchieved": false,
+    "trailingArmAnatomicalArticulationAchieved": false,
+    "separateSteepUpRightForearmReturnAchieved": false,
+    "originalInwardGripAndHiltContinuityAchieved": true,
+    "uninterruptedHeadSizedPaleWedgeAchieved": false,
+    "localCompositeCleanlinessAchieved": false,
+    "gameplayScaleTopologyReadabilityAchieved": false,
+    "finding": "The deterministic protected composite preserves the authoritative base exactly outside the mask and restores the complete original grip and hilt. Inside the editable corridor, the generated limb collapses to a straight hose-like reach with no far-low elbow, no separate up-right return, no pale wedge, and a residual sliver."
+  },
+  "maskIntegrity": {
+    "protectedMaskBinarySha256": "2077be0160dcb8cbe11c72e65c45bdeafa500f2f3606bfa7fd0646abdd0e45ac",
+    "protectedPixelCount": 1544522,
+    "editablePixelCount": 28342,
+    "candidateCountVerified": 4,
+    "outsideMaskMismatchCountPerCandidate": 0,
+    "acceptedCopyByteIdenticalToCandidate04Protected": true
+  },
+  "visualReview": {
+    "score": 40,
+    "maximum": 100,
+    "passThreshold": 85,
+    "criticalFloorPerCategory": 7,
+    "observedMinimumCategoryScore": 0,
+    "thresholdResult": "FAIL",
+    "criticalFloorResult": "FAIL",
+    "verdict": "DENY_PAID_3D_GENERATION",
+    "comparisonCount": 6,
+    "candidateMetBenchmarkBarCount": 2,
+    "candidateBelowBenchmarkBarCount": 4,
+    "requiredCandidateMetBenchmarkBarCount": 5,
+    "benchmarkGateResult": "FAIL",
+    "benchmarkPolicy": "Aggregate blinded-comparison results only; no benchmark image, crop, comparison sheet, filename, path, or other benchmark pixel is published.",
+    "singleBiggestGap": "The required two-segment trailing-arm topology is absent: the accepted image has no far-low-left elbow and no separate steep up-right forearm returning to the preserved inward grip, so the uninterrupted head-sized pale wedge cannot exist.",
+    "categoryScores": {
+      "authoritativeOutsideMaskPixelPreservation": 10,
+      "leadingArmAndNonTargetPoseFreeze": 10,
+      "round014FarLowLeftElbowImport": 0,
+      "trailingArmAnatomicalArticulation": 2,
+      "separateSteepUpRightForearmReturn": 0,
+      "originalInwardGripAndCompleteHiltContinuity": 10,
+      "uninterruptedHeadSizedPaleWedge": 0,
+      "localCompositeCleanliness": 4,
+      "gameplayScaleTopologyReadability": 1,
+      "aaaBenchmarkActionAuthorship": 3
+    }
+  },
+  "engineTruth": {
+    "unityProjectShellPresent": true,
+    "declaredUnityVersion": "6000.5.4f1",
+    "reviewedRound015AssetIntegratedInUnity": false,
+    "reviewedAssetMetaOrSymlinkPresent": false,
+    "reviewedAssetBytesPresentUnderUnityAssets": false,
+    "enabledBuildScene": "template SampleScene only",
+    "round015ReferencesInUnityProject": 0,
+    "runtimeGameplayArchitectureDetected": false,
+    "playerBuildDetected": false,
+    "runnableGameForReviewedAssetDetected": false,
+    "engineRun": false,
+    "actualGameCapturePerformed": false,
+    "finding": "The workspace contains a Unity template and older unrelated lookdev/review assets, but no Round015 import, meta, reference, scene integration, gameplay controller, or player build. No unrelated content was run and no fabricated gameplay capture was filed."
+  },
+  "decision": {
+    "result": "DENY_PAID_3D_GENERATION",
+    "paid3DGenerationAuthorized": false,
+    "unityLocked": true,
+    "instruction": "Preserve the verified hard-mask discipline and original grip/hilt continuity, but do not advance this visually failed straight-reach limb to paid 3D or Unity."
+  },
+  "limitations": [
+    "The filed image is original 2D concept art, not gameplay or game capture.",
+    "No actual game run was performed because no runnable gameplay integrating the reviewed asset exists.",
+    "The workspace has a Unity template/review shell and older unrelated evidence, not a player build or integrated combat encounter for this asset.",
+    "No 3D mesh, topology, rig, deformation, UV, collision, animation, LOD, texture, performance, or game-ready claim is made.",
+    "The hard-mask engineering passes, but the isolated visual target fails: preservation fidelity cannot substitute for the missing elbow-return topology.",
+    "The builder marked the target failed and promoted candidate 04 protected only for critic handoff; the independent critic also rejected the isolated Inward Return Mask and complete composite gate.",
+    "The concept review cannot establish legal originality, exclusivity, copyright status, trademark clearance, or absence of all third-party similarity.",
+    "Paid 3D generation and Unity remain locked because the isolated target, total-score, category-floor, and blinded-comparison gates all failed."
+  ],
+  "conceptArt": [
+    {
+      "label": "CRITIC-REJECTED — builder-promoted protected Inward Return Mask frame",
+      "disposition": "builder-failed-promoted-for-critic-and-critic-rejected-evidence",
+      "evidenceType": "Rejected 2D mechanics evidence — not gameplay, 3D, or game-ready evidence",
+      "publicPath": "/captures/P10/round-015-inward-return-mask/NyraKestrel_InwardReturnMask_CRITIC_REJECTED.png",
+      "sha256": "3c2abdbe4acbff9d36124e9236dc5c5e8ce352f3e044f454ca7f68e839535324",
+      "dimensions": {
+        "width": 1536,
+        "height": 1024
+      },
+      "format": "PNG",
+      "finding": "The exact original hilt, grip, rear leg, leading arm, identity, and framing survive outside the verified mask. The trailing arm remains a monotonic reach with no low elbow, return segment, or wedge."
+    }
+  ],
+  "guide": {
+    "authorship": "Original public-safe SVG authored for Round015; no third-party pose image.",
+    "pngSha256": "847f323f2c37a36870b54ae568a75f3482d859100b1b3b99e8963975cbe78cc7",
+    "svgSha256": "62f8bbdad3c74420eed2b4bfb3f233354732fb76044e6d95d0ad0565935a8d1a",
+    "dimensions": {
+      "width": 1536,
+      "height": 1024
+    }
+  },
+  "builderAttempts": [
+    {
+      "candidate": 1,
+      "rawSha256": "16ef4788af40c4cbab2f7fbe319af755c2432ceeae74ce68bd02557cce83681b",
+      "initialCompositeSha256": "6b029bcb70675a01e1939f9c5cad805ac67d2b054285c8a79c4b60692d9d7d08",
+      "protectedCompositeSha256": "15f702ac1132825216f964775574890e71b83f85e1fdd3b6442c3b1e56cf5aa9",
+      "disposition": "rejected",
+      "reason": "Monotonic arm and shortened raw hilt; protected compositing restores the authoritative hilt but leaves a detached blue fragment, no low elbow, no return, and no wedge."
+    },
+    {
+      "candidate": 2,
+      "rawSha256": "6ea89770239617b91a28646b9794fc6b2b8b9c17db1e58c4b6f7d4ea4a35140f",
+      "initialCompositeSha256": "bc03825140e4f9b4b2cd1a246b235c18a2a23d18cf94e7f86668ea3c467c29a7",
+      "protectedCompositeSha256": "1bb069121f44cea2358e5b2b3ea83e17787b26189a1ac3bf4991bd85d3c29fe0",
+      "disposition": "rejected",
+      "reason": "Monotonic reach with a boot-like invented lower segment; protected compositing leaves a detached dark fragment and no anatomical return wedge."
+    },
+    {
+      "candidate": 3,
+      "rawSha256": "3276ea94bf897b270127836104adf528e5368e575e9b514b4f1867c59740b070",
+      "initialCompositeSha256": "ed85a7b6f447501762b3f78d2095d802e0c448f1abe19c4257f892412996990f",
+      "protectedCompositeSha256": "b57f69019e2cded1be648af8f22177705dac24ed3930fbf2f0a240c653edec73",
+      "disposition": "rejected",
+      "reason": "The raw arm stays straight and truncates the hilt; protected compositing restores base authority but still has no low elbow or wedge and retains a small fragment."
+    },
+    {
+      "candidate": 4,
+      "rawSha256": "d1e745188b6a64cc451cb584e6bf8b0b410229f4ea9c89079e5d615fec868622",
+      "initialCompositeSha256": "8ac2a253e0a31767fc87e93ea172bc71ae063c9d664024241b07c0cdcb7db823",
+      "protectedCompositeSha256": "3c2abdbe4acbff9d36124e9236dc5c5e8ce352f3e044f454ca7f68e839535324",
+      "disposition": "builder-target-failed-promoted-for-critic-critic-rejected",
+      "reason": "Least-damaged protected composite and strongest continuity, but the arm remains monotonic with no far-low elbow, steep return, or head-sized wedge, plus a residual sliver."
+    }
+  ],
+  "nextRound": {
+    "round": 16,
+    "status": "two-segment-limb-silhouette",
+    "target": "Freeze the sealed Round013 authority and its already-correct original grip, hilt, rear leg, leading arm, identity, lighting, and framing; inside one newly verified trailing-arm-only hard mask, replace only the trailing limb between shoulder and preserved grip with an anatomical two-segment silhouette that descends to Round014 candidate04's far-low-left elbow vertex and reverses steeply up-right to the original inward grip, leaving one uninterrupted head-sized pale wedge between the segments; change nothing else.",
+    "compositePackGate": {
+      "minimumTotalScore": 85,
+      "minimumScorePerCategory": 7,
+      "blindComparisonCount": 6,
+      "minimumComparisonsMeetingBenchmarkBar": 5,
+      "paid3DGenerationRequiresFullPass": true
+    }
+  }
+}

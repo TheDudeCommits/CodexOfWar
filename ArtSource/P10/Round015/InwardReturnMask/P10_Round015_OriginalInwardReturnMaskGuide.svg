@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1536" height="1024" viewBox="0 0 1536 1024" role="img" aria-labelledby="title desc">
+  <title id="title">P10 Round015 original inward return mask guide</title>
+  <desc id="desc">Original public-safe mechanics diagram showing the frozen inward hilt grip, far-low-left elbow vertex, separately silhouetted steep up-right forearm, and an uninterrupted pale wedge. It contains no supplied-image pixels.</desc>
+  <defs>
+    <marker id="arrowBlue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#1e63a8"/>
+    </marker>
+    <marker id="arrowRed" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#b83b35"/>
+    </marker>
+    <style>
+      .label { font: 700 28px system-ui, sans-serif; fill: #1d2630; }
+      .small { font: 500 22px system-ui, sans-serif; fill: #31404f; }
+      .frozen { stroke: #596674; stroke-width: 22; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+      .target { stroke: #b83b35; stroke-width: 58; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+    </style>
+  </defs>
+
+  <rect width="1536" height="1024" fill="#f4efe5"/>
+  <rect x="34" y="34" width="1468" height="956" rx="28" fill="none" stroke="#d8cdbb" stroke-width="4"/>
+
+  <text x="78" y="98" class="label">P10 ROUND015 — INWARD RETURN MASK</text>
+  <text x="78" y="138" class="small">Geometry-only guide • original public-safe SVG • no source pixels</text>
+
+  <!-- Simplified frozen torso and rear leg: diagram geometry only. -->
+  <path d="M 695 335 C 642 370 610 425 604 492 C 605 565 648 622 705 665" fill="#d5dce2" stroke="#596674" stroke-width="12"/>
+  <path d="M 704 662 C 628 700 538 785 430 954" class="frozen" stroke-width="108"/>
+  <text x="690" y="820" class="small">FROZEN REAR LEG</text>
+
+  <!-- Frozen original diagonal hilt; the grip anchor remains unchanged. -->
+  <path d="M 150 798 L 1010 352" stroke="#244d78" stroke-width="28" stroke-linecap="round"/>
+  <path d="M 150 798 L 1010 352" stroke="#86a4c2" stroke-width="7" stroke-linecap="round"/>
+  <text x="112" y="850" class="small">UNCHANGED HILT</text>
+
+  <!-- Target topology. Shoulder attachment stays frozen; elbow vertex comes from Round014 candidate04; hand returns to the Round013 grip. -->
+  <path d="M 604 472 L 370 845" class="target"/>
+  <path d="M 370 845 L 450 625" class="target"/>
+  <circle cx="370" cy="845" r="18" fill="#f4efe5" stroke="#7d201d" stroke-width="9"/>
+  <circle cx="450" cy="625" r="34" fill="#b83b35" stroke="#7d201d" stroke-width="8"/>
+  <circle cx="604" cy="472" r="15" fill="#596674"/>
+
+  <!-- The pale target wedge is intentionally unfilled and contains only background. -->
+  <path d="M 574 500 L 397 806 L 445 660 Z" fill="#fffaf0" stroke="#d4a242" stroke-width="8" stroke-dasharray="18 14"/>
+  <text x="455" y="735" class="small" transform="rotate(-58 455 735)">PALE WEDGE</text>
+
+  <path d="M 258 894 L 350 858" stroke="#b83b35" stroke-width="6" marker-end="url(#arrowRed)"/>
+  <text x="74" y="924" class="label">FAR-LOW-LEFT ELBOW</text>
+
+  <path d="M 314 760 L 430 650" stroke="#1e63a8" stroke-width="7" marker-end="url(#arrowBlue)"/>
+  <text x="98" y="704" class="label">STEEP UP-RIGHT RETURN</text>
+  <text x="98" y="742" class="small">one separate forearm silhouette</text>
+
+  <path d="M 505 585 L 469 611" stroke="#b83b35" stroke-width="6" marker-end="url(#arrowRed)"/>
+  <text x="520" y="575" class="label">ORIGINAL INWARD GRIP</text>
+
+  <g transform="translate(1050 720)">
+    <rect width="390" height="204" rx="22" fill="#ffffff" stroke="#c7bba9" stroke-width="4"/>
+    <text x="26" y="48" class="label">HARD-MASK RULE</text>
+    <text x="26" y="88" class="small">Edit only elbow, forearm, hand.</text>
+    <text x="26" y="124" class="small">Freeze hilt, rear leg, leading arm,</text>
+    <text x="26" y="160" class="small">identity, blade, light, and framing.</text>
+  </g>
+</svg>

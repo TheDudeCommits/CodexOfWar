@@ -1,0 +1,299 @@
+{
+  "schema": "codexofwar.original-2d-inward-return-mask-receipt",
+  "version": "1.0.0",
+  "receipt_id": "P10-Round015-InwardReturnMaskReceipt",
+  "generated_utc": "2026-08-01T07:58:09Z",
+  "scope": {
+    "project_asset": "P10 Nyra Kestrel",
+    "round": "Round015",
+    "judged_unit": "Inward Return Mask only",
+    "scope_class": "one bounded original 2D targeted trailing-elbow, forearm, and hand edit",
+    "builder_target_result": "FAIL",
+    "eligibility": "INELIGIBLE_FOR_INWARD_RETURN_MASK",
+    "final_disposition": "PROMOTED_STRONGEST_BOUNDED_EVIDENCE_WITH_TARGET_FAIL",
+    "attempt_cap": 4,
+    "generated_outputs_spent": 4,
+    "cap_exhausted": true,
+    "original_2d_only": true,
+    "paid_3d_generation_authorized": false,
+    "engine_integration_authorized": false,
+    "claims_not_made": [
+      "benchmark result, benchmark comparison, or benchmark pass",
+      "successful Inward Return Mask",
+      "3D, rig, mesh, UV, deformation, collision, animation, LOD, engine, game-ready, or production-ready status",
+      "legal originality, exclusivity, copyright clearance, or trademark clearance"
+    ]
+  },
+  "exact_fresh_critic_prescription": "Use the authoritative Round013 candidate04 as the untouched base and hard-mask only the trailing elbow, forearm, and hand: place the elbow at Round014 candidate04's successful far-low-left vertex, then draw one separately silhouetted forearm steeply up-right to the original inward hilt grip so the unchanged hilt and rear leg remain outside one uninterrupted head-sized pale wedge; regenerate nothing else.",
+  "bounded_input_policy": {
+    "private_benchmark_archive_accessed": false,
+    "franchise_pixels_used": false,
+    "third_party_pose_pixels_used": false,
+    "additional_visual_source_used": false,
+    "authoritative_round013_candidate": {
+      "role": "untouched complete base and absolute authority for all non-target pixels and judged facts",
+      "path": "../../Round013/ElbowReturnTriangle/Iterations/P10_Round013_ElbowReturnTriangle_candidate04.png",
+      "sha256": "c88489f7af2c0a5d223f431fb322f72ac549283819c3c9b6281a20c1b39fbcd6",
+      "byte_size": 1750551,
+      "dimensions_px": {"width": 1536, "height": 1024},
+      "format": "png"
+    },
+    "secondary_round014_candidate": {
+      "role": "secondary authority only for the far-low-left elbow vertex; its altered hilt, outward/down hand, short return, rear-leg obstruction, and every other changed fact were explicitly forbidden",
+      "path": "../../Round014/TrailingReturnWedge/Iterations/P10_Round014_TrailingReturnWedge_candidate04.png",
+      "sha256": "3b4244040c27fc1d3410090c59eea52c5d6f369c38dc38aba88cad4a4353bd42",
+      "byte_size": 2036932,
+      "dimensions_px": {"width": 1536, "height": 1024},
+      "format": "png"
+    },
+    "frozen_invariants": [
+      "every authoritative Round013 pixel outside the final protected hard mask",
+      "complete leading arm and leading hand",
+      "original complete hilt, pommel, guard, blade, and all weapon construction",
+      "rear leg, both legs, boots, stance, and skid marks",
+      "face, identity, expression, gaze, hair, head, torso, costume, armor, palette, materials, and equipment",
+      "pale background, restrained lighting, shadows, 1536x1024 framing, scale, one person, and one weapon"
+    ],
+    "only_targeted_change": "trailing elbow, forearm, and hand inside the final 28,342-pixel white mask"
+  },
+  "original_round015_guide": {
+    "authorship": "original public-safe SVG authored and rendered before the first Round015 generation; no supplied-image pixels, embedded raster, external image reference, third-party pose image, or third-party pose pixels",
+    "intent": "geometry-only diagram of the far-low-left elbow, steep up-right forearm return, original inward grip, protected hilt and rear leg, and pale wedge",
+    "canvas_px": {"width": 1536, "height": 1024},
+    "svg": {
+      "path": "P10_Round015_OriginalInwardReturnMaskGuide.svg",
+      "sha256": "62f8bbdad3c74420eed2b4bfb3f233354732fb76044e6d95d0ad0565935a8d1a",
+      "byte_size": 4089,
+      "format": "svg"
+    },
+    "rendered_png": {
+      "path": "P10_Round015_OriginalInwardReturnMaskGuide.png",
+      "sha256": "847f323f2c37a36870b54ae568a75f3482d859100b1b3b99e8963975cbe78cc7",
+      "byte_size": 150208,
+      "dimensions_px": {"width": 1536, "height": 1024},
+      "format": "png"
+    },
+    "exact_authored_geometry": {
+      "shoulder_anchor": [604, 472],
+      "far_low_left_elbow": [370, 845],
+      "original_inward_grip": [450, 625],
+      "upper_arm_path": "M 604 472 L 370 845",
+      "return_forearm_path": "M 370 845 L 450 625",
+      "unchanged_hilt_axis": [[150, 798], [1010, 352]]
+    }
+  },
+  "hard_mask_provenance": {
+    "initial_mask": {
+      "description": "original arm-corridor mask authored before generation; later found to expose generated replacement-hilt pixels where the corridor crossed the weapon",
+      "svg": {"path": "P10_Round015_InwardReturnHardMask.svg", "sha256": "8986ad2fd7938c596c723b91a9b8182e88e385b3e4704940a5bcefee6ef6b7d3", "byte_size": 1265},
+      "rendered_png": {"path": "P10_Round015_InwardReturnHardMask.png", "sha256": "22ba35aaab7d8779795e73d94da757980d9a79f1e5d3ea124dc3d5c4c3bb90f9", "byte_size": 16296, "dimensions_px": {"width": 1536, "height": 1024}},
+      "binary_png": {"path": "P10_Round015_InwardReturnHardMask_binary.png", "sha256": "6caa112264886750e0d097fb96d2ce60d962f5a508fa61275f47cfa40bb08051", "byte_size": 5507, "dimensions_px": {"width": 1536, "height": 1024}}
+    },
+    "final_protected_mask": {
+      "description": "deterministic revision after four generation calls; the original complete hilt band, original inward grip, and rear-leg silhouette are carved back to protected black before all final candidate comparisons",
+      "svg": {"path": "P10_Round015_InwardReturnHardMask_Protected.svg", "sha256": "3e02bf533ac784d88e22d558313ab1e05151779377567b9d210ef89f7365b230", "byte_size": 1601},
+      "rendered_png": {"path": "P10_Round015_InwardReturnHardMask_Protected.png", "sha256": "9f71aab7bb503a281af0cc785db85c5885d03fc1b5e435c243bbf31fcbcac9c2", "byte_size": 14126, "dimensions_px": {"width": 1536, "height": 1024}},
+      "binary_png": {"path": "P10_Round015_InwardReturnHardMask_Protected_binary.png", "sha256": "2077be0160dcb8cbe11c72e65c45bdeafa500f2f3606bfa7fd0646abdd0e45ac", "byte_size": 5479, "dimensions_px": {"width": 1536, "height": 1024}},
+      "binary_values": [0, 255],
+      "editable_white_pixels": 28342,
+      "protected_black_pixels": 1544522,
+      "protected_pixel_equality_to_round013": {
+        "candidate01": {"mismatches": 0},
+        "candidate02": {"mismatches": 0},
+        "candidate03": {"mismatches": 0},
+        "candidate04": {"mismatches": 0}
+      }
+    },
+    "compositing_rule": "For every final protected candidate, take generated RGB only where the final binary mask equals 255; take authoritative Round013 candidate04 RGBA where the mask equals 0. No interpolation is used because the mask contains only 0 and 255.",
+    "initial_composites_preserved": true,
+    "final_protected_composites_preserved": true
+  },
+  "control_derivative": {
+    "path": "P10_Round015_ElbowSeedComposite.png",
+    "role": "deterministic candidate04 input only: Round014 pixels inside the initial arm corridor and Round013 pixels everywhere else; prompt authority restricted Round014 contribution to the elbow topology",
+    "sha256": "795ffa1b825d89a2e734c18d23cdd9290ddaa4ad0963b1f30266944a36b2270d",
+    "byte_size": 1808589,
+    "dimensions_px": {"width": 1536, "height": 1024},
+    "candid_note": "The seed visibly contained Round014's low hand and altered hilt material inside the initial corridor. Candidate04 was explicitly told to discard those facts, and the final protected composite restored authoritative hilt, grip, and rear-leg pixels wherever the final mask is black. The seed was not promoted and is not an independent source."
+  },
+  "generator": {
+    "execution_path": "managed image-generation/edit tool",
+    "model": "not exposed by managed tool",
+    "native_output_size": "1536x1024",
+    "output_format": "png",
+    "attempts": [
+      {
+        "candidate_id": "inward-return-mask-candidate-01",
+        "input_roles": [
+          "Round013 candidate04: untouched complete base and absolute non-target authority",
+          "Round015 original public-safe guide: target geometry only",
+          "Round015 initial hard mask: white editable corridor, black frozen"
+        ],
+        "input_sha256": [
+          "c88489f7af2c0a5d223f431fb322f72ac549283819c3c9b6281a20c1b39fbcd6",
+          "847f323f2c37a36870b54ae568a75f3482d859100b1b3b99e8963975cbe78cc7",
+          "22ba35aaab7d8779795e73d94da757980d9a79f1e5d3ea124dc3d5c4c3bb90f9"
+        ],
+        "raw_output": {"path": "Iterations/P10_Round015_InwardReturnMask_candidate01_raw.png", "sha256": "16ef4788af40c4cbab2f7fbe319af755c2432ceeae74ce68bd02557cce83681b", "byte_size": 1994367, "dimensions_px": {"width": 1536, "height": 1024}},
+        "initial_hard_composite": {"path": "Iterations/P10_Round015_InwardReturnMask_candidate01.png", "sha256": "6b029bcb70675a01e1939f9c5cad805ac67d2b054285c8a79c4b60692d9d7d08", "byte_size": 1795618, "dimensions_px": {"width": 1536, "height": 1024}},
+        "protected_hard_composite": {"path": "Iterations/P10_Round015_InwardReturnMask_candidate01_protected.png", "sha256": "15f702ac1132825216f964775574890e71b83f85e1fdd3b6442c3b1e56cf5aa9", "byte_size": 1789557, "dimensions_px": {"width": 1536, "height": 1024}},
+        "native_builder_disposition": "REJECT",
+        "native_reason": "Monotonic arm, shortened raw hilt, no far-low elbow, no steep return, and no pale wedge. The protected composite restores the authoritative hilt band but leaves a large detached blue fragment inside the editable corridor.",
+        "exact_prompt_lines": [
+          "Use case: precise-object-edit",
+          "Asset type: original 2D targeted pose-path correction, P10 Round015 Inward Return Mask, candidate 01 of at most 04",
+          "Input roles: Image 1 is the authoritative Round013 candidate04 and the untouched complete visual base. Image 2 is the ORIGINAL public-safe Round015 geometry guide, authority only for the trailing elbow vertex, separately silhouetted return forearm, original inward grip, and pale wedge; render none of its text, arrows, circles, outlines, flat colors, or diagram marks. Image 3 is the Round015 binary hard mask: white is the only editable trailing-arm corridor and black is absolutely frozen.",
+          "Primary request, exact fresh-critic prescription: “Use the authoritative Round013 candidate04 as the untouched base and hard-mask only the trailing elbow, forearm, and hand: place the elbow at Round014 candidate04's successful far-low-left vertex, then draw one separately silhouetted forearm steeply up-right to the original inward hilt grip so the unchanged hilt and rear leg remain outside one uninterrupted head-sized pale wedge; regenerate nothing else.”",
+          "Target topology: keep the trailing shoulder attachment stable. Place the trailing elbow at screen x370,y845, the far-low-left lowest external arm vertex established by the secondary elbow authority. From that elbow, draw one anatomical armored forearm as a distinct silhouette traveling steeply up-right to the original inward hand grip near screen x450,y625 on the unchanged existing cobalt hilt. The elbow bend must be readable; do not create a monotonic straight reach.",
+          "Negative space: leave one clean uninterrupted head-sized pale warm-background wedge between the arm segments. Keep the existing hilt and rear leg entirely outside that wedge. No cloth, armor, hair, hand, weapon, body, cable, shadow, or added element may cross or fill it.",
+          "Absolute freeze outside Image 3 white mask: every pixel and judged fact from Image 1, especially the complete leading arm and hand; original hilt, pommel, guard and all weapon construction; rear leg and both legs; face, identity, expression, gaze, hair; design, costume, armor, materials and equipment; stance, blade, lighting, background, shadows, framing and scale. Regenerate nothing else.",
+          "Constraints: original 2D illustration only; exactly one woman, one complete weapon, two arms and two hands; natural anatomy; no text, labels, arrows, circles, guide marks, logo, watermark, environment, added prop, extra limb, duplicate weapon, crop, redesign, glow, blur, or effect.",
+          "Hard reject: any non-target drift; altered leading arm, hilt, rear leg, identity, blade, lighting or framing; elbow not at the far-low-left vertex; no distinct steep up-right return forearm; hand not at the original inward grip; wedge absent, crossed, filled, or smaller than the head."
+        ]
+      },
+      {
+        "candidate_id": "inward-return-mask-candidate-02",
+        "input_roles": [
+          "Round013 candidate04: untouched complete base and absolute non-target authority",
+          "Round015 original public-safe guide: target geometry only",
+          "Round015 initial binary hard mask: white editable corridor, black frozen"
+        ],
+        "input_sha256": [
+          "c88489f7af2c0a5d223f431fb322f72ac549283819c3c9b6281a20c1b39fbcd6",
+          "847f323f2c37a36870b54ae568a75f3482d859100b1b3b99e8963975cbe78cc7",
+          "6caa112264886750e0d097fb96d2ce60d962f5a508fa61275f47cfa40bb08051"
+        ],
+        "raw_output": {"path": "Iterations/P10_Round015_InwardReturnMask_candidate02_raw.png", "sha256": "6ea89770239617b91a28646b9794fc6b2b8b9c17db1e58c4b6f7d4ea4a35140f", "byte_size": 2020766, "dimensions_px": {"width": 1536, "height": 1024}},
+        "initial_hard_composite": {"path": "Iterations/P10_Round015_InwardReturnMask_candidate02.png", "sha256": "bc03825140e4f9b4b2cd1a246b235c18a2a23d18cf94e7f86668ea3c467c29a7", "byte_size": 1806934, "dimensions_px": {"width": 1536, "height": 1024}},
+        "protected_hard_composite": {"path": "Iterations/P10_Round015_InwardReturnMask_candidate02_protected.png", "sha256": "1bb069121f44cea2358e5b2b3ea83e17787b26189a1ac3bf4991bd85d3c29fe0", "byte_size": 1791983, "dimensions_px": {"width": 1536, "height": 1024}},
+        "native_builder_disposition": "REJECT",
+        "native_reason": "Monotonic reach with a boot-like invented lower segment, no anatomical elbow return, and no wedge. Protected compositing leaves a detached dark arm or leg-like fragment inside the editable corridor.",
+        "exact_prompt_lines": [
+          "Use case: precise-object-edit",
+          "Asset type: original 2D hard-masked trailing-arm reconstruction, P10 Round015 Inward Return Mask, candidate 02 of at most 04",
+          "Input roles: Image 1 is authoritative Round013 candidate04, the untouched complete art base and absolute authority for every non-target pixel. Image 2 is the ORIGINAL public-safe Round015 mechanics guide, geometry authority only. Image 3 is the binary hard mask: edit only its white arm corridor; black is frozen. Do not render any guide text, arrows, circles, colors, outlines, or marks.",
+          "ONE CHANGE ONLY: rebuild only the trailing elbow, forearm, and hand as a clearly bent two-segment arm. Keep its shoulder attachment and the original inward hand grip fixed. Move the elbow dramatically to the far-low-left lowest external vertex at screen x370,y845. From that elbow, draw ONE SEPARATE, fully visible armored forearm traveling steeply UP-RIGHT to the original hand at screen x450,y625 gripping the unchanged cobalt hilt. The forearm must be long and anatomically connected, with a visible elbow bend; it must not be a straight monotonic reach.",
+          "Exact fresh-critic prescription: “Use the authoritative Round013 candidate04 as the untouched base and hard-mask only the trailing elbow, forearm, and hand: place the elbow at Round014 candidate04's successful far-low-left vertex, then draw one separately silhouetted forearm steeply up-right to the original inward hilt grip so the unchanged hilt and rear leg remain outside one uninterrupted head-sized pale wedge; regenerate nothing else.”",
+          "Pale wedge test: the separated arm segments must frame one continuous empty pale warm-background wedge at least the size of the head. Keep the existing hilt and rear leg outside it. Nothing may cross or fill it.",
+          "PIXEL FREEZE: preserve Image 1 outside the white mask exactly—complete leading arm and hand, original complete hilt and pommel, rear leg, identity, face, hair, costume, torso, both legs, stance, blade, weapon, lighting, shadows, background, framing and scale. Do not shorten, duplicate, move, redraw, or erase any hilt pixels. Regenerate nothing else.",
+          "Constraints: original 2D illustration only; natural anatomy; exactly one woman, one weapon, two arms and two hands; no text, guide marks, watermark, extra limb, duplicate weapon, crop, redesign, glow, blur, or added element.",
+          "Hard reject: background through the arm corridor; broken or missing limb; hilt change; rear-leg change; elbow near torso; forearm not returning up-right; hand moved off the original inward grip; wedge absent or obstructed."
+        ]
+      },
+      {
+        "candidate_id": "inward-return-mask-candidate-03",
+        "input_roles": [
+          "Round013 candidate04: untouched complete base and absolute freeze authority",
+          "Round014 candidate04: secondary elbow-position authority only",
+          "Round015 original public-safe guide: geometry only",
+          "Round015 initial binary hard mask: white editable corridor, black frozen"
+        ],
+        "input_sha256": [
+          "c88489f7af2c0a5d223f431fb322f72ac549283819c3c9b6281a20c1b39fbcd6",
+          "3b4244040c27fc1d3410090c59eea52c5d6f369c38dc38aba88cad4a4353bd42",
+          "847f323f2c37a36870b54ae568a75f3482d859100b1b3b99e8963975cbe78cc7",
+          "6caa112264886750e0d097fb96d2ce60d962f5a508fa61275f47cfa40bb08051"
+        ],
+        "raw_output": {"path": "Iterations/P10_Round015_InwardReturnMask_candidate03_raw.png", "sha256": "3276ea94bf897b270127836104adf528e5368e575e9b514b4f1867c59740b070", "byte_size": 1990964, "dimensions_px": {"width": 1536, "height": 1024}},
+        "initial_hard_composite": {"path": "Iterations/P10_Round015_InwardReturnMask_candidate03.png", "sha256": "ed85a7b6f447501762b3f78d2095d802e0c448f1abe19c4257f892412996990f", "byte_size": 1790877, "dimensions_px": {"width": 1536, "height": 1024}},
+        "protected_hard_composite": {"path": "Iterations/P10_Round015_InwardReturnMask_candidate03_protected.png", "sha256": "b57f69019e2cded1be648af8f22177705dac24ed3930fbf2f0a240c653edec73", "byte_size": 1783887, "dimensions_px": {"width": 1536, "height": 1024}},
+        "native_builder_disposition": "REJECT",
+        "native_reason": "The raw arm remains a straight reach and truncates the hilt. The protected composite restores base authority but still has no low elbow or return wedge and retains a small floating fragment.",
+        "exact_prompt_lines": [
+          "Use case: precise-object-edit",
+          "Asset type: original 2D hard-masked trailing-arm reconstruction, P10 Round015 Inward Return Mask, candidate 03 of at most 04",
+          "Input roles and strict authority: Image 1 is authoritative Round013 candidate04, the untouched complete base and absolute authority for the original hilt, original inward hand grip, rear leg, leading arm, identity, weapon, lighting, framing, and every non-target pixel. Image 2 is Round014 candidate04, secondary authority ONLY for the screen position and external silhouette of its far-low-left elbow vertex around x370,y845; NEVER copy its altered hilt, outward/down hand, obstructed wedge, forearm length, rear-leg occlusion, or any other pixel. Image 3 is the ORIGINAL public-safe Round015 geometry guide, geometry only. Image 4 is the binary hard mask: white is the only editable arm corridor; black is frozen. Render no guide or mask marks.",
+          "Exact fresh-critic prescription: “Use the authoritative Round013 candidate04 as the untouched base and hard-mask only the trailing elbow, forearm, and hand: place the elbow at Round014 candidate04's successful far-low-left vertex, then draw one separately silhouetted forearm steeply up-right to the original inward hilt grip so the unchanged hilt and rear leg remain outside one uninterrupted head-sized pale wedge; regenerate nothing else.”",
+          "RETAIN FROM IMAGE 2: only the far-low-left elbow location at x370,y845.",
+          "DISCARD FROM IMAGE 2: its low outward hand, altered cobalt hilt tail, short return, rear-leg obstruction, and all other content.",
+          "Mandatory arm construction on Image 1: keep the trailing shoulder attachment fixed. The upper arm descends far down-left to a visible anatomical elbow centered x370,y845. At that elbow it makes a sharp direction reversal. A single separate armored forearm then runs steeply up-right all the way to Image 1's ORIGINAL inward trailing hand centered near x450,y625 on Image 1's unchanged diagonal cobalt hilt. Keep that exact original hand grip, hilt, pommel, and rear leg; do not substitute or redraw them. The two arm segments must have distinct non-overlapping silhouettes around one continuous head-sized pale wedge.",
+          "Wedge: uninterrupted pale warm background only; original hilt stays on the outside-left boundary and original rear leg stays on the outside-right boundary. No hilt, leg, fabric, body, hair, shadow, or new element inside.",
+          "Absolute freeze from Image 1 outside the white mask: leading arm and hand; full hilt, pommel, guard, weapon and blade; rear leg and both legs; identity, face, hair, torso, costume, armor, equipment, stance, background, lighting, shadow, framing and scale. Exactly one woman, one complete weapon, two arms and two hands. Regenerate nothing else.",
+          "Constraints: original 2D illustration only; natural anatomy; no text, guide marks, logo, watermark, extra limb, detached fragment, duplicate weapon, crop, redesign, glow, blur, or effect.",
+          "Hard reject: copying Image 2's altered hilt or low hand; any detached hilt fragment; elbow not at the far-low-left vertex; missing steep up-right return to the original Image 1 grip; no clear pale wedge; any non-target drift."
+        ]
+      },
+      {
+        "candidate_id": "inward-return-mask-candidate-04",
+        "input_roles": [
+          "Round015 elbow-seed composite: immediate topology seed only",
+          "Round013 candidate04: untouched complete base and absolute freeze authority",
+          "Round015 original public-safe guide: geometry only",
+          "Round015 initial binary hard mask: white editable corridor, black frozen"
+        ],
+        "input_sha256": [
+          "795ffa1b825d89a2e734c18d23cdd9290ddaa4ad0963b1f30266944a36b2270d",
+          "c88489f7af2c0a5d223f431fb322f72ac549283819c3c9b6281a20c1b39fbcd6",
+          "847f323f2c37a36870b54ae568a75f3482d859100b1b3b99e8963975cbe78cc7",
+          "6caa112264886750e0d097fb96d2ce60d962f5a508fa61275f47cfa40bb08051"
+        ],
+        "raw_output": {"path": "Iterations/P10_Round015_InwardReturnMask_candidate04_raw.png", "sha256": "d1e745188b6a64cc451cb584e6bf8b0b410229f4ea9c89079e5d615fec868622", "byte_size": 1977549, "dimensions_px": {"width": 1536, "height": 1024}},
+        "initial_hard_composite": {"path": "Iterations/P10_Round015_InwardReturnMask_candidate04.png", "sha256": "8ac2a253e0a31767fc87e93ea172bc71ae063c9d664024241b07c0cdcb7db823", "byte_size": 1794019, "dimensions_px": {"width": 1536, "height": 1024}},
+        "protected_hard_composite": {"path": "Iterations/P10_Round015_InwardReturnMask_candidate04_protected.png", "sha256": "3c2abdbe4acbff9d36124e9236dc5c5e8ce352f3e044f454ca7f68e839535324", "byte_size": 1780933, "dimensions_px": {"width": 1536, "height": 1024}},
+        "native_builder_disposition": "PROMOTE BYTE-IDENTICALLY AS STRONGEST BOUNDED EVIDENCE; TARGET REMAINS FAIL",
+        "native_reason": "Least-damaged protected composite and strongest broad continuity. It still collapses to a monotonic arm, has no far-low elbow, no steep up-right return, no head-sized wedge, and retains a small detached residual fragment inside the white corridor.",
+        "exact_prompt_lines": [
+          "Use case: precise-object-edit",
+          "Asset type: final original 2D hard-masked trailing-forearm correction, P10 Round015 Inward Return Mask, candidate 04 of 04 FINAL CAP",
+          "Input roles: Image 1 is a deterministic Round015 elbow-seed composite: it already contains Round014's far-low-left elbow ONLY inside the recorded hard-mask corridor and Round013 pixels everywhere else. Use it solely as the immediate topology seed. Image 2 is authoritative untouched Round013 candidate04 and absolute authority for the original inward grip, complete unchanged hilt, rear leg, leading arm, identity, weapon, lighting, framing, and all non-target facts. Image 3 is the ORIGINAL public-safe Round015 geometry guide. Image 4 is the binary hard mask; white is the only editable arm corridor and black is frozen. Render no diagram or mask marks.",
+          "FINAL ONE CHANGE: keep Image 1's far-low-left elbow at screen x370,y845, but delete its low outward hand and altered short hilt fragment. From that elbow, draw one separately silhouetted anatomical armored FOREARM running steeply UP-RIGHT to Image 2's ORIGINAL inward trailing hand grip at screen x450,y625 on Image 2's unchanged existing cobalt hilt. Restore that exact Image 2 hand grip and exact complete hilt. Do not move the elbow; do not redraw the leading arm.",
+          "Exact fresh-critic prescription: “Use the authoritative Round013 candidate04 as the untouched base and hard-mask only the trailing elbow, forearm, and hand: place the elbow at Round014 candidate04's successful far-low-left vertex, then draw one separately silhouetted forearm steeply up-right to the original inward hilt grip so the unchanged hilt and rear leg remain outside one uninterrupted head-sized pale wedge; regenerate nothing else.”",
+          "Mandatory silhouette: shoulder to low elbow is one arm segment; low elbow to original inward grip is a second distinct segment reversing steeply up-right. Make the return forearm long enough to reach the original grip. Preserve one continuous head-sized pale warm-background wedge between the segments. The unchanged hilt must remain outside-left of the wedge; the unchanged rear leg must remain outside-right. Nothing crosses the wedge.",
+          "Absolute freeze from Image 2: complete leading arm and hand; exact full hilt, pommel, guard, blade and weapon; rear leg and both legs; face, identity, hair, torso, costume, armor, equipment, stance, background, lighting, shadows, framing and scale. Only the trailing elbow/forearm/hand may differ. Exactly one woman, one complete weapon, two arms and two hands. Regenerate nothing else.",
+          "Constraints: original 2D illustration only; natural anatomy; no low outward hand, no altered hilt fragment, no detached object, no text, label, arrow, circle, guide mark, logo, watermark, extra limb, duplicate weapon, crop, redesign, glow, blur, effect, or prop.",
+          "Final hard reject: losing the low elbow; hand remains low/outward; forearm does not return steeply up-right to Image 2 grip; hilt or rear leg enters the wedge; any hilt break or duplicate; wedge absent or smaller than head; any non-target drift."
+        ]
+      }
+    ]
+  },
+  "accepted_copy": {
+    "path": "P10_Round015_NyraKestrel_InwardReturnMask_v1.png",
+    "source_candidate": "Iterations/P10_Round015_InwardReturnMask_candidate04_protected.png",
+    "sha256": "3c2abdbe4acbff9d36124e9236dc5c5e8ce352f3e044f454ca7f68e839535324",
+    "byte_size": 1780933,
+    "dimensions_px": {"width": 1536, "height": 1024},
+    "format": "png",
+    "byte_identical_to_source": true,
+    "promotion_authority": "builder native-resolution visual comparison only; not independent criticism",
+    "promotion_reason": "least-damaged protected candidate with the strongest broad continuity; promotion preserves bounded evidence and does not convert FAIL into acceptance"
+  },
+  "candid_limitations": [
+    "The Inward Return Mask target failed and is ineligible.",
+    "No candidate places a clean anatomical elbow at the prescribed far-low-left vertex while returning a distinct forearm steeply up-right to the original inward grip.",
+    "No candidate creates one uninterrupted head-sized pale wedge with the original hilt and rear leg outside it.",
+    "The first mask exposed generated replacement-hilt pixels; all initial composites visibly broke or duplicated the hilt.",
+    "The protected mask restores every black-mask base pixel exactly, but all candidates still contain malformed or residual content inside the white editable corridor.",
+    "Candidate04 is least damaged but has no low elbow or return wedge and retains a small detached fragment.",
+    "The deterministic elbow seed contained forbidden Round014 low-hand and altered-hilt pixels inside the initial corridor; prompt constraints and final protected compositing prevented their use as authority, but the generation still failed.",
+    "The four-output cap is exhausted; no fifth generation was made.",
+    "Promotion records strongest bounded evidence only and is neither acceptance nor an independent critic result."
+  ],
+  "privacy_checks": {
+    "original_guide_contains_supplied_pixels": false,
+    "original_guide_contains_embedded_raster": false,
+    "original_guide_contains_external_image_reference": false,
+    "third_party_pose_imagery_used": false,
+    "private_benchmark_archive_accessed": false,
+    "franchise_pixels_used": false,
+    "only_visual_inputs": [
+      "authoritative Round013 candidate04",
+      "Round014 candidate04 restricted by prompt role to its far-low-left elbow vertex",
+      "original public-safe Round015 SVG-derived guide and masks",
+      "deterministic derivatives made only from those bounded project authorities"
+    ],
+    "reference_privacy_preserved": true
+  },
+  "validation": {
+    "svg_xml_valid": true,
+    "json_parse_valid": true,
+    "all_png_dimensions_verified": true,
+    "all_generated_raw_outputs_preserved_under_iterations": true,
+    "all_outputs_native_inspected": true,
+    "attempt_cap_respected": true,
+    "accepted_copy_byte_equality_verified": true,
+    "protected_outside_mask_pixel_equality_verified": true,
+    "privacy_review_passed": true,
+    "round015_only_write_scope_verified": true,
+    "git_staging_performed": false
+  }
+}

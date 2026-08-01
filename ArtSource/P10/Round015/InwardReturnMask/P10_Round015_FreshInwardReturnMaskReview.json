@@ -1,0 +1,246 @@
+{
+  "schema": "codexofwar.fresh-inward-return-mask-review",
+  "version": "1.0.0",
+  "review_id": "P10-Round015-FreshInwardReturnMaskReview",
+  "reviewed_utc": "2026-08-01T08:20:02Z",
+  "reviewer_mode": "fresh-context independent hostile AAA inward-return-mask and pre-engine gate",
+  "scope": {
+    "project_asset": "P10 Nyra Kestrel",
+    "round": "Round015",
+    "judged_unit": "Inward Return Mask only",
+    "exact_isolated_target": "Keep authoritative Round013 candidate04 pixel-untouched outside the hard mask; import only Round014 candidate04's far-low-left elbow vertex; construct one separately silhouetted anatomical trailing forearm running steeply up-right to the original inward hilt grip; keep the original hilt and rear leg outside one uninterrupted head-sized pale wedge; regenerate nothing else.",
+    "evaluation_standard": "private God of War Ragnarok gameplay benchmark; polished concept-art or web-quality plausibility is insufficient",
+    "claims_not_made": [
+      "successful Inward Return Mask",
+      "actual game run or capture",
+      "3D, rig, mesh, UV, deformation, collision, animation, LOD, engine, game-ready, or production-ready status",
+      "legal originality, exclusivity, copyright clearance, or trademark clearance"
+    ]
+  },
+  "contract_provenance": {
+    "round013_authoritative_candidate04": {
+      "path": "../../Round013/ElbowReturnTriangle/Iterations/P10_Round013_ElbowReturnTriangle_candidate04.png",
+      "sha256": "c88489f7af2c0a5d223f431fb322f72ac549283819c3c9b6281a20c1b39fbcd6",
+      "byte_size": 1750551,
+      "dimensions_px": {"width": 1536, "height": 1024},
+      "role": "absolute pixel authority outside the protected hard mask and authority for the original inward grip, complete hilt, rear leg, leading arm, and every other frozen fact"
+    },
+    "round014_fresh_review": {
+      "path": "../../Round014/TrailingReturnWedge/P10_Round014_FreshTrailingReturnWedgeReview.json",
+      "sha256": "4ebe93583384e483fb38bb7e1d694412821e0fab3d7abc0498c2977ba42af1cd",
+      "byte_size": 18671,
+      "role": "contract provenance only; it authorizes candidate04 solely for its far-low-left elbow vertex and explicitly rejects its hand, hilt, return, and wedge"
+    },
+    "round014_candidate04_elbow_authority": {
+      "sha256": "3b4244040c27fc1d3410090c59eea52c5d6f369c38dc38aba88cad4a4353bd42",
+      "byte_size": 2036932,
+      "dimensions_px": {"width": 1536, "height": 1024},
+      "authorized_fact_only": "far-low-left elbow vertex near screen x370,y845"
+    },
+    "provenance_scope_respected_by_reviewer": true
+  },
+  "sealed_artifact_integrity": {
+    "sealed_source_file_count_excluding_this_review": 24,
+    "manifest": [
+      {"path": "Iterations/P10_Round015_InwardReturnMask_candidate01.png", "sha256": "6b029bcb70675a01e1939f9c5cad805ac67d2b054285c8a79c4b60692d9d7d08", "byte_size": 1795618, "dimensions_px": {"width": 1536, "height": 1024}, "format": "png", "mode": "RGBA"},
+      {"path": "Iterations/P10_Round015_InwardReturnMask_candidate01_protected.png", "sha256": "15f702ac1132825216f964775574890e71b83f85e1fdd3b6442c3b1e56cf5aa9", "byte_size": 1789557, "dimensions_px": {"width": 1536, "height": 1024}, "format": "png", "mode": "RGBA"},
+      {"path": "Iterations/P10_Round015_InwardReturnMask_candidate01_raw.png", "sha256": "16ef4788af40c4cbab2f7fbe319af755c2432ceeae74ce68bd02557cce83681b", "byte_size": 1994367, "dimensions_px": {"width": 1536, "height": 1024}, "format": "png", "mode": "RGB"},
+      {"path": "Iterations/P10_Round015_InwardReturnMask_candidate02.png", "sha256": "bc03825140e4f9b4b2cd1a246b235c18a2a23d18cf94e7f86668ea3c467c29a7", "byte_size": 1806934, "dimensions_px": {"width": 1536, "height": 1024}, "format": "png", "mode": "RGBA"},
+      {"path": "Iterations/P10_Round015_InwardReturnMask_candidate02_protected.png", "sha256": "1bb069121f44cea2358e5b2b3ea83e17787b26189a1ac3bf4991bd85d3c29fe0", "byte_size": 1791983, "dimensions_px": {"width": 1536, "height": 1024}, "format": "png", "mode": "RGBA"},
+      {"path": "Iterations/P10_Round015_InwardReturnMask_candidate02_raw.png", "sha256": "6ea89770239617b91a28646b9794fc6b2b8b9c17db1e58c4b6f7d4ea4a35140f", "byte_size": 2020766, "dimensions_px": {"width": 1536, "height": 1024}, "format": "png", "mode": "RGB"},
+      {"path": "Iterations/P10_Round015_InwardReturnMask_candidate03.png", "sha256": "ed85a7b6f447501762b3f78d2095d802e0c448f1abe19c4257f892412996990f", "byte_size": 1790877, "dimensions_px": {"width": 1536, "height": 1024}, "format": "png", "mode": "RGBA"},
+      {"path": "Iterations/P10_Round015_InwardReturnMask_candidate03_protected.png", "sha256": "b57f69019e2cded1be648af8f22177705dac24ed3930fbf2f0a240c653edec73", "byte_size": 1783887, "dimensions_px": {"width": 1536, "height": 1024}, "format": "png", "mode": "RGBA"},
+      {"path": "Iterations/P10_Round015_InwardReturnMask_candidate03_raw.png", "sha256": "3276ea94bf897b270127836104adf528e5368e575e9b514b4f1867c59740b070", "byte_size": 1990964, "dimensions_px": {"width": 1536, "height": 1024}, "format": "png", "mode": "RGB"},
+      {"path": "Iterations/P10_Round015_InwardReturnMask_candidate04.png", "sha256": "8ac2a253e0a31767fc87e93ea172bc71ae063c9d664024241b07c0cdcb7db823", "byte_size": 1794019, "dimensions_px": {"width": 1536, "height": 1024}, "format": "png", "mode": "RGBA"},
+      {"path": "Iterations/P10_Round015_InwardReturnMask_candidate04_protected.png", "sha256": "3c2abdbe4acbff9d36124e9236dc5c5e8ce352f3e044f454ca7f68e839535324", "byte_size": 1780933, "dimensions_px": {"width": 1536, "height": 1024}, "format": "png", "mode": "RGBA"},
+      {"path": "Iterations/P10_Round015_InwardReturnMask_candidate04_raw.png", "sha256": "d1e745188b6a64cc451cb584e6bf8b0b410229f4ea9c89079e5d615fec868622", "byte_size": 1977549, "dimensions_px": {"width": 1536, "height": 1024}, "format": "png", "mode": "RGB"},
+      {"path": "P10_Round015_ElbowSeedComposite.png", "sha256": "795ffa1b825d89a2e734c18d23cdd9290ddaa4ad0963b1f30266944a36b2270d", "byte_size": 1808589, "dimensions_px": {"width": 1536, "height": 1024}, "format": "png", "mode": "RGBA"},
+      {"path": "P10_Round015_InwardReturnHardMask.png", "sha256": "22ba35aaab7d8779795e73d94da757980d9a79f1e5d3ea124dc3d5c4c3bb90f9", "byte_size": 16296, "dimensions_px": {"width": 1536, "height": 1024}, "format": "png", "mode": "RGB"},
+      {"path": "P10_Round015_InwardReturnHardMask.svg", "sha256": "8986ad2fd7938c596c723b91a9b8182e88e385b3e4704940a5bcefee6ef6b7d3", "byte_size": 1265, "dimensions_px": {"width": 1536, "height": 1024}, "dimension_basis": "declared width, height, and viewBox", "format": "svg"},
+      {"path": "P10_Round015_InwardReturnHardMask_Protected.png", "sha256": "9f71aab7bb503a281af0cc785db85c5885d03fc1b5e435c243bbf31fcbcac9c2", "byte_size": 14126, "dimensions_px": {"width": 1536, "height": 1024}, "format": "png", "mode": "RGB"},
+      {"path": "P10_Round015_InwardReturnHardMask_Protected.svg", "sha256": "3e02bf533ac784d88e22d558313ab1e05151779377567b9d210ef89f7365b230", "byte_size": 1601, "dimensions_px": {"width": 1536, "height": 1024}, "dimension_basis": "declared width, height, and viewBox", "format": "svg"},
+      {"path": "P10_Round015_InwardReturnHardMask_Protected_binary.png", "sha256": "2077be0160dcb8cbe11c72e65c45bdeafa500f2f3606bfa7fd0646abdd0e45ac", "byte_size": 5479, "dimensions_px": {"width": 1536, "height": 1024}, "format": "png", "mode": "L"},
+      {"path": "P10_Round015_InwardReturnHardMask_binary.png", "sha256": "6caa112264886750e0d097fb96d2ce60d962f5a508fa61275f47cfa40bb08051", "byte_size": 5507, "dimensions_px": {"width": 1536, "height": 1024}, "format": "png", "mode": "L"},
+      {"path": "P10_Round015_InwardReturnMaskReceipt.json", "sha256": "eda3a823aa510d2b96de8c77ace4ec0a580039c31c9bbb3747ad026dbbd204cf", "byte_size": 30597, "dimensions_px": null, "format": "json"},
+      {"path": "P10_Round015_NyraKestrel_InwardReturnMask_v1.png", "sha256": "3c2abdbe4acbff9d36124e9236dc5c5e8ce352f3e044f454ca7f68e839535324", "byte_size": 1780933, "dimensions_px": {"width": 1536, "height": 1024}, "format": "png", "mode": "RGBA"},
+      {"path": "P10_Round015_OriginalInwardReturnMaskGuide.png", "sha256": "847f323f2c37a36870b54ae568a75f3482d859100b1b3b99e8963975cbe78cc7", "byte_size": 150208, "dimensions_px": {"width": 1536, "height": 1024}, "format": "png", "mode": "RGB"},
+      {"path": "P10_Round015_OriginalInwardReturnMaskGuide.svg", "sha256": "62f8bbdad3c74420eed2b4bfb3f233354732fb76044e6d95d0ad0565935a8d1a", "byte_size": 4089, "dimensions_px": {"width": 1536, "height": 1024}, "dimension_basis": "declared width, height, and viewBox", "format": "svg"},
+      {"path": "README.md", "sha256": "df03fb1f8a49c0983fcc80c371c8f2536fb6d7d59f145a71a1db65138c709400", "byte_size": 5476, "dimensions_px": null, "format": "markdown"}
+    ],
+    "all_manifest_hashes_sizes_and_dimensions_recomputed": true,
+    "all_24_declared_receipt_artifact_entries_recomputed_with_discrepancy_count": 0,
+    "receipt_json_valid": true,
+    "all_three_svg_files_xml_valid": true,
+    "svg_embedded_raster_external_href_or_data_uri_count": 0,
+    "all_required_png_and_svg_artifacts_inspected": true,
+    "all_raw_initial_protected_and_promoted_images_inspected_at_native_resolution": true,
+    "accepted_copy": {
+      "path": "P10_Round015_NyraKestrel_InwardReturnMask_v1.png",
+      "source": "Iterations/P10_Round015_InwardReturnMask_candidate04_protected.png",
+      "byte_identical": true,
+      "cmp_exit_code": 0
+    }
+  },
+  "deterministic_composite_audit": {
+    "initial_binary_mask": {
+      "values": [0, 255],
+      "black_pixels": 1502462,
+      "white_pixels": 70402,
+      "rendered_png_threshold_mismatches": 0
+    },
+    "protected_binary_mask": {
+      "values": [0, 255],
+      "protected_black_pixels": 1544522,
+      "editable_white_pixels": 28342,
+      "rendered_png_threshold_mismatches": 0
+    },
+    "candidate_recomputation": [
+      {"candidate": "candidate01", "initial_outside_mask_rgba_mismatch_pixels": 0, "initial_inside_mask_rgb_vs_raw_mismatch_pixels": 0, "protected_outside_mask_rgba_mismatch_pixels": 0, "protected_inside_mask_rgb_vs_raw_mismatch_pixels": 0},
+      {"candidate": "candidate02", "initial_outside_mask_rgba_mismatch_pixels": 0, "initial_inside_mask_rgb_vs_raw_mismatch_pixels": 0, "protected_outside_mask_rgba_mismatch_pixels": 0, "protected_inside_mask_rgb_vs_raw_mismatch_pixels": 0},
+      {"candidate": "candidate03", "initial_outside_mask_rgba_mismatch_pixels": 0, "initial_inside_mask_rgb_vs_raw_mismatch_pixels": 0, "protected_outside_mask_rgba_mismatch_pixels": 0, "protected_inside_mask_rgb_vs_raw_mismatch_pixels": 0},
+      {"candidate": "candidate04", "initial_outside_mask_rgba_mismatch_pixels": 0, "initial_inside_mask_rgb_vs_raw_mismatch_pixels": 0, "protected_outside_mask_rgba_mismatch_pixels": 0, "protected_inside_mask_rgb_vs_raw_mismatch_pixels": 0}
+    ],
+    "elbow_seed_exact_expected_composite_mismatch_pixels": 0,
+    "elbow_seed_rule_verified": "Round014 candidate04 pixels exactly inside the initial binary mask and Round013 candidate04 pixels exactly outside it",
+    "deterministic_outside_mask_preservation_claim_verified": true,
+    "integrity_interpretation": "The protected composites are mechanically faithful to the base outside the mask. This proves scope preservation only; it does not prove that generated pixels inside the mask satisfy the visual target."
+  },
+  "fresh_native_findings": [
+    {
+      "candidate": "candidate01",
+      "raw": "The trailing chain remains a single descending reach into a low hand and shortens the hilt; there is no far-low elbow, reversal, or wedge.",
+      "initial_composite": "The permissive mask creates a broken duplicate hilt tail and visible pale-mask seam.",
+      "protected_composite": "The authoritative hilt and grip return, but a large detached blue fragment survives and the target topology remains absent.",
+      "disposition": "REJECT"
+    },
+    {
+      "candidate": "candidate02",
+      "raw": "A boot-like invented lower appendage replaces the requested elbow-return structure; the arm remains monotonic.",
+      "initial_composite": "The hilt is broken and duplicated around a detached dark appendage.",
+      "protected_composite": "The hilt is restored, but a large detached dark spear-or-boot fragment remains; no low elbow, return, or wedge exists.",
+      "disposition": "REJECT"
+    },
+    {
+      "candidate": "candidate03",
+      "raw": "The arm is a straight down-left reach and the hilt truncates at the hand.",
+      "initial_composite": "The original and generated hilt pieces conflict visibly.",
+      "protected_composite": "The hilt is restored, but a small floating flesh-and-armor fragment survives; the required return topology is absent.",
+      "disposition": "REJECT"
+    },
+    {
+      "candidate": "candidate04",
+      "raw": "The cleanest raw surface result still forms one descending arm-to-hand line with no far-low elbow or steep return.",
+      "initial_composite": "A duplicate disconnected hilt tail and pale corridor seam remain visible.",
+      "protected_composite": "This is the least-damaged candidate, but it is still a monotonic arm into the original grip; a small detached sliver and faint corridor ghost remain, and there is no qualifying wedge.",
+      "disposition": "STRONGEST BOUNDED EVIDENCE; TARGET REJECT"
+    }
+  ],
+  "inward_return_mask_contract_audit": {
+    "checks": [
+      {"contract": "authoritative Round013 pixels remain untouched outside the protected hard mask", "status": "met", "finding": "All four protected composites have zero RGBA mismatches across all 1,544,522 protected pixels."},
+      {"contract": "import only Round014 candidate04's far-low-left elbow vertex", "status": "not_met", "finding": "The accepted image contains no visible anatomical elbow at the prescribed far-low-left vertex."},
+      {"contract": "one separately silhouetted trailing forearm returns steeply up-right", "status": "not_met", "finding": "The trailing limb reads as one straight descending reach; no direction reversal or separate return forearm exists."},
+      {"contract": "return reaches the original inward hilt grip while preserving the original hilt", "status": "partially_met", "finding": "Protected compositing restores the original grip and complete hilt exactly, but no up-right forearm reaches that grip."},
+      {"contract": "original hilt and rear leg remain outside one uninterrupted head-sized pale wedge", "status": "not_met", "finding": "The hilt and rear leg are preserved, but the required arm-bounded pale wedge does not exist."},
+      {"contract": "regenerate nothing else", "status": "met", "finding": "Every black-mask base pixel is preserved exactly; all accepted differences are confined to the 28,342 white pixels."}
+    ],
+    "isolated_target_passed": false
+  },
+  "private_benchmark_comparison": {
+    "method": "Six relevant private gameplay views were reviewed sequentially as unlabeled A/B pairs. Candidate and benchmark position was randomized independently with system entropy and hidden until each judgment. Each source retained its original aspect ratio by fit-with-padding on equal panels; there was no crop, stretch, or retouch. Temporary extraction and pair renders were deleted, and no private pixels, source paths, source filenames, usernames, or absolute paths were published.",
+    "comparison_count": 6,
+    "required_candidate_meets_or_exceeds_count": 5,
+    "candidate_meets_or_exceeds_count": 2,
+    "candidate_below_count": 4,
+    "post_judgment_candidate_positions": ["B", "A", "B", "A", "B", "B"],
+    "gate_passed": false,
+    "comparisons": [
+      {"comparison_id": "IRM01", "focus": "frozen compact leading-arm fold and near-body weapon compression", "benchmark": {"benchmark_id": "PRIVATE-BM-IRM-01", "sha256": "c4693a135a8f66b17759349dd81e126001989aac894db1714d2d2cad89ae8fe0", "dimensions_px": {"width": 739, "height": 415}, "format": "jpeg"}, "candidate_meets_or_exceeds": true, "finding": "The exact frozen leading fold and near-body grip remain unusually clear and compact."},
+      {"comparison_id": "IRM02", "focus": "far-low-left elbow hierarchy and readable joint reversal", "benchmark": {"benchmark_id": "PRIVATE-BM-IRM-02", "sha256": "21858656b7887cc37f92c2bab4ed56f6cb273f45fd75193c0cb1c1b37456bc33", "dimensions_px": {"width": 596, "height": 335}, "format": "jpeg"}, "candidate_meets_or_exceeds": false, "finding": "The candidate has no low external elbow or reversal; the arm remains a single diagonal reach."},
+      {"comparison_id": "IRM03", "focus": "steep return forearm and protected negative-space wedge", "benchmark": {"benchmark_id": "PRIVATE-BM-IRM-03", "sha256": "d208c98d2ea91b654fb11070616887e0f8564fe3c5040ae854e3aab8645be98d", "dimensions_px": {"width": 739, "height": 415}, "format": "jpeg"}, "candidate_meets_or_exceeds": false, "finding": "The requested return forearm and arm-bounded wedge are wholly absent."},
+      {"comparison_id": "IRM04", "focus": "original inward grip and complete unchanged hilt continuity", "benchmark": {"benchmark_id": "PRIVATE-BM-IRM-04", "sha256": "1e99a94f8efbbdd9d4811e2706f84616ea9cc379909caee873d212ecfb9a68b0", "dimensions_px": {"width": 739, "height": 415}, "format": "jpeg"}, "candidate_meets_or_exceeds": true, "finding": "Protected compositing preserves a complete, crisp original grip and hilt with no remaining break in the accepted image."},
+      {"comparison_id": "IRM05", "focus": "anatomical integration and AAA action-phase authorship", "benchmark": {"benchmark_id": "PRIVATE-BM-IRM-05", "sha256": "a0161b955a1947fcabccc34c8e22ee0ebcb6ade357b51aa974c0057caf9294c9", "dimensions_px": {"width": 1920, "height": 1080}, "format": "webp"}, "candidate_meets_or_exceeds": false, "finding": "High surface polish cannot hide the missing elbow articulation, absent counterforce, and static concept-only staging."},
+      {"comparison_id": "IRM06", "focus": "one linked violent stop readable at gameplay framing", "benchmark": {"benchmark_id": "PRIVATE-BM-IRM-06", "sha256": "06ac0710130fe19f7c844ecc453bca2d27bcc72b25fef3a2615f8877b53c9778", "dimensions_px": {"width": 1400, "height": 787}, "format": "jpeg"}, "candidate_meets_or_exceeds": false, "finding": "At matched pair scale the intended elbow-return mechanism is invisible because it does not exist in the silhouette."}
+    ]
+  },
+  "scorecard": {
+    "scale": "0-10 per category; ten named categories sum directly to 100",
+    "categories": [
+      {"category": "authoritative outside-mask pixel preservation", "score": 10, "finding": "All 1,544,522 protected pixels match Round013 exactly for every protected candidate."},
+      {"category": "leading-arm and non-target pose freeze", "score": 10, "finding": "Leading arm, identity, stance, blade, hilt, rear leg, lighting, and framing remain exactly authoritative wherever protected."},
+      {"category": "Round014 far-low-left elbow import", "score": 0, "finding": "No qualifying elbow exists at the prescribed far-low-left vertex."},
+      {"category": "trailing-arm anatomical articulation", "score": 2, "finding": "The surviving limb is cleanly rendered but reads as a hose-like straight reach without an elbow joint."},
+      {"category": "separate steep up-right forearm return", "score": 0, "finding": "No up-right return segment exists."},
+      {"category": "original inward grip and complete hilt continuity", "score": 10, "finding": "The protected original grip and hilt are exact and complete."},
+      {"category": "uninterrupted head-sized pale wedge", "score": 0, "finding": "No arm-bounded wedge exists at any scale."},
+      {"category": "local composite cleanliness", "score": 4, "finding": "The accepted candidate retains a detached sliver and faint mask-corridor tonal ghost."},
+      {"category": "gameplay-scale topology readability", "score": 1, "finding": "The requested topology cannot read at thumbnail or gameplay scale because it was not constructed."},
+      {"category": "AAA benchmark action authorship", "score": 3, "finding": "The surface illustration is polished, but the frame lacks benchmark-grade joint mechanics, force continuity, gameplay context, and phase-specific action."}
+    ],
+    "composite_score": 40,
+    "maximum_score": 100,
+    "authorization_threshold": 85,
+    "observed_minimum_category_score": 0,
+    "minimum_category_score_required": 7,
+    "all_categories_meet_minimum": false,
+    "composite_threshold_passed": false
+  },
+  "engine_and_game_capture_truth": {
+    "unity_project_present": true,
+    "declared_unity_version": "6000.5.4f1",
+    "reviewed_round015_asset_integrated_in_unity": false,
+    "reviewed_asset_meta_or_symlink_present": false,
+    "reviewed_asset_bytes_present_under_unity_assets": false,
+    "enabled_build_scene": "template SampleScene only",
+    "round015_references_in_unity_project": 0,
+    "runtime_gameplay_architecture_detected": false,
+    "player_build_detected": false,
+    "runnable_game_integrating_round015_detected": false,
+    "engineRun": false,
+    "actualGameCapturePerformed": false,
+    "engineIntegrationLocked": true,
+    "finding": "The workspace contains a Unity template and older unrelated lookdev/review assets, but no Round015 import, meta, reference, scene integration, gameplay controller, or player build. Running unrelated content could not produce a truthful matched gameplay capture for this asset."
+  },
+  "paid3D": {
+    "authorized": false,
+    "requested_or_used": false,
+    "status": "DENIED_NOT_USED",
+    "finding": "Paid 3D and Unity integration remain denied because the composite score, category floor, benchmark count, and isolated visual target all fail."
+  },
+  "hard_gate": {
+    "composite_requirement": {"required": 85, "observed": 40, "passed": false},
+    "category_floor_requirement": {"required": 7, "observed_minimum": 0, "passed": false},
+    "benchmark_requirement": {"required_meets_or_exceeds": 5, "observed": 2, "comparison_count": 6, "passed": false},
+    "isolated_inward_return_mask_passed": false,
+    "all_conditions_passed": false
+  },
+  "verdict_token": "FAIL_INWARD_RETURN_MASK_VISUAL_ONLY_GATE",
+  "single_biggest_remaining_gap": "The required two-segment trailing-arm topology is absent: the accepted image has no far-low-left elbow and no separate steep up-right forearm returning to the preserved inward grip, so the uninterrupted head-sized pale wedge cannot exist.",
+  "round016_prescription_limited_to_single_gap": "Freeze the sealed Round013 authority and its already-correct original grip, hilt, rear leg, leading arm, identity, lighting, and framing; inside one newly verified trailing-arm-only hard mask, replace only the trailing limb between shoulder and preserved grip with an anatomical two-segment silhouette that descends to Round014 candidate04's far-low-left elbow vertex and reverses steeply up-right to the original inward grip, leaving one uninterrupted head-sized pale wedge between the segments; change nothing else.",
+  "privacy_boundary": {
+    "public_safe": true,
+    "private_benchmark_bytes_copied_or_published": false,
+    "private_benchmark_source_paths_present": false,
+    "private_benchmark_source_filenames_present": false,
+    "usernames_present": false,
+    "absolute_paths_present": false,
+    "public_comparison_artifact_created": false,
+    "temporary_private_extraction_deleted": true,
+    "temporary_unlabeled_pair_renders_deleted": true
+  },
+  "integrity_validation": {
+    "all_required_sealed_artifacts_inspected": true,
+    "all_raw_initial_protected_and_promoted_outputs_inspected_at_native_resolution": true,
+    "guide_mask_elbow_seed_receipt_and_readme_inspected": true,
+    "round013_candidate04_and_round014_review_used_only_as_contract_provenance": true,
+    "accepted_copy_byte_equality_recomputed": true,
+    "deterministic_outside_mask_preservation_recomputed": true,
+    "six_private_sequential_randomized_unlabeled_pairs_completed": true,
+    "private_aspect_ratios_preserved": true,
+    "engine_truth_audited_without_unrelated_run_or_fabricated_capture": true,
+    "category_scores_sum_to_composite": true,
+    "exactly_one_biggest_remaining_gap_recorded": true,
+    "exactly_one_round016_prescription_limited_to_that_gap": true,
+    "non_review_repository_files_modified_by_reviewer": false
+  }
+}

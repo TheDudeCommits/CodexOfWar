@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1536" height="1024" viewBox="0 0 1536 1024" role="img" aria-labelledby="title desc">
+  <title id="title">P10 Round015 protected-hilt inward return hard mask</title>
+  <desc id="desc">White is editable trailing-arm material. Black is the authoritative Round013 base. The original hilt band, inward grip, and rear-leg silhouette are explicitly carved back to protected black.</desc>
+  <rect width="1536" height="1024" fill="#000000"/>
+  <path d="M 595 465 C 560 500 505 548 450 625" fill="none" stroke="#ffffff" stroke-width="112" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 578 488 C 515 590 430 730 370 845" fill="none" stroke="#ffffff" stroke-width="110" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 370 845 C 390 790 420 700 450 625" fill="none" stroke="#ffffff" stroke-width="98" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="370" cy="845" r="66" fill="#ffffff"/>
+  <ellipse cx="450" cy="625" rx="66" ry="74" fill="#ffffff"/>
+
+  <!-- Protected authoritative Round013 hilt/pommel band, including the original inward grip. -->
+  <path d="M 150 798 L 1010 352" fill="none" stroke="#000000" stroke-width="56" stroke-linecap="round" stroke-linejoin="round"/>
+  <ellipse cx="450" cy="625" rx="52" ry="58" fill="#000000"/>
+
+  <!-- Protected authoritative Round013 rear-leg silhouette. -->
+  <path d="M 343 966 C 380 880 448 762 558 657 C 605 618 646 602 690 602" fill="none" stroke="#000000" stroke-width="132" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

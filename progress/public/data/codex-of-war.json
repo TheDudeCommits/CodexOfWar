@@ -19,11 +19,11 @@
   ],
   "activeBuild": {
     "pieceId": "P10",
-    "round": 15,
-    "roundLabel": "P10 · Round 015",
+    "round": 16,
+    "roundLabel": "P10 · Round 016",
     "status": "revising",
-    "builder": "Inward Return Mask",
-    "brief": "Round 015 is one bounded original 2D hard-masked forearm-and-hand repair with no result or capture filed yet. It returns to the authoritative Round013 candidate 04 as the untouched base, imports only Round014 candidate 04's successful far-low-left elbow vertex, and redraws only one separately silhouetted trailing forearm steeply up-right to the original inward hilt contact so the unchanged hilt and rear leg stay outside one uninterrupted head-sized pale wedge; paid 3D generation and Unity remain locked.",
+    "builder": "Two-Segment Limb Silhouette",
+    "brief": "Round 016 is one bounded original 2D isolated-limb build with no result or capture filed yet. It preserves the verified Round015 hard-mask discipline but no longer asks a whole-frame model to rediscover the weapon: it generates only an armored trailing-limb cutout at fixed shoulder, far-low-left elbow, and original inward-grip anchors, then composites that limb beneath the untouched Round013 hilt and outside the unchanged rear leg around one uninterrupted head-sized pale wedge; paid 3D generation and Unity remain locked.",
     "facts": [
       "P00 is accepted as infrastructure; its blind visual baseline remains an explicit 28.33–76.67 loss.",
       "Round 001 is mechanically reproducible: two independent critic reruns matched all six filed image hashes, P10 validation passed, focused EditMode passed 8/8, the full suite passed 14/14, and the P00 aggregate stayed byte-identical.",
@@ -61,7 +61,9 @@
       "The fresh Round 013 critic rejected the isolated Elbow Return Triangle at 41/100, a 1/10 category floor, and 2/6 benchmark comparisons against 5/6 required. The trailing elbow never becomes the far down-left lowest external vertex, the forearm never reverses up-right to the inward hand, and the pale triangle cannot exist. No integrated gameplay or player build exists for this asset; engine run and actual gameplay capture are false.",
       "Round 014 filed four bounded original 2D trailing-arm attempts and an original public-safe guide. Candidate 04 alone created a conspicuous far-low-left outer bend and a short up-right reversal, but the builder marked it failed because the hand drifted outward, the hilt construction changed, and hilt/rear-leg content occupied the required pale wedge.",
       "The fresh Round 014 critic rejected the isolated Trailing Return Wedge at 41/100, a 0/10 category floor, and 2/6 benchmark comparisons against 5/6 required. The arm-bounded return wedge is absent: the abbreviated forearm collapses into the altered hilt and rear leg, leaving the hand outward and no clean untouched head-sized pale triangle. No integrated gameplay or player build exists for this asset; engine run and actual gameplay capture are false.",
-      "Round 015 is now one bounded original 2D Inward Return Mask build with no result or capture filed. Round 001 remains the latest filed in-engine P10 evidence, while the global latest manifest remains pinned to accepted P00."
+      "Round 015 filed four bounded original 2D image-generation attempts, twelve raw/initial/protected outputs, an original public-safe guide, two deterministic hard-mask families, and a protected composite. Candidate 04 protected preserves all 1,544,522 frozen pixels with zero mismatches and restores the exact original grip and complete hilt, but the generated limb collapses to a monotonic reach and retains a residual sliver.",
+      "The fresh Round 015 critic rejected the isolated Inward Return Mask at 40/100, a 0/10 category floor, and 2/6 benchmark comparisons against 5/6 required. The required two-segment trailing-arm topology is absent: there is no far-low-left elbow, no separate steep up-right forearm return, and therefore no uninterrupted head-sized pale wedge. No Round015 integration, gameplay controller, build scene, or player build exists; engine run and actual gameplay capture are false.",
+      "Round 016 is now one bounded original 2D Two-Segment Limb Silhouette build with no result or capture filed. Round 001 remains the latest filed in-engine P10 evidence, while the global latest manifest remains pinned to accepted P00."
     ],
     "evidenceFingerprint": {
       "gitRevision": "2dedf617ace47ea5dbb2cde1817d6119604842d2",
@@ -123,7 +125,7 @@
         "Static lookdev only; no rig, S02, or S06"
       ]
     },
-    "nextGate": "Round 015 must use the authoritative Round013 candidate 04 as the untouched base, import only Round014 candidate 04's successful far-low-left elbow vertex, and hard-mask only the trailing elbow, forearm, and hand so one separately silhouetted anatomical forearm returns steeply up-right to the original inward hilt contact while the unchanged hilt and rear leg remain outside one uninterrupted head-sized pale wedge. The complete concept pack must earn at least 85/100 from a fresh critic, keep every category at or above 7, and meet the benchmark bar in at least 5 of 6 blinded comparisons before any paid 3D generation."
+    "nextGate": "Round 016 must freeze the sealed Round013 authority and the verified Round015 protected pixels, then generate only an isolated anatomical trailing-limb cutout at fixed shoulder, Round014 far-low-left elbow, and original inward-grip anchors. Deterministic compositing must place that limb beneath the untouched hilt and outside the unchanged rear leg while preserving one uninterrupted head-sized pale wedge. The complete concept pack must earn at least 85/100 from a fresh critic, keep every category at or above 7, and meet the benchmark bar in at least 5 of 6 blinded comparisons before any paid 3D generation."
   },
   "canonicalCapture": {
     "shotId": "S01",
@@ -505,6 +507,27 @@
         "scoreLabel": "Composite concept preflight 41/100 · threshold 85 · category floor 0/10",
         "preference": "Candidate met benchmark bar in 2/6 blinded comparisons · 5/6 required",
         "primaryGap": "The arm-bounded return wedge is absent: candidate04 has a low outer bend, but its abbreviated forearm collapses into the altered hilt and rear leg, leaving the hand outward and no clean untouched head-sized pale triangle."
+      }
+    },
+    {
+      "round": 15,
+      "label": "P10 · Round 015",
+      "pieceId": "P10",
+      "phase": "Fresh Inward Return Mask and composite critic complete",
+      "status": "criticized",
+      "date": "2026-08-01",
+      "builderBrief": "Return to the authoritative Round013 candidate 04, import only Round014's successful far-low-left elbow vertex, and hard-mask only the trailing limb while preserving the original hilt, rear leg, leading arm, identity, lighting, and framing pixel-exactly.",
+      "evidence": "The builder filed one strongest original 1536×1024 protected Inward Return Mask frame after four bounded generation attempts, twelve preserved raw/initial/protected outputs, an original public-safe guide, and two deterministic hard-mask families. Candidate 04 protected preserves all 1,544,522 frozen pixels with zero mismatches and restores the exact original inward grip and complete hilt, but the generated limb collapses to a straight hose-like reach with no far-low elbow, return segment, or wedge, and a residual sliver remains. A fresh critic rejected the isolated target despite the exact preservation proof. The composite scored 40/100, failed the category floor at 0/10, and met the benchmark bar in 2/6 comparisons against 5/6 required. A Unity template and older unrelated lookdev material exist, but no Round015 import, integration, gameplay controller, build scene, or player build exists; engine run and actual gameplay capture are false, and paid 3D generation remains denied.",
+      "evidenceLinks": [
+        "/captures/P10/round-015-inward-return-mask/NyraKestrel_InwardReturnMask_CRITIC_REJECTED.png",
+        "/data/P10-round-015-inward-return-mask.json"
+      ],
+      "critic": {
+        "status": "INWARD RETURN MASK FAIL · DENY_PAID_3D_GENERATION",
+        "score": 40,
+        "scoreLabel": "Composite concept preflight 40/100 · threshold 85 · category floor 0/10",
+        "preference": "Candidate met benchmark bar in 2/6 blinded comparisons · 5/6 required",
+        "primaryGap": "The required two-segment trailing-arm topology is absent: the accepted image has no far-low-left elbow and no separate steep up-right forearm returning to the preserved inward grip, so the uninterrupted head-sized pale wedge cannot exist."
       }
     }
   ],
