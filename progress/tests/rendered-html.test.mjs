@@ -91,7 +91,7 @@ test("server-renders the production evidence ledger", async () => {
   assert.match(html, /Reference 09/);
   assert.match(html, /29\.82%/);
   assert.match(html, /82,906/);
-  assert.match(html, /P10 · Round 009/);
+  assert.match(html, /P10 · Round 010/);
   assert.match(html, /Round rejected\. Rebuild in progress\./);
   assert.match(html, /Round 001 rejected · mechanically reproducible/);
   assert.match(
@@ -252,11 +252,19 @@ test("server-renders the production evidence ledger", async () => {
     /href="\/captures\/P10\/round-008-contact\/NyraKestrel_CombatGrip_FRESH_CRITIC_ACCEPTED\.png"/,
   );
   assert.match(html, /href="\/data\/P10-round-008-contact\.json"/);
-  assert.match(html, /Mythic silhouette under combat load/i);
-  assert.match(html, /one bounded original 2D concept-sheet build with no result or capture filed yet/i);
+  assert.match(html, /MYTHIC FORCE FAIL · DENY_PAID_3D_GENERATION/);
+  assert.match(html, /Composite concept preflight 71\/100 · threshold 85 · category floor 6\/10/);
+  assert.match(html, /Candidate met benchmark bar in 2\/6 blinded comparisons · 5\/6 required/);
+  assert.match(
+    html,
+    /href="\/captures\/P10\/round-009-mythic-force\/NyraKestrel_MythicForce_CRITIC_REJECTED\.png"/,
+  );
+  assert.match(html, /href="\/data\/P10-round-009-mythic-force\.json"/);
+  assert.match(html, /Ground-Arc Arrest signature force event/i);
+  assert.match(html, /one bounded original 2D signature-action build with no result or capture filed yet/i);
   assert.match(html, /complete concept pack must earn at least 85\/100/i);
-  assert.match(html, /industrial-technician/i);
-  assert.match(html, /convincing full-body combat force/i);
+  assert.match(html, /samurai-adjacent/i);
+  assert.match(html, /blade mass visibly drives the spine, shoulders, pelvis, feet/i);
   assert.doesNotMatch(html, /Reference\.zip|Reference\/[^"<]+\.(?:png|jpe?g|webp)/i);
   assert.doesNotMatch(
     html,
@@ -323,15 +331,16 @@ test("checked-in data contains the complete, honest P00–P25 ledger", async () 
   assert.equal(p00.status, "accepted");
   assert.equal(p10.status, "revising");
   assert.equal(dashboard.activeBuild.pieceId, "P10");
-  assert.equal(dashboard.activeBuild.round, 9);
-  assert.equal(dashboard.activeBuild.roundLabel, "P10 · Round 009");
+  assert.equal(dashboard.activeBuild.round, 10);
+  assert.equal(dashboard.activeBuild.roundLabel, "P10 · Round 010");
   assert.equal(
     dashboard.activeBuild.builder,
-    "Mythic silhouette under combat load",
+    "Ground-Arc Arrest signature force event",
   );
   assert.equal(dashboard.activeBuild.status, p10.status);
   assert.match(dashboard.activeBuild.brief, /no result or capture filed yet/i);
-  assert.match(dashboard.activeBuild.brief, /ownable mythic storm-warden silhouette/i);
+  assert.match(dashboard.activeBuild.brief, /samurai-adjacent tassets/i);
+  assert.match(dashboard.activeBuild.brief, /blade mass visibly drives/i);
   assert.match(dashboard.activeBuild.brief, /paid 3D generation and Unity remain locked/i);
   assert.ok(queuedPieces.every((piece) => piece.status === "queued"));
 
@@ -359,7 +368,7 @@ test("checked-in data contains the complete, honest P00–P25 ledger", async () 
   assert.equal(dashboard.acceptance.maximum, 100);
   assert.match(dashboard.acceptance.p00Exception, /visual loss does not block/i);
 
-  assert.equal(dashboard.rounds.length, 9);
+  assert.equal(dashboard.rounds.length, 10);
   assert.equal(dashboard.rounds[0].pieceId, "P00");
   assert.equal(
     dashboard.rounds[0].critic.status,
@@ -546,6 +555,30 @@ test("checked-in data contains the complete, honest P00–P25 ledger", async () 
     "/captures/P10/round-008-contact/NyraKestrel_CombatGrip_FRESH_CRITIC_ACCEPTED.png",
     "/data/P10-round-008-contact.json",
   ]);
+  assert.equal(dashboard.rounds[9].pieceId, "P10");
+  assert.equal(dashboard.rounds[9].round, 9);
+  assert.equal(dashboard.rounds[9].status, "criticized");
+  assert.equal(
+    dashboard.rounds[9].critic.status,
+    "MYTHIC FORCE FAIL · DENY_PAID_3D_GENERATION",
+  );
+  assert.equal(dashboard.rounds[9].critic.score, 71);
+  assert.equal(
+    dashboard.rounds[9].critic.scoreLabel,
+    "Composite concept preflight 71/100 · threshold 85 · category floor 6/10",
+  );
+  assert.equal(
+    dashboard.rounds[9].critic.preference,
+    "Candidate met benchmark bar in 2/6 blinded comparisons · 5/6 required",
+  );
+  assert.match(
+    dashboard.rounds[9].critic.primaryGap,
+    /mechanics-driven storm-warden combat silhouette/i,
+  );
+  assert.deepEqual(dashboard.rounds[9].evidenceLinks, [
+    "/captures/P10/round-009-mythic-force/NyraKestrel_MythicForce_CRITIC_REJECTED.png",
+    "/data/P10-round-009-mythic-force.json",
+  ]);
 });
 
 test("P10 evidence is filed while the global latest manifest remains P00-pinned", async () => {
@@ -560,6 +593,7 @@ test("P10 evidence is filed while the global latest manifest remains P00-pinned"
     p10Round006Concept,
     p10Round007Concept,
     p10Round008Contact,
+    p10Round009MythicForce,
     latestManifest,
     p10Screenshot,
     turntableContact,
@@ -582,6 +616,7 @@ test("P10 evidence is filed while the global latest manifest remains P00-pinned"
     round007Weapon,
     round007RejectedGrip,
     round008AcceptedContact,
+    round009RejectedMythicForce,
   ] = await Promise.all([
     readFile(dataUrl, "utf8").then(JSON.parse),
     readFile(
@@ -618,6 +653,10 @@ test("P10 evidence is filed while the global latest manifest remains P00-pinned"
     ).then(JSON.parse),
     readFile(
       new URL("../public/data/P10-round-008-contact.json", import.meta.url),
+      "utf8",
+    ).then(JSON.parse),
+    readFile(
+      new URL("../public/data/P10-round-009-mythic-force.json", import.meta.url),
       "utf8",
     ).then(JSON.parse),
     readFile(
@@ -747,6 +786,12 @@ test("P10 evidence is filed while the global latest manifest remains P00-pinned"
     readFile(
       new URL(
         "../public/captures/P10/round-008-contact/NyraKestrel_CombatGrip_FRESH_CRITIC_ACCEPTED.png",
+        import.meta.url,
+      ),
+    ),
+    readFile(
+      new URL(
+        "../public/captures/P10/round-009-mythic-force/NyraKestrel_MythicForce_CRITIC_REJECTED.png",
         import.meta.url,
       ),
     ),
@@ -1360,6 +1405,171 @@ test("P10 evidence is filed while the global latest manifest remains P00-pinned"
   assert.equal(round008AcceptedContact.readUInt32BE(20), 1024);
   assert.doesNotMatch(
     JSON.stringify(p10Round008Contact),
+    /Reference\.zip|Reference\/[^"']+\.(?:png|jpe?g|webp)|\/Users\/|\/home\/|[A-Za-z]:\\Users\\|\/tmp\/|\/private\/var\/folders\//i,
+  );
+
+  assert.equal(p10Round009MythicForce.piece, "P10");
+  assert.equal(p10Round009MythicForce.round, 9);
+  assert.equal(
+    p10Round009MythicForce.status,
+    "rejected-mythic-force-preflight",
+  );
+  assert.equal(
+    p10Round009MythicForce.artifactClass,
+    "original 2D mythic-force concept art",
+  );
+  assert.equal(p10Round009MythicForce.engineRun, false);
+  assert.equal(p10Round009MythicForce.actualGameCapturePerformed, false);
+  assert.equal(p10Round009MythicForce.unityCaptureFiled, false);
+  assert.equal(p10Round009MythicForce.threeDimensionalAssetFiled, false);
+  assert.equal(p10Round009MythicForce.gameReadyEvidenceFiled, false);
+  assert.equal(p10Round009MythicForce.builderAcceptedSheetFiled, true);
+  assert.equal(p10Round009MythicForce.isolatedMythicForceTargetPassed, false);
+  assert.equal(p10Round009MythicForce.paid3DGenerationAuthorized, false);
+  assert.equal(
+    p10Round009MythicForce.source.referencePixelsSuppliedToGeneration,
+    false,
+  );
+  assert.equal(
+    p10Round009MythicForce.source.receiptSha256,
+    "f123442ffa6c4058cebb32e97eb757fca1c699c4b1ffba83733edd6020baf26c",
+  );
+  assert.equal(
+    p10Round009MythicForce.source.readmeSha256,
+    "27a374345c9dcfe3a86b78a4b2aec2fbdf224ba862615d29d4026775cca084b7",
+  );
+  assert.equal(
+    p10Round009MythicForce.source.reviewSha256,
+    "5ecf267e87a2d8c550b56539afc70128fde61dc2db215dd15792b4af2555d56d",
+  );
+  assert.equal(
+    p10Round009MythicForce.isolatedDecision.verdict,
+    "FAIL_ISOLATED_MYTHIC_FORCE_TARGET",
+  );
+  assert.equal(p10Round009MythicForce.isolatedDecision.identityPreserved, true);
+  assert.equal(
+    p10Round009MythicForce.isolatedDecision.engineeringPreserved,
+    true,
+  );
+  assert.equal(
+    p10Round009MythicForce.isolatedDecision.oneWeaponContinuityPreserved,
+    true,
+  );
+  assert.equal(
+    p10Round009MythicForce.isolatedDecision.twoHandSameHiltContactPreserved,
+    true,
+  );
+  assert.equal(
+    p10Round009MythicForce.isolatedDecision.singularOwnableMythicStormWardenSilhouetteAchieved,
+    false,
+  );
+  assert.equal(
+    p10Round009MythicForce.isolatedDecision.convincingFullBodyCombatForceAchieved,
+    false,
+  );
+  assert.equal(p10Round009MythicForce.visualReview.score, 71);
+  assert.equal(p10Round009MythicForce.visualReview.maximum, 100);
+  assert.equal(p10Round009MythicForce.visualReview.passThreshold, 85);
+  assert.equal(
+    p10Round009MythicForce.visualReview.criticalFloorPerCategory,
+    7,
+  );
+  assert.equal(
+    p10Round009MythicForce.visualReview.observedMinimumCategoryScore,
+    6,
+  );
+  assert.equal(p10Round009MythicForce.visualReview.thresholdResult, "FAIL");
+  assert.equal(p10Round009MythicForce.visualReview.criticalFloorResult, "FAIL");
+  assert.equal(
+    p10Round009MythicForce.visualReview.verdict,
+    "DENY_PAID_3D_GENERATION",
+  );
+  assert.equal(p10Round009MythicForce.visualReview.comparisonCount, 6);
+  assert.equal(
+    p10Round009MythicForce.visualReview.candidateMetBenchmarkBarCount,
+    2,
+  );
+  assert.equal(
+    p10Round009MythicForce.visualReview.candidateBelowBenchmarkBarCount,
+    4,
+  );
+  assert.equal(
+    p10Round009MythicForce.visualReview.requiredCandidateMetBenchmarkBarCount,
+    5,
+  );
+  assert.equal(
+    p10Round009MythicForce.visualReview.benchmarkGateResult,
+    "FAIL",
+  );
+  assert.match(
+    p10Round009MythicForce.visualReview.singleBiggestGap,
+    /samurai-adjacent tassets, odachi language, and wide studio guard/i,
+  );
+  assert.equal(
+    p10Round009MythicForce.visualReview.categoryScores.premiumLayeredCostumeAndMaterialSeparation,
+    8,
+  );
+  assert.equal(
+    p10Round009MythicForce.visualReview.categoryScores.avoidanceOfGenericCivilianPlasticFetishAndFranchiseCues,
+    6,
+  );
+  assert.equal(
+    p10Round009MythicForce.decision.result,
+    "DENY_PAID_3D_GENERATION",
+  );
+  assert.equal(
+    p10Round009MythicForce.decision.paid3DGenerationAuthorized,
+    false,
+  );
+  assert.equal(p10Round009MythicForce.decision.unityLocked, true);
+  assert.equal(p10Round009MythicForce.builderAttempts.length, 4);
+  assert.deepEqual(
+    p10Round009MythicForce.builderAttempts.map((attempt) => attempt.sha256),
+    [
+      "2b4b7d5931fe61e34e412345da3394a258d82193b7dde603f8fa977a0ed1a204",
+      "45a6b89d22b34a84e2854dfe1556b0622da9807ed3cc51e96c4f3757e8b6ffe4",
+      "694d7237f1260f98cd57af370f4280737709a6f53a443d879c68437202e6b2b8",
+      "dcaf4e5464c05f51a75db3a5f3c07e898f9d9e778779f1f635bcfaedf70e1c7e",
+    ],
+  );
+  assert.equal(p10Round009MythicForce.nextRound.round, 10);
+  assert.equal(
+    p10Round009MythicForce.nextRound.status,
+    "ground-arc-arrest-signature-force-event",
+  );
+  assert.match(
+    p10Round009MythicForce.nextRound.target,
+    /redesigned non-historical storm-harvesting blade/i,
+  );
+  assert.match(p10Round009MythicForce.nextRound.target, /samurai-adjacent/i);
+  assert.deepEqual(p10Round009MythicForce.nextRound.compositePackGate, {
+    minimumTotalScore: 85,
+    minimumScorePerCategory: 7,
+    blindComparisonCount: 6,
+    minimumComparisonsMeetingBenchmarkBar: 5,
+    paid3DGenerationRequiresFullPass: true,
+  });
+  assert.equal(p10Round009MythicForce.conceptArt.length, 1);
+  assert.equal(
+    p10Round009MythicForce.conceptArt[0].publicPath,
+    "/captures/P10/round-009-mythic-force/NyraKestrel_MythicForce_CRITIC_REJECTED.png",
+  );
+  assert.equal(
+    p10Round009MythicForce.conceptArt[0].disposition,
+    "builder-accepted-critic-rejected-evidence",
+  );
+  assert.equal(
+    createHash("sha256").update(round009RejectedMythicForce).digest("hex"),
+    p10Round009MythicForce.conceptArt[0].sha256,
+  );
+  assert.equal(
+    round009RejectedMythicForce.subarray(1, 4).toString("ascii"),
+    "PNG",
+  );
+  assert.equal(round009RejectedMythicForce.readUInt32BE(16), 1536);
+  assert.equal(round009RejectedMythicForce.readUInt32BE(20), 1024);
+  assert.doesNotMatch(
+    JSON.stringify(p10Round009MythicForce),
     /Reference\.zip|Reference\/[^"']+\.(?:png|jpe?g|webp)|\/Users\/|\/home\/|[A-Za-z]:\\Users\\|\/tmp\/|\/private\/var\/folders\//i,
   );
 

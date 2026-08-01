@@ -1,0 +1,136 @@
+{
+  "schemaVersion": 1,
+  "piece": "P10",
+  "round": 9,
+  "status": "rejected-mythic-force-preflight",
+  "reviewType": "fresh-context mythic-force and composite 2D concept preflight",
+  "reviewedAt": "2026-08-01T00:00:00Z",
+  "artifactClass": "original 2D mythic-force concept art",
+  "engineRun": false,
+  "actualGameCapturePerformed": false,
+  "unityCaptureFiled": false,
+  "threeDimensionalAssetFiled": false,
+  "gameReadyEvidenceFiled": false,
+  "builderAcceptedSheetFiled": true,
+  "isolatedMythicForceTargetPassed": false,
+  "paid3DGenerationAuthorized": false,
+  "source": {
+    "name": "Nyra Kestrel mythic silhouette under combat load",
+    "scope": "Original 2D concept evidence only; no gameplay, 3D model, finished game asset, or production-ready implementation claim.",
+    "creator": "OpenAI image generation via Codex",
+    "referencePixelsSuppliedToGeneration": false,
+    "receiptPath": "ArtSource/P10/Round009/MythicForce/P10_Round009_MythicForceReceipt.json",
+    "receiptSha256": "f123442ffa6c4058cebb32e97eb757fca1c699c4b1ffba83733edd6020baf26c",
+    "readmePath": "ArtSource/P10/Round009/MythicForce/README.md",
+    "readmeSha256": "27a374345c9dcfe3a86b78a4b2aec2fbdf224ba862615d29d4026775cca084b7",
+    "reviewPath": "ArtSource/P10/Round009/MythicForce/P10_Round009_FreshMythicForceReview.json",
+    "reviewSha256": "5ecf267e87a2d8c550b56539afc70128fde61dc2db215dd15792b4af2555d56d"
+  },
+  "isolatedDecision": {
+    "verdict": "FAIL_ISOLATED_MYTHIC_FORCE_TARGET",
+    "identityPreserved": true,
+    "engineeringPreserved": true,
+    "oneWeaponContinuityPreserved": true,
+    "twoHandSameHiltContactPreserved": true,
+    "industrialTechnicianPresentationMateriallyReduced": true,
+    "singularOwnableMythicStormWardenSilhouetteAchieved": false,
+    "convincingFullBodyCombatForceAchieved": false,
+    "finding": "The builder's strongest sheet adds substantial layered protection and preserves the solved identity and grip, but the tasset-and-odachi language remains familiar and the wide studio guard lacks a decisive whole-body load, impact, acceleration, or recovery chain."
+  },
+  "visualReview": {
+    "score": 71,
+    "maximum": 100,
+    "passThreshold": 85,
+    "criticalFloorPerCategory": 7,
+    "observedMinimumCategoryScore": 6,
+    "thresholdResult": "FAIL",
+    "criticalFloorResult": "FAIL",
+    "verdict": "DENY_PAID_3D_GENERATION",
+    "comparisonCount": 6,
+    "candidateMetBenchmarkBarCount": 2,
+    "candidateBelowBenchmarkBarCount": 4,
+    "requiredCandidateMetBenchmarkBarCount": 5,
+    "benchmarkGateResult": "FAIL",
+    "benchmarkPolicy": "Aggregate blinded-comparison results only; no benchmark image, crop, comparison sheet, filename, path, or other benchmark pixel is published.",
+    "singleBiggestGap": "A singular mechanics-driven storm-warden combat silhouette: the current samurai-adjacent tassets, odachi language, and wide studio guard must become one unmistakably ownable full-body force event in which blade mass visibly drives the spine, shoulders, pelvis, feet, and layered equipment.",
+    "categoryScores": {
+      "multiViewIdentityConsistency": 7,
+      "neutralModelingUtility": 8,
+      "anatomy": 7,
+      "faceEyesHair": 7,
+      "premiumLayeredCostumeAndMaterialSeparation": 8,
+      "silhouetteAndRoleRead": 7,
+      "functionalSameHiltTwoHandGrip": 8,
+      "weaponPlausibility": 7,
+      "avoidanceOfGenericCivilianPlasticFetishAndFranchiseCues": 6,
+      "benchmarkLevelAuthorship": 6
+    }
+  },
+  "decision": {
+    "result": "DENY_PAID_3D_GENERATION",
+    "paid3DGenerationAuthorized": false,
+    "unityLocked": true,
+    "instruction": "Preserve the improved costume hierarchy and solved contact, but do not begin paid 3D generation or Unity integration from this pack."
+  },
+  "limitations": [
+    "The filed image is original 2D concept art, not gameplay or game capture.",
+    "No actual game run was performed because this is a pre-Unity 2D concept gate.",
+    "No 3D mesh, topology, rig, deformation, UV, collision, animation, LOD, texture, performance, or game-ready claim is made.",
+    "The builder accepted the sheet for critic handoff; the independent critic rejected the isolated mythic-force target and complete composite gate.",
+    "The concept review cannot establish legal originality, exclusivity, copyright status, trademark clearance, or absence of all third-party similarity.",
+    "Paid 3D generation and Unity remain locked because the isolated target, total-score, category-floor, and blinded-comparison gates all failed."
+  ],
+  "conceptArt": [
+    {
+      "label": "CRITIC-REJECTED — builder-accepted mythic-force sheet",
+      "disposition": "builder-accepted-critic-rejected-evidence",
+      "evidenceType": "Rejected 2D concept evidence — not gameplay, 3D, or game-ready evidence",
+      "publicPath": "/captures/P10/round-009-mythic-force/NyraKestrel_MythicForce_CRITIC_REJECTED.png",
+      "sha256": "dcaf4e5464c05f51a75db3a5f3c07e898f9d9e778779f1f635bcfaedf70e1c7e",
+      "dimensions": {
+        "width": 1536,
+        "height": 1024
+      },
+      "format": "PNG",
+      "finding": "The sheet materially improves costume layering and preserves one weapon plus two-hand contact, but remains a controlled samurai-adjacent studio guard rather than a singular force event."
+    }
+  ],
+  "builderAttempts": [
+    {
+      "candidate": 1,
+      "sha256": "2b4b7d5931fe61e34e412345da3394a258d82193b7dde603f8fa977a0ed1a204",
+      "disposition": "rejected",
+      "reason": "Presentation-like base and insufficient pelvis, ribcage, shoulder, and equipment torque."
+    },
+    {
+      "candidate": 2,
+      "sha256": "45a6b89d22b34a84e2854dfe1556b0622da9807ed3cc51e96c4f3757e8b6ffe4",
+      "disposition": "rejected",
+      "reason": "Hands remain too low to make the shoulders and upper back carry the blade."
+    },
+    {
+      "candidate": 3,
+      "sha256": "694d7237f1260f98cd57af370f4280737709a6f53a443d879c68437202e6b2b8",
+      "disposition": "rejected",
+      "reason": "Force improves, but the ring-like guard drifts from the accepted weapon language."
+    },
+    {
+      "candidate": 4,
+      "sha256": "dcaf4e5464c05f51a75db3a5f3c07e898f9d9e778779f1f635bcfaedf70e1c7e",
+      "disposition": "builder-accepted-critic-rejected",
+      "reason": "Strongest bounded output, but the fresh critic rejected its generic action language and insufficient full-body force."
+    }
+  ],
+  "nextRound": {
+    "round": 10,
+    "status": "ground-arc-arrest-signature-force-event",
+    "target": "Create one ownable mechanics-driven signature action in which the split yoke, diagonal conductor, redesigned non-historical storm-harvesting blade, planted heavy right grounding greave, spine, shoulders, pelvis, feet, cloth, and plates all express the same deceleration force without samurai-adjacent tassets or a studio guard pose.",
+    "compositePackGate": {
+      "minimumTotalScore": 85,
+      "minimumScorePerCategory": 7,
+      "blindComparisonCount": 6,
+      "minimumComparisonsMeetingBenchmarkBar": 5,
+      "paid3DGenerationRequiresFullPass": true
+    }
+  }
+}

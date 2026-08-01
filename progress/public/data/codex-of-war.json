@@ -19,11 +19,11 @@
   ],
   "activeBuild": {
     "pieceId": "P10",
-    "round": 9,
-    "roundLabel": "P10 · Round 009",
+    "round": 10,
+    "roundLabel": "P10 · Round 010",
     "status": "revising",
-    "builder": "Mythic silhouette under combat load",
-    "brief": "Round 009 is one bounded original 2D concept-sheet build with no result or capture filed yet. It must preserve Nyra's accepted identity, engineering anchors, weapon, and solved same-hilt contact while replacing the industrial-technician read with an ownable mythic storm-warden silhouette expressed through convincing full-body combat force; paid 3D generation and Unity remain locked.",
+    "builder": "Ground-Arc Arrest signature force event",
+    "brief": "Round 010 is one bounded original 2D signature-action build with no result or capture filed yet. It must replace the samurai-adjacent tassets, odachi language, and wide studio guard with one ownable mechanics-driven storm-warden force event in which blade mass visibly drives the spine, shoulders, pelvis, feet, conductor path, cloth, and plates; paid 3D generation and Unity remain locked.",
     "facts": [
       "P00 is accepted as infrastructure; its blind visual baseline remains an explicit 28.33–76.67 loss.",
       "Round 001 is mechanically reproducible: two independent critic reruns matched all six filed image hashes, P10 validation passed, focused EditMode passed 8/8, the full suite passed 14/14, and the P00 aggregate stayed byte-identical.",
@@ -50,8 +50,9 @@
       "Round 007 has no accepted combat-grip proof, gameplay, 3D asset, game-ready evidence, or Unity capture. Its single biggest gap is the absence of one accepted identity-preserving combat image that unambiguously proves both complete hands closed on separated regions of the same hilt.",
       "Round 008 generated four bounded original 2D contact candidates. The builder froze them fail-closed under a strict clean-negative-space rule, but a fresh critic independently found candidate 04 visually unambiguous and promoted a byte-identical accepted contact copy without regenerating the art.",
       "Round 008 passed its isolated same-hilt contact objective, raising functional grip to 8/10, but the complete pack still failed at 68/100, a 5/10 observed category floor, and only 3/6 benchmark-level comparisons against 5/6 required. Paid 3D generation and Unity remain locked.",
-      "The single biggest remaining gap is an iconic mythic combat-lead read: the costume and weapon still lack one singular authored silhouette expressed through convincing full-body combat force.",
-      "Round 009 is now a bounded original 2D mythic-silhouette-under-combat-load build with no result or capture filed. Round 001 remains the latest filed in-engine P10 evidence, while the global latest manifest remains pinned to accepted P00."
+      "Round 009 materially improved layered cloth, ceramic, metal, and copper separation while preserving the accepted identity, engineering anchors, one weapon, and solved same-hilt grip. A fresh critic nevertheless rejected the isolated mythic-force target.",
+      "The Round 009 composite scored 71/100 against 85, failed the category floor at 6/10, and met the benchmark bar in only 2/6 comparisons against 5/6 required. The single gap is a mechanics-driven storm-warden silhouette: its samurai-adjacent tassets, odachi language, and studio guard still lack one ownable full-body force event.",
+      "Round 010 is now one bounded original 2D Ground-Arc Arrest signature-action build with no result or capture filed. Round 001 remains the latest filed in-engine P10 evidence, while the global latest manifest remains pinned to accepted P00."
     ],
     "evidenceFingerprint": {
       "gitRevision": "2dedf617ace47ea5dbb2cde1817d6119604842d2",
@@ -113,7 +114,7 @@
         "Static lookdev only; no rig, S02, or S06"
       ]
     },
-    "nextGate": "Round 009 must preserve the fresh-critic accepted same-hilt contact while replacing the industrial-technician read with one ownable mythic storm-warden silhouette and convincing full-body combat force. The complete concept pack must earn at least 85/100 from a fresh critic, keep every category at or above 7, and meet the benchmark bar in at least 5 of 6 blinded comparisons before any paid 3D generation."
+    "nextGate": "Round 010 must preserve identity and same-hilt contact while removing samurai-adjacent tassets and historical odachi coding, then express one mechanics-driven signature action through a redesigned storm-harvesting blade and a coherent yoke-to-grounding-greave force chain. The complete concept pack must earn at least 85/100 from a fresh critic, keep every category at or above 7, and meet the benchmark bar in at least 5 of 6 blinded comparisons before any paid 3D generation."
   },
   "canonicalCapture": {
     "shotId": "S01",
@@ -369,6 +370,27 @@
         "scoreLabel": "Composite concept preflight 68/100 · threshold 85 · category floor 5/10",
         "preference": "Candidate met benchmark bar in 3/6 blinded comparisons · 5/6 required",
         "primaryGap": "The pack still reads as polished industrial-technician concept art rather than an iconic benchmark-level mythic combat lead: the costume and weapon lack one singular authored silhouette expressed through convincing full-body combat force."
+      }
+    },
+    {
+      "round": 9,
+      "label": "P10 · Round 009",
+      "pieceId": "P10",
+      "phase": "Fresh mythic-force and composite critic complete",
+      "status": "criticized",
+      "date": "2026-08-01",
+      "builderBrief": "Preserve Nyra's accepted identity, engineering anchors, weapon, and solved same-hilt contact while replacing the industrial-technician read with one ownable mythic storm-warden silhouette expressed through convincing full-body combat force.",
+      "evidence": "The builder filed one strongest original 1536×1024 mythic-force sheet after four bounded attempts. It preserves the person, engineering path, one weapon, and solved grip while materially improving layered cloth, ceramic, blackened-steel, and copper separation. A fresh critic rejected the isolated target: samurai-adjacent tassets, curved odachi language, and the broad studio guard still prevent a singular full-body force event. The composite scored 71/100, failed the category floor at 6/10, and met the benchmark bar in 2/6 comparisons against 5/6 required. No actual game run, gameplay, 3D model, game-ready asset, or Unity capture is claimed; paid 3D generation remains denied.",
+      "evidenceLinks": [
+        "/captures/P10/round-009-mythic-force/NyraKestrel_MythicForce_CRITIC_REJECTED.png",
+        "/data/P10-round-009-mythic-force.json"
+      ],
+      "critic": {
+        "status": "MYTHIC FORCE FAIL · DENY_PAID_3D_GENERATION",
+        "score": 71,
+        "scoreLabel": "Composite concept preflight 71/100 · threshold 85 · category floor 6/10",
+        "preference": "Candidate met benchmark bar in 2/6 blinded comparisons · 5/6 required",
+        "primaryGap": "A singular mechanics-driven storm-warden combat silhouette: the current samurai-adjacent tassets, odachi language, and wide studio guard must become one unmistakably ownable full-body force event in which blade mass visibly drives the spine, shoulders, pelvis, feet, and layered equipment."
       }
     }
   ],

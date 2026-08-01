@@ -1,0 +1,221 @@
+{
+  "schema": "codexofwar.fresh-mythic-force-composite-review",
+  "version": "1.0.0",
+  "review_id": "P10-Round009-FreshMythicForceReview",
+  "reviewed_utc": "2026-08-01T00:00:00Z",
+  "reviewer_mode": "independent hostile AAA mythic-force and composite pre-Unity gate",
+  "scope": {
+    "project_asset": "P10 Nyra Kestrel",
+    "round": "Round009",
+    "isolated_question": "Whether the accepted Round009 sheet preserves identity, engineering, one-weapon continuity, and two-hand contact while replacing industrial-technician presentation with a singular ownable mythic storm-warden silhouette expressed through convincing full-body combat force.",
+    "composite_pack": [
+      "Round007 accepted four-view turnaround",
+      "Round007 accepted weapon study",
+      "Round008 fresh-critic accepted combat-contact proof",
+      "Round009 accepted mythic-force sheet",
+      "all four persisted Round009 iterations",
+      "Round009 receipt"
+    ],
+    "claims_not_made": [
+      "actual game run or capture",
+      "3D, rig, mesh, UV, deformation, collision, animation, LOD, engine, or production readiness",
+      "legal originality, exclusivity, copyright clearance, or trademark clearance"
+    ]
+  },
+  "evidence": {
+    "round007_accepted_assets": [
+      {
+        "asset_id": "accepted-turnaround",
+        "sha256": "f54d6f4b4bc7707841b623148f522c1c60730bd8c6c620d4698531d928f2545a",
+        "dimensions_px": {"width": 1536, "height": 1024},
+        "format": "png"
+      },
+      {
+        "asset_id": "accepted-weapon",
+        "sha256": "6b604c69bf417e33e211366a006c800275b1ca3dda7a168bd84dcba054fff48b",
+        "dimensions_px": {"width": 1536, "height": 1024},
+        "format": "png"
+      }
+    ],
+    "round008_accepted_contact": {
+      "asset_id": "accepted-contact-proof",
+      "sha256": "06249a9cf8fcc94c4d531ebb6ffa835c4b7be8cc77202836069dd42d9e27692d",
+      "dimensions_px": {"width": 1536, "height": 1024},
+      "format": "png"
+    },
+    "round009_candidates": [
+      {
+        "candidate_id": "mythic-force-candidate-01",
+        "sha256": "2b4b7d5931fe61e34e412345da3394a258d82193b7dde603f8fa977a0ed1a204",
+        "byte_size": 2101168,
+        "dimensions_px": {"width": 1536, "height": 1024},
+        "format": "png",
+        "fresh_finding": "Identity and one connected weapon survive, but the low hand line, centered torso, and presentation stance do not express full-body force."
+      },
+      {
+        "candidate_id": "mythic-force-candidate-02",
+        "sha256": "45a6b89d22b34a84e2854dfe1556b0622da9807ed3cc51e96c4f3757e8b6ffe4",
+        "byte_size": 2129944,
+        "dimensions_px": {"width": 1536, "height": 1024},
+        "format": "png",
+        "fresh_finding": "Layering and asymmetry improve, but the hands remain below the body power center and the shoulders do not convincingly carry blade load."
+      },
+      {
+        "candidate_id": "mythic-force-candidate-03",
+        "sha256": "694d7237f1260f98cd57af370f4280737709a6f53a443d879c68437202e6b2b8",
+        "byte_size": 2219646,
+        "dimensions_px": {"width": 1536, "height": 1024},
+        "format": "png",
+        "fresh_finding": "The raised grip and wide base improve readiness, but the ring-like guard changes the accepted weapon language and introduces a familiar historical-sword cue."
+      },
+      {
+        "candidate_id": "mythic-force-candidate-04",
+        "sha256": "dcaf4e5464c05f51a75db3a5f3c07e898f9d9e778779f1f635bcfaedf70e1c7e",
+        "byte_size": 2290221,
+        "dimensions_px": {"width": 1536, "height": 1024},
+        "format": "png",
+        "fresh_finding": "This is the strongest Round009 frame: it restores a low rectangular guard, retains one complete weapon and separated two-hand contact, and adds substantial costume layering. The wide grounded pose remains a controlled studio guard rather than a decisive force event."
+      }
+    ],
+    "round009_accepted_sheet": {
+      "asset_id": "accepted-mythic-force-sheet",
+      "sha256": "dcaf4e5464c05f51a75db3a5f3c07e898f9d9e778779f1f635bcfaedf70e1c7e",
+      "byte_size": 2290221,
+      "dimensions_px": {"width": 1536, "height": 1024},
+      "format": "png",
+      "byte_identical_to_candidate_04": true
+    },
+    "round009_receipt": {
+      "document_id": "round009-mythic-force-receipt",
+      "sha256": "f123442ffa6c4058cebb32e97eb757fca1c699c4b1ffba83733edd6020baf26c",
+      "format": "json"
+    }
+  },
+  "isolated_decision": {
+    "verdict": "FAIL_ISOLATED_MYTHIC_FORCE_TARGET",
+    "identity_preserved": true,
+    "engineering_preserved": true,
+    "one_weapon_continuity_preserved": true,
+    "two_hand_same_hilt_contact_preserved": true,
+    "industrial_technician_presentation_materially_reduced": true,
+    "singular_ownable_mythic_storm_warden_silhouette_achieved": false,
+    "convincing_full_body_combat_force_achieved": false,
+    "finding": "The accepted sheet retains the core person, handed equipment path, heavy-right-leg asymmetry, complete weapon, and auditable same-hilt grip, while replacing much of the workwear read with denser layered protection. It still fails the complete isolated target because the tasset-and-odachi language remains familiar and the broad studio guard pose lacks a decisive whole-body load, impact, acceleration, or recovery chain."
+  },
+  "private_benchmark_comparison": {
+    "method": "Six relevant full-body combat and costume-authoring references were selected from a private visual inventory, randomly reordered, and placed in unlabeled two-panel sheets with independently randomized candidate side, aspect-preserving fit, neutral padding, and no retouching. Judgment was blind to side; all extraction and comparison files were destroyed after inspection.",
+    "comparison_count": 6,
+    "required_candidate_meets_count": 5,
+    "candidate_meets_count": 2,
+    "candidate_below_count": 4,
+    "gate_passed": false,
+    "comparisons": [
+      {
+        "comparison_id": "MF01",
+        "focus": "weapon acceleration and torso-to-arm force chain",
+        "benchmark": {"benchmark_id": "BM-R9-01", "sha256": "21858656b7887cc37f92c2bab4ed56f6cb273f45fd75193c0cb1c1b37456bc33", "dimensions_px": {"width": 596, "height": 335}, "format": "jpeg"},
+        "candidate_meets_bar": false,
+        "finding": "The candidate is clearer as a costume sheet, but its shoulders, hips, and blade remain held rather than accelerating through a committed combat action."
+      },
+      {
+        "comparison_id": "MF02",
+        "focus": "full-body silhouette and role legibility",
+        "benchmark": {"benchmark_id": "BM-R9-02", "sha256": "0293135a1aa7dae0a92f73e018d5f046cd8aa45b9b0e1727e8538ae951276869", "dimensions_px": {"width": 679, "height": 452}, "format": "jpeg"},
+        "candidate_meets_bar": true,
+        "finding": "The candidate's complete pale-ground figure, split shoulder device, counter-diagonal blade, and heavy grounding leg produce the more immediate full-body read."
+      },
+      {
+        "comparison_id": "MF03",
+        "focus": "action arc, threat response, and authored motion",
+        "benchmark": {"benchmark_id": "BM-R9-03", "sha256": "c4693a135a8f66b17759349dd81e126001989aac894db1714d2d2cad89ae8fe0", "dimensions_px": {"width": 739, "height": 415}, "format": "jpeg"},
+        "candidate_meets_bar": false,
+        "finding": "The benchmark communicates direction, timing, and risk through the whole figure; the candidate remains a posed readiness display."
+      },
+      {
+        "comparison_id": "MF04",
+        "focus": "equipment-body integration under impact",
+        "benchmark": {"benchmark_id": "BM-R9-04", "sha256": "1af9ad3cd30a4f90dd97d8fcdced94eee8afcc2828aff1013bf24f90721112b7", "dimensions_px": {"width": 766, "height": 400}, "format": "jpeg"},
+        "candidate_meets_bar": false,
+        "finding": "Candidate straps, plates, and conductor are coherent, but they do not visibly react to a comparable impact or directional load."
+      },
+      {
+        "comparison_id": "MF05",
+        "focus": "weapon mass and overhead load commitment",
+        "benchmark": {"benchmark_id": "BM-R9-05", "sha256": "d208c98d2ea91b654fb11070616887e0f8564fe3c5040ae854e3aab8645be98d", "dimensions_px": {"width": 739, "height": 415}, "format": "jpeg"},
+        "candidate_meets_bar": false,
+        "finding": "The candidate's long blade is plausible in outline, but the body does not sell its mass through spinal, shoulder, elbow, and foot loading."
+      },
+      {
+        "comparison_id": "MF06",
+        "focus": "layered costume hierarchy and authored material separation",
+        "benchmark": {"benchmark_id": "BM-R9-06", "sha256": "1e99a94f8efbbdd9d4811e2706f84616ea9cc379909caee873d212ecfb9a68b0", "dimensions_px": {"width": 739, "height": 415}, "format": "jpeg"},
+        "candidate_meets_bar": true,
+        "finding": "The candidate presents a strong readable hierarchy of cloth, ceramic, blackened metal, and copper across the entire figure."
+      }
+    ]
+  },
+  "scorecard": {
+    "scale": "0-10 per category; 100 total",
+    "categories": [
+      {"category": "multiview identity consistency", "score": 7, "finding": "The face, braid, shoulder device, diagonal conductor, hip module, and heavy-right-leg identity survive, though Round009 is one posed view and small construction details drift from the turnaround."},
+      {"category": "neutral modeling utility", "score": 8, "finding": "The accepted Round007 four-view sheet remains clean and useful for modeling, with only modest construction and orthographic drift."},
+      {"category": "anatomy", "score": 7, "finding": "Proportions and support are credible, but the broad stance reads arranged; shoulder, pelvis, spine, and feet do not form a fully convincing high-force kinetic chain."},
+      {"category": "face/eyes/hair", "score": 7, "finding": "The mature lived-in face and asymmetric braid remain recognizable, while eye shape, brow treatment, and facial plane emphasis still vary across sheets."},
+      {"category": "premium layered costume/material separation", "score": 8, "finding": "Round009 adds substantial cloth, ceramic, metal, and copper layering with strong value and surface separation, though some plate repetition feels generated rather than structurally resolved."},
+      {"category": "silhouette/role read", "score": 7, "finding": "The yoke, long blade, tassets, and giant grounding greave read clearly, but the overall role remains too close to a familiar armored odachi fighter to be singular at an AAA character-brand bar."},
+      {"category": "functional same-hilt two-hand grip", "score": 8, "finding": "Both closed hands occupy separated regions of one continuous wrapped hilt, with visible ingress, egress, pressure, and credible wrist alignment."},
+      {"category": "weapon plausibility", "score": 7, "finding": "The complete odachi, low guard, base cage, long hilt, blade, pommel, and tip are coherent; balance, cage fastening, and body response to the blade's mass remain underexplained."},
+      {"category": "avoidance generic/civilian/plastic/fetish/franchise cues", "score": 6, "finding": "Civilian, fetish, and glossy-plastic reads are reduced, but layered hanging tassets, the curved odachi, and the guard pose retain conspicuous generic samurai-adjacent coding."},
+      {"category": "benchmark-level authorship", "score": 6, "finding": "The sheet is polished concept art with stronger costume authorship, but only 2 of 6 blind comparisons meet the bar; action specificity, physical force, and ownable role language remain below benchmark."}
+    ],
+    "total_score": 71,
+    "maximum_score": 100,
+    "authorization_threshold": 85,
+    "minimum_category_score_required": 7,
+    "observed_minimum_category_score": 6,
+    "all_categories_meet_minimum": false,
+    "score_threshold_passed": false
+  },
+  "composite_decision": {
+    "verdict": "DENY_PAID_3D_GENERATION",
+    "paid_3d_generation_authorized": false,
+    "total_score": 71,
+    "total_threshold_passed": false,
+    "category_floor_passed": false,
+    "benchmark_result": "2/6 candidate-meets comparisons; 5/6 required",
+    "benchmark_gate_passed": false,
+    "all_authorization_conditions_passed": false,
+    "finding": "Round009 repairs much of the industrial-costume ceiling without losing the solved grip or weapon continuity, but the complete pack fails the isolated target, total score, category floor, and blinded benchmark gates."
+  },
+  "single_biggest_remaining_visual_gap": "A singular mechanics-driven storm-warden combat silhouette: the current samurai-adjacent tassets, odachi language, and wide studio guard must become one unmistakably ownable full-body force event in which blade mass visibly drives the spine, shoulders, pelvis, feet, and layered equipment.",
+  "pre_unity_state": {
+    "engineRun": false,
+    "actualGameCapturePerformed": false,
+    "preUnity2DConceptGate": true,
+    "unityLocked": true,
+    "unityUnlockCondition": "paid 3D generation authorized by a passing fresh composite gate",
+    "paid3DGenerationAuthorized": false
+  },
+  "integrity_validation": {
+    "candidate_hashes_recomputed": true,
+    "candidate_dimensions_and_formats_recomputed": true,
+    "accepted_copy_hash_matches_candidate_04": true,
+    "receipt_hash_recomputed": true,
+    "native_visual_inspection_completed": true,
+    "all_four_iterations_inspected": true,
+    "randomized_blind_comparisons_completed": true,
+    "json_validated": true
+  },
+  "privacy_cleanup": {
+    "public_safe": true,
+    "absolute_paths_present": false,
+    "usernames_present": false,
+    "private_archive_name_present": false,
+    "private_benchmark_filenames_or_paths_present": false,
+    "private_benchmark_pixels_embedded": false,
+    "benchmark_identifiers_limited_to_public_safe_ids_hashes_dimensions_and_formats": true,
+    "temporary_extraction_deleted": true,
+    "temporary_comparison_sheets_deleted": true,
+    "non_review_repository_files_modified": false
+  }
+}

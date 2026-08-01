@@ -1,0 +1,276 @@
+{
+  "schema": "codexofwar.original-2d-mythic-force-receipt",
+  "version": "1.0.0",
+  "receipt_id": "P10-Round009-MythicForceReceipt",
+  "generated_utc": "2026-07-31T21:46:40Z",
+  "scope": {
+    "project_asset": "P10 Nyra Kestrel mythic silhouette under combat load",
+    "round": "Round009",
+    "scope_class": "original 2D concept only",
+    "paid_3d_generation_authorized": false,
+    "builder_benchmark_claim": "not made",
+    "claims_not_made": [
+      "benchmark victory or benchmark equivalence",
+      "paid 3D authorization",
+      "production-ready game asset",
+      "mesh, rig, UV, deformation, collision, animation, LOD, or performance readiness",
+      "legal originality, exclusivity, copyright clearance, or trademark clearance"
+    ]
+  },
+  "attempt_policy": {
+    "maximum_image_generation_outputs": 4,
+    "image_generation_outputs_used": 4,
+    "cap_reached": true,
+    "fail_closed_policy": "Promote one sheet only if every stated Round009 invariant survives native-resolution inspection; otherwise preserve all outputs under Iterations and promote none.",
+    "final_disposition": "accepted-one-sheet-for-bounded-round009-handoff",
+    "fresh_critic_required": true
+  },
+  "bounded_input_policy": {
+    "public_safe_inputs": [
+      {
+        "role": "Round007 accepted character identity and handed equipment authority",
+        "file": "../../Round007/Concept/P10_Round007_NyraKestrel_Turnaround_v1.png",
+        "sha256": "f54d6f4b4bc7707841b623148f522c1c60730bd8c6c620d4698531d928f2545a",
+        "byte_size": 2095539,
+        "dimensions_px": {"width": 1536, "height": 1024},
+        "format": "png"
+      },
+      {
+        "role": "Round007 accepted exact Stormcage odachi authority",
+        "file": "../../Round007/Concept/P10_Round007_StormcageOdachi_v1.png",
+        "sha256": "6b604c69bf417e33e211366a006c800275b1ca3dda7a168bd84dcba054fff48b",
+        "byte_size": 1965133,
+        "dimensions_px": {"width": 1536, "height": 1024},
+        "format": "png"
+      },
+      {
+        "role": "Round008 authoritative visually passing same-hilt contact frame",
+        "file": "../../Round008/CombatContact/Iterations/P10_Round008_NyraKestrel_CombatGrip_candidate04_reject.png",
+        "sha256": "06249a9cf8fcc94c4d531ebb6ffa835c4b7be8cc77202836069dd42d9e27692d",
+        "byte_size": 1961681,
+        "dimensions_px": {"width": 1536, "height": 1024},
+        "format": "png"
+      },
+      {
+        "role": "Round008 fresh review and exact remaining-gap authority",
+        "file": "../../Round008/CombatContact/P10_Round008_FreshContactReview.json",
+        "sha256": "8c2f60c255316ed2298967f553790e29eef62d4b7528fc788f5f9433529e0e53",
+        "byte_size": 17933,
+        "format": "json"
+      }
+    ],
+    "excluded_inputs": [
+      "all private visual benchmarks",
+      "all benchmark pixels",
+      "all third-party franchise art",
+      "all unrelated project imagery"
+    ],
+    "prohibited_private_archive_inspected": false,
+    "third_party_visual_reference_used": false
+  },
+  "design_target": {
+    "remaining_gap": "industrial technician to iconic mythic storm-warden lead through one singular authored silhouette and convincing full-body combat force",
+    "thumbnail_silhouette": [
+      "upper-left attached split ivory induction yoke",
+      "protected oxidized-copper diagonal torso load path",
+      "lower-right massive right grounding greave",
+      "long Stormcage odachi counter-diagonal"
+    ],
+    "material_authorship": [
+      "interlocked worn warm-ivory ceramic reliquary insulation",
+      "deep-cobalt woven storm-cloth wraps and torque-responsive tassets",
+      "blackened-steel load frame",
+      "oxidized-copper structural conductor integrated into fastenings"
+    ]
+  },
+  "generator": {
+    "service": "OpenAI image generation tool",
+    "backend_model": "not exposed by tool response",
+    "native_resolution_inspection": true,
+    "all_persisted_images_inspected": true
+  },
+  "prompt_encoding": {
+    "field": "exact_prompt_lines",
+    "reconstruction": "Join array entries with a single LF newline character.",
+    "trailing_newline": false
+  },
+  "generation_lineage": [
+    {
+      "generation_id": "mythic-force-candidate-01",
+      "mode": "edit",
+      "taxonomy": "identity-preserve",
+      "edit_inputs": [
+        {"role": "same-hilt contact authority", "sha256": "06249a9cf8fcc94c4d531ebb6ffa835c4b7be8cc77202836069dd42d9e27692d"},
+        {"role": "character authority", "sha256": "f54d6f4b4bc7707841b623148f522c1c60730bd8c6c620d4698531d928f2545a"},
+        {"role": "weapon authority", "sha256": "6b604c69bf417e33e211366a006c800275b1ca3dda7a168bd84dcba054fff48b"}
+      ],
+      "output": "Iterations/P10_Round009_NyraKestrel_MythicForce_candidate01_reject.png",
+      "sha256": "2b4b7d5931fe61e34e412345da3394a258d82193b7dde603f8fa977a0ed1a204",
+      "byte_size": 2101168,
+      "dimensions_px": {"width": 1536, "height": 1024},
+      "format": "png",
+      "status": "rejected",
+      "rejection_reasons": [
+        "The face, attached yoke, diagonal conductor, right-hip capacitor, massive right grounding greave, lighter left leg, one complete sword, and both same-hilt closures survive.",
+        "The wide stance remains partly a symmetrical presentation pose; the pelvis and ribcage opposition, shoulder load, and torque response are not decisive enough for the mandatory combat-force gate.",
+        "The new layer count helps, but the plate rhythm still leans toward a familiar martial-armor silhouette rather than a singular load-bearing mythic read."
+      ],
+      "exact_prompt_lines": [
+        "Use case: identity-preserve",
+        "Asset type: original 2D game-character concept sheet, Round009 mythic-force candidate 01 of at most 04",
+        "Input images: Image 1 is authoritative ONLY for Nyra's already-solved exact same-hilt contact topology: one complete sword and both complete hands visibly closed on separated cobalt-wrapped regions of its same continuous hilt. Image 2 is authoritative for Nyra Kestrel's exact mature face, asymmetric braid, body, handed yoke/load-path/greave identity. Image 3 is authoritative for the exact Stormcage odachi. Create new art; do not copy Image 1's passive studio stance or civilian technician costume.",
+        "Primary request: one clean 1536x1024 landscape concept sheet dominated by exactly ONE complete full-body three-quarter combat-load pose of Nyra Kestrel as an iconic mythic storm-warden lead. No inset unless absolutely necessary. Her singular authored thumbnail silhouette must read as: upper-left split thunder yoke, diagonal torso conductor, lower-right massive grounding greave, and one long odachi forming the counter-diagonal.",
+        "Composition/framing: pale warm-gray studio background only, subtle contact shadow. Entire yoke terminals, head, braid, both arms/hands, both legs/soles, one pommel, one blade tip fully inside generous margins. Body's main axis descends from upper-left yoke/shoulder to the dramatically heavy RIGHT grounding foot planted in the lower-right quadrant. The lighter LEFT leg braces toward lower-left. The single long odachi counter-diagonal rises from pommel at lower-left through two hands near center to guard/caged base and blade tip at upper-right. No crop, no environment, no inset text.",
+        "Combat force/anatomy: a decisive loaded beat, not a neutral ready pose and not a running leap. Heavy character-RIGHT grounding foot is flat and planted, knee tracking over broad sole; the lighter left leg braces and pushes. Pelvis turns against the planted right leg while ribcage counter-rotates toward the blade. Spine inclines into resistance. Shoulders are offset, lats engaged, elbows and forearms form a credible force chain; both wrists neutral and visibly transmit the mass of the long blade. Center of mass sits over the broad right sole. Directional intent is toward upper-right as if arresting or redirecting enormous blade inertia. Storm-cloth, tassets, straps, plates and conductor hardware visibly respond to torque: inner cloth compresses at the loaded hip, outer tassets trail slightly, shoulder layers bunch, straps pull taut, plates overlap/compress on the loaded side. Weapon mass must feel heavy through anatomy and material response, with no VFX.",
+        "Exact identity invariants: preserve the same mature lived-in woman's face—low brows, slightly crooked nose, subtle under-eye fatigue/crow's feet, healed brow notch, unsmiling vigilant expression—and exact short asymmetric braid with ceramic beads. Preserve one attached split warm-IVORY ceramic induction yoke mounted behind and around character-LEFT shoulder only, a thick broken C/open squared horseshoe with two blunt terminals and clear gap, attached to a blackened-steel load frame. Preserve one mechanically protected oxidized-copper conductor crossing diagonally from yoke through torso fastenings into one compact RIGHT-hip capacitor, then continuing into the one dramatically heavier character-RIGHT grounding greave with blackened-steel slabs, copper shunts and extra-wide flat zero-heel sole. LEFT leg remains visibly lighter.",
+        "Mythic costume transformation: replace the civilian coverall/tunic impression with a deeply authored layered storm-warden construction. Large interlocked worn warm-ivory ceramic lamella and reliquary-like insulating shapes form an asymmetric shoulder mantle, sternum bridge, rib/hip protection and forearm shells; these are functional electrical insulation, angular and architectural, not generic samurai scales or knight plate. Beneath them, deep-cobalt woven storm-cloth forms wrap layers, articulated sleeves, overlapping torque-responsive tassets and leg wraps, with visible hand-built woven texture and ritual repair seams. A restrained blackened-steel load frame visibly carries the yoke and anchors armor under load. The single oxidized-copper structural conductor is integrated into ceramic fastenings, hinge pins, clamps and tension closures so it reads foundational, never bolt-on decoration. Keep broad capable shoulders, solid waist, powerful thighs, realistic anatomy; no bust sculpting, corset, cleavage, fetish shaping or heels. Materials are matte and worn at contact edges only. Silhouette hierarchy and big shapes before microdetail.",
+        "Exact weapon/contact invariants, highest priority: exactly ONE complete Stormcage odachi, identical to Image 3: one gently curved blackened-steel blade; one small pale mineral billet physically caged in a stout black rectangular frame ONLY at blade base; one broad low rectangular ivory ceramic guard; one long oval deep-cobalt woven-insulated hilt with ivory ferrules and central separator; one capped ivory pommel; recessed copper never on gripping surfaces. Both complete hands remain visibly CLOSED around separated regions of that SAME continuous blue-wrapped hilt, character-RIGHT/leading hand below guard and character-LEFT/trailing hand above pommel, with exposed blue grip and ivory separator between hands. The hilt visibly enters and exits both fists; each hand has one thumb and four curled fingers with contact pressure and wrap compression. No hover, gap, malformed digits, fused hand, crossed wrist, body penetration, detached part, duplicate guard/hilt/blade, second sword or scabbard.",
+        "Style/medium: premium original 2D industrial-mythic fantasy character concept painting, crisp hand-authored controlled edges, restrained linework, matte material separation, pale studio clarity; no photoreal cosplay, no 3D render.",
+        "Hard reject if: passive/neutral weight distribution; civilian technician/workwear read; generic samurai, knight or cyberpunk silhouette; missing/detached yoke; broken/mirrored load path; wrong heavy leg; either hand not enclosing the same continuous hilt; weapon duplication/detachment; malformed anatomy; crop.",
+        "Avoid: text, labels, logo, watermark, environment, lightning, glow, particles, action smear, motion blur, dramatic VFX, cape, skirt, long coat tails, horns, wings, antlers, decorative spikes, generic samurai, generic knight, generic cyberpunk technician, glossy plastic, pin-up anatomy, franchise cues."
+      ]
+    },
+    {
+      "generation_id": "mythic-force-candidate-02",
+      "mode": "edit",
+      "taxonomy": "identity-preserve",
+      "edit_inputs": [
+        {"role": "Round009 costume/contact base", "sha256": "2b4b7d5931fe61e34e412345da3394a258d82193b7dde603f8fa977a0ed1a204"},
+        {"role": "same-hilt contact authority", "sha256": "06249a9cf8fcc94c4d531ebb6ffa835c4b7be8cc77202836069dd42d9e27692d"},
+        {"role": "character authority", "sha256": "f54d6f4b4bc7707841b623148f522c1c60730bd8c6c620d4698531d928f2545a"},
+        {"role": "weapon authority", "sha256": "6b604c69bf417e33e211366a006c800275b1ca3dda7a168bd84dcba054fff48b"}
+      ],
+      "output": "Iterations/P10_Round009_NyraKestrel_MythicForce_candidate02_reject.png",
+      "sha256": "45a6b89d22b34a84e2854dfe1556b0622da9807ed3cc51e96c4f3757e8b6ffe4",
+      "byte_size": 2129944,
+      "dimensions_px": {"width": 1536, "height": 1024},
+      "format": "png",
+      "status": "rejected",
+      "rejection_reasons": [
+        "The load shift is stronger and all identity/contact/weapon-count invariants remain readable.",
+        "Both hands remain too low near the pelvis, leaving the shoulders and upper back insufficiently loaded by the long blade; the body still reads as a guarded presentation stance."
+      ],
+      "exact_prompt_lines": [
+        "Use case: identity-preserve",
+        "Asset type: targeted original 2D mythic-force correction, Round009 candidate 02 of at most 04",
+        "Input images: Image 1 is the new Round009 base and is authoritative for the successful mythic layered costume, exact mature face/braid, attached split left yoke, diagonal copper route, right-hip capacitor, massive character-RIGHT greave, lighter left leg, one complete exact odachi, and both hands visibly closed on separated parts of the same hilt. Image 2 is sole authority for the already-solved same-hilt contact topology. Image 3 remains exact identity/handed-equipment authority. Image 4 remains exact weapon authority.",
+        "Primary request: PRESERVE Image 1's successful character identity, mythic storm-warden material construction, macro silhouette anchors, exact one-object sword, exact same-hilt two-hand closures, clean pale studio, framing and matte 2D painting. Correct ONLY its documented weakness: the stance still feels presented rather than bodily integrated under enormous combat load. Re-articulate the whole body and all torque-responsive equipment into one unmistakable loaded kinetic chain, without adding VFX or changing the design.",
+        "Force correction: heavy character-RIGHT grounding foot stays the huge broad planted mass in the LOWER-RIGHT quadrant, fully flat with heel and forefoot loaded. Set the pelvis lower and laterally over that sole; character-RIGHT knee bends and tracks over the toe while the character-LEFT leg lengthens toward lower-left and visibly pushes the ground away. Counter-rotate pelvis and ribcage: pelvis turns slightly viewer-left, ribcage twists hard toward upper-right behind the sword; spine forms a believable braced diagonal rather than upright presentation. Drop the character-RIGHT shoulder and draw the character-LEFT shoulder back so the two shoulders, forearms, wrists and hilt form a visibly tensioned force chain arresting the long blade's momentum toward upper-right. Both elbows bend under load; forearm muscles and hands compress the wrap. Center of mass must sit over the right grounding sole. The face remains vigilant and directed along the intended blade line.",
+        "Equipment/body response: preserve the same layered functional costume but make load visible. The cobalt storm-cloth compresses in deep folds at the loaded right groin/hip and waist; opposite-side cloth stretches taut. Interlocked ivory ceramic insulation overlaps close on the compressed right torso and opens fractionally on the left twist. The blackened-steel load-frame strap from the left yoke pulls taut across the back/upper torso. The single protected copper conductor remains continuous and strains inside its integrated clamps without floating. Cobalt articulated tassets and wrap ends trail toward lower-left from the torque; no symmetrical hanging skirt shape. Shoulder mantle nests into the yoke mount under compression. Nothing floats.",
+        "Macro silhouette remains exact and ownable: split ivory thunder-yoke at upper-left; protected copper diagonal across torso; giant heavy RIGHT grounding mass at lower-right; one long odachi counter-diagonal from lower-left pommel through hands to upper-right blade tip. Do not crop. Exactly one full-body figure, no insets.",
+        "Exact contact lock: exactly one connected odachi from one pommel through one continuous deep-cobalt hilt, both separated closed hands, one separator, one broad ivory guard, one black cage with small base-only pale mineral, and one gently curved blackened-steel blade to one tip. Character-RIGHT/leading hand below guard and character-LEFT/trailing hand above pommel. Same hilt visibly enters and exits each fist; four curled fingers and opposed thumb per hand, pressure and wrap compression. No hover, gap, fused/malformed digits, wrist kink, body penetration, duplicate/detached weapon part, second sword or scabbard.",
+        "Exact identity/design lock: mature face, brow notch, crooked nose, under-eye fatigue, asymmetric short braid and beads; one attached split ivory yoke only at character-LEFT shoulder; one diagonal protected copper route to one RIGHT-hip capacitor then the massive character-RIGHT greave; lighter left boot. Preserve the layered warm-ivory ceramic reliquary/lamella insulation, deep-cobalt woven storm-cloth wraps/tassets, blackened-steel load frame and integrated oxidized-copper fastenings. Keep forms electrical and architectural, not historical armor.",
+        "Style/medium: premium original 2D industrial-mythic fantasy concept painting with crisp controlled hand-painted edges, matte worn materials and pale studio clarity.",
+        "Hard reject: neutral/presented stance; center of mass between feet; cloth/plates hanging symmetrically; civilian technician read; generic samurai/knight/cyberpunk read; any drift in face/braid/yoke/load path/heavy-right-leg/weapon; missing same-hilt contact; crop.",
+        "Avoid: text, logo, watermark, environment, lightning, glow, particles, motion blur, action smear, cape, skirt, long coat, horns, wings, antlers, decorative spikes, samurai scales, knight plate, cyberpunk coveralls, corset, bust sculpting, fetish anatomy, franchise cues, photoreal cosplay, 3D render."
+      ]
+    },
+    {
+      "generation_id": "mythic-force-candidate-03",
+      "mode": "edit",
+      "taxonomy": "identity-preserve",
+      "edit_inputs": [
+        {"role": "Round009 costume/contact base", "sha256": "45a6b89d22b34a84e2854dfe1556b0622da9807ed3cc51e96c4f3757e8b6ffe4"},
+        {"role": "same-hilt contact authority", "sha256": "06249a9cf8fcc94c4d531ebb6ffa835c4b7be8cc77202836069dd42d9e27692d"},
+        {"role": "character authority", "sha256": "f54d6f4b4bc7707841b623148f522c1c60730bd8c6c620d4698531d928f2545a"},
+        {"role": "weapon authority", "sha256": "6b604c69bf417e33e211366a006c800275b1ca3dda7a168bd84dcba054fff48b"}
+      ],
+      "output": "Iterations/P10_Round009_NyraKestrel_MythicForce_candidate03_reject.png",
+      "sha256": "694d7237f1260f98cd57af370f4280737709a6f53a443d879c68437202e6b2b8",
+      "byte_size": 2219646,
+      "dimensions_px": {"width": 1536, "height": 1024},
+      "format": "png",
+      "status": "rejected",
+      "rejection_reasons": [
+        "The raised hilt, asymmetric right-foot load, push-pull shoulders, pelvis/ribcage opposition, and equipment torque response solve the full-body combat-force defect.",
+        "The weapon guard drifts into a circular/tall ring assembly with an extra round plate, violating the exact single broad low rectangular Stormcage guard and generic-katana avoidance."
+      ],
+      "exact_prompt_lines": [
+        "Use case: identity-preserve",
+        "Asset type: targeted original 2D combat-force correction, Round009 candidate 03 of at most 04",
+        "Input images: Image 1 is authoritative for the successful Round009 mythic storm-warden costume, exact mature face/braid, attached left yoke, handed copper load path, right-hip capacitor, massive character-RIGHT greave/lighter left leg, full framing, and one complete Stormcage odachi. Image 2 is sole authority for the solved anatomy/contact relationship: both hands visibly enclose separated regions of one continuous hilt. Images 3 and 4 remain exact identity and weapon authorities.",
+        "Primary request: preserve all design, materials, identity, one-object weapon continuity, same-hilt contact, pale studio, and 1536x1024 full-body framing from Image 1. Correct ONLY the remaining combat-force failure by replacing its low pelvis-level hand position and symmetrical presentation stance with an unmistakably shoulder-loaded blade-arrest under torsion.",
+        "Required pose map: heavy character-RIGHT grounding foot remains a dramatically huge broad flat mass planted in the LOWER-RIGHT quadrant, sole completely flush to ground. Bend the right knee deeply and move the pelvis decisively over that right heel/sole. The lighter character-LEFT leg extends long to LOWER-LEFT as a rear driving brace, heel engaged, creating a clearly asymmetrical base. Torso rises from the loaded right hip toward UPPER-LEFT, but leans and twists toward the weapon. Pelvis counter-rotates viewer-left while ribcage rotates strongly viewer-right; waist cloth shows opposing diagonal compression and stretch.",
+        "Raise the SAME connected hilt and BOTH closed hands together from pelvis level to LOWER-CHEST / STERNUM HEIGHT, clearly separated from the hips and thighs. The character-RIGHT leading hand remains immediately below the guard; character-LEFT trailing hand remains above pommel, with visible blue wrap and ivory separator between. Both elbows are lifted away from the body and bent under load. The leading forearm drives toward upper-right while the trailing elbow pulls back toward upper-left, producing a visible push-pull torque couple through shoulders, chest, lats and obliques. One shoulder advances and drops; the other retracts and rises. Wrists remain straight with the hilt. Neck and head counter-turn along the blade line. This is the instant Nyra arrests a massive rising blade deflection—not a neutral ready stance, pose display, run or leap.",
+        "Weapon counter-diagonal: one pommel near mid-left/lower-left, continuous hilt passes through the two chest-height hands near canvas center, one guard and caged blade base at center-right, one long gently curved blade continues to UPPER-RIGHT tip. Complete weapon and body remain in frame. The blade's visible length must feel massive and shoulders/forearms must visibly bear it.",
+        "Torque response: preserve the layered costume but make its mechanics react. Deep-cobalt woven storm-cloth bunches and compresses at the loaded right hip/ribs, stretches taut across the opposing flank, and wrap/tasset ends trail subtly toward lower-left. Ivory ceramic reliquary plates overlap tightly on compression side and fan slightly on extension side. Blackened-steel yoke load-frame strap pulls taut diagonally. The protected copper conductor remains one continuous mechanically clamped line and curves only at articulated joints. Right-hip capacitor is pulled into its belt harness; belt edge dents cloth. No floating plates or symmetrical skirt.",
+        "Macro silhouette lock: upper-left attached split ivory thunder-yoke; diagonal protected copper torso route; lower-right massive right grounding greave; one odachi counter-diagonal lower-left to upper-right. Singular at thumbnail.",
+        "Exact contact/weapon lock, highest priority: exactly ONE connected Stormcage odachi—one capped ivory pommel, one long oval cobalt woven hilt, one ivory separator, one broad low rectangular ivory guard, one stout black cage with a small pale mineral ONLY at blade base, one gently curved blackened-steel blade, one tip. Both complete hands CLOSED on separated cobalt regions of that SAME continuous hilt; right/leading hand below guard, left/trailing hand above pommel; hilt enters/exits each fist; opposed thumb and four curled fingers per hand, pressure and wrap compression. No hover, gap, malformed/fused digits, wrist kink, body penetration, detached or duplicate part, second sword/scabbard.",
+        "Exact identity/design lock: same mature lived-in face, brow notch, crooked nose, under-eye fatigue, asymmetric short braid/beads; one attached split ivory yoke only at character-LEFT shoulder; one copper route to character-RIGHT hip capacitor and one massive character-RIGHT greave; lighter left boot. Same functional electrical layering of interlocked worn warm-ivory ceramic reliquary insulation, deep-cobalt woven storm-cloth wraps/tassets, blackened-steel load frame, oxidized-copper structural fastenings. Architectural electrical construction, not historical armor.",
+        "Style/medium: premium original 2D industrial-mythic fantasy concept painting, controlled hand-painted edges, restrained linework, matte wear, pale studio clarity.",
+        "Hard reject: hands below waist or touching pelvis; shoulders relaxed; weight centered between feet; upright/symmetrical presentation stance; missing counter-rotation; unchanged cloth/strap response; civilian technician or generic samurai/knight/cyberpunk read; drift in face/braid/yoke/load path/heavy-right-leg/weapon/contact; crop.",
+        "Avoid: text, labels, logo, watermark, environment, lightning, glow, particles, motion blur, action smear, extra insets, cape, skirt, long coat, horns, wings, antlers, spikes, historical samurai scales, knight plate, cyberpunk coveralls, corset, bust sculpting, fetish anatomy, franchise cues, photoreal cosplay, 3D render."
+      ]
+    },
+    {
+      "generation_id": "mythic-force-candidate-04",
+      "mode": "edit",
+      "taxonomy": "precise-object-edit",
+      "edit_inputs": [
+        {"role": "Round009 solved mythic-force base", "sha256": "694d7237f1260f98cd57af370f4280737709a6f53a443d879c68437202e6b2b8"},
+        {"role": "same-hilt contact authority", "sha256": "06249a9cf8fcc94c4d531ebb6ffa835c4b7be8cc77202836069dd42d9e27692d"},
+        {"role": "character authority", "sha256": "f54d6f4b4bc7707841b623148f522c1c60730bd8c6c620d4698531d928f2545a"},
+        {"role": "weapon authority", "sha256": "6b604c69bf417e33e211366a006c800275b1ca3dda7a168bd84dcba054fff48b"}
+      ],
+      "output": "Iterations/P10_Round009_NyraKestrel_MythicForce_candidate04.png",
+      "sha256": "dcaf4e5464c05f51a75db3a5f3c07e898f9d9e778779f1f635bcfaedf70e1c7e",
+      "byte_size": 2290221,
+      "dimensions_px": {"width": 1536, "height": 1024},
+      "format": "png",
+      "status": "accepted-and-copied",
+      "accepted_copy": "P10_Round009_NyraKestrel_MythicForce_v1.png",
+      "acceptance_basis": [
+        "One full-body three-quarter figure dominates a clean pale studio sheet with every body, yoke, weapon, and sole extremity in frame.",
+        "The upper-left split yoke, diagonal copper route, lower-right grounding mass, and odachi counter-diagonal create a singular thumbnail silhouette.",
+        "The mature face, asymmetric braid, attached yoke, right-hip capacitor, heavy right greave, lighter left leg, and exact material hierarchy remain readable.",
+        "The costume is no longer civilian coveralls: layered ivory electrical reliquary plates, cobalt woven torque layers, a blackened-steel load frame, and integrated copper fastenings form the storm-warden construction.",
+        "The heavy right foot is planted; the pelvis sinks toward it; ribcage, shoulders, elbows, forearms, wrists, cloth, plates, straps, capacitor harness, and conductor all express a loaded counter-rotation without VFX.",
+        "Exactly one complete Stormcage odachi is present. Both hands visibly close on separated regions of the same continuous hilt; one rectangular guard, one base cage, one blade, one pommel, and one tip are present with no crop or body penetration.",
+        "No text, logo, watermark, environment, lightning, glow, particles, or action smear is visible."
+      ],
+      "exact_prompt_lines": [
+        "Use case: precise-object-edit",
+        "Asset type: final bounded original 2D exact-weapon correction, Round009 candidate 04 of 04",
+        "Input images: Image 1 is the authoritative finished mythic-force composition. Preserve its exact mature Nyra identity, face, braid, mythic layered costume, attached left yoke, diagonal copper load path, right-hip capacitor, massive planted character-RIGHT grounding greave, lighter left brace leg, full-body framing, deeply loaded stance, pelvis/ribcage counter-rotation, raised chest-height push-pull arms, both closed hands on one hilt, cloth/plate torque response, pale studio, matte 2D painting, and complete blade silhouette. Image 2 is authoritative for exact same-hilt contact. Image 3 is exact identity/handed equipment authority. Image 4 is SOLE exact weapon construction authority.",
+        "Primary request: CHANGE ONLY the weapon's guard and immediately adjacent blade-base cage junction in Image 1. Its circular/tall guard drift is wrong. Replace it with the exact accepted Image 4 Stormcage construction while leaving every other pixel-level design relationship conceptually unchanged.",
+        "Exact local correction: remove the circular ring/tsuba-like shape and any extra round plate behind or around the hilt. There must be exactly ONE broad LOW RECTANGULAR warm-ivory ceramic guard with rounded rectangular corners and a blackened-steel structural core, oriented perpendicular to the hilt. It is wider left-to-right across the blade/hilt axis and thin along the axis, never circular, oval, wheel-like, crescent, or vertically tall. Immediately beyond that one guard, toward the blade, preserve exactly ONE small desaturated pale mineral billet physically enclosed in ONE stout blackened-steel rectangular cage with crossbars, bolted cheeks and raised rim, ONLY at the blade base. Short oxidized-copper bus bars pass from this cage through the guard into the full tang. No other mineral, ring, guard, disk, module or plate.",
+        "One-object/contact lock: keep exactly one connected odachi from one capped ivory pommel at left through one continuous deep-cobalt oval woven hilt, character-LEFT trailing closed hand, visible blue wrap plus one small ivory separator, character-RIGHT leading closed hand, the corrected one low rectangular guard, one base cage, one gently curved blackened-steel blade, and one upper-right tip. Both existing hands remain in their exact chest-height locations, visibly closed on separated cobalt regions of that same hilt; preserve all fingers, thumbs, contact pressure, wrap ingress/egress and straight wrists. Do not move, regenerate, duplicate or detach hands, hilt, blade or pommel.",
+        "Absolute preservation lock: keep Image 1's exact combat-loaded anatomy and silhouette—huge character-RIGHT foot planted lower-right, pelvis sunk toward it, lighter left leg driving lower-left, torso/shoulders counter-rotated, elbows lifted, raised hands, blade mass visibly carried. Keep exact face/braid, upper-left attached split ivory yoke, continuous protected copper diagonal, right hip capacitor, functional layered ivory ceramic reliquary insulation, cobalt storm-cloth wraps/tassets, blackened-steel load frame, oxidized-copper fastenings. No costume or pose redesign. Keep entire character, yoke, both soles, pommel and blade tip fully framed on pale warm-gray studio.",
+        "Style/medium: exact premium original 2D industrial-mythic concept painting from Image 1, crisp hand-painted matte edges and restrained wear.",
+        "Hard reject: any circular/oval/tall guard; extra ring or second guard; guard/cage duplication; detached blade/hilt; altered same-hilt contact; hands lowered; pose relaxed; identity/load-path/heavy-right-leg drift; crop.",
+        "Avoid: text, labels, logo, watermark, environment, lightning, glow, particles, motion blur, action smear, generic katana tsuba, generic samurai/knight/cyberpunk cues, fetish anatomy, franchise cues, photoreal cosplay, 3D render."
+      ]
+    }
+  ],
+  "accepted_asset": {
+    "file": "P10_Round009_NyraKestrel_MythicForce_v1.png",
+    "sha256": "dcaf4e5464c05f51a75db3a5f3c07e898f9d9e778779f1f635bcfaedf70e1c7e",
+    "byte_size": 2290221,
+    "dimensions_px": {"width": 1536, "height": 1024},
+    "format": "png",
+    "source_generation_id": "mythic-force-candidate-04"
+  },
+  "validation": {
+    "json_validated": true,
+    "all_input_hashes_recomputed": true,
+    "all_output_hashes_recomputed": true,
+    "all_output_byte_sizes_recomputed": true,
+    "all_output_dimensions_and_formats_recomputed": true,
+    "accepted_copy_hash_matches_source_output": true,
+    "native_visual_inspection_completed": true,
+    "attempt_cap_respected": true,
+    "only_round009_modified": true
+  },
+  "privacy_cleanup": {
+    "public_safe": true,
+    "absolute_paths_present": false,
+    "usernames_present": false,
+    "private_archive_filename_present": false,
+    "private_benchmark_filenames_or_paths_present": false,
+    "private_benchmark_pixels_embedded": false,
+    "prohibited_private_archive_inspected": false,
+    "temporary_extraction_created": false,
+    "temporary_comparison_sheets_created": false,
+    "third_party_franchise_pixels_used": false
+  }
+}
