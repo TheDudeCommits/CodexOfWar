@@ -1,0 +1,343 @@
+{
+  "schema": "codexofwar.fresh-elbow-return-triangle-review",
+  "version": "1.0.0",
+  "review_id": "P10-Round013-FreshElbowReturnTriangleReview",
+  "reviewed_utc": "2026-08-01T06:55:40Z",
+  "reviewer_mode": "independent hostile AAA elbow-return-triangle and pre-engine gate",
+  "scope": {
+    "project_asset": "P10 Nyra Kestrel",
+    "round": "Round013",
+    "judged_unit": "Elbow Return Triangle — isolated two-arm weapon-load topology",
+    "isolated_question": "Whether the strongest Round013 keyframe creates a compact leading elbow fold, a trailing elbow that is the far down-left and lowest external arm vertex, a forearm returning up-right to an inward hand, and a large pale triangular negative space while preserving frozen shoulder order, jaw gap, same-hilt contact, lower load, toe skid, blade mass, identity, design, and framing.",
+    "claims_not_made": [
+      "actual game run or capture",
+      "successful Elbow Return Triangle",
+      "3D, rig, mesh, UV, deformation, collision, animation, LOD, engine, game-ready, or production-ready status",
+      "legal originality, exclusivity, copyright clearance, or trademark clearance"
+    ]
+  },
+  "artifact_integrity": {
+    "attempts": [
+      {
+        "candidate_id": "elbow-return-triangle-candidate-01",
+        "path": "Iterations/P10_Round013_ElbowReturnTriangle_candidate01.png",
+        "sha256": "c033ffe206dec0343894dd1a4742099a4b4e96224caa113173d14344c1063386",
+        "byte_size": 2053709,
+        "dimensions_px": {"width": 1536, "height": 1024},
+        "format": "png",
+        "fresh_finding": "This best preserves the prior identity and loaded lower-body read, but both arms haul toward hilt endpoints; neither elbow path creates the required fold-return mechanism."
+      },
+      {
+        "candidate_id": "elbow-return-triangle-candidate-02",
+        "path": "Iterations/P10_Round013_ElbowReturnTriangle_candidate02.png",
+        "sha256": "9731b43baedace9e4e1d0b2dd1e7f9aa92b2e330113ae8a55754e07a09bec4e0",
+        "byte_size": 2110727,
+        "dimensions_px": {"width": 1536, "height": 1024},
+        "format": "png",
+        "fresh_finding": "The hilt tail is useful and both contacts remain readable, but the leading arm is extended and the trailing hand continues down-left rather than receiving an up-right forearm return."
+      },
+      {
+        "candidate_id": "elbow-return-triangle-candidate-03",
+        "path": "Iterations/P10_Round013_ElbowReturnTriangle_candidate03.png",
+        "sha256": "779006f95836184d0206a85871dd17d70e3a60c6430c8044e3e193d0a8729422",
+        "byte_size": 2126659,
+        "dimensions_px": {"width": 1536, "height": 1024},
+        "format": "png",
+        "fresh_finding": "This is another endpoint-reaching solution: the leading elbow stays long, the trailing elbow never becomes the lowest external vertex, and no return triangle opens."
+      },
+      {
+        "candidate_id": "elbow-return-triangle-candidate-04",
+        "path": "Iterations/P10_Round013_ElbowReturnTriangle_candidate04.png",
+        "sha256": "c88489f7af2c0a5d223f431fb322f72ac549283819c3c9b6281a20c1b39fbcd6",
+        "byte_size": 1750551,
+        "dimensions_px": {"width": 1536, "height": 1024},
+        "format": "png",
+        "fresh_finding": "The strongest isolated attempt finally folds the leading elbow compactly beneath the high shoulder, but the trailing arm descends monotonically to its hand, creates no return triangle, and incurs severe identity, design, stance, and toe-skid drift."
+      }
+    ],
+    "accepted_copy": {
+      "path": "P10_Round013_NyraKestrel_ElbowReturnTriangle_v1.png",
+      "sha256": "c88489f7af2c0a5d223f431fb322f72ac549283819c3c9b6281a20c1b39fbcd6",
+      "byte_size": 1750551,
+      "dimensions_px": {"width": 1536, "height": 1024},
+      "format": "png",
+      "byte_identical_to_candidate_04": true
+    },
+    "guide_png": {
+      "path": "P10_Round013_OriginalElbowReturnTriangleGuide.png",
+      "sha256": "bedafd12ba61c48ec0a7fb4f18babfdb06f0a28b800d63ab04a2d61295042c70",
+      "byte_size": 141980,
+      "dimensions_px": {"width": 1536, "height": 1024},
+      "format": "png"
+    },
+    "guide_svg": {
+      "path": "P10_Round013_OriginalElbowReturnTriangleGuide.svg",
+      "sha256": "cac19ee4abe9ecdaeb003cead6a62c4b635bc23678032f22a7ec5863d3dfeea7",
+      "byte_size": 5371,
+      "dimensions_px": {"width": 1536, "height": 1024},
+      "dimension_basis": "declared width, height, and viewBox",
+      "format": "svg"
+    },
+    "receipt": {
+      "path": "P10_Round013_ElbowReturnTriangleReceipt.json",
+      "sha256": "2ebff0f4c747e05a9054aa23a9f59d3ef2cdb19bd9b5afed6255a9437251b8cb",
+      "byte_size": 28504,
+      "dimensions_px": null,
+      "dimension_status": "not applicable to text",
+      "format": "json"
+    },
+    "readme": {
+      "path": "README.md",
+      "sha256": "fda5d53b228fb91d0cc1b996b1be4cf5f8ae7173ebb2d4fce43eb2a2b7657a0e",
+      "byte_size": 3940,
+      "dimensions_px": null,
+      "dimension_status": "not applicable to text",
+      "format": "markdown"
+    },
+    "all_hashes_sizes_and_dimensions_recomputed": true,
+    "all_attempts_inspected_at_native_resolution": true,
+    "candidate_04_acceptance_equality_recomputed": true
+  },
+  "elbow_return_triangle_contract_audit": {
+    "original_guide_png_and_svg_inspected": true,
+    "guide_geometry": {
+      "leading_upper_arm_path": "M 852 346 C 871 363 875 387 856 412",
+      "leading_forearm_path": "M 856 412 C 874 398 892 386 914 382",
+      "leading_elbow_center_px": [857, 411],
+      "trailing_upper_arm_path": "M 681 423 L 446 626",
+      "trailing_forearm_path": "M 446 626 L 655 563",
+      "trailing_elbow_center_px": [446, 626],
+      "pale_triangle_path": "M 659 449 L 479 602 L 640 553 C 655 527 666 489 659 449 Z",
+      "hilt_axis_px": [[604, 593], [932, 372]],
+      "blade_axis_px": [[908, 389], [1410, 102]]
+    },
+    "checks": [
+      {
+        "contract": "compact leading elbow folded beneath the high leading shoulder",
+        "status": "met",
+        "finding": "Candidate 04 makes the viewer-right arm turn through a short, acute elbow beneath the high shoulder; this is the one decisive topology improvement over the prior attempts."
+      },
+      {
+        "contract": "trailing elbow far down-left and lowest external arm vertex",
+        "status": "not_met",
+        "finding": "The viewer-left arm continues down-left toward the hand; the hand, not the elbow, terminates the descending path, so there is no low external elbow corner."
+      },
+      {
+        "contract": "trailing forearm returns sharply up-right to an inward hand",
+        "status": "not_met",
+        "finding": "No directional reversal occurs after the trailing elbow. The arm reads as one monotonic diagonal rather than an upper-arm descent followed by a returning forearm."
+      },
+      {
+        "contract": "large pale triangular negative space",
+        "status": "not_met",
+        "finding": "Without an external low elbow and return segment, the torso, upper arm, and forearm cannot bound the required open pale triangle."
+      },
+      {
+        "contract": "high viewer-right and low viewer-left shoulder order with jaw gap",
+        "status": "met",
+        "finding": "The shoulder order remains legible and a useful pale gap separates the lowered trailing shoulder from the jaw."
+      },
+      {
+        "contract": "complete separated same-hilt contact with inward trailing hand and tail beyond",
+        "status": "met",
+        "finding": "Both hands are complete and separated on one continuous hilt, and hilt material remains visible past the trailing hand; the hilt and guard design themselves drift."
+      },
+      {
+        "contract": "frozen lower load and rear toe-only skid",
+        "status": "not_met",
+        "finding": "The prior compressed right load column becomes a broad bilateral stance, while the rear foot loses the airborne heel, toe-only skid, and gouge logic."
+      },
+      {
+        "contract": "frozen identity, costume, armor, weapon construction, and framing",
+        "status": "not_met",
+        "finding": "Face, hair architecture, chest yoke, armor language, guard and hilt construction, limb proportions, stance, and crop relationships are substantially reconstructed rather than frozen."
+      },
+      {
+        "contract": "upper-right blade mass remains outside the torso silhouette",
+        "status": "partially_met",
+        "finding": "The blade still occupies the upper-right field and the full figure and weapon fit inside frame, but blade, hilt, and body proportions materially change."
+      },
+      {
+        "contract": "one violent arrested stop",
+        "status": "not_met",
+        "finding": "The compact leading arm adds compression, but the missing trailing reversal and lost lower-load skid prevent the pose from resolving as one linked violent stop."
+      }
+    ],
+    "fresh_attempt_ranking": [
+      "candidate-04",
+      "candidate-01",
+      "candidate-02",
+      "candidate-03"
+    ]
+  },
+  "private_benchmark_comparison": {
+    "method": "Six relevant private gameplay views were reviewed as sequential unlabeled A/B pairs with independently randomized candidate/reference order. Original aspect ratios were preserved, no retouching was performed, and no comparison composite was created. Temporary private extraction was deleted after inspection and no private pixels were copied into the repository or publication.",
+    "comparison_count": 6,
+    "required_candidate_meets_or_exceeds_count": 5,
+    "candidate_meets_or_exceeds_count": 2,
+    "candidate_below_count": 4,
+    "gate_passed": false,
+    "comparisons": [
+      {
+        "comparison_id": "ER01",
+        "focus": "compact leading-elbow fold and near-body compression",
+        "benchmark": {"benchmark_id": "PRIVATE-BM-ER-01", "sha256": "c4693a135a8f66b17759349dd81e126001989aac894db1714d2d2cad89ae8fe0", "dimensions_px": {"width": 739, "height": 415}, "format": "jpeg"},
+        "candidate_meets_or_exceeds": true,
+        "finding": "The candidate's acute leading fold is exceptionally explicit in the isolated frame and creates a clear near-body compression point."
+      },
+      {
+        "comparison_id": "ER02",
+        "focus": "trailing elbow as the far down-left and lowest external vertex",
+        "benchmark": {"benchmark_id": "PRIVATE-BM-ER-02", "sha256": "21858656b7887cc37f92c2bab4ed56f6cb273f45fd75193c0cb1c1b37456bc33", "dimensions_px": {"width": 596, "height": 335}, "format": "jpeg"},
+        "candidate_meets_or_exceeds": false,
+        "finding": "The candidate never establishes a projecting low elbow corner; its trailing hand simply continues the shoulder-to-hand descent."
+      },
+      {
+        "comparison_id": "ER03",
+        "focus": "up-right forearm return and authored triangular negative space",
+        "benchmark": {"benchmark_id": "PRIVATE-BM-ER-03", "sha256": "d208c98d2ea91b654fb11070616887e0f8564fe3c5040ae854e3aab8645be98d", "dimensions_px": {"width": 739, "height": 415}, "format": "jpeg"},
+        "candidate_meets_or_exceeds": false,
+        "finding": "The candidate supplies neither the directional reversal nor the large clean triangle needed to make counterforce readable without explanation."
+      },
+      {
+        "comparison_id": "ER04",
+        "focus": "complete separated same-hilt contact and hilt tail readability",
+        "benchmark": {"benchmark_id": "PRIVATE-BM-ER-04", "sha256": "1e99a94f8efbbdd9d4811e2706f84616ea9cc379909caee873d212ecfb9a68b0", "dimensions_px": {"width": 739, "height": 415}, "format": "jpeg"},
+        "candidate_meets_or_exceeds": true,
+        "finding": "Both candidate hands are complete, separated, visibly attached to one hilt, and followed by a conspicuous trailing hilt tail."
+      },
+      {
+        "comparison_id": "ER05",
+        "focus": "identity, design, and frozen-stance integration",
+        "benchmark": {"benchmark_id": "PRIVATE-BM-ER-05", "sha256": "a0161b955a1947fcabccc34c8e22ee0ebcb6ade357b51aa974c0057caf9294c9", "dimensions_px": {"width": 1920, "height": 1080}, "format": "webp"},
+        "candidate_meets_or_exceeds": false,
+        "finding": "The candidate treats the guide as a new character reconstruction; extensive face, hair, armor, weapon, proportion, and stance drift defeats frozen-design integration."
+      },
+      {
+        "comparison_id": "ER06",
+        "focus": "lower-load toe skid and one violent gameplay stop",
+        "benchmark": {"benchmark_id": "PRIVATE-BM-ER-06", "sha256": "06ac0710130fe19f7c844ecc453bca2d27bcc72b25fef3a2615f8877b53c9778", "dimensions_px": {"width": 1400, "height": 787}, "format": "jpeg"},
+        "candidate_meets_or_exceeds": false,
+        "finding": "The candidate's broad stance, flat rear contact, absent toe skid, and context-free presentation do not match the benchmark's linked recoil, ground reaction, and phase-specific stop."
+      }
+    ]
+  },
+  "scorecard": {
+    "scale": "0-10 per category; ten categories sum directly to 100",
+    "categories": [
+      {
+        "category": "identity and frozen-design continuity",
+        "score": 3,
+        "finding": "The palette and broad character premise persist, but face, hair, yoke, armor, guard, hilt, proportions, stance, and crop undergo major guide-only reconstruction."
+      },
+      {
+        "category": "compact leading-elbow fold",
+        "score": 8,
+        "finding": "The leading elbow is short, acute, and nested beneath the high shoulder; this isolated target reads immediately."
+      },
+      {
+        "category": "trailing elbow far down-left and lowest vertex",
+        "score": 2,
+        "finding": "The trailing elbow does not project below and outside the chain; the arm keeps descending toward the hand."
+      },
+      {
+        "category": "forearm return up-right to inward hand",
+        "score": 1,
+        "finding": "The required reversal is absent: there is no clearly legible up-right forearm segment after the elbow."
+      },
+      {
+        "category": "large pale triangular negative space",
+        "score": 1,
+        "finding": "No large pale triangle is bounded by torso, trailing upper arm, and returning forearm."
+      },
+      {
+        "category": "shoulder order and jaw-gap preservation",
+        "score": 7,
+        "finding": "The viewer-right shoulder remains high, the viewer-left shoulder low, and a readable jaw gap survives."
+      },
+      {
+        "category": "complete separated same-hilt grip and tail",
+        "score": 7,
+        "finding": "Both hands are complete and separated on one hilt with visible material beyond the inward trailing hand, despite weapon-design drift."
+      },
+      {
+        "category": "lower-body load and toe-skid preservation",
+        "score": 2,
+        "finding": "The frozen unilateral load and rear toe-only skid collapse into a broad bilateral stance and flatter rear-foot contact."
+      },
+      {
+        "category": "blade mass, framing, and render readability",
+        "score": 6,
+        "finding": "The upper-right blade mass, full-body framing, clean silhouette, and polished materials read, but weapon/body proportions and crop relationships drift."
+      },
+      {
+        "category": "benchmark authorship and violent-stop quality",
+        "score": 4,
+        "finding": "The image is polished and non-derivative in the bounded review, yet it clears only 2 of 6 comparisons and lacks linked trailing-arm and ground-reaction force."
+      }
+    ],
+    "composite_score": 41,
+    "maximum_score": 100,
+    "authorization_threshold": 85,
+    "observed_minimum_category_score": 1,
+    "minimum_category_score_required": 7,
+    "all_categories_meet_minimum": false,
+    "composite_threshold_passed": false
+  },
+  "engine_and_game_capture_truth": {
+    "unity_project_shell_present": true,
+    "installed_unity_editor_detected": true,
+    "review_only_unity_scenes_detected": true,
+    "round013_asset_integrated_in_unity": false,
+    "runtime_gameplay_architecture_detected": false,
+    "player_build_detected": false,
+    "runnable_game_for_reviewed_asset_detected": false,
+    "engineRun": false,
+    "actualGameCapturePerformed": false,
+    "engineIntegrationLocked": true,
+    "receiptEngineIntegrationAuthorized": false,
+    "visualOnlyGate": true,
+    "finding": "The workspace contains an installed editor and a Unity template/review shell, but no Nyra Round013 integration, runtime gameplay controller, encounter scene, or player build. Running unrelated review content could not produce matched gameplay evidence for this 2D proof, so no engine run or fabricated capture was performed."
+  },
+  "paid3D": {
+    "authorized": false,
+    "requested_or_used": false,
+    "status": "DENIED_NOT_USED",
+    "finding": "Paid 3D remains denied and unused because the isolated target, composite score, category floor, and five-of-six benchmark gates all fail."
+  },
+  "hard_gate": {
+    "composite_requirement": {"required": 85, "observed": 41, "passed": false},
+    "category_floor_requirement": {"required": 7, "observed_minimum": 1, "passed": false},
+    "benchmark_requirement": {"required_meets_or_exceeds": 5, "observed": 2, "comparison_count": 6, "passed": false},
+    "isolated_elbow_return_triangle_passed": false,
+    "all_conditions_passed": false
+  },
+  "verdict_token": "FAIL_ELBOW_RETURN_TRIANGLE_VISUAL_ONLY_GATE",
+  "single_biggest_remaining_gap": "The trailing-arm return topology is absent: the elbow never becomes the far down-left lowest vertex and the forearm never reverses up-right to the inward hand, so the required pale triangle cannot exist.",
+  "round014_prescription_limited_to_single_gap": "Freeze candidate 04's leading arm and every other judged fact; re-author only the trailing elbow, forearm, and hand path so the elbow becomes the far down-left lowest external vertex, the hand stays inward on the existing hilt, and the forearm returns sharply up-right, leaving a clean head-sized pale triangle untouched.",
+  "privacy_boundary": {
+    "public_safe": true,
+    "private_benchmark_bytes_copied_or_published": false,
+    "private_benchmark_source_path_present": false,
+    "private_benchmark_filenames_present": false,
+    "usernames_present": false,
+    "absolute_paths_present": false,
+    "benchmark_identifiers_limited_to_public_safe_ids_hashes_dimensions_and_formats": true,
+    "comparison_composites_created": false,
+    "temporary_private_extraction_deleted": true
+  },
+  "integrity_validation": {
+    "all_four_attempts_inspected_at_native_resolution": true,
+    "accepted_copy_inspected_at_native_resolution": true,
+    "original_guide_png_and_svg_inspected": true,
+    "candidate_04_and_accepted_copy_byte_equality_verified": true,
+    "receipt_and_readme_inspected": true,
+    "six_private_blind_pairs_completed": true,
+    "engine_truth_audited_without_fabrication": true,
+    "category_scores_sum_to_composite": true,
+    "exactly_one_biggest_remaining_gap_recorded": true,
+    "round014_prescription_limited_to_that_gap": true,
+    "json_validated": true,
+    "non_review_repository_files_modified_by_reviewer": false
+  }
+}

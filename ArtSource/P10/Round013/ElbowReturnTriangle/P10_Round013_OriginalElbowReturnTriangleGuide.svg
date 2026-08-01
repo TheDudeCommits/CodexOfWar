@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1536" height="1024" viewBox="0 0 1536 1024">
+  <rect width="1536" height="1024" fill="#f3efe6"/>
+
+  <text x="64" y="72" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="700" fill="#203246">ORIGINAL ELBOW RETURN TRIANGLE — SILHOUETTE GUIDE</text>
+  <text x="64" y="110" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="600" fill="#5c6f82">Round013 • authored vector geometry • no third-party pose pixels</text>
+
+  <!-- Frozen blade and hilt axis: upper-right mass and separated same-hilt grip -->
+  <path d="M 604 593 L 932 372" fill="none" stroke="#2e6f91" stroke-width="38" stroke-linecap="round"/>
+  <path d="M 908 389 L 1410 102" fill="none" stroke="#172838" stroke-width="66" stroke-linecap="square"/>
+  <path d="M 1210 247 L 1400 137" fill="none" stroke="#172838" stroke-width="108" stroke-linecap="square"/>
+
+  <!-- Head and jaw gap -->
+  <ellipse cx="758" cy="239" rx="66" ry="82" transform="rotate(-14 758 239)" fill="#ddc49a" stroke="#172838" stroke-width="18"/>
+  <path d="M 704 218 L 738 226" stroke="#dc4d2f" stroke-width="15" stroke-linecap="round"/>
+  <path d="M 774 317 L 791 357" stroke="#172838" stroke-width="24" stroke-linecap="round"/>
+
+  <!-- Twisted torso; viewer-right shoulder remains high, viewer-left shoulder low -->
+  <path d="M 673 423 C 694 379 746 354 807 350 C 846 348 875 367 888 402 C 870 468 840 538 792 612 C 736 613 688 582 651 528 C 645 488 652 453 673 423 Z" fill="#203246"/>
+  <path d="M 687 415 C 739 404 795 374 852 337" fill="none" stroke="#dc4d2f" stroke-width="16" stroke-linecap="round"/>
+
+  <!-- Leading arm: thick acute fold under the high viewer-right shoulder -->
+  <path d="M 852 346 C 871 363 875 387 856 412" fill="none" stroke="#2a8295" stroke-width="58" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 856 412 C 874 398 892 386 914 382" fill="none" stroke="#2a8295" stroke-width="48" stroke-linecap="round"/>
+  <circle cx="857" cy="411" r="21" fill="#f3efe6" stroke="#dc4d2f" stroke-width="9"/>
+  <ellipse cx="920" cy="380" rx="24" ry="31" transform="rotate(50 920 380)" fill="#ddc49a" stroke="#172838" stroke-width="9"/>
+
+  <!-- Trailing arm: shoulder to far down-left elbow, then forearm returns up-right -->
+  <path d="M 681 423 L 446 626" fill="none" stroke="#2a8295" stroke-width="66" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 446 626 L 655 563" fill="none" stroke="#2a8295" stroke-width="58" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="446" cy="626" r="24" fill="#f3efe6" stroke="#dc4d2f" stroke-width="10"/>
+  <ellipse cx="659" cy="559" rx="25" ry="32" transform="rotate(52 659 559)" fill="#ddc49a" stroke="#172838" stroke-width="9"/>
+
+  <!-- Explicit open pale negative-space window, bounded by torso and the two arm segments -->
+  <path d="M 659 449 L 479 602 L 640 553 C 655 527 666 489 659 449 Z" fill="#fffaf0" stroke="#e3a82e" stroke-width="12" stroke-linejoin="round"/>
+  <text x="405" y="492" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="700" fill="#9b6510">LARGE PALE</text>
+  <text x="405" y="524" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="700" fill="#9b6510">TRIANGLE</text>
+
+  <!-- Pelvis and frozen lower-load silhouette -->
+  <path d="M 699 593 C 744 568 820 566 865 598 L 838 672 C 780 695 705 682 664 637 Z" fill="#506373"/>
+  <path d="M 718 637 L 574 759 L 413 887" fill="none" stroke="#9da8ad" stroke-width="76" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 413 887 L 363 934 L 465 941" fill="none" stroke="#2a8295" stroke-width="31" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 829 626 L 976 732 L 1117 893" fill="none" stroke="#9da8ad" stroke-width="94" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 1117 893 L 1295 921" fill="none" stroke="#506373" stroke-width="62" stroke-linecap="round"/>
+  <path d="M 106 945 C 500 934 870 952 1441 938" fill="none" stroke="#9da8ad" stroke-width="8"/>
+
+  <!-- Non-overlapping explanatory callouts -->
+  <path d="M 930 316 L 876 365" fill="none" stroke="#dc4d2f" stroke-width="7"/>
+  <text x="944" y="287" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="700" fill="#52677b">HIGH SHOULDER</text>
+  <text x="944" y="318" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="600" fill="#52677b">ACUTE ELBOW FOLD UNDER IT</text>
+
+  <path d="M 293 660 L 415 629" fill="none" stroke="#dc4d2f" stroke-width="7"/>
+  <text x="70" y="687" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="700" fill="#52677b">ELBOW FAR DOWN-LEFT</text>
+  <text x="70" y="718" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="600" fill="#52677b">OUTSIDE TORSO</text>
+
+  <path d="M 797 744 L 622 583" fill="none" stroke="#dc4d2f" stroke-width="7"/>
+  <text x="806" y="750" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="700" fill="#52677b">FOREARM RETURNS UP-RIGHT</text>
+  <text x="806" y="781" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="600" fill="#52677b">TO THE TRAILING HAND</text>
+
+  <text x="1085" y="974" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="700" fill="#52677b">FROZEN RIGHT LOAD / REAR TOE SKID</text>
+</svg>

@@ -1,0 +1,252 @@
+{
+  "schema": "codexofwar.original-2d-elbow-return-triangle-receipt",
+  "version": "1.0.0",
+  "receipt_id": "P10-Round013-ElbowReturnTriangleReceipt",
+  "generated_utc": "2026-08-01T06:43:28Z",
+  "scope": {
+    "project_asset": "P10 Nyra Kestrel",
+    "round": "Round013",
+    "judged_unit": "Elbow Return Triangle — unequal-elbow counterforce topology only",
+    "scope_class": "one original 2D pose-topology proof only",
+    "builder_target_result": "FAIL",
+    "eligibility": "INELIGIBLE_FOR_ELBOW_RETURN_TRIANGLE",
+    "final_disposition": "PROMOTED_STRONGEST_ISOLATED_LEADING_ELBOW_PROGRESS_PROOF_FOR_FRESH_CRITICISM_WITH_TARGET_FAIL",
+    "generation_cap": 4,
+    "generation_outputs_spent": 4,
+    "cap_exhausted": true,
+    "paid_3d_generation_authorized": false,
+    "engine_integration_authorized": false,
+    "claims_not_made": [
+      "benchmark victory, benchmark comparison, or benchmark pass",
+      "successful Elbow Return Triangle",
+      "3D, rig, mesh, UV, deformation, collision, animation, LOD, engine, game-ready, or production-ready status",
+      "legal originality, exclusivity, copyright clearance, or trademark clearance"
+    ]
+  },
+  "bounded_input_policy": {
+    "private_benchmark_archive_accessed": false,
+    "franchise_pixels_used": false,
+    "third_party_pose_pixels_used": false,
+    "read_inputs": [
+      {
+        "role": "Round012 accepted candidate04 and frozen visual authority",
+        "path": "../../Round012/ScapularCounterforce/Iterations/P10_Round012_ScapularCounterforce_candidate04.png",
+        "sha256": "f64cfdad9fa0805d495d5c02db2ae8e0c697fa3b664b0402d8b717a8bd271411",
+        "byte_size": 2189181,
+        "dimensions_px": {"width": 1536, "height": 1024},
+        "format": "png"
+      },
+      {
+        "role": "Round012 original public-safe mechanics guide",
+        "path": "../../Round012/ScapularCounterforce/P10_Round012_OriginalScapularMechanicsGuide.png",
+        "sha256": "434cde6efa606f528b09f0596ed020fd7c1549f547bef100e355c4afc9d44da5",
+        "byte_size": 212067,
+        "dimensions_px": {"width": 1536, "height": 1024},
+        "format": "png"
+      },
+      {
+        "role": "Round012 fresh review and exact failure authority",
+        "path": "../../Round012/ScapularCounterforce/P10_Round012_FreshScapularCounterforceReview.json",
+        "sha256": "8b074b94bc4fdbf9f70c643bed155699486014825ae21b1f50c52520ea48e02e",
+        "byte_size": 18282,
+        "dimensions_px": null,
+        "format": "json"
+      }
+    ],
+    "administrative_metadata_read": {
+      "role": "Round012 receipt used only to verify prior hashes, prompt history, and frozen provenance",
+      "path": "../../Round012/ScapularCounterforce/P10_Round012_ScapularCounterforceReceipt.json",
+      "sha256": "6a9a22e40e7c9656548b744617022f6d6dc7bd9a3a59374988c98a7a7c40dc62",
+      "byte_size": 32403,
+      "dimensions_px": null,
+      "format": "json"
+    },
+    "frozen_invariants": [
+      "viewer-right leading shoulder remains high and viewer-left trailing shoulder remains low",
+      "pale jaw-to-low-shoulder gap remains open",
+      "both complete hands remain widely separated on one continuous hilt with exposed cobalt wrap",
+      "dominant viewer-right lower-body load remains",
+      "viewer-left rear toe skid remains",
+      "blade center of mass remains outside the torso upper-right",
+      "Nyra identity, costume, weapon, lighting, and framing remain",
+      "one full person and one full weapon remain inside the landscape frame"
+    ],
+    "only_targeted_change": "Leading elbow acutely folded beneath the high shoulder plus far down-left trailing elbow whose forearm returns up-right to its hand, together creating a large pale triangular negative-space window bounded by torso, upper arm, and returning forearm."
+  },
+  "original_round013_guide": {
+    "authorship": "original public-safe SVG authored before any Round013 generation; no third-party pose image or pixels",
+    "intent": "Thick human-readable limb silhouettes with a conspicuous pale wedge; labels kept outside one another; not a thin skeleton-only guide.",
+    "canvas_px": {"width": 1536, "height": 1024},
+    "svg": {
+      "path": "P10_Round013_OriginalElbowReturnTriangleGuide.svg",
+      "sha256": "cac19ee4abe9ecdaeb003cead6a62c4b635bc23678032f22a7ec5863d3dfeea7",
+      "byte_size": 5371,
+      "format": "svg"
+    },
+    "rendered_png": {
+      "path": "P10_Round013_OriginalElbowReturnTriangleGuide.png",
+      "sha256": "bedafd12ba61c48ec0a7fb4f18babfdb06f0a28b800d63ab04a2d61295042c70",
+      "byte_size": 141980,
+      "dimensions_px": {"width": 1536, "height": 1024},
+      "format": "png"
+    },
+    "exact_authored_geometry": {
+      "leading_arm_upper_path": "M 852 346 C 871 363 875 387 856 412",
+      "leading_arm_forearm_path": "M 856 412 C 874 398 892 386 914 382",
+      "leading_elbow_center": [857, 411],
+      "trailing_upper_arm_path": "M 681 423 L 446 626",
+      "trailing_forearm_path": "M 446 626 L 655 563",
+      "trailing_elbow_center": [446, 626],
+      "pale_triangle_path": "M 659 449 L 479 602 L 640 553 C 655 527 666 489 659 449 Z",
+      "hilt_axis": [[604, 593], [932, 372]],
+      "blade_axis": [[908, 389], [1410, 102]]
+    }
+  },
+  "generator": {
+    "execution_path": "managed image-generation/edit tool",
+    "model": "not exposed by managed tool",
+    "native_output_size": "1536x1024",
+    "output_format": "png",
+    "workflow": "guide-first identity-preserving edits for candidates 01-03; guide-only sketch-to-render reconstruction for candidate04 by explicit root direction",
+    "attempts": [
+      {
+        "candidate_id": "elbow-return-triangle-candidate-01",
+        "mode": "identity-preserve multi-image edit",
+        "input_roles": ["Round012 candidate04", "Round012 original guide", "Round013 original guide"],
+        "input_sha256": ["f64cfdad9fa0805d495d5c02db2ae8e0c697fa3b664b0402d8b717a8bd271411", "434cde6efa606f528b09f0596ed020fd7c1549f547bef100e355c4afc9d44da5", "bedafd12ba61c48ec0a7fb4f18babfdb06f0a28b800d63ab04a2d61295042c70"],
+        "output": "Iterations/P10_Round013_ElbowReturnTriangle_candidate01.png",
+        "sha256": "c033ffe206dec0343894dd1a4742099a4b4e96224caa113173d14344c1063386",
+        "byte_size": 2053709,
+        "dimensions_px": {"width": 1536, "height": 1024},
+        "format": "png",
+        "root_verdict": "REJECT",
+        "decision": "Essentially the Round012 paired-haul topology: both arms remain straight to endpoint grips; no elbow vertex, return, or triangle.",
+        "exact_prompt_lines": [
+          "Use case: identity-preserve",
+          "Asset type: original 2D targeted pose correction, P10 Round013 Elbow Return Triangle, candidate 01 of at most 04",
+          "Input roles: Image 1 is the accepted Round012 candidate04 and ABSOLUTE authority for Nyra identity, face, hair, costume, materials, one complete weapon, lighting, framing, high viewer-right/low viewer-left shoulder order and jaw gap, widely separated complete same-hilt grip with exposed cobalt hilt, lower-body right load, rear toe skid, and upper-right blade center of mass. Image 2 is the original Round012 public-safe mechanics guide and secondary authority for frozen scapular order and load. Image 3 is the ORIGINAL Round013 public-safe thick-silhouette guide and PRIMARY authority only for the unequal-elbow topology and large pale triangle. Translate its arm shapes into natural anatomy; do not render any title, text, labels, leader lines, colored outlines, diagram marks, or joint circles.",
+          "Primary request: edit ONLY the two elbow/forearm paths and the minimum adjacent sleeve deformation needed. Preserve all frozen facts from Image 1. The one judged change is an unmistakable unequal-elbow counterforce topology.",
+          "Leading elbow: on viewer-right/weapon side, keep the already-high shoulder exactly high and jaw-cleared. Rebuild the leading upper arm and forearm so the elbow is acutely folded directly beneath that high shoulder, close to the upper ribs. The leading hand remains complete and grips immediately behind the guard. This arm must read short, compressed, and folded, never long reaching.",
+          "Trailing elbow: on viewer-left side, keep the already-low shoulder exactly low and jaw-cleared. Drive its elbow FAR down-left and fully outside the torso silhouette, below the hilt and lower than both hands. Run the upper arm from the low shoulder down-left to that elbow, then return the forearm sharply up-right to the complete trailing hand on the same pommel-side hilt region.",
+          "Negative-space acceptance test: torso edge, trailing upper arm, and returning trailing forearm must bound a LARGE, CLEAN, UNMISTAKABLE TRIANGULAR WINDOW of untouched pale warm background. It must be visible at thumbnail scale and roughly head-sized or larger. No cloth, armor, hair, weapon, cable, hand, or body may fill or cross this pale triangle. The elbow is the outer down-left vertex; low shoulder and trailing hand are the two upper/right vertices.",
+          "Grip freeze: both hands remain complete, anatomically plausible, unoccluded, and widely separated on ONE continuous chest-height cobalt hilt. Preserve a conspicuous uninterrupted exposed cobalt wrap span between hands. Keep exact guard/pommel/blade construction and upper-right blade mass.",
+          "Absolute freeze from Image 1: viewer-right-high/viewer-left-low shoulder order and pale jaw gap; head, mature face, expression, gaze, hair; cobalt/ivory/blackened-steel/oxidized-copper costume, harness/yoke, protected copper routing, capacitor, greaves, cloth, palette and materials; huge planted viewer-right boot and compressed right-leg load; airborne viewer-left heel, toe-only skid and gouge; pelvis and torso placement; one complete full storm-shear; pale warm-neutral studio background and lighting; 1536x1024 full framing. No redesign or polish.",
+          "Final-art prohibitions: no text, title, label, arrow, force line, colored guide outline, joint circle, logo, watermark, environment, enemy, lightning, glow, particles, sparks, speed lines, motion blur, dust, crop, extra person, duplicate or detached weapon, body penetration, added prop, bare/fetish amplification.",
+          "Hard reject: long leading elbow; trailing elbow inside torso or above hilt; no large pale triangular window; triangle crossed or filled; paired reaching; hidden or overlapping hand; hands clustered near guard; lost exposed hilt; shoulder order or jaw gap changed; lower-load/toe-skid, blade mass, identity, costume, lighting or framing drift."
+        ]
+      },
+      {
+        "candidate_id": "elbow-return-triangle-candidate-02",
+        "mode": "identity-preserve multi-image edit",
+        "input_roles": ["candidate01 base", "Round012 candidate04", "Round013 original guide"],
+        "input_sha256": ["c033ffe206dec0343894dd1a4742099a4b4e96224caa113173d14344c1063386", "f64cfdad9fa0805d495d5c02db2ae8e0c697fa3b664b0402d8b717a8bd271411", "bedafd12ba61c48ec0a7fb4f18babfdb06f0a28b800d63ab04a2d61295042c70"],
+        "output": "Iterations/P10_Round013_ElbowReturnTriangle_candidate02.png",
+        "sha256": "9731b43baedace9e4e1d0b2dd1e7f9aa92b2e330113ae8a55754e07a09bec4e0",
+        "byte_size": 2110727,
+        "dimensions_px": {"width": 1536, "height": 1024},
+        "format": "png",
+        "root_verdict": "REJECT",
+        "decision": "Useful long hilt tail appears, but the trailing hand follows it left; elbow remains near torso, no up-right return, no triangle, and leading arm remains extended.",
+        "exact_prompt_lines": [
+          "Use case: identity-preserve",
+          "Asset type: targeted upper-limb reconstruction, original 2D P10 Round013 Elbow Return Triangle, candidate 02 of at most 04",
+          "Authority order: Image 1 is the immediate art base and freeze authority for all solved identity/design/lower-load/weapon/light/framing facts. Image 2 is the accepted Round012 candidate04 authority for the exact viewer-right-high/viewer-left-low shoulder order, jaw gap, full character and weapon. Image 3 is the ORIGINAL public-safe Round013 thick-silhouette guide and ABSOLUTE authority only for the unequal-elbow topology and open pale triangle. Translate its anatomy; never copy its title, labels, leader lines, colored outlines, joint circles or diagram marks.",
+          "Primary request: genuinely REBUILD both arm paths and BOTH hand positions on the same continuous hilt. Do not preserve the prior endpoint grip geometry. All non-arm facts stay frozen.",
+          "Exact 1536x1024 topology map: viewer-left trailing shoulder center around x600,y400, low and clearly away from jaw. Viewer-left trailing elbow around x420,y625, far DOWN-LEFT, below the hilt and fully protruding outside the torso silhouette. Viewer-left trailing hand around x690,y500, gripping an interior pommel-side section of the same cobalt hilt—not its endpoint. Upper arm runs shoulder down-left to the elbow; forearm visibly reverses direction and returns steeply UP-RIGHT from elbow to hand. The elbow must be a clear external silhouette vertex.",
+          "Critical hilt correction: leave a LONG, fully visible cobalt pommel/hilt tail extending left/down-left past the trailing hand toward the existing endpoint. Do not move the hand back to the endpoint. Despite this tail, keep a large uninterrupted exposed cobalt-wrap span between the trailing hand at x690,y500 and leading hand at x900,y380. Both hands remain complete, unoccluded and widely separated on ONE hilt.",
+          "Viewer-right leading topology: keep high viewer-right shoulder around x790,y300, above and jaw-cleared. Put leading elbow around x745,y450, below and inward beneath that shoulder, visibly protruding as the bottom vertex of an acute V. Return forearm sharply up-right to complete leading hand around x900,y380 immediately behind guard. The acute fold must be obvious, not a straight reach.",
+          "Negative-space acceptance test: low trailing shoulder, far down-left elbow, and returning hand/forearm must create a HUGE CLEAN PALE TRIANGULAR BACKGROUND WINDOW, at least head-sized, bounded by torso edge, trailing upper arm and returning forearm. No cloth, armor, hair, weapon, cable or body crosses or fills it. The elbow is the far down-left vertex. Triangle must read at thumbnail scale.",
+          "Freeze exactly: viewer-right-high/viewer-left-low shoulder order and jaw gap; mature Nyra identity/face/expression/gaze/hair; cobalt/ivory/blackened-steel/oxidized-copper costume, yoke/harness, copper routing, capacitor, greaves, cloth, palette/materials; huge planted viewer-right boot and right load column; airborne viewer-left heel, toe-only skid and gouge; pelvis/torso placement; one full storm-shear, exact guard/blade/pommel, upper-right blade center of mass; pale warm-neutral studio lighting/background; full 1536x1024 framing.",
+          "Final-art prohibitions: no text, labels, arrows, circles, guide marks, logo, watermark, environment, enemy, lightning, glow, particles, blur, dust, crop, extra person, duplicate/detached weapon, body penetration, added prop, redesign, bare/fetish amplification.",
+          "Hard reject: trailing hand at hilt endpoint; no long hilt tail left of trailing hand; trailing elbow inside torso or above hilt; no direction reversal; absent/filled/crossed pale triangle; straight leading arm; leading elbow not below/inside high shoulder; paired hauling; hidden or clustered hands; lost exposed wrap; changed shoulder order/jaw gap; lower load, toe skid, blade mass, identity/design/light/framing drift."
+        ]
+      },
+      {
+        "candidate_id": "elbow-return-triangle-candidate-03",
+        "mode": "identity-preserve multi-image edit",
+        "input_roles": ["candidate02 base", "Round013 original guide", "Round012 candidate04"],
+        "input_sha256": ["9731b43baedace9e4e1d0b2dd1e7f9aa92b2e330113ae8a55754e07a09bec4e0", "bedafd12ba61c48ec0a7fb4f18babfdb06f0a28b800d63ab04a2d61295042c70", "f64cfdad9fa0805d495d5c02db2ae8e0c697fa3b664b0402d8b717a8bd271411"],
+        "output": "Iterations/P10_Round013_ElbowReturnTriangle_candidate03.png",
+        "sha256": "779006f95836184d0206a85871dd17d70e3a60c6430c8044e3e193d0a8729422",
+        "byte_size": 2126659,
+        "dimensions_px": {"width": 1536, "height": 1024},
+        "format": "png",
+        "root_verdict": "REJECT",
+        "decision": "Topology regresses to endpoint-style reach; trailing hand remains far left, no external elbow or return, no triangle, and leading arm remains straight.",
+        "exact_prompt_lines": [
+          "Use case: identity-preserve",
+          "Asset type: genuine arm and hand position rebuild, original 2D P10 Round013 Elbow Return Triangle, candidate 03 of at most 04",
+          "Authority order: Image 1 candidate02 is the immediate base and absolute authority for every pixel-composition fact outside both arms/hands: keep its newly corrected LONG cobalt hilt tail, full blade, feet, lower body, torso, head, identity, costume, lighting, background and framing. Image 2 is the ORIGINAL public-safe Round013 thick-silhouette guide and absolute authority only for the two deep-V arm paths and empty pale triangle; translate it into natural anatomy and render none of its text/lines/circles/colors. Image 3 is the accepted Round012 authority for frozen high-right/low-left shoulder order and design continuity.",
+          "Primary request: REPLACE, not nudge, both upper arms, elbow positions, forearms and hands. Preserve the exact existing hilt axis and long left tail, but relocate the complete hands along it. Both elbow joints must be visibly lower than their corresponding hands and must protrude as unmistakable outer-silhouette vertices.",
+          "TRAILING SIDE exact screen map on 1536x1024: keep low viewer-left shoulder around x600,y400. Put the trailing elbow center around x390,y640. This elbow must be the LEFTMOST point of the entire human body—farther left than shoulder, torso, cloth, hand and knee—and clearly BELOW the trailing shoulder and trailing hand. Run a thick sleeved upper arm diagonally DOWN-LEFT from shoulder to elbow. Then reverse direction at the visible elbow vertex and run a thick forearm diagonally UP-RIGHT to a complete trailing hand around x690,y480 on the existing interior hilt. This must form a DEEP OPEN V, not a shallow curve and not a straight reach.",
+          "TRAILING HAND/HILT: move the complete trailing hand RIGHT and UP along the unchanged existing cobalt hilt to x690,y480. Preserve the very long visible cobalt pommel tail extending left/down-left well past the hand. Keep an exposed uninterrupted hilt span between trailing hand and leading hand. Do not allow the trailing hand to follow the tail left again.",
+          "PALE TRIANGLE: torso edge plus shoulder-to-elbow upper arm plus elbow-to-hand returning forearm must enclose a LARGE EMPTY PALE BACKGROUND TRIANGLE, wider than the head. No skirt, tabard, thigh, pouch, cable, armor, weapon, hair, shadow or body may cross or fill it. The elbow at x390,y640 is the far lower-left triangle vertex; shoulder and hand are the upper vertices. The pale window must be obvious at thumbnail scale.",
+          "LEADING SIDE exact screen map: high viewer-right shoulder around x790,y290. Put leading elbow around x740,y490, conspicuously BELOW and slightly LEFT/inside the shoulder and BELOW the leading hand. Run upper arm DOWN-LEFT from high shoulder to elbow, then forearm UP-RIGHT from elbow to a complete leading hand around x900,y365 immediately behind the guard. Form a second obvious acute V with the elbow vertex visible along the torso-side silhouette; do not run shoulder directly to guard.",
+          "Absolute freezes: long cobalt tail and one continuous hilt; complete widely separated grips with visible wrap between them; high viewer-right/low viewer-left shoulders and pale jaw gap; mature face/expression/gaze/hair; cobalt/ivory/blackened-steel/oxidized-copper costume, yoke/harness, copper routing, capacitor, greaves, cloth, palette/materials; huge planted viewer-right boot/right load; airborne viewer-left heel/toe skid/gouge; pelvis and torso placement; one full storm-shear and upper-right blade center of mass; pale warm-neutral studio light/background; full frame.",
+          "Change only the arms/hands and minimum sleeve deformation. Do not move feet, blade, hilt tail, head or lighting.",
+          "Final-art prohibitions: no text, labels, arrows, circles, guide marks, logo, watermark, environment, enemy, lightning, glow, particles, blur, dust, crop, extra person, duplicate/detached weapon, body penetration, added prop, redesign, bare/fetish amplification.",
+          "Hard reject: trailing elbow is not leftmost body point; trailing elbow above y600; trailing hand left of x640; missing up-right forearm; no huge empty pale triangle; cloth/equipment fills triangle; leading elbow above hand; either arm straight; paired hauling; hidden/clustered hands; lost long hilt tail or exposed inter-hand wrap; any frozen-fact drift."
+        ]
+      },
+      {
+        "candidate_id": "elbow-return-triangle-candidate-04",
+        "mode": "guide-only sketch-to-render reconstruction",
+        "input_roles": ["Round013 original guide only"],
+        "input_sha256": ["bedafd12ba61c48ec0a7fb4f18babfdb06f0a28b800d63ab04a2d61295042c70"],
+        "output": "Iterations/P10_Round013_ElbowReturnTriangle_candidate04.png",
+        "sha256": "c88489f7af2c0a5d223f431fb322f72ac549283819c3c9b6281a20c1b39fbcd6",
+        "byte_size": 1750551,
+        "dimensions_px": {"width": 1536, "height": 1024},
+        "format": "png",
+        "root_verdict": "PROMOTE BYTE-IDENTICALLY AS STRONGEST ISOLATED TARGET-PROGRESS PROOF; TARGET REMAINS FAIL",
+        "decision": "Only output with a genuinely compact leading-arm fold, solving one half of the topology. Trailing arm still runs monotonically down-left to its hand, with no elbow-lowest vertex, return, or pale triangle. Guide-only reconstruction causes substantial continuity drift.",
+        "exact_prompt_lines": [
+          "Use case: sketch-to-render",
+          "Asset type: guide-only original 2D pose topology diagnostic, P10 Round013 Elbow Return Triangle, candidate 04 of 04 FINAL CAP",
+          "Input role: Image 1 is the ORIGINAL public-safe thick-silhouette guide and the ABSOLUTE authority for the entire full-body pose, both deep-V arm paths, hilt/long-tail placement, upper-right blade mass, planted-right load, rear toe skid, and especially the huge pale return triangle. Translate its shapes into coherent natural anatomy and polished original 2D industrial-mythic character art. Do not render any title, words, callout lines, circles, colored outlines, diagram marks, or instructional graphics.",
+          "Absolute priority: match the guide silhouette and negative spaces before identity detail. The final art must show one mature athletic woman in a violent arrested two-handed greatsword stop. Viewer-right shoulder is very high and jaw-cleared; viewer-left shoulder is conspicuously low and away from jaw.",
+          "TRAILING ARM topology: low viewer-left shoulder runs by a thick upper arm sharply DOWN-LEFT to a far external elbow that is the LEFTMOST human-body point. That elbow is visibly lower than both shoulder and trailing hand. From that elbow, a distinct thick forearm reverses direction and returns steeply UP-RIGHT to a complete trailing hand gripping an interior section of the hilt. The elbow vertex must visibly protrude in the outer silhouette.",
+          "PALE TRIANGLE is the number-one acceptance fact: torso edge, trailing upper arm, and returning trailing forearm must bound a HUGE, clean, unmistakable triangular window of untouched pale warm background. Make it at least head-sized and broad enough to read instantly at thumbnail. No torso, cloth, armor, skirt, thigh, pouch, cable, hair, weapon, shadow, or limb may enter or cross this triangle.",
+          "HILT/GRIP: trailing hand sits inward on the cobalt wrapped hilt, not at its endpoint. A long visible cobalt pommel/hilt tail extends far left/down-left beyond the trailing hand. Leading hand is far away near the guard, leaving a conspicuous uninterrupted exposed cobalt wrap span between two complete, unoccluded hands on one continuous hilt.",
+          "LEADING ARM topology: high viewer-right shoulder runs DOWN and slightly inward to a clearly visible elbow vertex below the shoulder and below the leading hand. The forearm then returns sharply UP-RIGHT to the complete leading hand immediately behind the guard. This creates an obvious acute V folded beneath the high shoulder, never a straight shoulder-to-guard reach.",
+          "Lower-body silhouette: massive planted viewer-right boot and compressed right ankle/knee/hip load column; viewer-left rear heel airborne with toe-only skid and small gouge. One complete oversized storm-shear greatsword, chest-height lower-left-to-upper-right cobalt hilt, enormous dark cleaver blade with center of mass outside torso upper-right. One full person and one full weapon inside 1536x1024 landscape frame.",
+          "Textual Nyra design anchors, secondary to topology: mature brown-skinned woman; shaved right temple with geometric scar/mark; long black braided hair whipping left; deep cobalt quilted combat cloth; ivory ceramic shoulder/yoke plates; blackened-steel segmented armor; oxidized copper power routing down the massive planted right greave; compact rectangular hip capacitor; dark cleaver blade, ivory cage-like guard, cobalt wrapped hilt. Pale warm-neutral studio background and restrained soft studio lighting, high-detail original 2D concept illustration.",
+          "Final-art prohibitions: no text, letters, title, labels, arrows, leader lines, circles, colored guide outlines, force line, logo, watermark, environment, enemy, lightning, glow, particles, sparks, speed lines, blur, dust cloud, crop, extra person, duplicate/detached weapon, body penetration, added prop, bare/fetish amplification.",
+          "Hard reject: absent/filled/crossed pale triangle; trailing elbow not leftmost body point; trailing elbow above hand; trailing forearm does not return up-right; trailing hand at hilt endpoint; no long tail beyond hand; leading arm straight; leading elbow above hand; no acute V; hands hidden/clustered; no exposed wrap; paired hauling. Topology success is more important than exact identity continuity."
+        ]
+      }
+    ]
+  },
+  "accepted_copy": {
+    "path": "P10_Round013_NyraKestrel_ElbowReturnTriangle_v1.png",
+    "source_candidate": "Iterations/P10_Round013_ElbowReturnTriangle_candidate04.png",
+    "sha256": "c88489f7af2c0a5d223f431fb322f72ac549283819c3c9b6281a20c1b39fbcd6",
+    "byte_size": 1750551,
+    "dimensions_px": {"width": 1536, "height": 1024},
+    "format": "png",
+    "byte_identical_to_source": true,
+    "promotion_authority": "root native visual judgment",
+    "promotion_reason": "Only attempt with a genuinely compact leading-arm fold; promoted as isolated target-progress evidence for separate fresh criticism, not as a passing frame."
+  },
+  "candid_limitations": [
+    "Elbow Return Triangle target failed and is ineligible.",
+    "The promoted trailing arm runs monotonically down-left from shoulder through elbow to hand; its forearm does not return up-right.",
+    "The promoted trailing elbow is not the lowest external vertex relative to its hand.",
+    "No large pale triangular negative-space window is bounded by torso, upper arm, and returning forearm.",
+    "Guide-only reconstruction substantially drifts exact identity, costume and armor construction, weapon grip and hilt construction, stance proportions, rear toe-skid detail, and framing from Round012.",
+    "The promoted compact leading-elbow fold is only one half of the required unequal-elbow topology.",
+    "The four-output cap is exhausted; no further builder generation was made.",
+    "Promotion is strongest bounded evidence for an independent fresh critic and is not builder self-acceptance."
+  ],
+  "validation": {
+    "all_attempts_preserved": true,
+    "all_attempts_inspected_at_native_resolution": true,
+    "all_hashes_sizes_and_dimensions_recomputed": true,
+    "accepted_copy_hash_size_and_dimensions_recomputed": true,
+    "accepted_copy_byte_equality_recomputed": true,
+    "json_parse_validated": true,
+    "privacy_validated": true,
+    "round013_only_write_scope_validated": true,
+    "fresh_critic_pending": true
+  }
+}

@@ -91,7 +91,7 @@ test("server-renders the production evidence ledger", async () => {
   assert.match(html, /Reference 09/);
   assert.match(html, /29\.82%/);
   assert.match(html, /82,906/);
-  assert.match(html, /P10 · Round 013/);
+  assert.match(html, /P10 · Round 014/);
   assert.match(html, /Round rejected\. Rebuild in progress\./);
   assert.match(html, /Round 001 rejected · mechanically reproducible/);
   assert.match(
@@ -283,11 +283,19 @@ test("server-renders the production evidence ledger", async () => {
     /href="\/captures\/P10\/round-012-scapular-counterforce\/NyraKestrel_ScapularCounterforce_CRITIC_REJECTED\.png"/,
   );
   assert.match(html, /href="\/data\/P10-round-012-scapular-counterforce\.json"/);
-  assert.match(html, /Elbow Return Triangle/i);
-  assert.match(html, /one bounded original 2D elbow-topology build with no result or capture filed yet/i);
+  assert.match(html, /ELBOW RETURN TRIANGLE FAIL · DENY_PAID_3D_GENERATION/);
+  assert.match(html, /Composite concept preflight 41\/100 · threshold 85 · category floor 1\/10/);
+  assert.match(html, /Candidate met benchmark bar in 2\/6 blinded comparisons · 5\/6 required/);
+  assert.match(
+    html,
+    /href="\/captures\/P10\/round-013-elbow-return-triangle\/NyraKestrel_ElbowReturnTriangle_CRITIC_REJECTED\.png"/,
+  );
+  assert.match(html, /href="\/data\/P10-round-013-elbow-return-triangle\.json"/);
+  assert.match(html, /Trailing Return Wedge/i);
+  assert.match(html, /one bounded original 2D trailing-arm topology build with no result or capture filed yet/i);
   assert.match(html, /complete concept pack must earn at least 85\/100/i);
-  assert.match(html, /far down-left trailing elbow/i);
-  assert.match(html, /large pale triangle/i);
+  assert.match(html, /far down-left lowest external vertex/i);
+  assert.match(html, /head-sized pale triangle/i);
   assert.doesNotMatch(html, /Reference\.zip|Reference\/[^"<]+\.(?:png|jpe?g|webp)/i);
   assert.doesNotMatch(
     html,
@@ -354,17 +362,17 @@ test("checked-in data contains the complete, honest P00–P25 ledger", async () 
   assert.equal(p00.status, "accepted");
   assert.equal(p10.status, "revising");
   assert.equal(dashboard.activeBuild.pieceId, "P10");
-  assert.equal(dashboard.activeBuild.round, 13);
-  assert.equal(dashboard.activeBuild.roundLabel, "P10 · Round 013");
+  assert.equal(dashboard.activeBuild.round, 14);
+  assert.equal(dashboard.activeBuild.roundLabel, "P10 · Round 014");
   assert.equal(
     dashboard.activeBuild.builder,
-    "Elbow Return Triangle",
+    "Trailing Return Wedge",
   );
   assert.equal(dashboard.activeBuild.status, p10.status);
   assert.match(dashboard.activeBuild.brief, /no result or capture filed yet/i);
-  assert.match(dashboard.activeBuild.brief, /elbow-topology/i);
-  assert.match(dashboard.activeBuild.brief, /acutely folded leading elbow/i);
-  assert.match(dashboard.activeBuild.brief, /triangular pale negative-space/i);
+  assert.match(dashboard.activeBuild.brief, /trailing-arm topology/i);
+  assert.match(dashboard.activeBuild.brief, /compact leading arm/i);
+  assert.match(dashboard.activeBuild.brief, /head-sized pale triangle/i);
   assert.match(dashboard.activeBuild.brief, /paid 3D generation and Unity remain locked/i);
   assert.ok(queuedPieces.every((piece) => piece.status === "queued"));
 
@@ -392,7 +400,7 @@ test("checked-in data contains the complete, honest P00–P25 ledger", async () 
   assert.equal(dashboard.acceptance.maximum, 100);
   assert.match(dashboard.acceptance.p00Exception, /visual loss does not block/i);
 
-  assert.equal(dashboard.rounds.length, 13);
+  assert.equal(dashboard.rounds.length, 14);
   assert.equal(dashboard.rounds[0].pieceId, "P00");
   assert.equal(
     dashboard.rounds[0].critic.status,
@@ -675,6 +683,30 @@ test("checked-in data contains the complete, honest P00–P25 ledger", async () 
     "/captures/P10/round-012-scapular-counterforce/NyraKestrel_ScapularCounterforce_CRITIC_REJECTED.png",
     "/data/P10-round-012-scapular-counterforce.json",
   ]);
+  assert.equal(dashboard.rounds[13].pieceId, "P10");
+  assert.equal(dashboard.rounds[13].round, 13);
+  assert.equal(dashboard.rounds[13].status, "criticized");
+  assert.equal(
+    dashboard.rounds[13].critic.status,
+    "ELBOW RETURN TRIANGLE FAIL · DENY_PAID_3D_GENERATION",
+  );
+  assert.equal(dashboard.rounds[13].critic.score, 41);
+  assert.equal(
+    dashboard.rounds[13].critic.scoreLabel,
+    "Composite concept preflight 41/100 · threshold 85 · category floor 1/10",
+  );
+  assert.equal(
+    dashboard.rounds[13].critic.preference,
+    "Candidate met benchmark bar in 2/6 blinded comparisons · 5/6 required",
+  );
+  assert.match(
+    dashboard.rounds[13].critic.primaryGap,
+    /trailing-arm return topology is absent/i,
+  );
+  assert.deepEqual(dashboard.rounds[13].evidenceLinks, [
+    "/captures/P10/round-013-elbow-return-triangle/NyraKestrel_ElbowReturnTriangle_CRITIC_REJECTED.png",
+    "/data/P10-round-013-elbow-return-triangle.json",
+  ]);
 });
 
 test("P10 evidence is filed while the global latest manifest remains P00-pinned", async () => {
@@ -693,6 +725,7 @@ test("P10 evidence is filed while the global latest manifest remains P00-pinned"
     p10Round010GroundArc,
     p10Round011KineticChain,
     p10Round012ScapularCounterforce,
+    p10Round013ElbowReturnTriangle,
     latestManifest,
     p10Screenshot,
     turntableContact,
@@ -719,6 +752,7 @@ test("P10 evidence is filed while the global latest manifest remains P00-pinned"
     round010RejectedGroundArc,
     round011RejectedKineticChain,
     round012RejectedScapularCounterforce,
+    round013RejectedElbowReturnTriangle,
   ] = await Promise.all([
     readFile(dataUrl, "utf8").then(JSON.parse),
     readFile(
@@ -772,6 +806,13 @@ test("P10 evidence is filed while the global latest manifest remains P00-pinned"
     readFile(
       new URL(
         "../public/data/P10-round-012-scapular-counterforce.json",
+        import.meta.url,
+      ),
+      "utf8",
+    ).then(JSON.parse),
+    readFile(
+      new URL(
+        "../public/data/P10-round-013-elbow-return-triangle.json",
         import.meta.url,
       ),
       "utf8",
@@ -927,6 +968,12 @@ test("P10 evidence is filed while the global latest manifest remains P00-pinned"
     readFile(
       new URL(
         "../public/captures/P10/round-012-scapular-counterforce/NyraKestrel_ScapularCounterforce_CRITIC_REJECTED.png",
+        import.meta.url,
+      ),
+    ),
+    readFile(
+      new URL(
+        "../public/captures/P10/round-013-elbow-return-triangle/NyraKestrel_ElbowReturnTriangle_CRITIC_REJECTED.png",
         import.meta.url,
       ),
     ),
@@ -2176,6 +2223,155 @@ test("P10 evidence is filed while the global latest manifest remains P00-pinned"
   assert.equal(round012RejectedScapularCounterforce.readUInt32BE(20), 1024);
   assert.doesNotMatch(
     JSON.stringify(p10Round012ScapularCounterforce),
+    /Reference\.zip|Reference\/[^"']+\.(?:png|jpe?g|webp)|\/Users\/|\/home\/|[A-Za-z]:\\Users\\|\/tmp\/|\/private\/var\/folders\//i,
+  );
+
+  assert.equal(p10Round013ElbowReturnTriangle.piece, "P10");
+  assert.equal(p10Round013ElbowReturnTriangle.round, 13);
+  assert.equal(
+    p10Round013ElbowReturnTriangle.status,
+    "rejected-elbow-return-triangle-preflight",
+  );
+  assert.equal(p10Round013ElbowReturnTriangle.engineRun, false);
+  assert.equal(
+    p10Round013ElbowReturnTriangle.actualGameCapturePerformed,
+    false,
+  );
+  assert.equal(p10Round013ElbowReturnTriangle.unityProjectShellPresent, true);
+  assert.equal(
+    p10Round013ElbowReturnTriangle.runnableReviewedGameplayDetected,
+    false,
+  );
+  assert.equal(
+    p10Round013ElbowReturnTriangle.isolatedElbowReturnTriangleTargetPassed,
+    false,
+  );
+  assert.equal(
+    p10Round013ElbowReturnTriangle.source.receiptSha256,
+    "2ebff0f4c747e05a9054aa23a9f59d3ef2cdb19bd9b5afed6255a9437251b8cb",
+  );
+  assert.equal(
+    p10Round013ElbowReturnTriangle.source.readmeSha256,
+    "fda5d53b228fb91d0cc1b996b1be4cf5f8ae7173ebb2d4fce43eb2a2b7657a0e",
+  );
+  assert.equal(
+    p10Round013ElbowReturnTriangle.source.reviewSha256,
+    "344bbd027c6e92b134a7a0a868b83d01379a21fff8ea0aebcff1b9980433cfcf",
+  );
+  assert.equal(
+    p10Round013ElbowReturnTriangle.source.guidePngSha256,
+    "bedafd12ba61c48ec0a7fb4f18babfdb06f0a28b800d63ab04a2d61295042c70",
+  );
+  assert.equal(
+    p10Round013ElbowReturnTriangle.source.guideSvgSha256,
+    "cac19ee4abe9ecdaeb003cead6a62c4b635bc23678032f22a7ec5863d3dfeea7",
+  );
+  assert.equal(
+    p10Round013ElbowReturnTriangle.isolatedDecision.verdict,
+    "FAIL_ELBOW_RETURN_TRIANGLE_VISUAL_ONLY_GATE",
+  );
+  assert.equal(
+    p10Round013ElbowReturnTriangle.isolatedDecision.strongestCandidate,
+    "elbow-return-triangle-candidate-04",
+  );
+  assert.equal(
+    p10Round013ElbowReturnTriangle.isolatedDecision.compactLeadingElbowAchieved,
+    true,
+  );
+  assert.equal(
+    p10Round013ElbowReturnTriangle.isolatedDecision
+      .trailingElbowLowestExternalVertexAchieved,
+    false,
+  );
+  assert.equal(
+    p10Round013ElbowReturnTriangle.isolatedDecision
+      .trailingForearmReturnUpRightAchieved,
+    false,
+  );
+  assert.equal(
+    p10Round013ElbowReturnTriangle.isolatedDecision
+      .largePaleTriangularNegativeSpaceAchieved,
+    false,
+  );
+  assert.equal(p10Round013ElbowReturnTriangle.visualReview.score, 41);
+  assert.equal(
+    p10Round013ElbowReturnTriangle.visualReview.observedMinimumCategoryScore,
+    1,
+  );
+  assert.equal(
+    p10Round013ElbowReturnTriangle.visualReview
+      .candidateMetBenchmarkBarCount,
+    2,
+  );
+  assert.equal(
+    p10Round013ElbowReturnTriangle.visualReview
+      .requiredCandidateMetBenchmarkBarCount,
+    5,
+  );
+  assert.match(
+    p10Round013ElbowReturnTriangle.visualReview.singleBiggestGap,
+    /trailing-arm return topology is absent/i,
+  );
+  assert.equal(
+    p10Round013ElbowReturnTriangle.visualReview.categoryScores
+      .compactLeadingElbowFold,
+    8,
+  );
+  assert.equal(
+    p10Round013ElbowReturnTriangle.visualReview.categoryScores
+      .forearmReturnUpRightToInwardHand,
+    1,
+  );
+  assert.equal(
+    p10Round013ElbowReturnTriangle.visualReview.categoryScores
+      .largePaleTriangularNegativeSpace,
+    1,
+  );
+  assert.equal(
+    p10Round013ElbowReturnTriangle.decision.result,
+    "DENY_PAID_3D_GENERATION",
+  );
+  assert.equal(p10Round013ElbowReturnTriangle.decision.unityLocked, true);
+  assert.equal(p10Round013ElbowReturnTriangle.builderAttempts.length, 4);
+  assert.deepEqual(
+    p10Round013ElbowReturnTriangle.builderAttempts.map(
+      (attempt) => attempt.sha256,
+    ),
+    [
+      "c033ffe206dec0343894dd1a4742099a4b4e96224caa113173d14344c1063386",
+      "9731b43baedace9e4e1d0b2dd1e7f9aa92b2e330113ae8a55754e07a09bec4e0",
+      "779006f95836184d0206a85871dd17d70e3a60c6430c8044e3e193d0a8729422",
+      "c88489f7af2c0a5d223f431fb322f72ac549283819c3c9b6281a20c1b39fbcd6",
+    ],
+  );
+  assert.equal(p10Round013ElbowReturnTriangle.nextRound.round, 14);
+  assert.equal(
+    p10Round013ElbowReturnTriangle.nextRound.status,
+    "trailing-return-wedge",
+  );
+  assert.match(
+    p10Round013ElbowReturnTriangle.nextRound.target,
+    /forearm returns sharply up-right/i,
+  );
+  assert.equal(p10Round013ElbowReturnTriangle.conceptArt.length, 1);
+  assert.equal(
+    p10Round013ElbowReturnTriangle.conceptArt[0].publicPath,
+    "/captures/P10/round-013-elbow-return-triangle/NyraKestrel_ElbowReturnTriangle_CRITIC_REJECTED.png",
+  );
+  assert.equal(
+    createHash("sha256")
+      .update(round013RejectedElbowReturnTriangle)
+      .digest("hex"),
+    p10Round013ElbowReturnTriangle.conceptArt[0].sha256,
+  );
+  assert.equal(
+    round013RejectedElbowReturnTriangle.subarray(1, 4).toString("ascii"),
+    "PNG",
+  );
+  assert.equal(round013RejectedElbowReturnTriangle.readUInt32BE(16), 1536);
+  assert.equal(round013RejectedElbowReturnTriangle.readUInt32BE(20), 1024);
+  assert.doesNotMatch(
+    JSON.stringify(p10Round013ElbowReturnTriangle),
     /Reference\.zip|Reference\/[^"']+\.(?:png|jpe?g|webp)|\/Users\/|\/home\/|[A-Za-z]:\\Users\\|\/tmp\/|\/private\/var\/folders\//i,
   );
 

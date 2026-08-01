@@ -1,0 +1,172 @@
+{
+  "schemaVersion": 1,
+  "piece": "P10",
+  "round": 13,
+  "status": "rejected-elbow-return-triangle-preflight",
+  "reviewType": "fresh-context Elbow Return Triangle and composite 2D concept preflight",
+  "reviewedAt": "2026-08-01T06:55:40Z",
+  "artifactClass": "original 2D guide-driven arm-topology concept art",
+  "engineRun": false,
+  "actualGameCapturePerformed": false,
+  "unityProjectShellPresent": true,
+  "runnableReviewedGameplayDetected": false,
+  "unityCaptureFiled": false,
+  "threeDimensionalAssetFiled": false,
+  "gameReadyEvidenceFiled": false,
+  "builderAcceptedFrameFiled": true,
+  "isolatedElbowReturnTriangleTargetPassed": false,
+  "paid3DGenerationAuthorized": false,
+  "source": {
+    "name": "Nyra Kestrel Elbow Return Triangle mechanics proof",
+    "scope": "Original 2D guide-driven arm-topology evidence only; no gameplay, 3D model, finished game asset, or production-ready implementation claim.",
+    "creator": "OpenAI image generation via Codex",
+    "referencePixelsSuppliedToGeneration": false,
+    "receiptPath": "ArtSource/P10/Round013/ElbowReturnTriangle/P10_Round013_ElbowReturnTriangleReceipt.json",
+    "receiptSha256": "2ebff0f4c747e05a9054aa23a9f59d3ef2cdb19bd9b5afed6255a9437251b8cb",
+    "readmePath": "ArtSource/P10/Round013/ElbowReturnTriangle/README.md",
+    "readmeSha256": "fda5d53b228fb91d0cc1b996b1be4cf5f8ae7173ebb2d4fce43eb2a2b7657a0e",
+    "reviewPath": "ArtSource/P10/Round013/ElbowReturnTriangle/P10_Round013_FreshElbowReturnTriangleReview.json",
+    "reviewSha256": "344bbd027c6e92b134a7a0a868b83d01379a21fff8ea0aebcff1b9980433cfcf",
+    "guidePngPath": "ArtSource/P10/Round013/ElbowReturnTriangle/P10_Round013_OriginalElbowReturnTriangleGuide.png",
+    "guidePngSha256": "bedafd12ba61c48ec0a7fb4f18babfdb06f0a28b800d63ab04a2d61295042c70",
+    "guideSvgPath": "ArtSource/P10/Round013/ElbowReturnTriangle/P10_Round013_OriginalElbowReturnTriangleGuide.svg",
+    "guideSvgSha256": "cac19ee4abe9ecdaeb003cead6a62c4b635bc23678032f22a7ec5863d3dfeea7"
+  },
+  "isolatedDecision": {
+    "verdict": "FAIL_ELBOW_RETURN_TRIANGLE_VISUAL_ONLY_GATE",
+    "strongestCandidate": "elbow-return-triangle-candidate-04",
+    "compactLeadingElbowAchieved": true,
+    "trailingElbowLowestExternalVertexAchieved": false,
+    "trailingForearmReturnUpRightAchieved": false,
+    "largePaleTriangularNegativeSpaceAchieved": false,
+    "correctHighRightLowLeftShoulderOrderAchieved": true,
+    "jawGapAchieved": true,
+    "completeSeparatedSameHiltGripAchieved": true,
+    "inwardTrailingHandAndHiltTailAchieved": true,
+    "lowerBodyLoadPreserved": false,
+    "rearToeOnlySkidPreserved": false,
+    "identityAndFrozenDesignPreserved": false,
+    "upperRightBladeMassPreserved": "partial",
+    "oneViolentStopAchieved": false,
+    "finding": "Candidate 04 finally compresses the leading elbow beneath the high shoulder and preserves separated contact, but its trailing arm descends monotonically to the hand. No low external elbow, up-right return, or pale triangle exists, while identity, design, stance, toe skid, and framing drift materially."
+  },
+  "visualReview": {
+    "score": 41,
+    "maximum": 100,
+    "passThreshold": 85,
+    "criticalFloorPerCategory": 7,
+    "observedMinimumCategoryScore": 1,
+    "thresholdResult": "FAIL",
+    "criticalFloorResult": "FAIL",
+    "verdict": "DENY_PAID_3D_GENERATION",
+    "comparisonCount": 6,
+    "candidateMetBenchmarkBarCount": 2,
+    "candidateBelowBenchmarkBarCount": 4,
+    "requiredCandidateMetBenchmarkBarCount": 5,
+    "benchmarkGateResult": "FAIL",
+    "benchmarkPolicy": "Aggregate blinded-comparison results only; no benchmark image, crop, comparison sheet, filename, path, or other benchmark pixel is published.",
+    "singleBiggestGap": "The trailing-arm return topology is absent: the elbow never becomes the far down-left lowest vertex and the forearm never reverses up-right to the inward hand, so the required pale triangle cannot exist.",
+    "categoryScores": {
+      "identityAndFrozenDesignContinuity": 3,
+      "compactLeadingElbowFold": 8,
+      "trailingElbowFarDownLeftAndLowestVertex": 2,
+      "forearmReturnUpRightToInwardHand": 1,
+      "largePaleTriangularNegativeSpace": 1,
+      "shoulderOrderAndJawGapPreservation": 7,
+      "completeSeparatedSameHiltGripAndTail": 7,
+      "lowerBodyLoadAndToeSkidPreservation": 2,
+      "bladeMassFramingAndRenderReadability": 6,
+      "benchmarkAuthorshipAndViolentStopQuality": 4
+    }
+  },
+  "engineTruth": {
+    "unityProjectShellPresent": true,
+    "installedUnityEditorDetected": true,
+    "reviewOnlyUnityScenesDetected": true,
+    "round013AssetIntegratedInUnity": false,
+    "runtimeGameplayArchitectureDetected": false,
+    "playerBuildDetected": false,
+    "runnableGameForReviewedAssetDetected": false,
+    "engineRun": false,
+    "actualGameCapturePerformed": false,
+    "finding": "The workspace contains an installed editor and a Unity template/review shell, but no Nyra Round013 integration, runtime gameplay controller, encounter scene, or player build. No unrelated shell run or fabricated gameplay capture was filed."
+  },
+  "decision": {
+    "result": "DENY_PAID_3D_GENERATION",
+    "paid3DGenerationAuthorized": false,
+    "unityLocked": true,
+    "instruction": "Preserve candidate 04's compact leading arm and all other judged facts; do not begin paid 3D generation or Unity integration from this pack."
+  },
+  "limitations": [
+    "The filed image is original 2D concept art, not gameplay or game capture.",
+    "No actual game run was performed because no runnable gameplay integrating the reviewed asset exists.",
+    "The workspace has a Unity review shell, not a player build or integrated combat encounter for this asset.",
+    "No 3D mesh, topology, rig, deformation, UV, collision, animation, LOD, texture, performance, or game-ready claim is made.",
+    "The builder marked the target failed and promoted candidate 04 only for critic handoff; the independent critic also rejected the isolated Elbow Return Triangle and complete composite gate.",
+    "Candidate 04 materially drifts the frozen identity, face, hair, yoke, armor, guard, hilt, stance, toe skid, proportions, and framing.",
+    "The concept review cannot establish legal originality, exclusivity, copyright status, trademark clearance, or absence of all third-party similarity.",
+    "Paid 3D generation and Unity remain locked because the isolated target, total-score, category-floor, and blinded-comparison gates all failed."
+  ],
+  "conceptArt": [
+    {
+      "label": "CRITIC-REJECTED — builder-promoted Elbow Return Triangle frame",
+      "disposition": "builder-failed-promoted-for-critic-and-critic-rejected-evidence",
+      "evidenceType": "Rejected 2D mechanics evidence — not gameplay, 3D, or game-ready evidence",
+      "publicPath": "/captures/P10/round-013-elbow-return-triangle/NyraKestrel_ElbowReturnTriangle_CRITIC_REJECTED.png",
+      "sha256": "c88489f7af2c0a5d223f431fb322f72ac549283819c3c9b6281a20c1b39fbcd6",
+      "dimensions": {
+        "width": 1536,
+        "height": 1024
+      },
+      "format": "PNG",
+      "finding": "The compact leading fold and separated same-hilt contact read clearly. The absent trailing return topology and extensive frozen-design drift make the frame ineligible."
+    }
+  ],
+  "guide": {
+    "authorship": "Original public-safe SVG authored for Round013; no third-party pose image.",
+    "pngSha256": "bedafd12ba61c48ec0a7fb4f18babfdb06f0a28b800d63ab04a2d61295042c70",
+    "svgSha256": "cac19ee4abe9ecdaeb003cead6a62c4b635bc23678032f22a7ec5863d3dfeea7",
+    "dimensions": {
+      "width": 1536,
+      "height": 1024
+    }
+  },
+  "builderAttempts": [
+    {
+      "candidate": 1,
+      "sha256": "c033ffe206dec0343894dd1a4742099a4b4e96224caa113173d14344c1063386",
+      "disposition": "rejected",
+      "reason": "Identity and lower load hold best, but both arms haul toward hilt endpoints and no elbow fold-return mechanism appears."
+    },
+    {
+      "candidate": 2,
+      "sha256": "9731b43baedace9e4e1d0b2dd1e7f9aa92b2e330113ae8a55754e07a09bec4e0",
+      "disposition": "rejected",
+      "reason": "The hilt tail and contacts read, but the leading arm stays extended and the trailing hand continues down-left without a return."
+    },
+    {
+      "candidate": 3,
+      "sha256": "779006f95836184d0206a85871dd17d70e3a60c6430c8044e3e193d0a8729422",
+      "disposition": "rejected",
+      "reason": "Both arms regress to endpoint reaching; the lowest external elbow, up-right return, and triangle remain absent."
+    },
+    {
+      "candidate": 4,
+      "sha256": "c88489f7af2c0a5d223f431fb322f72ac549283819c3c9b6281a20c1b39fbcd6",
+      "disposition": "builder-target-failed-promoted-for-critic-critic-rejected",
+      "reason": "Strongest compact leading-elbow proof, but the trailing return and pale triangle are absent and frozen identity, design, stance, toe skid, proportions, and framing drift."
+    }
+  ],
+  "nextRound": {
+    "round": 14,
+    "status": "trailing-return-wedge",
+    "target": "Freeze candidate 04's leading arm and every other judged fact; re-author only the trailing elbow, forearm, and hand path so the elbow becomes the far down-left lowest external vertex, the hand stays inward on the existing hilt, and the forearm returns sharply up-right, leaving a clean head-sized pale triangle untouched.",
+    "compositePackGate": {
+      "minimumTotalScore": 85,
+      "minimumScorePerCategory": 7,
+      "blindComparisonCount": 6,
+      "minimumComparisonsMeetingBenchmarkBar": 5,
+      "paid3DGenerationRequiresFullPass": true
+    }
+  }
+}
