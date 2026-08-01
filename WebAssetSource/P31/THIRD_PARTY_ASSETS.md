@@ -1,15 +1,16 @@
 # P31 third-party asset ledger
 
-This directory is the acquisition and preparation workspace for the browser-game playable through P30 Round003. All publisher access happened on **2026-08-01**. Every selected asset below is marked CC0 by its original publisher. Raw downloads are retained for reproducibility but are not the preferred runtime payload; use `processed/` plus the preserved license/provenance files for integration.
+This directory is the acquisition and preparation workspace for the browser-game playable through P30 Round004. The original CC0 stack was accessed on **2026-08-01**; Blender Studio Rain was accessed on **2026-08-02** under CC BY 4.0. Raw downloads are retained for reproducibility but are not the preferred runtime payload; use `processed/` plus the preserved license/provenance files for integration.
 
 No file was obtained from an unofficial mirror, account-gated page, or paid tier. The modern Quaternius ZIPs were delivered anonymously by the publisher's official Itch distribution through Itch's signed CDN. The Round003 Poly Haven models and dependencies came directly from the public official files API/CDN. Acquisition and processing did not touch the Git index, branch, Unity project, or progress records.
 
 ## Runtime payload at a glance
 
-- Integration-ready payload: **51 files, 30,606,180 bytes (29.188 MiB)** under `processed/`.
-- Entire `processed/` tree: **61 files, 30,611,270 bytes (29.193 MiB)**; the difference is ten preserved Quaternius license/readme files.
+- Integration-ready payload: **54 files, 38,195,156 bytes (36.426 MiB)** under `processed/`; the Round004 increase is exactly the three shipping GLBs.
+- Entire `processed/` tree: **68 files, 39,560,225 bytes (37.728 MiB)**; Round004 build-input PNGs and the Stormcage audit JSON are deliberately not runtime payloads.
 - Raw provenance: **49 files, 490,031,235 bytes (467.330 MiB)** under ignored `raw/`; these archives/direct sources and API snapshots are not runtime payloads.
-- Hero/reference models: `processed/quaternius/models/universal_superhero_female.glb`, `universal_hair_long.glb`, `female_ranger_outfit.glb`, and `claymore.glb`.
+- Active Round004 actors: `processed/round004/characters/nyra.glb`, `processed/round004/characters/hollow.glb`, and project-original `processed/round004/weapons/stormcage.glb`.
+- Earlier hero/reference models remain at `processed/quaternius/models/universal_superhero_female.glb`, `universal_hair_long.glb`, `female_ranger_outfit.glb`, and `claymore.glb`.
 - Animation libraries: `processed/quaternius/animations/player_core.glb` and `combat_zombie.glb`; exact gameplay mapping is below.
 - Enemy: `processed/quaternius/models/zombie_basic.glb`, self-contained with six first-playable actions.
 - Environment: the active Round003 set is `processed/polyhaven/round003/` plus `processed/polyhaven/hdri/`; the earlier Kenney ruins and original Poly Haven JPG material copies remain as provenance-backed legacy candidates.
@@ -18,8 +19,9 @@ No file was obtained from an unofficial mirror, account-gated page, or paid tier
 
 ## Source registry
 
-| ID | Publisher / author | Asset and publisher version | Official landing / download | CC0 proof |
+| ID | Publisher / author | Asset and publisher version | Official landing / download | License proof |
 | --- | --- | --- | --- | --- |
+| BS-RAIN | Blender Studio / Blender Foundation | Rain Rig v3.3; archive contains `rain_v3.2.blend` | [official character page](https://studio.blender.org/characters/rain/v3/), [stable source ZIP](https://studio.blender.org/download-source/files/ee/a7/eea73e55dba1cea31c09848df6a794b2-4.zip) | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/); required credit: “Rain Rig (CC) Blender Foundation \| studio.blender.org” |
 | PH-SNOW | Poly Haven / Adrian Kubasa | Snowy Forest; publisher API state accessed 2026-08-01; 1K HDR variant | [asset](https://polyhaven.com/a/snowy_forest), [files API](https://api.polyhaven.com/files/snowy_forest) | [Poly Haven asset license](https://polyhaven.com/license), [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
 | PH-BRICK | Poly Haven / Rob Tuytel | Castle Brick 01; publisher API state accessed 2026-08-01; 1K JPG variants | [asset](https://polyhaven.com/a/castle_brick_01), [files API](https://api.polyhaven.com/files/castle_brick_01) | [Poly Haven asset license](https://polyhaven.com/license), [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
 | PH-COBBLE | Poly Haven / Sơn Nguyễn | Mossy Cobblestone; publisher API state accessed 2026-08-01; 1K JPG variants | [asset](https://polyhaven.com/a/mossy_cobblestone), [files API](https://api.polyhaven.com/files/mossy_cobblestone) | [Poly Haven asset license](https://polyhaven.com/license), [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
@@ -35,6 +37,14 @@ No file was obtained from an unofficial mirror, account-gated page, or paid tier
 | Q-UAL2 | Quaternius | Universal Animation Library 2, January 2026, free Standard tier | [publisher page](https://quaternius.com/packs/universalanimationlibrary2.html), [publisher Itch distribution](https://quaternius.itch.io/universal-animation-library-2) | [publisher page](https://quaternius.com/packs/universalanimationlibrary2.html), bundled `License.txt`, [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
 | Q-WEAPON | Quaternius | Modular Weapons Pack, September 2018 | [publisher page](https://quaternius.com/packs/medievalweapons.html), [publisher Drive folder](https://drive.google.com/drive/folders/1Z6vYiQxY8W73FXuMWzaTQAg9rzbumnOr?usp=sharing) | [publisher page](https://quaternius.com/packs/medievalweapons.html), publisher `License.txt`, [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
 | Q-ZOMBIE | Quaternius | Zombie Apocalypse Kit, March 2024 | [publisher page](https://quaternius.com/packs/zombieapocalypsekit.html), [publisher Drive folder](https://drive.google.com/drive/folders/1mWP6sCHun7OUMHQeDNZLrXTteXlzWg_t?usp=sharing) | [publisher page](https://quaternius.com/packs/zombieapocalypsekit.html), publisher `License.txt`, [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+
+## Round004 character and weapon supplement
+
+- **Nyra** derives from BS-RAIN (CC BY 4.0) plus the existing Q-UAL1/Q-UAL2 CC0 animation libraries. Modification notice: Rain geometry was altered and buried surfaces pruned; the canonical 65-bone gameplay rig was substituted; weights were transferred; textures were atlased/resized; armor and mantle were added; five gameplay actions were embedded. Preserve the credit **“Rain Rig (CC) Blender Foundation | studio.blender.org”** with distributed credits.
+- **Hollow** derives from the existing Q-ZOMBIE CC0 payload. The source sneaker region was removed before a wrapped boot/greave replacement; the original 50-bone rig and exact `Idle`, `HitReact`, and `Death` clips remain.
+- **Stormcage** is a project-original procedural mesh authored from deterministic Blender primitives and profiles. The former Quaternius claymore was inspected only as an orientation reference; no third-party geometry or texture was copied into Stormcage.
+- The three source/runtime GLB pairs are byte-identical and total **7,588,976 bytes**: Nyra `f3e93e…d7101`, Hollow `626a71…8881`, Stormcage `a25554…a11`.
+- Rain acquisition proof, official-page snapshot, CC BY legalcode, extracted blend and selected exact texture inputs are under `source_work/round004/originals/blender-studio-rain/`. Build and clean-reimport receipts are under `source_work/round004/`; exact texture recipes are in `texture_build_receipt.json`.
 
 ## Raw acquisition ledger
 

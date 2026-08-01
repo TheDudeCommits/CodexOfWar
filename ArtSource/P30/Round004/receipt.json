@@ -1,0 +1,301 @@
+{
+  "schema": "p30-round004-builder.v1",
+  "piece": "P30",
+  "round": "Round004",
+  "generatedAt": "2026-08-02T02:57:12+07:00",
+  "role": "builder",
+  "verdict": "candidate-only-no-pass-claim",
+  "scope": {
+    "kind": "character-combat-fidelity-only",
+    "implemented": [
+      "Replaced the stable character.hero payload with Nyra, a five-draw 70,984-triangle authored character on the exact 65-bone gameplay rig with five exact embedded clips.",
+      "Replaced the stable character.hollow payload with a five-draw 32,389-triangle Hollow on its original 50-bone rig with exact Idle, HitReact, and Death clips.",
+      "Replaced the stable weapon.claymore payload with project-original Stormcage, a three-draw 6,104-triangle grip-centred two-hand claymore.",
+      "Tuned only CharacterViews scale, grip/contact offset, weapon orientation/material normalization, authored names, and localized Hollow wound/eye hit flash.",
+      "Kept manifest version 2 and the same 18 enabled keys; all 18 load with no failure or authored fallback in headed production evidence."
+    ],
+    "explicitlyUnchanged": [
+      "environment geometry, materials, textures, lighting, fog, staging, post stack, and asset bytes",
+      "camera, viewport, HUD, input bindings/controller, physics bridge, and render bridge",
+      "60 Hz simulation, constants, timing, damage, collision, deterministic clocks, tapes, seed, telemetry schema, and review API",
+      "Round003 candidate, critic evidence, reports, and receipts"
+    ],
+    "notExpanded": [
+      "no gameplay system, camera, environment, HUD, physics, input, telemetry, progress, Unity, Git, branch, commit, push, PR, or deployment work",
+      "no acceptance or AAA claim"
+    ]
+  },
+  "runtimeTuning": {
+    "heroScale": 1.36,
+    "hollowScale": 1.74,
+    "stormcageScale": 0.87,
+    "stormcagePosition": [0.004, -0.209, 0.018],
+    "stormcageRotation": [-1.5707963267948966, 0.05, 3.141592653589793],
+    "bracketDecision": "X=0 occluded faces; +PI/2 became edge-on in S04; -PI/2 kept startup below the faces and made the active blade a visible diagonal, so -PI/2 was selected."
+  },
+  "shippingAssets": [
+    {
+      "manifestKey": "character.hero",
+      "url": "/assets/models/ashwake/nyra.glb",
+      "bytes": 5705072,
+      "sha256": "f3e93e577a7419b29734646488166ce3b52f52bb8982e2a5041d2237222d7101",
+      "triangles": 70984,
+      "bones": 65,
+      "draws": 5,
+      "clips": ["Idle_Loop", "Walk_Loop", "Sprint_Loop", "Roll", "Sword_Regular_A"],
+      "unweightedVertices": 0,
+      "maxInfluences": 4,
+      "byteIdenticalRuntimePublish": true
+    },
+    {
+      "manifestKey": "character.hollow",
+      "url": "/assets/models/ashwake/hollow.glb",
+      "bytes": 1619612,
+      "sha256": "626a71d26b656b767af52154998b5c082f39be65dde08ab3e701e65b99ae8881",
+      "triangles": 32389,
+      "bones": 50,
+      "draws": 5,
+      "clips": ["Idle", "HitReact", "Death"],
+      "unweightedVertices": 0,
+      "maxInfluences": 4,
+      "byteIdenticalRuntimePublish": true
+    },
+    {
+      "manifestKey": "weapon.claymore",
+      "url": "/assets/models/ashwake/stormcage.glb",
+      "bytes": 264292,
+      "sha256": "a255542b0ca58ef5d8a90a131851e55c51c00983fb1815e718f29371134b2a11",
+      "triangles": 6104,
+      "draws": 3,
+      "materials": 3,
+      "byteIdenticalRuntimePublish": true
+    }
+  ],
+  "payload": {
+    "round004ShippingGlbs": {
+      "files": 3,
+      "bytes": 7588976
+    },
+    "manifest": {
+      "version": 2,
+      "enabledKeys": 18,
+      "stableKeysReplaced": 3,
+      "keysAddedOrRemoved": 0,
+      "sha256": "373e2af4dd5173f68c4e45cc7c0b5eede06fc135839c25f43a512369a760ba75"
+    }
+  },
+  "builderProductionEvidence": {
+    "source": "ArtSource/P30/Round004/capture-evidence.json",
+    "sourceSha256": "0e278b583e76b75bd001915c4635067d8b24dc051a15927cc3a504f72bd08979",
+    "url": "http://127.0.0.1:4173/?review=1&post=0",
+    "browser": {
+      "name": "Google Chrome",
+      "version": "150.0.7871.187",
+      "headed": true,
+      "webgl": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+      "unmaskedVendor": "Google Inc. (Apple)",
+      "unmaskedRenderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M2, Unspecified Version)"
+    },
+    "surface": {
+      "viewport": {"width": 1600, "height": 900},
+      "canvasCss": {"width": 1600, "height": 900},
+      "canvasBacking": {"width": 1600, "height": 900},
+      "devicePixelRatio": 1,
+      "rendererPixelRatio": 1
+    },
+    "timingMs": {
+      "navigationToReady": 4345,
+      "round002DoNotRegressBeyond": 4109,
+      "regressedBeyondRound002": true,
+      "overByMs": 236,
+      "coldReadyAcceptanceClaim": false
+    },
+    "httpStatus": 200,
+    "pageErrors": [],
+    "requestFailures": [],
+    "httpErrors": [],
+    "reviewErrors": [],
+    "rendererErrors": [],
+    "webglGetError": 0
+  },
+  "assetLoadReceipt": {
+    "schema": "gauntlet.asset-load.v1",
+    "manifestVersion": 2,
+    "enabledCount": 18,
+    "loadedCount": 18,
+    "failures": [],
+    "complete": true,
+    "productionAuthored": true,
+    "proceduralFallbackActive": false,
+    "pmremInstalled": true
+  },
+  "captures": [
+    {"id":"S01","path":"ArtSource/P30/Round004/S01.png","bytes":1857464,"sha256":"8ffe895bf44c17028465c835ac985e5e54fb45a7987582dc5fbde763cbc9b52c","tick":120,"playerMotion":"idle","attackPhase":"idle","targetHealth":100,"events":[],"calls":64,"triangles":322521,"textures":24,"geometries":26},
+    {"id":"S02","path":"ArtSource/P30/Round004/S02.png","bytes":1941049,"sha256":"28e485db4ab17dfd622aedab466a1d041538c1e89b22bbf3d5e67ae2c45c99ea","tick":23,"playerMotion":"idle","attackPhase":"idle","targetHealth":100,"events":[],"calls":63,"triangles":321705,"textures":24,"geometries":26},
+    {"id":"S03","path":"ArtSource/P30/Round004/S03.png","bytes":1944282,"sha256":"6f4a7eda6686be89b2d2f43f8da137c34e716f46c14e58d6b937e9554b379f06","tick":29,"playerMotion":"attack","attackPhase":"startup","targetHealth":100,"events":["attack_started"],"calls":63,"triangles":321705,"textures":24,"geometries":26},
+    {"id":"S04","path":"ArtSource/P30/Round004/S04.png","bytes":1946130,"sha256":"f606332a0e1bb58ed5e552b1b96ff9f3454cc59b10c1a60a1d6629d48484cac4","tick":34,"playerMotion":"attack","attackPhase":"active","targetHealth":90,"events":["attack_started","enemy_hit"],"calls":68,"triangles":322809,"textures":24,"geometries":29},
+    {"id":"S05","path":"ArtSource/P30/Round004/S05.png","bytes":1945836,"sha256":"26273dd8fd781a4ce0e74cea824454bdf12690082386b097cc98d4b7cba6fcba","tick":41,"playerMotion":"attack","attackPhase":"recovery","targetHealth":90,"events":["attack_started","enemy_hit"],"calls":65,"triangles":322569,"textures":24,"geometries":29},
+    {"id":"S06","path":"ArtSource/P30/Round004/S06.png","bytes":1932563,"sha256":"ca4b8e56c489dcbc66d612339c904e7e0f40594d887481b4a96ac5e8f6aecf26","tick":37,"playerMotion":"dodge","attackPhase":"idle","targetHealth":100,"events":["dodge_started"],"calls":63,"triangles":321705,"textures":24,"geometries":29}
+  ],
+  "capturePngContract": {
+    "count": 6,
+    "width": 1600,
+    "height": 900,
+    "colorType": 2,
+    "hasAlpha": false,
+    "forbiddenMetadataFound": false,
+    "timestamps": "prescribed deterministic processed ticks retained exactly; no mechanics or camera changes were made for beautification"
+  },
+  "resourceCeilings": {
+    "limits": {"calls":100,"triangles":250000,"textures":32,"geometries":64},
+    "observedMaximum": {"capture":"S04","calls":68,"triangles":322809,"textures":24,"geometries":29},
+    "withinEveryCeiling": false,
+    "failures": [
+      {"metric":"triangles","observed":322809,"limit":250000,"overBy":72809}
+    ]
+  },
+  "determinismEvidence": {
+    "tapeA": {
+      "runs": 2,
+      "processedTicksPerRun": 60,
+      "simulationSnapshotsAndEventsExact": true,
+      "run1Sha256": "8730027eb413acf1d94b6a2449b86f8a60a2cfb8a15b03ce7f0448708e51e4c2",
+      "run2Sha256": "8730027eb413acf1d94b6a2449b86f8a60a2cfb8a15b03ce7f0448708e51e4c2"
+    },
+    "tapeB": {"processedTicks":60,"pass":true,"targetHealth":100,"enemyHitEvents":0},
+    "S06ExactQueue": "move.forward value=1 ticks 0-19; move.right value=1 ticks 20-28; dodge down tick 28; dodge up tick 29; capture at processed tick 37"
+  },
+  "provenance": {
+    "rain": {
+      "sourceId": "BS-RAIN",
+      "license": "CC-BY-4.0",
+      "requiredCredit": "Rain Rig (CC) Blender Foundation | studio.blender.org",
+      "officialPage": "https://studio.blender.org/characters/rain/v3/",
+      "modificationNoticeRetained": true
+    },
+    "nyraLineage": ["BS-RAIN", "Q-UAL1", "Q-UAL2"],
+    "hollowLineage": ["Q-ZOMBIE"],
+    "stormcage": "project-original-procedural-mesh",
+    "receipts": [
+      "WebAssetSource/P31/source_work/round004/acquisition_receipt.json",
+      "WebAssetSource/P31/source_work/round004/texture_build_receipt.json",
+      "WebAssetSource/P31/source_work/round004/runtime_publish_receipt.json",
+      "WebAssetSource/P31/ASSET_RECEIPT.json",
+      "WebAssetSource/P31/THIRD_PARTY_ASSETS.md"
+    ]
+  },
+  "auditReceipts": [
+    {"path":"WebAssetSource/P31/source_work/round004/hero_build_receipt.json","sha256":"3bf8d0d54f0bb8a673bf1bd5c59d399c058c56b6f5f52c47b6100c604518f728"},
+    {"path":"WebAssetSource/P31/source_work/round004/nyra_round004_reimport_inspection.json","sha256":"9858a7f31fd33520ff46bc07ce957424b2e56589df6b7675329d8466035b3099"},
+    {"path":"WebAssetSource/P31/source_work/round004/hollow_build_receipt.json","sha256":"21d177090b5365a04aed095eec0247fce6c8d16b4d9db2b951530128cc01a5d3"},
+    {"path":"WebAssetSource/P31/source_work/round004/hollow_round004_reimport_inspection.json","sha256":"5c45701b0a7cf2909112230cda3a8214a0672ada3848b2cc761c5aadf167ed83"},
+    {"path":"WebAssetSource/P31/source_work/round004/stormcage_build_receipt.json","sha256":"4d20b8db4964a02b6ed329ebbfa4db777a3696b9e6707294c919a52e4de096e1"},
+    {"path":"WebAssetSource/P31/source_work/round004/stormcage_provenance.json","sha256":"5d9fb0be080b7f035defedba786c58a1cfd0113f0fd2b3ebc067b47a9537b71e"},
+    {"path":"WebAssetSource/P31/source_work/round004/stormcage_reimport_inspection.json","sha256":"caa631c1905e90d24e6feda769ea844727cafd0556779ff9dadc0c8cc412fdd1"}
+  ],
+  "implementationHashes": {
+    "characterViews": "01612bad384dd71d2c6550e29484c316df34cbbbc5b35a217af8c9cf549d25bb",
+    "captureScript": "e67666d8ffd0126d7fe43f6fa79de929b9905cf9d09a6bacb0f121d0ed4cb563",
+    "manifest": "373e2af4dd5173f68c4e45cc7c0b5eede06fc135839c25f43a512369a760ba75",
+    "p31AssetReceipt": "28f08086b401408dbd4b1a634ce5acbd7230cb3104effa75fd754fa3359e3288",
+    "p31ReceiptGenerator": "9dacbe7aa37d77eaf0af96fe47d739a7a10043b6f363cd6256226ec476506bb5"
+  },
+  "frozenSubsystemIntegrity": {
+    "beforeList": "ArtSource/P30/Round004/freeze-before.sha256",
+    "beforeListSha256": "ee6464e5d6d8b196c7deb51e8c0cb7b3c93607ff816e8c888995a78cb20263b0",
+    "afterList": "ArtSource/P30/Round004/freeze-after.sha256",
+    "afterListSha256": "ee6464e5d6d8b196c7deb51e8c0cb7b3c93607ff816e8c888995a78cb20263b0",
+    "checkedFiles": 80,
+    "passCount": 80,
+    "mismatchCount": 0,
+    "command": "shasum -a 256 -c ArtSource/P30/Round004/freeze-before.sha256",
+    "status": "pass",
+    "beforeAfterListsByteIdentical": true,
+    "allBeforeAndAfterHashesMatch": true
+  },
+  "validation": [
+    {"command":"npm run typecheck","exitCode":0,"status":"pass","detail":"TypeScript noEmit completed."},
+    {"command":"npm run lint","exitCode":0,"status":"pass","detail":"ESLint completed with no error."},
+    {"command":"npm test","exitCode":0,"status":"pass","detail":"Vitest: 2 files passed, 5 tests passed."},
+    {"command":"npm run build","exitCode":0,"status":"pass-with-warning","detail":"Vite production build completed; carried chunk-size warning remains."},
+    {"command":"npm run smoke","exitCode":0,"status":"pass","detail":"Playwright: 3 browser tests passed, including deterministic review, out-of-range/pause/blur, and WebGL context restore."},
+    {"command":"python3 WebAssetSource/P31/source_work/build_receipt.py","status":"pass","detail":"Mixed-license P31 receipt regenerated at 68 processed files / 39,560,225 bytes and 54 integration-ready files / 38,195,156 bytes."},
+    {"command":"shasum -a 256 -c ArtSource/P30/Round004/freeze-before.sha256","exitCode":0,"status":"pass","detail":"80 passes, 0 mismatches; freeze-after.sha256 is byte-identical to freeze-before.sha256."},
+    {"command":"Round004 headed Chrome capture","status":"pass-with-performance-failures","detail":"18/18 assets, no fallback/errors, deterministic tapes pass; cold ready and triangle ceilings fail as separately recorded."}
+  ],
+  "observedWarnings": [
+    "Vite reports a production JavaScript chunk above 500 kB after minification.",
+    "Chrome console carries Rapier initialization, RGBELoader, and PCFSoftShadowMap deprecation warnings; no console error occurred.",
+    "Cold navigation-to-ready is 4,345 ms, 236 ms over the inherited 4,109 ms guardrail.",
+    "S04 reaches 322,809 triangles, 72,809 above the inherited 250,000-triangle ceiling."
+  ],
+  "knownCarriedFailures": [
+    "The Hollow atlas source/output hashes and transform semantics are retained, but the original builder shell command was not retained; byte-exact source reproduction is therefore not claimed.",
+    "Hollow retains a visibly large/chibi head and boot-shape risk.",
+    "Nyra retains possible chest-shell and far-arm silhouette risk in close overlap.",
+    "The prescribed S05 timestamp partially loses the blade behind the actors; the prescribed S06 timestamp captures a supine roll beat.",
+    "Close-tape S02-S05 actor overlap remains; mechanics/camera were frozen and were not changed to beautify evidence."
+  ],
+  "limitations": [
+    "This is builder-owned candidate evidence only; no independent critic or final acceptance verdict is claimed.",
+    "No AAA, production-ready, or every-hard-gate-pass claim is made.",
+    "The private Reference archive was not inspected or touched."
+  ],
+  "changedFiles": {
+    "runtime": [
+      "web-game/public/assets/manifest.json",
+      "web-game/public/assets/models/ashwake/nyra.glb",
+      "web-game/public/assets/models/ashwake/hollow.glb",
+      "web-game/public/assets/models/ashwake/stormcage.glb",
+      "web-game/src/render/objects/CharacterViews.ts"
+    ],
+    "evidence": [
+      "web-game/scripts/p30-round004-capture.mjs",
+      "ArtSource/P30/Round004/S01.png",
+      "ArtSource/P30/Round004/S02.png",
+      "ArtSource/P30/Round004/S03.png",
+      "ArtSource/P30/Round004/S04.png",
+      "ArtSource/P30/Round004/S05.png",
+      "ArtSource/P30/Round004/S06.png",
+      "ArtSource/P30/Round004/capture-evidence.json",
+      "ArtSource/P30/Round004/receipt.json",
+      "ArtSource/P30/Round004/freeze-before.sha256",
+      "ArtSource/P30/Round004/freeze-after.sha256"
+    ],
+    "processedAssets": [
+      "WebAssetSource/P31/processed/round004/characters/hollow.glb",
+      "WebAssetSource/P31/processed/round004/characters/nyra.glb",
+      "WebAssetSource/P31/processed/round004/textures/hollow_atlas_512.png",
+      "WebAssetSource/P31/processed/round004/textures/nyra_face_atlas_2k.png",
+      "WebAssetSource/P31/processed/round004/textures/nyra_hair_1k.png",
+      "WebAssetSource/P31/processed/round004/weapons/stormcage.asset-receipt.json",
+      "WebAssetSource/P31/processed/round004/weapons/stormcage.glb"
+    ],
+    "sourceWork": [
+      "WebAssetSource/P31/source_work/round004/acquisition_receipt.json",
+      "WebAssetSource/P31/source_work/round004/blender_common.py",
+      "WebAssetSource/P31/source_work/round004/build_hero.py",
+      "WebAssetSource/P31/source_work/round004/build_hollow.py",
+      "WebAssetSource/P31/source_work/round004/build_stormcage.py",
+      "WebAssetSource/P31/source_work/round004/hero_build_receipt.json",
+      "WebAssetSource/P31/source_work/round004/hollow_build_receipt.json",
+      "WebAssetSource/P31/source_work/round004/hollow_round004_reimport_inspection.json",
+      "WebAssetSource/P31/source_work/round004/inspect_blend.py",
+      "WebAssetSource/P31/source_work/round004/nyra_round004_reimport_inspection.json",
+      "WebAssetSource/P31/source_work/round004/runtime_publish_receipt.json",
+      "WebAssetSource/P31/source_work/round004/stormcage_build_receipt.json",
+      "WebAssetSource/P31/source_work/round004/stormcage_provenance.json",
+      "WebAssetSource/P31/source_work/round004/stormcage_reimport_inspection.json",
+      "WebAssetSource/P31/source_work/round004/texture_build_receipt.json",
+      "WebAssetSource/P31/source_work/round004/originals/blender-studio-rain/download.headers.txt",
+      "WebAssetSource/P31/source_work/round004/originals/blender-studio-rain/license/CC-BY-4.0-legalcode.txt",
+      "WebAssetSource/P31/source_work/round004/originals/blender-studio-rain/license/official-rain-page.headers.txt",
+      "WebAssetSource/P31/source_work/round004/originals/blender-studio-rain/license/official-rain-page.html"
+    ],
+    "ledgers": [
+      "WebAssetSource/P31/source_work/build_receipt.py",
+      "WebAssetSource/P31/ASSET_RECEIPT.json",
+      "WebAssetSource/P31/THIRD_PARTY_ASSETS.md"
+    ]
+  }
+}

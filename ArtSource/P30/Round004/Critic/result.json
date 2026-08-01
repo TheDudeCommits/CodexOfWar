@@ -1,0 +1,83 @@
+{
+  "schema": "p30.round004.independent-critic.v1",
+  "role": "independent-critic",
+  "piece": "P30",
+  "round": "Round004",
+  "verdict": "REJECT",
+  "accepted": false,
+  "score": 34,
+  "scoreOutOf": 100,
+  "categories": {
+    "characterAnatomySilhouette": {"score": 3, "max": 10, "deduction": "Toy-like anatomy, small gameplay scale, and merged hero/Hollow silhouettes in S02-S05; S06 reads as a toppled ragdoll."},
+    "skinHairClothArmorMaterialFidelity": {"score": 2, "max": 10, "deduction": "Flat plastic color blocks, chunky hair, and little skin, cloth, leather, or armor micro-surface differentiation."},
+    "enemyZombieThreatFidelity": {"score": 2, "max": 10, "deduction": "The Hollow is a simplified cartoon skull figure and never attacks; the 30-second combat interval left player health at 100 while the enemy only idled, reacted, and died."},
+    "weaponQualityHandContactReadability": {"score": 3, "max": 10, "deduction": "The blade is readable in S01-S04 but collapses edge-on/behind the actors in S05 and crosses the body/ground in S06; stable visible palm contact is not maintained."},
+    "animationPosingWeightContact": {"score": 2, "max": 10, "deduction": "Required clips run, but attack startup, active, and recovery lack weight and spacing; actors intersect at contact and the roll pose looks ungrounded."},
+    "combatVfxImpactPhysicsReadability": {"score": 3, "max": 10, "deduction": "Health, hit reaction, sparks, and a toast register, but the large flat cyan fan and intersecting bodies do not communicate a physical weapon impact."},
+    "cameraFramingComposition": {"score": 3, "max": 10, "deduction": "Actors are tiny against empty ground, combat silhouettes overlap, boom obstruction is unimplemented, and camera replay hashes differ after reset."},
+    "environmentLightingIntegration": {"score": 5, "max": 10, "deduction": "The PBR fort and cobbles are coherent, but the arena remains an empty plane against a dark void and characters look weakly integrated with the lighting."},
+    "uiCinematicCoherence": {"score": 5, "max": 10, "deduction": "The sparse HUD is legible, but the persistent controls strip and floating REND toast feel prototype-level and the presentation has no cinematic combat emphasis."},
+    "runtimePolishStabilityPerformance": {"score": 6, "max": 10, "deduction": "Cold ready, 60 fps behavior, input, resize, and context restore are good; every capture exceeds the triangle ceiling, full camera replay is not exact, obstruction is pending, and three deprecation warnings recur."}
+  },
+  "focusedBlindWins": {"S03": false, "S04": false, "S05": false, "count": 0, "required": 3},
+  "overallBlindWins": {"S01": false, "S02": false, "S03": false, "S04": false, "S05": false, "S06": false, "count": 0, "required": 5, "tiesLose": true},
+  "blindProtocol": {"pairs": 6, "randomizedAnonymousAB": true, "decisionsLockedBeforeReveal": true, "privateIdentitiesIncluded": false},
+  "production": {
+    "source": "fresh isolated copy of frozen web-game",
+    "node": "24.18.1",
+    "npm": "11.7.0",
+    "build": "vite 8.2.0 production",
+    "server": "vite preview on fresh port 51321",
+    "health": {"npmCi": "pass", "typecheck": "pass", "lint": "pass", "simulationTests": "5/5 pass", "build": "pass", "browserSmoke": "3/3 pass"},
+    "largeChunkBytes": 2974510,
+    "contractHashes": {
+      "captureScript": "e67666d8ffd0126d7fe43f6fa79de929b9905cf9d09a6bacb0f121d0ed4cb563",
+      "reviewSpec": "673f7e1f73ce3da053b0dc711a7d41cc11c7c565a2eadc10d087c30458448c57",
+      "reviewHarness": "28a0631b5f9264ea8a1eccf6dd17cd918b011ab632a44f3d8bce93c2d9e2e34c"
+    }
+  },
+  "browser": {
+    "name": "Google Chrome",
+    "version": "150.0.7871.187",
+    "headed": true,
+    "webgl": "WebGL 2.0",
+    "gpu": "ANGLE Metal Renderer: Apple M2",
+    "viewport": {"width": 1600, "height": 900, "dpr": 1, "canvasCss": [1600, 900], "canvasBacking": [1600, 900]},
+    "httpStatus": 200,
+    "coldReadyMs": 2389.407625
+  },
+  "gates": {
+    "allHardGatesPass": false,
+    "assets18Of18NoFallback": {"pass": true, "enabled": 18, "loaded": 18, "failures": 0, "productionAuthored": true, "pmremInstalled": true},
+    "requiredClipsPresentAndExercised": {"pass": true, "hero": ["Idle_Loop", "Walk_Loop", "Sprint_Loop", "Roll", "Sword_Regular_A"], "hollow": ["Idle", "HitReact", "Death"]},
+    "captureViewport1600x900Dpr1": {"pass": true, "captures": 6},
+    "deterministicTapeReplayReset": {"pass": false, "simulationExact": true, "simulationRun1Sha256": "95ea058cf10ae2bdebc38eee07706d88598d62b82ff748c54401f84aacf2f587", "simulationRun2Sha256": "95ea058cf10ae2bdebc38eee07706d88598d62b82ff748c54401f84aacf2f587", "cameraExact": false, "cameraRun1Sha256": "882cc40a7f565721373aa8d8e7b976174d5543dfa5e36feb3a39aec809ac2465", "cameraRun2Sha256": "0fe73a94d0551c6c8a6805b566a79b2d78fe533255f8886a650fbc00001d34b9", "maxObservedPositionDeltaMeters": 0.000595391},
+    "noSevereActorWeaponClipping": {"pass": false, "evidence": "S02-S05 actors visibly overlap; S04 contact intersects torsos."},
+    "weaponVisibleNotEdgeOn": {"pass": false, "evidence": "S05 loses the blade edge-on/behind the actors."},
+    "stablePalmContact": {"pass": false, "evidence": "Grip readability changes across S03-S06 and the S06 blade crosses body/ground."},
+    "cameraObstructionProjectionReplay": {"pass": false, "obstructionImplemented": false, "obstructionStatus": "pending", "projectionReplayExact": true, "cameraReplayExact": false},
+    "pointerLock": {"pass": true, "reviewAcquired": true, "liveAcquired": true, "released": true, "physicalMouseYawBefore": 0, "physicalMouseYawAfter": -0.552},
+    "resize": {"pass": true, "observed": ["1280x720 backing/CSS", "1600x900 restored"]},
+    "pauseBlurHeldKey": {"pass": true, "pauseStable": true, "blurCleared": true, "heldKeyDidNotResume": true},
+    "webglContextRestore": {"pass": true, "losses": 1, "restores": 1, "finalLost": false},
+    "significantErrors": {"pass": true, "pageErrors": 0, "requestFailures": 0, "httpErrors": 0, "webglGetError": 0, "uniqueWarnings": 3},
+    "coldReadyAtMost4109ms": {"pass": true, "measuredMs": 2389.407625, "limitMs": 4109},
+    "captureResourceCeiling": {"pass": false, "triangleLimit": 250000, "measuredRange": [321705, 322809], "drawCallRange": [63, 68], "textures": 24, "geometryRange": [26, 29]},
+    "threeThirtySecondIntervals": {"pass": true, "durationsMs": [31503.106042, 31253.706792, 32146.947708], "meanFps": [59.984655, 60.012615, 59.845109], "p95RafMs": [18.5, 18.5, 18.6], "longTasks": [0, 0, 0], "contextGrowth": [0, 0, 0], "textureGrowth": [0, 0, 0], "sustainedFailure": false}
+  },
+  "captures": [
+    {"id": "S01", "file": "S01.png", "preset": "combat-tape-c", "processedTicks": 120, "capturedAtUtc": "2026-08-01T20:19:25.675Z", "pageTimestampMs": 3090.2, "pngSha256": "f4767702f5f5b9a1e86d864d584ad7bc1c8db92b1e8d1cf5cdd69059656fb207", "stateSha256": "5105479b22d8d293d539f82e6eaafaa88d0331dc238ef7993042e45e2d8975da", "cameraSha256": "350fb6a345ab35b708ccd66044c2932dc25c69090bd404b902412f4839d6d9a2", "viewportSha256": "9a3a626d4dcdb26031597a71a7c0f9ad13fad23d66898529379beea441f5589d", "state": {"tick": 120, "elapsedSeconds": 2, "playerPosition": [0, 5.600004673], "playerMotion": "idle", "targetHealth": 100, "targetMotion": "idle"}, "cameraPosition": [1.349423323, 2.971010924, 12.606409589], "triangles": 322521, "calls": 64},
+    {"id": "S02", "file": "S02.png", "preset": "combat-idle", "processedTicks": 23, "capturedAtUtc": "2026-08-01T20:19:26.340Z", "pageTimestampMs": 3702.4, "pngSha256": "c2fa301760bb7b4811d77daba3c4a2f52f6bc7ae975dbb1753d0c205b12aeb4c", "stateSha256": "1f2d0c91c11435f513ee13a3c97f73cdca4eb8627c8f17a71a3a236ed12f9acf", "cameraSha256": "4c2a6eb8c5637d96a7c30091c93e51c224f39bc73622cbee0728710740efa31b", "viewportSha256": "9a3a626d4dcdb26031597a71a7c0f9ad13fad23d66898529379beea441f5589d", "state": {"tick": 23, "elapsedSeconds": 0.383333333, "playerPosition": [0, 1.600000858], "playerMotion": "idle", "targetHealth": 100, "targetMotion": "idle"}, "cameraPosition": [1.35, 2.970485715, 8.755663569], "triangles": 321705, "calls": 63},
+    {"id": "S03", "file": "S03.png", "preset": "combat-startup", "processedTicks": 29, "capturedAtUtc": "2026-08-01T20:19:26.763Z", "pageTimestampMs": 4125.2, "pngSha256": "c6f3754dd8c242b79c72c7069719d78ffe833b5590e2f27b9efb6c776b3aa533", "stateSha256": "1d83b95f31b4b5359e999200814ee2af799233427a5f469bc88d9b3636cff37d", "cameraSha256": "0da337b32cd7366f5a392bcf842606264b818c4e21be6c1f8c737878a72105de", "viewportSha256": "9a3a626d4dcdb26031597a71a7c0f9ad13fad23d66898529379beea441f5589d", "state": {"tick": 29, "elapsedSeconds": 0.483333333, "playerPosition": [0, 1.600000858], "playerMotion": "attack", "attackPhase": "startup", "attackFrame": 5, "targetHealth": 100, "targetMotion": "idle"}, "cameraPosition": [1.35, 2.970485715, 8.664786758], "triangles": 321705, "calls": 63},
+    {"id": "S04", "file": "S04.png", "preset": "combat-active-hit", "processedTicks": 34, "capturedAtUtc": "2026-08-01T20:19:27.427Z", "pageTimestampMs": 4790.5, "pngSha256": "f606332a0e1bb58ed5e552b1b96ff9f3454cc59b10c1a60a1d6629d48484cac4", "stateSha256": "f588c940e73cac30ccd1754575c7ddbf13909d61798cf77afed28ea918d82c24", "cameraSha256": "6b9b9ad80776d3dca106eda3e1ebf350bf31f2a430b55c50f1977930d26e7b89", "viewportSha256": "9a3a626d4dcdb26031597a71a7c0f9ad13fad23d66898529379beea441f5589d", "state": {"tick": 34, "elapsedSeconds": 0.566666667, "playerPosition": [0, 1.600000858], "playerMotion": "attack", "attackPhase": "active", "attackFrame": 10, "targetHealth": 90, "targetMotion": "hit"}, "cameraPosition": [1.375182436, 2.952513373, 8.633443362], "triangles": 322809, "calls": 68},
+    {"id": "S05", "file": "S05.png", "preset": "combat-recovery", "processedTicks": 41, "capturedAtUtc": "2026-08-01T20:19:28.071Z", "pageTimestampMs": 5440.4, "pngSha256": "26273dd8fd781a4ce0e74cea824454bdf12690082386b097cc98d4b7cba6fcba", "stateSha256": "5b3436470ba40ec3f4b9e9759ec1859a351b6975c699f090347c3eb87eb7e9d9", "cameraSha256": "37f3d9b1f81996a0c5d76dfc7016c5315833c1e4a9f17e25dfde3191e77a5473", "viewportSha256": "9a3a626d4dcdb26031597a71a7c0f9ad13fad23d66898529379beea441f5589d", "state": {"tick": 41, "elapsedSeconds": 0.683333333, "playerPosition": [0, 1.600000858], "playerMotion": "attack", "attackPhase": "recovery", "attackFrame": 17, "targetHealth": 90, "targetMotion": "hit"}, "cameraPosition": [1.343237088, 2.965169976, 8.616048648], "triangles": 322569, "calls": 65},
+    {"id": "S06", "file": "S06.png", "preset": "combat-dodge-side-offset", "processedTicks": 37, "capturedAtUtc": "2026-08-01T20:19:28.650Z", "pageTimestampMs": 6012.8, "pngSha256": "ca4b8e56c489dcbc66d612339c904e7e0f40594d887481b4a96ac5e8f6aecf26", "stateSha256": "2586ea4793026d8dd009d41d83bd33eab73597aa06e9061aec2901a54e2e20ed", "cameraSha256": "d97abaf6a098bbbd98f731a8450a1355aebb6719b8ec097d585bda4e1dd2047e", "viewportSha256": "9a3a626d4dcdb26031597a71a7c0f9ad13fad23d66898529379beea441f5589d", "state": {"tick": 37, "elapsedSeconds": 0.616666667, "playerPosition": [2.260000229, 1.600000858], "playerMotion": "dodge", "stamina": 74, "targetHealth": 100, "targetMotion": "idle"}, "cameraPosition": [2.786078589, 2.970485715, 8.623625051], "triangles": 321705, "calls": 63}
+  ],
+  "singleBiggestGap": {
+    "id": "combat-character-contact-package",
+    "evidence": "The candidate lost all focused S03-S05 comparisons. Those frames show low-detail toy-like actors merged into one silhouette, weak pose weight/contact, and an edge-on/obscured weapon in S05.",
+    "smallestPrescription": "Replace only the hero/Hollow/weapon duel package with a matched high-fidelity PBR pair and one authored two-handed heavy-strike plus synchronized HitReact; enforce visible grip constraints and non-intersecting contact spacing while leaving environment and HUD unchanged.",
+    "acceptanceTest": "Fresh frozen S03, S04, and S05 must each show separated readable silhouettes, a fully visible blade with stable palm contact, a clear contact point, and grounded paired motion, then win 3/3 new blind comparisons against private reference S03-S05."
+  },
+  "privacy": {"privateArchiveNeverCopiedToRepo": true, "privateFilenamesHashesLayoutsOmitted": true, "decisionsRecordedBeforeReveal": true, "cleanupComplete": true}
+}

@@ -1,0 +1,100 @@
+{
+  "joined_weight_audit": {
+    "Hollow_Draw_BoneCorrosion": {
+      "invalid_sums": 0,
+      "max_influences": 4,
+      "unweighted": 0,
+      "vertices": 1432
+    },
+    "Hollow_Draw_CharcoalWraps": {
+      "invalid_sums": 0,
+      "max_influences": 4,
+      "unweighted": 0,
+      "vertices": 864
+    },
+    "Hollow_Draw_CorpseAtlas": {
+      "invalid_sums": 0,
+      "max_influences": 4,
+      "unweighted": 0,
+      "vertices": 15139
+    },
+    "Hollow_Draw_HotEye": {
+      "invalid_sums": 0,
+      "max_influences": 4,
+      "unweighted": 0,
+      "vertices": 130
+    },
+    "Hollow_Draw_WetWounds": {
+      "invalid_sums": 0,
+      "max_influences": 4,
+      "unweighted": 0,
+      "vertices": 230
+    }
+  },
+  "output": {
+    "animations": [
+      "Death",
+      "HitReact",
+      "Idle"
+    ],
+    "bones": 50,
+    "bytes": 1619612,
+    "draw_primitives": 5,
+    "materials": [
+      "Hollow_BoneCorrosion",
+      "Hollow_CharcoalWraps",
+      "Hollow_CorpseAtlas",
+      "Hollow_HotEye",
+      "Hollow_WetWounds"
+    ],
+    "mesh_objects": 5,
+    "path": "WebAssetSource/P31/processed/round004/characters/hollow.glb",
+    "required_bones": [
+      "Foot.L",
+      "Head",
+      "Hips",
+      "LowerArm.L",
+      "LowerLeg.L",
+      "Root",
+      "Shoulder.L",
+      "Torso",
+      "UpperLeg.L"
+    ],
+    "sha256": "626a71d26b656b767af52154998b5c082f39be65dde08ab3e701e65b99ae8881",
+    "triangles": 32389,
+    "vertices": 17795
+  },
+  "quality_notes": [
+    "Exact source Idle, HitReact, and Death clips remain on the original 50-bone rest skeleton.",
+    "The base body is proportion-deformed into a narrow waist, forward head, high left shoulder, dropped right shoulder, and unequal long arms.",
+    "High scapular growth, enlarged claw forearm, three talons, broken jaw, one hot eye, rib slit, shoulder cavity, and thigh wound are authored geometry rather than a tint.",
+    "The actual shod-foot source vertices are deleted before refinement; charcoal diagonal wraps, torn tabard leaves, a corroded greave, and an organic wrapped boot replace the shorts-and-sneaker gameplay read.",
+    "All meshes are consolidated to five exact draws and hard-fail any unweighted vertex or influence count above four."
+  ],
+  "schema": "p30.round004.hollow-build.v1",
+  "source": {
+    "palette_atlas": "WebAssetSource/P31/processed/round004/textures/hollow_atlas_512.png",
+    "palette_atlas_sha256": "e2f8935847b26cdc16d926ae09168aba98af7046d3754ea9298b46c7aaa420de",
+    "zombie_glb": "WebAssetSource/P31/processed/quaternius/models/zombie_basic.glb",
+    "zombie_glb_sha256": "f199c9bdea193312fae5e13e045d4677e6b68bced027178252e8de61c33d5ac4"
+  },
+  "source_sneaker_removal": {
+    "vertices_after": 4341,
+    "vertices_before": 4716,
+    "vertices_removed": 375
+  },
+  "source_weight_audit": {
+    "Eyelid": {
+      "invalid_sums": 0,
+      "max_influences": 4,
+      "unweighted": 0,
+      "vertices": 506
+    },
+    "Zombie": {
+      "invalid_sums": 0,
+      "max_influences": 4,
+      "unweighted": 0,
+      "vertices": 14633
+    }
+  }
+}

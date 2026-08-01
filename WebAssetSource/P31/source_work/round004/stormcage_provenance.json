@@ -1,0 +1,23 @@
+{
+  "asset_id": "weapon.stormcage",
+  "asset_name": "Stormcage",
+  "asset_type": "two-hand claymore",
+  "generator": {
+    "blender": "5.2.0 LTS",
+    "script": "WebAssetSource/P31/source_work/round004/build_stormcage.py",
+    "script_sha256": "b68c56d6ff8014846ddc900d63a57ad8be6e7b89cc6782a8be94901b0e24622c"
+  },
+  "mount_orientation_reference": {
+    "derived_geometry": false,
+    "finding": "Existing asset points along Blender +Z / glTF local +Y. Stormcage preserves that axis convention.",
+    "inspected_runtime_asset": "web-game/public/assets/models/quaternius/claymore.glb",
+    "inspected_runtime_asset_sha256": "ec545aa46464893348dbeec42adb87b203643f9c7d6b4c39c2074721f9a73866"
+  },
+  "provenance": {
+    "authoring_note": "Purpose-built from deterministic Blender primitives and custom profiles for P30 Round004; no external mesh or texture content.",
+    "external_source_dependencies": [],
+    "kind": "project-original-procedural-mesh",
+    "third_party_meshes": [],
+    "third_party_textures": []
+  }
+}

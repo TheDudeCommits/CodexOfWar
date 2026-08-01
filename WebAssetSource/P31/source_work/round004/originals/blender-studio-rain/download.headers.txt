@@ -1,0 +1,45 @@
+HTTP/2 302 
+date: Sat, 01 Aug 2026 17:56:34 GMT
+content-type: text/html; charset=utf-8
+content-length: 0
+location: https://studio.blender.org/files/ee/a7/eea73e55dba1cea31c09848df6a794b2-4.zip?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=WPXVUIKB8MLIOWB7INUX%2F20260801%2Feu-central-1%2Fs3%2Faws4_request&X-Amz-Date=20260801T175634Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=d84eaef90591938f4fd31125be0dd3692e68c89c9c676f1cad2d8b2c8e669b1c
+server: cloudflare
+x-frame-options: DENY
+x-frame-options: DENY
+x-frame-options: SAMEORIGIN
+vary: Cookie
+x-content-type-options: nosniff
+x-content-type-options: nosniff
+x-content-type-options: nosniff
+referrer-policy: same-origin
+cross-origin-opener-policy: same-origin
+set-cookie: sessionid=jgo4wynefi5eld2u3hec9ggb1iz4qotp; expires=Sat, 26 Sep 2026 17:56:34 GMT; HttpOnly; Max-Age=4838400; Path=/; SameSite=Lax; Secure
+x-xss-protection: 1; mode=block
+x-xss-protection: 1; mode=block
+cache-control: no-transform
+cache-control: no-transform
+strict-transport-security: max-age=63072000; preload
+cf-cache-status: BYPASS
+x-permitted-cross-domain-policies: none
+cf-ray: a246b8607f87854c-BKK
+
+HTTP/2 200 
+date: Sat, 01 Aug 2026 17:56:34 GMT
+content-type: application/zip
+content-length: 67579177
+server: cloudflare
+accept-ranges: bytes
+last-modified: Tue, 17 Mar 2026 11:15:50 GMT
+x-rgw-object-type: Normal
+etag: "bf090892e7ff0e99673fe799d6fe9c6e-1"
+cache-control: private,max-age=1728000
+content-disposition: attachment; filename="Rain%20v3.3.zip"
+strict-transport-security: max-age=63072000
+x-debug-bucket: blender-studio-production-1
+access-control-allow-origin: *
+access-control-allow-credentials: true
+access-control-allow-headers: Authorization,Accept,Origin,DNT,X-csrftoken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Content-Range,Range
+cf-cache-status: DYNAMIC
+x-permitted-cross-domain-policies: none
+cf-ray: a246b8620ba6854c-BKK
+

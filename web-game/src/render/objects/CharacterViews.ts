@@ -140,9 +140,9 @@ export class HeroView {
 
     if (this.usingFallback) this.buildProceduralFallback();
     else if (hero && weapon && rightHand) {
-      this.root.name = "character.hero.female-ranger.authored";
-      hero.scene.name = "female-ranger-visible-model";
-      hero.scene.scale.setScalar(1.26);
+      this.root.name = "character.hero.nyra.round004";
+      hero.scene.name = "nyra-visible-model";
+      hero.scene.scale.setScalar(1.36);
       hero.scene.rotation.y = Math.PI;
       configureAndCloneMaterials(hero.scene, this.ownedMaterials, (material) => {
         if (material instanceof THREE.MeshStandardMaterial) {
@@ -152,22 +152,25 @@ export class HeroView {
       });
       configureAndCloneMaterials(weapon.scene, this.ownedMaterials, (material) => {
         if (material instanceof THREE.MeshStandardMaterial) {
-          // The converted publisher GLB retains alpha=0 on every opaque MASK
-          // material. Normalize that exporter artifact for the runtime weapon.
           material.opacity = 1;
           material.alphaTest = 0;
           material.transparent = false;
-          material.envMapIntensity = 1.55;
-          material.metalness = Math.max(0.52, material.metalness);
-          material.roughness = Math.min(0.34, material.roughness);
+          material.envMapIntensity = 1.38;
+          if (material.name.includes("Aether")) {
+            material.metalness = Math.min(0.08, material.metalness);
+            material.roughness = Math.min(0.32, material.roughness);
+          } else {
+            material.metalness = Math.max(0.48, material.metalness);
+            material.roughness = Math.min(0.46, material.roughness);
+          }
         }
       });
-      weapon.scene.name = "claymore-right-hand";
-      weapon.scene.position.set(0.004, 0.012, 0.018);
-      // Quaternius' grip-adjacent origin points the blade along local +Y,
-      // opposite this rig's sword grip direction.
-      weapon.scene.rotation.set(0, 0.05, Math.PI);
-      weapon.scene.scale.setScalar(0.96);
+      weapon.scene.name = "stormcage-right-hand";
+      weapon.scene.position.set(0.004, -0.209, 0.018);
+      // Stormcage preserves the prior +Y blade convention but is centered on its
+      // two-hand grip, so the local offset seats the upper grip in Nyra's palm.
+      weapon.scene.rotation.set(-Math.PI / 2, 0.05, Math.PI);
+      weapon.scene.scale.setScalar(0.87);
       rightHand.add(weapon.scene);
       this.visual.add(hero.scene);
       this.animator = new DeterministicAnimator(hero.scene, clips);
@@ -328,19 +331,24 @@ export class ZombieView {
 
     if (this.usingFallback) this.buildProceduralFallback();
     else if (zombie) {
-      this.root.name = "character.hollow.zombie-basic.authored";
-      zombie.scene.name = "zombie-basic-visible-model";
-      zombie.scene.scale.setScalar(1.68);
+      this.root.name = "character.hollow.round004";
+      zombie.scene.name = "hollow-visible-model";
+      zombie.scene.scale.setScalar(1.74);
       zombie.scene.rotation.y = Math.PI;
       configureAndCloneMaterials(zombie.scene, this.ownedMaterials, (material) => {
         if (material instanceof THREE.MeshStandardMaterial) {
           material.envMapIntensity = 1.15;
           material.roughness = Math.min(0.86, material.roughness);
-          this.flashMaterials.push({
-            material,
-            emissive: material.emissive.clone(),
-            intensity: material.emissiveIntensity,
-          });
+          if (
+            material.name.includes("WetWounds") ||
+            material.name.includes("HotEye")
+          ) {
+            this.flashMaterials.push({
+              material,
+              emissive: material.emissive.clone(),
+              intensity: material.emissiveIntensity,
+            });
+          }
         }
       });
       this.visual.add(zombie.scene);

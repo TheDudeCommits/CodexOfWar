@@ -1,0 +1,1113 @@
+{
+  "actions": [
+    "Death",
+    "HitReact",
+    "Idle"
+  ],
+  "blender": "5.2.0 LTS",
+  "collections": [],
+  "file": "WebAssetSource/P31/processed/round004/characters/hollow.glb",
+  "images": [
+    {
+      "filepath": "",
+      "name": "hollow_atlas_512",
+      "packed": true,
+      "size": [
+        512,
+        512
+      ]
+    }
+  ],
+  "materials": [
+    "Hollow_BoneCorrosion",
+    "Hollow_CharcoalWraps",
+    "Hollow_CorpseAtlas",
+    "Hollow_HotEye",
+    "Hollow_WetWounds"
+  ],
+  "objects": [
+    {
+      "collections": [
+        "Scene Collection"
+      ],
+      "dimensions": [
+        0.652141,
+        0.63774,
+        0.964416
+      ],
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "materials": [
+        "Hollow_BoneCorrosion"
+      ],
+      "modifiers": [
+        "ARMATURE"
+      ],
+      "name": "Hollow_Draw_BoneCorrosion",
+      "parent": "Hollow_GameplayRig",
+      "polygons": 2820,
+      "rotation_euler": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "shape_keys": 0,
+      "triangles_base": 2820,
+      "type": "MESH",
+      "uv_ranges": [
+        {
+          "max": [
+            1.0,
+            1.0
+          ],
+          "min": [
+            0.0,
+            0.0
+          ],
+          "name": "UVMap"
+        }
+      ],
+      "vertex_groups": 50,
+      "vertices": 4886
+    },
+    {
+      "collections": [
+        "Scene Collection"
+      ],
+      "dimensions": [
+        0.496299,
+        0.489739,
+        1.187191
+      ],
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "materials": [
+        "Hollow_CharcoalWraps"
+      ],
+      "modifiers": [
+        "ARMATURE"
+      ],
+      "name": "Hollow_Draw_CharcoalWraps",
+      "parent": "Hollow_GameplayRig",
+      "polygons": 1608,
+      "rotation_euler": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "shape_keys": 0,
+      "triangles_base": 1608,
+      "type": "MESH",
+      "uv_ranges": [
+        {
+          "max": [
+            1.0,
+            1.0
+          ],
+          "min": [
+            0.0,
+            0.0
+          ],
+          "name": "UVMap"
+        }
+      ],
+      "vertex_groups": 50,
+      "vertices": 3232
+    },
+    {
+      "collections": [
+        "Scene Collection"
+      ],
+      "dimensions": [
+        1.558265,
+        0.810701,
+        1.227838
+      ],
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "materials": [
+        "Hollow_CorpseAtlas"
+      ],
+      "modifiers": [
+        "ARMATURE"
+      ],
+      "name": "Hollow_Draw_CorpseAtlas",
+      "parent": "Hollow_GameplayRig",
+      "polygons": 27257,
+      "rotation_euler": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "shape_keys": 0,
+      "triangles_base": 27257,
+      "type": "MESH",
+      "uv_ranges": [
+        {
+          "max": [
+            0.329205,
+            0.797973
+          ],
+          "min": [
+            0.016685,
+            0.794897
+          ],
+          "name": "UVMap"
+        }
+      ],
+      "vertex_groups": 50,
+      "vertices": 15223
+    },
+    {
+      "collections": [
+        "Scene Collection"
+      ],
+      "dimensions": [
+        0.027305,
+        0.017089,
+        0.031585
+      ],
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "materials": [
+        "Hollow_HotEye"
+      ],
+      "modifiers": [
+        "ARMATURE"
+      ],
+      "name": "Hollow_Draw_HotEye",
+      "parent": "Hollow_GameplayRig",
+      "polygons": 256,
+      "rotation_euler": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "shape_keys": 0,
+      "triangles_base": 256,
+      "type": "MESH",
+      "uv_ranges": [
+        {
+          "max": [
+            1.0,
+            1.0
+          ],
+          "min": [
+            0.0,
+            0.0
+          ],
+          "name": "UVMap"
+        }
+      ],
+      "vertex_groups": 50,
+      "vertices": 544
+    },
+    {
+      "collections": [
+        "Scene Collection"
+      ],
+      "dimensions": [
+        0.480442,
+        0.097953,
+        0.301044
+      ],
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "materials": [
+        "Hollow_WetWounds"
+      ],
+      "modifiers": [
+        "ARMATURE"
+      ],
+      "name": "Hollow_Draw_WetWounds",
+      "parent": "Hollow_GameplayRig",
+      "polygons": 448,
+      "rotation_euler": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "shape_keys": 0,
+      "triangles_base": 448,
+      "type": "MESH",
+      "uv_ranges": [],
+      "vertex_groups": 50,
+      "vertices": 878
+    },
+    {
+      "bone_details": [
+        {
+          "deform": true,
+          "head": [
+            -0.000691,
+            0.123989,
+            -0.001272
+          ],
+          "name": "Root",
+          "parent": null,
+          "tail": [
+            -0.000691,
+            0.123989,
+            0.14803
+          ]
+        },
+        {
+          "deform": true,
+          "head": [
+            0.000443,
+            0.03574,
+            0.509157
+          ],
+          "name": "Body",
+          "parent": "Root",
+          "tail": [
+            0.000443,
+            0.03574,
+            0.64122
+          ]
+        },
+        {
+          "deform": true,
+          "head": [
+            -0.000336,
+            0.167631,
+            0.502457
+          ],
+          "name": "Hips",
+          "parent": "Body",
+          "tail": [
+            -0.000336,
+            0.184418,
+            0.667142
+          ]
+        },
+        {
+          "deform": true,
+          "head": [
+            -0.000336,
+            0.184418,
+            0.667142
+          ],
+          "name": "Abdomen",
+          "parent": "Hips",
+          "tail": [
+            -0.000336,
+            0.181066,
+            0.790305
+          ]
+        },
+        {
+          "deform": true,
+          "head": [
+            -0.000336,
+            0.181066,
+            0.790305
+          ],
+          "name": "Torso",
+          "parent": "Abdomen",
+          "tail": [
+            -0.000336,
+            0.064993,
+            0.854145
+          ]
+        },
+        {
+          "deform": true,
+          "head": [
+            -0.000336,
+            0.03037,
+            0.873187
+          ],
+          "name": "Neck",
+          "parent": "Torso",
+          "tail": [
+            -0.000336,
+            -0.06154,
+            0.934016
+          ]
+        },
+        {
+          "deform": true,
+          "head": [
+            -0.000336,
+            -0.06154,
+            0.934015
+          ],
+          "name": "Head",
+          "parent": "Neck",
+          "tail": [
+            -0.000336,
+            -0.084725,
+            1.027403
+          ]
+        },
+        {
+          "deform": true,
+          "head": [
+            0.130451,
+            -0.222303,
+            1.071478
+          ],
+          "name": "Eyelid.L",
+          "parent": "Head",
+          "tail": [
+            0.130451,
+            -0.222303,
+            1.1677
+          ]
+        },
+        {
+          "deform": true,
+          "head": [
+            -0.130451,
+            -0.222303,
+            1.071477
+          ],
+          "name": "Eyelid.R",
+          "parent": "Head",
+          "tail": [
+            -0.130451,
+            -0.222303,
+            1.1677
+          ]
+        },
+        {
+          "deform": true,
+          "head": [
+            -0.000336,
+            -0.113637,
+            0.853116
+          ],
+          "name": "Tongue1",
+          "parent": "Head",
+          "tail": [
+            -0.000336,
+            -0.185101,
+            0.89182
+          ]
+        },
+        {
+          "deform": true,
+          "head": [
+            -0.000336,
+            -0.185101,
+            0.89182
+          ],
+          "name": "Tongue2",
+          "parent": "Tongue1",
+          "tail": [
+            -0.000336,
+            -0.285398,
+            0.888899
+          ]
+        },
+        {
+          "deform": true,
+          "head": [
+            -0.000336,
+            -0.285398,
+            0.888899
+          ],
+          "name": "Tongue3",
+          "parent": "Tongue2",
+          "tail": [
+            -0.000336,
+            -0.326296,
+            0.855791
+          ]
+        },
+        {
+          "deform": true,
+          "head": [
+            -0.000336,
+            -0.326296,
+            0.855791
+          ],
+          "name": "Tongue4",
+          "parent": "Tongue3",
+          "tail": [
+            -0.000336,
+            -0.346745,
+            0.821709
+          ]
+        },
+        {
+          "deform": true,
+          "head": [
+            -0.000336,
+            -0.346745,
+            0.821709
+          ],
+          "name": "Tongue5",
+          "parent": "Tongue4",
+          "tail": [
+            -0.000336,
+            -0.359723,
+            0.784142
+          ]
+        },
+        {
+          "deform": true,
+          "head": [
+            0.09165,
+            0.106011,
+            0.730498
+          ],
+          "name": "Shoulder.L",
+          "parent": "Torso",
+          "tail": [
+            0.211308,
+            0.147507,
+            0.845035
+          ]
+        },
+        {
+          "deform": true,
+          "head": [
+            0.211308,
+            0.147506,
+            0.845035
+          ],
+          "name": "UpperArm.L",
+          "parent": "Shoulder.L",
+          "tail": [
+            0.417224,
+            0.146182,
+            0.855049
+          ]
+        },
+        {
+          "deform": true,
+          "head": [
+            0.417224,
+            0.146182,
+            0.855049
+          ],
+          "name": "LowerArm.L",
+          "parent": "UpperArm.L",
+          "tail": [
+            0.675023,
+            0.132026,
+            0.856807
+          ]
+        },
+        {
+          "deform": true,
+          "head": [
+            0.675023,
+            0.132026,
+            0.856807
+          ],
+          "name": "Index1.L",
+          "parent": "LowerArm.L",
+          "tail": [
+            0.791021,
+            0.069681,
+            0.900687
+          ]
+        },
+        {
+          "deform": true,
+          "head": [
+            0.791021,
+            0.069681,
+            0.900687
+          ],
+          "name": "Index2.L",
+          "parent": "Index1.L",
+          "tail": [
+            0.829236,
+            0.060284,
+            0.900591
+          ]
+        },
+        {
+          "deform": true,
+          "head": [
+            0.829236,
+            0.060284,
+            0.900591
+          ],
+          "name": "Index3.L",
+          "parent": "Index2.L",
+          "tail": [
+            0.866756,
+            0.050145,
+            0.894409
+          ]
+        },
+        {
+          "deform": true,
+          "head": [
+            0.675023,
+            0.132026,
+            0.856807
+          ],
+          "name": "Middle1.L",
+          "parent": "LowerArm.L",
+          "tail": [
+            0.811035,
+            0.140179,
+            0.890241
+          ]
+        },
+        {
+          "deform": true,
+          "head": [
+            0.811035,
+            0.140179,
+            0.890241
+          ],
+          "name": "Middle2.L",
+          "parent": "Middle1.L",
+          "tail": [
+            0.848819,
+            0.138019,
+            0.894112
+          ]
+        },
+        {
+          "deform": true,
+          "head": [
+            0.848819,
+            0.138019,
+            0.894112
+          ],
+          "name": "Middle3.L",
+          "parent": "Middle2.L",
+          "tail": [
+            0.885663,
+            0.135525,
+            0.884969
+          ]
+        },
+        {
+          "deform": true,
+          "head": [
+            0.675023,
+            0.132026,
+            0.856807
+          ],
+          "name": "Pinky1.L",
+          "parent": "LowerArm.L",
+          "tail": [
+            0.777188,
+            0.195749,
+            0.884727
+          ]
+        },
+        {
+          "deform": true,
+          "head": [
+            0.777188,
+            0.195749,
+            0.884728
+          ],
+          "name": "Pinky2.L",
+          "parent": "Pinky1.L",
+          "tail": [
+            0.835755,
+            0.211286,
+            0.872661
+          ]
+        },
+        {
+          "deform": true,
+          "head": [
+            0.835755,
+            0.211286,
+            0.872661
+          ],
+          "name": "Pinky3.L",
+          "parent": "Pinky2.L",
+          "tail": [
+            0.893453,
+            0.224521,
+            0.854971
+          ]
+        },
+        {
+          "deform": true,
+          "head": [
+            0.675023,
+            0.132026,
+            0.856807
+          ],
+          "name": "Thumb1.L",
+          "parent": "LowerArm.L",
+          "tail": [
+            0.702024,
+            0.003707,
+            0.893973
+          ]
+        },
+        {
+          "deform": true,
+          "head": [
+            0.702024,
+            0.003707,
+            0.893973
+          ],
+          "name": "Thumb2.L",
+          "parent": "Thumb1.L",
+          "tail": [
+            0.781003,
+            -0.106281,
+            0.909496
+          ]
+        },
+        {
+          "deform": true,
+          "head": [
+            -0.09165,
+            0.106011,
+            0.730498
+          ],
+          "name": "Shoulder.R",
+          "parent": "Torso",
+          "tail": [
+            -0.211308,
+            0.147506,
+            0.845035
+          ]
+        },
+        {
+          "deform": true,
+          "head": [
+            -0.211308,
+            0.147506,
+            0.845035
+          ],
+          "name": "UpperArm.R",
+          "parent": "Shoulder.R",
+          "tail": [
+            -0.417224,
+            0.146182,
+            0.855049
+          ]
+        },
+        {
+          "deform": true,
+          "head": [
+            -0.417224,
+            0.146182,
+            0.855049
+          ],
+          "name": "LowerArm.R",
+          "parent": "UpperArm.R",
+          "tail": [
+            -0.675023,
+            0.132026,
+            0.856807
+          ]
+        },
+        {
+          "deform": true,
+          "head": [
+            -0.675023,
+            0.132026,
+            0.856807
+          ],
+          "name": "Index1.R",
+          "parent": "LowerArm.R",
+          "tail": [
+            -0.79102,
+            0.069681,
+            0.900687
+          ]
+        },
+        {
+          "deform": true,
+          "head": [
+            -0.79102,
+            0.069681,
+            0.900687
+          ],
+          "name": "Index2.R",
+          "parent": "Index1.R",
+          "tail": [
+            -0.829236,
+            0.060284,
+            0.900591
+          ]
+        },
+        {
+          "deform": true,
+          "head": [
+            -0.829236,
+            0.060284,
+            0.900591
+          ],
+          "name": "Index3.R",
+          "parent": "Index2.R",
+          "tail": [
+            -0.866755,
+            0.050145,
+            0.894409
+          ]
+        },
+        {
+          "deform": true,
+          "head": [
+            -0.675023,
+            0.132026,
+            0.856806
+          ],
+          "name": "Middle1.R",
+          "parent": "LowerArm.R",
+          "tail": [
+            -0.811035,
+            0.140179,
+            0.890241
+          ]
+        },
+        {
+          "deform": true,
+          "head": [
+            -0.811035,
+            0.140179,
+            0.890241
+          ],
+          "name": "Middle2.R",
+          "parent": "Middle1.R",
+          "tail": [
+            -0.848819,
+            0.138019,
+            0.894112
+          ]
+        },
+        {
+          "deform": true,
+          "head": [
+            -0.848819,
+            0.138019,
+            0.894112
+          ],
+          "name": "Middle3.R",
+          "parent": "Middle2.R",
+          "tail": [
+            -0.885663,
+            0.135525,
+            0.884969
+          ]
+        },
+        {
+          "deform": true,
+          "head": [
+            -0.675023,
+            0.132026,
+            0.856807
+          ],
+          "name": "Pinky1.R",
+          "parent": "LowerArm.R",
+          "tail": [
+            -0.777187,
+            0.195749,
+            0.884727
+          ]
+        },
+        {
+          "deform": true,
+          "head": [
+            -0.777187,
+            0.195749,
+            0.884728
+          ],
+          "name": "Pinky2.R",
+          "parent": "Pinky1.R",
+          "tail": [
+            -0.835755,
+            0.211286,
+            0.872661
+          ]
+        },
+        {
+          "deform": true,
+          "head": [
+            -0.835755,
+            0.211285,
+            0.87266
+          ],
+          "name": "Pinky3.R",
+          "parent": "Pinky2.R",
+          "tail": [
+            -0.893452,
+            0.224521,
+            0.854971
+          ]
+        },
+        {
+          "deform": true,
+          "head": [
+            -0.675023,
+            0.132026,
+            0.856807
+          ],
+          "name": "Thumb1.R",
+          "parent": "LowerArm.R",
+          "tail": [
+            -0.702024,
+            0.003707,
+            0.893973
+          ]
+        },
+        {
+          "deform": true,
+          "head": [
+            -0.702024,
+            0.003707,
+            0.893973
+          ],
+          "name": "Thumb2.R",
+          "parent": "Thumb1.R",
+          "tail": [
+            -0.781003,
+            -0.106281,
+            0.909496
+          ]
+        },
+        {
+          "deform": true,
+          "head": [
+            0.140903,
+            0.144728,
+            0.518261
+          ],
+          "name": "UpperLeg.L",
+          "parent": "Body",
+          "tail": [
+            0.145599,
+            0.117519,
+            0.280577
+          ]
+        },
+        {
+          "deform": true,
+          "head": [
+            0.145599,
+            0.117519,
+            0.280577
+          ],
+          "name": "LowerLeg.L",
+          "parent": "UpperLeg.L",
+          "tail": [
+            0.145598,
+            0.145225,
+            0.042904
+          ]
+        },
+        {
+          "deform": true,
+          "head": [
+            -0.140903,
+            0.144728,
+            0.518261
+          ],
+          "name": "UpperLeg.R",
+          "parent": "Body",
+          "tail": [
+            -0.145599,
+            0.117518,
+            0.280577
+          ]
+        },
+        {
+          "deform": true,
+          "head": [
+            -0.145599,
+            0.117518,
+            0.280577
+          ],
+          "name": "LowerLeg.R",
+          "parent": "UpperLeg.R",
+          "tail": [
+            -0.145599,
+            0.145226,
+            0.042904
+          ]
+        },
+        {
+          "deform": true,
+          "head": [
+            0.146297,
+            0.147716,
+            0.021683
+          ],
+          "name": "Foot.L",
+          "parent": "Root",
+          "tail": [
+            0.146297,
+            -0.001585,
+            0.021134
+          ]
+        },
+        {
+          "deform": true,
+          "head": [
+            -0.146297,
+            0.147716,
+            0.021683
+          ],
+          "name": "Foot.R",
+          "parent": "Root",
+          "tail": [
+            -0.146297,
+            -0.001585,
+            0.021134
+          ]
+        },
+        {
+          "deform": true,
+          "head": [
+            0.14449,
+            -0.854267,
+            0.257631
+          ],
+          "name": "PoleTarget.L",
+          "parent": "Root",
+          "tail": [
+            0.14449,
+            -0.854267,
+            0.406933
+          ]
+        },
+        {
+          "deform": true,
+          "head": [
+            -0.14449,
+            -0.854266,
+            0.257631
+          ],
+          "name": "PoleTarget.R",
+          "parent": "Root",
+          "tail": [
+            -0.14449,
+            -0.854266,
+            0.406933
+          ]
+        }
+      ],
+      "bone_names": [
+        "Root",
+        "Body",
+        "Hips",
+        "Abdomen",
+        "Torso",
+        "Neck",
+        "Head",
+        "Eyelid.L",
+        "Eyelid.R",
+        "Tongue1",
+        "Tongue2",
+        "Tongue3",
+        "Tongue4",
+        "Tongue5",
+        "Shoulder.L",
+        "UpperArm.L",
+        "LowerArm.L",
+        "Index1.L",
+        "Index2.L",
+        "Index3.L",
+        "Middle1.L",
+        "Middle2.L",
+        "Middle3.L",
+        "Pinky1.L",
+        "Pinky2.L",
+        "Pinky3.L",
+        "Thumb1.L",
+        "Thumb2.L",
+        "Shoulder.R",
+        "UpperArm.R",
+        "LowerArm.R",
+        "Index1.R",
+        "Index2.R",
+        "Index3.R",
+        "Middle1.R",
+        "Middle2.R",
+        "Middle3.R",
+        "Pinky1.R",
+        "Pinky2.R",
+        "Pinky3.R",
+        "Thumb1.R",
+        "Thumb2.R",
+        "UpperLeg.L",
+        "LowerLeg.L",
+        "UpperLeg.R",
+        "LowerLeg.R",
+        "Foot.L",
+        "Foot.R",
+        "PoleTarget.L",
+        "PoleTarget.R"
+      ],
+      "bones": 50,
+      "collections": [
+        "Scene Collection"
+      ],
+      "deform_bones": 50,
+      "dimensions": [
+        1.285232,
+        1.05015,
+        0.892296
+      ],
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "modifiers": [],
+      "name": "Hollow_GameplayRig",
+      "parent": null,
+      "rotation_euler": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "type": "ARMATURE"
+    }
+  ]
+}

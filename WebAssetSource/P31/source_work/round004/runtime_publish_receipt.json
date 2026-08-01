@@ -1,0 +1,45 @@
+{
+  "schema": "p30.round004.runtime-publish.v1",
+  "manifest": {
+    "path": "web-game/public/assets/manifest.json",
+    "version": 2,
+    "enabledKeyCount": 18,
+    "sha256": "373e2af4dd5173f68c4e45cc7c0b5eede06fc135839c25f43a512369a760ba75",
+    "stableKeysReplaced": 3,
+    "keysAddedOrRemoved": 0
+  },
+  "publishes": [
+    {
+      "manifestKey": "character.hero",
+      "manifestUrl": "/assets/models/ashwake/nyra.glb",
+      "sourcePath": "WebAssetSource/P31/processed/round004/characters/nyra.glb",
+      "runtimePath": "web-game/public/assets/models/ashwake/nyra.glb",
+      "sourceSha256": "f3e93e577a7419b29734646488166ce3b52f52bb8982e2a5041d2237222d7101",
+      "runtimeSha256": "f3e93e577a7419b29734646488166ce3b52f52bb8982e2a5041d2237222d7101",
+      "bytes": 5705072,
+      "byteIdentical": true
+    },
+    {
+      "manifestKey": "character.hollow",
+      "manifestUrl": "/assets/models/ashwake/hollow.glb",
+      "sourcePath": "WebAssetSource/P31/processed/round004/characters/hollow.glb",
+      "runtimePath": "web-game/public/assets/models/ashwake/hollow.glb",
+      "sourceSha256": "626a71d26b656b767af52154998b5c082f39be65dde08ab3e701e65b99ae8881",
+      "runtimeSha256": "626a71d26b656b767af52154998b5c082f39be65dde08ab3e701e65b99ae8881",
+      "bytes": 1619612,
+      "byteIdentical": true
+    },
+    {
+      "manifestKey": "weapon.claymore",
+      "manifestUrl": "/assets/models/ashwake/stormcage.glb",
+      "sourcePath": "WebAssetSource/P31/processed/round004/weapons/stormcage.glb",
+      "runtimePath": "web-game/public/assets/models/ashwake/stormcage.glb",
+      "sourceSha256": "a255542b0ca58ef5d8a90a131851e55c51c00983fb1815e718f29371134b2a11",
+      "runtimeSha256": "a255542b0ca58ef5d8a90a131851e55c51c00983fb1815e718f29371134b2a11",
+      "bytes": 264292,
+      "byteIdentical": true
+    }
+  ],
+  "combinedBytes": 7588976,
+  "allByteIdentical": true
+}

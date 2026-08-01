@@ -1,0 +1,188 @@
+{
+  "buried_body_prune": {
+    "triangles_after": 11804,
+    "triangles_before": 20462,
+    "triangles_removed": 8658,
+    "vertices_after": 5972,
+    "vertices_before": 10256,
+    "vertices_removed": 4284
+  },
+  "joined_weight_audit": {
+    "Nyra_Draw_CopperArmor": {
+      "invalid_sums": 0,
+      "max_influences": 4,
+      "unweighted": 0,
+      "vertices": 8350
+    },
+    "Nyra_Draw_FaceSkinEyes": {
+      "invalid_sums": 0,
+      "max_influences": 4,
+      "unweighted": 0,
+      "vertices": 13785
+    },
+    "Nyra_Draw_Hair": {
+      "invalid_sums": 0,
+      "max_influences": 4,
+      "unweighted": 0,
+      "vertices": 3719
+    },
+    "Nyra_Draw_IvoryArmor": {
+      "invalid_sums": 0,
+      "max_influences": 4,
+      "unweighted": 0,
+      "vertices": 1218
+    },
+    "Nyra_Draw_TealCloth": {
+      "invalid_sums": 0,
+      "max_influences": 4,
+      "unweighted": 0,
+      "vertices": 9525
+    }
+  },
+  "landmark_rest_fit": {
+    "checks": {
+      "ankle_z": {
+        "abs_error": 0.0,
+        "observed": 0.1037,
+        "target": 0.1037
+      },
+      "arm_plane_z": {
+        "abs_error": 0.0,
+        "observed": 1.440801,
+        "target": 1.440801
+      },
+      "hand_end_x": {
+        "abs_error": 0.0,
+        "observed": 0.787829,
+        "target": 0.787829
+      },
+      "head_pivot_z": {
+        "abs_error": 0.0,
+        "observed": 1.568701,
+        "target": 1.568701
+      },
+      "hip_z": {
+        "abs_error": 0.0,
+        "observed": 0.9321,
+        "target": 0.9321
+      },
+      "knee_z": {
+        "abs_error": 0.0,
+        "observed": 0.5318,
+        "target": 0.5318
+      },
+      "neck_z": {
+        "abs_error": 0.0,
+        "observed": 1.487601,
+        "target": 1.487601
+      },
+      "wrist_x": {
+        "abs_error": 0.0,
+        "observed": 0.7389,
+        "target": 0.7389
+      }
+    },
+    "status": "pass",
+    "target_rig": "player_core.glb 65-joint rest skeleton",
+    "worst_abs_error": 0.0
+  },
+  "output": {
+    "animations": [
+      "Idle_Loop",
+      "Roll",
+      "Sprint_Loop",
+      "Sword_Regular_A",
+      "Walk_Loop"
+    ],
+    "bones": 65,
+    "bytes": 5705072,
+    "draw_primitives": 5,
+    "materials": [
+      "Nyra_CopperArmor",
+      "Nyra_FaceSkinEyes",
+      "Nyra_Hair",
+      "Nyra_IvoryArmor",
+      "Nyra_TealCloth"
+    ],
+    "mesh_objects": 5,
+    "path": "WebAssetSource/P31/processed/round004/characters/nyra.glb",
+    "required_bones": [
+      "Head",
+      "hand_r",
+      "pelvis",
+      "root"
+    ],
+    "sha256": "f3e93e577a7419b29734646488166ce3b52f52bb8982e2a5041d2237222d7101",
+    "triangles": 70984,
+    "vertices": 36597
+  },
+  "quality_notes": [
+    "Rain face, eyes, brows, lashes, swept hair, and ponytail preserved as authored meshes.",
+    "CloudRig replaced by player_core's exact 65-joint rest skeleton after explicit wrist, arm plane, neck, head, hip, knee, and ankle landmark fitting.",
+    "Complete neck, shoulder, arm, elbow, forearm, hand, and finger anatomy comes from Rain's unmasked body; only torso and leg skin fully buried by the opaque outfit is deleted.",
+    "Body and outfit weights transferred by nearest-face interpolation, normalized, limited to four influences, and hard-failed on any unweighted vertex.",
+    "The 2K face/body/eye atlas and 1K hair texture preserve Rain's freckles, lips, eyes, and authored groom breakup.",
+    "Authored split-keel cuirass, overlapping open pauldrons, tapered open bracers and greaves, pointed asymmetric faulds, curved segmented belt, and weighted diagonal mantle added for Nyra's agile armor silhouette.",
+    "Mouth internals and unused facial-control geometry omitted to remain inside the gameplay triangle budget.",
+    "Five exact in-place gameplay actions are embedded on the same canonical rest skeleton used by the skin."
+  ],
+  "schema": "p30.round004.hero-build.v1",
+  "source": {
+    "canonical_gameplay_rig": "WebAssetSource/P31/processed/quaternius/animations/player_core.glb",
+    "canonical_gameplay_rig_sha256": "261156c05d74ea8cded6da1b6853feb7e9c89721e782536d0813a0c15f47fdc6",
+    "combat_animation": "WebAssetSource/P31/processed/quaternius/animations/combat_zombie.glb",
+    "combat_animation_sha256": "66bd8332a4c58d94114cf23444dfc8de3a399234e2cd62012efdb5d78f6c5f9e",
+    "face_atlas": {
+      "bytes": 818862,
+      "path": "WebAssetSource/P31/processed/round004/textures/nyra_face_atlas_2k.png",
+      "resolution": [
+        2048,
+        2048
+      ],
+      "sha256": "ed384f21a4ba0c3c3a46130651ef9b0590c311652801ceae0fc255c9c65a8fe1"
+    },
+    "hair_texture": {
+      "bytes": 529180,
+      "path": "WebAssetSource/P31/processed/round004/textures/nyra_hair_1k.png",
+      "resolution": [
+        1024,
+        1024
+      ],
+      "sha256": "40cb28bf34b823d550fd36667c873dd7b75f6e3e322321dc577b6d67576fc115"
+    },
+    "rain_blend": "WebAssetSource/P31/source_work/round004/originals/blender-studio-rain/extracted/Rain v3.3/rain_v3.2.blend",
+    "rain_blend_sha256": "831ab6d837c679040285862b15dc9ee5180b018442a88aeaf92aaa7509b80258"
+  },
+  "weight_transfer": {
+    "Nyra_Body": {
+      "invalid_sums": 0,
+      "max_influences": 4,
+      "unweighted": 0,
+      "vertices": 5972
+    },
+    "Nyra_Boots": {
+      "invalid_sums": 0,
+      "max_influences": 4,
+      "unweighted": 0,
+      "vertices": 6634
+    },
+    "Nyra_Legging": {
+      "invalid_sums": 0,
+      "max_influences": 4,
+      "unweighted": 0,
+      "vertices": 4531
+    },
+    "Nyra_Mantle": {
+      "invalid_sums": 0,
+      "max_influences": 4,
+      "unweighted": 0,
+      "vertices": 1285
+    },
+    "Nyra_Undersuit": {
+      "invalid_sums": 0,
+      "max_influences": 4,
+      "unweighted": 0,
+      "vertices": 3264
+    }
+  }
+}

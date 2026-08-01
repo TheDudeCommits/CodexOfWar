@@ -19,21 +19,22 @@
   ],
   "activeBuild": {
     "pieceId": "P30",
-    "round": 4,
-    "roundLabel": "P30 · Round 004",
+    "round": 5,
+    "roundLabel": "P30 · Round 005",
     "status": "revising",
-    "builder": "Character Combat Fidelity Revision",
-    "brief": "Replace and tune only the hero, Hollow, and claymore render assets and materials, their rig, grip, and contact offsets, and the existing attack and reaction presentation clips. Freeze every other domain.",
+    "builder": "Combat Contact Package Revision",
+    "brief": "Replace only the hero, Hollow, and weapon duel package with a matched high-fidelity PBR pair and one authored two-handed heavy strike plus synchronized HitReact. Enforce visible grip constraints and non-intersecting contact spacing; freeze every other domain.",
     "facts": [
       "P00 is accepted as infrastructure; its blind visual baseline remains an explicit 28.33–76.67 loss.",
       "P10 remains paused after rejected Round 017 and the unfiled Unity Round 018 stop; it is not the active browser-work lane.",
-      "P30 Round 003 received a fresh independent headed Chrome 150 audit on hardware-accelerated WebGL2 through ANGLE Metal on Apple M2 at 1600×900 and DPR 1.",
-      "All 18 authored assets loaded with no procedural fallback and PMREM; Tape A simulation, events, and timing, Tape B, physical bindings, blur, resize and DPR handling, WebGL restore, and three 30-second performance and resource samples passed.",
-      "The critic rejected Round 003 at 30/100 with 0/6 candidate wins; all six outcomes were overwhelming. This is rejected candidate evidence, never accepted evidence.",
-      "Category scores were composition and camera 3, character and animation 2, environment, materials, and lighting 4, combat readability and impact 2, technical 5, and AAA finish 2.",
-      "Warm-runtime worsts were 16.7 ms median, 18.5 ms p95, 18.7 ms p99, 75 draw calls, 176,017 triangles, 30 textures, and 30 geometries.",
-      "The environment payload is 3,349,498 bytes and the enabled payload is 15,961,504 bytes. P31 records 22/22 GLBs, six WebPs, official CC0 provenance, 12 byte-identical runtime files, and 11 unchanged frozen-subsystem hashes.",
-      "Hard failures remain in camera replay, Tape C obstruction, projection, pointer lock and look, reset replay, held input on pause, runtime-error-free interaction, 5.817 s cold ready, and the blind gate.",
+      "P30 Round 004 received a fresh independent headed Chrome 150 audit on hardware-accelerated WebGL2 through ANGLE Metal on Apple M2 at 1600×900 and DPR 1.",
+      "All 18 authored assets loaded with no procedural fallback and PMREM. The required five hero clips and three Hollow clips were present and exercised.",
+      "Pointer lock and physical look, pause and blur handling, held-key clearing, resize and DPR restoration, WebGL context restoration, error-free runtime, 2.389 s cold ready, and three representative 30-second timing intervals passed.",
+      "The critic rejected Round 004 at 34/100 with 0/3 focused S03–S05 wins and 0/6 overall candidate wins. None of the private comparisons was close. This is rejected candidate evidence, never accepted evidence.",
+      "The lowest category scores were 2/10 for materials, zombie fidelity, and animation and contact. Environment integration and UI reached 5/10; runtime polish reached 6/10.",
+      "Warm timing remained near 60 fps with 18.6 ms worst p95, but every capture failed the 250,000-triangle ceiling at 321,705–322,809 triangles.",
+      "P31 records 68 processed files, 54 integration-ready files, mixed-license lineage and required Rain credit, three byte-identical Round 004 runtime GLBs, and 80 unchanged frozen files.",
+      "Hard failures remain in capture triangle count, camera obstruction, full camera replay, actor and torso intersection, weapon visibility and palm contact, and the blind gate.",
       "The global latest capture manifest remains intentionally pinned to accepted P00."
     ],
     "evidenceFingerprint": {
@@ -46,78 +47,77 @@
       "deviceScaleFactor": 1
     },
     "evidenceBundle": {
-      "roundLabel": "P30 · Round 003 critic gate",
-      "status": "REJECT · 30/100 · candidate evidence only",
-      "manifestPath": "/data/P30-round-003.json",
+      "roundLabel": "P30 · Round 004 critic gate",
+      "status": "REJECT · 34/100 · focused 0/3 · overall 0/6",
+      "manifestPath": "/data/P30-round-004.json",
       "s01": {
-        "label": "S02 close-idle diagnostic · rejected candidate",
-        "path": "/captures/P30/round-003/S02.png"
+        "label": "S03 startup diagnostic · rejected candidate",
+        "path": "/captures/P30/round-004/S03.png"
       },
       "diagnostic": {
         "label": "S04 active-hit diagnostic · rejected candidate",
-        "path": "/captures/P30/round-003/S04.png"
+        "path": "/captures/P30/round-004/S04.png"
       },
       "metrics": [
         {
           "label": "Verdict",
-          "value": "REJECT · 30/100"
+          "value": "REJECT · 34/100"
         },
         {
           "label": "Authored assets",
           "value": "18/18 · no fallback · PMREM"
         },
         {
-          "label": "Candidate wins",
-          "value": "0/6 · all overwhelming"
+          "label": "Focused / overall",
+          "value": "0/3 · 0/6"
         },
         {
           "label": "Cold ready",
-          "value": "5.817 s · fail"
+          "value": "2.389 s · pass"
         },
         {
           "label": "Warm runtime",
-          "value": "16.7 / 18.5 / 18.7 ms · median / p95 / p99"
+          "value": "59.85 fps · 18.6 ms p95"
         },
         {
-          "label": "Enabled payload",
-          "value": "15,961,504 bytes"
+          "label": "Peak triangles",
+          "value": "322,809 / 250,000 · fail"
         }
       ],
       "checks": [
         "Headed Chrome 150 · Metal M2 · WebGL2 · 1600×900 · DPR 1",
         "18/18 authored assets · no fallback · PMREM",
-        "Tape A simulation, events, and timing pass",
-        "Tape B and physical bindings pass",
-        "Blur, resize and DPR handling, and WebGL restore pass",
-        "Three 30-second performance and resource samples pass",
-        "P31 provenance · 22/22 GLBs · six WebPs · official CC0"
+        "Five hero clips and three Hollow clips present and exercised",
+        "Simulation replay exact",
+        "Pointer lock, physical look, pause, blur, held-key clearing, resize, and DPR handling pass",
+        "WebGL restore and error-free runtime pass",
+        "Three representative 30-second frame-timing intervals pass",
+        "P31 provenance · mixed-license lineage · required Rain credit · three byte-identical runtime GLBs"
       ],
       "limitations": [
-        "Camera replay · hard fail",
-        "Tape C obstruction · hard fail",
-        "Projection observed at 58° / 0.08 / 110, not the required 50° / 0.08 / 120",
-        "Pointer lock and look · WrongDocumentError",
-        "Reset replay · hard fail",
-        "A held key survives pause",
-        "Runtime-error-free interaction · hard fail",
-        "Cold ready 5.817 s · hard fail",
-        "Blind gate · REJECT 30/100 · 0/6 candidate wins"
+        "Capture resources · 321,705–322,809 triangles · hard fail",
+        "Camera boom obstruction · unimplemented",
+        "Full camera replay · hash mismatch after reset",
+        "S02–S05 actor overlap and S04 torso intersection",
+        "S05 blade obscured or edge-on",
+        "Stable palm contact · hard fail",
+        "Blind gate · REJECT 34/100 · focused 0/3 · overall 0/6"
       ]
     },
-    "nextGate": "Close only character_combat_fidelity. Success requires a fresh independent S03–S05 result that wins 3/3 matched blind comparisons."
+    "nextGate": "Close only combat-character-contact-package. Fresh frozen S03–S05 must show separated silhouettes, a fully visible blade with stable palm contact, a clear contact point, and grounded paired motion, then win 3/3 new blind comparisons."
   },
   "canonicalCapture": {
-    "shotId": "S02",
-    "name": "Tape A baseline · rejected candidate",
-    "purpose": "P30 Round 003 close-idle candidate evidence",
+    "shotId": "S04",
+    "name": "Tape A active hit · rejected candidate",
+    "purpose": "P30 Round 004 active-hit candidate evidence",
     "camera": "Third-person review camera",
     "heroHeight": "24–32% of image height",
     "measuredHeroHeight": "not acceptance-qualified",
-    "sceneRead": "Close Tape A state before attack. Round 003 remains rejected candidate evidence; Round 004 changes only character combat fidelity and does not claim acceptance.",
+    "sceneRead": "Active-hit Tape A state. Round 004 remains rejected candidate evidence; Round 005 changes only the combat-character contact package and does not claim acceptance.",
     "benchmarkId": "Anonymous six-pair gate",
     "benchmarkPolicy": "Aggregate 0/6 result only — benchmark pixels, composites, and reference filenames are never published",
-    "capturePath": "/captures/P30/round-003/S02.png",
-    "manifestPath": "/data/P30-round-003.json",
+    "capturePath": "/captures/P30/round-004/S04.png",
+    "manifestPath": "/data/P30-round-004.json",
     "latestManifestPath": "/data/capture-manifest-latest.json",
     "captureAvailable": true,
     "manifestAvailable": true
@@ -659,6 +659,49 @@
         "preference": "Candidate won 0/6 aggregate blind comparisons · all six outcomes overwhelming",
         "primaryGap": "character_combat_fidelity: Replace and tune only the hero, Hollow, and claymore render assets and materials, their rig, grip, and contact offsets, and the existing attack and reaction presentation clips; freeze every other domain."
       }
+    },
+    {
+      "round": 4,
+      "label": "P30 · Round 004",
+      "pieceId": "P30",
+      "phase": "Fresh independent headed production-browser critic complete",
+      "status": "criticized",
+      "date": "2026-08-02",
+      "engineRun": true,
+      "actualGameCapturePerformed": true,
+      "targetMatchedGameCapturePerformed": true,
+      "gateQualifyingCapture": false,
+      "builderBrief": "Replace only the hero, Hollow, and weapon render package with authored Nyra, Hollow, and Stormcage assets; tune scale, material response, grip seat, and existing clip presentation while freezing environment, camera, HUD, controls, simulation, physics, seed, telemetry, and review contracts.",
+      "evidence": "A fresh independent headed Chrome 150 audit on Apple M2 WebGL2 at 1600×900 and DPR 1 loaded 18/18 authored assets with no fallback and PMREM. Required hero and Hollow clips, pointer lock and physical look, pause and blur behavior, held-key clearing, resize and DPR restoration, WebGL context recovery, error-free runtime, 2.389 s cold ready, and three representative 30-second timing intervals passed. The candidate was rejected at 34/100 with 0/3 focused S03–S05 wins and 0/6 overall wins; none was close. All captures exceeded the 250,000-triangle ceiling, camera obstruction was unimplemented, full camera replay diverged after reset, actors intersected, and S05 lost the blade silhouette.",
+      "evidenceLinks": [
+        "/captures/P30/round-004/S03.png",
+        "/captures/P30/round-004/S04.png",
+        "/captures/P30/round-004/S05.png",
+        "/data/P30-round-004.json"
+      ],
+      "categoryScores": {
+        "characterAnatomySilhouette": 3,
+        "skinHairClothArmorMaterialFidelity": 2,
+        "enemyZombieThreatFidelity": 2,
+        "weaponQualityHandContactReadability": 3,
+        "animationPosingWeightContact": 2,
+        "combatVfxImpactPhysicsReadability": 3,
+        "cameraFramingComposition": 3,
+        "environmentLightingIntegration": 5,
+        "uiCinematicCoherence": 5,
+        "runtimePolishStabilityPerformance": 6
+      },
+      "critic": {
+        "status": "REJECT · CANDIDATE EVIDENCE ONLY · NOT ACCEPTED",
+        "score": 34,
+        "focusedCandidatePreferredCount": 0,
+        "focusedComparisonCount": 3,
+        "candidatePreferredCount": 0,
+        "comparisonCount": 6,
+        "scoreLabel": "Fresh independent headed browser gate 34/100 · focused 0/3 · overall 0/6",
+        "preference": "Candidate won 0/3 focused and 0/6 aggregate blind comparisons · none was close",
+        "primaryGap": "combat-character-contact-package: Replace only the hero, Hollow, and weapon duel package with a matched high-fidelity PBR pair and one authored two-handed heavy strike plus synchronized HitReact; enforce visible grip constraints and non-intersecting contact spacing."
+      }
     }
   ],
   "pieces": [
@@ -944,7 +987,7 @@
       "name": "Three.js playable nucleus",
       "group": "Vertical slice",
       "status": "revising",
-      "outcome": "Round 003 is rejected candidate evidence at 30/100 with 0/6 candidate wins. Round 004 revises only character combat fidelity while every other domain remains frozen.",
+      "outcome": "Round 004 is rejected candidate evidence at 34/100 with 0/3 focused and 0/6 overall candidate wins. Round 005 revises only the combat-character contact package while every other domain remains frozen.",
       "requiredEvidence": [
         "S01–S06 fresh browser captures",
         "Exact Tape A, Tape B, and Tape C replays",

@@ -1,9 +1,34 @@
 {
   "schema": "p31-third-party-asset-receipt-v1",
   "access_date": "2026-08-01",
-  "scope": "CC0 browser asset stack through P30 Round003; publisher source and processed lineage retained in WebAssetSource/P31",
+  "scope": "Mixed-license browser asset stack through P30 Round004; publisher source, required attribution, project-original declarations, and processed lineage retained in WebAssetSource/P31",
   "cc0_deed_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "cc_by_4_deed_url": "https://creativecommons.org/licenses/by/4.0/",
   "source_registry": {
+    "BS-RAIN": {
+      "publisher": "Blender Studio",
+      "author": "Blender Foundation / Blender Studio",
+      "title": "Rain Rig",
+      "version": "v3.3 archive; source blend rain_v3.2.blend",
+      "official_page": "https://studio.blender.org/characters/rain/v3/",
+      "download_or_listing_url": "https://studio.blender.org/download-source/files/ee/a7/eea73e55dba1cea31c09848df6a794b2-4.zip",
+      "license": "CC-BY-4.0",
+      "license_proof_url": "https://creativecommons.org/licenses/by/4.0/",
+      "access_date": "2026-08-02",
+      "required_credit": "Rain Rig (CC) Blender Foundation | studio.blender.org",
+      "modification_notice": "Adapted for Nyra: geometry altered and buried surfaces pruned; the canonical 65-bone gameplay rig substituted; weights transferred; textures atlased/resized; armor and mantle added; five gameplay actions embedded."
+    },
+    "PROJECT-ORIGINAL": {
+      "publisher": "Gauntlet Loop project",
+      "author": "Gauntlet Loop project",
+      "title": "Round004 original authored assets",
+      "version": "P30 Round004",
+      "official_page": "project-local",
+      "download_or_listing_url": "project-local",
+      "license": "project-original",
+      "license_proof_url": "project-local",
+      "access_date": "2026-08-02"
+    },
     "PH-SNOW": {
       "publisher": "Poly Haven",
       "author": "Adrian Kubasa",
@@ -178,16 +203,20 @@
       "bytes": 490031235
     },
     "processed": {
-      "file_count": 61,
-      "bytes": 30611270
+      "file_count": 68,
+      "bytes": 39560225
     },
     "licenses": {
       "file_count": 2,
       "bytes": 1199
     },
     "integration_ready": {
-      "file_count": 51,
-      "bytes": 30606180
+      "file_count": 54,
+      "bytes": 38195156
+    },
+    "round004_source_work_provenance": {
+      "file_count": 11,
+      "bytes": 82441623
     }
   },
   "files": [
@@ -198,6 +227,9 @@
       "bytes": 2232589,
       "sha256": "921f3f73927bb23106cae34bc21d5ab4b033a9fc120475e96f714a406e3169df",
       "source_id": "KEN-CASTLE",
+      "source_ids": [
+        "KEN-CASTLE"
+      ],
       "publisher": "Kenney",
       "author": "Kenney",
       "official_page": "https://kenney.nl/assets/castle-kit",
@@ -216,6 +248,9 @@
       "bytes": 6019666,
       "sha256": "97a1d09c66e4fd6c247c8ea87f84c0cc59caaeceae19414c995afb1616a1e1c9",
       "source_id": "KEN-SMOKE",
+      "source_ids": [
+        "KEN-SMOKE"
+      ],
       "publisher": "Kenney",
       "author": "Kenney Vleugels",
       "official_page": "https://kenney.nl/assets/smoke-particles",
@@ -234,6 +269,9 @@
       "bytes": 149512,
       "sha256": "87a1fe1cfeee5f282fe06a7a9c25ab9ebf24b7674fe19171b7f2762dffb628c1",
       "source_id": "OGA-SWORD",
+      "source_ids": [
+        "OGA-SWORD"
+      ],
       "publisher": "OpenGameArt",
       "author": "StarNinjas",
       "official_page": "https://opengameart.org/content/20-sword-sound-effects-attacks-and-clashes",
@@ -252,6 +290,9 @@
       "bytes": 144575,
       "sha256": "f363c80ea1627548d336370750651b0d2d092978148ecfb3642717c2efb54b6b",
       "source_id": "OGA-SWORD",
+      "source_ids": [
+        "OGA-SWORD"
+      ],
       "publisher": "OpenGameArt",
       "author": "StarNinjas",
       "official_page": "https://opengameart.org/content/20-sword-sound-effects-attacks-and-clashes",
@@ -270,6 +311,9 @@
       "bytes": 397872,
       "sha256": "605dff92b8a405a4810aa88b7f8544c6eb7b08b0668816f958abb44cc70cb620",
       "source_id": "OGA-SLASH",
+      "source_ids": [
+        "OGA-SLASH"
+      ],
       "publisher": "OpenGameArt",
       "author": "Cethiel",
       "official_page": "https://opengameart.org/content/weapon-slash-effect",
@@ -288,6 +332,9 @@
       "bytes": 1894914,
       "sha256": "0c3bd168c04dacc5c15002cabf0fb3c682500eb49befa53627c0f8eb52aa4baf",
       "source_id": "PH-SNOW",
+      "source_ids": [
+        "PH-SNOW"
+      ],
       "publisher": "Poly Haven",
       "author": "Adrian Kubasa",
       "official_page": "https://polyhaven.com/a/snowy_forest",
@@ -306,6 +353,9 @@
       "bytes": 25412,
       "sha256": "61a7b4048de324fe16d7e1daa5d6ec1f88177d561391e4247fb283ad16e796e9",
       "source_id": "PH-STATUE",
+      "source_ids": [
+        "PH-STATUE"
+      ],
       "publisher": "Poly Haven",
       "author": "Benny Weimer",
       "official_page": "https://polyhaven.com/a/gothic_statue",
@@ -324,6 +374,9 @@
       "bytes": 912484,
       "sha256": "8608701ecff6b56e9fd9cddd130541f831ff8131a7758d54e7964af3d0152b9c",
       "source_id": "PH-STATUE",
+      "source_ids": [
+        "PH-STATUE"
+      ],
       "publisher": "Poly Haven",
       "author": "Benny Weimer",
       "official_page": "https://polyhaven.com/a/gothic_statue",
@@ -342,6 +395,9 @@
       "bytes": 2900,
       "sha256": "eecbc67793a1e1efa1359d57fa497cb267fc7a4039823d3feecb6d0fcd2ad2db",
       "source_id": "PH-STATUE",
+      "source_ids": [
+        "PH-STATUE"
+      ],
       "publisher": "Poly Haven",
       "author": "Benny Weimer",
       "official_page": "https://polyhaven.com/a/gothic_statue",
@@ -360,6 +416,9 @@
       "bytes": 1012,
       "sha256": "2a2212624bcc5e545e916c859d12ed5a33079ba83c79640a65e5423f6bb4f8ed",
       "source_id": "PH-STATUE",
+      "source_ids": [
+        "PH-STATUE"
+      ],
       "publisher": "Poly Haven",
       "author": "Benny Weimer",
       "official_page": "https://polyhaven.com/a/gothic_statue",
@@ -378,6 +437,9 @@
       "bytes": 960949,
       "sha256": "fbe7cec4c4745fb796c98a03209b6d664fca81b8b20d155e39509f85daa61fbb",
       "source_id": "PH-STATUE",
+      "source_ids": [
+        "PH-STATUE"
+      ],
       "publisher": "Poly Haven",
       "author": "Benny Weimer",
       "official_page": "https://polyhaven.com/a/gothic_statue",
@@ -396,6 +458,9 @@
       "bytes": 1037433,
       "sha256": "7c74e5a4e5af689d5c7556bb8b0bd60c8cc6c0cac9d8445fbd9f153abd1eddf1",
       "source_id": "PH-STATUE",
+      "source_ids": [
+        "PH-STATUE"
+      ],
       "publisher": "Poly Haven",
       "author": "Benny Weimer",
       "official_page": "https://polyhaven.com/a/gothic_statue",
@@ -414,6 +479,9 @@
       "bytes": 1064867,
       "sha256": "f0d1de09cb49f38ea5de9fb3b0af80834837616188d0504f07ee0cfc39a1ca91",
       "source_id": "PH-STATUE",
+      "source_ids": [
+        "PH-STATUE"
+      ],
       "publisher": "Poly Haven",
       "author": "Benny Weimer",
       "official_page": "https://polyhaven.com/a/gothic_statue",
@@ -432,6 +500,9 @@
       "bytes": 85266,
       "sha256": "3cd24326d799f839448923692664b2681b6d08f3eb1dd950366db924cf967e4b",
       "source_id": "PH-FORT",
+      "source_ids": [
+        "PH-FORT"
+      ],
       "publisher": "Poly Haven",
       "author": "Rico Cilliers",
       "official_page": "https://polyhaven.com/a/modular_fort_01",
@@ -450,6 +521,9 @@
       "bytes": 1014,
       "sha256": "baff4deb8f3ce4d5b19a405b179c11e05c83907469ff2907fbdd2cad3c448fe1",
       "source_id": "PH-FORT",
+      "source_ids": [
+        "PH-FORT"
+      ],
       "publisher": "Poly Haven",
       "author": "Rico Cilliers",
       "official_page": "https://polyhaven.com/a/modular_fort_01",
@@ -468,6 +542,9 @@
       "bytes": 1288144,
       "sha256": "de86e71af4cd5b37006914a8e7ae7de59b245b73364317f1886285a6aa797f57",
       "source_id": "PH-FORT",
+      "source_ids": [
+        "PH-FORT"
+      ],
       "publisher": "Poly Haven",
       "author": "Rico Cilliers",
       "official_page": "https://polyhaven.com/a/modular_fort_01",
@@ -486,6 +563,9 @@
       "bytes": 71433,
       "sha256": "829ac97d4c5c5672d3055d772e0ef4b545ad93cb4b639296f34e3ddf04cf9faf",
       "source_id": "PH-FORT",
+      "source_ids": [
+        "PH-FORT"
+      ],
       "publisher": "Poly Haven",
       "author": "Rico Cilliers",
       "official_page": "https://polyhaven.com/a/modular_fort_01",
@@ -504,6 +584,9 @@
       "bytes": 872242,
       "sha256": "d51902ce06084dd828cf82d60fcbc733160cc27ada41d5e57b38bafbe5d12327",
       "source_id": "PH-FORT",
+      "source_ids": [
+        "PH-FORT"
+      ],
       "publisher": "Poly Haven",
       "author": "Rico Cilliers",
       "official_page": "https://polyhaven.com/a/modular_fort_01",
@@ -522,6 +605,9 @@
       "bytes": 995332,
       "sha256": "d453b45cec06da3da9e67b38d016f6358c7c310a99db9b066e07e3a494731f4d",
       "source_id": "PH-FORT",
+      "source_ids": [
+        "PH-FORT"
+      ],
       "publisher": "Poly Haven",
       "author": "Rico Cilliers",
       "official_page": "https://polyhaven.com/a/modular_fort_01",
@@ -540,6 +626,9 @@
       "bytes": 1478355,
       "sha256": "567953f0b7da39f6d4f173cc98ff948d31e07b516c8d2e0e0b0ec69de35cab3e",
       "source_id": "PH-FORT",
+      "source_ids": [
+        "PH-FORT"
+      ],
       "publisher": "Poly Haven",
       "author": "Rico Cilliers",
       "official_page": "https://polyhaven.com/a/modular_fort_01",
@@ -558,6 +647,9 @@
       "bytes": 807245,
       "sha256": "d6a9e67be3f171857bb06af436ebaefedd1fd3ca4e1212c8ad42be7ef6038c91",
       "source_id": "PH-FORT",
+      "source_ids": [
+        "PH-FORT"
+      ],
       "publisher": "Poly Haven",
       "author": "Rico Cilliers",
       "official_page": "https://polyhaven.com/a/modular_fort_01",
@@ -576,6 +668,9 @@
       "bytes": 945345,
       "sha256": "fe5811560cf0471321fe6af08114f279a7f957412b8aa6e2c224112990760556",
       "source_id": "PH-FORT",
+      "source_ids": [
+        "PH-FORT"
+      ],
       "publisher": "Poly Haven",
       "author": "Rico Cilliers",
       "official_page": "https://polyhaven.com/a/modular_fort_01",
@@ -594,6 +689,9 @@
       "bytes": 1070875,
       "sha256": "c5a21bd71f1ed0186fedaad18edb74713527a9426f5d136a5b21c3e09a71e1c3",
       "source_id": "PH-FORT",
+      "source_ids": [
+        "PH-FORT"
+      ],
       "publisher": "Poly Haven",
       "author": "Rico Cilliers",
       "official_page": "https://polyhaven.com/a/modular_fort_01",
@@ -612,6 +710,9 @@
       "bytes": 936858,
       "sha256": "6d3327658794a90fc1b52c19dfbb57059b7ea9801f59abd13417e4be7bf40a34",
       "source_id": "PH-FORT",
+      "source_ids": [
+        "PH-FORT"
+      ],
       "publisher": "Poly Haven",
       "author": "Rico Cilliers",
       "official_page": "https://polyhaven.com/a/modular_fort_01",
@@ -630,6 +731,9 @@
       "bytes": 978641,
       "sha256": "8bdefadca0688e9b3fd91b4d12f341918b0a3670c25537c18a777fa51bb90bea",
       "source_id": "PH-FORT",
+      "source_ids": [
+        "PH-FORT"
+      ],
       "publisher": "Poly Haven",
       "author": "Rico Cilliers",
       "official_page": "https://polyhaven.com/a/modular_fort_01",
@@ -648,6 +752,9 @@
       "bytes": 1194253,
       "sha256": "6e8b0e1abac9c6ab0f9a36c04300ea3d0ca83dede3b49485c969a71494ce8d53",
       "source_id": "PH-FORT",
+      "source_ids": [
+        "PH-FORT"
+      ],
       "publisher": "Poly Haven",
       "author": "Rico Cilliers",
       "official_page": "https://polyhaven.com/a/modular_fort_01",
@@ -666,6 +773,9 @@
       "bytes": 209005,
       "sha256": "61039af9cead766f482877f6a7d605a1935c6a2d2923d789d71c418a4b447b6e",
       "source_id": "PH-BRICK",
+      "source_ids": [
+        "PH-BRICK"
+      ],
       "publisher": "Poly Haven",
       "author": "Rob Tuytel",
       "official_page": "https://polyhaven.com/a/castle_brick_01",
@@ -684,6 +794,9 @@
       "bytes": 693571,
       "sha256": "3823fdc4bcb37cc7b26fd7e3b2a80e82f5a23354d22d84eb0ca277909f923b2c",
       "source_id": "PH-BRICK",
+      "source_ids": [
+        "PH-BRICK"
+      ],
       "publisher": "Poly Haven",
       "author": "Rob Tuytel",
       "official_page": "https://polyhaven.com/a/castle_brick_01",
@@ -702,6 +815,9 @@
       "bytes": 1069379,
       "sha256": "f3c4c0538fd5c3f9e1aabcb0169fbbc3ac2883ed5544f05d9008d2736a2899de",
       "source_id": "PH-BRICK",
+      "source_ids": [
+        "PH-BRICK"
+      ],
       "publisher": "Poly Haven",
       "author": "Rob Tuytel",
       "official_page": "https://polyhaven.com/a/castle_brick_01",
@@ -720,6 +836,9 @@
       "bytes": 715595,
       "sha256": "8d737b10700257d179dc0413f278477c1bdc79d346f2bf6e8b504e850bde7c82",
       "source_id": "PH-COBBLE",
+      "source_ids": [
+        "PH-COBBLE"
+      ],
       "publisher": "Poly Haven",
       "author": "Sơn Nguyễn",
       "official_page": "https://polyhaven.com/a/mossy_cobblestone",
@@ -738,6 +857,9 @@
       "bytes": 1089617,
       "sha256": "105d6209ff99952ca316e814eebf06c1c3cb244da62184137a97e29aee74b7d7",
       "source_id": "PH-COBBLE",
+      "source_ids": [
+        "PH-COBBLE"
+      ],
       "publisher": "Poly Haven",
       "author": "Sơn Nguyễn",
       "official_page": "https://polyhaven.com/a/mossy_cobblestone",
@@ -756,6 +878,9 @@
       "bytes": 980112,
       "sha256": "32a128c921cf0311798ebb6c6a766db900a10419233c87cc52f8d226b2aa4cc0",
       "source_id": "PH-COBBLE",
+      "source_ids": [
+        "PH-COBBLE"
+      ],
       "publisher": "Poly Haven",
       "author": "Sơn Nguyễn",
       "official_page": "https://polyhaven.com/a/mossy_cobblestone",
@@ -774,6 +899,9 @@
       "bytes": 294347394,
       "sha256": "c3468b18871cc8c8f05ab14df7712baf22cb9f389cbd870babf130e595187f70",
       "source_id": "Q-OUTFIT",
+      "source_ids": [
+        "Q-OUTFIT"
+      ],
       "publisher": "Quaternius",
       "author": "Quaternius",
       "official_page": "https://quaternius.com/packs/modularcharacteroutfitsfantasy.html",
@@ -792,6 +920,9 @@
       "bytes": 18735003,
       "sha256": "4008ea208a604773a2b2177d965f0f5d3195498b5bf838c3f5785d68e95f2a68",
       "source_id": "Q-UAL2",
+      "source_ids": [
+        "Q-UAL2"
+      ],
       "publisher": "Quaternius",
       "author": "Quaternius",
       "official_page": "https://quaternius.com/packs/universalanimationlibrary2.html",
@@ -810,6 +941,9 @@
       "bytes": 15904933,
       "sha256": "cc73fc4e495b82958207316596317a3f40b9fa38065bde1027937452da537724",
       "source_id": "Q-UAL1",
+      "source_ids": [
+        "Q-UAL1"
+      ],
       "publisher": "Quaternius",
       "author": "Quaternius",
       "official_page": "https://quaternius.com/packs/universalanimationlibrary.html",
@@ -828,6 +962,9 @@
       "bytes": 128968391,
       "sha256": "fdbf1804c90dfc1ea03e992bff7da2dfd1a79318e13270a660180f9308455f40",
       "source_id": "Q-BASE",
+      "source_ids": [
+        "Q-BASE"
+      ],
       "publisher": "Quaternius",
       "author": "Quaternius",
       "official_page": "https://quaternius.com/packs/universalbasecharacters.html",
@@ -846,6 +983,9 @@
       "bytes": 34668,
       "sha256": "0bc24e1f7a52d78bb3deac765c1f2bab71184a92b107f6c094998f4cf6280447",
       "source_id": "Q-WEAPON",
+      "source_ids": [
+        "Q-WEAPON"
+      ],
       "publisher": "Quaternius",
       "author": "Quaternius",
       "official_page": "https://quaternius.com/packs/medievalweapons.html",
@@ -864,6 +1004,9 @@
       "bytes": 528,
       "sha256": "d32abf5eb61a5d20c582525c2ee9d8d42d86401d6b3ea0a2d5283fcaecaa35b9",
       "source_id": "Q-WEAPON",
+      "source_ids": [
+        "Q-WEAPON"
+      ],
       "publisher": "Quaternius",
       "author": "Quaternius",
       "official_page": "https://quaternius.com/packs/medievalweapons.html",
@@ -882,6 +1025,9 @@
       "bytes": 728,
       "sha256": "2202cc2f608c4210790b112e5f121bc2e7f8dced7b5b1c7f4be6203461bdebbb",
       "source_id": "Q-OUTFIT",
+      "source_ids": [
+        "Q-OUTFIT"
+      ],
       "publisher": "Quaternius",
       "author": "Quaternius",
       "official_page": "https://quaternius.com/packs/modularcharacteroutfitsfantasy.html",
@@ -900,6 +1046,9 @@
       "bytes": 311,
       "sha256": "2f87579c277cde1e1ddbd4b8d823bed618728781cb6597b4dee3978c589ff5c4",
       "source_id": "Q-OUTFIT",
+      "source_ids": [
+        "Q-OUTFIT"
+      ],
       "publisher": "Quaternius",
       "author": "Quaternius",
       "official_page": "https://quaternius.com/packs/modularcharacteroutfitsfantasy.html",
@@ -918,6 +1067,9 @@
       "bytes": 332,
       "sha256": "6d01f55c6e4c49a2c9963e147e561945ae2c83958c8ca667d90a6bffdbfac061",
       "source_id": "Q-UAL1",
+      "source_ids": [
+        "Q-UAL1"
+      ],
       "publisher": "Quaternius",
       "author": "Quaternius",
       "official_page": "https://quaternius.com/packs/universalanimationlibrary.html",
@@ -936,6 +1088,9 @@
       "bytes": 702,
       "sha256": "ccd02718886b5a57f10f0a8911a38cfe10c36880e1d6dfa3445923fba32d2a72",
       "source_id": "Q-UAL1",
+      "source_ids": [
+        "Q-UAL1"
+      ],
       "publisher": "Quaternius",
       "author": "Quaternius",
       "official_page": "https://quaternius.com/packs/universalanimationlibrary.html",
@@ -954,6 +1109,9 @@
       "bytes": 332,
       "sha256": "6d01f55c6e4c49a2c9963e147e561945ae2c83958c8ca667d90a6bffdbfac061",
       "source_id": "Q-UAL2",
+      "source_ids": [
+        "Q-UAL2"
+      ],
       "publisher": "Quaternius",
       "author": "Quaternius",
       "official_page": "https://quaternius.com/packs/universalanimationlibrary2.html",
@@ -972,6 +1130,9 @@
       "bytes": 702,
       "sha256": "ccd02718886b5a57f10f0a8911a38cfe10c36880e1d6dfa3445923fba32d2a72",
       "source_id": "Q-UAL2",
+      "source_ids": [
+        "Q-UAL2"
+      ],
       "publisher": "Quaternius",
       "author": "Quaternius",
       "official_page": "https://quaternius.com/packs/universalanimationlibrary2.html",
@@ -990,6 +1151,9 @@
       "bytes": 275,
       "sha256": "3447416d55d5cf3a82311c4941578068d544cc4cfa1d49a6a26a28c98b96c393",
       "source_id": "Q-UAL2",
+      "source_ids": [
+        "Q-UAL2"
+      ],
       "publisher": "Quaternius",
       "author": "Quaternius",
       "official_page": "https://quaternius.com/packs/universalanimationlibrary2.html",
@@ -1008,6 +1172,9 @@
       "bytes": 806,
       "sha256": "0f4beaf0fe360a7732e58bbe3dbf60a2422367fbea60cb9ea4add968f383268e",
       "source_id": "Q-BASE",
+      "source_ids": [
+        "Q-BASE"
+      ],
       "publisher": "Quaternius",
       "author": "Quaternius",
       "official_page": "https://quaternius.com/packs/universalbasecharacters.html",
@@ -1026,6 +1193,9 @@
       "bytes": 374,
       "sha256": "de990ef6fc68cffd7fd1ae342c4d0c823b541b8848d8f76bca5d3339f4de6f6e",
       "source_id": "Q-ZOMBIE",
+      "source_ids": [
+        "Q-ZOMBIE"
+      ],
       "publisher": "Quaternius",
       "author": "Quaternius",
       "official_page": "https://quaternius.com/packs/zombieapocalypsekit.html",
@@ -1044,6 +1214,9 @@
       "bytes": 6256,
       "sha256": "8803e5543d5e6b6f66aa41a5ef93e6c2ffb77b5476d0202296d2f4c8f4eb9e8d",
       "source_id": "Q-ZOMBIE",
+      "source_ids": [
+        "Q-ZOMBIE"
+      ],
       "publisher": "Quaternius",
       "author": "Quaternius",
       "official_page": "https://quaternius.com/packs/zombieapocalypsekit.html",
@@ -1062,6 +1235,9 @@
       "bytes": 1703033,
       "sha256": "c6eab64ef87f89cbd6862b59964b20024ca7e329d3d44f72c76fced6c24861c8",
       "source_id": "Q-ZOMBIE",
+      "source_ids": [
+        "Q-ZOMBIE"
+      ],
       "publisher": "Quaternius",
       "author": "Quaternius",
       "official_page": "https://quaternius.com/packs/zombieapocalypsekit.html",
@@ -1080,6 +1256,9 @@
       "bytes": 7529,
       "sha256": "66fd49be148f32e88f6c8cace67120250d1943a7856601158ad0ff24651db0b0",
       "source_id": "KEN-CASTLE",
+      "source_ids": [
+        "KEN-CASTLE"
+      ],
       "publisher": "Kenney",
       "author": "Kenney",
       "official_page": "https://kenney.nl/assets/castle-kit",
@@ -1098,6 +1277,9 @@
       "bytes": 16204,
       "sha256": "7ea1ee769eb063b192c3c3744cd32a11616320f7ca491fbe23289552f6655595",
       "source_id": "KEN-CASTLE",
+      "source_ids": [
+        "KEN-CASTLE"
+      ],
       "publisher": "Kenney",
       "author": "Kenney",
       "official_page": "https://kenney.nl/assets/castle-kit",
@@ -1116,6 +1298,9 @@
       "bytes": 71252,
       "sha256": "e0663eb42a97c5d992b1864ba3459e8246de11cf29fd72f10ef5ffd271f3029a",
       "source_id": "KEN-CASTLE",
+      "source_ids": [
+        "KEN-CASTLE"
+      ],
       "publisher": "Kenney",
       "author": "Kenney",
       "official_page": "https://kenney.nl/assets/castle-kit",
@@ -1134,6 +1319,9 @@
       "bytes": 9836,
       "sha256": "ec21b1d65c04ba6384734c31ac542bb4015541e652c411796fd7bcf292e6413c",
       "source_id": "KEN-CASTLE",
+      "source_ids": [
+        "KEN-CASTLE"
+      ],
       "publisher": "Kenney",
       "author": "Kenney",
       "official_page": "https://kenney.nl/assets/castle-kit",
@@ -1152,6 +1340,9 @@
       "bytes": 41724,
       "sha256": "575e6463b9bc58b8294690b2c1a15409b0624e0253af1a215bf67ea5e9cbaaba",
       "source_id": "KEN-CASTLE",
+      "source_ids": [
+        "KEN-CASTLE"
+      ],
       "publisher": "Kenney",
       "author": "Kenney",
       "official_page": "https://kenney.nl/assets/castle-kit",
@@ -1170,6 +1361,9 @@
       "bytes": 15264,
       "sha256": "82d27b869162b6a9ee19b0d7480913f56928b6620708f3b3899131495803cc9a",
       "source_id": "KEN-CASTLE",
+      "source_ids": [
+        "KEN-CASTLE"
+      ],
       "publisher": "Kenney",
       "author": "Kenney",
       "official_page": "https://kenney.nl/assets/castle-kit",
@@ -1188,6 +1382,9 @@
       "bytes": 37560,
       "sha256": "8daf5cccceace888d51d74b0e0254e192004faf926e07f1b28e94191879af3a6",
       "source_id": "KEN-CASTLE",
+      "source_ids": [
+        "KEN-CASTLE"
+      ],
       "publisher": "Kenney",
       "author": "Kenney",
       "official_page": "https://kenney.nl/assets/castle-kit",
@@ -1206,6 +1403,9 @@
       "bytes": 12132,
       "sha256": "4f0baca90eb52d96717aaabf36db98f1f2b554876f44da533b57dd92b6f67965",
       "source_id": "KEN-CASTLE",
+      "source_ids": [
+        "KEN-CASTLE"
+      ],
       "publisher": "Kenney",
       "author": "Kenney",
       "official_page": "https://kenney.nl/assets/castle-kit",
@@ -1224,6 +1424,9 @@
       "bytes": 18156,
       "sha256": "22d359abfaa3cf3dc5a2fece09a108024a07a4e263b21a4a0689da0e630699ed",
       "source_id": "KEN-CASTLE",
+      "source_ids": [
+        "KEN-CASTLE"
+      ],
       "publisher": "Kenney",
       "author": "Kenney",
       "official_page": "https://kenney.nl/assets/castle-kit",
@@ -1242,6 +1445,9 @@
       "bytes": 16552,
       "sha256": "b2ea00acbf4ba91ff0d4b8b942edf9fa12d821abd0b2c945c57a2b9b3153cfe3",
       "source_id": "KEN-CASTLE",
+      "source_ids": [
+        "KEN-CASTLE"
+      ],
       "publisher": "Kenney",
       "author": "Kenney",
       "official_page": "https://kenney.nl/assets/castle-kit",
@@ -1260,6 +1466,9 @@
       "bytes": 52454,
       "sha256": "5d9f2b522beaa41511ef0ad1ccf2457d90b9aba8f5cac7154e3a86f8be7cc05b",
       "source_id": "KEN-SMOKE",
+      "source_ids": [
+        "KEN-SMOKE"
+      ],
       "publisher": "Kenney",
       "author": "Kenney Vleugels",
       "official_page": "https://kenney.nl/assets/smoke-particles",
@@ -1278,6 +1487,9 @@
       "bytes": 60263,
       "sha256": "1ed936faff42d2801240b83bc500f11bdf2a1b49a5f3915796ef2e7cc86af2d7",
       "source_id": "KEN-SMOKE",
+      "source_ids": [
+        "KEN-SMOKE"
+      ],
       "publisher": "Kenney",
       "author": "Kenney Vleugels",
       "official_page": "https://kenney.nl/assets/smoke-particles",
@@ -1296,6 +1508,9 @@
       "bytes": 61123,
       "sha256": "52c12880719018e571ea80abe6d338c8ba3ffaae1189032851d081a6cb48c723",
       "source_id": "KEN-SMOKE",
+      "source_ids": [
+        "KEN-SMOKE"
+      ],
       "publisher": "Kenney",
       "author": "Kenney Vleugels",
       "official_page": "https://kenney.nl/assets/smoke-particles",
@@ -1314,6 +1529,9 @@
       "bytes": 57599,
       "sha256": "33f894c2279bee9f77874dbfa3c0e9f071a0ee5e1a7065dcc40196029d699f58",
       "source_id": "KEN-SMOKE",
+      "source_ids": [
+        "KEN-SMOKE"
+      ],
       "publisher": "Kenney",
       "author": "Kenney Vleugels",
       "official_page": "https://kenney.nl/assets/smoke-particles",
@@ -1332,6 +1550,9 @@
       "bytes": 17794,
       "sha256": "4a3e80705619cbd7500682ab51004011ddf67e14ccf1818ceb9e5b539fe42b75",
       "source_id": "OGA-SWORD",
+      "source_ids": [
+        "OGA-SWORD"
+      ],
       "publisher": "OpenGameArt",
       "author": "StarNinjas",
       "official_page": "https://opengameart.org/content/20-sword-sound-effects-attacks-and-clashes",
@@ -1350,6 +1571,9 @@
       "bytes": 19102,
       "sha256": "e74221f6cec0acaa7c19095618c683c3cdc1741f02193b61cb28a2ec56cbfce2",
       "source_id": "OGA-SWORD",
+      "source_ids": [
+        "OGA-SWORD"
+      ],
       "publisher": "OpenGameArt",
       "author": "StarNinjas",
       "official_page": "https://opengameart.org/content/20-sword-sound-effects-attacks-and-clashes",
@@ -1368,6 +1592,9 @@
       "bytes": 13071,
       "sha256": "ce09eb2987531d1323415065d7811a9cf0ea8639766d9fa77655d602e7e14989",
       "source_id": "OGA-SWORD",
+      "source_ids": [
+        "OGA-SWORD"
+      ],
       "publisher": "OpenGameArt",
       "author": "StarNinjas",
       "official_page": "https://opengameart.org/content/20-sword-sound-effects-attacks-and-clashes",
@@ -1386,6 +1613,9 @@
       "bytes": 16491,
       "sha256": "5c5e78e466ba78fe2414f2b7a2a6eb674822ccfc8a8bc9fda32be22f5dde5e69",
       "source_id": "OGA-SWORD",
+      "source_ids": [
+        "OGA-SWORD"
+      ],
       "publisher": "OpenGameArt",
       "author": "StarNinjas",
       "official_page": "https://opengameart.org/content/20-sword-sound-effects-attacks-and-clashes",
@@ -1404,6 +1634,9 @@
       "bytes": 13951,
       "sha256": "e09f222b70d53f2967514d076e2ae50c21526ac640fe4919965f964af043da1a",
       "source_id": "OGA-SWORD",
+      "source_ids": [
+        "OGA-SWORD"
+      ],
       "publisher": "OpenGameArt",
       "author": "StarNinjas",
       "official_page": "https://opengameart.org/content/20-sword-sound-effects-attacks-and-clashes",
@@ -1422,6 +1655,9 @@
       "bytes": 8759,
       "sha256": "16189b2070151b9cdcbd07e15989a9fb0dce89e894134f67692ec9f4eefe631d",
       "source_id": "OGA-SLASH",
+      "source_ids": [
+        "OGA-SLASH"
+      ],
       "publisher": "OpenGameArt",
       "author": "Cethiel",
       "official_page": "https://opengameart.org/content/weapon-slash-effect",
@@ -1440,6 +1676,9 @@
       "bytes": 10839,
       "sha256": "a3d2c6cd354cfab75d1ab964d2b580c1f3144061d3c2361a2c46a504df6b7db9",
       "source_id": "OGA-SLASH",
+      "source_ids": [
+        "OGA-SLASH"
+      ],
       "publisher": "OpenGameArt",
       "author": "Cethiel",
       "official_page": "https://opengameart.org/content/weapon-slash-effect",
@@ -1458,6 +1697,9 @@
       "bytes": 9958,
       "sha256": "2ce1c82da724c9ddb679d12e115315efb20439d86b64bb71d458b2b1d0e29c83",
       "source_id": "OGA-SLASH",
+      "source_ids": [
+        "OGA-SLASH"
+      ],
       "publisher": "OpenGameArt",
       "author": "Cethiel",
       "official_page": "https://opengameart.org/content/weapon-slash-effect",
@@ -1476,6 +1718,9 @@
       "bytes": 12598,
       "sha256": "5152df40de39bc8747655e4b2c5fbd8fde73d238e206dc3724ab01ffeb1c9dc6",
       "source_id": "OGA-SLASH",
+      "source_ids": [
+        "OGA-SLASH"
+      ],
       "publisher": "OpenGameArt",
       "author": "Cethiel",
       "official_page": "https://opengameart.org/content/weapon-slash-effect",
@@ -1494,6 +1739,9 @@
       "bytes": 12521,
       "sha256": "8cefc4715621b0428e5a02797007b783aad793bb7c0892f3f785ae369cefcec8",
       "source_id": "OGA-SLASH",
+      "source_ids": [
+        "OGA-SLASH"
+      ],
       "publisher": "OpenGameArt",
       "author": "Cethiel",
       "official_page": "https://opengameart.org/content/weapon-slash-effect",
@@ -1512,6 +1760,9 @@
       "bytes": 8469,
       "sha256": "4778452da88178c77984ed07b6fbe3bf7df7036c5ffd8c9effafc6b9da05ae74",
       "source_id": "OGA-SLASH",
+      "source_ids": [
+        "OGA-SLASH"
+      ],
       "publisher": "OpenGameArt",
       "author": "Cethiel",
       "official_page": "https://opengameart.org/content/weapon-slash-effect",
@@ -1530,6 +1781,9 @@
       "bytes": 1894914,
       "sha256": "0c3bd168c04dacc5c15002cabf0fb3c682500eb49befa53627c0f8eb52aa4baf",
       "source_id": "PH-SNOW",
+      "source_ids": [
+        "PH-SNOW"
+      ],
       "publisher": "Poly Haven",
       "author": "Adrian Kubasa",
       "official_page": "https://polyhaven.com/a/snowy_forest",
@@ -1548,6 +1802,9 @@
       "bytes": 209005,
       "sha256": "61039af9cead766f482877f6a7d605a1935c6a2d2923d789d71c418a4b447b6e",
       "source_id": "PH-BRICK",
+      "source_ids": [
+        "PH-BRICK"
+      ],
       "publisher": "Poly Haven",
       "author": "Rob Tuytel",
       "official_page": "https://polyhaven.com/a/castle_brick_01",
@@ -1566,6 +1823,9 @@
       "bytes": 693571,
       "sha256": "3823fdc4bcb37cc7b26fd7e3b2a80e82f5a23354d22d84eb0ca277909f923b2c",
       "source_id": "PH-BRICK",
+      "source_ids": [
+        "PH-BRICK"
+      ],
       "publisher": "Poly Haven",
       "author": "Rob Tuytel",
       "official_page": "https://polyhaven.com/a/castle_brick_01",
@@ -1584,6 +1844,9 @@
       "bytes": 1069379,
       "sha256": "f3c4c0538fd5c3f9e1aabcb0169fbbc3ac2883ed5544f05d9008d2736a2899de",
       "source_id": "PH-BRICK",
+      "source_ids": [
+        "PH-BRICK"
+      ],
       "publisher": "Poly Haven",
       "author": "Rob Tuytel",
       "official_page": "https://polyhaven.com/a/castle_brick_01",
@@ -1602,6 +1865,9 @@
       "bytes": 715595,
       "sha256": "8d737b10700257d179dc0413f278477c1bdc79d346f2bf6e8b504e850bde7c82",
       "source_id": "PH-COBBLE",
+      "source_ids": [
+        "PH-COBBLE"
+      ],
       "publisher": "Poly Haven",
       "author": "Sơn Nguyễn",
       "official_page": "https://polyhaven.com/a/mossy_cobblestone",
@@ -1620,6 +1886,9 @@
       "bytes": 1089617,
       "sha256": "105d6209ff99952ca316e814eebf06c1c3cb244da62184137a97e29aee74b7d7",
       "source_id": "PH-COBBLE",
+      "source_ids": [
+        "PH-COBBLE"
+      ],
       "publisher": "Poly Haven",
       "author": "Sơn Nguyễn",
       "official_page": "https://polyhaven.com/a/mossy_cobblestone",
@@ -1638,6 +1907,9 @@
       "bytes": 980112,
       "sha256": "32a128c921cf0311798ebb6c6a766db900a10419233c87cc52f8d226b2aa4cc0",
       "source_id": "PH-COBBLE",
+      "source_ids": [
+        "PH-COBBLE"
+      ],
       "publisher": "Poly Haven",
       "author": "Sơn Nguyễn",
       "official_page": "https://polyhaven.com/a/mossy_cobblestone",
@@ -1656,6 +1928,9 @@
       "bytes": 41956,
       "sha256": "a029b852e57bb2ba954ec69a729c738cf8a8bbc7a507605d49e6f4415b598a97",
       "source_id": "PH-FORT",
+      "source_ids": [
+        "PH-FORT"
+      ],
       "publisher": "Poly Haven",
       "author": "Rico Cilliers",
       "official_page": "https://polyhaven.com/a/modular_fort_01",
@@ -1674,6 +1949,9 @@
       "bytes": 64624,
       "sha256": "205bddd127ec4c8e87e13108003c4c1343092a213c77473d3056e7b105ad111f",
       "source_id": "PH-FORT",
+      "source_ids": [
+        "PH-FORT"
+      ],
       "publisher": "Poly Haven",
       "author": "Rico Cilliers",
       "official_page": "https://polyhaven.com/a/modular_fort_01",
@@ -1692,6 +1970,9 @@
       "bytes": 55192,
       "sha256": "48a9af555add02a70362df01323abf050c3e36492c8ee860bd0b5799ca13d98a",
       "source_id": "PH-FORT",
+      "source_ids": [
+        "PH-FORT"
+      ],
       "publisher": "Poly Haven",
       "author": "Rico Cilliers",
       "official_page": "https://polyhaven.com/a/modular_fort_01",
@@ -1710,6 +1991,9 @@
       "bytes": 219772,
       "sha256": "f3c9d8a491d02e62424bc104eb5fd50fa7e2516c9860e8e8f0cb7ef842725c44",
       "source_id": "PH-FORT",
+      "source_ids": [
+        "PH-FORT"
+      ],
       "publisher": "Poly Haven",
       "author": "Rico Cilliers",
       "official_page": "https://polyhaven.com/a/modular_fort_01",
@@ -1728,6 +2012,9 @@
       "bytes": 19244,
       "sha256": "e60605cf7f632c9e193cab5e91415a0b0a62556d2121ea569750eaa7f3e3caaf",
       "source_id": "PH-FORT",
+      "source_ids": [
+        "PH-FORT"
+      ],
       "publisher": "Poly Haven",
       "author": "Rico Cilliers",
       "official_page": "https://polyhaven.com/a/modular_fort_01",
@@ -1746,6 +2033,9 @@
       "bytes": 922824,
       "sha256": "e0327cf7fda9d308d5f96ca28f86b5851d5501b511f5356db43fca9a90ab380f",
       "source_id": "PH-STATUE",
+      "source_ids": [
+        "PH-STATUE"
+      ],
       "publisher": "Poly Haven",
       "author": "Benny Weimer",
       "official_page": "https://polyhaven.com/a/gothic_statue",
@@ -1764,6 +2054,9 @@
       "bytes": 349700,
       "sha256": "6f603e8df23bd5032024c1c38f12bdf69ce5ce151405a3056a6c0ad92ba71371",
       "source_id": "PH-COBBLE",
+      "source_ids": [
+        "PH-COBBLE"
+      ],
       "publisher": "Poly Haven",
       "author": "Sơn Nguyễn",
       "official_page": "https://polyhaven.com/a/mossy_cobblestone",
@@ -1782,6 +2075,9 @@
       "bytes": 394730,
       "sha256": "3903a0a795c1584283b5983f1fdbd32435f13b9a7656bf940023054da2769c67",
       "source_id": "PH-COBBLE",
+      "source_ids": [
+        "PH-COBBLE"
+      ],
       "publisher": "Poly Haven",
       "author": "Sơn Nguyễn",
       "official_page": "https://polyhaven.com/a/mossy_cobblestone",
@@ -1800,6 +2096,9 @@
       "bytes": 161986,
       "sha256": "98558a0b83e34439512b0c6315d687990457a3f3d20234c8564080365fdb3842",
       "source_id": "PH-COBBLE",
+      "source_ids": [
+        "PH-COBBLE"
+      ],
       "publisher": "Poly Haven",
       "author": "Sơn Nguyễn",
       "official_page": "https://polyhaven.com/a/mossy_cobblestone",
@@ -1818,6 +2117,9 @@
       "bytes": 295418,
       "sha256": "98ffd6f778300a99c4a5c7ae43fa6726c1881621599b99c4143d6f4a6f31a064",
       "source_id": "PH-FORT",
+      "source_ids": [
+        "PH-FORT"
+      ],
       "publisher": "Poly Haven",
       "author": "Rico Cilliers",
       "official_page": "https://polyhaven.com/a/modular_fort_01",
@@ -1836,6 +2138,9 @@
       "bytes": 517172,
       "sha256": "b8fa399819f39545500fa1d818fe3cd10d70808ed344542bacca11ccbfcbc97a",
       "source_id": "PH-FORT",
+      "source_ids": [
+        "PH-FORT"
+      ],
       "publisher": "Poly Haven",
       "author": "Rico Cilliers",
       "official_page": "https://polyhaven.com/a/modular_fort_01",
@@ -1854,6 +2159,9 @@
       "bytes": 306880,
       "sha256": "511ee8f569e261b2217ec7362f4194f9edabfb5b43ac6ccc708528010a2da9f5",
       "source_id": "PH-FORT",
+      "source_ids": [
+        "PH-FORT"
+      ],
       "publisher": "Poly Haven",
       "author": "Rico Cilliers",
       "official_page": "https://polyhaven.com/a/modular_fort_01",
@@ -1872,6 +2180,9 @@
       "bytes": 876188,
       "sha256": "66bd8332a4c58d94114cf23444dfc8de3a399234e2cd62012efdb5d78f6c5f9e",
       "source_id": "Q-UAL2",
+      "source_ids": [
+        "Q-UAL2"
+      ],
       "publisher": "Quaternius",
       "author": "Quaternius",
       "official_page": "https://quaternius.com/packs/universalanimationlibrary2.html",
@@ -1890,6 +2201,9 @@
       "bytes": 1010988,
       "sha256": "261156c05d74ea8cded6da1b6853feb7e9c89721e782536d0813a0c15f47fdc6",
       "source_id": "Q-UAL1",
+      "source_ids": [
+        "Q-UAL1"
+      ],
       "publisher": "Quaternius",
       "author": "Quaternius",
       "official_page": "https://quaternius.com/packs/universalanimationlibrary.html",
@@ -1908,6 +2222,9 @@
       "bytes": 728,
       "sha256": "2202cc2f608c4210790b112e5f121bc2e7f8dced7b5b1c7f4be6203461bdebbb",
       "source_id": "Q-OUTFIT",
+      "source_ids": [
+        "Q-OUTFIT"
+      ],
       "publisher": "Quaternius",
       "author": "Quaternius",
       "official_page": "https://quaternius.com/packs/modularcharacteroutfitsfantasy.html",
@@ -1926,6 +2243,9 @@
       "bytes": 311,
       "sha256": "2f87579c277cde1e1ddbd4b8d823bed618728781cb6597b4dee3978c589ff5c4",
       "source_id": "Q-OUTFIT",
+      "source_ids": [
+        "Q-OUTFIT"
+      ],
       "publisher": "Quaternius",
       "author": "Quaternius",
       "official_page": "https://quaternius.com/packs/modularcharacteroutfitsfantasy.html",
@@ -1944,6 +2264,9 @@
       "bytes": 528,
       "sha256": "d32abf5eb61a5d20c582525c2ee9d8d42d86401d6b3ea0a2d5283fcaecaa35b9",
       "source_id": "Q-WEAPON",
+      "source_ids": [
+        "Q-WEAPON"
+      ],
       "publisher": "Quaternius",
       "author": "Quaternius",
       "official_page": "https://quaternius.com/packs/medievalweapons.html",
@@ -1962,6 +2285,9 @@
       "bytes": 332,
       "sha256": "6d01f55c6e4c49a2c9963e147e561945ae2c83958c8ca667d90a6bffdbfac061",
       "source_id": "Q-UAL2",
+      "source_ids": [
+        "Q-UAL2"
+      ],
       "publisher": "Quaternius",
       "author": "Quaternius",
       "official_page": "https://quaternius.com/packs/universalanimationlibrary2.html",
@@ -1980,6 +2306,9 @@
       "bytes": 702,
       "sha256": "ccd02718886b5a57f10f0a8911a38cfe10c36880e1d6dfa3445923fba32d2a72",
       "source_id": "Q-UAL2",
+      "source_ids": [
+        "Q-UAL2"
+      ],
       "publisher": "Quaternius",
       "author": "Quaternius",
       "official_page": "https://quaternius.com/packs/universalanimationlibrary2.html",
@@ -1998,6 +2327,9 @@
       "bytes": 275,
       "sha256": "3447416d55d5cf3a82311c4941578068d544cc4cfa1d49a6a26a28c98b96c393",
       "source_id": "Q-UAL2",
+      "source_ids": [
+        "Q-UAL2"
+      ],
       "publisher": "Quaternius",
       "author": "Quaternius",
       "official_page": "https://quaternius.com/packs/universalanimationlibrary2.html",
@@ -2016,6 +2348,9 @@
       "bytes": 332,
       "sha256": "6d01f55c6e4c49a2c9963e147e561945ae2c83958c8ca667d90a6bffdbfac061",
       "source_id": "Q-UAL1",
+      "source_ids": [
+        "Q-UAL1"
+      ],
       "publisher": "Quaternius",
       "author": "Quaternius",
       "official_page": "https://quaternius.com/packs/universalanimationlibrary.html",
@@ -2034,6 +2369,9 @@
       "bytes": 702,
       "sha256": "ccd02718886b5a57f10f0a8911a38cfe10c36880e1d6dfa3445923fba32d2a72",
       "source_id": "Q-UAL1",
+      "source_ids": [
+        "Q-UAL1"
+      ],
       "publisher": "Quaternius",
       "author": "Quaternius",
       "official_page": "https://quaternius.com/packs/universalanimationlibrary.html",
@@ -2052,6 +2390,9 @@
       "bytes": 806,
       "sha256": "0f4beaf0fe360a7732e58bbe3dbf60a2422367fbea60cb9ea4add968f383268e",
       "source_id": "Q-BASE",
+      "source_ids": [
+        "Q-BASE"
+      ],
       "publisher": "Quaternius",
       "author": "Quaternius",
       "official_page": "https://quaternius.com/packs/universalbasecharacters.html",
@@ -2070,6 +2411,9 @@
       "bytes": 374,
       "sha256": "de990ef6fc68cffd7fd1ae342c4d0c823b541b8848d8f76bca5d3339f4de6f6e",
       "source_id": "Q-ZOMBIE",
+      "source_ids": [
+        "Q-ZOMBIE"
+      ],
       "publisher": "Quaternius",
       "author": "Quaternius",
       "official_page": "https://quaternius.com/packs/zombieapocalypsekit.html",
@@ -2088,6 +2432,9 @@
       "bytes": 47272,
       "sha256": "ec545aa46464893348dbeec42adb87b203643f9c7d6b4c39c2074721f9a73866",
       "source_id": "Q-WEAPON",
+      "source_ids": [
+        "Q-WEAPON"
+      ],
       "publisher": "Quaternius",
       "author": "Quaternius",
       "official_page": "https://quaternius.com/packs/medievalweapons.html",
@@ -2106,6 +2453,9 @@
       "bytes": 8199776,
       "sha256": "600029a31ecda96d4ee19d67640cfbe3a3fd9de57e9b08cac47ea079340ee945",
       "source_id": "Q-OUTFIT",
+      "source_ids": [
+        "Q-OUTFIT"
+      ],
       "publisher": "Quaternius",
       "author": "Quaternius",
       "official_page": "https://quaternius.com/packs/modularcharacteroutfitsfantasy.html",
@@ -2124,6 +2474,9 @@
       "bytes": 2819560,
       "sha256": "3cd401a782200a144dfb670caa8ff3c0efdd6ca03f3736888063e38ea6c06fee",
       "source_id": "Q-BASE",
+      "source_ids": [
+        "Q-BASE"
+      ],
       "publisher": "Quaternius",
       "author": "Quaternius",
       "official_page": "https://quaternius.com/packs/universalbasecharacters.html",
@@ -2142,6 +2495,9 @@
       "bytes": 6446636,
       "sha256": "fc150c32d9592a812ca981a5375ece8118a1af665fe583e1ed06009bdda88684",
       "source_id": "Q-BASE",
+      "source_ids": [
+        "Q-BASE"
+      ],
       "publisher": "Quaternius",
       "author": "Quaternius",
       "official_page": "https://quaternius.com/packs/universalbasecharacters.html",
@@ -2160,6 +2516,9 @@
       "bytes": 582868,
       "sha256": "f199c9bdea193312fae5e13e045d4677e6b68bced027178252e8de61c33d5ac4",
       "source_id": "Q-ZOMBIE",
+      "source_ids": [
+        "Q-ZOMBIE"
+      ],
       "publisher": "Quaternius",
       "author": "Quaternius",
       "official_page": "https://quaternius.com/packs/zombieapocalypsekit.html",
@@ -2172,12 +2531,178 @@
       "selection_and_transform": "Blender 5.2.0 glTF-to-self-contained-GLB; Y-up; packed atlas; retained only Idle, Walk, Run, Idle_Attack, HitReact, Death"
     },
     {
+      "path": "processed/round004/characters/hollow.glb",
+      "role": "runtime-model",
+      "integration_ready": true,
+      "bytes": 1619612,
+      "sha256": "626a71d26b656b767af52154998b5c082f39be65dde08ab3e701e65b99ae8881",
+      "source_id": "Q-ZOMBIE",
+      "source_ids": [
+        "Q-ZOMBIE"
+      ],
+      "publisher": "Quaternius",
+      "author": "Quaternius",
+      "official_page": "https://quaternius.com/packs/zombieapocalypsekit.html",
+      "download_or_listing_url": "https://drive.google.com/drive/folders/1mWP6sCHun7OUMHQeDNZLrXTteXlzWg_t?usp=sharing",
+      "license": "CC0-1.0",
+      "license_proof_url": "https://quaternius.com/packs/zombieapocalypsekit.html",
+      "access_date": "2026-08-01",
+      "source_version": "March 2024",
+      "original_filename_or_member": "zombie_basic.glb",
+      "selection_and_transform": "Blender 5.2.0 deterministic Zombie Basic adaptation; source sneaker removed; body proportion-deformed; replacement boot/greave, wraps, tabard, wounds, eye and talons authored; original 50-bone rig and Idle/HitReact/Death retained; five draw primitives; self-contained GLB"
+    },
+    {
+      "path": "processed/round004/characters/nyra.glb",
+      "role": "runtime-model",
+      "integration_ready": true,
+      "bytes": 5705072,
+      "sha256": "f3e93e577a7419b29734646488166ce3b52f52bb8982e2a5041d2237222d7101",
+      "source_id": "BS-RAIN",
+      "source_ids": [
+        "BS-RAIN",
+        "Q-UAL1",
+        "Q-UAL2"
+      ],
+      "publisher": "Blender Studio",
+      "author": "Blender Foundation / Blender Studio",
+      "official_page": "https://studio.blender.org/characters/rain/v3/",
+      "download_or_listing_url": "https://studio.blender.org/download-source/files/ee/a7/eea73e55dba1cea31c09848df6a794b2-4.zip",
+      "license": "CC-BY-4.0",
+      "license_proof_url": "https://creativecommons.org/licenses/by/4.0/",
+      "access_date": "2026-08-02",
+      "source_version": "v3.3 archive; source blend rain_v3.2.blend",
+      "original_filename_or_member": "Rain_v3.3.zip / rain_v3.2.blend plus player_core.glb and combat_zombie.glb",
+      "selection_and_transform": "Blender 5.2.0 deterministic Rain-to-Nyra adaptation; buried body surfaces pruned; exact 65-joint player_core skeleton fitted; maximum four normalized influences; five exact gameplay clips embedded; five draw primitives; self-contained GLB",
+      "lineage": [
+        {
+          "source_id": "BS-RAIN",
+          "license": "CC-BY-4.0"
+        },
+        {
+          "source_id": "Q-UAL1",
+          "license": "CC0-1.0"
+        },
+        {
+          "source_id": "Q-UAL2",
+          "license": "CC0-1.0"
+        }
+      ]
+    },
+    {
+      "path": "processed/round004/textures/hollow_atlas_512.png",
+      "role": "build-texture-input",
+      "integration_ready": false,
+      "bytes": 4307,
+      "sha256": "e2f8935847b26cdc16d926ae09168aba98af7046d3754ea9298b46c7aaa420de",
+      "source_id": "Q-ZOMBIE",
+      "source_ids": [
+        "Q-ZOMBIE"
+      ],
+      "publisher": "Quaternius",
+      "author": "Quaternius",
+      "official_page": "https://quaternius.com/packs/zombieapocalypsekit.html",
+      "download_or_listing_url": "https://drive.google.com/drive/folders/1mWP6sCHun7OUMHQeDNZLrXTteXlzWg_t?usp=sharing",
+      "license": "CC0-1.0",
+      "license_proof_url": "https://quaternius.com/packs/zombieapocalypsekit.html",
+      "access_date": "2026-08-01",
+      "source_version": "March 2024",
+      "original_filename_or_member": "Zombie_Atlas.png",
+      "selection_and_transform": "ffmpeg palette adjustment of the verified Quaternius Zombie Atlas; ordinary 512x512 RGB PNG; input/output hashes and recipe recorded in source_work/round004/texture_build_receipt.json; embedded in hollow.glb, not loaded separately at runtime"
+    },
+    {
+      "path": "processed/round004/textures/nyra_face_atlas_2k.png",
+      "role": "build-texture-input",
+      "integration_ready": false,
+      "bytes": 818862,
+      "sha256": "ed384f21a4ba0c3c3a46130651ef9b0590c311652801ceae0fc255c9c65a8fe1",
+      "source_id": "BS-RAIN",
+      "source_ids": [
+        "BS-RAIN"
+      ],
+      "publisher": "Blender Studio",
+      "author": "Blender Foundation / Blender Studio",
+      "official_page": "https://studio.blender.org/characters/rain/v3/",
+      "download_or_listing_url": "https://studio.blender.org/download-source/files/ee/a7/eea73e55dba1cea31c09848df6a794b2-4.zip",
+      "license": "CC-BY-4.0",
+      "license_proof_url": "https://creativecommons.org/licenses/by/4.0/",
+      "access_date": "2026-08-02",
+      "source_version": "v3.3 archive; source blend rain_v3.2.blend",
+      "original_filename_or_member": "Rain body diffuse UDIM 1001/1003, eyes, and hands diffuse",
+      "selection_and_transform": "ffmpeg 8.1.2 four-input Lanczos 1024px scale plus 2x2 xstack of Rain face, eyes, body and hands; ordinary 2048x2048 RGB PNG; exact command in source_work/round004/texture_build_receipt.json; embedded in nyra.glb, not loaded separately at runtime"
+    },
+    {
+      "path": "processed/round004/textures/nyra_hair_1k.png",
+      "role": "build-texture-input",
+      "integration_ready": false,
+      "bytes": 529180,
+      "sha256": "40cb28bf34b823d550fd36667c873dd7b75f6e3e322321dc577b6d67576fc115",
+      "source_id": "BS-RAIN",
+      "source_ids": [
+        "BS-RAIN"
+      ],
+      "publisher": "Blender Studio",
+      "author": "Blender Foundation / Blender Studio",
+      "official_page": "https://studio.blender.org/characters/rain/v3/",
+      "download_or_listing_url": "https://studio.blender.org/download-source/files/ee/a7/eea73e55dba1cea31c09848df6a794b2-4.zip",
+      "license": "CC-BY-4.0",
+      "license_proof_url": "https://creativecommons.org/licenses/by/4.0/",
+      "access_date": "2026-08-02",
+      "source_version": "v3.3 archive; source blend rain_v3.2.blend",
+      "original_filename_or_member": "TEX-rain_hair_diffuse.png",
+      "selection_and_transform": "ffmpeg 8.1.2 Lanczos scale of Rain hair diffuse to 1024x1024; ordinary RGB PNG; exact command in source_work/round004/texture_build_receipt.json; embedded in nyra.glb, not loaded separately at runtime"
+    },
+    {
+      "path": "processed/round004/weapons/stormcage.asset-receipt.json",
+      "role": "audit-document",
+      "integration_ready": false,
+      "bytes": 7630,
+      "sha256": "4d20b8db4964a02b6ed329ebbfa4db777a3696b9e6707294c919a52e4de096e1",
+      "source_id": "PROJECT-ORIGINAL",
+      "source_ids": [
+        "PROJECT-ORIGINAL"
+      ],
+      "publisher": "Gauntlet Loop project",
+      "author": "Gauntlet Loop project",
+      "official_page": "project-local",
+      "download_or_listing_url": "project-local",
+      "license": "project-original",
+      "license_proof_url": "project-local",
+      "access_date": "2026-08-02",
+      "source_version": "P30 Round004",
+      "original_filename_or_member": "stormcage.asset-receipt.json",
+      "selection_and_transform": "Generated Stormcage build, dimension, budget, clean-reimport and provenance audit document; not a runtime payload"
+    },
+    {
+      "path": "processed/round004/weapons/stormcage.glb",
+      "role": "runtime-model",
+      "integration_ready": true,
+      "bytes": 264292,
+      "sha256": "a255542b0ca58ef5d8a90a131851e55c51c00983fb1815e718f29371134b2a11",
+      "source_id": "PROJECT-ORIGINAL",
+      "source_ids": [
+        "PROJECT-ORIGINAL"
+      ],
+      "publisher": "Gauntlet Loop project",
+      "author": "Gauntlet Loop project",
+      "official_page": "project-local",
+      "download_or_listing_url": "project-local",
+      "license": "project-original",
+      "license_proof_url": "project-local",
+      "access_date": "2026-08-02",
+      "source_version": "P30 Round004",
+      "original_filename_or_member": "project-original Blender geometry",
+      "selection_and_transform": "Blender 5.2.0 project-original deterministic primitives and custom profiles; grip-centred origin; three materials and draw primitives; no external mesh or texture content; self-contained GLB"
+    },
+    {
       "path": "licenses/Kenney_Castle_Kit_License.txt",
       "role": "preserved-document",
       "integration_ready": false,
       "bytes": 713,
       "sha256": "aac944f18106b3a3e29c6fdeec02523d4cab4c735abc01f5a8fa88a79ae173ef",
       "source_id": "KEN-CASTLE",
+      "source_ids": [
+        "KEN-CASTLE"
+      ],
       "publisher": "Kenney",
       "author": "Kenney",
       "official_page": "https://kenney.nl/assets/castle-kit",
@@ -2196,6 +2721,9 @@
       "bytes": 486,
       "sha256": "16dffa20429eccd9a6ddbffffe7870191974975d192d3934e53da5d486ed2e4f",
       "source_id": "KEN-SMOKE",
+      "source_ids": [
+        "KEN-SMOKE"
+      ],
       "publisher": "Kenney",
       "author": "Kenney Vleugels",
       "official_page": "https://kenney.nl/assets/smoke-particles",
@@ -2206,6 +2734,237 @@
       "source_version": "1.0",
       "original_filename_or_member": "license.txt",
       "selection_and_transform": "publisher-supplied license/readme preserved verbatim and collision-safely renamed"
+    },
+    {
+      "path": "source_work/round004/originals/blender-studio-rain/Rain_v3.3.zip",
+      "role": "raw-provenance",
+      "integration_ready": false,
+      "bytes": 67579177,
+      "sha256": "80217f163f6392dc829233d63c2cfb5e1376775bc34101ad14f39631fea70d24",
+      "source_id": "BS-RAIN",
+      "source_ids": [
+        "BS-RAIN"
+      ],
+      "publisher": "Blender Studio",
+      "author": "Blender Foundation / Blender Studio",
+      "official_page": "https://studio.blender.org/characters/rain/v3/",
+      "download_or_listing_url": "https://studio.blender.org/download-source/files/ee/a7/eea73e55dba1cea31c09848df6a794b2-4.zip",
+      "license": "CC-BY-4.0",
+      "license_proof_url": "https://creativecommons.org/licenses/by/4.0/",
+      "access_date": "2026-08-02",
+      "source_version": "v3.3 archive; source blend rain_v3.2.blend",
+      "original_filename_or_member": "Rain_v3.3.zip",
+      "selection_and_transform": "downloaded verbatim from the official Blender Studio stable source endpoint"
+    },
+    {
+      "path": "source_work/round004/originals/blender-studio-rain/download.headers.txt",
+      "role": "raw-provenance",
+      "integration_ready": false,
+      "bytes": 1982,
+      "sha256": "92ab3bb9f99503148f23d274e6d014e713adaa73dbb55df62796d4dbd7503a34",
+      "source_id": "BS-RAIN",
+      "source_ids": [
+        "BS-RAIN"
+      ],
+      "publisher": "Blender Studio",
+      "author": "Blender Foundation / Blender Studio",
+      "official_page": "https://studio.blender.org/characters/rain/v3/",
+      "download_or_listing_url": "https://studio.blender.org/download-source/files/ee/a7/eea73e55dba1cea31c09848df6a794b2-4.zip",
+      "license": "CC-BY-4.0",
+      "license_proof_url": "https://creativecommons.org/licenses/by/4.0/",
+      "access_date": "2026-08-02",
+      "source_version": "v3.3 archive; source blend rain_v3.2.blend",
+      "original_filename_or_member": "download.headers.txt",
+      "selection_and_transform": "official page, transport-header, or CC-BY-4.0 license evidence retained verbatim"
+    },
+    {
+      "path": "source_work/round004/originals/blender-studio-rain/extracted/Rain v3.3/rain_v3.2.blend",
+      "role": "raw-provenance",
+      "integration_ready": false,
+      "bytes": 9167189,
+      "sha256": "831ab6d837c679040285862b15dc9ee5180b018442a88aeaf92aaa7509b80258",
+      "source_id": "BS-RAIN",
+      "source_ids": [
+        "BS-RAIN"
+      ],
+      "publisher": "Blender Studio",
+      "author": "Blender Foundation / Blender Studio",
+      "official_page": "https://studio.blender.org/characters/rain/v3/",
+      "download_or_listing_url": "https://studio.blender.org/download-source/files/ee/a7/eea73e55dba1cea31c09848df6a794b2-4.zip",
+      "license": "CC-BY-4.0",
+      "license_proof_url": "https://creativecommons.org/licenses/by/4.0/",
+      "access_date": "2026-08-02",
+      "source_version": "v3.3 archive; source blend rain_v3.2.blend",
+      "original_filename_or_member": "rain_v3.2.blend",
+      "selection_and_transform": "extracted verbatim from Rain_v3.3.zip for reproducible Nyra adaptation"
+    },
+    {
+      "path": "source_work/round004/originals/blender-studio-rain/extracted/Rain v3.3/textures/TEX-rain_body_diffuse.1001.png",
+      "role": "raw-provenance",
+      "integration_ready": false,
+      "bytes": 677145,
+      "sha256": "79294db9cccc7c395b3c95c5692eae454554611e8cad89e898f8b325b504bad5",
+      "source_id": "BS-RAIN",
+      "source_ids": [
+        "BS-RAIN"
+      ],
+      "publisher": "Blender Studio",
+      "author": "Blender Foundation / Blender Studio",
+      "official_page": "https://studio.blender.org/characters/rain/v3/",
+      "download_or_listing_url": "https://studio.blender.org/download-source/files/ee/a7/eea73e55dba1cea31c09848df6a794b2-4.zip",
+      "license": "CC-BY-4.0",
+      "license_proof_url": "https://creativecommons.org/licenses/by/4.0/",
+      "access_date": "2026-08-02",
+      "source_version": "v3.3 archive; source blend rain_v3.2.blend",
+      "original_filename_or_member": "TEX-rain_body_diffuse.1001.png",
+      "selection_and_transform": "extracted verbatim from Rain_v3.3.zip for reproducible Nyra adaptation"
+    },
+    {
+      "path": "source_work/round004/originals/blender-studio-rain/extracted/Rain v3.3/textures/TEX-rain_body_diffuse.1003.png",
+      "role": "raw-provenance",
+      "integration_ready": false,
+      "bytes": 2410048,
+      "sha256": "64e0f179a1a872758801ce433b2b5b20ba0e9a399e01574b5a0f9266868c86ca",
+      "source_id": "BS-RAIN",
+      "source_ids": [
+        "BS-RAIN"
+      ],
+      "publisher": "Blender Studio",
+      "author": "Blender Foundation / Blender Studio",
+      "official_page": "https://studio.blender.org/characters/rain/v3/",
+      "download_or_listing_url": "https://studio.blender.org/download-source/files/ee/a7/eea73e55dba1cea31c09848df6a794b2-4.zip",
+      "license": "CC-BY-4.0",
+      "license_proof_url": "https://creativecommons.org/licenses/by/4.0/",
+      "access_date": "2026-08-02",
+      "source_version": "v3.3 archive; source blend rain_v3.2.blend",
+      "original_filename_or_member": "TEX-rain_body_diffuse.1003.png",
+      "selection_and_transform": "extracted verbatim from Rain_v3.3.zip for reproducible Nyra adaptation"
+    },
+    {
+      "path": "source_work/round004/originals/blender-studio-rain/extracted/Rain v3.3/textures/TEX-rain_eyes.png",
+      "role": "raw-provenance",
+      "integration_ready": false,
+      "bytes": 327295,
+      "sha256": "fb2d509abe4bfa3aa4093272e81a25ddd9bbc3e4d03248fe7f213f9cda38a005",
+      "source_id": "BS-RAIN",
+      "source_ids": [
+        "BS-RAIN"
+      ],
+      "publisher": "Blender Studio",
+      "author": "Blender Foundation / Blender Studio",
+      "official_page": "https://studio.blender.org/characters/rain/v3/",
+      "download_or_listing_url": "https://studio.blender.org/download-source/files/ee/a7/eea73e55dba1cea31c09848df6a794b2-4.zip",
+      "license": "CC-BY-4.0",
+      "license_proof_url": "https://creativecommons.org/licenses/by/4.0/",
+      "access_date": "2026-08-02",
+      "source_version": "v3.3 archive; source blend rain_v3.2.blend",
+      "original_filename_or_member": "TEX-rain_eyes.png",
+      "selection_and_transform": "extracted verbatim from Rain_v3.3.zip for reproducible Nyra adaptation"
+    },
+    {
+      "path": "source_work/round004/originals/blender-studio-rain/extracted/Rain v3.3/textures/TEX-rain_hair_diffuse.png",
+      "role": "raw-provenance",
+      "integration_ready": false,
+      "bytes": 1934798,
+      "sha256": "01c35d3fc4b3e961acf3446fdc4a5de83937e09c1b05b074b27c87e511d50ad6",
+      "source_id": "BS-RAIN",
+      "source_ids": [
+        "BS-RAIN"
+      ],
+      "publisher": "Blender Studio",
+      "author": "Blender Foundation / Blender Studio",
+      "official_page": "https://studio.blender.org/characters/rain/v3/",
+      "download_or_listing_url": "https://studio.blender.org/download-source/files/ee/a7/eea73e55dba1cea31c09848df6a794b2-4.zip",
+      "license": "CC-BY-4.0",
+      "license_proof_url": "https://creativecommons.org/licenses/by/4.0/",
+      "access_date": "2026-08-02",
+      "source_version": "v3.3 archive; source blend rain_v3.2.blend",
+      "original_filename_or_member": "TEX-rain_hair_diffuse.png",
+      "selection_and_transform": "extracted verbatim from Rain_v3.3.zip for reproducible Nyra adaptation"
+    },
+    {
+      "path": "source_work/round004/originals/blender-studio-rain/extracted/Rain v3.3/textures/TEX-rain_hands_diffuse.png",
+      "role": "raw-provenance",
+      "integration_ready": false,
+      "bytes": 266895,
+      "sha256": "d4abb09a50d846f57179d61bb0a72431cc57d261b1646b6439de1724afce4afc",
+      "source_id": "BS-RAIN",
+      "source_ids": [
+        "BS-RAIN"
+      ],
+      "publisher": "Blender Studio",
+      "author": "Blender Foundation / Blender Studio",
+      "official_page": "https://studio.blender.org/characters/rain/v3/",
+      "download_or_listing_url": "https://studio.blender.org/download-source/files/ee/a7/eea73e55dba1cea31c09848df6a794b2-4.zip",
+      "license": "CC-BY-4.0",
+      "license_proof_url": "https://creativecommons.org/licenses/by/4.0/",
+      "access_date": "2026-08-02",
+      "source_version": "v3.3 archive; source blend rain_v3.2.blend",
+      "original_filename_or_member": "TEX-rain_hands_diffuse.png",
+      "selection_and_transform": "extracted verbatim from Rain_v3.3.zip for reproducible Nyra adaptation"
+    },
+    {
+      "path": "source_work/round004/originals/blender-studio-rain/license/CC-BY-4.0-legalcode.txt",
+      "role": "raw-provenance",
+      "integration_ready": false,
+      "bytes": 18657,
+      "sha256": "9ba9550ad48438d0836ddab3da480b3b69ffa0aac7b7878b5a0039e7ab429411",
+      "source_id": "BS-RAIN",
+      "source_ids": [
+        "BS-RAIN"
+      ],
+      "publisher": "Blender Studio",
+      "author": "Blender Foundation / Blender Studio",
+      "official_page": "https://studio.blender.org/characters/rain/v3/",
+      "download_or_listing_url": "https://studio.blender.org/download-source/files/ee/a7/eea73e55dba1cea31c09848df6a794b2-4.zip",
+      "license": "CC-BY-4.0",
+      "license_proof_url": "https://creativecommons.org/licenses/by/4.0/",
+      "access_date": "2026-08-02",
+      "source_version": "v3.3 archive; source blend rain_v3.2.blend",
+      "original_filename_or_member": "CC-BY-4.0-legalcode.txt",
+      "selection_and_transform": "official page, transport-header, or CC-BY-4.0 license evidence retained verbatim"
+    },
+    {
+      "path": "source_work/round004/originals/blender-studio-rain/license/official-rain-page.headers.txt",
+      "role": "raw-provenance",
+      "integration_ready": false,
+      "bytes": 821,
+      "sha256": "0f51dff4e63e02aa2a4b0b891183799c0c96d3fd74766d2a28f112fa73a4a6be",
+      "source_id": "BS-RAIN",
+      "source_ids": [
+        "BS-RAIN"
+      ],
+      "publisher": "Blender Studio",
+      "author": "Blender Foundation / Blender Studio",
+      "official_page": "https://studio.blender.org/characters/rain/v3/",
+      "download_or_listing_url": "https://studio.blender.org/download-source/files/ee/a7/eea73e55dba1cea31c09848df6a794b2-4.zip",
+      "license": "CC-BY-4.0",
+      "license_proof_url": "https://creativecommons.org/licenses/by/4.0/",
+      "access_date": "2026-08-02",
+      "source_version": "v3.3 archive; source blend rain_v3.2.blend",
+      "original_filename_or_member": "official-rain-page.headers.txt",
+      "selection_and_transform": "official page, transport-header, or CC-BY-4.0 license evidence retained verbatim"
+    },
+    {
+      "path": "source_work/round004/originals/blender-studio-rain/license/official-rain-page.html",
+      "role": "raw-provenance",
+      "integration_ready": false,
+      "bytes": 57616,
+      "sha256": "9e1a1c966c820fa9a4aa597d5a3fd33db2b753b1824ea4ba951bcda0c032245a",
+      "source_id": "BS-RAIN",
+      "source_ids": [
+        "BS-RAIN"
+      ],
+      "publisher": "Blender Studio",
+      "author": "Blender Foundation / Blender Studio",
+      "official_page": "https://studio.blender.org/characters/rain/v3/",
+      "download_or_listing_url": "https://studio.blender.org/download-source/files/ee/a7/eea73e55dba1cea31c09848df6a794b2-4.zip",
+      "license": "CC-BY-4.0",
+      "license_proof_url": "https://creativecommons.org/licenses/by/4.0/",
+      "access_date": "2026-08-02",
+      "source_version": "v3.3 archive; source blend rain_v3.2.blend",
+      "original_filename_or_member": "official-rain-page.html",
+      "selection_and_transform": "official page, transport-header, or CC-BY-4.0 license evidence retained verbatim"
     }
   ],
   "runtime_clip_mapping": {
@@ -2226,11 +2985,15 @@
   "validation": {
     "status": "pass",
     "blender": "5.2.0 LTS",
-    "all_22_glbs_blender_reimported": true,
+    "all_25_shipping_glbs_blender_reimported": true,
     "kenney_glbs": "9/9 pass; glTF 2.0; identity roots; ground-aligned pivots; external shared palette present",
     "quaternius_glbs": "7/7 pass; glTF 2.0; no external URIs; selected action sets exact",
     "round003_environment_glbs": "6/6 pass under Blender 5.2.0; ordinary GLB; one mesh/material; grounded identity pivots; UV0 present; no images, external URIs, animations, required extensions, Draco, or Meshopt; 36,297 triangles and 1,323,612 bytes",
     "round003_textures": "6/6 ordinary 1024x1024 WebP built with cwebp 1.6.0; exact source/output SHA-256 and command flags recorded",
+    "round004_character_weapon_glbs": "3/3 pass clean Blender 5.2.0 re-import; Nyra 70,984 triangles/65 bones/5 exact clips/5 draws, Hollow 32,389 triangles/50 bones/3 exact clips/5 draws, Stormcage 6,104 triangles/3 draws",
+    "round004_build_textures": "3/3 ordinary PNG inputs embedded into the character GLBs and not loaded separately at runtime; exact hashes and recipes recorded",
+    "round004_runtime_publish": "three source/runtime GLB pairs are byte-identical; 7,588,976 combined bytes",
+    "mixed_license_lineage": "Nyra explicitly records BS-RAIN (CC-BY-4.0), Q-UAL1 (CC0), and Q-UAL2 (CC0); Hollow records Q-ZOMBIE (CC0); Stormcage records project-original with the former claymore used only as a non-derived orientation reference",
     "universal_rig_joint_count": 65,
     "universal_rig_joint_sequence_sha256": "32702abb0d4c46cf76d2b7d846603c56fd27bbb2c2e65aa6af1e155725615722",
     "zombie_joint_count": 50,
@@ -2240,6 +3003,7 @@
     "gltf_transform": "not installed; no Draco/Meshopt/KTX2 transform applied"
   },
   "known_limitations": [
+    "Rain Rig requires the credit 'Rain Rig (CC) Blender Foundation | studio.blender.org' and a modification notice wherever credits are distributed; the exact source, official page snapshot, license legalcode, and adaptation notice are retained.",
     "Quaternius modern Standard assets were archive-only, so four whole free ZIPs are retained raw and ignored by the scoped .gitignore.",
     "Standard Universal Base exposes only Superhero Female/Male; Female_Ranger uses Regular Female proportions. Joint schema matches, but the two are separate alternatives rather than a claimed seamless assembly.",
     "The publisher base glTF referenced missing T_Eye_Normal_png.png; a byte-identical alias of supplied T_Eye_Normal.png was used in scratch conversion only.",

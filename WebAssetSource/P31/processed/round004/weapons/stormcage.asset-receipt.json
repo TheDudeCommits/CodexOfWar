@@ -1,0 +1,310 @@
+{
+  "asset_id": "weapon.stormcage",
+  "asset_name": "Stormcage",
+  "asset_type": "two-hand claymore",
+  "audit_files": [
+    "WebAssetSource/P31/source_work/round004/stormcage_reimport_inspection.json",
+    "WebAssetSource/P31/source_work/round004/stormcage_provenance.json"
+  ],
+  "authored_summary": {
+    "bounds_max": [
+      0.264086,
+      0.04,
+      1.698705
+    ],
+    "bounds_min": [
+      -0.264091,
+      -0.04,
+      -0.3
+    ],
+    "dimensions": [
+      0.528177,
+      0.08,
+      1.998705
+    ],
+    "materials": [
+      "Stormcage_Aether",
+      "Stormcage_Copper",
+      "Stormcage_Steel"
+    ],
+    "mesh_objects": 3,
+    "objects": [
+      {
+        "location": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "materials": [
+          "Stormcage_Aether"
+        ],
+        "name": "Stormcage_AetherChannel",
+        "rotation_euler": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "triangles": 344,
+        "vertices": 178
+      },
+      {
+        "location": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "materials": [
+          "Stormcage_Copper"
+        ],
+        "name": "Stormcage_CopperCage",
+        "rotation_euler": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "triangles": 3896,
+        "vertices": 2172
+      },
+      {
+        "location": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "materials": [
+          "Stormcage_Steel"
+        ],
+        "name": "Stormcage_SteelGeometry",
+        "rotation_euler": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "triangles": 1864,
+        "vertices": 966
+      }
+    ],
+    "triangles": 6104,
+    "vertices": 3316
+  },
+  "budget_audit": {
+    "draw_primitives_actual": 3,
+    "draw_primitives_max": 3,
+    "materials_actual": 3,
+    "materials_max": 3,
+    "passed": true,
+    "triangles_actual": 6104,
+    "triangles_required": [
+      5000,
+      7000
+    ]
+  },
+  "clean_reimport_audit": {
+    "blender": "5.2.0 LTS",
+    "bounds_max": [
+      0.264086,
+      0.04,
+      1.698705
+    ],
+    "bounds_min": [
+      -0.264091,
+      -0.04,
+      -0.3
+    ],
+    "dimensions": [
+      0.528177,
+      0.08,
+      1.998705
+    ],
+    "file": "WebAssetSource/P31/processed/round004/weapons/stormcage.glb",
+    "materials": [
+      "Stormcage_Aether",
+      "Stormcage_Copper",
+      "Stormcage_Steel"
+    ],
+    "mesh_objects": 3,
+    "objects": [
+      {
+        "location": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "materials": [
+          "Stormcage_Aether"
+        ],
+        "name": "Stormcage_AetherChannel",
+        "rotation_euler": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "triangles": 344,
+        "vertices": 682
+      },
+      {
+        "location": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "materials": [
+          "Stormcage_Copper"
+        ],
+        "name": "Stormcage_CopperCage",
+        "rotation_euler": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "triangles": 3896,
+        "vertices": 3030
+      },
+      {
+        "location": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "materials": [
+          "Stormcage_Steel"
+        ],
+        "name": "Stormcage_SteelGeometry",
+        "rotation_euler": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "triangles": 1864,
+        "vertices": 2518
+      }
+    ],
+    "source_glb_bytes": 264292,
+    "source_glb_sha256": "a255542b0ca58ef5d8a90a131851e55c51c00983fb1815e718f29371134b2a11",
+    "triangles": 6104,
+    "vertices": 6230
+  },
+  "dimension_audit": {
+    "blade_max_thickness_m": 0.068,
+    "blade_nominal_width_m": 0.22,
+    "blade_shoulder_width_m": 0.336,
+    "grip_length_m": 0.44,
+    "guard_knuckle_clearance_m": 0.026,
+    "guard_width_m": 0.52,
+    "passed": true,
+    "total_length_m": 2.0
+  },
+  "generator": {
+    "blender": "5.2.0 LTS",
+    "script": "WebAssetSource/P31/source_work/round004/build_stormcage.py",
+    "script_sha256": "b68c56d6ff8014846ddc900d63a57ad8be6e7b89cc6782a8be94901b0e24622c"
+  },
+  "mount_orientation_reference": {
+    "derived_geometry": false,
+    "finding": "Existing asset points along Blender +Z / glTF local +Y. Stormcage preserves that axis convention.",
+    "inspected_runtime_asset": "web-game/public/assets/models/quaternius/claymore.glb",
+    "inspected_runtime_asset_sha256": "ec545aa46464893348dbeec42adb87b203643f9c7d6b4c39c2074721f9a73866"
+  },
+  "mount_recommendation": {
+    "axis": "Keep the existing CharacterViews local Z rotation of PI; the blade remains glTF local +Y like the former asset.",
+    "note": "The -0.221 m local-Y compensation is a measured starting point after the runtime PI flip; verify the final palm contact in the Nyra Sword_Regular_A startup and active poses.",
+    "pivot_difference": "Stormcage's origin is the grip centre. The former claymore's origin sat approximately 0.23 m below its grip centre.",
+    "recommended_initial_local_position_m": [
+      0.004,
+      -0.209,
+      0.018
+    ]
+  },
+  "optimization": {
+    "geometry_compression": "none",
+    "reason": "Small standalone mesh with no textures; retained uncompressed GLB for deterministic Blender reimport and broad browser support."
+  },
+  "previews": [
+    {
+      "bytes": 1117678,
+      "name": "neutral-front",
+      "path": "WebAssetSource/P31/source_work/round004/stormcage-preview/neutral-front.png",
+      "resolution": [
+        900,
+        1200
+      ],
+      "sha256": "1986e133d50d2f7adf76e9afbf0ec50437ecf4e3bfd1731deaad2b401e658669"
+    },
+    {
+      "bytes": 1123088,
+      "name": "neutral-three-quarter",
+      "path": "WebAssetSource/P31/source_work/round004/stormcage-preview/neutral-three-quarter.png",
+      "resolution": [
+        900,
+        1200
+      ],
+      "sha256": "b53666932fb01fce6e46325151eefd352cb41727def94754369d04b7e52ba572"
+    }
+  ],
+  "provenance": {
+    "authoring_note": "Purpose-built from deterministic Blender primitives and custom profiles for P30 Round004; no external mesh or texture content.",
+    "external_source_dependencies": [],
+    "kind": "project-original-procedural-mesh",
+    "third_party_meshes": [],
+    "third_party_textures": []
+  },
+  "shipping_asset": {
+    "bytes": 264292,
+    "format": "GLB 2.0",
+    "path": "WebAssetSource/P31/processed/round004/weapons/stormcage.glb",
+    "sha256": "a255542b0ca58ef5d8a90a131851e55c51c00983fb1815e718f29371134b2a11"
+  },
+  "specification": {
+    "axis_blender": "+Z",
+    "axis_gltf_three": "+Y",
+    "blade_max_thickness": 0.068,
+    "blade_nominal_width": 0.22,
+    "blade_shoulder_width": 0.336,
+    "grip_length": 0.44,
+    "grip_z_max": 0.22,
+    "grip_z_min": -0.22,
+    "guard_knuckle_clearance": 0.026,
+    "guard_lowest_z": 0.248,
+    "guard_width": 0.52,
+    "origin": "world (0,0,0), exact centre of the two-hand grip",
+    "overall_z_max": 1.7,
+    "overall_z_min": -0.3,
+    "total_length": 2.0,
+    "units": "metres"
+  },
+  "working_source": {
+    "bytes": 179862,
+    "path": "WebAssetSource/P31/source_work/round004/working/stormcage.blend",
+    "sha256": "3323b083b9a110a41bb1024a3f79b09f0bd4b56ed66425cb987c570fc0d516f3"
+  }
+}

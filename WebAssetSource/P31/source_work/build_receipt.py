@@ -11,6 +11,30 @@ ROOT = Path(__file__).resolve().parents[1]
 ACCESS_DATE = "2026-08-01"
 
 SOURCES = {
+    "BS-RAIN": {
+        "publisher": "Blender Studio",
+        "author": "Blender Foundation / Blender Studio",
+        "title": "Rain Rig",
+        "version": "v3.3 archive; source blend rain_v3.2.blend",
+        "official_page": "https://studio.blender.org/characters/rain/v3/",
+        "download_or_listing_url": "https://studio.blender.org/download-source/files/ee/a7/eea73e55dba1cea31c09848df6a794b2-4.zip",
+        "license": "CC-BY-4.0",
+        "license_proof_url": "https://creativecommons.org/licenses/by/4.0/",
+        "access_date": "2026-08-02",
+        "required_credit": "Rain Rig (CC) Blender Foundation | studio.blender.org",
+        "modification_notice": "Adapted for Nyra: geometry altered and buried surfaces pruned; the canonical 65-bone gameplay rig substituted; weights transferred; textures atlased/resized; armor and mantle added; five gameplay actions embedded.",
+    },
+    "PROJECT-ORIGINAL": {
+        "publisher": "Gauntlet Loop project",
+        "author": "Gauntlet Loop project",
+        "title": "Round004 original authored assets",
+        "version": "P30 Round004",
+        "official_page": "project-local",
+        "download_or_listing_url": "project-local",
+        "license": "project-original",
+        "license_proof_url": "project-local",
+        "access_date": "2026-08-02",
+    },
     "PH-SNOW": {
         "publisher": "Poly Haven",
         "author": "Adrian Kubasa",
@@ -180,44 +204,75 @@ SOURCES = {
     },
 }
 
+ROUND004_PROVENANCE_PATHS = (
+    "source_work/round004/originals/blender-studio-rain/Rain_v3.3.zip",
+    "source_work/round004/originals/blender-studio-rain/download.headers.txt",
+    "source_work/round004/originals/blender-studio-rain/extracted/Rain v3.3/rain_v3.2.blend",
+    "source_work/round004/originals/blender-studio-rain/extracted/Rain v3.3/textures/TEX-rain_body_diffuse.1001.png",
+    "source_work/round004/originals/blender-studio-rain/extracted/Rain v3.3/textures/TEX-rain_body_diffuse.1003.png",
+    "source_work/round004/originals/blender-studio-rain/extracted/Rain v3.3/textures/TEX-rain_eyes.png",
+    "source_work/round004/originals/blender-studio-rain/extracted/Rain v3.3/textures/TEX-rain_hair_diffuse.png",
+    "source_work/round004/originals/blender-studio-rain/extracted/Rain v3.3/textures/TEX-rain_hands_diffuse.png",
+    "source_work/round004/originals/blender-studio-rain/license/CC-BY-4.0-legalcode.txt",
+    "source_work/round004/originals/blender-studio-rain/license/official-rain-page.headers.txt",
+    "source_work/round004/originals/blender-studio-rain/license/official-rain-page.html",
+)
 
-def source_id(path: str) -> str:
+
+def source_ids(path: str) -> list[str]:
+    if path == "processed/round004/characters/nyra.glb":
+        return ["BS-RAIN", "Q-UAL1", "Q-UAL2"]
+    if path.startswith("processed/round004/textures/nyra_"):
+        return ["BS-RAIN"]
+    if path == "processed/round004/characters/hollow.glb" or path == "processed/round004/textures/hollow_atlas_512.png":
+        return ["Q-ZOMBIE"]
+    if path.startswith("processed/round004/weapons/stormcage"):
+        return ["PROJECT-ORIGINAL"]
+    if path.startswith("source_work/round004/originals/blender-studio-rain/"):
+        return ["BS-RAIN"]
     if "round003/gothic_statue" in path or "round003/geometry/gothic_statue" in path:
-        return "PH-STATUE"
+        return ["PH-STATUE"]
     if "round003/materials/ground/" in path:
-        return "PH-COBBLE"
+        return ["PH-COBBLE"]
     if "round003/modular_fort_01" in path or "round003/geometry/fort_" in path or "round003/materials/sector/" in path:
-        return "PH-FORT"
+        return ["PH-FORT"]
     if "snowy_forest" in path:
-        return "PH-SNOW"
+        return ["PH-SNOW"]
     if "castle_brick_01" in path:
-        return "PH-BRICK"
+        return ["PH-BRICK"]
     if "mossy_cobblestone" in path:
-        return "PH-COBBLE"
+        return ["PH-COBBLE"]
     if "castle-kit" in path or "/ruins/" in path or "Castle_Kit" in path:
-        return "KEN-CASTLE"
+        return ["KEN-CASTLE"]
     if "smoke-particles" in path or "/vfx/smoke/" in path or "Smoke_Particles" in path:
-        return "KEN-SMOKE"
+        return ["KEN-SMOKE"]
     if "weapon-slash-effect" in path or "/slash_classic/" in path:
-        return "OGA-SLASH"
+        return ["OGA-SLASH"]
     if "sword-sounds-starninjas" in path or "/audio/sword/" in path:
-        return "OGA-SWORD"
+        return ["OGA-SWORD"]
     if "Universal Base Characters" in path or "universal-base-characters" in path or "universal_superhero" in path or "universal_hair" in path:
-        return "Q-BASE"
+        return ["Q-BASE"]
     if "Modular Character Outfits" in path or "modular-character-outfits" in path or "female_ranger" in path:
-        return "Q-OUTFIT"
+        return ["Q-OUTFIT"]
     if "Universal Animation Library 2" in path or "universal-animation-library-2" in path or "combat_zombie" in path:
-        return "Q-UAL2"
+        return ["Q-UAL2"]
     if "Universal Animation Library[" in path or "universal-animation-library/" in path or "universal-animation-library-" in path or "player_core" in path:
-        return "Q-UAL1"
+        return ["Q-UAL1"]
     if "modular-weapons" in path or "claymore" in path:
-        return "Q-WEAPON"
+        return ["Q-WEAPON"]
     if "zombie-apocalypse" in path or "Zombie_" in path or "zombie_basic" in path:
-        return "Q-ZOMBIE"
+        return ["Q-ZOMBIE"]
     raise ValueError(f"Unmapped third-party file: {path}")
 
 
 TRANSFORMS = {
+    "processed/round004/characters/nyra.glb": "Blender 5.2.0 deterministic Rain-to-Nyra adaptation; buried body surfaces pruned; exact 65-joint player_core skeleton fitted; maximum four normalized influences; five exact gameplay clips embedded; five draw primitives; self-contained GLB",
+    "processed/round004/characters/hollow.glb": "Blender 5.2.0 deterministic Zombie Basic adaptation; source sneaker removed; body proportion-deformed; replacement boot/greave, wraps, tabard, wounds, eye and talons authored; original 50-bone rig and Idle/HitReact/Death retained; five draw primitives; self-contained GLB",
+    "processed/round004/textures/nyra_face_atlas_2k.png": "ffmpeg 8.1.2 four-input Lanczos 1024px scale plus 2x2 xstack of Rain face, eyes, body and hands; ordinary 2048x2048 RGB PNG; exact command in source_work/round004/texture_build_receipt.json; embedded in nyra.glb, not loaded separately at runtime",
+    "processed/round004/textures/nyra_hair_1k.png": "ffmpeg 8.1.2 Lanczos scale of Rain hair diffuse to 1024x1024; ordinary RGB PNG; exact command in source_work/round004/texture_build_receipt.json; embedded in nyra.glb, not loaded separately at runtime",
+    "processed/round004/textures/hollow_atlas_512.png": "ffmpeg palette adjustment of the verified Quaternius Zombie Atlas; ordinary 512x512 RGB PNG; input/output hashes and recipe recorded in source_work/round004/texture_build_receipt.json; embedded in hollow.glb, not loaded separately at runtime",
+    "processed/round004/weapons/stormcage.glb": "Blender 5.2.0 project-original deterministic primitives and custom profiles; grip-centred origin; three materials and draw primitives; no external mesh or texture content; self-contained GLB",
+    "processed/round004/weapons/stormcage.asset-receipt.json": "Generated Stormcage build, dimension, budget, clean-reimport and provenance audit document; not a runtime payload",
     "processed/quaternius/models/universal_superhero_female.glb": "Blender 5.2.0 glTF-to-self-contained-GLB; Y-up; selected Standard female body; downscaled referenced 2K body/hair maps to 1K and retained 256px eye maps; byte-identical alias repaired missing eye-normal filename in scratch only",
     "processed/quaternius/models/universal_hair_long.glb": "Blender 5.2.0 glTF-to-self-contained-GLB; Y-up; selected Hair_Long mesh and Universal rig; downscaled referenced 2K maps to 1K",
     "processed/quaternius/models/female_ranger_outfit.glb": "Blender 5.2.0 glTF-to-self-contained-GLB; Y-up; selected complete Female_Ranger outfit; downscaled referenced Ranger 4K and Regular Female 2K maps to 1K",
@@ -235,6 +290,12 @@ def transform(path: str) -> str:
         if "/original-docs/" in path:
             return "extracted verbatim from the named publisher archive for preservation"
         return "downloaded verbatim from the original publisher distribution"
+    if path.startswith("source_work/round004/originals/blender-studio-rain/"):
+        if path.endswith("Rain_v3.3.zip"):
+            return "downloaded verbatim from the official Blender Studio stable source endpoint"
+        if path.endswith("rain_v3.2.blend") or "/textures/" in path:
+            return "extracted verbatim from Rain_v3.3.zip for reproducible Nyra adaptation"
+        return "official page, transport-header, or CC-BY-4.0 license evidence retained verbatim"
     if path.startswith("processed/polyhaven/round003/geometry/"):
         return "Blender 5.2.0 selection from the official 1K glTF; publisher contact-sheet transform removed; metric mesh centered on X/Z, grounded at Y=0, collapsed to one texture-free AshwakeSectorShared placeholder material; ordinary GLB with no Draco, Meshopt, KTX2, animations, images, or external URI; validated by Blender re-import"
     if path.startswith("processed/polyhaven/round003/materials/ground/"):
@@ -251,6 +312,18 @@ def transform(path: str) -> str:
 
 
 def role(path: str) -> str:
+    if path.startswith("source_work/round004/originals/"):
+        return "raw-provenance"
+    if path in {
+        "processed/round004/characters/nyra.glb",
+        "processed/round004/characters/hollow.glb",
+        "processed/round004/weapons/stormcage.glb",
+    }:
+        return "runtime-model"
+    if path.startswith("processed/round004/textures/"):
+        return "build-texture-input"
+    if path == "processed/round004/weapons/stormcage.asset-receipt.json":
+        return "audit-document"
     if path.startswith("raw/"):
         return "raw-provenance"
     if "/licenses/" in path or path.startswith("licenses/"):
@@ -272,6 +345,12 @@ def role(path: str) -> str:
 
 def original_filename(path: str) -> str:
     overrides = {
+        "processed/round004/characters/nyra.glb": "Rain_v3.3.zip / rain_v3.2.blend plus player_core.glb and combat_zombie.glb",
+        "processed/round004/characters/hollow.glb": "zombie_basic.glb",
+        "processed/round004/textures/nyra_face_atlas_2k.png": "Rain body diffuse UDIM 1001/1003, eyes, and hands diffuse",
+        "processed/round004/textures/nyra_hair_1k.png": "TEX-rain_hair_diffuse.png",
+        "processed/round004/textures/hollow_atlas_512.png": "Zombie_Atlas.png",
+        "processed/round004/weapons/stormcage.glb": "project-original Blender geometry",
         "processed/quaternius/models/universal_superhero_female.glb": "Superhero_Female_FullBody.gltf",
         "processed/quaternius/models/universal_hair_long.glb": "Hair_Long.gltf",
         "processed/quaternius/models/female_ranger_outfit.glb": "Female_Ranger.gltf",
@@ -317,33 +396,40 @@ def sha256(path: Path) -> str:
 
 def main() -> None:
     files = []
+    selected_paths = []
     for top in ("raw", "processed", "licenses"):
-        for path in sorted((ROOT / top).rglob("*")):
-            if not path.is_file():
-                continue
-            relative = path.relative_to(ROOT).as_posix()
-            sid = source_id(relative)
-            source = SOURCES[sid]
-            files.append(
-                {
-                    "path": relative,
-                    "role": role(relative),
-                    "integration_ready": role(relative).startswith("runtime-"),
-                    "bytes": path.stat().st_size,
-                    "sha256": sha256(path),
-                    "source_id": sid,
-                    "publisher": source["publisher"],
-                    "author": source["author"],
-                    "official_page": source["official_page"],
-                    "download_or_listing_url": source["download_or_listing_url"],
-                    "license": source["license"],
-                    "license_proof_url": source["license_proof_url"],
-                    "access_date": ACCESS_DATE,
-                    "source_version": source["version"],
-                    "original_filename_or_member": original_filename(relative),
-                    "selection_and_transform": transform(relative),
-                }
-            )
+        selected_paths.extend(path for path in sorted((ROOT / top).rglob("*")) if path.is_file())
+    selected_paths.extend(ROOT / relative for relative in ROUND004_PROVENANCE_PATHS)
+    for path in selected_paths:
+        relative = path.relative_to(ROOT).as_posix()
+        lineage = source_ids(relative)
+        sid = lineage[0]
+        source = SOURCES[sid]
+        entry = {
+            "path": relative,
+            "role": role(relative),
+            "integration_ready": role(relative).startswith("runtime-"),
+            "bytes": path.stat().st_size,
+            "sha256": sha256(path),
+            "source_id": sid,
+            "source_ids": lineage,
+            "publisher": source["publisher"],
+            "author": source["author"],
+            "official_page": source["official_page"],
+            "download_or_listing_url": source["download_or_listing_url"],
+            "license": source["license"],
+            "license_proof_url": source["license_proof_url"],
+            "access_date": source.get("access_date", ACCESS_DATE),
+            "source_version": source["version"],
+            "original_filename_or_member": original_filename(relative),
+            "selection_and_transform": transform(relative),
+        }
+        if len(lineage) > 1:
+            entry["lineage"] = [
+                {"source_id": item, "license": SOURCES[item]["license"]}
+                for item in lineage
+            ]
+        files.append(entry)
 
     totals = {}
     for key in ("raw", "processed", "licenses"):
@@ -357,12 +443,21 @@ def main() -> None:
         "file_count": len(runtime),
         "bytes": sum(item["bytes"] for item in runtime),
     }
+    retained_round004 = [
+        item for item in files
+        if item["path"].startswith("source_work/round004/originals/")
+    ]
+    totals["round004_source_work_provenance"] = {
+        "file_count": len(retained_round004),
+        "bytes": sum(item["bytes"] for item in retained_round004),
+    }
 
     receipt = {
         "schema": "p31-third-party-asset-receipt-v1",
         "access_date": ACCESS_DATE,
-        "scope": "CC0 browser asset stack through P30 Round003; publisher source and processed lineage retained in WebAssetSource/P31",
+        "scope": "Mixed-license browser asset stack through P30 Round004; publisher source, required attribution, project-original declarations, and processed lineage retained in WebAssetSource/P31",
         "cc0_deed_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "cc_by_4_deed_url": "https://creativecommons.org/licenses/by/4.0/",
         "source_registry": SOURCES,
         "totals": totals,
         "files": files,
@@ -384,11 +479,15 @@ def main() -> None:
         "validation": {
             "status": "pass",
             "blender": "5.2.0 LTS",
-            "all_22_glbs_blender_reimported": True,
+            "all_25_shipping_glbs_blender_reimported": True,
             "kenney_glbs": "9/9 pass; glTF 2.0; identity roots; ground-aligned pivots; external shared palette present",
             "quaternius_glbs": "7/7 pass; glTF 2.0; no external URIs; selected action sets exact",
             "round003_environment_glbs": "6/6 pass under Blender 5.2.0; ordinary GLB; one mesh/material; grounded identity pivots; UV0 present; no images, external URIs, animations, required extensions, Draco, or Meshopt; 36,297 triangles and 1,323,612 bytes",
             "round003_textures": "6/6 ordinary 1024x1024 WebP built with cwebp 1.6.0; exact source/output SHA-256 and command flags recorded",
+            "round004_character_weapon_glbs": "3/3 pass clean Blender 5.2.0 re-import; Nyra 70,984 triangles/65 bones/5 exact clips/5 draws, Hollow 32,389 triangles/50 bones/3 exact clips/5 draws, Stormcage 6,104 triangles/3 draws",
+            "round004_build_textures": "3/3 ordinary PNG inputs embedded into the character GLBs and not loaded separately at runtime; exact hashes and recipes recorded",
+            "round004_runtime_publish": "three source/runtime GLB pairs are byte-identical; 7,588,976 combined bytes",
+            "mixed_license_lineage": "Nyra explicitly records BS-RAIN (CC-BY-4.0), Q-UAL1 (CC0), and Q-UAL2 (CC0); Hollow records Q-ZOMBIE (CC0); Stormcage records project-original with the former claymore used only as a non-derived orientation reference",
             "universal_rig_joint_count": 65,
             "universal_rig_joint_sequence_sha256": "32702abb0d4c46cf76d2b7d846603c56fd27bbb2c2e65aa6af1e155725615722",
             "zombie_joint_count": 50,
@@ -398,6 +497,7 @@ def main() -> None:
             "gltf_transform": "not installed; no Draco/Meshopt/KTX2 transform applied",
         },
         "known_limitations": [
+            "Rain Rig requires the credit 'Rain Rig (CC) Blender Foundation | studio.blender.org' and a modification notice wherever credits are distributed; the exact source, official page snapshot, license legalcode, and adaptation notice are retained.",
             "Quaternius modern Standard assets were archive-only, so four whole free ZIPs are retained raw and ignored by the scoped .gitignore.",
             "Standard Universal Base exposes only Superhero Female/Male; Female_Ranger uses Regular Female proportions. Joint schema matches, but the two are separate alternatives rather than a claimed seamless assembly.",
             "The publisher base glTF referenced missing T_Eye_Normal_png.png; a byte-identical alias of supplied T_Eye_Normal.png was used in scratch conversion only.",

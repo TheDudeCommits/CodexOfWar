@@ -1,0 +1,58 @@
+{
+  "schema": "p30.round004.texture-build.v1",
+  "tool": "ffmpeg 8.1.2",
+  "textures": [
+    {
+      "id": "nyra-face-atlas",
+      "inputs": [
+        "TEX-rain_body_diffuse.1003.png",
+        "TEX-rain_eyes.png",
+        "TEX-rain_body_diffuse.1001.png",
+        "TEX-rain_hands_diffuse.png"
+      ],
+      "command": "ffmpeg -y -v error -i TEX-rain_body_diffuse.1003.png -i TEX-rain_eyes.png -i TEX-rain_body_diffuse.1001.png -i TEX-rain_hands_diffuse.png -filter_complex '[0:v]scale=1024:1024:flags=lanczos[a];[1:v]scale=1024:1024:flags=lanczos[b];[2:v]scale=1024:1024:flags=lanczos[c];[3:v]scale=1024:1024:flags=lanczos[d];[a][b][c][d]xstack=inputs=4:layout=0_0|w0_0|0_h0|w0_h0[out]' -map '[out]' -frames:v 1 nyra_face_atlas_2k.png",
+      "output": {
+        "path": "WebAssetSource/P31/processed/round004/textures/nyra_face_atlas_2k.png",
+        "bytes": 818862,
+        "sha256": "ed384f21a4ba0c3c3a46130651ef9b0590c311652801ceae0fc255c9c65a8fe1",
+        "resolution": [2048, 2048]
+      },
+      "byteExactReproductionVerified": true
+    },
+    {
+      "id": "nyra-hair",
+      "inputs": [
+        "TEX-rain_hair_diffuse.png"
+      ],
+      "command": "ffmpeg -y -v error -i TEX-rain_hair_diffuse.png -vf 'scale=1024:1024:flags=lanczos' -frames:v 1 nyra_hair_1k.png",
+      "output": {
+        "path": "WebAssetSource/P31/processed/round004/textures/nyra_hair_1k.png",
+        "bytes": 529180,
+        "sha256": "40cb28bf34b823d550fd36667c873dd7b75f6e3e322321dc577b6d67576fc115",
+        "resolution": [1024, 1024]
+      },
+      "byteExactReproductionVerified": true
+    },
+    {
+      "id": "hollow-palette",
+      "input": {
+        "path": "WebAssetSource/P31/raw/quaternius/zombie-apocalypse-kit/Zombie_Atlas.png",
+        "bytes": 6256,
+        "sha256": "8803e5543d5e6b6f66aa41a5ef93e6c2ffb77b5476d0202296d2f4c8f4eb9e8d"
+      },
+      "transform": "ffmpeg darker/desaturated palette adjustment at unchanged 512x512 RGB resolution",
+      "command": null,
+      "commandRetentionStatus": "fail-original-builder-shell-command-not-retained",
+      "output": {
+        "path": "WebAssetSource/P31/processed/round004/textures/hollow_atlas_512.png",
+        "bytes": 4307,
+        "sha256": "e2f8935847b26cdc16d926ae09168aba98af7046d3754ea9298b46c7aaa420de",
+        "resolution": [512, 512]
+      },
+      "byteIdentityVerifiedAsEmbeddedBuildInput": true,
+      "byteExactReproductionVerified": false
+    }
+  ],
+  "runtimeNote": "All three PNGs are embedded in the character GLBs and are not loaded as separate manifest payloads.",
+  "overallStatus": "partial-fail-hollow-command-not-retained"
+}

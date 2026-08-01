@@ -1,0 +1,54 @@
+{
+  "schema": "p30.round004.acquisition.v1",
+  "accessDate": "2026-08-02",
+  "source": {
+    "id": "BS-RAIN",
+    "publisher": "Blender Studio",
+    "author": "Blender Foundation / Blender Studio",
+    "title": "Rain Rig",
+    "version": "v3.3 archive; source blend rain_v3.2.blend",
+    "officialPage": "https://studio.blender.org/characters/rain/v3/",
+    "stableDownload": "https://studio.blender.org/download-source/files/ee/a7/eea73e55dba1cea31c09848df6a794b2-4.zip",
+    "license": "CC-BY-4.0",
+    "licenseProof": "https://creativecommons.org/licenses/by/4.0/",
+    "requiredCredit": "Rain Rig (CC) Blender Foundation | studio.blender.org",
+    "modificationNotice": "Adapted for Nyra: geometry altered and buried surfaces pruned; canonical 65-bone gameplay rig substituted; weights transferred; textures atlased/resized; armor and mantle added; five gameplay actions embedded."
+  },
+  "retained": [
+    {
+      "path": "WebAssetSource/P31/source_work/round004/originals/blender-studio-rain/Rain_v3.3.zip",
+      "bytes": 67579177,
+      "sha256": "80217f163f6392dc829233d63c2cfb5e1376775bc34101ad14f39631fea70d24"
+    },
+    {
+      "path": "WebAssetSource/P31/source_work/round004/originals/blender-studio-rain/extracted/Rain v3.3/rain_v3.2.blend",
+      "bytes": 9167189,
+      "sha256": "831ab6d837c679040285862b15dc9ee5180b018442a88aeaf92aaa7509b80258"
+    },
+    {
+      "path": "WebAssetSource/P31/source_work/round004/originals/blender-studio-rain/license/official-rain-page.html",
+      "bytes": 57616,
+      "sha256": "9e1a1c966c820fa9a4aa597d5a3fd33db2b753b1824ea4ba951bcda0c032245a"
+    },
+    {
+      "path": "WebAssetSource/P31/source_work/round004/originals/blender-studio-rain/license/CC-BY-4.0-legalcode.txt",
+      "bytes": 18657,
+      "sha256": "9ba9550ad48438d0836ddab3da480b3b69ffa0aac7b7878b5a0039e7ab429411"
+    }
+  ],
+  "transportEvidence": [
+    "WebAssetSource/P31/source_work/round004/originals/blender-studio-rain/download.headers.txt",
+    "WebAssetSource/P31/source_work/round004/originals/blender-studio-rain/license/official-rain-page.headers.txt"
+  ],
+  "reusedExistingSources": [
+    "Q-UAL1",
+    "Q-UAL2",
+    "Q-ZOMBIE"
+  ],
+  "stormcage": {
+    "kind": "project-original-procedural-mesh",
+    "thirdPartyGeometry": false,
+    "thirdPartyTextures": false,
+    "formerClaymoreUse": "orientation reference only; no derived geometry"
+  }
+}

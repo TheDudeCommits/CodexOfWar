@@ -9,21 +9,21 @@
   "assets": {
     "character.hero": {
       "type": "glb",
-      "url": "/assets/models/quaternius/female_ranger_outfit.glb",
+      "url": "/assets/models/ashwake/nyra.glb",
       "enabled": true,
       "compression": "none",
       "scale": 1
     },
     "character.hollow": {
       "type": "glb",
-      "url": "/assets/models/quaternius/zombie_basic.glb",
+      "url": "/assets/models/ashwake/hollow.glb",
       "enabled": true,
       "compression": "none",
       "scale": 1
     },
     "weapon.claymore": {
       "type": "glb",
-      "url": "/assets/models/quaternius/claymore.glb",
+      "url": "/assets/models/ashwake/stormcage.glb",
       "enabled": true,
       "compression": "none",
       "scale": 1

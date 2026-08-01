@@ -1,0 +1,100 @@
+{
+  "blender": "5.2.0 LTS",
+  "bounds_max": [
+    0.264086,
+    0.04,
+    1.698705
+  ],
+  "bounds_min": [
+    -0.264091,
+    -0.04,
+    -0.3
+  ],
+  "dimensions": [
+    0.528177,
+    0.08,
+    1.998705
+  ],
+  "file": "WebAssetSource/P31/processed/round004/weapons/stormcage.glb",
+  "materials": [
+    "Stormcage_Aether",
+    "Stormcage_Copper",
+    "Stormcage_Steel"
+  ],
+  "mesh_objects": 3,
+  "objects": [
+    {
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "materials": [
+        "Stormcage_Aether"
+      ],
+      "name": "Stormcage_AetherChannel",
+      "rotation_euler": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "triangles": 344,
+      "vertices": 682
+    },
+    {
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "materials": [
+        "Stormcage_Copper"
+      ],
+      "name": "Stormcage_CopperCage",
+      "rotation_euler": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "triangles": 3896,
+      "vertices": 3030
+    },
+    {
+      "location": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "materials": [
+        "Stormcage_Steel"
+      ],
+      "name": "Stormcage_SteelGeometry",
+      "rotation_euler": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "triangles": 1864,
+      "vertices": 2518
+    }
+  ],
+  "source_glb_bytes": 264292,
+  "source_glb_sha256": "a255542b0ca58ef5d8a90a131851e55c51c00983fb1815e718f29371134b2a11",
+  "triangles": 6104,
+  "vertices": 6230
+}

@@ -92,3 +92,10 @@ ArtSource/P10/Round004/ThirdParty/BlenderStudioRain/LICENSE-CC-BY-4.0.txt binary
 ArtSource/P10/Round005/ThirdParty/BlenderStudioEinar/LICENSE-CC-BY-4.0.txt binary
 WebAssetSource/P31/licenses/**/*.txt binary
 WebAssetSource/P31/processed/quaternius/licenses/**/*.txt binary
+
+# Official publisher pages, transport headers, and legalcode snapshots are
+# hashed as acquired provenance. Preserve their original CRLF and whitespace.
+WebAssetSource/P31/source_work/**/originals/**/*.headers.txt binary
+WebAssetSource/P31/source_work/**/originals/**/download.headers.txt binary
+WebAssetSource/P31/source_work/**/originals/**/*.html binary
+WebAssetSource/P31/source_work/**/originals/**/CC-BY-4.0-legalcode.txt binary
