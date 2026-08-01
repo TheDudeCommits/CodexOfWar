@@ -91,7 +91,7 @@ test("server-renders the production evidence ledger", async () => {
   assert.match(html, /Reference 09/);
   assert.match(html, /29\.82%/);
   assert.match(html, /82,906/);
-  assert.match(html, /P10 · Round 011/);
+  assert.match(html, /P10 · Round 012/);
   assert.match(html, /Round rejected\. Rebuild in progress\./);
   assert.match(html, /Round 001 rejected · mechanically reproducible/);
   assert.match(
@@ -268,11 +268,18 @@ test("server-renders the production evidence ledger", async () => {
     /href="\/captures\/P10\/round-010-ground-arc\/NyraKestrel_GroundArcArrest_CRITIC_REJECTED\.png"/,
   );
   assert.match(html, /href="\/data\/P10-round-010-ground-arc\.json"/);
-  assert.match(html, /Biomechanical force-chain keyframe/i);
-  assert.match(html, /one bounded original 2D pose-guide-driven keyframe build with no result or capture filed yet/i);
+  assert.match(html, /KINETIC CHAIN FAIL · DENY_PAID_3D_GENERATION/);
+  assert.match(html, /Composite concept preflight 62\/100 · threshold 85 · category floor 5\/10/);
+  assert.match(
+    html,
+    /href="\/captures\/P10\/round-011-kinetic-chain\/NyraKestrel_KineticChain_CRITIC_REJECTED\.png"/,
+  );
+  assert.match(html, /href="\/data\/P10-round-011-kinetic-chain\.json"/);
+  assert.match(html, /Scapular Counterforce Lock/i);
+  assert.match(html, /one bounded original 2D upper-body counterforce build with no result or capture filed yet/i);
   assert.match(html, /complete concept pack must earn at least 85\/100/i);
-  assert.match(html, /custom joint-and-weapon pose guide/i);
-  assert.match(html, /violent deceleration/i);
+  assert.match(html, /one scapula forward\/down, the other back\/up/i);
+  assert.match(html, /one violent stop/i);
   assert.doesNotMatch(html, /Reference\.zip|Reference\/[^"<]+\.(?:png|jpe?g|webp)/i);
   assert.doesNotMatch(
     html,
@@ -339,16 +346,17 @@ test("checked-in data contains the complete, honest P00–P25 ledger", async () 
   assert.equal(p00.status, "accepted");
   assert.equal(p10.status, "revising");
   assert.equal(dashboard.activeBuild.pieceId, "P10");
-  assert.equal(dashboard.activeBuild.round, 11);
-  assert.equal(dashboard.activeBuild.roundLabel, "P10 · Round 011");
+  assert.equal(dashboard.activeBuild.round, 12);
+  assert.equal(dashboard.activeBuild.roundLabel, "P10 · Round 012");
   assert.equal(
     dashboard.activeBuild.builder,
-    "Biomechanical force-chain keyframe",
+    "Scapular Counterforce Lock",
   );
   assert.equal(dashboard.activeBuild.status, p10.status);
   assert.match(dashboard.activeBuild.brief, /no result or capture filed yet/i);
-  assert.match(dashboard.activeBuild.brief, /pose-guide-driven/i);
-  assert.match(dashboard.activeBuild.brief, /violent deceleration chain/i);
+  assert.match(dashboard.activeBuild.brief, /upper-body counterforce/i);
+  assert.match(dashboard.activeBuild.brief, /opposing scapular motion/i);
+  assert.match(dashboard.activeBuild.brief, /violent stop/i);
   assert.match(dashboard.activeBuild.brief, /paid 3D generation and Unity remain locked/i);
   assert.ok(queuedPieces.every((piece) => piece.status === "queued"));
 
@@ -376,7 +384,7 @@ test("checked-in data contains the complete, honest P00–P25 ledger", async () 
   assert.equal(dashboard.acceptance.maximum, 100);
   assert.match(dashboard.acceptance.p00Exception, /visual loss does not block/i);
 
-  assert.equal(dashboard.rounds.length, 11);
+  assert.equal(dashboard.rounds.length, 12);
   assert.equal(dashboard.rounds[0].pieceId, "P00");
   assert.equal(
     dashboard.rounds[0].critic.status,
@@ -611,6 +619,30 @@ test("checked-in data contains the complete, honest P00–P25 ledger", async () 
     "/captures/P10/round-010-ground-arc/NyraKestrel_GroundArcArrest_CRITIC_REJECTED.png",
     "/data/P10-round-010-ground-arc.json",
   ]);
+  assert.equal(dashboard.rounds[11].pieceId, "P10");
+  assert.equal(dashboard.rounds[11].round, 11);
+  assert.equal(dashboard.rounds[11].status, "criticized");
+  assert.equal(
+    dashboard.rounds[11].critic.status,
+    "KINETIC CHAIN FAIL · DENY_PAID_3D_GENERATION",
+  );
+  assert.equal(dashboard.rounds[11].critic.score, 62);
+  assert.equal(
+    dashboard.rounds[11].critic.scoreLabel,
+    "Composite concept preflight 62/100 · threshold 85 · category floor 5/10",
+  );
+  assert.equal(
+    dashboard.rounds[11].critic.preference,
+    "Candidate met benchmark bar in 2/6 blinded comparisons · 5/6 required",
+  );
+  assert.match(
+    dashboard.rounds[11].critic.primaryGap,
+    /both scapulae and arms still advance as a quiet paired reach/i,
+  );
+  assert.deepEqual(dashboard.rounds[11].evidenceLinks, [
+    "/captures/P10/round-011-kinetic-chain/NyraKestrel_KineticChain_CRITIC_REJECTED.png",
+    "/data/P10-round-011-kinetic-chain.json",
+  ]);
 });
 
 test("P10 evidence is filed while the global latest manifest remains P00-pinned", async () => {
@@ -627,6 +659,7 @@ test("P10 evidence is filed while the global latest manifest remains P00-pinned"
     p10Round008Contact,
     p10Round009MythicForce,
     p10Round010GroundArc,
+    p10Round011KineticChain,
     latestManifest,
     p10Screenshot,
     turntableContact,
@@ -651,6 +684,7 @@ test("P10 evidence is filed while the global latest manifest remains P00-pinned"
     round008AcceptedContact,
     round009RejectedMythicForce,
     round010RejectedGroundArc,
+    round011RejectedKineticChain,
   ] = await Promise.all([
     readFile(dataUrl, "utf8").then(JSON.parse),
     readFile(
@@ -695,6 +729,10 @@ test("P10 evidence is filed while the global latest manifest remains P00-pinned"
     ).then(JSON.parse),
     readFile(
       new URL("../public/data/P10-round-010-ground-arc.json", import.meta.url),
+      "utf8",
+    ).then(JSON.parse),
+    readFile(
+      new URL("../public/data/P10-round-011-kinetic-chain.json", import.meta.url),
       "utf8",
     ).then(JSON.parse),
     readFile(
@@ -836,6 +874,12 @@ test("P10 evidence is filed while the global latest manifest remains P00-pinned"
     readFile(
       new URL(
         "../public/captures/P10/round-010-ground-arc/NyraKestrel_GroundArcArrest_CRITIC_REJECTED.png",
+        import.meta.url,
+      ),
+    ),
+    readFile(
+      new URL(
+        "../public/captures/P10/round-011-kinetic-chain/NyraKestrel_KineticChain_CRITIC_REJECTED.png",
         import.meta.url,
       ),
     ),
@@ -1789,6 +1833,161 @@ test("P10 evidence is filed while the global latest manifest remains P00-pinned"
   assert.equal(round010RejectedGroundArc.readUInt32BE(20), 1024);
   assert.doesNotMatch(
     JSON.stringify(p10Round010GroundArc),
+    /Reference\.zip|Reference\/[^"']+\.(?:png|jpe?g|webp)|\/Users\/|\/home\/|[A-Za-z]:\\Users\\|\/tmp\/|\/private\/var\/folders\//i,
+  );
+
+  assert.equal(p10Round011KineticChain.piece, "P10");
+  assert.equal(p10Round011KineticChain.round, 11);
+  assert.equal(
+    p10Round011KineticChain.status,
+    "rejected-kinetic-chain-preflight",
+  );
+  assert.equal(
+    p10Round011KineticChain.artifactClass,
+    "original 2D pose-guide-driven signature-force concept art",
+  );
+  assert.equal(p10Round011KineticChain.engineRun, false);
+  assert.equal(p10Round011KineticChain.actualGameCapturePerformed, false);
+  assert.equal(p10Round011KineticChain.unityProjectShellPresent, true);
+  assert.equal(p10Round011KineticChain.runnableReviewedGameplayDetected, false);
+  assert.equal(p10Round011KineticChain.unityCaptureFiled, false);
+  assert.equal(p10Round011KineticChain.threeDimensionalAssetFiled, false);
+  assert.equal(p10Round011KineticChain.gameReadyEvidenceFiled, false);
+  assert.equal(p10Round011KineticChain.builderAcceptedFrameFiled, true);
+  assert.equal(p10Round011KineticChain.isolatedKineticChainTargetPassed, false);
+  assert.equal(p10Round011KineticChain.paid3DGenerationAuthorized, false);
+  assert.equal(
+    p10Round011KineticChain.source.referencePixelsSuppliedToGeneration,
+    false,
+  );
+  assert.equal(
+    p10Round011KineticChain.source.receiptSha256,
+    "bce5ccc57d27c5313f023c9cd3616bb7cecba54bfcffcd76e2e5554ffdcd4766",
+  );
+  assert.equal(
+    p10Round011KineticChain.source.readmeSha256,
+    "6d69f167c305333a5ad898ca676460bf93cdd5caeffef257427ee28e7a4019b0",
+  );
+  assert.equal(
+    p10Round011KineticChain.source.reviewSha256,
+    "fad0cd1851d4951d89d76591557304b678416628d513c83598d3bf0df82ff226",
+  );
+  assert.equal(
+    p10Round011KineticChain.source.poseGuidePngSha256,
+    "55a46c2e0161bd050d8094cb0d010d619ddb0226b172a95f6d6bdf2b9d0809aa",
+  );
+  assert.equal(
+    p10Round011KineticChain.source.poseGuideSvgSha256,
+    "a6d58bd4a749f21d97497a5675fdfd775a08d61bab89e0327e4875e0bee7d9b0",
+  );
+  assert.equal(
+    p10Round011KineticChain.isolatedDecision.verdict,
+    "FAIL_VISUAL_ONLY_KINETIC_CHAIN_GATE",
+  );
+  assert.equal(
+    p10Round011KineticChain.isolatedDecision.strongestCandidate,
+    "kinetic-chain-candidate-04",
+  );
+  assert.equal(
+    p10Round011KineticChain.isolatedDecision.upperRightExternalBladeMassAchieved,
+    true,
+  );
+  assert.equal(
+    p10Round011KineticChain.isolatedDecision.chestHeightDisplacedHiltAchieved,
+    true,
+  );
+  assert.equal(
+    p10Round011KineticChain.isolatedDecision.rearHeelAirborneToeSkidAchieved,
+    true,
+  );
+  assert.equal(
+    p10Round011KineticChain.isolatedDecision.scapularPushPullAchieved,
+    false,
+  );
+  assert.equal(
+    p10Round011KineticChain.isolatedDecision.deepTorsoCCurveAchieved,
+    false,
+  );
+  assert.equal(
+    p10Round011KineticChain.isolatedDecision.oneViolentDecelerationEventAchieved,
+    false,
+  );
+  assert.equal(p10Round011KineticChain.visualReview.score, 62);
+  assert.equal(p10Round011KineticChain.visualReview.maximum, 100);
+  assert.equal(p10Round011KineticChain.visualReview.passThreshold, 85);
+  assert.equal(
+    p10Round011KineticChain.visualReview.criticalFloorPerCategory,
+    7,
+  );
+  assert.equal(
+    p10Round011KineticChain.visualReview.observedMinimumCategoryScore,
+    5,
+  );
+  assert.equal(p10Round011KineticChain.visualReview.thresholdResult, "FAIL");
+  assert.equal(p10Round011KineticChain.visualReview.criticalFloorResult, "FAIL");
+  assert.equal(p10Round011KineticChain.visualReview.comparisonCount, 6);
+  assert.equal(
+    p10Round011KineticChain.visualReview.candidateMetBenchmarkBarCount,
+    2,
+  );
+  assert.equal(
+    p10Round011KineticChain.visualReview.requiredCandidateMetBenchmarkBarCount,
+    5,
+  );
+  assert.match(
+    p10Round011KineticChain.visualReview.singleBiggestGap,
+    /both scapulae and arms still advance as a quiet paired reach/i,
+  );
+  assert.equal(
+    p10Round011KineticChain.visualReview.categoryScores.biomechanicsAndSingleEventDeceleration,
+    5,
+  );
+  assert.equal(
+    p10Round011KineticChain.decision.result,
+    "DENY_PAID_3D_GENERATION",
+  );
+  assert.equal(p10Round011KineticChain.decision.unityLocked, true);
+  assert.equal(p10Round011KineticChain.builderAttempts.length, 4);
+  assert.deepEqual(
+    p10Round011KineticChain.builderAttempts.map((attempt) => attempt.sha256),
+    [
+      "cf23f4343e748d14ed8702bdd469aed2a4ed74dc1724883a332e0c6ca596f760",
+      "058be7fcede38052a0144b8726460f6aaece9f1404b282b0d63384229530e1b1",
+      "fc394a2cbb77fbc207d65e1054ee4be7a9d2e71141822ab24f1afa67d506f372",
+      "d148436582ac130ea6d867db7d7544aa7f1726143be4d9a8ce9206bf19fa7f62",
+    ],
+  );
+  assert.equal(p10Round011KineticChain.nextRound.round, 12);
+  assert.equal(
+    p10Round011KineticChain.nextRound.status,
+    "scapular-counterforce-lock",
+  );
+  assert.match(p10Round011KineticChain.nextRound.target, /one scapula drives forward\/down/i);
+  assert.match(p10Round011KineticChain.nextRound.target, /deep C-curve/i);
+  assert.deepEqual(p10Round011KineticChain.nextRound.compositePackGate, {
+    minimumTotalScore: 85,
+    minimumScorePerCategory: 7,
+    blindComparisonCount: 6,
+    minimumComparisonsMeetingBenchmarkBar: 5,
+    paid3DGenerationRequiresFullPass: true,
+  });
+  assert.equal(p10Round011KineticChain.conceptArt.length, 1);
+  assert.equal(
+    p10Round011KineticChain.conceptArt[0].publicPath,
+    "/captures/P10/round-011-kinetic-chain/NyraKestrel_KineticChain_CRITIC_REJECTED.png",
+  );
+  assert.equal(
+    createHash("sha256").update(round011RejectedKineticChain).digest("hex"),
+    p10Round011KineticChain.conceptArt[0].sha256,
+  );
+  assert.equal(
+    round011RejectedKineticChain.subarray(1, 4).toString("ascii"),
+    "PNG",
+  );
+  assert.equal(round011RejectedKineticChain.readUInt32BE(16), 1536);
+  assert.equal(round011RejectedKineticChain.readUInt32BE(20), 1024);
+  assert.doesNotMatch(
+    JSON.stringify(p10Round011KineticChain),
     /Reference\.zip|Reference\/[^"']+\.(?:png|jpe?g|webp)|\/Users\/|\/home\/|[A-Za-z]:\\Users\\|\/tmp\/|\/private\/var\/folders\//i,
   );
 

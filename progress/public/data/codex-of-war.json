@@ -19,11 +19,11 @@
   ],
   "activeBuild": {
     "pieceId": "P10",
-    "round": 11,
-    "roundLabel": "P10 · Round 011",
+    "round": 12,
+    "roundLabel": "P10 · Round 012",
     "status": "revising",
-    "builder": "Biomechanical force-chain keyframe",
-    "brief": "Round 011 is one bounded original 2D pose-guide-driven keyframe build with no result or capture filed yet. It freezes Nyra's identity, equipment, non-historical storm-shear, and solved contact, then targets only a violent deceleration chain in which blade momentum visibly deforms the grip, wrists, elbows, scapulae, spine, pelvis, compressed right leg, trailing left toe, cloth, plates, and conductor; paid 3D generation and Unity remain locked.",
+    "builder": "Scapular Counterforce Lock",
+    "brief": "Round 012 is one bounded original 2D upper-body counterforce build with no result or capture filed yet. It freezes the solved right-leg load, rear toe skid, chest-height hilt, external upper-right blade mass, identity, costume, weapon, and framing, then targets only opposing scapular motion, unequal elbows, and a deep ribcage-pelvis C-curve that resolves the caught blade as one violent stop; paid 3D generation and Unity remain locked.",
     "facts": [
       "P00 is accepted as infrastructure; its blind visual baseline remains an explicit 28.33–76.67 loss.",
       "Round 001 is mechanically reproducible: two independent critic reruns matched all six filed image hashes, P10 validation passed, focused EditMode passed 8/8, the full suite passed 14/14, and the P00 aggregate stayed byte-identical.",
@@ -53,7 +53,9 @@
       "Round 009 materially improved layered cloth, ceramic, metal, and copper separation while preserving the accepted identity, engineering anchors, one weapon, and solved same-hilt grip. A fresh critic nevertheless rejected the isolated mythic-force target at 71/100, a 6/10 floor, and 2/6 benchmark comparisons.",
       "Round 010 removed samurai-adjacent tassets and historical odachi curvature, introduced a non-historical storm-shear, preserved identity and contact, and improved the rear toe pivot plus heavy-right-leg load. A fresh critic still rejected the signature event.",
       "The Round 010 composite scored 68/100 against 85, failed the category floor at 6/10, and met the benchmark bar in only 2/6 comparisons against 5/6 required. The single gap is a mechanically unified violent deceleration chain rather than another wide posed greatsword hold.",
-      "Round 011 is now one bounded original 2D biomechanical force-chain keyframe build driven by an original pose guide, with no result or capture filed. Round 001 remains the latest filed in-engine P10 evidence, while the global latest manifest remains pinned to accepted P00."
+      "Round 011 filed four bounded original 2D keyframes driven by an original public-safe pose guide. Candidate 04 materially improved the chest-height hilt, external upper-right blade mass, heavy right load column, airborne rear heel, toe skid, and coherent secondary lag, but it also introduced two-tail hair drift and exaggerated blade and boot masses.",
+      "The fresh Round 011 critic rejected the isolated kinetic-chain target at 62/100, a 5/10 category floor, and 2/6 benchmark comparisons against 5/6 required. Both scapulae and arms still advance as a paired reach, so blade mass does not resolve through an opposing shoulder girdle and deep ribcage-pelvis C-curve as one violent stop. No integrated gameplay or player build exists for this asset; engine run and actual gameplay capture are false.",
+      "Round 012 is now one bounded original 2D Scapular Counterforce Lock build with no result or capture filed. Round 001 remains the latest filed in-engine P10 evidence, while the global latest manifest remains pinned to accepted P00."
     ],
     "evidenceFingerprint": {
       "gitRevision": "2dedf617ace47ea5dbb2cde1817d6119604842d2",
@@ -115,7 +117,7 @@
         "Static lookdev only; no rig, S02, or S06"
       ]
     },
-    "nextGate": "Round 011 must preserve identity, equipment, storm-shear, and same-hilt contact while a custom joint-and-weapon pose guide forces one asymmetrical deceleration event through the complete grip-to-ground chain and reactive equipment. The complete concept pack must earn at least 85/100 from a fresh critic, keep every category at or above 7, and meet the benchmark bar in at least 5 of 6 blinded comparisons before any paid 3D generation."
+    "nextGate": "Round 012 must preserve the solved lower-body load, rear toe skid, chest-height hilt, external blade mass, identity, costume, weapon, and framing while an original upper-body guide forces one scapula forward/down, the other back/up, unequal elbows, and a deep ribcage-pelvis C-curve that resolves the caught blade as one violent stop. The complete concept pack must earn at least 85/100 from a fresh critic, keep every category at or above 7, and meet the benchmark bar in at least 5 of 6 blinded comparisons before any paid 3D generation."
   },
   "canonicalCapture": {
     "shotId": "S01",
@@ -413,6 +415,27 @@
         "scoreLabel": "Composite concept preflight 68/100 · threshold 85 · category floor 6/10",
         "preference": "Candidate met benchmark bar in 2/6 blinded comparisons · 5/6 required",
         "primaryGap": "A genuinely arrested, mechanically unified force chain: the current image still reads as a wide posed greatsword hold because blade momentum does not visibly load the spine, scapulae, shoulders, elbows, wrists, pelvis, feet, cloth, plates, and conductor as one violent deceleration event."
+      }
+    },
+    {
+      "round": 11,
+      "label": "P10 · Round 011",
+      "pieceId": "P10",
+      "phase": "Fresh Kinetic Chain and composite critic complete",
+      "status": "criticized",
+      "date": "2026-08-01",
+      "builderBrief": "Use an original pose and load guide to preserve the solved design and contact while forcing one violent full-body deceleration through the blade, grip, shoulder girdle, torso, loaded right leg, rear toe skid, and reactive equipment.",
+      "evidence": "The builder filed one strongest original 1536×1024 Kinetic Chain keyframe after four bounded attempts and an original public-safe pose guide. The frame materially improves the chest-height hilt, external upper-right blade mass, dominant right-leg load, airborne rear heel, toe skid, and leftward secondary lag. A fresh critic rejected the isolated target because both scapulae and arms still advance as a quiet paired reach, while the torso remains too long and calm to resolve the caught mass as one violent stop. The composite scored 62/100, failed the category floor at 5/10, and met the benchmark bar in 2/6 comparisons against 5/6 required. A Unity review shell exists, but the reviewed asset is not integrated and no gameplay scene or player build exists; engine run and actual gameplay capture are false, and paid 3D generation remains denied.",
+      "evidenceLinks": [
+        "/captures/P10/round-011-kinetic-chain/NyraKestrel_KineticChain_CRITIC_REJECTED.png",
+        "/data/P10-round-011-kinetic-chain.json"
+      ],
+      "critic": {
+        "status": "KINETIC CHAIN FAIL · DENY_PAID_3D_GENERATION",
+        "score": 62,
+        "scoreLabel": "Composite concept preflight 62/100 · threshold 85 · category floor 5/10",
+        "preference": "Candidate met benchmark bar in 2/6 blinded comparisons · 5/6 required",
+        "primaryGap": "The upper-body force chain is not mechanically arrested: both scapulae and arms still advance as a quiet paired reach, so the upper-right blade mass never resolves through a push-pull shoulder girdle into the ribcage-pelvis C-curve as one violent stop."
       }
     }
   ],

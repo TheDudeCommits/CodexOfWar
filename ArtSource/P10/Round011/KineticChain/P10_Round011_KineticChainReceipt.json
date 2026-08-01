@@ -1,0 +1,317 @@
+{
+  "schema": "codexofwar.original-2d-biomechanical-force-chain-receipt",
+  "version": "1.0.0",
+  "receipt_id": "P10-Round011-KineticChainReceipt",
+  "generated_utc": "2026-08-01T02:22:22Z",
+  "scope": {
+    "project_asset": "P10 Nyra Kestrel",
+    "round": "Round011",
+    "judged_unit": "Ground-Arc Arrest biomechanical force-chain keyframe",
+    "scope_class": "one original 2D concept keyframe only",
+    "final_disposition": "PROMOTED_FOR_FRESH_CRITICISM_WITH_CAVEATS",
+    "paid_3d_generation_authorized": false,
+    "unity_authorized": false,
+    "claims_not_made": [
+      "benchmark victory",
+      "3D, rig, mesh, UV, deformation, collision, animation, LOD, engine, game-ready, or production-ready status",
+      "legal originality, exclusivity, copyright clearance, or trademark clearance"
+    ]
+  },
+  "bounded_input_policy": {
+    "private_benchmark_archive_accessed": false,
+    "franchise_pixels_used": false,
+    "read_inputs": [
+      {
+        "role": "Round007 accepted identity authority",
+        "path": "../../Round007/Concept/P10_Round007_NyraKestrel_Turnaround_v1.png",
+        "sha256": "f54d6f4b4bc7707841b623148f522c1c60730bd8c6c620d4698531d928f2545a",
+        "byte_size": 2095539,
+        "dimensions_px": {"width": 1536, "height": 1024},
+        "format": "png"
+      },
+      {
+        "role": "Round008 fresh-critic accepted same-hilt contact authority",
+        "path": "../../Round008/CombatContact/P10_Round008_NyraKestrel_CombatGrip_v1.png",
+        "sha256": "06249a9cf8fcc94c4d531ebb6ffa835c4b7be8cc77202836069dd42d9e27692d",
+        "byte_size": 1961681,
+        "dimensions_px": {"width": 1536, "height": 1024},
+        "format": "png"
+      },
+      {
+        "role": "Round010 accepted frame and frozen non-historical storm-shear design",
+        "path": "../../Round010/GroundArcArrest/P10_Round010_NyraKestrel_GroundArcArrest_v1.png",
+        "sha256": "3cf1e4c8f798480d8f2c2e889943e2aba832e5a299337f0a800ffd1f68683df6",
+        "byte_size": 2136775,
+        "dimensions_px": {"width": 1536, "height": 1024},
+        "format": "png"
+      },
+      {
+        "role": "Round010 receipt",
+        "path": "../../Round010/GroundArcArrest/P10_Round010_GroundArcArrestReceipt.json",
+        "sha256": "232191e121e6804739db75f3cfd969caf9815c5ecaeccc0f04f39e7497d2a2e0",
+        "byte_size": 30038,
+        "format": "json"
+      },
+      {
+        "role": "Round010 fresh review and exact force-chain gap authority",
+        "path": "../../Round010/GroundArcArrest/P10_Round010_FreshGroundArcReview.json",
+        "sha256": "fee67f1dbb37a4f3c40f3ba52e15421bfc1d1d9916d8c80cbff826570b27fa33",
+        "byte_size": 17225,
+        "format": "json"
+      }
+    ],
+    "frozen_invariants": [
+      "Round010 non-historical broad-backed storm-shear design",
+      "mature face and short asymmetric braid",
+      "attached character-left ivory induction yoke and black mount",
+      "protected diagonal oxidized-copper route",
+      "right-hip capacitor",
+      "heavy character-right grounding greave and lighter left leg",
+      "cobalt, warm ivory, blackened steel, oxidized copper palette",
+      "both complete hands on separated regions of the same continuous hilt"
+    ]
+  },
+  "original_pose_load_guide": {
+    "authorship": "original public-safe SVG authored for Round011; no third-party pose image",
+    "canvas_px": {"width": 1536, "height": 1024},
+    "svg": {
+      "path": "P10_Round011_OriginalPoseLoadGuide.svg",
+      "sha256": "a6d58bd4a749f21d97497a5675fdfd775a08d61bab89e0327e4875e0bee7d9b0",
+      "byte_size": 6403,
+      "format": "svg"
+    },
+    "rendered_png": {
+      "path": "P10_Round011_OriginalPoseLoadGuide.png",
+      "sha256": "55a46c2e0161bd050d8094cb0d010d619ddb0226b172a95f6d6bdf2b9d0809aa",
+      "byte_size": 157606,
+      "dimensions_px": {"width": 1536, "height": 1024},
+      "format": "png"
+    },
+    "exact_authored_geometry": {
+      "ground_path_d": "M 115 872 C 420 862, 760 880, 1415 864",
+      "left_rear_chain": [[730,558],[530,688],[402,782],[438,846],[505,854]],
+      "left_high_heel_wedge": [[360,752],[438,846],[510,854]],
+      "right_load_chain": [[802,552],[914,650],[1020,772],[1096,842],[1240,850]],
+      "pelvis_segment": [[715,558],[810,542]],
+      "ribcage_opposition_segment": [[682,500],[790,422]],
+      "spine_path_d": "M 770 550 C 708 524, 654 479, 646 424 C 638 373, 672 337, 722 320",
+      "left_scapula_segment": [[606,370],[666,404]],
+      "right_scapula_segment": [[744,342],[820,374]],
+      "left_arm_chain": [[610,372],[490,496],[676,522]],
+      "right_arm_chain": [[820,374],[772,430],[806,447]],
+      "neck_chain": [[722,320],[716,278]],
+      "head": {"center":[700,220],"radii":[64,76],"rotation_degrees":-18,"gaze_segment":[[674,214],[638,207]]},
+      "hilt_axis": [[594,584],[855,396]],
+      "trailing_hand_region": [[688,520],[720,497]],
+      "leading_hand_region": [[790,456],[820,434]],
+      "guard_segment": [[848,384],[882,431]],
+      "blade_axis": [[866,402],[1386,92]],
+      "blade_center_of_mass": [1118,252],
+      "blade_tip_polygon": [[1290,150],[1418,73],[1383,129]],
+      "sole_force_arrow_path_d": "M 1155 228 C 994 324, 850 420, 775 462 C 710 500, 735 548, 810 566 C 875 582, 925 646, 982 710 C 1025 758, 1080 814, 1176 838"
+    },
+    "intent": [
+      "Massive right foot planted forward/down-right with ankle, knee, and hip deeply compressed into one dominant load column.",
+      "Left foot far rear on forefoot with conspicuously high heel and inward toe drag.",
+      "Pelvis rotated against ribcage; spine C-curved and side-bent away from upper-right blade mass.",
+      "Separated scapulae create push-pull: left arm long, right elbow tightly compressed.",
+      "Separated hand regions occupy one continuous steeply diagonal hilt; blade center of mass lies outside torso.",
+      "Head counter-turns viewer-left toward threat.",
+      "The guide's single dashed orange force arrow is instructional only and prohibited from final art."
+    ]
+  },
+  "generator": {
+    "mode": "identity-preserving multi-image edit",
+    "execution_path": "managed workspace image-edit endpoint",
+    "model": "not exposed by managed tool",
+    "native_output_size": "1536x1024",
+    "output_format": "png",
+    "generation_cap": 4,
+    "outputs_generated": 4,
+    "cap_exhausted": true,
+    "local_skill_cli": {
+      "path": "imagegen/scripts/image_gen.py",
+      "available": true,
+      "used_for_live_call": false,
+      "reason": "OPENAI_API_KEY was absent in the shell and the local CLI accepts one edit image while this task required simultaneous pose, identity, design, and contact authorities. The managed workspace edit endpoint was used as the bounded multi-image fallback."
+    }
+  },
+  "generation_lineage": [
+    {
+      "generation_id": "kinetic-chain-candidate-01",
+      "taxonomy": "identity-preserve",
+      "mode": "edit",
+      "input_roles": ["original pose/load guide", "Round010 accepted frame/design", "Round007 identity", "Round008 contact"],
+      "input_sha256": ["55a46c2e0161bd050d8094cb0d010d619ddb0226b172a95f6d6bdf2b9d0809aa","3cf1e4c8f798480d8f2c2e889943e2aba832e5a299337f0a800ffd1f68683df6","f54d6f4b4bc7707841b623148f522c1c60730bd8c6c620d4698531d928f2545a","06249a9cf8fcc94c4d531ebb6ffa835c4b7be8cc77202836069dd42d9e27692d"],
+      "output": "Iterations/P10_Round011_KineticChain_candidate01_reject.png",
+      "sha256": "cf23f4343e748d14ed8702bdd469aed2a4ed74dc1724883a332e0c6ca596f760",
+      "byte_size": 2246549,
+      "dimensions_px": {"width":1536,"height":1024},
+      "format": "png",
+      "status": "rejected",
+      "rejection_reasons": [
+        "The hilt remains too close to horizontal at waist height.",
+        "The ribcage and scapulae still look arranged around a held weapon rather than deformed by blade momentum.",
+        "Rear heel lift is too modest for the explicit forefoot-only contract."
+      ],
+      "exact_prompt_lines": [
+        "Use case: identity-preserve",
+        "Asset type: original 2D biomechanical force-chain keyframe, P10 Round011 Ground-Arc Arrest, candidate 01 of at most 04",
+        "Input roles: Image 1 is a public-safe ORIGINAL authored pose/load guide and the sole authority for joint placement, asymmetry, right-leg load column, rear-toe geometry, C-curved torso, push-pull scapulae, asymmetric elbows, separated-hand hilt axis, head counter-turn, and decisive blade diagonal. Translate its geometry into natural anatomy; DO NOT reproduce its orange force arrow, circles, diagram lines, labels, or text. Image 2 is the exact frozen Round010 art authority for the non-historical storm-shear blade design, mature face, asymmetric braid, attached split character-left ivory yoke and black mount, diagonal protected copper route, right-hip capacitor, extremely heavy character-right grounding greave/lighter left leg, open asymmetric storm-cloth harness, palette, materials, pale studio presentation, and same-hilt two-hand contact. Image 3 is exact Round007 identity authority for Nyra's mature lived-in facial structure, crooked nose, brow notch, shaved side, short asymmetric braid, thick athletic adult proportions, attached left yoke, right-hip capacitor, and heavy-right/lighter-left engineering. Image 4 is the accepted same-hilt contact authority: both complete hands close around separated cobalt regions of one continuous hilt with visible wrap compression.",
+        "Primary request: Repose the exact frozen Image 2 Nyra and exact frozen Image 2 storm-shear weapon into ONE physically extreme, violently arrested full-body keyframe. This is the instant the moving blade mass is caught at maximum upper-right extension and pulls the entire body off-axis. Change only pose, anatomical loading, and physically consistent equipment response. Do not redesign costume, face, hair, yoke, circuit, capacitor, greaves, palette, weapon, guard, cage, hilt, or pommel.",
+        "Pose contract: massive character-RIGHT foot planted forward/down-right with its huge broad sole fully compressed into ground; right ankle deeply closed, right knee deeply flexed and tracking over that sole, right hip dropped directly into the same compressed load column. Character-LEFT foot far rear on forefoot only, heel conspicuously high, toes gripping and dragged inward toward the load column; no flat rear heel and no equal two-foot support. Pelvis rotates hard opposite ribcage. Spine visibly forms a loaded C-curve and side-bends away from the moving blade. Ribcage pitches off-axis, never upright. Head counter-turns toward viewer-left threat while eyes remain alert.",
+        "Upper-body chain: character-right scapula protracts and drives down/forward; character-left scapula retracts and separates visibly, creating unmistakable push-pull across shoulders. Right elbow is tightly compressed; left elbow reaches longer and more extended. Both wrists stay straight and loaded. Both complete hands visibly enclose separated regions of the SAME continuous cobalt hilt: leading right hand immediately behind the guard, trailing left hand near pommel, visible exposed wrap and ivory separator between them, exact plausible digits, pressure shadows, no hover or fusion.",
+        "Weapon physics: exactly ONE complete frozen Round010 broad-backed blackened-steel storm-shear, not an odachi and not redesigned. Its center of mass lies well outside the torso toward upper-right. One decisive steep diagonal axis from lower-left pommel through both hands and guard to upper-right clipped blade tip; never horizontal at waist. Full pommel, hilt, guard, base cage, broad blade, and tip visible with margin. Blade mass visibly drags wrists, elbows, scapulae, ribs and shoulder line toward upper-right while pelvis and right greave arrest it down-right.",
+        "Reactive equipment: every secondary element reacts opposite the arrest direction with one coherent timing. Short braid, cobalt cloth tails, straps, yoke mount, right-hip capacitor belt, ivory ceramic plates, and protected copper conductor all trail, tension, compress, buckle slightly, or shear consistently toward upper-left/left relative to the blade's caught upper-right travel; no random wind. Right-side plates and capacitor belt dig into the compressed hip; left-side straps stretch; yoke remains firmly attached and mount visibly taut; copper route remains continuous and protected.",
+        "Style/medium: premium original 2D industrial-mythic fantasy concept painting matching Image 2, controlled hand-painted edges, matte worn cobalt/ivory/blackened-steel/oxidized-copper material separation, restrained natural studio light.",
+        "Composition/framing: native 1536x1024 landscape. Exactly one complete adult woman and one complete weapon. Full head, braid, attached yoke, both arms/hands, both legs/feet, raised rear heel and toes, planted right sole, pommel, guard/cage, entire blade and tip all fully inside generous margins. Pale neutral warm-gray studio ground; one small physical right-foot contact shadow and a subtle short rear-toe skid/gouge are allowed.",
+        "Final-art prohibitions: NO force arrow, diagram mark, joint circle, text, label, logo, watermark, environment, enemy, architecture, lightning, glow, particles, sparks, speed lines, action smear, motion blur, dust cloud, or crop.",
+        "Hard reject: static wide greatsword hold; bilateral balance; flat rear heel; upright quiet torso; quiet scapulae; hilt across waist; blade mass not driving body; hand hover; malformed digits; duplicate or detached weapon; body penetration; identity/design drift; bare-arm or fetish amplification; extra person; cropped foot, yoke, pommel, guard, cage, or blade tip."
+      ]
+    },
+    {
+      "generation_id": "kinetic-chain-candidate-02",
+      "taxonomy": "identity-preserve",
+      "mode": "edit",
+      "input_roles": ["candidate 01 base", "original pose/load guide", "Round010 accepted frame/design", "Round007 identity"],
+      "input_sha256": ["cf23f4343e748d14ed8702bdd469aed2a4ed74dc1724883a332e0c6ca596f760","55a46c2e0161bd050d8094cb0d010d619ddb0226b172a95f6d6bdf2b9d0809aa","3cf1e4c8f798480d8f2c2e889943e2aba832e5a299337f0a800ffd1f68683df6","f54d6f4b4bc7707841b623148f522c1c60730bd8c6c620d4698531d928f2545a"],
+      "output": "Iterations/P10_Round011_KineticChain_candidate02_reject.png",
+      "sha256": "058be7fcede38052a0144b8726460f6aaece9f1404b282b0d63384229530e1b1",
+      "byte_size": 2215822,
+      "dimensions_px": {"width":1536,"height":1024},
+      "format": "png",
+      "status": "rejected",
+      "rejection_reasons": [
+        "Rear-toe arrest improves, but the hilt remains centered across the waist.",
+        "The shoulder girdle and scapulae remain too quiet for the claimed blade mass.",
+        "The pose still reads as a broad held guard."
+      ],
+      "exact_prompt_lines": [
+        "Use case: identity-preserve",
+        "Asset type: targeted original 2D biomechanical force-chain correction, P10 Round011 Ground-Arc Arrest, candidate 02 of at most 04",
+        "Input roles: Image 1 is the immediate art base and authority for exact face, braid, attached left yoke, copper route, right-hip capacitor, heavy-right/lighter-left equipment, palette, materials, one complete frozen storm-shear weapon, and exact valid two-hand same-hilt contact. Image 2 is the public-safe ORIGINAL pose/load geometry authority. Translate its geometry into anatomy only; never reproduce its arrow, circles, labels, lines, or text. Image 3 is the frozen Round010 non-historical design authority. Image 4 is the frozen Round007 identity authority.",
+        "Primary request: Preserve Image 1 exactly except for THREE documented force-chain failures. Correct only: (1) rotate the entire connected weapon plus both already-contacting hands/forearms together into a steep decisive lower-left-to-upper-right diagonal, (2) deform the torso/scapulae into an unmistakable off-axis C-curved push-pull arrest, and (3) raise and inward-drag the rear left heel so only forefoot/toes contact. Keep all identity, costume, equipment, material, weapon-construction, digit/contact, and studio-style details unchanged.",
+        "Correction 1 — weapon axis and mass: the exact same one-piece Round010 storm-shear remains intact and complete. Move lower-left pommel to roughly x=560,y=620, separated trailing left hand near x=655,y=545, leading right hand near x=780,y=455, guard near x=850,y=390, and blade tip near x=1440,y=80 in the 1536x1024 frame. This is a clear steep diagonal, never a waist-horizontal hilt. The broad blade center of mass stays far outside the torso in upper-right. Both complete hands remain closed around separated cobalt regions of the SAME continuous hilt, wrists aligned, separator visible, and the whole hand/weapon assembly remains connected.",
+        "Correction 2 — violent anatomical deformation: drop the massive character-RIGHT hip over its planted forward/down-right broad foot. Close the right ankle and knee more deeply into one compressed zig-zag load column. Rotate pelvis hard left/down while ribcage is dragged right/up. Bend and side-load the spine into a large visible C curve away from the blade, with abdomen shortened on the loaded right side and stretched on the left side. Pitch sternum off-axis. Protract the character-right scapula far forward/down and retract the character-left scapula far back, visibly separating the shoulder blades. Compress the right elbow tightly near ribs while left elbow reaches long and pulls from behind. Head counter-turns toward viewer-left threat. The blade must visibly pull wrists, elbows, scapulae and ribs; no calm held posture.",
+        "Correction 3 — rear toe arrest: move character-LEFT foot far rear/left and rotate it so ONLY the ball and toes scrape the ground. Heel must be conspicuously high—at least one full boot-height above the ground plane—with the foot steeply plantar-flexed and dragged inward toward the right load column. Add only a tiny physical toe gouge/contact shadow. No flat rear sole and no bilateral support.",
+        "Equipment response: make short braid, cobalt cloth tail, straps, attached yoke mount, capacitor belt, ivory plates, and protected copper conductor visibly lag/tension toward upper-left/left opposite the caught blade's upper-right momentum. Keep yoke attached, circuit continuous, capacitor at right hip, plates protective, and response coherent; no random wind.",
+        "Composition/framing: 1536x1024 landscape, exactly one full person and one complete weapon, every extremity and all weapon parts including yoke, both feet, raised heel/toes, pommel, guard/cage, blade tip inside generous margins. Pale neutral studio ground only.",
+        "Final-art prohibitions: no arrow, diagram mark, joint circle, text, label, logo, watermark, environment, enemy, lightning, glow, particles, sparks, speed line, motion blur, dust cloud, crop, duplicate weapon, detached part, or penetration.",
+        "Hard reject: static wide hold; flat rear heel; upright torso; quiet scapulae; hilt across waist; bilateral balance; hand hover/malformed digits; design/identity drift; bare or fetish amplification."
+      ]
+    },
+    {
+      "generation_id": "kinetic-chain-candidate-03",
+      "taxonomy": "identity-preserve",
+      "mode": "edit",
+      "input_roles": ["original pose/load guide", "Round010 accepted frame/design", "Round007 identity", "Round008 contact"],
+      "input_sha256": ["55a46c2e0161bd050d8094cb0d010d619ddb0226b172a95f6d6bdf2b9d0809aa","3cf1e4c8f798480d8f2c2e889943e2aba832e5a299337f0a800ffd1f68683df6","f54d6f4b4bc7707841b623148f522c1c60730bd8c6c620d4698531d928f2545a","06249a9cf8fcc94c4d531ebb6ffa835c4b7be8cc77202836069dd42d9e27692d"],
+      "output": "Iterations/P10_Round011_KineticChain_candidate03_reject.png",
+      "sha256": "fc394a2cbb77fbc207d65e1054ee4be7a9d2e71141822ab24f1afa67d506f372",
+      "byte_size": 2071531,
+      "dimensions_px": {"width":1536,"height":1024},
+      "format": "png",
+      "status": "rejected",
+      "rejection_reasons": [
+        "Torso and weapon share a stronger diagonal, but the rear foot regresses to a broad near-flat support.",
+        "Both elbows remain too similar, weakening the required push-pull chain.",
+        "The silhouette remains closer to a staged guard than a violent arrest."
+      ],
+      "exact_prompt_lines": [
+        "Use case: identity-preserve",
+        "Asset type: original 2D Ground-Arc Arrest biomechanical force-chain keyframe, P10 Round011 candidate 03 of at most 04",
+        "Authority order: Image 1 is the ORIGINAL authored spatial skeleton and silhouette contract and MUST control the final pose at thumbnail scale. Convert its exact off-axis joint map into natural anatomy; remove every diagram artifact and do not render its orange arrow, circles, lines, labels, or text. Image 2 freezes ALL Round010 art design: the same mature Nyra face, braid, attached left yoke, copper route, right-hip capacitor, heavy right grounding greave/lighter left leg, costume, palette, pale studio treatment, and exact one-piece non-historical broad-backed storm-shear weapon. Image 3 reinforces the frozen Round007 identity. Image 4 is sole contact reference for two complete hands closing on separated regions of one continuous hilt.",
+        "Do not inherit the broad comfortable stance from Images 2 or 4. Rebuild their exact design on Image 1's extreme kinetic skeleton. The judged fact is a violent deceleration, not a ready pose.",
+        "Exact thumbnail silhouette map on a 1536x1024 landscape canvas: huge planted RIGHT foot and sole centered near x=1110,y=850; compressed right ankle near x=1010,y=760; deeply flexed right knee near x=915,y=650; dropped right hip near x=800,y=550, all one down-right load column. Rear LEFT toe/ball near x=430,y=845, left ankle near x=400,y=780, heel clearly high near x=360,y=750 and visibly off ground, left knee near x=530,y=690, left hip near x=730,y=560. Only rear toes touch; heel at least one boot-height high and dragged inward.",
+        "Torso map: pelvis line rotates down-left while lumbar spine begins at x=770,y=550, bows strongly left through x=655,y=450, then returns toward neck x=720,y=315: a large unmistakable C curve and side-bend away from the upper-right blade mass. Ribcage rotates hard opposite pelvis and pitches off-axis. Head at x=700,y=220 counter-turns sharply toward viewer-left threat. No upright sternum.",
+        "Scapula/arm map: character-left rear scapula at x=610,y=370 retracts hard; left shoulder pulls back, left elbow extends far to x=490,y=495, then trailing wrist/hand reaches to x=675,y=520. Character-right scapula at x=820,y=375 protracts/downshifts; right elbow folds tightly at x=770,y=430 and leading wrist/hand closes near x=805,y=447. This strong long-left/short-right opposition must visibly distort shoulder heights, clavicles, chest folds, and back contour. Quiet or level shoulders fail.",
+        "Weapon map: exact same one connected Round010 storm-shear. Pommel near x=595,y=585; continuous cobalt hilt rises steeply through trailing left hand near x=675,y=520, visible separator/exposed wrap, leading right hand near x=805,y=447, ivory guard near x=865,y=400; broad blade continues on the SAME decisive diagonal through upper-right with center of mass near x=1120,y=250 and clipped tip near x=1410,y=85. Do not place hilt at pelvis or horizontally across waist. Both hands visibly close with plausible digits, wrap compression, aligned wrists, no hover/fusion.",
+        "Force result: blade mass caught upper-right pulls wrists, elbows, separated scapulae, ribs and braid upper-right while the rotated pelvis and compressed right leg arrest down-right; spine bows away between them. Short braid, cobalt cloth tail, straps, attached-yoke mount, right-hip capacitor belt, ceramic plates, and protected copper conductor all visibly lag/tension toward upper-left/left, opposite the catch, with one coherent timing. Yoke stays attached; copper stays continuous; capacitor stays right hip.",
+        "Style: exact premium hand-painted 2D industrial-mythic concept art of Image 2; matte cobalt, ivory ceramic, blackened steel, oxidized copper; pale warm-neutral studio ground. Original 2D concept only.",
+        "Frame all of one adult woman and one complete weapon: head, braid, yoke, both feet including high rear heel/toes, right sole, both hands, pommel, guard/cage, full broad blade and tip inside generous margins. A tiny rear-toe gouge and contact shadows only.",
+        "NO arrow, diagram marks, text, logo, watermark, environment, enemy, lightning, glow, particles, sparks, speed lines, blur, dust cloud, crop, extra person, duplicate/detached weapon, body penetration, costume/weapon redesign, bare/fetish amplification. Hard reject a wide guard, bilateral balance, flat rear heel, waist-horizontal hilt, quiet upright torso/scapulae, malformed digits, or blade mass not driving the body."
+      ]
+    },
+    {
+      "generation_id": "kinetic-chain-candidate-04",
+      "taxonomy": "identity-preserve",
+      "mode": "edit",
+      "input_roles": ["candidate 03 base", "original pose/load guide", "Round010 accepted frame/design", "Round007 identity"],
+      "input_sha256": ["fc394a2cbb77fbc207d65e1054ee4be7a9d2e71141822ab24f1afa67d506f372","55a46c2e0161bd050d8094cb0d010d619ddb0226b172a95f6d6bdf2b9d0809aa","3cf1e4c8f798480d8f2c2e889943e2aba832e5a299337f0a800ffd1f68683df6","f54d6f4b4bc7707841b623148f522c1c60730bd8c6c620d4698531d928f2545a"],
+      "output": "Iterations/P10_Round011_KineticChain_candidate04_reject.png",
+      "sha256": "d148436582ac130ea6d867db7d7544aa7f1726143be4d9a8ce9206bf19fa7f62",
+      "byte_size": 2086501,
+      "dimensions_px": {"width":1536,"height":1024},
+      "format": "png",
+      "status": "strongest-isolated-pose-proof-accepted-and-copied",
+      "accepted_copy": "P10_Round011_NyraKestrel_KineticChain_v1.png",
+      "acceptance_basis": [
+        "Strongest kinetic result: rear heel is fully airborne on a toe skid, the right load column is dominant, the hilt is raised across the chest, the blade center of mass is outside the torso, and cloth/circuit lag coherently left.",
+        "Pelvis/ribcage opposition and the full-body diagonal read as a materially stronger arrested event than candidates 01–03.",
+        "One complete full person, both feet, attached yoke, pommel, guard/cage, blade and tip remain inside the 1536x1024 frame; same-hilt two-hand contact remains readable."
+      ],
+      "promotion_caveats": [
+        "Native inspection shows two opposed braided hair tails rather than the frozen single short asymmetric braid; identity/design freeze is imperfect.",
+        "Scapular push-pull is improved but moderate because both arms trend toward similar forward extension.",
+        "The C-curve reads chiefly through the full-body diagonal rather than a deeply compressed torso bend.",
+        "The broad blade and front grounding boot are exaggerated into giant block forms."
+      ],
+      "exact_prompt_lines": [
+        "Use case: identity-preserve",
+        "Asset type: final bounded targeted Ground-Arc Arrest kinetic correction, P10 Round011 candidate 04 of 04",
+        "Inputs: Image 1 is the immediate art base. Preserve its exact Nyra face, short asymmetric braid, attached left ivory yoke, protected continuous copper route, right-hip capacitor, heavy right grounding greave/lighter left leg, cobalt/ivory/blackened-steel/copper materials, exact one-piece non-historical storm-shear, one-person framing, and valid two-hand same-hilt contact. Image 2 is the ORIGINAL joint/load guide and must control the corrected silhouette; never render its arrow, labels, circles, or lines. Image 3 freezes Round010 art/design. Image 4 freezes Round007 identity.",
+        "Change ONLY four kinetic facts; do not redesign or add anything.",
+        "1. REAR FOOT TOPOLOGY: lift the character-LEFT heel dramatically until there is a clearly visible boot-height wedge of pale empty background beneath the heel and rear half of the sole. Only the ball and toe cap touch the floor at far lower-left. Plantar-flex the ankle steeply; drag toes inward/down-right and show a tiny short toe gouge. The rear heel cannot touch its shadow and cannot share load.",
+        "2. HILT LIFT: move the entire connected pommel+hilt+both already-gripping hands+guard+blade rigidly together upward and clockwise. Pommel at about x=585,y=600; trailing left hand x=675,y=530; leading right hand x=805,y=425; guard x=875,y=350; blade tip x=1440,y=65. The continuous hilt must cross diagonally in front of lower chest, not horizontally at waist or pelvis. Keep both hands closed on separated cobalt regions of the same hilt, separator visible, wrists straight, exact plausible digits.",
+        "3. PUSH-PULL CHAIN: visibly dislocate the comfortable symmetry without injury. Character-right scapula and shoulder drive far forward/down toward the guard; right elbow folds tightly under the leading fist near the ribs. Character-left scapula retracts far back/up; left shoulder opens and left elbow reaches much longer behind/left before the forearm returns to trailing hand. Shoulder line is steeply tilted; one elbow sharply compressed, the other substantially extended. Bow the spine more deeply into a C away from the blade and rotate ribcage hard against the dropped pelvis. Sternum pitches diagonally; head counter-turns viewer-left. The blade mass must appear to pull the whole upper chain upper-right.",
+        "4. EQUIPMENT LAG: all loose/reactive elements share one opposite direction, upper-left/left: braid lifts and streams left; cobalt cloth tails and straps lift left rather than hang vertically; attached yoke mount stretches taut; right-hip capacitor belt digs into compressed hip; ceramic plates gap on the extended left side and compress on the right; copper conductor stays continuous but tensions visibly. No random wind and no motion blur.",
+        "Right load column remains massive and singular: right foot planted forward/down-right, broad sole flattened, ankle deeply closed, knee flexed over sole, hip dropped above it. Full person, both feet, attached yoke, pommel, guard/cage, complete broad blade and tip all inside 1536x1024 landscape with margin. Pale neutral warm-gray studio ground, contact shadows and tiny toe gouge only.",
+        "Final art contains NO guide arrow/marks/text, no label/logo/watermark, no environment/enemy, no lightning/glow/particles/sparks/speed lines/blur/dust cloud, no extra person, no duplicate/detached weapon, no body penetration, no crop, no bare/fetish amplification.",
+        "Hard reject if rear heel is flat or low, hilt remains at waist, shoulders/elbows are bilateral, torso is upright/quiet, equipment hangs neutrally, any hand hovers or is malformed, or identity/design changes."
+      ]
+    }
+  ],
+  "decision": {
+    "accepted_candidate_id": "kinetic-chain-candidate-04",
+    "accepted_copy": {
+      "path": "P10_Round011_NyraKestrel_KineticChain_v1.png",
+      "sha256": "d148436582ac130ea6d867db7d7544aa7f1726143be4d9a8ce9206bf19fa7f62",
+      "byte_size": 2086501,
+      "dimensions_px": {"width":1536,"height":1024},
+      "format": "png"
+    },
+    "accepted_copy_equality": {
+      "applicable": true,
+      "source": "Iterations/P10_Round011_KineticChain_candidate04_reject.png",
+      "byte_identical": true,
+      "source_sha256": "d148436582ac130ea6d867db7d7544aa7f1726143be4d9a8ce9206bf19fa7f62",
+      "accepted_sha256": "d148436582ac130ea6d867db7d7544aa7f1726143be4d9a8ce9206bf19fa7f62"
+    },
+    "promoted_keyframe_created": true,
+    "strongest_candidate_id": "kinetic-chain-candidate-04",
+    "verdict": "PROMOTE_STRONGEST_ISOLATED_KINETIC_CHAIN_PROOF_FOR_FRESH_CRITIC",
+    "finding": "Candidate 04 materially improves the isolated Ground-Arc Arrest contract over candidates 01–03: chest-height diagonal hilt, upper-right external blade mass, dominant compressed right load column, airborne rear heel with toe skid, pelvis/ribcage opposition, and coherent leftward secondary lag. Promotion is evidence for fresh criticism only. It does not establish a complete design-freeze pass because braid identity drifts to two tails, scapular opposition is moderate, the C-curve is not deeply compressed, and blade/front-boot forms are exaggerated."
+  },
+  "integrity_validation": {
+    "all_output_files_persisted_under_iterations": true,
+    "all_output_sha256_recomputed": true,
+    "all_outputs_native_1536x1024_png": true,
+    "all_four_outputs_inspected_at_native_resolution": true,
+    "generation_cap_observed": true,
+    "accepted_copy_present_and_byte_identical_to_candidate_04": true,
+    "pose_guide_svg_and_png_hashes_recomputed": true,
+    "round010_fresh_review_sha_matches_required_fee67f1d_prefix_and_fa33_suffix": true,
+    "json_validated": true
+  },
+  "privacy_cleanup": {
+    "public_safe": true,
+    "absolute_paths_present": false,
+    "usernames_present": false,
+    "private_archive_name_present": false,
+    "private_benchmark_filenames_or_paths_present": false,
+    "private_benchmark_pixels_embedded": false,
+    "franchise_pixels_embedded": false,
+    "third_party_pose_pixels_embedded": false,
+    "only_round011_repository_files_created_or_modified": true
+  }
+}

@@ -1,0 +1,168 @@
+{
+  "schemaVersion": 1,
+  "piece": "P10",
+  "round": 11,
+  "status": "rejected-kinetic-chain-preflight",
+  "reviewType": "fresh-context Kinetic Chain and composite 2D concept preflight",
+  "reviewedAt": "2026-08-01T02:34:52Z",
+  "artifactClass": "original 2D pose-guide-driven signature-force concept art",
+  "engineRun": false,
+  "actualGameCapturePerformed": false,
+  "unityProjectShellPresent": true,
+  "runnableReviewedGameplayDetected": false,
+  "unityCaptureFiled": false,
+  "threeDimensionalAssetFiled": false,
+  "gameReadyEvidenceFiled": false,
+  "builderAcceptedFrameFiled": true,
+  "isolatedKineticChainTargetPassed": false,
+  "paid3DGenerationAuthorized": false,
+  "source": {
+    "name": "Nyra Kestrel Kinetic Chain signature-force keyframe",
+    "scope": "Original 2D pose-guide-driven concept evidence only; no gameplay, 3D model, finished game asset, or production-ready implementation claim.",
+    "creator": "OpenAI image generation via Codex",
+    "referencePixelsSuppliedToGeneration": false,
+    "receiptPath": "ArtSource/P10/Round011/KineticChain/P10_Round011_KineticChainReceipt.json",
+    "receiptSha256": "bce5ccc57d27c5313f023c9cd3616bb7cecba54bfcffcd76e2e5554ffdcd4766",
+    "readmePath": "ArtSource/P10/Round011/KineticChain/README.md",
+    "readmeSha256": "6d69f167c305333a5ad898ca676460bf93cdd5caeffef257427ee28e7a4019b0",
+    "reviewPath": "ArtSource/P10/Round011/KineticChain/P10_Round011_FreshKineticChainReview.json",
+    "reviewSha256": "fad0cd1851d4951d89d76591557304b678416628d513c83598d3bf0df82ff226",
+    "poseGuidePngPath": "ArtSource/P10/Round011/KineticChain/P10_Round011_OriginalPoseLoadGuide.png",
+    "poseGuidePngSha256": "55a46c2e0161bd050d8094cb0d010d619ddb0226b172a95f6d6bdf2b9d0809aa",
+    "poseGuideSvgPath": "ArtSource/P10/Round011/KineticChain/P10_Round011_OriginalPoseLoadGuide.svg",
+    "poseGuideSvgSha256": "a6d58bd4a749f21d97497a5675fdfd775a08d61bab89e0327e4875e0bee7d9b0"
+  },
+  "isolatedDecision": {
+    "verdict": "FAIL_VISUAL_ONLY_KINETIC_CHAIN_GATE",
+    "strongestCandidate": "kinetic-chain-candidate-04",
+    "upperRightExternalBladeMassAchieved": true,
+    "chestHeightDisplacedHiltAchieved": true,
+    "dominantRightLoadColumnAchieved": true,
+    "rearHeelAirborneToeSkidAchieved": true,
+    "pelvisRibcageOppositionPartiallyAchieved": true,
+    "secondaryMotionLagPartiallyAchieved": true,
+    "scapularPushPullAchieved": false,
+    "deepTorsoCCurveAchieved": false,
+    "oneViolentDecelerationEventAchieved": false,
+    "identityDesignFreezeAchieved": false,
+    "finding": "The strongest frame materially improves the lower-body load, chest-height hilt, external blade mass, rear toe skid, and secondary lag. It still fails as one arrested event because both arms advance together, the scapular opposition is weak, the torso remains comparatively quiet, and braid, blade, and boot proportions drift."
+  },
+  "visualReview": {
+    "score": 62,
+    "maximum": 100,
+    "passThreshold": 85,
+    "criticalFloorPerCategory": 7,
+    "observedMinimumCategoryScore": 5,
+    "thresholdResult": "FAIL",
+    "criticalFloorResult": "FAIL",
+    "verdict": "DENY_PAID_3D_GENERATION",
+    "comparisonCount": 6,
+    "candidateMetBenchmarkBarCount": 2,
+    "candidateBelowBenchmarkBarCount": 4,
+    "requiredCandidateMetBenchmarkBarCount": 5,
+    "benchmarkGateResult": "FAIL",
+    "benchmarkPolicy": "Aggregate blinded-comparison results only; no benchmark image, crop, comparison sheet, filename, path, or other benchmark pixel is published.",
+    "singleBiggestGap": "The upper-body force chain is not mechanically arrested: both scapulae and arms still advance as a quiet paired reach, so the upper-right blade mass never resolves through a push-pull shoulder girdle into the ribcage-pelvis C-curve as one violent stop.",
+    "categoryScores": {
+      "identityContinuity": 6,
+      "poseGuideContract": 7,
+      "biomechanicsAndSingleEventDeceleration": 5,
+      "anatomy": 6,
+      "silhouetteAndRoleRead": 7,
+      "gripAndWeaponPlausibility": 6,
+      "costumeAndSecondaryMotionContinuity": 6,
+      "renderMaterialAndReadability": 7,
+      "benchmarkAuthorshipAndNonDerivativeQuality": 6,
+      "avoidanceOfHistoricalSamuraiOdachiAndStudioGuardRelapse": 6
+    }
+  },
+  "engineTruth": {
+    "unityProjectShellPresent": true,
+    "installedUnityEditorDetected": true,
+    "reviewOnlyUnityScenesDetected": true,
+    "round011AssetIntegratedInUnity": false,
+    "runtimeGameplayArchitectureDetected": false,
+    "playerBuildDetected": false,
+    "runnableGameForReviewedAssetDetected": false,
+    "engineRun": false,
+    "actualGameCapturePerformed": false,
+    "finding": "The workspace contains an installed editor and a Unity review shell, but no integrated Round011 asset, gameplay controller architecture, encounter scene, or player build. No unrelated shell run or fabricated gameplay capture was filed."
+  },
+  "decision": {
+    "result": "DENY_PAID_3D_GENERATION",
+    "paid3DGenerationAuthorized": false,
+    "unityLocked": true,
+    "instruction": "Preserve the solved lower-body load, toe skid, displaced hilt, and external blade mass; do not begin paid 3D generation or Unity integration from this pack."
+  },
+  "limitations": [
+    "The filed image is original 2D concept art, not gameplay or game capture.",
+    "No actual game run was performed because no runnable gameplay integrating the reviewed asset exists.",
+    "The workspace has a Unity review shell, not a player build or integrated combat encounter for this asset.",
+    "No 3D mesh, topology, rig, deformation, UV, collision, animation, LOD, texture, performance, or game-ready claim is made.",
+    "The builder promoted candidate 04 for critic handoff; the independent critic rejected the isolated Kinetic Chain target and complete composite gate.",
+    "The concept review cannot establish legal originality, exclusivity, copyright status, trademark clearance, or absence of all third-party similarity.",
+    "Paid 3D generation and Unity remain locked because the isolated target, total-score, category-floor, and blinded-comparison gates all failed."
+  ],
+  "conceptArt": [
+    {
+      "label": "CRITIC-REJECTED — builder-accepted Kinetic Chain frame",
+      "disposition": "builder-accepted-critic-rejected-evidence",
+      "evidenceType": "Rejected 2D concept evidence — not gameplay, 3D, or game-ready evidence",
+      "publicPath": "/captures/P10/round-011-kinetic-chain/NyraKestrel_KineticChain_CRITIC_REJECTED.png",
+      "sha256": "d148436582ac130ea6d867db7d7544aa7f1726143be4d9a8ce9206bf19fa7f62",
+      "dimensions": {
+        "width": 1536,
+        "height": 1024
+      },
+      "format": "PNG",
+      "finding": "The chest-height hilt, external upper-right blade mass, loaded right leg, airborne rear heel, toe skid, and leftward lag read clearly. The quiet paired arm reach and shallow torso deformation prevent one mechanically arrested stop."
+    }
+  ],
+  "poseGuide": {
+    "authorship": "Original public-safe SVG authored for Round011; no third-party pose image.",
+    "pngSha256": "55a46c2e0161bd050d8094cb0d010d619ddb0226b172a95f6d6bdf2b9d0809aa",
+    "svgSha256": "a6d58bd4a749f21d97497a5675fdfd775a08d61bab89e0327e4875e0bee7d9b0",
+    "dimensions": {
+      "width": 1536,
+      "height": 1024
+    }
+  },
+  "builderAttempts": [
+    {
+      "candidate": 1,
+      "sha256": "cf23f4343e748d14ed8702bdd469aed2a4ed74dc1724883a332e0c6ca596f760",
+      "disposition": "rejected",
+      "reason": "Waist-height near-horizontal hilt, quiet scapulae and ribcage, and insufficient rear-heel lift."
+    },
+    {
+      "candidate": 2,
+      "sha256": "058be7fcede38052a0144b8726460f6aaece9f1404b282b0d63384229530e1b1",
+      "disposition": "rejected",
+      "reason": "Rear-toe arrest improves, but the centered waist hilt and quiet shoulder girdle still read as a broad held guard."
+    },
+    {
+      "candidate": 3,
+      "sha256": "fc394a2cbb77fbc207d65e1054ee4be7a9d2e71141822ab24f1afa67d506f372",
+      "disposition": "rejected",
+      "reason": "Torso and weapon share a stronger diagonal, but the rear foot flattens and both elbows remain too similar."
+    },
+    {
+      "candidate": 4,
+      "sha256": "d148436582ac130ea6d867db7d7544aa7f1726143be4d9a8ce9206bf19fa7f62",
+      "disposition": "builder-accepted-critic-rejected",
+      "reason": "Strongest isolated pose proof, but the fresh critic rejected the paired upper-body reach, shallow C-curve, and identity/design drift."
+    }
+  ],
+  "nextRound": {
+    "round": 12,
+    "status": "scapular-counterforce-lock",
+    "target": "Freeze the solved lower-body load, rear toe skid, chest-height hilt, external blade mass, identity, costume, weapon, and framing; re-author only the upper-body force transfer so one scapula drives forward/down, the other retracts/back-up, unequal elbows torque the ribcage against the pelvis, and the blade resolves through a deep C-curve as one violent stop.",
+    "compositePackGate": {
+      "minimumTotalScore": 85,
+      "minimumScorePerCategory": 7,
+      "blindComparisonCount": 6,
+      "minimumComparisonsMeetingBenchmarkBar": 5,
+      "paid3DGenerationRequiresFullPass": true
+    }
+  }
+}
