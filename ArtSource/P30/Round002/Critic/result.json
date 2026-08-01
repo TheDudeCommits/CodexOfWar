@@ -1,0 +1,626 @@
+{
+  "schema": "p30.round002.critic.v1",
+  "piece": "P30",
+  "round": "Round002",
+  "role": "fresh-independent-critic",
+  "verdict": "reject",
+  "accepted": false,
+  "score": {
+    "total": 25,
+    "maximum": 100,
+    "required": 95,
+    "categorySum": 15,
+    "categoryMaximum": 60,
+    "categories": {
+      "composition_camera": 2,
+      "character_animation": 3,
+      "environment_materials_lighting": 2,
+      "combat_readability_impact": 2,
+      "technical_correctness_performance": 5,
+      "aaa_finish": 1
+    },
+    "minimumCategoryRequired": 9,
+    "everyCategoryPass": false
+  },
+  "acceptance": {
+    "totalScorePass": false,
+    "everyCategoryPass": false,
+    "blindWinPass": false,
+    "allHardGatesPass": false
+  },
+  "auditRuntime": {
+    "productionBundle": true,
+    "headed": true,
+    "browser": "Google Chrome 150.0.7871.187",
+    "automation": "Playwright",
+    "httpStatus": 200,
+    "webglVersion": "WebGL 2.0",
+    "unmaskedVendor": "Google Inc. (Apple)",
+    "unmaskedRenderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M2, Unspecified Version)",
+    "hardwareMetal": true,
+    "surface": {
+      "viewportWidth": 1600,
+      "viewportHeight": 900,
+      "devicePixelRatio": 1,
+      "canvasCssWidth": 1600,
+      "canvasCssHeight": 900,
+      "canvasBackingWidth": 1600,
+      "canvasBackingHeight": 900,
+      "rendererPixelRatio": 1
+    },
+    "ready": {
+      "schema": "cow.review.v1",
+      "piece": "P30",
+      "preset": "P30",
+      "seed": 30001,
+      "rapier": "ready",
+      "assets": "ready",
+      "renderer": "compiled-and-warm",
+      "apiObservedMs": 459,
+      "coldReadyMs": 4109,
+      "coldReadyCeilingMs": 2500,
+      "coldReadyPass": false
+    }
+  },
+  "assetLoad": {
+    "schema": "gauntlet.asset-load.v1",
+    "manifestVersion": 2,
+    "enabledCount": 18,
+    "loadedCount": 18,
+    "failures": [],
+    "complete": true,
+    "productionAuthored": true,
+    "proceduralFallbackActive": false,
+    "pmremInstalled": true,
+    "views": {
+      "heroAuthored": true,
+      "hollowAuthored": true,
+      "arenaSectorAuthored": true,
+      "fallbackReasons": []
+    },
+    "bindings": {
+      "animationVisible": true,
+      "weaponLoadedAndVisible": true,
+      "textureLoadedAndVisible": true,
+      "heroClipCount": 10,
+      "hollowClipCount": 6,
+      "evidenceCaptures": [
+        "S03.png",
+        "S04.png",
+        "S05.png",
+        "S06.png"
+      ]
+    }
+  },
+  "hardGates": {
+    "production_headed_hardware_webgl_surface": true,
+    "review_contract_cow_review_v1": true,
+    "authored_assets_18_of_18_no_fallback_pmrem": true,
+    "visible_animation_weapon_texture_binding": true,
+    "tape_a_simulation_replay": true,
+    "tape_a_required_timing_damage_busy_rejection": true,
+    "tape_a_camera_replay": false,
+    "tape_b_out_of_range": true,
+    "tape_c_camera_obstruction_collision": false,
+    "projection_50_0_08_120": false,
+    "pointer_lock_mouse_look": false,
+    "camera_reset_replay": false,
+    "physical_keyboard_mouse_bindings": true,
+    "held_keys_pause_and_blur": false,
+    "resize_dpr_restoration": true,
+    "webgl_loss_restore_capture_recovery": true,
+    "runtime_error_free_interaction": false,
+    "frame_time_and_resource_ceilings": true,
+    "cold_ready_2500ms": false,
+    "blind_candidate_wins_5_of_6": false,
+    "allPass": false
+  },
+  "determinism": {
+    "seed": 30001,
+    "tapeA": {
+      "runs": 2,
+      "processedTicksPerRun": 60,
+      "allProcessedSimulationSnapshotsExact": true,
+      "allEventsExact": true,
+      "cameraTelemetryExact": false,
+      "cameraMismatchTicks": [
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59
+      ],
+      "cameraPeakPositionDelta": 0.068249882,
+      "cameraPeakQuaternionComponentDelta": 0.003991048,
+      "tickMatrix": [
+        {
+          "ticks": "0-19",
+          "playerZStart": 2.55,
+          "playerZEnd": 1.600001,
+          "motion": "move",
+          "attackPhase": "idle",
+          "targetHp": 100,
+          "events": []
+        },
+        {
+          "ticks": "20-23",
+          "playerZ": 1.600001,
+          "motion": "idle",
+          "attackPhase": "idle",
+          "targetHp": 100,
+          "events": []
+        },
+        {
+          "ticks": "24-31",
+          "playerZ": 1.600001,
+          "motion": "attack",
+          "attackPhase": "startup",
+          "targetHp": 100,
+          "events": [
+            {
+              "tick": 24,
+              "type": "attack_started",
+              "attackSerial": 1
+            },
+            {
+              "tick": 28,
+              "type": "attack_rejected_busy",
+              "attackSerial": 1
+            }
+          ]
+        },
+        {
+          "ticks": "32-35",
+          "playerZ": 1.600001,
+          "motion": "attack",
+          "attackPhase": "active",
+          "targetHpAt32": 100,
+          "targetHpAt33": 90,
+          "events": [
+            {
+              "tick": 33,
+              "type": "enemy_hit",
+              "damage": 10,
+              "hpBefore": 100,
+              "hpAfter": 90,
+              "attackSerial": 1
+            }
+          ]
+        },
+        {
+          "ticks": "36-49",
+          "playerZ": 1.600001,
+          "motion": "attack",
+          "attackPhase": "recovery",
+          "targetHp": 90,
+          "events": []
+        },
+        {
+          "ticks": "50-59",
+          "playerZ": 1.600001,
+          "motion": "idle",
+          "attackPhase": "idle",
+          "targetHp": 90,
+          "events": []
+        }
+      ],
+      "fullPerTickMatrixLocation": "critic-report.md#deterministic-tape-a",
+      "final": {
+        "tick": 60,
+        "playerZ": 1.6000008583068848,
+        "playerHealth": 100,
+        "targetHealth": 90,
+        "attackPhase": "idle"
+      }
+    },
+    "tapeB": {
+      "processedTicks": 60,
+      "playerZ": 2.5999999046325684,
+      "targetHealth": 100,
+      "enemyHitCount": 0,
+      "pass": true
+    },
+    "tapeC": {
+      "processedTicks": 120,
+      "playerZ": 5.60000467300415,
+      "cameraPosition": [
+        1.3493243905648555,
+        2.9711010273709593,
+        12.6062258322561
+      ],
+      "cameraYaw": 0,
+      "cameraPitch": 0.2,
+      "boomDesiredDistance": 7.15,
+      "boomResolvedDistance": 7.15,
+      "collisionAppliedAnyTick": false,
+      "resolvedLessThanDesiredAnyTick": false,
+      "cameraObstruction": {
+        "implemented": false,
+        "status": "pending",
+        "telemetryHook": true
+      },
+      "pass": false
+    }
+  },
+  "cameraAndInput": {
+    "projection": {
+      "required": {
+        "fovDegrees": 50,
+        "near": 0.08,
+        "far": 120
+      },
+      "observed": {
+        "fovDegrees": 58,
+        "near": 0.08,
+        "far": 110
+      },
+      "pass": false
+    },
+    "pointerLockMouseLook": {
+      "chromeFocused": true,
+      "chromeVisible": true,
+      "trustedCanvasClick": true,
+      "attackSerialAfterClick": 1,
+      "pointerLockAcquired": false,
+      "yawChanged": false,
+      "pitchChanged": false,
+      "pageError": "WrongDocumentError: The root document of this element is not valid for pointer lock.",
+      "pass": false
+    },
+    "cameraResetReplay": {
+      "exact": false,
+      "positionMaxAbsDelta": 0.034034747,
+      "quaternionMaxAbsDelta": 0.001998314,
+      "pass": false
+    },
+    "physicalKeyboard": {
+      "action": "KeyW",
+      "twentyTickStartZ": 2.6,
+      "twentyTickEndZ": 1.600001,
+      "pass": true
+    },
+    "pauseHeldKey": {
+      "movedBeforePauseZ": 2.5,
+      "whilePausedZ": 2.5,
+      "firstResumedTickZ": 2.450000047683716,
+      "heldCleared": false,
+      "pass": false
+    },
+    "blurHeldKey": {
+      "beforeBlurZ": 2.5,
+      "afterTenTicksZ": 2.5,
+      "heldCleared": true,
+      "pass": true
+    },
+    "resizeDpr": {
+      "perturbedWindow": {
+        "width": 1280,
+        "height": 720,
+        "dpr": 2
+      },
+      "rendererDuringPerturbation": {
+        "width": 1600,
+        "height": 900,
+        "pixelRatio": 1
+      },
+      "restoredWindow": {
+        "width": 1600,
+        "height": 900,
+        "dpr": 1
+      },
+      "rendererAfterRestoration": {
+        "width": 1600,
+        "height": 900,
+        "pixelRatio": 1
+      },
+      "pass": true
+    }
+  },
+  "contextRecovery": {
+    "webglLoseContextAvailable": true,
+    "losses": 1,
+    "restores": 1,
+    "captureRecovered": true,
+    "captureDataUrlLength": 2533154,
+    "finalRendererErrors": [],
+    "finalReviewErrors": [],
+    "pass": true
+  },
+  "performance": {
+    "surface": {
+      "width": 1600,
+      "height": 900,
+      "dpr": 1,
+      "postProcessing": false
+    },
+    "warmupFramesPerSample": 120,
+    "sampleSeconds": 30,
+    "samples": [
+      {
+        "sample": 1,
+        "frameCount": 1801,
+        "medianMs": 16.7,
+        "p95Ms": 18.5,
+        "p99Ms": 18.6,
+        "maxMs": 19.8,
+        "calls": 63,
+        "triangles": 77710,
+        "textures": 31,
+        "geometries": 31,
+        "runtimeCpuFrameMsSnapshot": 1.0
+      },
+      {
+        "sample": 2,
+        "frameCount": 1801,
+        "medianMs": 16.7,
+        "p95Ms": 18.5,
+        "p99Ms": 18.7,
+        "maxMs": 18.8,
+        "calls": 63,
+        "triangles": 77710,
+        "textures": 31,
+        "geometries": 31,
+        "runtimeCpuFrameMsSnapshot": 0.5
+      },
+      {
+        "sample": 3,
+        "frameCount": 1800,
+        "medianMs": 16.7,
+        "p95Ms": 18.4,
+        "p99Ms": 18.6,
+        "maxMs": 33.0,
+        "calls": 63,
+        "triangles": 77710,
+        "textures": 31,
+        "geometries": 31,
+        "runtimeCpuFrameMsSnapshot": 0.8
+      }
+    ],
+    "ceilings": {
+      "medianMs": 16.7,
+      "p95Ms": 20,
+      "p99Ms": 25,
+      "calls": 120,
+      "triangles": 1500000,
+      "textures": 32,
+      "geometries": 120,
+      "coldReadyMs": 2500
+    },
+    "summary": {
+      "medianOfSampleMediansMs": 16.7,
+      "worstP95Ms": 18.5,
+      "worstP99Ms": 18.7,
+      "maxCalls": 63,
+      "maxTriangles": 77710,
+      "maxTextures": 31,
+      "maxGeometries": 31,
+      "frameAndResourceCeilingsPass": true,
+      "coldReadyPass": false,
+      "overallPerformanceGatePass": false
+    }
+  },
+  "runtimeDiagnostics": {
+    "assetLoadErrors": [],
+    "requestFailures": [],
+    "rendererErrorsAfterRecovery": [],
+    "reviewErrorsAfterRecovery": [],
+    "warnings": [
+      "Carried Rapier initialization deprecation.",
+      "RGBELoader deprecation in favor of HDRLoader."
+    ],
+    "expectedContextMessages": [
+      "WebGL context lost.",
+      "WebGL context restored."
+    ],
+    "interactionErrors": [
+      "WrongDocumentError during pointer-lock request."
+    ]
+  },
+  "blindComparison": {
+    "pairCount": 6,
+    "protocol": "Scenario-matched candidate captures; pair order shuffled; opaque pair IDs; left/right randomized; decisions and reasons locked before reveal.",
+    "candidateWins": 0,
+    "requiredCandidateWins": 5,
+    "pass": false,
+    "pairs": [
+      {
+        "pairId": "P-8E4294",
+        "candidateWon": false,
+        "confidence": "overwhelming",
+        "reason": "The winning image had a close combat triangle, forceful silhouettes, dense spatial context, differentiated surfaces, and contact particles; the candidate left tiny overlapping actors in a flat stage."
+      },
+      {
+        "pairId": "P-D54D68",
+        "candidateWon": false,
+        "confidence": "overwhelming",
+        "reason": "The winning image used a commanding foreground silhouette, believable anatomy and gear, textured depth, and readable adversary response; the candidate was obstructed and toy-like."
+      },
+      {
+        "pairId": "P-FAF0C0",
+        "candidateWon": false,
+        "confidence": "overwhelming",
+        "reason": "The winning image established scale hierarchy, cinematic opposition, atmosphere, and clear imminent action; the candidate reduced the beat to tiny figures on an undifferentiated floor."
+      },
+      {
+        "pairId": "P-5E3B41",
+        "candidateWon": false,
+        "confidence": "overwhelming",
+        "reason": "The winning image showed decisive contact, directional force, layered debris and sparks, grounded proximity, and material detail; the candidate was overexposed, overlapping, and weak at impact."
+      },
+      {
+        "pairId": "P-D06BA0",
+        "candidateWon": false,
+        "confidence": "overwhelming",
+        "reason": "The winning image created a sweeping action line, strong depth, readable threats, and coherent spatial drama; the candidate presented a small central scuffle."
+      },
+      {
+        "pairId": "P-33A88C",
+        "candidateWon": false,
+        "confidence": "overwhelming",
+        "reason": "The winning image combined over-shoulder composition, atmospheric separation, luminous weapon trajectory, and reactive depth; the candidate was static and dominated by empty floor and sky."
+      }
+    ]
+  },
+  "captures": [
+    {
+      "id": "S01",
+      "file": "S01.png",
+      "scenario": "Tape C obstruction framing at 120 ticks",
+      "width": 1600,
+      "height": 900,
+      "bytes": 1727202,
+      "alpha": false,
+      "pngChunks": [
+        "IHDR",
+        "IDAT",
+        "IEND"
+      ],
+      "privateMetadataPresent": false
+    },
+    {
+      "id": "S02",
+      "file": "S02.png",
+      "scenario": "Close idle at 23 ticks",
+      "width": 1600,
+      "height": 900,
+      "bytes": 1727960,
+      "alpha": false,
+      "pngChunks": [
+        "IHDR",
+        "IDAT",
+        "IEND"
+      ],
+      "privateMetadataPresent": false
+    },
+    {
+      "id": "S03",
+      "file": "S03.png",
+      "scenario": "Attack startup at 29 ticks",
+      "width": 1600,
+      "height": 900,
+      "bytes": 1725619,
+      "alpha": false,
+      "pngChunks": [
+        "IHDR",
+        "IDAT",
+        "IEND"
+      ],
+      "privateMetadataPresent": false
+    },
+    {
+      "id": "S04",
+      "file": "S04.png",
+      "scenario": "Active hit at 34 ticks",
+      "width": 1600,
+      "height": 900,
+      "bytes": 1726981,
+      "alpha": false,
+      "pngChunks": [
+        "IHDR",
+        "IDAT",
+        "IEND"
+      ],
+      "privateMetadataPresent": false
+    },
+    {
+      "id": "S05",
+      "file": "S05.png",
+      "scenario": "Recovery and aftermath at 41 ticks",
+      "width": 1600,
+      "height": 900,
+      "bytes": 1727112,
+      "alpha": false,
+      "pngChunks": [
+        "IHDR",
+        "IDAT",
+        "IEND"
+      ],
+      "privateMetadataPresent": false
+    },
+    {
+      "id": "S06",
+      "file": "S06.png",
+      "scenario": "Dodge and side-offset framing at 37 ticks",
+      "width": 1600,
+      "height": 900,
+      "bytes": 1724157,
+      "alpha": false,
+      "pngChunks": [
+        "IHDR",
+        "IDAT",
+        "IEND"
+      ],
+      "privateMetadataPresent": false
+    }
+  ],
+  "biggestRemainingGap": {
+    "id": "cohesive_aaa_combat_presentation",
+    "reason": "The visible duel lacks a coherent AAA presentation package and lost all six blind pairs overwhelmingly.",
+    "prescription": "Replace and tune only the visible presentation package for the existing hero, Hollow, claymore, single camera-facing arena sector, their materials and lighting, and the existing contact FX. Do not alter simulation, physics, hit timing or damage, camera behavior, input, HUD, review API or telemetry, seed, tapes, viewport, or post default.",
+    "measurableSuccess": [
+      "Fresh S01-S06 captures at 1600x900 DPR 1 and seed 30001 win at least 5 of 6 in a new blind comparison.",
+      "Character/animation, environment/materials/lighting, combat readability/impact, and AAA finish each score at least 9 of 10.",
+      "S03-S06 contain zero hero/weapon/Hollow mesh interpenetrations at the frozen capture ticks, and the active strike reads through trail, contact point, target reaction, and debris without relying on the damage toast.",
+      "Hero, Hollow, weapon, and visible sector share one deliberate fidelity and style target with consistent texel density and physically coherent material response; central combat highlights do not clip.",
+      "Preserve 18 of 18 loading, no fallback, PMREM, exact Tape A/B simulation behavior, and all current passing frame and resource ceilings; cold ready does not regress beyond 4109 ms."
+    ],
+    "frozenConstraints": [
+      "one hero",
+      "one Hollow",
+      "one claymore",
+      "one camera-facing arena sector",
+      "60 Hz simulation",
+      "seed 30001",
+      "existing tapes and damage timing",
+      "cow.review.v1",
+      "1600x900 DPR 1",
+      "camera, input, physics, HUD, and post default unchanged"
+    ]
+  },
+  "failuresOutsideSelectedGap": [
+    "camera boom obstruction is pending",
+    "projection is 58/0.08/110 instead of 50/0.08/120",
+    "pointer lock and mouse look fail",
+    "hit shake survives camera reset",
+    "pause does not clear held movement",
+    "pointer interaction emits a page error",
+    "cold ready is 4109 ms"
+  ],
+  "privateCleanup": {
+    "extractedBenchmarkMaterialDeleted": true,
+    "pairCompositesDeleted": true,
+    "revealMapDeleted": true,
+    "privateWorkingRecordDeleted": true,
+    "dedicatedPrivateWorkspaceAbsenceVerified": true,
+    "privateMaterialCopiedIntoRepository": false
+  },
+  "mutations": {
+    "runtimeFilesChanged": false,
+    "sourceFilesChanged": false,
+    "progressFilesChanged": false,
+    "builderCapturesOverwritten": false,
+    "gitActionsPerformed": false
+  }
+}

@@ -18,131 +18,95 @@
     "accepted"
   ],
   "activeBuild": {
-    "pieceId": "P10",
-    "round": 18,
-    "roundLabel": "P10 · Three.js Pivot 001",
+    "pieceId": "P30",
+    "round": 3,
+    "roundLabel": "P30 · Round 003",
     "status": "revising",
-    "builder": "Three.js Playable Foundation",
-    "brief": "Unity Round 018 was halted unfiled at user direction. The active build is a vanilla Three.js, TypeScript, Vite, and Rapier vertical slice with simulation state outside the renderer, an explicit third-person and lock-on camera, movement, sprint, dodge, one light attack, one zombie target, a GLB asset manifest, a low-chrome DOM HUD, and deterministic browser capture hooks. Procedural placeholders are allowed only for this foundation gate; a coherent free licensed GLB stack replaces them next.",
+    "builder": "Cohesive AAA Combat Presentation Revision",
+    "brief": "Replace and tune only the visible presentation package for the existing hero, Hollow, claymore, one camera-facing arena sector, their materials and lighting, and the existing contact effects while freezing mechanics, camera, input, HUD, and the review contract.",
     "facts": [
       "P00 is accepted as infrastructure; its blind visual baseline remains an explicit 28.33–76.67 loss.",
-      "Round 001 is mechanically reproducible: two independent critic reruns matched all six filed image hashes, P10 validation passed, focused EditMode passed 8/8, the full suite passed 14/14, and the P00 aggregate stayed byte-identical.",
-      "The randomized blind judge scored our round-001 frame 9/60 and Reference 09 49/60; the independent critic scored ours 10/60 and the reference 51/60.",
-      "Round 002 passed its mechanical export gates but failed visual preflight at 5/13. The decisive frame exposed torn and detached combat hands, so it never entered Unity.",
-      "A fresh-context critic scored round 003 at 6/13 with only 4/8 mandatory checks. The source package is a visual NO-GO and Unity was never launched.",
-      "Round 003 passed anatomy, face, feet, joint continuity, neutral coverage, and diagnostic coverage; it failed hands and grip, costume, weapon contact, materials, LOD0 budget, combat pose, and authored identity.",
-      "Two isolated Blender reruns matched semantic structure, topology, materials, and weights, but exact artifact determinism failed at 0/16 hashes for repository-to-run and 0/16 between runs. The round-003 audit also omitted its Combat FBX because its record key collided with the combat PNG.",
-      "A separate 80-deform-bone export prototype proved structural rig feasibility, but shoulder, elbow, wrist, thumb, finger, and facial-deformation hard gates remain unresolved; it is not combat-ready.",
-      "Round 004 mechanically delivered a lawful static Rain-derived source, five FBXs, nine diagnostics, and an 88,036-triangle LOD0, but a fresh critic rejected it at 7/13 with only 4/8 mandatory checks. Unity was never launched.",
-      "Round 004 passed anatomy, face, feet, joint continuity, LOD0, neutral coverage, and diagnostic coverage. It failed the second complete hand enclosure, premium costume construction, weapon function, material separation, combat intent, and unmistakable close-range AAA identity.",
-      "The single biggest gap is exact: the costume still reads as a toy-like procedural slab-and-tube assembly rather than believable, layered, worn, functional AAA warrior gear.",
-      "Two isolated Round 004 reruns matched all 26 frozen input hashes and canonical geometry, topology, UVs, materials, assignments, transforms, bounds, and near-pixel imagery. Exact output determinism still failed: only the 22 copied textures matched among 39 physical outputs.",
-      "All five Round 004 FBXs contain one broken absolute texture reference and leak the source path. The supplied validator missed this because it checks image resolution only in the authored blend.",
-      "Round 005 delivered a lawful Blender Studio Einar-derived static source, four static FBXs, nine 1600px diagnostics, and a fresh clean-import proof. Required credit is Einar Rig (CC-BY) Blender Foundation | studio.blender.org.",
-      "A fresh-context critic rejected Round 005 at 6/13 with only 4/8 mandatory checks. The benchmark was preferred in all 7/7 blinded comparisons, Unity remained locked, and no actual game capture was performed.",
-      "Round 005 passed anatomy, authored face and hair, grounded feet, joint continuity, LOD0 budget, and diagnostic coverage. It failed the two-hand hilt enclosure, premium warrior costume, weapon function, portable materials, combat intent, neutral modeling coverage, and unmistakable premium anime-warrior identity.",
-      "The single biggest gap is core authorship and identity: the delivery still reads as the licensed Einar civilian mechanic in workwear with attached props, not an unmistakable premium authored anime warrior at the God of War Ragnarok benchmark level.",
-      "Factory-state validation semantically passed all 4/4 static imports at 85,096 / 47,615 / 25,484 LOD triangles, but texture portability and source-to-reimport material parity both failed.",
-      "The Round 005 release-sanitization follow-up passed: checkout-specific metadata was removed without changing the judged visual payload, and factory-state validation now reproduces the audit, clean-import report, and reimport diagnostic byte-for-byte.",
-      "Round 006 filed three original 2D concept images only, not gameplay, 3D, or game-ready evidence. A fresh critic rejected the set at 55/100 against an 85 threshold, the critical category floor failed, and the candidate met the benchmark bar in 0/6 blinded comparisons.",
-      "Paid 3D generation was not authorized and Unity was not entered for Round 006. The single biggest gap is benchmark-level authored identity: the generic dark armored-anime swordswoman lacks a unique, function-led visual thesis.",
-      "Round 007 filed two accepted original 2D concept sheets and one clearly labeled rejected grip diagnostic only. A fresh critic denied paid 3D generation at 62/100 against an 85 threshold, failed the category floor, and found the candidate met the benchmark bar in 2/6 comparisons against 5/6 required.",
-      "Round 007 has no accepted combat-grip proof, gameplay, 3D asset, game-ready evidence, or Unity capture. Its single biggest gap is the absence of one accepted identity-preserving combat image that unambiguously proves both complete hands closed on separated regions of the same hilt.",
-      "Round 008 generated four bounded original 2D contact candidates. The builder froze them fail-closed under a strict clean-negative-space rule, but a fresh critic independently found candidate 04 visually unambiguous and promoted a byte-identical accepted contact copy without regenerating the art.",
-      "Round 008 passed its isolated same-hilt contact objective, raising functional grip to 8/10, but the complete pack still failed at 68/100, a 5/10 observed category floor, and only 3/6 benchmark-level comparisons against 5/6 required. Paid 3D generation and Unity remain locked.",
-      "Round 009 materially improved layered cloth, ceramic, metal, and copper separation while preserving the accepted identity, engineering anchors, one weapon, and solved same-hilt grip. A fresh critic nevertheless rejected the isolated mythic-force target at 71/100, a 6/10 floor, and 2/6 benchmark comparisons.",
-      "Round 010 removed samurai-adjacent tassets and historical odachi curvature, introduced a non-historical storm-shear, preserved identity and contact, and improved the rear toe pivot plus heavy-right-leg load. A fresh critic still rejected the signature event.",
-      "The Round 010 composite scored 68/100 against 85, failed the category floor at 6/10, and met the benchmark bar in only 2/6 comparisons against 5/6 required. The single gap is a mechanically unified violent deceleration chain rather than another wide posed greatsword hold.",
-      "Round 011 filed four bounded original 2D keyframes driven by an original public-safe pose guide. Candidate 04 materially improved the chest-height hilt, external upper-right blade mass, heavy right load column, airborne rear heel, toe skid, and coherent secondary lag, but it also introduced two-tail hair drift and exaggerated blade and boot masses.",
-      "The fresh Round 011 critic rejected the isolated kinetic-chain target at 62/100, a 5/10 category floor, and 2/6 benchmark comparisons against 5/6 required. Both scapulae and arms still advance as a paired reach, so blade mass does not resolve through an opposing shoulder girdle and deep ribcage-pelvis C-curve as one violent stop. No integrated gameplay or player build exists for this asset; engine run and actual gameplay capture are false.",
-      "Round 012 filed four bounded original 2D upper-body mechanics attempts driven by an original public-safe guide. Candidate 04 narrowly corrected the high-right/low-left shoulder order and jaw gap while preserving widely separated complete contact, the lower-body load, rear toe skid, and external blade mass; the builder still marked the target failed.",
-      "The fresh Round 012 critic rejected the isolated Scapular Counterforce Lock at 56/100, a 3/10 category floor, and 1/6 benchmark comparisons against 5/6 required. The leading elbow stays long and the trailing elbow never drops down-left and returns, so the triangular push-pull mechanism is absent and the pose reads as paired hauling. No integrated gameplay or player build exists for this asset; engine run and actual gameplay capture are false.",
-      "Round 013 filed four bounded original 2D elbow-topology attempts and an original public-safe guide. Candidate 04 alone produced a compact leading-elbow fold beneath the high shoulder, but it was promoted only as failed critic evidence because the trailing arm still descends monotonically and the guide-only reconstruction materially drifted identity, design, stance, toe skid, proportions, and framing.",
-      "The fresh Round 013 critic rejected the isolated Elbow Return Triangle at 41/100, a 1/10 category floor, and 2/6 benchmark comparisons against 5/6 required. The trailing elbow never becomes the far down-left lowest external vertex, the forearm never reverses up-right to the inward hand, and the pale triangle cannot exist. No integrated gameplay or player build exists for this asset; engine run and actual gameplay capture are false.",
-      "Round 014 filed four bounded original 2D trailing-arm attempts and an original public-safe guide. Candidate 04 alone created a conspicuous far-low-left outer bend and a short up-right reversal, but the builder marked it failed because the hand drifted outward, the hilt construction changed, and hilt/rear-leg content occupied the required pale wedge.",
-      "The fresh Round 014 critic rejected the isolated Trailing Return Wedge at 41/100, a 0/10 category floor, and 2/6 benchmark comparisons against 5/6 required. The arm-bounded return wedge is absent: the abbreviated forearm collapses into the altered hilt and rear leg, leaving the hand outward and no clean untouched head-sized pale triangle. No integrated gameplay or player build exists for this asset; engine run and actual gameplay capture are false.",
-      "Round 015 filed four bounded original 2D image-generation attempts, twelve raw/initial/protected outputs, an original public-safe guide, two deterministic hard-mask families, and a protected composite. Candidate 04 protected preserves all 1,544,522 frozen pixels with zero mismatches and restores the exact original grip and complete hilt, but the generated limb collapses to a monotonic reach and retains a residual sliver.",
-      "The fresh Round 015 critic rejected the isolated Inward Return Mask at 40/100, a 0/10 category floor, and 2/6 benchmark comparisons against 5/6 required. The required two-segment trailing-arm topology is absent: there is no far-low-left elbow, no separate steep up-right forearm return, and therefore no uninterrupted head-sized pale wedge. No Round015 integration, gameplay controller, build scene, or player build exists; engine run and actual gameplay capture are false.",
-      "Round 016 filed four original isolated-limb attempts, four complete deterministic key/map/composite/protected lineages, an exact-anchor guide, protection-zone diagnostics, and one builder-promoted failed frame. Candidate 04 hit shoulder, elbow, and grip with effectively zero transform residual, but protection removed 54,019 of 77,360 corridor pixels and left only a severed shoulder stump plus floating shard.",
-      "The fresh Round 016 critic ran Unity 6000.5.4f1 successfully in an isolated copy and captured a new S01 frame and turntable. That real capture shows the obsolete low-poly Astra Vale Round001 proxy because Nyra Round016 is absent from Unity; the gate failed at 33/100, a 0/10 floor, and 0/6 blind wins.",
-      "Round 017 filed one deterministic local-constraint proof and one original judge panel. The builder preserved locality and mechanical connectivity, but the accepted proof became a fused third-leg or shield mass; all 23 PNGs remained byte-identical through release sanitation.",
-      "The fresh Round 017 critic rejected the round at 31/100, a 0/10 floor, and 0/6 blind wins. Unity 6000.5.4f1 ran successfully, but the actual fresh S01 afff193d2efeff8d092df787ccb9af69f2b7dad93268806c0539cf3cd0436c81 was moved to private Trash after review and not published; it showed obsolete Round001 Astra Vale rather than Nyra.",
-      "The user stopped the Unity Round 018 path before it was filed, staged, or reviewed; its untracked diagnostic evidence is preserved but earns no progress credit. The tracked release remains Round 017.",
-      "The active path is now a web-native Three.js and Rapier playable foundation, followed by a legally shippable free GLB asset pass and a fresh real-browser blind critic. The global latest manifest remains pinned to accepted P00."
+      "P10 remains paused after rejected Round 017 and the unfiled Unity Round 018 stop; it is not the active browser-work lane.",
+      "P30 Round 002 received a fresh independent headed Chrome audit on hardware-accelerated WebGL2 through ANGLE Metal on Apple M2.",
+      "All 18 authored assets loaded with no procedural fallback, and PMREM was installed; the P31 asset pipeline is integrated and provenance-ready.",
+      "Tape A simulation snapshots and events replay exactly across two runs, and Tape B passes; Tape A camera presentation does not replay exactly after reset.",
+      "The fixed 1600×900 surface, WebGL context recovery, and every frame-time and resource ceiling pass.",
+      "The critic rejected Round 002 at 25/100 with 0/6 candidate wins; this is rejected candidate evidence, never accepted evidence.",
+      "Hard failures remain in camera replay and obstruction, projection, pointer lock and look, hit-shake reset, pause-held input, pointer interaction, and 4.109 s cold ready.",
+      "The global latest capture manifest remains intentionally pinned to accepted P00."
     ],
     "evidenceFingerprint": {
-      "gitRevision": "37b29d5a7892c75b7da204f98aaf85c92365d90b",
-      "gitState": "isolated-critic-copy",
-      "unityVersion": "6000.5.4f1",
-      "urpVersion": "17.5.0",
-      "scene": "Assets/CodexOfWar/Review/Scenes/P10_HeroLookdev.unity",
-      "seed": 24007001,
-      "preset": "S01_Explore",
+      "auditContext": "Fresh independent headed production-browser audit",
+      "browser": "Google Chrome",
+      "graphics": "WebGL2 · ANGLE Metal Renderer: Apple M2",
+      "headed": true,
+      "hardwareAccelerated": true,
       "resolution": "1600×900",
-      "capturedAtUtc": "2026-08-01T09:45:08.478Z",
-      "renderSettingsSha256": "44c656be7394557e9bc93929faa2256ac71fe0f208d0e1206901f58ae73acc12",
-      "screenshotSha256": "afff193d2efeff8d092df787ccb9af69f2b7dad93268806c0539cf3cd0436c81",
-      "captureContractSha256": "f43fdcf09b931a8f4185d7a8df2cc994dcfaafcf7889de8653f5c09d4edb246c"
+      "deviceScaleFactor": 1
     },
     "evidenceBundle": {
-      "roundLabel": "P10 · Round 017 critic gate",
-      "status": "Round 017 rejected · real engine run, target absent",
-      "manifestPath": "/data/P10-round-017-local-constraint-release.json",
+      "roundLabel": "P30 · Round 002 critic gate",
+      "status": "REJECT · 25/100 · candidate evidence only",
+      "manifestPath": "/data/P30-round-002.json",
       "s01": {
-        "label": "Carried-forward Round016 public Unity S01 context · not the Round017 run",
-        "path": "/captures/P10/round-016-two-segment-limb/S01_FreshEngineGate_OldAstraVale.png",
-        "sha256": "46c055eab47a88d102a8ebe52de54b88fa77e9764c75769eae80c74b37da0dab"
+        "label": "S02 close-idle diagnostic · rejected candidate",
+        "path": "/captures/P30/round-002/S02.png"
       },
-      "turntable": {
-        "label": "Round017 original local-constraint judge panel",
-        "path": "/captures/P10/round-017-local-constraint-release/P10_Round017_JudgePanel.png",
-        "sha256": "da5ad839b4a5d27bb255f062fa0a97aca8f36bbbf00a454bc033e130abe41a02"
+      "diagnostic": {
+        "label": "S04 active-hit diagnostic · rejected candidate",
+        "path": "/captures/P30/round-002/S04.png"
       },
       "metrics": [
         {
-          "label": "Critic score",
-          "value": "31/100"
+          "label": "Verdict",
+          "value": "REJECT · 25/100"
         },
         {
-          "label": "Category floor",
-          "value": "0/10"
+          "label": "Authored assets",
+          "value": "18/18 · no fallback · PMREM"
         },
         {
-          "label": "Blind wins",
+          "label": "Candidate wins",
           "value": "0/6"
         },
         {
-          "label": "Unity target",
-          "value": "Nyra R017 absent"
+          "label": "Cold ready",
+          "value": "4.109 s · fail"
         }
       ],
       "checks": [
-        "Fresh Round017 Unity batch capture PASS · exit 0",
-        "All 29 builder-manifest artifacts verified · 0 mismatches",
-        "All 23 PNGs unchanged through release sanitation",
-        "Final critic review 982e6e5ebfd84d4929e57e994ad9809f373fafedebce974f9ad3e12b958d95fe"
+        "Tape A simulation snapshots and events exact across two runs",
+        "Tape B out-of-range replay pass · zero hits",
+        "Fixed 1600×900 surface pass across viewport and DPR changes",
+        "WebGL context loss and restore pass · state preserved",
+        "Frame-time and resource ceilings pass · 16.7 ms median and 18.5 ms worst p95"
       ],
       "limitations": [
-        "The actual fresh Round017 S01 afff193d… was moved to private Trash after review and not published",
-        "The linked Unity frame is clearly carried-forward Round016 context, not a byte substitute",
-        "The Round017 proof is rejected 2D evidence, not a 3D game asset",
-        "No target-matched Nyra gameplay frame exists"
+        "Camera obstruction absent · hard fail",
+        "Camera replay nondeterministic after reset",
+        "Pointer-lock and look path failed",
+        "Hit shake survives camera reset",
+        "Pointer interaction produced a runtime error",
+        "Cold ready 4.109 s exceeds the 2.5 s target",
+        "Projection is 58° / far 110, not the required 50° / far 120",
+        "A held movement key survives pause and moves on resume",
+        "Round rejected at 25/100 with 0/6 candidate wins"
       ]
     },
-    "nextGate": "The first Three.js gate must build and run in a real browser, expose deterministic 1600×900 capture hooks, sustain a fixed 60 Hz simulation boundary, and prove movement, sprint, dodge, light-attack hit timing, zombie damage and reaction, and lock-on camera behavior. Build, simulation tests, and browser smoke capture must pass. Procedural geometry may qualify only the foundation mechanics; the visual gate still requires a free licensed GLB asset pass, at least 95/100, a 9/10 category floor, and 5/6 blind wins."
+    "nextGate": "Close only cohesive_aaa_combat_presentation: replace and tune the visible hero, Hollow, claymore, one camera-facing arena sector, their materials and lighting, and the existing contact effects. Keep mechanics, camera, input, HUD, and the review contract frozen."
   },
   "canonicalCapture": {
-    "shotId": "S01",
-    "name": "Explore · carried-forward context",
-    "purpose": "Public engine context for the target-matching gate",
-    "camera": "Low shoulder",
+    "shotId": "S02",
+    "name": "Tape A baseline · rejected candidate",
+    "purpose": "P30 Round 002 close-idle candidate evidence",
+    "camera": "Third-person review camera",
     "heroHeight": "24–32% of image height",
-    "measuredHeroHeight": "29.82% of image height",
-    "sceneRead": "Carried-forward Round016 public context only; the actual Round017 S01 was moved to private Trash after review, is not published, and is target-mismatched.",
-    "benchmarkId": "Reference 09",
-    "benchmarkPolicy": "ID only — the local benchmark image is never published",
-    "capturePath": "/captures/P10/round-016-two-segment-limb/S01_FreshEngineGate_OldAstraVale.png",
-    "manifestPath": "/data/P10-round-017-local-constraint-release.json",
+    "measuredHeroHeight": "not acceptance-qualified",
+    "sceneRead": "Close Tape A state before attack. The authored presentation is integrated, but the round remains rejected candidate evidence and does not claim acceptance.",
+    "benchmarkId": "Anonymous six-pair gate",
+    "benchmarkPolicy": "Aggregate 0/6 result only — benchmark pixels, composites, and reference filenames are never published",
+    "capturePath": "/captures/P30/round-002/S02.png",
+    "manifestPath": "/data/P30-round-002.json",
     "latestManifestPath": "/data/capture-manifest-latest.json",
     "captureAvailable": true,
     "manifestAvailable": true
@@ -202,7 +166,7 @@
         "status": "Infrastructure accepted · visual baseline lost",
         "score": 28.33,
         "scoreLabel": "28.33/100",
-        "preference": "Reference 09 (B) over current Unity (A)",
+        "preference": "Private benchmark (B) over current Unity (A)",
         "primaryGap": "The current Unity frame remains a raw blockout: untextured primitive geometry and a mannequin-like hero prevent the focal character and world from reading as production-quality rendered content."
       }
     },
@@ -224,7 +188,7 @@
         "status": "Rejected · fresh blind judge and critic agree",
         "score": 9,
         "scoreLabel": "Blind 9/60 · critic 10/60",
-        "preference": "Reference 09 (B) over P10 round-001 (A)",
+        "preference": "Private benchmark (B) over P10 round-001 (A)",
         "primaryGap": "Replace the disconnected sphere, cylinder, and cuboid plastic-mannequin hero with one continuous, anatomically credible authored shell whose face, hands, feet, joints, layered costume, weapon, and distinct skin, hair, cloth, and metal responses survive the locked S01 and four-view cameras without clipped highlights."
       }
     },
@@ -586,6 +550,67 @@
         "preference": "Actual Unity evidence preferred in 0/6 blinded comparisons · 5/6 required",
         "primaryGap": "The trailing limb is a fused, colossal third-leg/shield mass with a punched-through hand and no readable interior wedge, so it destroys anatomy, grip depth, the rear leg, and the gameplay silhouette in one dominant defect."
       }
+    },
+    {
+      "round": 1,
+      "label": "P30 · Round 001",
+      "pieceId": "P30",
+      "phase": "Fresh headed production-browser critic complete",
+      "status": "criticized",
+      "date": "2026-08-01",
+      "engineRun": true,
+      "actualGameCapturePerformed": true,
+      "targetMatchedGameCapturePerformed": true,
+      "gateQualifyingCapture": false,
+      "builderBrief": "Build a deterministic Three.js and Rapier playable nucleus with fixed 1600×900 review captures, replayable movement and one-hit combat, a third-person camera, context recovery, and bounded browser-runtime budgets.",
+      "evidence": "A fresh headed Chrome 151 production audit on hardware-accelerated ANGLE Metal passed Tape A mechanics determinism, Tape B out-of-range behavior, the fixed surface, context recovery, and warm runtime. It failed overall at 28/100 with a 1/10 floor and 0/6 candidate wins. Camera obstruction is absent, camera presentation changes after reset, look and pointer lock failed, cold ready was 2.94 s, projection was 58° / 110 instead of 50° / 120, and a held movement key survives pause. These captures are rejected foundation evidence, not AAA acceptance. Separately, a 27.3 MB CC0 runtime set is provenance-ready with 80/80 receipt files matched and 16/16 GLBs imported; the ignored 475.3 MB raw cache is not integrated.",
+      "evidenceLinks": [
+        "/captures/P30/round-001/S01.png",
+        "/captures/P30/round-001/S02.png",
+        "/captures/P30/round-001/S04.png",
+        "/data/P30-round-001.json"
+      ],
+      "critic": {
+        "status": "FAIL · REJECTED FOUNDATION EVIDENCE · NOT AAA ACCEPTANCE",
+        "score": 28,
+        "categoryFloor": 1,
+        "candidatePreferredCount": 0,
+        "comparisonCount": 6,
+        "requiredCandidatePreferredCount": 5,
+        "scoreLabel": "Fresh headed browser gate 28/100 · category floor 1/10",
+        "preference": "Candidate met benchmark bar in 0/6 aggregate blind comparisons",
+        "primaryGap": "prototype_grade_presentation_layer: Replace only the hero, Hollow, and one camera-facing arena sector with validated authored GLBs and PBR materials; wire idle, locomotion, startup, active, recovery, hit, and death clips; add one bounded contact VFX stack; recapture S01–S06 while retaining the current resource ceilings."
+      }
+    },
+    {
+      "round": 2,
+      "label": "P30 · Round 002",
+      "pieceId": "P30",
+      "phase": "Fresh independent headed production-browser critic complete",
+      "status": "criticized",
+      "date": "2026-08-01",
+      "engineRun": true,
+      "actualGameCapturePerformed": true,
+      "targetMatchedGameCapturePerformed": true,
+      "gateQualifyingCapture": false,
+      "builderBrief": "Integrate the authored hero, Hollow, claymore, one camera-facing arena sector, PBR materials and lighting, and one bounded contact-effects stack without changing the deterministic mechanics or review contract.",
+      "evidence": "A fresh independent headed Chrome audit on Apple M2 loaded all 18 authored assets with no fallback and PMREM. Tape A simulation snapshots and events were exact across two runs; Tape B passed; the fixed surface, context recovery, and performance ceilings passed. The candidate was rejected at 25/100 with 0/6 candidate wins. Camera replay and obstruction, 58° / 110 projection versus 50° / 120, pointer lock and look, hit-shake reset, pause-held input, pointer interaction, and 4.109 s cold ready remain hard failures. The single primary gap is cohesive_aaa_combat_presentation.",
+      "evidenceLinks": [
+        "/captures/P30/round-002/S02.png",
+        "/captures/P30/round-002/S04.png",
+        "/captures/P30/round-002/S06.png",
+        "/data/P30-round-002.json"
+      ],
+      "critic": {
+        "status": "REJECT · CANDIDATE EVIDENCE ONLY · NOT ACCEPTED",
+        "score": 25,
+        "candidatePreferredCount": 0,
+        "comparisonCount": 6,
+        "requiredCandidatePreferredCount": 5,
+        "scoreLabel": "Fresh independent headed browser gate 25/100",
+        "preference": "Candidate met the bar in 0/6 aggregate blind comparisons",
+        "primaryGap": "cohesive_aaa_combat_presentation: Replace and tune only the visible presentation package for the existing hero, Hollow, claymore, one camera-facing arena sector, their materials and lighting, and the existing contact effects; keep mechanics, camera, input, HUD, and the review contract frozen."
+      }
     }
   ],
   "pieces": [
@@ -708,8 +733,8 @@
       "id": "P10",
       "name": "Hero look development",
       "group": "Vertical slice",
-      "status": "revising",
-      "outcome": "The first anime-style fighter reads as a premium authored character at gameplay and finisher distance, with coherent skin, hair, cloth, metal, and weapon materials.",
+      "status": "paused",
+      "outcome": "Paused after rejected Round 017 and the unfiled Unity Round 018 stop. The historical look-development evidence remains preserved, but this is no longer the active implementation lane.",
       "requiredEvidence": [
         "S01, S02, and S06",
         "Neutral turntable"
@@ -865,6 +890,32 @@
       "status": "queued",
       "outcome": "All fighters can complete the benchmark encounter while remaining mechanically and audiovisually distinct.",
       "requiredEvidence": []
+    },
+    {
+      "id": "P30",
+      "name": "Three.js playable nucleus",
+      "group": "Vertical slice",
+      "status": "revising",
+      "outcome": "A browser-native Three.js and Rapier duel preserves deterministic fixed-step movement and one-hit combat, fixed review captures, context recovery, camera control, and bounded runtime behavior.",
+      "requiredEvidence": [
+        "S01, S02, and S04",
+        "Deterministic Tape A and Tape B replays",
+        "Camera obstruction and look replay",
+        "Cold-ready and warm-runtime report"
+      ]
+    },
+    {
+      "id": "P31",
+      "name": "Authored presentation integration",
+      "group": "Vertical slice",
+      "status": "building",
+      "outcome": "The authored asset pipeline is integrated and provenance-ready: 18/18 hero, Hollow, claymore, visible arena-sector, animation, PBR, and environment assets load with no procedural fallback and PMREM, without changing the deterministic nucleus.",
+      "requiredEvidence": [
+        "S01–S06 fresh browser captures",
+        "18/18 authored runtime assets loaded with provenance ready",
+        "Required animation-clip coverage",
+        "Resource-ceiling validation"
+      ]
     }
   ]
 }

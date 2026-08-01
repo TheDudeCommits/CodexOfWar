@@ -39,3 +39,8 @@ Builds/
 *.blend@
 __pycache__/
 *.py[cod]
+
+# Private Round001 critic payloads stay local; candidate images and repo-safe
+# review reports in other rounds remain eligible for version control.
+/ArtSource/P30/Round001/critic-report.md
+/ArtSource/P30/Round001/result.json

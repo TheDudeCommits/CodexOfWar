@@ -1,0 +1,89 @@
+{
+  "schema": "cow.public-browser-critic.v1",
+  "piece": "P30",
+  "round": 2,
+  "date": "2026-08-01",
+  "status": "rejected-candidate-evidence",
+  "acceptanceScope": "This round is rejected candidate evidence, not accepted evidence.",
+  "verdict": {
+    "result": "REJECT",
+    "overallScore": 25,
+    "maximumScore": 100,
+    "candidateWins": 0,
+    "comparisonCount": 6
+  },
+  "auditEnvironment": {
+    "context": "fresh independent headed production-browser audit",
+    "browser": "Google Chrome",
+    "headed": true,
+    "hardwareAccelerated": true,
+    "renderer": "WebGL2 · ANGLE Metal Renderer: Apple M2",
+    "viewport": "1600×900",
+    "deviceScaleFactor": 1
+  },
+  "assetIntegration": {
+    "status": "integrated-provenance-ready",
+    "authoredAssetsLoaded": 18,
+    "authoredAssetsExpected": 18,
+    "proceduralFallbackActive": false,
+    "pmremInstalled": true
+  },
+  "deterministicReplays": {
+    "tapeA": {
+      "simulationSnapshotsExactAcrossTwoRuns": true,
+      "eventsExactAcrossTwoRuns": true,
+      "cameraPresentationExactAcrossTwoRuns": false
+    },
+    "tapeB": {
+      "pass": true,
+      "endingTargetHp": 100,
+      "hitCount": 0
+    }
+  },
+  "validatedPasses": {
+    "fixedSurface": true,
+    "contextRecovery": true,
+    "frameTimeAndResourceCeilings": true,
+    "warmRuntime": {
+      "medianMilliseconds": 16.7,
+      "worstP95Milliseconds": 18.5,
+      "worstP99Milliseconds": 18.7,
+      "drawCalls": 63,
+      "triangles": 77710,
+      "textures": 31,
+      "geometries": 31
+    }
+  },
+  "hardFailures": [
+    "Camera presentation does not replay exactly after reset.",
+    "Camera obstruction collision is absent.",
+    "Projection is 58° / 110 rather than the required 50° / 120.",
+    "Pointer lock and camera look failed.",
+    "Hit shake survives camera reset.",
+    "A held movement key survives pause and moves the player on resume.",
+    "Pointer interaction produced a runtime error.",
+    "Cold ready was 4.109 s, exceeding the 2.5 s ceiling.",
+    "The visual gate rejected the candidate at 25/100 with 0/6 candidate wins."
+  ],
+  "captures": [
+    {
+      "id": "S02",
+      "path": "/captures/P30/round-002/S02.png",
+      "role": "Close idle candidate diagnostic"
+    },
+    {
+      "id": "S04",
+      "path": "/captures/P30/round-002/S04.png",
+      "role": "Active-hit candidate diagnostic"
+    },
+    {
+      "id": "S06",
+      "path": "/captures/P30/round-002/S06.png",
+      "role": "Dodge and side-offset candidate diagnostic"
+    }
+  ],
+  "primaryGap": {
+    "id": "cohesive_aaa_combat_presentation",
+    "prescription": "Replace and tune only the visible presentation package for the existing hero, Hollow, claymore, one camera-facing arena sector, their materials and lighting, and the existing contact effects. Keep mechanics, camera, input, HUD, and the review contract frozen."
+  }
+}

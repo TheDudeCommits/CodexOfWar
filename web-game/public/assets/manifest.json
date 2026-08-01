@@ -1,0 +1,135 @@
+{
+  "version": 2,
+  "conventions": {
+    "units": "meters",
+    "upAxis": "+Y",
+    "forwardAxis": "-Z",
+    "origin": "grounded character root"
+  },
+  "assets": {
+    "character.hero": {
+      "type": "glb",
+      "url": "/assets/models/quaternius/female_ranger_outfit.glb",
+      "enabled": true,
+      "compression": "none",
+      "scale": 1
+    },
+    "character.hollow": {
+      "type": "glb",
+      "url": "/assets/models/quaternius/zombie_basic.glb",
+      "enabled": true,
+      "compression": "none",
+      "scale": 1
+    },
+    "weapon.claymore": {
+      "type": "glb",
+      "url": "/assets/models/quaternius/claymore.glb",
+      "enabled": true,
+      "compression": "none",
+      "scale": 1
+    },
+    "animation.player-core": {
+      "type": "glb",
+      "url": "/assets/animations/quaternius/player_core.glb",
+      "enabled": true,
+      "compression": "none",
+      "scale": 1
+    },
+    "animation.combat": {
+      "type": "glb",
+      "url": "/assets/animations/quaternius/combat_zombie.glb",
+      "enabled": true,
+      "compression": "none",
+      "scale": 1
+    },
+    "environment.ashwake-arena": {
+      "type": "glb",
+      "url": "/assets/environment/ruins/tower-base.glb",
+      "enabled": true,
+      "compression": "none",
+      "scale": 1
+    },
+    "environment.ruin-doorway": {
+      "type": "glb",
+      "url": "/assets/environment/ruins/wall-doorway.glb",
+      "enabled": true,
+      "compression": "none",
+      "scale": 1
+    },
+    "environment.ruin-wall": {
+      "type": "glb",
+      "url": "/assets/environment/ruins/wall-half.glb",
+      "enabled": true,
+      "compression": "none",
+      "scale": 1
+    },
+    "environment.ruin-pillar": {
+      "type": "glb",
+      "url": "/assets/environment/ruins/wall-pillar.glb",
+      "enabled": true,
+      "compression": "none",
+      "scale": 1
+    },
+    "environment.ruin-stairs": {
+      "type": "glb",
+      "url": "/assets/environment/ruins/stairs-stone.glb",
+      "enabled": true,
+      "compression": "none",
+      "scale": 1
+    },
+    "environment.ruin-rocks": {
+      "type": "glb",
+      "url": "/assets/environment/ruins/rocks-large.glb",
+      "enabled": true,
+      "compression": "none",
+      "scale": 1
+    },
+    "environment.snowy-forest": {
+      "type": "hdr",
+      "url": "/assets/environment/hdri/snowy_forest_1k.hdr",
+      "enabled": true
+    },
+    "material.cobble-diffuse": {
+      "type": "texture",
+      "url": "/assets/environment/materials/mossy_cobblestone/mossy_cobblestone_diff_1k.jpg",
+      "enabled": true,
+      "colorSpace": "srgb",
+      "wrap": "repeat"
+    },
+    "material.cobble-normal": {
+      "type": "texture",
+      "url": "/assets/environment/materials/mossy_cobblestone/mossy_cobblestone_nor_gl_1k.jpg",
+      "enabled": true,
+      "colorSpace": "linear",
+      "wrap": "repeat"
+    },
+    "material.cobble-arm": {
+      "type": "texture",
+      "url": "/assets/environment/materials/mossy_cobblestone/mossy_cobblestone_arm_1k.jpg",
+      "enabled": true,
+      "colorSpace": "linear",
+      "wrap": "repeat"
+    },
+    "material.brick-diffuse": {
+      "type": "texture",
+      "url": "/assets/environment/materials/castle_brick_01/castle_brick_01_diff_1k.jpg",
+      "enabled": true,
+      "colorSpace": "srgb",
+      "wrap": "repeat"
+    },
+    "material.brick-normal": {
+      "type": "texture",
+      "url": "/assets/environment/materials/castle_brick_01/castle_brick_01_nor_gl_1k.jpg",
+      "enabled": true,
+      "colorSpace": "linear",
+      "wrap": "repeat"
+    },
+    "material.brick-arm": {
+      "type": "texture",
+      "url": "/assets/environment/materials/castle_brick_01/castle_brick_01_arm_1k.jpg",
+      "enabled": true,
+      "colorSpace": "linear",
+      "wrap": "repeat"
+    }
+  }
+}

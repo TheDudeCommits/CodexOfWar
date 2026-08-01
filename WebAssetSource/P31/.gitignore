@@ -1,0 +1,38 @@
+# Publisher archives and direct source downloads are provenance-only.
+/raw/
+
+# Keep source_work reports, receipts, JSON validation, and scripts trackable,
+# but fail closed for extracted/download caches and heavyweight source payloads.
+/source_work/**/extracted/
+/source_work/**/downloads/
+/source_work/**/download_chunks/
+/source_work/**/cache/
+/source_work/**/*.zip
+/source_work/**/*.7z
+/source_work/**/*.tar
+/source_work/**/*.gz
+/source_work/**/*.fbx
+/source_work/**/*.obj
+/source_work/**/*.mtl
+/source_work/**/*.gltf
+/source_work/**/*.glb
+/source_work/**/*.bin
+/source_work/**/*.blend
+/source_work/**/*.blend[0-9]*
+/source_work/**/*.hdr
+/source_work/**/*.exr
+/source_work/**/*.png
+/source_work/**/*.jpg
+/source_work/**/*.jpeg
+/source_work/**/*.ogg
+/source_work/**/*.wav
+/source_work/**/*.part
+/source_work/**/*.part.*
+/source_work/**/*.tmp
+/source_work/**/.DS_Store
+
+# Local DCC/editor recovery files anywhere in this acquisition scope.
+*.blend1
+*.blend2
+*.blend@
+.DS_Store

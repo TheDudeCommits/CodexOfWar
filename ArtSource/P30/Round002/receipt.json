@@ -1,0 +1,482 @@
+{
+  "schema": "p30-round002-builder.v1",
+  "piece": "P30",
+  "round": "Round002",
+  "generatedAt": "2026-08-01T22:13:39+07:00",
+  "role": "builder",
+  "verdict": "candidate-only-no-pass-claim",
+  "scope": {
+    "kind": "presentation-layer-only",
+    "prescription": "Replace only the hero, Hollow, and one camera-facing arena sector with validated authored GLBs/PBR materials; wire idle, locomotion, startup, active, recovery, hit, and death animation states; add a bounded weapon-trail, directional-sparks, hit-flash, and short-lived-debris contact stack.",
+    "implemented": [
+      "Authored Quaternius female ranger, zombie Hollow, claymore, player-core carrier, and combat/zombie carrier are manifest-backed.",
+      "One bounded Kenney ruin sector is authored around the existing duel.",
+      "Mossy Cobblestone and Castle Brick 1K PBR maps are used on the visible sector.",
+      "Snowy Forest HDR is loaded with RGBELoader and installed as a PMREM environment.",
+      "Animation mixers are sampled deterministically from simulation state for idle, locomotion, attack startup/active/recovery, hit, and death presentation.",
+      "A preallocated contact stack supplies weapon trail, directional sparks, hit flash, and short-lived instanced debris.",
+      "Procedural hero, Hollow, and arena views are selected only after an observable genuine asset or required-clip validation failure."
+    ],
+    "explicitlyUnchanged": [
+      "60 Hz deterministic simulation mechanics",
+      "review schema cow.review.v1 and action timing",
+      "telemetry fields, with assetLoad and capture-hook receipts added only additively",
+      "1600x900 DPR-1 review surface",
+      "camera obstruction behavior",
+      "camera projection and pointer-lock behavior",
+      "pause/held-key behavior",
+      "camera-shake reset behavior",
+      "simulation and browser test expectations"
+    ],
+    "notExpanded": [
+      "no additional arena",
+      "no additional enemy",
+      "no additional weapon",
+      "no gameplay-system work"
+    ]
+  },
+  "productionEvidence": {
+    "url": "http://127.0.0.1:4173/?review=1&post=0",
+    "build": "Vite 8.2.0 production bundle",
+    "browser": {
+      "name": "Chromium",
+      "version": "151.0.7922.34",
+      "headless": true
+    },
+    "readyReceipt": {
+      "schema": "cow.review.v1",
+      "piece": "P30",
+      "preset": "P30",
+      "seed": 30001,
+      "viewport": {
+        "width": 1600,
+        "height": 900,
+        "dpr": 1
+      },
+      "rapier": "ready",
+      "assets": "ready",
+      "renderer": "compiled-and-warm"
+    },
+    "coldTimingMs": {
+      "readyPromiseAfterApiObserved": 3423,
+      "navigationToReadyWall": 4357,
+      "budget": 2500,
+      "passesBudget": false
+    },
+    "canvas": {
+      "css": {
+        "width": 1600,
+        "height": 900
+      },
+      "backingStore": {
+        "width": 1600,
+        "height": 900
+      },
+      "devicePixelRatio": 1,
+      "rendererPixelRatio": 1
+    },
+    "pageErrors": [],
+    "requestFailures": [],
+    "rendererErrors": [],
+    "webglGetError": 0
+  },
+  "captures": [
+    {
+      "id": "S01",
+      "file": "ArtSource/P30/Round002/S01.png",
+      "sha256": "5c4b08a378f05e3b3a581132eeac663225b2de706946d52d5e1f37e3607c21fe",
+      "pixelWidth": 1600,
+      "pixelHeight": 900,
+      "hasAlpha": false,
+      "scenario": {
+        "preset": "combat-tape-c",
+        "seed": 30001,
+        "actions": "move.backward value=1 on ticks 0-59; camera.reset down on tick 72",
+        "processedTicks": 120,
+        "captureAdvance": "one fixed tick and render per step",
+        "playerZ": 5.60000467300415,
+        "targetHealth": 100
+      },
+      "renderer": {
+        "calls": 63,
+        "triangles": 77710,
+        "textures": 31,
+        "geometries": 31
+      }
+    },
+    {
+      "id": "S02",
+      "file": "ArtSource/P30/Round002/S02.png",
+      "sha256": "a6049238bbe9680d1ec67d3405e2f181aa11c2ce02362bd3af14c53b0b14dcbc",
+      "pixelWidth": 1600,
+      "pixelHeight": 900,
+      "hasAlpha": false,
+      "scenario": {
+        "preset": "combat-tape-c",
+        "seed": 30001,
+        "actions": "move.forward value=1 on ticks 0-19",
+        "processedTicks": 23,
+        "captureAdvance": "one fixed tick and render per step",
+        "playerZ": 1.6000008583068848,
+        "targetHealth": 100,
+        "playerAttackPhase": "idle"
+      },
+      "renderer": {
+        "calls": 63,
+        "triangles": 77710,
+        "textures": 31,
+        "geometries": 31
+      }
+    },
+    {
+      "id": "S04",
+      "file": "ArtSource/P30/Round002/S04.png",
+      "sha256": "f283cb31854ee80e50c95ea39bad8c369f62c2777478be56984b1779702b85f6",
+      "pixelWidth": 1600,
+      "pixelHeight": 900,
+      "hasAlpha": false,
+      "scenario": {
+        "preset": "combat-tape-c",
+        "seed": 30001,
+        "actions": "move.forward value=1 on ticks 0-19; attack.primary down on tick 24 and up on tick 25",
+        "processedTicks": 34,
+        "captureAdvance": "one fixed tick and render per step",
+        "playerZ": 1.6000008583068848,
+        "targetHealth": 90,
+        "playerAttackPhase": "active",
+        "playerAttackFrame": 10,
+        "events": [
+          {
+            "tick": 24,
+            "type": "attack_started",
+            "attackSerial": 1
+          },
+          {
+            "tick": 33,
+            "type": "enemy_hit",
+            "damage": 10,
+            "hpBefore": 100,
+            "hpAfter": 90,
+            "attackSerial": 1
+          }
+        ]
+      },
+      "renderer": {
+        "calls": 68,
+        "triangles": 78814,
+        "textures": 31,
+        "geometries": 34
+      }
+    }
+  ],
+  "resourceCeilings": {
+    "limits": {
+      "calls": 100,
+      "triangles": 250000,
+      "textures": 32,
+      "geometries": 64
+    },
+    "observedMaximumActiveFrame": {
+      "capture": "S04",
+      "calls": 68,
+      "triangles": 78814,
+      "textures": 31,
+      "geometries": 34
+    },
+    "withinEveryCeiling": true
+  },
+  "deterministicTapeA": {
+    "seed": 30001,
+    "processedTicks": 60,
+    "final": {
+      "playerZ": 1.6000008583068848,
+      "playerHealth": 100,
+      "targetHealth": 90,
+      "playerAttackPhase": "idle"
+    },
+    "phaseBoundaries": {
+      "tick24": "startup",
+      "tick32": "active",
+      "tick33": "active; one 10-damage hit",
+      "tick36": "recovery",
+      "tick50": "idle"
+    },
+    "events": [
+      {
+        "tick": 24,
+        "type": "attack_started",
+        "attackSerial": 1
+      },
+      {
+        "tick": 28,
+        "type": "attack_rejected_busy",
+        "attackSerial": 1
+      },
+      {
+        "tick": 33,
+        "type": "enemy_hit",
+        "damage": 10,
+        "hpBefore": 100,
+        "hpAfter": 90,
+        "attackSerial": 1
+      }
+    ],
+    "mechanicsChangedByRound002": false
+  },
+  "assetLoadReceipt": {
+    "schema": "gauntlet.asset-load.v1",
+    "manifestVersion": 2,
+    "enabledCount": 18,
+    "loadedCount": 18,
+    "failures": [],
+    "complete": true,
+    "productionAuthored": true,
+    "proceduralFallbackActive": false,
+    "environment": {
+      "key": "environment.snowy-forest",
+      "pmremInstalled": true
+    },
+    "views": {
+      "hero": {
+        "authored": true,
+        "fallbackReason": null,
+        "animations": [
+          "Death01",
+          "Hit_Chest",
+          "Idle_Loop",
+          "Roll",
+          "Sprint_Loop",
+          "Sword_Regular_A",
+          "Walk_Loop",
+          "Zombie_Idle_Loop",
+          "Zombie_Scratch",
+          "Zombie_Walk_Fwd_Loop"
+        ]
+      },
+      "hollow": {
+        "authored": true,
+        "fallbackReason": null,
+        "animations": [
+          "Death",
+          "HitReact",
+          "Idle",
+          "Idle_Attack",
+          "Run",
+          "Walk"
+        ]
+      },
+      "arenaSector": {
+        "authored": true,
+        "fallbackReason": null
+      }
+    },
+    "enabledAndLoadedKeys": [
+      "animation.combat",
+      "animation.player-core",
+      "character.hero",
+      "character.hollow",
+      "environment.ashwake-arena",
+      "environment.ruin-doorway",
+      "environment.ruin-pillar",
+      "environment.ruin-rocks",
+      "environment.ruin-stairs",
+      "environment.ruin-wall",
+      "environment.snowy-forest",
+      "material.brick-arm",
+      "material.brick-diffuse",
+      "material.brick-normal",
+      "material.cobble-arm",
+      "material.cobble-diffuse",
+      "material.cobble-normal",
+      "weapon.claymore"
+    ]
+  },
+  "runtimeAssetProvenance": {
+    "sourceRoot": "WebAssetSource/P31/processed",
+    "publisherReceipts": [
+      "WebAssetSource/P31/THIRD_PARTY_ASSETS.md",
+      "WebAssetSource/P31/ASSET_RECEIPT.json"
+    ],
+    "rawArchivesShipped": false,
+    "files": [
+      {
+        "path": "web-game/public/assets/animations/quaternius/combat_zombie.glb",
+        "sha256": "66bd8332a4c58d94114cf23444dfc8de3a399234e2cd62012efdb5d78f6c5f9e"
+      },
+      {
+        "path": "web-game/public/assets/animations/quaternius/player_core.glb",
+        "sha256": "261156c05d74ea8cded6da1b6853feb7e9c89721e782536d0813a0c15f47fdc6"
+      },
+      {
+        "path": "web-game/public/assets/models/quaternius/female_ranger_outfit.glb",
+        "sha256": "600029a31ecda96d4ee19d67640cfbe3a3fd9de57e9b08cac47ea079340ee945"
+      },
+      {
+        "path": "web-game/public/assets/models/quaternius/zombie_basic.glb",
+        "sha256": "f199c9bdea193312fae5e13e045d4677e6b68bced027178252e8de61c33d5ac4"
+      },
+      {
+        "path": "web-game/public/assets/models/quaternius/claymore.glb",
+        "sha256": "ec545aa46464893348dbeec42adb87b203643f9c7d6b4c39c2074721f9a73866"
+      },
+      {
+        "path": "web-game/public/assets/environment/ruins/Textures/colormap.png",
+        "sha256": "66fd49be148f32e88f6c8cace67120250d1943a7856601158ad0ff24651db0b0"
+      },
+      {
+        "path": "web-game/public/assets/environment/ruins/rocks-large.glb",
+        "sha256": "7ea1ee769eb063b192c3c3744cd32a11616320f7ca491fbe23289552f6655595"
+      },
+      {
+        "path": "web-game/public/assets/environment/ruins/stairs-stone.glb",
+        "sha256": "ec21b1d65c04ba6384734c31ac542bb4015541e652c411796fd7bcf292e6413c"
+      },
+      {
+        "path": "web-game/public/assets/environment/ruins/tower-base.glb",
+        "sha256": "575e6463b9bc58b8294690b2c1a15409b0624e0253af1a215bf67ea5e9cbaaba"
+      },
+      {
+        "path": "web-game/public/assets/environment/ruins/wall-doorway.glb",
+        "sha256": "8daf5cccceace888d51d74b0e0254e192004faf926e07f1b28e94191879af3a6"
+      },
+      {
+        "path": "web-game/public/assets/environment/ruins/wall-half.glb",
+        "sha256": "4f0baca90eb52d96717aaabf36db98f1f2b554876f44da533b57dd92b6f67965"
+      },
+      {
+        "path": "web-game/public/assets/environment/ruins/wall-pillar.glb",
+        "sha256": "22d359abfaa3cf3dc5a2fece09a108024a07a4e263b21a4a0689da0e630699ed"
+      },
+      {
+        "path": "web-game/public/assets/environment/hdri/snowy_forest_1k.hdr",
+        "sha256": "0c3bd168c04dacc5c15002cabf0fb3c682500eb49befa53627c0f8eb52aa4baf"
+      },
+      {
+        "path": "web-game/public/assets/environment/materials/castle_brick_01/castle_brick_01_arm_1k.jpg",
+        "sha256": "61039af9cead766f482877f6a7d605a1935c6a2d2923d789d71c418a4b447b6e"
+      },
+      {
+        "path": "web-game/public/assets/environment/materials/castle_brick_01/castle_brick_01_diff_1k.jpg",
+        "sha256": "3823fdc4bcb37cc7b26fd7e3b2a80e82f5a23354d22d84eb0ca277909f923b2c"
+      },
+      {
+        "path": "web-game/public/assets/environment/materials/castle_brick_01/castle_brick_01_nor_gl_1k.jpg",
+        "sha256": "f3c4c0538fd5c3f9e1aabcb0169fbbc3ac2883ed5544f05d9008d2736a2899de"
+      },
+      {
+        "path": "web-game/public/assets/environment/materials/mossy_cobblestone/mossy_cobblestone_arm_1k.jpg",
+        "sha256": "8d737b10700257d179dc0413f278477c1bdc79d346f2bf6e8b504e850bde7c82"
+      },
+      {
+        "path": "web-game/public/assets/environment/materials/mossy_cobblestone/mossy_cobblestone_diff_1k.jpg",
+        "sha256": "105d6209ff99952ca316e814eebf06c1c3cb244da62184137a97e29aee74b7d7"
+      },
+      {
+        "path": "web-game/public/assets/environment/materials/mossy_cobblestone/mossy_cobblestone_nor_gl_1k.jpg",
+        "sha256": "32a128c921cf0311798ebb6c6a766db900a10419233c87cc52f8d226b2aa4cc0"
+      }
+    ]
+  },
+  "changedFiles": {
+    "sourceAndConfig": [
+      "web-game/README.md",
+      "web-game/index.html",
+      "web-game/public/assets/README.md",
+      "web-game/public/assets/manifest.json",
+      "web-game/src/diagnostics/CowReviewHarness.ts",
+      "web-game/src/diagnostics/captureHooks.ts",
+      "web-game/src/main.ts",
+      "web-game/src/render/adapters/RenderBridge.ts",
+      "web-game/src/render/app/GameApp.ts",
+      "web-game/src/render/app/createRenderer.ts",
+      "web-game/src/render/app/createScene.ts",
+      "web-game/src/render/loaders/AssetRegistry.ts",
+      "web-game/src/render/objects/ArenaView.ts",
+      "web-game/src/render/objects/CharacterViews.ts",
+      "web-game/src/render/objects/CombatFx.ts",
+      "web-game/src/styles.css"
+    ],
+    "runtimeAssets": 19,
+    "candidateEvidence": [
+      "ArtSource/P30/Round002/S01.png",
+      "ArtSource/P30/Round002/S02.png",
+      "ArtSource/P30/Round002/S04.png",
+      "ArtSource/P30/Round002/receipt.json"
+    ],
+    "round001Modified": false,
+    "gitActionsPerformed": false
+  },
+  "validation": [
+    {
+      "command": "npm run typecheck",
+      "status": "pass",
+      "detail": "TypeScript noEmit completed with exit code 0."
+    },
+    {
+      "command": "npm run lint",
+      "status": "pass",
+      "detail": "ESLint completed with exit code 0."
+    },
+    {
+      "command": "npm run test",
+      "status": "pass",
+      "detail": "Vitest: 2 files passed, 5 tests passed."
+    },
+    {
+      "command": "npm run build",
+      "status": "pass",
+      "detail": "TypeScript and Vite 8.2.0 production build passed; 46 modules transformed."
+    },
+    {
+      "command": "npm run smoke",
+      "status": "pass",
+      "detail": "Playwright: 3 browser tests passed in 33.1 seconds, including deterministic replay and context-loss restoration."
+    }
+  ],
+  "observedWarnings": [
+    "Rapier reports deprecated initialization parameters inherited from the existing foundation.",
+    "Three.js 0.185 warns that RGBELoader is deprecated in favor of HDRLoader; RGBELoader was retained because the Round002 prescription explicitly requires it.",
+    "Headless Chromium reports KHR_parallel_shader_compile unavailable.",
+    "Headless capture produced non-fatal GPU ReadPixels stall warnings.",
+    "Vite reports the production JavaScript chunk is larger than 500 kB after minification.",
+    "Playwright reports that NO_COLOR is ignored because FORCE_COLOR is set."
+  ],
+  "knownCarriedFailures": [
+    {
+      "id": "camera-obstruction",
+      "status": "pending-unchanged",
+      "evidence": "telemetry reports implemented=false, status=pending, telemetryHook=true; the S01 foreground pillar remains deliberately visible."
+    },
+    {
+      "id": "camera-projection",
+      "status": "unchanged",
+      "evidence": "configured FOV/near/far remains 58/0.08/110 rather than the requested 50/0.08/120."
+    },
+    {
+      "id": "camera-look-pointer-lock",
+      "status": "not-remediated",
+      "evidence": "Round001 camera.look rejection and headed WrongDocumentError path were outside this presentation pass."
+    },
+    {
+      "id": "pause-held-input",
+      "status": "not-remediated",
+      "evidence": "Escape still does not explicitly clear held movement input."
+    },
+    {
+      "id": "cold-ready",
+      "status": "fails-budget",
+      "evidence": "this headless production run reached ready in 3423 ms after the API was observed and 4357 ms wall time from navigation, above 2500 ms."
+    },
+    {
+      "id": "reset-camera-shake",
+      "status": "not-remediated",
+      "evidence": "combat-shake reset determinism remains outside this presentation pass."
+    }
+  ],
+  "assetLimitations": [
+    "The source claymore GLB exports MASK materials with baseColorFactor alpha 0; the runtime narrowly normalizes those weapon materials to opaque and records no fallback.",
+    "The 65-joint universal combat/zombie carrier is loaded and retained but is not retargeted onto the native 50-joint zombie rig; the Hollow uses its native Idle, HitReact, and Death clips.",
+    "The full female-ranger outfit is used as the authored hero instead of a layered base/outfit assembly.",
+    "This receipt documents builder evidence only; an independent critic must determine the visual and full gate verdict."
+  ]
+}

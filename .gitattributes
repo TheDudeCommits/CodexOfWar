@@ -62,6 +62,23 @@ game/Assets/CodexOfWar/Heroes/P10/Round016/**/*.png filter=lfs diff=lfs merge=lf
 ArtSource/P10/Round017/**/*.png filter=lfs diff=lfs merge=lfs -text
 game/Assets/CodexOfWar/Heroes/P10/Round017/**/*.png filter=lfs diff=lfs merge=lfs -text
 
+# P30 review imagery is binary evidence; keep all rounds in LFS without
+# capturing adjacent Markdown or JSON critic records.
+ArtSource/P30/**/*.png filter=lfs diff=lfs merge=lfs -text
+
+# P31 curated binaries and their deliberately duplicated browser payload use
+# LFS. Source manifests, receipts, documentation, and code remain normal text.
+WebAssetSource/P31/processed/**/*.hdr filter=lfs diff=lfs merge=lfs -text
+WebAssetSource/P31/processed/**/*.jpg filter=lfs diff=lfs merge=lfs -text
+WebAssetSource/P31/processed/**/*.jpeg filter=lfs diff=lfs merge=lfs -text
+WebAssetSource/P31/processed/**/*.png filter=lfs diff=lfs merge=lfs -text
+WebAssetSource/P31/processed/**/*.ogg filter=lfs diff=lfs merge=lfs -text
+web-game/public/assets/**/*.hdr filter=lfs diff=lfs merge=lfs -text
+web-game/public/assets/**/*.jpg filter=lfs diff=lfs merge=lfs -text
+web-game/public/assets/**/*.jpeg filter=lfs diff=lfs merge=lfs -text
+web-game/public/assets/**/*.png filter=lfs diff=lfs merge=lfs -text
+web-game/public/assets/**/*.ogg filter=lfs diff=lfs merge=lfs -text
+
 # New dashboard evidence captures are durable binary artifacts.
 progress/public/captures/**/*.png filter=lfs diff=lfs merge=lfs -text
 
@@ -71,3 +88,5 @@ ArtSource/P10/Round002/ThirdParty/Quaternius/License_Standard.txt binary
 ArtSource/P10/Round003/ThirdParty/BlenderStudioRain/LICENSE-CC-BY-4.0.txt binary
 ArtSource/P10/Round004/ThirdParty/BlenderStudioRain/LICENSE-CC-BY-4.0.txt binary
 ArtSource/P10/Round005/ThirdParty/BlenderStudioEinar/LICENSE-CC-BY-4.0.txt binary
+WebAssetSource/P31/licenses/**/*.txt binary
+WebAssetSource/P31/processed/quaternius/licenses/**/*.txt binary

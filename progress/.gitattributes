@@ -1,0 +1,4 @@
+# Keep the standalone Sites source repository lightweight while preserving
+# exact content-addressed identities for durable dashboard imagery.
+public/captures/**/*.png filter=lfs diff=lfs merge=lfs -text
+public/social-card.png filter=lfs diff=lfs merge=lfs -text

@@ -1,0 +1,129 @@
+{
+  "schema": "cow.public-browser-critic.v1",
+  "piece": "P30",
+  "round": 1,
+  "date": "2026-08-01",
+  "status": "rejected-foundation-evidence",
+  "acceptanceScope": "This round is rejected foundation evidence, not AAA acceptance.",
+  "verdict": {
+    "result": "FAIL",
+    "overallScore": 28,
+    "maximumScore": 100,
+    "categoryFloor": 1,
+    "categoryMaximum": 10,
+    "candidateWins": 0,
+    "comparisonCount": 6
+  },
+  "auditEnvironment": {
+    "context": "fresh headed production build",
+    "browser": "Google Chrome for Testing 151.0.7922.34",
+    "headed": true,
+    "hardwareAccelerated": true,
+    "renderer": "WebGL2 · ANGLE Metal Renderer: Apple M2",
+    "viewport": "1600×900",
+    "deviceScaleFactor": 1
+  },
+  "deterministicReplays": {
+    "tapeA": {
+      "mechanicsPass": true,
+      "simulationSnapshotsExactAcrossTwoRuns": true,
+      "eventsExactAcrossTwoRuns": true,
+      "cameraPresentationExactAcrossTwoRuns": false
+    },
+    "tapeB": {
+      "pass": true,
+      "endingTargetHp": 100,
+      "hitCount": 0
+    }
+  },
+  "validatedPasses": {
+    "fixedSurface": {
+      "pass": true,
+      "rendererSize": "1600×900",
+      "rendererPixelRatio": 1,
+      "viewportResizeStable": true,
+      "highDpiStable": true
+    },
+    "contextRecovery": {
+      "pass": true,
+      "statePreserved": true,
+      "postRestoreRender": true,
+      "rendererErrors": 0,
+      "webglErrors": 0
+    },
+    "warmRuntime": {
+      "pass": true,
+      "warmupFrames": 120,
+      "medianMilliseconds": 16.7,
+      "p95Milliseconds": 18.6,
+      "p99Milliseconds": 18.7,
+      "drawCalls": 82,
+      "triangles": 14294,
+      "textures": 3,
+      "geometries": 43
+    }
+  },
+  "hardFailures": [
+    "Camera obstruction is absent and the S01 pillar occludes roughly the left quarter of the playfield.",
+    "Camera presentation is nondeterministic after reset and replay.",
+    "The pointer-lock and camera-look path failed in the headed audit.",
+    "The visual gate failed at 28/100 with a 1/10 floor and 0/6 candidate wins."
+  ],
+  "additionalGateFailures": {
+    "coldReady": {
+      "observedSeconds": 2.94,
+      "targetSeconds": 2.5,
+      "pass": false
+    },
+    "cameraProjection": {
+      "observed": {
+        "fovDegrees": 58,
+        "farMeters": 110
+      },
+      "required": {
+        "fovDegrees": 50,
+        "farMeters": 120
+      },
+      "pass": false
+    },
+    "pauseInputRelease": {
+      "pass": false,
+      "observation": "A held movement key survives pause and moves the player on resume."
+    }
+  },
+  "assetReadiness": {
+    "status": "provenance-ready-not-integrated",
+    "curatedRuntimeSetMegabytes": 27.3,
+    "receiptFiles": {
+      "matched": 80,
+      "total": 80
+    },
+    "glbImports": {
+      "passed": 16,
+      "total": 16
+    },
+    "ignoredRawCacheMegabytes": 475.3,
+    "integrationState": "The curated set is validated and ready; neither it nor the ignored raw cache is integrated yet."
+  },
+  "captures": [
+    {
+      "id": "S01",
+      "path": "/captures/P30/round-001/S01.png",
+      "role": "Camera-obstruction failure evidence"
+    },
+    {
+      "id": "S02",
+      "path": "/captures/P30/round-001/S02.png",
+      "role": "Clean Tape A baseline at tick 23"
+    },
+    {
+      "id": "S04",
+      "path": "/captures/P30/round-001/S04.png",
+      "role": "Processed-hit evidence immediately after tick 33"
+    }
+  ],
+  "primaryGap": {
+    "id": "prototype_grade_presentation_layer",
+    "prescription": "Replace only the hero, Hollow, and one camera-facing arena sector with validated authored GLBs and PBR materials; wire idle, locomotion, startup, active, recovery, hit, and death clips; add one bounded contact VFX stack; recapture S01–S06 while retaining the current resource ceilings."
+  }
+}

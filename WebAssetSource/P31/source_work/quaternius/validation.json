@@ -1,0 +1,486 @@
+{
+  "files": {
+    "animations/combat_zombie.glb": {
+      "blender_reimport": {
+        "actions": [
+          "Sword_Regular_A",
+          "Zombie_Idle_Loop",
+          "Zombie_Scratch",
+          "Zombie_Walk_Fwd_Loop"
+        ],
+        "armatures": 1,
+        "bones": 65,
+        "bounds_max": [
+          0.951058,
+          1.0,
+          1.7138
+        ],
+        "bounds_min": [
+          -0.951058,
+          -1.0,
+          -1.0
+        ],
+        "bounds_size": [
+          1.902116,
+          2.0,
+          2.7138
+        ],
+        "images": [],
+        "mesh_objects": 2,
+        "objects": 3,
+        "triangles": 13823,
+        "vertices": 8590
+      },
+      "bytes": 876188,
+      "glb": {
+        "animations": [
+          "Sword_Regular_A",
+          "Zombie_Idle_Loop",
+          "Zombie_Scratch",
+          "Zombie_Walk_Fwd_Loop"
+        ],
+        "asset": {
+          "generator": "Khronos glTF Blender I/O v5.2.39",
+          "version": "2.0"
+        },
+        "extensions_used": [],
+        "external_uris": [],
+        "images": 0,
+        "joint_count": 65,
+        "joint_sequence_sha256": "32702abb0d4c46cf76d2b7d846603c56fd27bbb2c2e65aa6af1e155725615722",
+        "materials": 2,
+        "meshes": 1,
+        "nodes": 67,
+        "scenes": 1,
+        "skins": 1
+      },
+      "sha256": "66bd8332a4c58d94114cf23444dfc8de3a399234e2cd62012efdb5d78f6c5f9e",
+      "status": "pass"
+    },
+    "animations/player_core.glb": {
+      "blender_reimport": {
+        "actions": [
+          "Death01",
+          "Hit_Chest",
+          "Idle_Loop",
+          "Roll",
+          "Sprint_Loop",
+          "Walk_Loop"
+        ],
+        "armatures": 1,
+        "bones": 65,
+        "bounds_max": [
+          0.951058,
+          1.0,
+          1.778374
+        ],
+        "bounds_min": [
+          -0.951058,
+          -1.0,
+          -1.0
+        ],
+        "bounds_size": [
+          1.902116,
+          2.0,
+          2.778374
+        ],
+        "images": [],
+        "mesh_objects": 2,
+        "objects": 3,
+        "triangles": 13823,
+        "vertices": 8590
+      },
+      "bytes": 1010988,
+      "glb": {
+        "animations": [
+          "Death01",
+          "Hit_Chest",
+          "Idle_Loop",
+          "Roll",
+          "Sprint_Loop",
+          "Walk_Loop"
+        ],
+        "asset": {
+          "generator": "Khronos glTF Blender I/O v5.2.39",
+          "version": "2.0"
+        },
+        "extensions_used": [],
+        "external_uris": [],
+        "images": 0,
+        "joint_count": 65,
+        "joint_sequence_sha256": "32702abb0d4c46cf76d2b7d846603c56fd27bbb2c2e65aa6af1e155725615722",
+        "materials": 2,
+        "meshes": 1,
+        "nodes": 67,
+        "scenes": 1,
+        "skins": 1
+      },
+      "sha256": "261156c05d74ea8cded6da1b6853feb7e9c89721e782536d0813a0c15f47fdc6",
+      "status": "pass"
+    },
+    "models/claymore.glb": {
+      "blender_reimport": {
+        "actions": [],
+        "armatures": 0,
+        "bones": 0,
+        "bounds_max": [
+          0.133465,
+          0.037024,
+          1.712194
+        ],
+        "bounds_min": [
+          -0.133465,
+          -0.037024,
+          -0.087806
+        ],
+        "bounds_size": [
+          0.26693,
+          0.074047,
+          1.8
+        ],
+        "images": [],
+        "mesh_objects": 1,
+        "objects": 1,
+        "triangles": 1032,
+        "vertices": 1529
+      },
+      "bytes": 47272,
+      "glb": {
+        "animations": [],
+        "asset": {
+          "generator": "Khronos glTF Blender I/O v5.2.39",
+          "version": "2.0"
+        },
+        "extensions_used": [],
+        "external_uris": [],
+        "images": 0,
+        "joint_count": 0,
+        "joint_sequence_sha256": null,
+        "materials": 5,
+        "meshes": 1,
+        "nodes": 1,
+        "scenes": 1,
+        "skins": 0
+      },
+      "sha256": "ec545aa46464893348dbeec42adb87b203643f9c7d6b4c39c2074721f9a73866",
+      "status": "pass"
+    },
+    "models/female_ranger_outfit.glb": {
+      "blender_reimport": {
+        "actions": [],
+        "armatures": 1,
+        "bones": 65,
+        "bounds_max": [
+          0.951058,
+          1.0,
+          1.794079
+        ],
+        "bounds_min": [
+          -0.951058,
+          -1.0,
+          -1.0
+        ],
+        "bounds_size": [
+          1.902116,
+          2.0,
+          2.794079
+        ],
+        "images": [
+          {
+            "height": 1024,
+            "name": "T_Ranger_BaseColor",
+            "packed": true,
+            "width": 1024
+          },
+          {
+            "height": 1024,
+            "name": "T_Ranger_Normal",
+            "packed": true,
+            "width": 1024
+          },
+          {
+            "height": 1024,
+            "name": "T_Ranger_ORM",
+            "packed": true,
+            "width": 1024
+          },
+          {
+            "height": 1024,
+            "name": "T_Regular_Female_Dark_BaseColor",
+            "packed": true,
+            "width": 1024
+          },
+          {
+            "height": 1024,
+            "name": "T_Regular_Female_Normal",
+            "packed": true,
+            "width": 1024
+          },
+          {
+            "height": 1024,
+            "name": "T_Regular_Female_Roughness",
+            "packed": true,
+            "width": 1024
+          }
+        ],
+        "mesh_objects": 10,
+        "objects": 11,
+        "triangles": 27046,
+        "vertices": 26155
+      },
+      "bytes": 8199776,
+      "glb": {
+        "animations": [],
+        "asset": {
+          "generator": "Khronos glTF Blender I/O v5.2.39",
+          "version": "2.0"
+        },
+        "extensions_used": [],
+        "external_uris": [],
+        "images": 6,
+        "joint_count": 65,
+        "joint_sequence_sha256": "32702abb0d4c46cf76d2b7d846603c56fd27bbb2c2e65aa6af1e155725615722",
+        "materials": 2,
+        "meshes": 9,
+        "nodes": 75,
+        "scenes": 1,
+        "skins": 1
+      },
+      "sha256": "600029a31ecda96d4ee19d67640cfbe3a3fd9de57e9b08cac47ea079340ee945",
+      "status": "pass"
+    },
+    "models/universal_hair_long.glb": {
+      "blender_reimport": {
+        "actions": [],
+        "armatures": 1,
+        "bones": 65,
+        "bounds_max": [
+          0.951058,
+          1.0,
+          1.777229
+        ],
+        "bounds_min": [
+          -0.951058,
+          -1.0,
+          -1.0
+        ],
+        "bounds_size": [
+          1.902116,
+          2.0,
+          2.777229
+        ],
+        "images": [
+          {
+            "height": 1024,
+            "name": "T_Hair_2_BaseColor",
+            "packed": true,
+            "width": 1024
+          },
+          {
+            "height": 1024,
+            "name": "T_Hair_2_Normal",
+            "packed": true,
+            "width": 1024
+          }
+        ],
+        "mesh_objects": 2,
+        "objects": 3,
+        "triangles": 2986,
+        "vertices": 3122
+      },
+      "bytes": 2819560,
+      "glb": {
+        "animations": [],
+        "asset": {
+          "generator": "Khronos glTF Blender I/O v5.2.39",
+          "version": "2.0"
+        },
+        "extensions_used": [],
+        "external_uris": [],
+        "images": 2,
+        "joint_count": 65,
+        "joint_sequence_sha256": "32702abb0d4c46cf76d2b7d846603c56fd27bbb2c2e65aa6af1e155725615722",
+        "materials": 1,
+        "meshes": 1,
+        "nodes": 67,
+        "scenes": 1,
+        "skins": 1
+      },
+      "sha256": "3cd401a782200a144dfb670caa8ff3c0efdd6ca03f3736888063e38ea6c06fee",
+      "status": "pass"
+    },
+    "models/universal_superhero_female.glb": {
+      "blender_reimport": {
+        "actions": [],
+        "armatures": 1,
+        "bones": 65,
+        "bounds_max": [
+          0.951058,
+          1.0,
+          1.766643
+        ],
+        "bounds_min": [
+          -0.951058,
+          -1.0,
+          -1.0
+        ],
+        "bounds_size": [
+          1.902116,
+          2.0,
+          2.766643
+        ],
+        "images": [
+          {
+            "height": 256,
+            "name": "T_Eye_Brown",
+            "packed": true,
+            "width": 256
+          },
+          {
+            "height": 256,
+            "name": "T_Eye_Normal_png",
+            "packed": true,
+            "width": 256
+          },
+          {
+            "height": 1024,
+            "name": "T_Hair_2_BaseColor",
+            "packed": true,
+            "width": 1024
+          },
+          {
+            "height": 1024,
+            "name": "T_Hair_2_Normal",
+            "packed": true,
+            "width": 1024
+          },
+          {
+            "height": 1024,
+            "name": "T_Superhero_Female_Dark_BaseColor",
+            "packed": true,
+            "width": 1024
+          },
+          {
+            "height": 1024,
+            "name": "T_Superhero_Female_Normal",
+            "packed": true,
+            "width": 1024
+          },
+          {
+            "height": 1024,
+            "name": "T_Superhero_Female_Roughness",
+            "packed": true,
+            "width": 1024
+          }
+        ],
+        "mesh_objects": 4,
+        "objects": 5,
+        "triangles": 15140,
+        "vertices": 8890
+      },
+      "bytes": 6446636,
+      "glb": {
+        "animations": [],
+        "asset": {
+          "generator": "Khronos glTF Blender I/O v5.2.39",
+          "version": "2.0"
+        },
+        "extensions_used": [],
+        "external_uris": [],
+        "images": 7,
+        "joint_count": 65,
+        "joint_sequence_sha256": "32702abb0d4c46cf76d2b7d846603c56fd27bbb2c2e65aa6af1e155725615722",
+        "materials": 3,
+        "meshes": 3,
+        "nodes": 69,
+        "scenes": 1,
+        "skins": 1
+      },
+      "sha256": "fc150c32d9592a812ca981a5375ece8118a1af665fe583e1ed06009bdda88684",
+      "status": "pass"
+    },
+    "models/zombie_basic.glb": {
+      "blender_reimport": {
+        "actions": [
+          "Death",
+          "HitReact",
+          "Idle",
+          "Idle_Attack",
+          "Run",
+          "Walk"
+        ],
+        "armatures": 1,
+        "bones": 50,
+        "bounds_max": [
+          0.951058,
+          1.0,
+          1.142789
+        ],
+        "bounds_min": [
+          -0.951058,
+          -1.0,
+          -1.0
+        ],
+        "bounds_size": [
+          1.902116,
+          2.0,
+          2.142789
+        ],
+        "images": [
+          {
+            "height": 512,
+            "name": "Zombie_Atlas",
+            "packed": true,
+            "width": 512
+          }
+        ],
+        "mesh_objects": 3,
+        "objects": 4,
+        "triangles": 7902,
+        "vertices": 4904
+      },
+      "bytes": 582868,
+      "glb": {
+        "animations": [
+          "Death",
+          "HitReact",
+          "Idle",
+          "Idle_Attack",
+          "Run",
+          "Walk"
+        ],
+        "asset": {
+          "generator": "Khronos glTF Blender I/O v5.2.39",
+          "version": "2.0"
+        },
+        "extensions_used": [],
+        "external_uris": [],
+        "images": 1,
+        "joint_count": 50,
+        "joint_sequence_sha256": "5578533bd94c45435e401c392d75c244733d4f1a1505230aa1d9206440ed46ab",
+        "materials": 1,
+        "meshes": 2,
+        "nodes": 53,
+        "scenes": 1,
+        "skins": 1
+      },
+      "sha256": "f199c9bdea193312fae5e13e045d4677e6b68bced027178252e8de61c33d5ac4",
+      "status": "pass"
+    }
+  },
+  "overall_status": "pass",
+  "universal_rig_compatibility": {
+    "files": [
+      "animations/combat_zombie.glb",
+      "animations/player_core.glb",
+      "models/female_ranger_outfit.glb",
+      "models/universal_hair_long.glb",
+      "models/universal_superhero_female.glb"
+    ],
+    "joint_count": 65,
+    "joint_sequence_sha256": "32702abb0d4c46cf76d2b7d846603c56fd27bbb2c2e65aa6af1e155725615722",
+    "note": "Joint schema matches; body proportions/rest poses remain asset-specific.",
+    "status": "pass"
+  },
+  "validator": "Blender 5.2.0 LTS plus direct GLB 2.0 structural checks"
+}

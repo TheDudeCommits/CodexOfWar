@@ -1,0 +1,492 @@
+:root {
+  color-scheme: dark;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --ink: #07090c;
+  --bone: #eadfc9;
+  --muted: #8e969f;
+  --ember: #e05238;
+  --ember-bright: #ff8a55;
+  --aether: #78d7e8;
+  --panel: rgb(10 13 17 / 78%);
+  --line: rgb(225 219 201 / 20%);
+  background: var(--ink);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#game-root {
+  width: 100%;
+  height: 100%;
+  min-width: 320px;
+  min-height: 480px;
+  margin: 0;
+  overflow: hidden;
+}
+
+body {
+  background:
+    radial-gradient(circle at 50% 40%, #171417 0, #07090c 68%),
+    #07090c;
+  user-select: none;
+}
+
+#game-root {
+  position: relative;
+  isolation: isolate;
+}
+
+#game-root.is-review-mode {
+  width: 1600px;
+  height: 900px;
+}
+
+#game-canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  cursor: crosshair;
+  outline: none;
+}
+
+.hud {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.vignette {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgb(0 0 0 / 34%), transparent 18%, transparent 76%, rgb(0 0 0 / 42%)),
+    radial-gradient(ellipse at center, transparent 54%, rgb(0 0 0 / 42%) 100%);
+  mix-blend-mode: multiply;
+  opacity: 0.66;
+}
+
+.vignette::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  opacity: 0.07;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.7'/%3E%3C/svg%3E");
+}
+
+.objective-chip,
+.enemy-status,
+.player-status {
+  position: absolute;
+  color: var(--bone);
+  filter: drop-shadow(0 8px 18px rgb(0 0 0 / 45%));
+}
+
+.objective-chip {
+  top: max(28px, env(safe-area-inset-top));
+  left: max(32px, env(safe-area-inset-left));
+  display: grid;
+  min-width: 250px;
+  gap: 3px;
+  padding: 12px 22px 13px 17px;
+  overflow: hidden;
+  border-left: 2px solid var(--ember);
+  background:
+    linear-gradient(105deg, rgb(11 13 16 / 92%) 0%, rgb(11 13 16 / 70%) 78%, transparent),
+    repeating-linear-gradient(90deg, transparent 0 24px, rgb(255 255 255 / 2%) 24px 25px);
+  clip-path: polygon(0 0, calc(100% - 17px) 0, 100% 50%, calc(100% - 17px) 100%, 0 100%);
+  transition: border-color 240ms ease, filter 240ms ease;
+}
+
+.objective-chip::before {
+  position: absolute;
+  top: 0;
+  right: 14px;
+  width: 1px;
+  height: 100%;
+  content: "";
+  background: linear-gradient(transparent, var(--line), transparent);
+  transform: rotate(18deg);
+}
+
+.objective-chip .eyebrow {
+  color: var(--ember-bright);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.22em;
+}
+
+.objective-chip strong {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 0.045em;
+  text-transform: uppercase;
+}
+
+.objective-sub {
+  color: var(--muted);
+  font-size: 10px;
+  letter-spacing: 0.07em;
+}
+
+.objective-chip.is-complete {
+  border-color: var(--aether);
+  filter: drop-shadow(0 0 20px rgb(120 215 232 / 22%));
+}
+
+.objective-chip.is-complete .eyebrow {
+  color: var(--aether);
+}
+
+.enemy-status {
+  top: max(34px, env(safe-area-inset-top));
+  right: max(34px, env(safe-area-inset-right));
+  width: min(300px, 30vw);
+}
+
+.enemy-heading,
+.meter-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+  font-size: 10px;
+  font-weight: 750;
+  letter-spacing: 0.18em;
+}
+
+.enemy-heading span:last-child {
+  color: #c6b8a4;
+  font-variant-numeric: tabular-nums;
+}
+
+.meter {
+  position: relative;
+  height: 6px;
+  overflow: hidden;
+  border: 1px solid rgb(229 222 205 / 22%);
+  background: rgb(0 0 0 / 48%);
+  clip-path: polygon(0 0, 100% 0, calc(100% - 4px) 100%, 4px 100%);
+}
+
+.meter::after {
+  position: absolute;
+  inset: 1px;
+  content: "";
+  opacity: 0.22;
+  background: repeating-linear-gradient(90deg, transparent 0 23px, #07090c 23px 24px);
+}
+
+.meter i {
+  display: block;
+  width: 100%;
+  height: 100%;
+  transform-origin: left center;
+  transition: width 170ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.meter--enemy {
+  height: 8px;
+  border-color: rgb(224 82 56 / 48%);
+}
+
+.meter--enemy i {
+  background: linear-gradient(90deg, #6e1917, var(--ember-bright));
+  box-shadow: 0 0 14px rgb(224 82 56 / 78%);
+}
+
+.meter--enemy.is-critical i {
+  animation: critical-pulse 700ms ease-in-out infinite alternate;
+}
+
+.player-status {
+  bottom: max(30px, env(safe-area-inset-bottom));
+  left: max(32px, env(safe-area-inset-left));
+  display: flex;
+  align-items: end;
+  gap: 13px;
+}
+
+.sigil {
+  display: grid;
+  width: 48px;
+  height: 48px;
+  place-items: center;
+  border: 1px solid rgb(120 215 232 / 44%);
+  color: var(--aether);
+  background: radial-gradient(circle, rgb(37 87 100 / 70%), rgb(6 10 13 / 88%) 64%);
+  font-family: Georgia, serif;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  clip-path: polygon(50% 0, 92% 22%, 100% 72%, 65% 100%, 18% 92%, 0 45%, 20% 12%);
+  text-shadow: 0 0 9px var(--aether);
+}
+
+.player-meters {
+  width: min(260px, 38vw);
+}
+
+.meter-label {
+  margin-bottom: 4px;
+  color: #c4baaa;
+  font-size: 8px;
+}
+
+.meter-label--small {
+  margin-top: 7px;
+}
+
+.meter--health {
+  height: 7px;
+  border-color: rgb(120 215 232 / 36%);
+}
+
+.meter--health i {
+  background: linear-gradient(90deg, #27798d, var(--aether));
+  box-shadow: 0 0 12px rgb(120 215 232 / 50%);
+}
+
+.meter--stamina {
+  height: 4px;
+  border-color: rgb(218 198 137 / 30%);
+}
+
+.meter--stamina i {
+  background: linear-gradient(90deg, #91783e, #e7d487);
+}
+
+.control-hint {
+  position: absolute;
+  bottom: max(28px, env(safe-area-inset-bottom));
+  left: 50%;
+  display: flex;
+  gap: 16px;
+  padding: 9px 14px;
+  border-top: 1px solid var(--line);
+  color: #a9aaab;
+  background: linear-gradient(90deg, transparent, rgb(7 9 12 / 74%) 10%, rgb(7 9 12 / 74%) 90%, transparent);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  transform: translateX(-50%);
+  transition: opacity 600ms ease, transform 600ms ease;
+  animation: hint-arrive 500ms 700ms both;
+  white-space: nowrap;
+}
+
+.control-hint.is-hidden {
+  opacity: 0;
+  transform: translate(-50%, 9px);
+}
+
+kbd {
+  margin-right: 3px;
+  color: var(--bone);
+  font: inherit;
+}
+
+.lock-reticle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 54px;
+  height: 54px;
+  opacity: 0;
+  transition: opacity 140ms ease;
+}
+
+.lock-reticle.is-visible {
+  opacity: 1;
+}
+
+.lock-reticle span {
+  position: absolute;
+  inset: 3px;
+  border: 1px solid rgb(255 138 85 / 78%);
+  animation: reticle-spin 8s linear infinite;
+  clip-path: polygon(0 0, 30% 0, 30% 3%, 3% 3%, 3% 30%, 0 30%, 0 0, 70% 0, 100% 0, 100% 30%, 97% 30%, 97% 3%, 70% 3%, 70% 0, 100% 70%, 100% 100%, 70% 100%, 70% 97%, 97% 97%, 97% 70%, 100% 70%, 30% 100%, 0 100%, 0 70%, 3% 70%, 3% 97%, 30% 97%);
+}
+
+.lock-reticle b {
+  position: absolute;
+  top: 58px;
+  left: 50%;
+  color: var(--ember-bright);
+  font-size: 7px;
+  letter-spacing: 0.2em;
+  transform: translateX(-50%);
+}
+
+.toast {
+  position: absolute;
+  top: 27%;
+  left: 50%;
+  padding: 7px 18px;
+  border-block: 1px solid rgb(120 215 232 / 32%);
+  color: var(--aether);
+  background: linear-gradient(90deg, transparent, rgb(6 10 13 / 80%) 20%, rgb(6 10 13 / 80%) 80%, transparent);
+  font-family: Georgia, serif;
+  font-size: 13px;
+  letter-spacing: 0.16em;
+  opacity: 0;
+  transform: translate(-50%, 8px) scale(0.97);
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.toast.is-visible {
+  opacity: 1;
+  transform: translate(-50%, 0) scale(1);
+}
+
+.toast.is-danger {
+  border-color: rgb(224 82 56 / 42%);
+  color: var(--ember-bright);
+}
+
+.diagnostics {
+  position: absolute;
+  top: 112px;
+  right: 32px;
+  display: none;
+  min-width: 205px;
+  margin: 0;
+  padding: 11px 13px;
+  border: 1px solid rgb(120 215 232 / 24%);
+  color: #a8eaf5;
+  background: rgb(4 8 10 / 84%);
+  font: 10px/1.6 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  letter-spacing: 0.06em;
+  box-shadow: 0 8px 30px rgb(0 0 0 / 35%);
+}
+
+.diagnostics.is-visible {
+  display: block;
+}
+
+.context-overlay,
+.boot-error {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: none;
+  place-content: center;
+  justify-items: center;
+  gap: 8px;
+  color: var(--bone);
+  background: rgb(4 5 7 / 94%);
+  text-align: center;
+}
+
+.context-overlay.is-visible,
+.boot-error {
+  display: grid;
+}
+
+.context-overlay strong,
+.boot-error strong {
+  font-family: Georgia, serif;
+  font-size: 20px;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+}
+
+.context-overlay span,
+.boot-error span {
+  max-width: 420px;
+  color: var(--muted);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+}
+
+.context-mark {
+  display: grid;
+  width: 64px;
+  height: 64px;
+  margin-bottom: 14px;
+  place-items: center;
+  border: 1px solid var(--ember);
+  color: var(--ember-bright);
+  font-family: Georgia, serif;
+  clip-path: polygon(50% 0, 100% 30%, 80% 100%, 20% 100%, 0 30%);
+}
+
+@keyframes critical-pulse {
+  to { filter: brightness(1.8); }
+}
+
+@keyframes hint-arrive {
+  from { opacity: 0; transform: translate(-50%, 10px); }
+}
+
+@keyframes reticle-spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (max-width: 760px) {
+  .objective-chip {
+    top: 18px;
+    left: 18px;
+    min-width: 208px;
+    padding: 9px 18px 10px 13px;
+  }
+
+  .objective-chip strong {
+    font-size: 14px;
+  }
+
+  .objective-sub {
+    display: none;
+  }
+
+  .enemy-status {
+    top: 84px;
+    right: 18px;
+    width: 190px;
+  }
+
+  .player-status {
+    bottom: 22px;
+    left: 18px;
+  }
+
+  .player-meters {
+    width: 180px;
+  }
+
+  .sigil {
+    width: 40px;
+    height: 40px;
+  }
+
+  .control-hint {
+    right: 14px;
+    bottom: 86px;
+    left: auto;
+    display: grid;
+    gap: 5px;
+    padding: 8px 10px;
+    transform: none;
+  }
+
+  .control-hint.is-hidden {
+    transform: translateY(8px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

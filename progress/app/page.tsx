@@ -6,6 +6,7 @@ type PieceStatus =
   | "review-ready"
   | "criticized"
   | "revising"
+  | "paused"
   | "accepted";
 
 type Piece = {
@@ -20,7 +21,7 @@ type Piece = {
 type EvidenceAsset = {
   label: string;
   path: string;
-  sha256: string;
+  sha256?: string;
 };
 
 type Dashboard = {
@@ -43,26 +44,13 @@ type Dashboard = {
     builder: string;
     brief: string;
     facts: string[];
-    evidenceFingerprint: {
-      gitRevision: string;
-      gitState: string;
-      unityVersion: string;
-      urpVersion: string;
-      scene: string;
-      seed: number;
-      preset: string;
-      resolution: string;
-      capturedAtUtc: string;
-      renderSettingsSha256: string;
-      screenshotSha256: string;
-      captureContractSha256: string;
-    };
+    evidenceFingerprint: Record<string, string | number | boolean>;
     evidenceBundle: {
       roundLabel: string;
       status: string;
       manifestPath: string;
       s01: EvidenceAsset;
-      turntable: EvidenceAsset;
+      diagnostic: EvidenceAsset;
       metrics: Array<{
         label: string;
         value: string;
@@ -215,6 +203,7 @@ export default function Home() {
       "review-ready": 0,
       criticized: 0,
       revising: 0,
+      paused: 0,
       accepted: 0,
     },
   );
@@ -498,7 +487,7 @@ export default function Home() {
                 <div>
                   <p className="panel-label">Critic diagnostic</p>
                   <h3 id="evidence-heading">
-                    {dashboard.activeBuild.evidenceBundle.turntable.label}
+                    {dashboard.activeBuild.evidenceBundle.diagnostic.label}
                   </h3>
                 </div>
                 <span className="availability is-filed">
@@ -508,20 +497,27 @@ export default function Home() {
               </div>
               <a
                 className="turntable-link"
-                href={dashboard.activeBuild.evidenceBundle.turntable.path}
+                href={dashboard.activeBuild.evidenceBundle.diagnostic.path}
               >
                 <object
-                  aria-label={dashboard.activeBuild.evidenceBundle.turntable.label}
-                  data={dashboard.activeBuild.evidenceBundle.turntable.path}
+                  aria-label={dashboard.activeBuild.evidenceBundle.diagnostic.label}
+                  data={dashboard.activeBuild.evidenceBundle.diagnostic.path}
                   type="image/png"
                 />
               </a>
-              <div className="asset-hash">
-                <span>SHA-256</span>
-                <code>
-                  {dashboard.activeBuild.evidenceBundle.turntable.sha256}
-                </code>
-              </div>
+              {dashboard.activeBuild.evidenceBundle.diagnostic.sha256 ? (
+                <div className="asset-hash">
+                  <span>SHA-256</span>
+                  <code>
+                    {dashboard.activeBuild.evidenceBundle.diagnostic.sha256}
+                  </code>
+                </div>
+              ) : (
+                <div className="asset-hash">
+                  <span>Evidence class</span>
+                  <strong>Public candidate · rejected round</strong>
+                </div>
+              )}
             </div>
 
             <div className="evidence-ledger">
@@ -531,17 +527,21 @@ export default function Home() {
               </div>
 
               <dl className="evidence-file-hashes">
-                {[dashboard.activeBuild.evidenceBundle.s01,
-                  dashboard.activeBuild.evidenceBundle.turntable].map(
-                  (asset) => (
-                    <div key={asset.path}>
-                      <dt>{asset.label} SHA-256</dt>
-                      <dd>
+                {[
+                  dashboard.activeBuild.evidenceBundle.s01,
+                  dashboard.activeBuild.evidenceBundle.diagnostic,
+                ].map((asset) => (
+                  <div key={asset.path}>
+                    <dt>{asset.label}</dt>
+                    <dd>
+                      {asset.sha256 ? (
                         <code>{asset.sha256}</code>
-                      </dd>
-                    </div>
-                  ),
-                )}
+                      ) : (
+                        <a href={asset.path}>Open public candidate</a>
+                      )}
+                    </dd>
+                  </div>
+                ))}
               </dl>
 
               <dl className="evidence-metrics">
@@ -575,13 +575,13 @@ export default function Home() {
 
               <div className="evidence-links evidence-bundle-links">
                 <a href={dashboard.activeBuild.evidenceBundle.s01.path}>
-                  Open engine context
+                  Open candidate capture
                 </a>
-                <a href={dashboard.activeBuild.evidenceBundle.turntable.path}>
+                <a href={dashboard.activeBuild.evidenceBundle.diagnostic.path}>
                   Open diagnostic
                 </a>
                 <a href={dashboard.activeBuild.evidenceBundle.manifestPath}>
-                  Open P10 manifest
+                  Open public evidence record
                 </a>
               </div>
             </div>
