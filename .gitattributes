@@ -47,6 +47,10 @@ ArtSource/P10/Round009/**/*.png filter=lfs diff=lfs merge=lfs -text
 game/Assets/CodexOfWar/Heroes/P10/Round009/**/*.png filter=lfs diff=lfs merge=lfs -text
 ArtSource/P10/Round010/**/*.png filter=lfs diff=lfs merge=lfs -text
 game/Assets/CodexOfWar/Heroes/P10/Round010/**/*.png filter=lfs diff=lfs merge=lfs -text
+ArtSource/P10/Round011/**/*.png filter=lfs diff=lfs merge=lfs -text
+game/Assets/CodexOfWar/Heroes/P10/Round011/**/*.png filter=lfs diff=lfs merge=lfs -text
+ArtSource/P10/Round012/**/*.png filter=lfs diff=lfs merge=lfs -text
+game/Assets/CodexOfWar/Heroes/P10/Round012/**/*.png filter=lfs diff=lfs merge=lfs -text
 
 # New dashboard evidence captures are durable binary artifacts.
 progress/public/captures/**/*.png filter=lfs diff=lfs merge=lfs -text

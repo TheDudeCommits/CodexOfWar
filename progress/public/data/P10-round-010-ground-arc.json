@@ -1,0 +1,143 @@
+{
+  "schemaVersion": 1,
+  "piece": "P10",
+  "round": 10,
+  "status": "rejected-ground-arc-preflight",
+  "reviewType": "fresh-context Ground-Arc Arrest and composite 2D concept preflight",
+  "reviewedAt": "2026-08-01T02:00:00Z",
+  "artifactClass": "original 2D signature-force concept art",
+  "engineRun": false,
+  "actualGameCapturePerformed": false,
+  "unityCaptureFiled": false,
+  "threeDimensionalAssetFiled": false,
+  "gameReadyEvidenceFiled": false,
+  "builderAcceptedFrameFiled": true,
+  "isolatedGroundArcTargetPassed": false,
+  "paid3DGenerationAuthorized": false,
+  "source": {
+    "name": "Nyra Kestrel Ground-Arc Arrest signature force event",
+    "scope": "Original 2D concept evidence only; no gameplay, 3D model, finished game asset, or production-ready implementation claim.",
+    "creator": "OpenAI image generation via Codex",
+    "referencePixelsSuppliedToGeneration": false,
+    "receiptPath": "ArtSource/P10/Round010/GroundArcArrest/P10_Round010_GroundArcArrestReceipt.json",
+    "receiptSha256": "232191e121e6804739db75f3cfd969caf9815c5ecaeccc0f04f39e7497d2a2e0",
+    "readmePath": "ArtSource/P10/Round010/GroundArcArrest/README.md",
+    "readmeSha256": "b037657d9e31fd778e7fe68b1d3e0cc8f4920357bd9f0c4c09dad93da759ed2e",
+    "reviewPath": "ArtSource/P10/Round010/GroundArcArrest/P10_Round010_FreshGroundArcReview.json",
+    "reviewSha256": "fee67f1dbb37a4f3c40f3ba52e15421bfc1d1d9916d8c80cbff826570b27fa33"
+  },
+  "isolatedDecision": {
+    "verdict": "FAIL_ISOLATED_GROUND_ARC_ARREST_TARGET",
+    "strongestCandidate": "ground-arc-arrest-candidate-03",
+    "identityPreserved": true,
+    "attachedLeftYokePreserved": true,
+    "copperRoutePreserved": true,
+    "rightHipCapacitorPreserved": true,
+    "heavyRightLegEngineeringPreserved": true,
+    "oneWeaponContinuityPreserved": true,
+    "twoHandSameHiltContactPreserved": true,
+    "samuraiAdjacentTassetsRemoved": true,
+    "historicalOdachiCodingRemoved": true,
+    "nonHistoricalStormShearLanguageAchieved": true,
+    "singularOwnableStormShearSilhouetteAchieved": false,
+    "groundArcArrestFullBodyDecelerationAchieved": false,
+    "staticWidePoseRejected": true,
+    "finding": "The strongest frame meaningfully corrects the historical weapon and costume silhouette, but remains a carefully staged wide greatsword hold. Blade mass does not visibly drive one continuous arrest through the spine, scapulae, shoulders, elbows, wrists, pelvis, feet, cloth, plates, and conductor."
+  },
+  "visualReview": {
+    "score": 68,
+    "maximum": 100,
+    "passThreshold": 85,
+    "criticalFloorPerCategory": 7,
+    "observedMinimumCategoryScore": 6,
+    "thresholdResult": "FAIL",
+    "criticalFloorResult": "FAIL",
+    "verdict": "DENY_PAID_3D_GENERATION",
+    "comparisonCount": 6,
+    "candidateMetBenchmarkBarCount": 2,
+    "candidateBelowBenchmarkBarCount": 4,
+    "requiredCandidateMetBenchmarkBarCount": 5,
+    "benchmarkGateResult": "FAIL",
+    "benchmarkPolicy": "Aggregate blinded-comparison results only; no benchmark image, crop, comparison sheet, filename, path, or other benchmark pixel is published.",
+    "singleBiggestGap": "A genuinely arrested, mechanically unified force chain: the current image still reads as a wide posed greatsword hold because blade momentum does not visibly load the spine, scapulae, shoulders, elbows, wrists, pelvis, feet, cloth, plates, and conductor as one violent deceleration event.",
+    "categoryScores": {
+      "multiViewIdentityConsistency": 7,
+      "neutralModelingUtility": 8,
+      "anatomy": 6,
+      "faceEyesHair": 7,
+      "premiumLayeredCostumeAndMaterialSeparation": 7,
+      "silhouetteAndRoleRead": 7,
+      "functionalSameHiltTwoHandGrip": 8,
+      "weaponPlausibility": 6,
+      "avoidanceOfGenericCivilianPlasticFetishAndFranchiseCues": 6,
+      "benchmarkLevelAuthorship": 6
+    }
+  },
+  "decision": {
+    "result": "DENY_PAID_3D_GENERATION",
+    "paid3DGenerationAuthorized": false,
+    "unityLocked": true,
+    "instruction": "Preserve the corrected non-historical silhouette and solved contact, but do not begin paid 3D generation or Unity integration from this pack."
+  },
+  "limitations": [
+    "The filed image is original 2D concept art, not gameplay or game capture.",
+    "No actual game run was performed because this is a pre-Unity 2D concept gate.",
+    "No 3D mesh, topology, rig, deformation, UV, collision, animation, LOD, texture, performance, or game-ready claim is made.",
+    "The builder accepted candidate 03 for critic handoff; the independent critic rejected the isolated Ground-Arc Arrest target and complete composite gate.",
+    "The concept review cannot establish legal originality, exclusivity, copyright status, trademark clearance, or absence of all third-party similarity.",
+    "Paid 3D generation and Unity remain locked because the isolated target, total-score, category-floor, and blinded-comparison gates all failed."
+  ],
+  "conceptArt": [
+    {
+      "label": "CRITIC-REJECTED — builder-accepted Ground-Arc Arrest frame",
+      "disposition": "builder-accepted-critic-rejected-evidence",
+      "evidenceType": "Rejected 2D concept evidence — not gameplay, 3D, or game-ready evidence",
+      "publicPath": "/captures/P10/round-010-ground-arc/NyraKestrel_GroundArcArrest_CRITIC_REJECTED.png",
+      "sha256": "3cf1e4c8f798480d8f2c2e889943e2aba832e5a299337f0a800ffd1f68683df6",
+      "dimensions": {
+        "width": 1536,
+        "height": 1024
+      },
+      "format": "PNG",
+      "finding": "The non-historical storm-shear, open-leg silhouette, toe pivot, and heavy-right-leg load read clearly, but the complete body and equipment remain arranged around a held blade rather than arrested by its momentum."
+    }
+  ],
+  "builderAttempts": [
+    {
+      "candidate": 1,
+      "sha256": "834effbdc600b5d04ca4c439dcf6b997f98b1887aa98d8d492e2da8a06b78ada",
+      "disposition": "rejected",
+      "reason": "Flat rear foot, low horizontal hilt, and broad braced guard."
+    },
+    {
+      "candidate": 2,
+      "sha256": "43ad3639f7daafd3306178d6bf64f998bad7bb2225a983f8e8df3095c6f9c635",
+      "disposition": "rejected",
+      "reason": "Grip and torque improve, but both feet carry a stable wide guard."
+    },
+    {
+      "candidate": 3,
+      "sha256": "3cf1e4c8f798480d8f2c2e889943e2aba832e5a299337f0a800ffd1f68683df6",
+      "disposition": "builder-accepted-critic-rejected",
+      "reason": "Strongest bounded output, but the fresh critic rejected its staged hold and incomplete force chain."
+    },
+    {
+      "candidate": 4,
+      "sha256": "539baf8871f65d62605e174e24f1cf96bcbc3dd23c3334a8d1e3be3ef5ba646f",
+      "disposition": "rejected",
+      "reason": "Rear heel returns flat and the frame regresses to a stable two-foot guard."
+    }
+  ],
+  "nextRound": {
+    "round": 11,
+    "status": "biomechanical-force-chain-keyframe",
+    "target": "Freeze the accepted identity, equipment, storm-shear, and solved contact; use an original joint-and-weapon pose guide to produce one violent deceleration keyframe in which blade momentum visibly deforms the entire grip-to-ground body and equipment chain.",
+    "compositePackGate": {
+      "minimumTotalScore": 85,
+      "minimumScorePerCategory": 7,
+      "blindComparisonCount": 6,
+      "minimumComparisonsMeetingBenchmarkBar": 5,
+      "paid3DGenerationRequiresFullPass": true
+    }
+  }
+}

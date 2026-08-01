@@ -1,0 +1,199 @@
+{
+  "schema": "codexofwar.original-2d-signature-force-event-receipt",
+  "version": "1.0.0",
+  "receipt_id": "P10-Round010-GroundArcArrestReceipt",
+  "generated_utc": "2026-08-01T01:48:03Z",
+  "scope": {
+    "project_asset": "P10 Nyra Kestrel Ground-Arc Arrest",
+    "round": "Round010",
+    "judged_unit": "Ground-Arc Arrest signature force event",
+    "scope_class": "one original 2D concept frame only",
+    "paid_3d_generation_authorized": false,
+    "unity_authorized": false,
+    "claims_not_made": [
+      "benchmark victory",
+      "3D authorization",
+      "production-ready or game-ready asset",
+      "mesh, rig, UV, deformation, collision, animation, LOD, engine, or performance readiness",
+      "legal originality, exclusivity, copyright clearance, or trademark clearance"
+    ]
+  },
+  "bounded_input_policy": {
+    "read_inputs": [
+      {"role": "Round007 accepted identity authority", "path": "../../Round007/Concept/P10_Round007_NyraKestrel_Turnaround_v1.png", "sha256": "f54d6f4b4bc7707841b623148f522c1c60730bd8c6c620d4698531d928f2545a", "byte_size": 2095539, "dimensions_px": {"width": 1536, "height": 1024}, "format": "png"},
+      {"role": "Round007 accepted weapon authority", "path": "../../Round007/Concept/P10_Round007_StormcageOdachi_v1.png", "sha256": "6b604c69bf417e33e211366a006c800275b1ca3dda7a168bd84dcba054fff48b", "byte_size": 1965133, "dimensions_px": {"width": 1536, "height": 1024}, "format": "png"},
+      {"role": "Round008 accepted same-hilt contact authority", "path": "../../Round008/CombatContact/P10_Round008_NyraKestrel_CombatGrip_v1.png", "sha256": "06249a9cf8fcc94c4d531ebb6ffa835c4b7be8cc77202836069dd42d9e27692d", "byte_size": 1961681, "dimensions_px": {"width": 1536, "height": 1024}, "format": "png"},
+      {"role": "Round009 accepted sheet", "path": "../../Round009/MythicForce/P10_Round009_NyraKestrel_MythicForce_v1.png", "sha256": "dcaf4e5464c05f51a75db3a5f3c07e898f9d9e778779f1f635bcfaedf70e1c7e", "byte_size": 2290221, "dimensions_px": {"width": 1536, "height": 1024}, "format": "png"},
+      {"role": "Round009 receipt", "path": "../../Round009/MythicForce/P10_Round009_MythicForceReceipt.json", "sha256": "f123442ffa6c4058cebb32e97eb757fca1c699c4b1ffba83733edd6020baf26c", "byte_size": 33738, "format": "json"},
+      {"role": "exact gap authority", "path": "../../Round009/MythicForce/P10_Round009_FreshMythicForceReview.json", "sha256": "5ecf267e87a2d8c550b56539afc70128fde61dc2db215dd15792b4af2555d56d", "byte_size": 13913, "format": "json"}
+    ],
+    "gap_authority_finding": "A singular mechanics-driven storm-warden combat silhouette: the current samurai-adjacent tassets, odachi language, and wide studio guard must become one unmistakably ownable full-body force event in which blade mass visibly drives the spine, shoulders, pelvis, feet, and layered equipment.",
+    "excluded_inputs": [
+      "private benchmark archive",
+      "private benchmark pixels",
+      "third-party franchise pixels",
+      "all unrelated project imagery"
+    ],
+    "third_party_visual_reference_used": false
+  },
+  "generator": {
+    "service": "OpenAI in-app image generation tool",
+    "backend_model": "not exposed by the tool response",
+    "taxonomy": "identity-preserve",
+    "native_resolution_inspection": true,
+    "all_persisted_outputs_inspected": true
+  },
+  "prompt_encoding": {
+    "field": "exact_prompt_lines",
+    "reconstruction": "Join array entries with a single LF newline character.",
+    "trailing_newline": false
+  },
+  "attempt_cap": {"maximum_generated_images": 4, "generated_images": 4, "cap_respected": true},
+  "generation_lineage": [
+    {
+      "generation_id": "ground-arc-arrest-candidate-01",
+      "mode": "edit",
+      "taxonomy": "identity-preserve",
+      "input_sha256": ["dcaf4e5464c05f51a75db3a5f3c07e898f9d9e778779f1f635bcfaedf70e1c7e", "06249a9cf8fcc94c4d531ebb6ffa835c4b7be8cc77202836069dd42d9e27692d", "f54d6f4b4bc7707841b623148f522c1c60730bd8c6c620d4698531d928f2545a", "6b604c69bf417e33e211366a006c800275b1ca3dda7a168bd84dcba054fff48b"],
+      "output": "Iterations/P10_Round010_GroundArcArrest_candidate01.png",
+      "sha256": "834effbdc600b5d04ca4c439dcf6b997f98b1887aa98d8d492e2da8a06b78ada",
+      "byte_size": 2230866,
+      "dimensions_px": {"width": 1536, "height": 1024},
+      "format": "png",
+      "status": "rejected",
+      "rejection_reasons": ["The left foot remains flat rather than visibly trailing on a pivoting forefoot.", "The wide base and low horizontal hilt still read as a braced guard more than a caught deceleration event.", "Spine and scapular opposition are not singular enough at thumbnail scale."],
+      "exact_prompt_lines": [
+        "Use case: identity-preserve",
+        "Asset type: original 2D game character signature action concept, P10 Round010 Ground-Arc Arrest, candidate 01 of at most 04",
+        "Input roles: Image 1 is the primary accepted full-body identity/material/load-path base. Image 2 is sole authority for visibly solved two-hand same-hilt contact. Image 3 is authority for mature face, asymmetric braid, attached character-left split ivory yoke, diagonal copper circuit, right-hip capacitor, and heavy character-right grounding greave. Image 4 is authority only for the base-only caged pale mineral, cobalt insulated two-hand grip, ivory ceramic guard/pommel, and one connected storm-harvesting weapon; redesign its blade silhouette as specified below.",
+        "Primary request: Create ONE dominant full-body three-quarter frame of Nyra Kestrel performing her unmistakable signature force event: a hard two-handed deceleration/arrest of a massive storm-harvesting blade at the instant its momentum is caught by her entire body. This is not a guard pose, attack wind-up, or presentation stance. Pale neutral warm-gray studio ground only.",
+        "Pose mechanics: The huge character-RIGHT grounding greave occupies LOWER-RIGHT, planted completely flat and visibly compressed under load; right knee deeply flexed and pelvis driven over that sole. The lighter character-LEFT foot trails in LOWER-LEFT on a pivoting forefoot with turned heel and taut calf. Pelvis and ribcage counter-rotate strongly. Spine bows and twists into the arrest; one scapula retracts while the other protracts; shoulders form an opposing push-pull couple; elbows bend asymmetrically; wrists remain straight with the hilt. Both complete hands are CLOSED on separated cobalt regions of ONE continuous hilt, leading right hand below the guard and trailing left hand above the pommel; show opposed thumbs, four curled fingers per hand, visible wrap ingress/egress and pressure compression. The blade's momentum pulls toward UPPER-RIGHT while her grounded body arrests it toward LOWER-RIGHT, creating a clear center of mass, counter-diagonal, and readable action arc without effects.",
+        "Mechanics-driven costume redesign: Preserve the identity colors and apparatus but radically remove samurai coding. NO hanging tasset skirt, lamellar or samurai shoulder rhythm, kimono wrap, historical sword-guard pose. Replace the entire lower silhouette with an asymmetric load-bearing storm-cloth harness: a taut cobalt diagonal pelvic sling anchored into the right-hip capacitor and right greave, one short compressed storm-cloth panel only on the loaded right hip, open articulated thigh/knee lines, and an exposed lighter left gaiter. Use sparse engineered ivory ceramic impact plates and blackened-steel brackets with non-repeating shapes. Straps, cloth, plates, copper conductor, capacitor harness and yoke mount all visibly share the same tension/compression and torque from the arrest.",
+        "Weapon redesign: exactly ONE complete connected weapon. Replace the smooth katana/odachi silhouette with an ownable broad-backed ASYMMETRICAL STORM-SHEAR / BREAKER BLADE: long but credible mass, straight-to-subtly-kinked load edge, a stepped broad blackened-steel induction spine with one blunt offset shoulder and a clipped chisel-like harvesting tip, clearly non-historical and not a conventional sword. Preserve exactly one small desaturated pale mineral physically caged only at the blade base, exactly one low ivory ceramic guard with engineered trapezoid/bridge geometry, one long cobalt oval insulated two-hand grip with a separator, and one ivory ceramic pommel. No second blade, no detached parts, no scabbard.",
+        "Thumbnail contract: upper-left attached split yoke/halo, diagonal copper torso conductor, blade-force counter-diagonal to upper-right, lower-right grounding mass; one instantly readable zig-zag load path. Anatomy and force outrank ornament.",
+        "Style/medium: premium original 2D industrial-mythic fantasy concept painting, crisp controlled hand-painted edges, matte worn cobalt/ivory/blackened-steel/copper materials, pale studio clarity, restrained contrast.",
+        "Composition/framing: 1536x1024 landscape, one person only, head/yoke, all limbs, both soles, pommel and blade tip fully in frame with margin. No inset sheet.",
+        "Hard constraints: same mature face, brow notch, crooked nose, under-eye fatigue, asymmetric braid; character-left attached split ivory yoke; protected diagonal copper circuit into character-right hip capacitor; heavy right greave/lighter left leg; exactly one weapon; both hands visibly enclosing the same continuous hilt; no crop, no body penetration, no malformed or fused digits, no hover, no duplicate person or weapon.",
+        "Avoid: text, label, logo, watermark, environment, architecture, lightning, electricity effects, glow, particles, sparks, dust, motion blur, action smear, long skirt, tassets, lamellar, samurai, katana, odachi, kimono, generic knight, cyberpunk technician, corset, bust sculpting, fetish anatomy, capes, horns, wings, antlers, decorative spikes, franchise cues, photoreal cosplay, 3D render."
+      ]
+    },
+    {
+      "generation_id": "ground-arc-arrest-candidate-02",
+      "mode": "edit",
+      "taxonomy": "identity-preserve",
+      "input_sha256": ["834effbdc600b5d04ca4c439dcf6b997f98b1887aa98d8d492e2da8a06b78ada", "06249a9cf8fcc94c4d531ebb6ffa835c4b7be8cc77202836069dd42d9e27692d", "f54d6f4b4bc7707841b623148f522c1c60730bd8c6c620d4698531d928f2545a"],
+      "output": "Iterations/P10_Round010_GroundArcArrest_candidate02.png",
+      "sha256": "43ad3639f7daafd3306178d6bf64f998bad7bb2225a983f8e8df3095c6f9c635",
+      "byte_size": 2232302,
+      "dimensions_px": {"width": 1536, "height": 1024},
+      "format": "png",
+      "status": "rejected",
+      "rejection_reasons": ["The raised grip and torso torque improve, but the two-foot support remains a broad stable guard.", "The left heel does not lift clearly enough to prove the required trailing pivot.", "The body remains balanced between both feet rather than arrested over the grounding greave."],
+      "exact_prompt_lines": [
+        "Use case: identity-preserve",
+        "Asset type: targeted original 2D force-chain correction, P10 Round010 Ground-Arc Arrest, candidate 02 of at most 04",
+        "Input roles: Image 1 is the primary Round010 candidate and is authoritative for the successful mature identity, exact attached split left yoke, conductor/capacitor/right-greave load path, radically de-samuraied open-leg storm-cloth harness, one connected broad-backed asymmetrical storm-shear blade, base-only caged pale mineral, palette, matte 2D finish, framing, and same-hilt hand placement. Image 2 is contact anatomy authority. Image 3 is identity and handed equipment authority.",
+        "Primary request: Preserve Image 1's character, costume redesign, apparatus, exact one-object weapon construction, contact, materials, pale studio, and full framing. Correct ONLY its remaining guarded-studio-pose failure into a singular Ground-Arc Arrest: the unmistakable instant a massive blade's clockwise/downrange momentum is caught and stopped through the whole body.",
+        "Force correction: Keep the massive character-RIGHT grounding greave in LOWER-RIGHT, but compress it harder: sole completely flush, ankle closed, right knee driven forward and inward, pelvis dropped decisively over the right heel. Lift the character-LEFT heel clearly off the ground so only its forefoot/toe pivots in LOWER-LEFT; turn the left knee and pelvis against the blade. Narrow the planted base slightly so it no longer looks like a posed symmetrical split stance.",
+        "Move the continuous hilt and both closed hands from the current low horizontal guard to a steep rising counter-diagonal across the chest: pommel near LOWER-LEFT ribs, both separated hands near sternum, guard just above/right of the leading hand, blade base at mid-right, broad heavy blade continuing to UPPER-RIGHT. The hilt must remain one continuous object through both fists. The leading character-RIGHT forearm pushes up/right while the trailing character-LEFT elbow pulls back/down around the ribs. One scapula visibly protracts, the other retracts; one shoulder drops and advances, the other rises and withdraws. Bow and twist the spine into the arrest; ribcage counter-rotates against the dropped pelvis; head counter-turns toward the blade line. Keep wrists straight and digits complete.",
+        "Equipment force response: the cobalt diagonal pelvic sling, right-hip short cloth panel, conductor, capacitor belt, yoke mount, straps and sparse ceramic plates must all pull along one zig-zag load path. Cloth bunches sharply at the loaded right hip and stretches taut across the left flank. The capacitor harness dents the right hip under tension. The attached yoke mount tilts subtly under shoulder torque without detaching. No effects.",
+        "Exact preservation lock: same mature face and asymmetric braid; same split ivory yoke attached at character-left shoulder; same diagonal protected copper circuit into right-hip capacitor and massive right greave; same open articulated thighs and light left gaiter; same non-historical broad-backed stepped breaker blade with clipped harvesting tip; same base-only caged pale mineral; same low engineered ivory bridge guard, cobalt grip and ivory pommel. Exactly one person and one complete weapon.",
+        "Contact lock: both complete hands closed on separated cobalt regions of the SAME continuous hilt, right/leading hand below guard and left/trailing hand above pommel; opposed thumb plus four curled fingers per hand, pressure compression, visible grip entering and exiting each fist, no hover, gap, malformed/fused digit, wrist kink, penetration, duplication or detachment.",
+        "Composition: 1536x1024 landscape, one dominant full-body three-quarter figure on pale neutral warm-gray studio ground, all extremities, yoke, both soles, pommel and blade tip fully in frame with margin. Thumbnail zig-zag: upper-left yoke, diagonal conductor, rising blade-force counter-diagonal, lower-right grounding mass.",
+        "Style/medium: premium original 2D industrial-mythic concept painting, crisp controlled hand-painted edges, matte worn cobalt/ivory/blackened-steel/copper materials.",
+        "Hard reject: left heel flat; hands below waist; horizontal guard; shoulders relaxed; center of mass between feet; symmetric wide stance; hanging tasset skirt; smooth katana/odachi; historical guard; generic knight/cyberpunk technician.",
+        "Avoid: inset sheet, text, logo, watermark, environment, lightning, glow, particles, sparks, dust, motion blur, action smear, cape, skirt, tassets, lamellar, kimono, samurai, katana, odachi, fetish anatomy, franchise cues, photoreal cosplay, 3D render."
+      ]
+    },
+    {
+      "generation_id": "ground-arc-arrest-candidate-03",
+      "mode": "edit",
+      "taxonomy": "identity-preserve",
+      "input_sha256": ["834effbdc600b5d04ca4c439dcf6b997f98b1887aa98d8d492e2da8a06b78ada", "06249a9cf8fcc94c4d531ebb6ffa835c4b7be8cc77202836069dd42d9e27692d"],
+      "output": "Iterations/P10_Round010_GroundArcArrest_candidate03.png",
+      "sha256": "3cf1e4c8f798480d8f2c2e889943e2aba832e5a299337f0a800ffd1f68683df6",
+      "byte_size": 2136775,
+      "dimensions_px": {"width": 1536, "height": 1024},
+      "format": "png",
+      "status": "accepted-and-copied",
+      "accepted_copy": "P10_Round010_NyraKestrel_GroundArcArrest_v1.png",
+      "acceptance_basis": ["One full-body three-quarter figure and one complete broad-backed breaker weapon are fully framed on a pale studio ground.", "The huge right greave is planted and compressed while the lighter left leg trails on a clearly lifted heel and toe pivot.", "Pelvis, ribcage, bowed spine, opposed shoulders, bent elbows, straight wrists and head counter-turn form one readable arrest chain.", "Both complete hands close around separated regions of the same continuous cobalt hilt with visible grip ingress and egress.", "The smooth odachi and hanging tasset skirt are replaced by a broad stepped non-historical storm-shear silhouette and open articulated leg lines with an asymmetric load-bearing cloth harness.", "Mature face, asymmetric braid, attached split left yoke, diagonal copper path, right-hip capacitor, heavy-right/lighter-left leg identity, base-only caged mineral, and cobalt/ivory/blackened-steel/copper hierarchy survive.", "No inset, text, logo, watermark, environment, lightning, glow, particles, motion blur, crop, extra person, duplicate weapon, or body penetration is visible."],
+      "exact_prompt_lines": [
+        "Use case: identity-preserve",
+        "Asset type: original 2D signature-action correction, P10 Round010 Ground-Arc Arrest, candidate 03 of at most 04",
+        "Input roles: Image 1 is exact design authority for Nyra's mature face/asymmetric braid, attached split character-left ivory yoke, diagonal copper path, right-hip capacitor, huge character-right grounding greave/lighter left leg, open-leg asymmetric storm-cloth harness, palette, and the one connected non-historical broad-backed breaker blade. Image 2 is sole authority for two complete hands visibly closed on separated regions of one continuous hilt.",
+        "Primary request: Recompose the same exact design into ONE unmistakable full-body three-quarter Ground-Arc Arrest signature event on pale neutral studio ground: the instant a clockwise blade sweep reaches maximum extension toward UPPER-RIGHT and Nyra violently brakes it around her planted right grounding foot. The body must look momentarily pulled off-axis by the blade mass, not calmly posed or balanced between two feet.",
+        "Base topology and center of mass: The huge character-RIGHT grounding greave is the single dominant load column in LOWER-RIGHT under the pelvis, foot fully flat and compressed, ankle deeply closed, right knee flexed and tracking over the broad sole. Bring the pelvis close above that foot. The character-LEFT leg trails far back toward LOWER-LEFT with knee nearly extended but not locked; ONLY the ball and toes touch the ground, heel clearly high in the air and rotated outward. Do not make a wide two-foot guard or equal support triangle.",
+        "Whole-body force chain: pelvis whips against the blade direction while ribcage twists sharply toward UPPER-RIGHT; spine forms a loaded C-curve and visible torsion. Torso pitches diagonally, not upright. Character-RIGHT shoulder is shoved forward/down toward the guard; character-LEFT scapula retracts hard and the left elbow pulls behind the ribcage. Both elbows are bent asymmetrically and visibly loaded. Hilt passes diagonally across lower chest, not waist. Wrists aligned to hilt. Head counter-turns back toward UPPER-LEFT while eyes track the blade.",
+        "Weapon action: exactly ONE complete heavy broad-backed asymmetrical storm-shear/breaker weapon from ivory pommel at lower-left of torso, through one continuous cobalt oval insulated hilt and both separated fists, one low ivory bridge guard, one base-only black cage containing a small pale mineral, into a stepped blackened-steel induction spine and clipped chisel-like harvesting tip at UPPER-RIGHT. The blade is caught at the end of its arc and visibly drags shoulders and ribs toward UPPER-RIGHT; credible mass, non-historical, not smooth or curved like katana/odachi.",
+        "Contact lock: both complete hands CLOSED on separated cobalt regions of the SAME continuous hilt; character-RIGHT leading hand immediately below guard, character-LEFT trailing hand above pommel; four curled fingers and opposed thumb per hand; visible ingress/egress of grip and wrap compression; no hover, gap, malformed/fused digits, wrist kink, penetration, duplicate/detached weapon.",
+        "Equipment load response: attached split ivory yoke remains upper-left and its black mount pulls taut; protected diagonal copper conductor stretches across twisted torso into one right-hip capacitor; capacitor belt digs into loaded hip; copper descends into right greave. One short right-hip cobalt storm-cloth load panel compresses and kicks against the arrest while a taut diagonal pelvic sling stretches toward left ribs. Open articulated thighs and knees remain visible. Sparse non-repeating ivory ceramic plates and black brackets compress on the right side and separate slightly on the left extension side.",
+        "Thumbnail contract: upper-left split yoke, diagonal torso copper, broad blade-force counter-diagonal to upper-right, lower-right grounding mass; one instantly readable zig-zag load path.",
+        "Style/medium: premium original 2D industrial-mythic fantasy concept painting, crisp controlled hand-painted edges, matte worn cobalt/ivory/blackened-steel/copper materials, restrained contrast.",
+        "Composition/framing: 1536x1024 landscape, one person only, dominant full body three-quarter, head/yoke, all limbs, the raised left heel and toes, right sole, pommel, full blade and tip entirely visible with margin. Pale warm-gray studio ground and subtle contact shadow only.",
+        "Hard reject: left heel touching ground; two equal support feet; center of mass between feet; upright torso; symmetrical wide guard; hands at pelvis; horizontal guard pose; relaxed scapulae; hanging tasset skirt; lamellar; kimono wrap; smooth katana/odachi; generic knight or cyberpunk technician.",
+        "Avoid: inset sheet, text, label, logo, watermark, environment, architecture, lightning, glow, particles, sparks, dust, motion blur, action smear, crop, extra person, cape, skirt, tassets, historical armor rhythm, fetish anatomy, franchise cues, photoreal cosplay, 3D render."
+      ]
+    },
+    {
+      "generation_id": "ground-arc-arrest-candidate-04",
+      "mode": "edit",
+      "taxonomy": "identity-preserve",
+      "input_sha256": ["834effbdc600b5d04ca4c439dcf6b997f98b1887aa98d8d492e2da8a06b78ada", "3cf1e4c8f798480d8f2c2e889943e2aba832e5a299337f0a800ffd1f68683df6", "06249a9cf8fcc94c4d531ebb6ffa835c4b7be8cc77202836069dd42d9e27692d"],
+      "output": "Iterations/P10_Round010_GroundArcArrest_candidate04.png",
+      "sha256": "539baf8871f65d62605e174e24f1cf96bcbc3dd23c3334a8d1e3be3ef5ba646f",
+      "byte_size": 2156657,
+      "dimensions_px": {"width": 1536, "height": 1024},
+      "format": "png",
+      "status": "rejected",
+      "rejection_reasons": ["The lighter left heel regresses to flat ground contact, breaking the mandatory trailing toe-pivot.", "The hilt remains low and nearly horizontal instead of clearly loading the lower sternum.", "The stance returns toward two-foot studio guard balance."],
+      "exact_prompt_lines": [
+        "Use case: identity-preserve",
+        "Asset type: final bounded original 2D Ground-Arc Arrest composition, P10 Round010 candidate 04 of 04",
+        "Input roles: Image 1 is exact authority for the successful upper-left split-yoke placement, mature face/asymmetric braid, identity, diagonal conductor, open-leg de-samuraied storm-cloth harness, right-hip capacitor, huge lower-right grounding greave, one connected broad-backed breaker blade, material palette, and pale full-body framing. Image 2 is exact authority for the successful force mechanics of the trailing character-LEFT toe-pivot with heel lifted, dropped pelvis over the planted massive character-RIGHT greave, twisted torso, and blade mass. Image 3 is exact authority for two anatomically complete closed hands gripping separated regions of one continuous hilt.",
+        "Primary request: Fuse ONLY these successful relationships into ONE dominant full-body three-quarter signature event: Nyra Kestrel's Ground-Arc Arrest, the unmistakable instant she violently brakes the massive storm-shear blade at the end of its arc. Preserve the exact design and non-historical weapon from Image 1, use the asymmetric single-load-column lower-body mechanics from Image 2, and elevate the hilt/contact to lower-sternum height so scapulae, shoulders, elbows and wrists visibly carry the blade momentum. This must read as force, not a studio guard.",
+        "Mandatory thumbnail composition: the attached split ivory yoke/halo occupies UPPER-LEFT behind the character's LEFT shoulder; the protected copper conductor crosses the torso diagonally; the broad blade-force counter-diagonal runs from central chest to UPPER-RIGHT; the massive character-RIGHT grounding greave anchors LOWER-RIGHT. Together these form one instantly readable zig-zag load path.",
+        "Lower-body lock: huge right grounding greave fully flat and visibly compressed under load in lower-right, ankle closed, right knee deeply bent, pelvis dropped directly over its sole. The lighter left leg trails long toward lower-left; only ball and toes touch ground; heel clearly high in the air and pivoting outward. No equal two-foot guard and no center of mass between feet.",
+        "Upper-body arrest: pelvis counter-rotates against ribcage; spine bows and twists; torso pitches off-axis toward blade momentum. One scapula protracts and one retracts, one shoulder advances/drops and the other withdraws/rises. Character-RIGHT leading forearm pushes toward upper-right while character-LEFT trailing elbow pulls behind lower-left ribs. Both elbows visibly bent under load. Place both closed hands and the continuous hilt across LOWER-CHEST/STERNUM, clearly above waist and pelvis. Wrists remain straight with the hilt. Head counter-turns toward upper-left while eyes track the blade.",
+        "Contact/weapon lock, highest priority: exactly ONE complete connected storm-shear/breaker weapon from one ivory pommel, through one continuous deep-cobalt oval insulated two-hand grip and both separated fists, one ivory separator, one low engineered ivory bridge guard, one blackened-steel base cage containing a small pale mineral ONLY at blade base, into one broad-backed asymmetrical blackened-steel blade with stepped induction spine, blunt offset shoulder and clipped chisel-like harvesting tip. Both complete hands CLOSED around separated cobalt grip regions; right/leading hand immediately below guard, left/trailing hand above pommel; four curled fingers plus opposed thumb per hand, visible grip ingress/egress and compression. No smooth katana/odachi curve, second blade, scabbard, duplicate/detached part, hover, malformed/fused digits, wrist kink or body penetration.",
+        "Identity/equipment lock: same mature lived-in face, crooked nose, brow notch, under-eye fatigue, asymmetric short braid; attached split yoke only at character-left shoulder; one protected copper path into right-hip capacitor then right greave; lighter left gaiter. Preserve the open articulated leg lines and asymmetric load-bearing storm-cloth harness: taut diagonal cobalt pelvic sling and one short right-hip load panel, not hanging tassets or skirt. Straps, cloth, sparse non-repeating ceramic plates, conductor, capacitor belt and yoke mount visibly tense/compress along the same arrest.",
+        "Style/medium: premium original 2D industrial-mythic fantasy concept painting, crisp controlled hand-painted edges, matte worn cobalt/ivory/blackened-steel/copper materials, restrained contrast, pale studio clarity.",
+        "Composition/framing: 1536x1024 landscape, one person only, complete full body, all limbs, raised left heel/toes, right sole, yoke, pommel, entire weapon and blade tip fully inside frame with margin; pale neutral warm-gray studio ground and subtle contact shadow only.",
+        "Hard reject: yoke outside upper-left; left heel flat; two equal support feet; hands below waist; horizontal pelvis guard; upright relaxed torso; hanging tasset skirt; lamellar/samurai shoulder rhythm; kimono wrap; smooth katana/odachi; generic knight/cyberpunk technician; crop.",
+        "Avoid: inset sheet, text, label, logo, watermark, environment, architecture, lightning, glow, particles, sparks, dust, motion blur, action smear, cape, skirt, tassets, historical armor rhythm, fetish anatomy, franchise cues, photoreal cosplay, 3D render."
+      ]
+    }
+  ],
+  "accepted_asset": {
+    "file": "P10_Round010_NyraKestrel_GroundArcArrest_v1.png",
+    "sha256": "3cf1e4c8f798480d8f2c2e889943e2aba832e5a299337f0a800ffd1f68683df6",
+    "byte_size": 2136775,
+    "dimensions_px": {"width": 1536, "height": 1024},
+    "format": "png",
+    "source_generation_id": "ground-arc-arrest-candidate-03",
+    "accepted_copy_byte_identical": true
+  },
+  "validation": {
+    "json_validated": true,
+    "all_input_hashes_recomputed": true,
+    "all_output_hashes_recomputed": true,
+    "all_output_byte_sizes_recomputed": true,
+    "all_output_dimensions_and_formats_recomputed": true,
+    "accepted_copy_hash_matches_source_output": true,
+    "native_visual_inspection_completed": true,
+    "attempt_cap_respected": true,
+    "only_round010_modified": true
+  },
+  "privacy_cleanup": {
+    "public_safe": true,
+    "absolute_paths_present": false,
+    "usernames_present": false,
+    "private_archive_filename_present": false,
+    "private_benchmark_filenames_or_paths_present": false,
+    "private_benchmark_pixels_embedded": false,
+    "prohibited_private_archive_inspected": false,
+    "temporary_extraction_created": false,
+    "temporary_comparison_sheets_created": false,
+    "third_party_franchise_pixels_used": false
+  }
+}

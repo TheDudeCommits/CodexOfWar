@@ -19,11 +19,11 @@
   ],
   "activeBuild": {
     "pieceId": "P10",
-    "round": 10,
-    "roundLabel": "P10 · Round 010",
+    "round": 11,
+    "roundLabel": "P10 · Round 011",
     "status": "revising",
-    "builder": "Ground-Arc Arrest signature force event",
-    "brief": "Round 010 is one bounded original 2D signature-action build with no result or capture filed yet. It must replace the samurai-adjacent tassets, odachi language, and wide studio guard with one ownable mechanics-driven storm-warden force event in which blade mass visibly drives the spine, shoulders, pelvis, feet, conductor path, cloth, and plates; paid 3D generation and Unity remain locked.",
+    "builder": "Biomechanical force-chain keyframe",
+    "brief": "Round 011 is one bounded original 2D pose-guide-driven keyframe build with no result or capture filed yet. It freezes Nyra's identity, equipment, non-historical storm-shear, and solved contact, then targets only a violent deceleration chain in which blade momentum visibly deforms the grip, wrists, elbows, scapulae, spine, pelvis, compressed right leg, trailing left toe, cloth, plates, and conductor; paid 3D generation and Unity remain locked.",
     "facts": [
       "P00 is accepted as infrastructure; its blind visual baseline remains an explicit 28.33–76.67 loss.",
       "Round 001 is mechanically reproducible: two independent critic reruns matched all six filed image hashes, P10 validation passed, focused EditMode passed 8/8, the full suite passed 14/14, and the P00 aggregate stayed byte-identical.",
@@ -50,9 +50,10 @@
       "Round 007 has no accepted combat-grip proof, gameplay, 3D asset, game-ready evidence, or Unity capture. Its single biggest gap is the absence of one accepted identity-preserving combat image that unambiguously proves both complete hands closed on separated regions of the same hilt.",
       "Round 008 generated four bounded original 2D contact candidates. The builder froze them fail-closed under a strict clean-negative-space rule, but a fresh critic independently found candidate 04 visually unambiguous and promoted a byte-identical accepted contact copy without regenerating the art.",
       "Round 008 passed its isolated same-hilt contact objective, raising functional grip to 8/10, but the complete pack still failed at 68/100, a 5/10 observed category floor, and only 3/6 benchmark-level comparisons against 5/6 required. Paid 3D generation and Unity remain locked.",
-      "Round 009 materially improved layered cloth, ceramic, metal, and copper separation while preserving the accepted identity, engineering anchors, one weapon, and solved same-hilt grip. A fresh critic nevertheless rejected the isolated mythic-force target.",
-      "The Round 009 composite scored 71/100 against 85, failed the category floor at 6/10, and met the benchmark bar in only 2/6 comparisons against 5/6 required. The single gap is a mechanics-driven storm-warden silhouette: its samurai-adjacent tassets, odachi language, and studio guard still lack one ownable full-body force event.",
-      "Round 010 is now one bounded original 2D Ground-Arc Arrest signature-action build with no result or capture filed. Round 001 remains the latest filed in-engine P10 evidence, while the global latest manifest remains pinned to accepted P00."
+      "Round 009 materially improved layered cloth, ceramic, metal, and copper separation while preserving the accepted identity, engineering anchors, one weapon, and solved same-hilt grip. A fresh critic nevertheless rejected the isolated mythic-force target at 71/100, a 6/10 floor, and 2/6 benchmark comparisons.",
+      "Round 010 removed samurai-adjacent tassets and historical odachi curvature, introduced a non-historical storm-shear, preserved identity and contact, and improved the rear toe pivot plus heavy-right-leg load. A fresh critic still rejected the signature event.",
+      "The Round 010 composite scored 68/100 against 85, failed the category floor at 6/10, and met the benchmark bar in only 2/6 comparisons against 5/6 required. The single gap is a mechanically unified violent deceleration chain rather than another wide posed greatsword hold.",
+      "Round 011 is now one bounded original 2D biomechanical force-chain keyframe build driven by an original pose guide, with no result or capture filed. Round 001 remains the latest filed in-engine P10 evidence, while the global latest manifest remains pinned to accepted P00."
     ],
     "evidenceFingerprint": {
       "gitRevision": "2dedf617ace47ea5dbb2cde1817d6119604842d2",
@@ -114,7 +115,7 @@
         "Static lookdev only; no rig, S02, or S06"
       ]
     },
-    "nextGate": "Round 010 must preserve identity and same-hilt contact while removing samurai-adjacent tassets and historical odachi coding, then express one mechanics-driven signature action through a redesigned storm-harvesting blade and a coherent yoke-to-grounding-greave force chain. The complete concept pack must earn at least 85/100 from a fresh critic, keep every category at or above 7, and meet the benchmark bar in at least 5 of 6 blinded comparisons before any paid 3D generation."
+    "nextGate": "Round 011 must preserve identity, equipment, storm-shear, and same-hilt contact while a custom joint-and-weapon pose guide forces one asymmetrical deceleration event through the complete grip-to-ground chain and reactive equipment. The complete concept pack must earn at least 85/100 from a fresh critic, keep every category at or above 7, and meet the benchmark bar in at least 5 of 6 blinded comparisons before any paid 3D generation."
   },
   "canonicalCapture": {
     "shotId": "S01",
@@ -391,6 +392,27 @@
         "scoreLabel": "Composite concept preflight 71/100 · threshold 85 · category floor 6/10",
         "preference": "Candidate met benchmark bar in 2/6 blinded comparisons · 5/6 required",
         "primaryGap": "A singular mechanics-driven storm-warden combat silhouette: the current samurai-adjacent tassets, odachi language, and wide studio guard must become one unmistakably ownable full-body force event in which blade mass visibly drives the spine, shoulders, pelvis, feet, and layered equipment."
+      }
+    },
+    {
+      "round": 10,
+      "label": "P10 · Round 010",
+      "pieceId": "P10",
+      "phase": "Fresh Ground-Arc Arrest and composite critic complete",
+      "status": "criticized",
+      "date": "2026-08-01",
+      "builderBrief": "Replace the samurai-adjacent tassets, odachi language, and wide studio guard with one ownable mechanics-driven storm-warden force event while preserving Nyra's identity, engineering path, and solved same-hilt contact.",
+      "evidence": "The builder filed one strongest original 1536×1024 Ground-Arc Arrest frame after four bounded attempts. It removes the strongest historical silhouette cues, introduces a broad non-historical storm-shear, preserves identity and contact, and improves the trailing toe pivot plus heavy-right-leg load. A fresh critic still rejected the isolated target: the complete frame remains a staged wide greatsword hold, with insufficient blade-driven deformation through the body and equipment. The composite scored 68/100, failed the category floor at 6/10, and met the benchmark bar in 2/6 comparisons against 5/6 required. No actual game run, gameplay, 3D model, game-ready asset, or Unity capture is claimed; paid 3D generation remains denied.",
+      "evidenceLinks": [
+        "/captures/P10/round-010-ground-arc/NyraKestrel_GroundArcArrest_CRITIC_REJECTED.png",
+        "/data/P10-round-010-ground-arc.json"
+      ],
+      "critic": {
+        "status": "GROUND-ARC FAIL · DENY_PAID_3D_GENERATION",
+        "score": 68,
+        "scoreLabel": "Composite concept preflight 68/100 · threshold 85 · category floor 6/10",
+        "preference": "Candidate met benchmark bar in 2/6 blinded comparisons · 5/6 required",
+        "primaryGap": "A genuinely arrested, mechanically unified force chain: the current image still reads as a wide posed greatsword hold because blade momentum does not visibly load the spine, scapulae, shoulders, elbows, wrists, pelvis, feet, cloth, plates, and conductor as one violent deceleration event."
       }
     }
   ],
