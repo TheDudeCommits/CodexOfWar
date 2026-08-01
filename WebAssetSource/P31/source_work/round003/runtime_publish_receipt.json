@@ -1,0 +1,94 @@
+{
+  "files": [
+    {
+      "byte_identical": true,
+      "bytes": 41956,
+      "runtime_path": "web-game/public/assets/environment/ashwake/geometry/fort_buttress.glb",
+      "sha256": "a029b852e57bb2ba954ec69a729c738cf8a8bbc7a507605d49e6f4415b598a97",
+      "source_path": "WebAssetSource/P31/processed/polyhaven/round003/geometry/fort_buttress.glb"
+    },
+    {
+      "byte_identical": true,
+      "bytes": 64624,
+      "runtime_path": "web-game/public/assets/environment/ashwake/geometry/fort_gate.glb",
+      "sha256": "205bddd127ec4c8e87e13108003c4c1343092a213c77473d3056e7b105ad111f",
+      "source_path": "WebAssetSource/P31/processed/polyhaven/round003/geometry/fort_gate.glb"
+    },
+    {
+      "byte_identical": true,
+      "bytes": 19244,
+      "runtime_path": "web-game/public/assets/environment/ashwake/geometry/fort_wall.glb",
+      "sha256": "e60605cf7f632c9e193cab5e91415a0b0a62556d2121ea569750eaa7f3e3caaf",
+      "source_path": "WebAssetSource/P31/processed/polyhaven/round003/geometry/fort_wall.glb"
+    },
+    {
+      "byte_identical": true,
+      "bytes": 219772,
+      "runtime_path": "web-game/public/assets/environment/ashwake/geometry/fort_tower.glb",
+      "sha256": "f3c9d8a491d02e62424bc104eb5fd50fa7e2516c9860e8e8f0cb7ef842725c44",
+      "source_path": "WebAssetSource/P31/processed/polyhaven/round003/geometry/fort_tower.glb"
+    },
+    {
+      "byte_identical": true,
+      "bytes": 55192,
+      "runtime_path": "web-game/public/assets/environment/ashwake/geometry/fort_stairs.glb",
+      "sha256": "48a9af555add02a70362df01323abf050c3e36492c8ee860bd0b5799ca13d98a",
+      "source_path": "WebAssetSource/P31/processed/polyhaven/round003/geometry/fort_stairs.glb"
+    },
+    {
+      "byte_identical": true,
+      "bytes": 922824,
+      "runtime_path": "web-game/public/assets/environment/ashwake/geometry/gothic_statue.glb",
+      "sha256": "e0327cf7fda9d308d5f96ca28f86b5851d5501b511f5356db43fca9a90ab380f",
+      "source_path": "WebAssetSource/P31/processed/polyhaven/round003/geometry/gothic_statue.glb"
+    },
+    {
+      "byte_identical": true,
+      "bytes": 349700,
+      "runtime_path": "web-game/public/assets/environment/ashwake/materials/ground/ashwake_ground_basecolor.webp",
+      "sha256": "6f603e8df23bd5032024c1c38f12bdf69ce5ce151405a3056a6c0ad92ba71371",
+      "source_path": "WebAssetSource/P31/processed/polyhaven/round003/materials/ground/ashwake_ground_basecolor.webp"
+    },
+    {
+      "byte_identical": true,
+      "bytes": 394730,
+      "runtime_path": "web-game/public/assets/environment/ashwake/materials/ground/ashwake_ground_normal.webp",
+      "sha256": "3903a0a795c1584283b5983f1fdbd32435f13b9a7656bf940023054da2769c67",
+      "source_path": "WebAssetSource/P31/processed/polyhaven/round003/materials/ground/ashwake_ground_normal.webp"
+    },
+    {
+      "byte_identical": true,
+      "bytes": 161986,
+      "runtime_path": "web-game/public/assets/environment/ashwake/materials/ground/ashwake_ground_orm.webp",
+      "sha256": "98558a0b83e34439512b0c6315d687990457a3f3d20234c8564080365fdb3842",
+      "source_path": "WebAssetSource/P31/processed/polyhaven/round003/materials/ground/ashwake_ground_orm.webp"
+    },
+    {
+      "byte_identical": true,
+      "bytes": 295418,
+      "runtime_path": "web-game/public/assets/environment/ashwake/materials/sector/ashwake_sector_basecolor.webp",
+      "sha256": "98ffd6f778300a99c4a5c7ae43fa6726c1881621599b99c4143d6f4a6f31a064",
+      "source_path": "WebAssetSource/P31/processed/polyhaven/round003/materials/sector/ashwake_sector_basecolor.webp"
+    },
+    {
+      "byte_identical": true,
+      "bytes": 517172,
+      "runtime_path": "web-game/public/assets/environment/ashwake/materials/sector/ashwake_sector_normal.webp",
+      "sha256": "b8fa399819f39545500fa1d818fe3cd10d70808ed344542bacca11ccbfcbc97a",
+      "source_path": "WebAssetSource/P31/processed/polyhaven/round003/materials/sector/ashwake_sector_normal.webp"
+    },
+    {
+      "byte_identical": true,
+      "bytes": 306880,
+      "runtime_path": "web-game/public/assets/environment/ashwake/materials/sector/ashwake_sector_orm.webp",
+      "sha256": "511ee8f569e261b2217ec7362f4194f9edabfb5b43ac6ccc708528010a2da9f5",
+      "source_path": "WebAssetSource/P31/processed/polyhaven/round003/materials/sector/ashwake_sector_orm.webp"
+    }
+  ],
+  "policy": "real byte-identical runtime copies; no symlinks",
+  "schema": "p31.round003.runtime-publish.v1",
+  "totals": {
+    "bytes": 3349498,
+    "files": 12
+  }
+}

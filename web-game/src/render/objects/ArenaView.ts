@@ -1,7 +1,8 @@
 import * as THREE from "three";
 import type { AssetRegistry } from "../loaders/AssetRegistry";
+import { AshwakeMaterials } from "../materials/AshwakeMaterials";
 
-const RUIN_KEYS = [
+const SECTOR_KEYS = [
   "environment.ashwake-arena",
   "environment.ruin-doorway",
   "environment.ruin-wall",
@@ -10,75 +11,143 @@ const RUIN_KEYS = [
   "environment.ruin-rocks",
 ] as const;
 
-interface RuinPlacement {
-  key: (typeof RUIN_KEYS)[number];
+const MATERIAL_KEYS = [
+  "material.cobble-diffuse",
+  "material.cobble-normal",
+  "material.cobble-arm",
+  "material.brick-diffuse",
+  "material.brick-normal",
+  "material.brick-arm",
+] as const;
+
+type SectorKey = (typeof SECTOR_KEYS)[number];
+
+interface SectorPlacement {
+  key: SectorKey;
+  name: string;
   position: readonly [number, number, number];
   rotation: number;
   scale: readonly [number, number, number];
 }
 
-const RUIN_PLACEMENTS: readonly RuinPlacement[] = [
-  {
-    key: "environment.ashwake-arena",
-    position: [-6.3, 0, -8.8],
-    rotation: 0.12,
-    scale: [4.6, 4.6, 4.6],
-  },
+const MAIN_PLACEMENTS: readonly SectorPlacement[] = [
   {
     key: "environment.ruin-doorway",
-    position: [0.05, 0, -8.65],
+    name: "central-gate",
+    position: [0, 0, -8.75],
     rotation: Math.PI / 2,
-    scale: [4.25, 4.25, 4.25],
+    scale: [0.72, 0.72, 0.72],
   },
   {
     key: "environment.ruin-wall",
-    position: [-3.25, 0, -8.35],
-    rotation: 0.05,
-    scale: [3.65, 3.15, 2.25],
+    name: "west-curtain-wall",
+    position: [-5.55, 0, -9.05],
+    rotation: Math.PI / 2,
+    scale: [0.72, 0.72, 0.72],
   },
   {
     key: "environment.ruin-wall",
-    position: [3.15, 0, -8.25],
+    name: "east-curtain-wall",
+    position: [5.55, 0, -9.05],
+    rotation: Math.PI / 2,
+    scale: [0.72, 0.72, 0.72],
+  },
+  {
+    key: "environment.ruin-pillar",
+    name: "west-round-tower",
+    position: [-9.25, 0, -8.7],
+    rotation: 0.07,
+    scale: [0.36, 0.36, 0.36],
+  },
+  {
+    key: "environment.ruin-pillar",
+    name: "east-round-tower",
+    position: [9.25, 0, -8.7],
     rotation: -0.08,
-    scale: [3.7, 2.75, 2.2],
+    scale: [0.36, 0.36, 0.36],
   },
   {
-    key: "environment.ruin-pillar",
-    position: [-5.0, 0, -6.8],
-    rotation: -0.1,
-    scale: [2.5, 4.05, 2.5],
+    key: "environment.ashwake-arena",
+    name: "west-return-buttress",
+    position: [-7.1, 0, -5.6],
+    rotation: -0.24,
+    scale: [0.43, 0.43, 0.43],
   },
   {
-    key: "environment.ruin-pillar",
-    position: [5.15, 0, -6.65],
-    rotation: 0.14,
-    scale: [2.5, 3.6, 2.5],
+    key: "environment.ashwake-arena",
+    name: "east-return-buttress",
+    position: [7.15, 0, -5.75],
+    rotation: 0.23,
+    scale: [0.43, 0.43, 0.43],
   },
   {
     key: "environment.ruin-stairs",
-    position: [0.2, 0.06, -5.55],
-    rotation: Math.PI,
-    scale: [4.8, 2.1, 4.0],
+    name: "west-wall-stair",
+    position: [-3.25, 0, -7.45],
+    rotation: Math.PI / 2,
+    scale: [0.33, 0.33, 0.33],
   },
   {
     key: "environment.ruin-rocks",
-    position: [-4.1, 0.03, -4.9],
-    rotation: 0.35,
-    scale: [2.1, 1.45, 2.1],
+    name: "gothic-statue",
+    position: [4.25, 0.48, -5.55],
+    rotation: -0.28,
+    scale: [1.58, 1.58, 1.58],
+  },
+];
+
+const DISTANT_PLACEMENTS: readonly SectorPlacement[] = [
+  {
+    key: "environment.ruin-wall",
+    name: "distant-west-wall",
+    position: [-7.8, 0, -18.2],
+    rotation: Math.PI / 2,
+    scale: [0.96, 0.96, 0.96],
   },
   {
-    key: "environment.ruin-rocks",
-    position: [4.2, 0.03, -4.65],
-    rotation: -0.52,
-    scale: [1.65, 1.2, 1.65],
+    key: "environment.ruin-wall",
+    name: "distant-central-wall",
+    position: [0, 0, -18.7],
+    rotation: Math.PI / 2,
+    scale: [0.98, 0.98, 0.98],
   },
-  // Kept in the camera's left-side travel lane so this art pass does not imply
-  // that the separately tracked boom-obstruction defect was repaired.
+  {
+    key: "environment.ruin-wall",
+    name: "distant-east-wall",
+    position: [7.8, 0, -18.2],
+    rotation: Math.PI / 2,
+    scale: [0.96, 0.96, 0.96],
+  },
   {
     key: "environment.ruin-pillar",
-    position: [-4.85, 0, 6.2],
-    rotation: 0.2,
-    scale: [2.25, 3.4, 2.25],
+    name: "distant-west-watchtower",
+    position: [-13.2, 0, -18.9],
+    rotation: 0.05,
+    scale: [0.55, 0.55, 0.55],
+  },
+  {
+    key: "environment.ruin-pillar",
+    name: "distant-east-watchtower",
+    position: [13.2, 0, -18.9],
+    rotation: -0.04,
+    scale: [0.55, 0.55, 0.55],
+  },
+];
+
+const FOREGROUND_PLACEMENTS: readonly SectorPlacement[] = [
+  {
+    key: "environment.ashwake-arena",
+    name: "west-low-foreground-fragment",
+    position: [-10.6, -0.04, 5.9],
+    rotation: 0.7,
+    scale: [0.46, 0.18, 0.46],
+  },
+  {
+    key: "environment.ruin-wall",
+    name: "east-low-foreground-fragment",
+    position: [10.9, -0.03, 4.4],
+    rotation: -0.95,
+    scale: [0.47, 0.16, 0.47],
   },
 ];
 
@@ -88,35 +157,16 @@ export class ArenaView {
   readonly fallbackReason: string | null;
   private readonly ownedGeometries: THREE.BufferGeometry[] = [];
   private readonly ownedMaterials: THREE.Material[] = [];
-  private readonly ritualMaterial: THREE.MeshBasicMaterial;
   private readonly embers: THREE.Points;
+  private readonly materials: AshwakeMaterials | null;
 
-  constructor(assets: AssetRegistry) {
-    const requiredKeys = [
-      ...RUIN_KEYS,
-      "material.cobble-diffuse",
-      "material.cobble-normal",
-      "material.cobble-arm",
-      "material.brick-diffuse",
-      "material.brick-normal",
-      "material.brick-arm",
-    ];
-    const missing = requiredKeys.filter((key) => {
-      if (key.startsWith("material.")) return assets.getTexture(key) === null;
-      return assets.instantiate(key) === null;
-    });
+  constructor(assets: AssetRegistry, maxAnisotropy = 1) {
+    const missingGeometry = SECTOR_KEYS.filter((key) => assets.instantiate(key) === null);
+    const missingTextures = MATERIAL_KEYS.filter((key) => assets.getTexture(key) === null);
+    const missing = [...missingGeometry, ...missingTextures];
     this.usingFallback = missing.length > 0;
     this.fallbackReason = missing.length > 0 ? `missing ${missing.join(", ")}` : null;
-
-    this.ritualMaterial = this.trackMaterial(
-      new THREE.MeshBasicMaterial({
-        color: 0xd46d43,
-        transparent: true,
-        opacity: 0.42,
-        blending: THREE.AdditiveBlending,
-        depthWrite: false,
-      }),
-    );
+    this.materials = this.usingFallback ? null : new AshwakeMaterials(assets, maxAnisotropy);
     this.embers = this.createEmbers();
 
     if (this.usingFallback) this.buildProceduralFallback();
@@ -125,12 +175,16 @@ export class ArenaView {
   }
 
   update(elapsed: number): void {
-    this.ritualMaterial.opacity = 0.34 + Math.sin(elapsed * 1.8) * 0.08;
-    this.embers.rotation.y = elapsed * 0.012;
-    this.embers.position.y = Math.sin(elapsed * 0.48) * 0.06;
+    this.embers.rotation.y = elapsed * 0.006;
+    this.embers.position.y = Math.sin(elapsed * 0.42) * 0.035;
+    const material = this.embers.material;
+    if (material instanceof THREE.PointsMaterial) {
+      material.opacity = 0.2 + Math.sin(elapsed * 1.3 + 0.4) * 0.025;
+    }
   }
 
   dispose(): void {
+    this.materials?.dispose();
     for (const geometry of this.ownedGeometries) geometry.dispose();
     for (const material of this.ownedMaterials) material.dispose();
     this.ownedGeometries.length = 0;
@@ -138,109 +192,99 @@ export class ArenaView {
   }
 
   private buildAuthoredSector(assets: AssetRegistry): void {
-    this.root.name = "environment.ashwake-arena.authored";
-    const cobble = this.makePbrMaterial(
-      assets,
-      "material.cobble-diffuse",
-      "material.cobble-normal",
-      "material.cobble-arm",
-      5.2,
-      5.2,
-      0.94,
-      0.04,
-    );
-    const brick = this.makePbrMaterial(
-      assets,
-      "material.brick-diffuse",
-      "material.brick-normal",
-      "material.brick-arm",
-      2.8,
-      2.8,
-      0.88,
-      0.055,
-    );
+    if (!this.materials) return;
+    this.root.name = "environment.ashwake-fort-sector.authored";
 
-    const ground = new THREE.Mesh(this.trackGeometry(new THREE.CylinderGeometry(12, 12.25, 0.42, 72)), cobble);
-    ground.position.y = -0.25;
+    const ground = new THREE.Mesh(
+      this.trackGeometry(new THREE.PlaneGeometry(64, 64, 1, 1)),
+      this.materials.ground,
+    );
+    ground.name = "ashwake-ground-plane-no-visible-platform-edge";
+    ground.rotation.x = -Math.PI / 2;
+    ground.position.set(0, -0.035, -5);
     ground.receiveShadow = true;
     this.root.add(ground);
 
-    const sectorFoundation = new THREE.Mesh(
-      this.trackGeometry(new THREE.BoxGeometry(15.5, 0.62, 3.45, 1, 1, 1)),
-      brick,
+    const doorwayShape = new THREE.Shape();
+    doorwayShape.moveTo(-0.86, 0);
+    doorwayShape.lineTo(0.86, 0);
+    doorwayShape.lineTo(0.86, 1.16);
+    doorwayShape.absarc(0, 1.16, 0.86, 0, Math.PI, false);
+    doorwayShape.lineTo(-0.86, 0);
+    const doorwayField = new THREE.Mesh(
+      this.trackGeometry(new THREE.ShapeGeometry(doorwayShape, 16)),
+      this.trackMaterial(
+        new THREE.MeshBasicMaterial({
+          color: 0x060b0e,
+          fog: true,
+          toneMapped: false,
+        }),
+      ),
     );
-    sectorFoundation.position.set(0, -0.06, -8.35);
-    sectorFoundation.castShadow = true;
-    sectorFoundation.receiveShadow = true;
-    this.root.add(sectorFoundation);
+    doorwayField.name = "dark-gate-contrast-field";
+    doorwayField.position.set(0, 0.02, -9.72);
+    this.root.add(doorwayField);
 
-    let ruinPaletteMaterial: THREE.Material | null = null;
-    for (const placement of RUIN_PLACEMENTS) {
-      const ruin = assets.instantiate(placement.key);
-      if (!ruin) continue;
-      ruin.position.set(...placement.position);
-      ruin.rotation.y = placement.rotation;
-      ruin.scale.set(...placement.scale);
-      ruin.name = `${placement.key}.authored-instance`;
-      ruin.traverse((node) => {
-        if (!(node instanceof THREE.Mesh)) return;
-        if (!ruinPaletteMaterial) {
-          const sourceMaterial = Array.isArray(node.material) ? node.material[0] : node.material;
-          if (sourceMaterial) {
-            ruinPaletteMaterial = this.trackMaterial(sourceMaterial.clone());
-            if (ruinPaletteMaterial instanceof THREE.MeshStandardMaterial) {
-              ruinPaletteMaterial.color.setHex(0x7b8790);
-              ruinPaletteMaterial.envMapIntensity = 0.82;
-              ruinPaletteMaterial.roughness = 0.88;
-              ruinPaletteMaterial.metalness = 0.015;
-            }
-          }
-        }
-        if (ruinPaletteMaterial) node.material = ruinPaletteMaterial;
-        node.castShadow = true;
-        node.receiveShadow = true;
-      });
-      this.root.add(ruin);
+    for (const placement of [
+      ...DISTANT_PLACEMENTS,
+      ...MAIN_PLACEMENTS,
+      ...FOREGROUND_PLACEMENTS,
+    ]) {
+      this.addPlacement(assets, placement, this.materials.sector);
     }
 
-    const ring = new THREE.Mesh(
-      this.trackGeometry(new THREE.TorusGeometry(4.8, 0.038, 6, 80)),
-      this.ritualMaterial,
+    const statuePedestal = new THREE.Mesh(
+      this.trackGeometry(new THREE.CylinderGeometry(0.92, 1.08, 0.48, 12, 1)),
+      this.materials.sector,
     );
-    ring.rotation.x = Math.PI / 2;
-    ring.position.y = 0.024;
-    this.root.add(ring);
+    statuePedestal.name = "gothic-statue-pedestal";
+    statuePedestal.position.set(4.25, 0.22, -5.55);
+    statuePedestal.rotation.y = 0.14;
+    statuePedestal.castShadow = true;
+    statuePedestal.receiveShadow = true;
+    this.root.add(statuePedestal);
+  }
 
-    const innerRing = new THREE.Mesh(
-      this.trackGeometry(new THREE.TorusGeometry(2.05, 0.018, 5, 64)),
-      this.ritualMaterial,
-    );
-    innerRing.rotation.x = Math.PI / 2;
-    innerRing.position.y = 0.027;
-    this.root.add(innerRing);
+  private addPlacement(
+    assets: AssetRegistry,
+    placement: SectorPlacement,
+    material: THREE.Material,
+  ): void {
+    const instance = assets.instantiate(placement.key);
+    if (!instance) return;
+    instance.name = `${placement.name}.authored-instance`;
+    instance.position.set(...placement.position);
+    instance.rotation.y = placement.rotation;
+    instance.scale.set(...placement.scale);
+    instance.traverse((node) => {
+      if (!(node instanceof THREE.Mesh)) return;
+      node.material = material;
+      node.castShadow = true;
+      node.receiveShadow = true;
+      node.frustumCulled = true;
+    });
+    this.root.add(instance);
   }
 
   private buildProceduralFallback(): void {
     this.root.name = "environment.ashwake-arena.procedural-fallback";
     const stone = this.trackMaterial(
-      new THREE.MeshStandardMaterial({ color: 0x20242a, roughness: 0.92, metalness: 0.04 }),
+      new THREE.MeshStandardMaterial({ color: 0x20262a, roughness: 0.94, metalness: 0 }),
     );
-    const ground = new THREE.Mesh(this.trackGeometry(new THREE.CylinderGeometry(12, 12.2, 0.42, 64)), stone);
-    ground.position.y = -0.25;
+    const ground = new THREE.Mesh(this.trackGeometry(new THREE.PlaneGeometry(42, 42)), stone);
+    ground.rotation.x = -Math.PI / 2;
+    ground.position.y = -0.035;
     ground.receiveShadow = true;
     this.root.add(ground);
 
     const fallbackPieces: readonly (readonly [number, number, number, number, number])[] = [
-      [-5.7, 2.1, -8.4, 2.2, 4.2],
-      [-2.5, 1.65, -8.6, 2.4, 3.3],
-      [0, 2.3, -8.75, 2.1, 4.6],
-      [2.65, 1.85, -8.55, 2.5, 3.7],
-      [5.8, 2.2, -8.2, 2.1, 4.4],
-      [-4.8, 1.9, 6.2, 1.7, 3.8],
+      [-6.4, 2.2, -8.6, 4.5, 4.4],
+      [0, 2.65, -8.8, 4.3, 5.3],
+      [6.4, 2.2, -8.6, 4.5, 4.4],
     ];
     for (const [x, y, z, width, height] of fallbackPieces) {
       const piece = new THREE.Mesh(
-        this.trackGeometry(new THREE.BoxGeometry(width, height, 1.1)),
+        this.trackGeometry(new THREE.BoxGeometry(width, height, 1.4)),
         stone,
       );
       piece.position.set(x, y, z);
@@ -250,58 +294,29 @@ export class ArenaView {
     }
   }
 
-  private makePbrMaterial(
-    assets: AssetRegistry,
-    diffuseKey: string,
-    normalKey: string,
-    armKey: string,
-    repeatX: number,
-    repeatY: number,
-    roughness: number,
-    metalness: number,
-  ): THREE.MeshStandardMaterial {
-    const map = assets.getTexture(diffuseKey)!;
-    const normalMap = assets.getTexture(normalKey)!;
-    const armMap = assets.getTexture(armKey)!;
-    for (const texture of [map, normalMap, armMap]) texture.repeat.set(repeatX, repeatY);
-    return this.trackMaterial(
-      new THREE.MeshStandardMaterial({
-        color: 0xc8c0af,
-        map,
-        normalMap,
-        normalScale: new THREE.Vector2(0.72, 0.72),
-        roughness,
-        roughnessMap: armMap,
-        metalness,
-        metalnessMap: armMap,
-        envMapIntensity: 0.95,
-      }),
-    );
-  }
-
   private createEmbers(): THREE.Points {
-    const count = 110;
+    const count = 64;
     const positions = new Float32Array(count * 3);
     let value = 0xa51c_2026;
-    const random = (): number => {
+    const sample = (): number => {
       value = (value * 1664525 + 1013904223) >>> 0;
       return value / 0x1_0000_0000;
     };
     for (let index = 0; index < count; index += 1) {
-      const radius = 1.7 + random() * 9.1;
-      const angle = random() * Math.PI * 2;
+      const radius = 2.4 + sample() * 8.2;
+      const angle = sample() * Math.PI * 2;
       positions[index * 3] = Math.sin(angle) * radius;
-      positions[index * 3 + 1] = 0.18 + random() * 3.9;
-      positions[index * 3 + 2] = Math.cos(angle) * radius;
+      positions[index * 3 + 1] = 0.16 + sample() * 2.6;
+      positions[index * 3 + 2] = Math.cos(angle) * radius - 1.4;
     }
     const geometry = this.trackGeometry(new THREE.BufferGeometry());
     geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
     const material = this.trackMaterial(
       new THREE.PointsMaterial({
-        color: 0xe98b5b,
-        size: 0.04,
+        color: 0xd57a51,
+        size: 0.026,
         transparent: true,
-        opacity: 0.48,
+        opacity: 0.2,
         blending: THREE.AdditiveBlending,
         depthWrite: false,
         sizeAttenuation: true,

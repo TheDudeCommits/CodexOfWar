@@ -31,9 +31,9 @@ export function createRenderer(
   );
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.3;
+  renderer.toneMappingExposure = 1.02;
   renderer.shadowMap.enabled = true;
-  renderer.shadowMap.type = THREE.PCFShadowMap;
+  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
   renderer.domElement.id = "game-canvas";
   renderer.domElement.setAttribute("aria-label", "Ashwake combat arena");
   renderer.domElement.tabIndex = 0;

@@ -1,0 +1,285 @@
+{
+  "schema": "p30.round003.critic.v1",
+  "piece": "P30",
+  "round": "Round003",
+  "role": "fresh-independent-critic",
+  "verdict": "reject",
+  "accepted": false,
+  "score": {
+    "total": 30,
+    "maximum": 100,
+    "required": 95,
+    "categorySum": 18,
+    "categoryMaximum": 60,
+    "categories": {
+      "composition_camera": 3,
+      "character_animation": 2,
+      "environment_materials_lighting": 4,
+      "combat_readability_impact": 2,
+      "technical_correctness_performance": 5,
+      "aaa_finish": 2
+    },
+    "minimumCategoryRequired": 9,
+    "everyCategoryPass": false
+  },
+  "acceptance": {
+    "totalScorePass": false,
+    "everyCategoryPass": false,
+    "blindWinPass": false,
+    "allHardGatesPass": false
+  },
+  "auditRuntime": {
+    "productionBundle": true,
+    "typecheckPass": true,
+    "lintPass": true,
+    "buildPass": true,
+    "headed": true,
+    "browser": "Google Chrome 150.0.7871.187",
+    "automation": "Playwright",
+    "httpStatus": 200,
+    "webglVersion": "WebGL 2.0",
+    "unmaskedVendor": "Google Inc. (Apple)",
+    "unmaskedRenderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M2, Unspecified Version)",
+    "hardwareMetal": true,
+    "glError": 0,
+    "surface": {
+      "viewportWidth": 1600,
+      "viewportHeight": 900,
+      "devicePixelRatio": 1,
+      "canvasCssWidth": 1600,
+      "canvasCssHeight": 900,
+      "canvasBackingWidth": 1600,
+      "canvasBackingHeight": 900,
+      "rendererPixelRatio": 1
+    },
+    "ready": {
+      "schema": "cow.review.v1",
+      "piece": "P30",
+      "preset": "P30",
+      "seed": 30001,
+      "rapier": "ready",
+      "assets": "ready",
+      "renderer": "compiled-and-warm",
+      "apiObservedMs": 1225,
+      "coldReadyMs": 5817,
+      "coldReadyCeilingMs": 2500,
+      "coldReadyPass": false
+    }
+  },
+  "assetLoad": {
+    "schema": "gauntlet.asset-load.v1",
+    "manifestVersion": 2,
+    "enabledCount": 18,
+    "loadedCount": 18,
+    "failures": [],
+    "complete": true,
+    "productionAuthored": true,
+    "proceduralFallbackActive": false,
+    "pmremInstalled": true,
+    "heroAuthored": true,
+    "hollowAuthored": true,
+    "arenaSectorAuthored": true,
+    "visibleAnimationWeaponTextureBinding": true
+  },
+  "hardGates": {
+    "production_headed_hardware_webgl_surface": true,
+    "review_contract_cow_review_v1": true,
+    "authored_assets_18_of_18_no_fallback_pmrem": true,
+    "visible_animation_weapon_texture_binding": true,
+    "tape_a_simulation_replay": true,
+    "tape_a_required_timing_damage_busy_rejection": true,
+    "tape_a_camera_replay": false,
+    "tape_b_out_of_range": true,
+    "tape_c_camera_obstruction_collision": false,
+    "projection_50_0_08_120": false,
+    "pointer_lock_mouse_look": false,
+    "camera_reset_replay": false,
+    "physical_keyboard_mouse_bindings": true,
+    "held_keys_pause_and_blur": false,
+    "resize_dpr_restoration": true,
+    "webgl_loss_restore_capture_recovery": true,
+    "runtime_error_free_interaction": false,
+    "frame_time_and_resource_ceilings": true,
+    "cold_ready_2500ms": false,
+    "blind_candidate_wins_5_of_6": false,
+    "allPass": false
+  },
+  "determinism": {
+    "seed": 30001,
+    "tapeA": {
+      "runs": 2,
+      "processedTicksPerRun": 60,
+      "simulationSnapshotsExact": true,
+      "eventsExact": true,
+      "cameraTelemetryExact": false,
+      "cameraMismatchTickStart": 33,
+      "cameraMismatchTickEnd": 59,
+      "cameraPeakPositionDelta": 0.0682498823589126,
+      "cameraPeakQuaternionComponentDelta": 0.003991047611062698,
+      "attackStartupTicks": "24-31",
+      "attackActiveTicks": "32-35",
+      "enemyHitTick": 33,
+      "damage": 10,
+      "attackRecoveryTicks": "36-49",
+      "idleReturnTick": 50,
+      "busyRejectionTick": 28,
+      "finalPlayerZ": 1.6000008583068848,
+      "finalTargetHealth": 90
+    },
+    "tapeB": {
+      "processedTicks": 60,
+      "playerZ": 2.5999999046325684,
+      "targetHealth": 100,
+      "enemyHitCount": 0,
+      "pass": true
+    },
+    "tapeC": {
+      "processedTicks": 120,
+      "playerZ": 5.60000467300415,
+      "boomDesiredDistance": 7.15,
+      "boomResolvedDistance": 7.15,
+      "collisionAppliedAnyTick": false,
+      "resolvedLessThanDesiredAnyTick": false,
+      "cameraObstruction": {
+        "implemented": false,
+        "status": "pending"
+      },
+      "pass": false
+    }
+  },
+  "cameraAndInput": {
+    "projection": {
+      "required": { "fovDegrees": 50, "near": 0.08, "far": 120 },
+      "observed": { "fovDegrees": 58, "near": 0.08, "far": 110 },
+      "pass": false
+    },
+    "pointerLockMouseLook": {
+      "pointerLockAcquired": false,
+      "yawBefore": 0,
+      "yawAfter": 0,
+      "pitchBefore": 0.2,
+      "pitchAfter": 0.2,
+      "pageError": "WrongDocumentError: The root document of this element is not valid for pointer lock.",
+      "pass": false
+    },
+    "cameraResetReplay": {
+      "exact": false,
+      "positionMaxAbsDelta": 0.03810079121982102,
+      "quaternionMaxAbsDelta": 0.0022159951067757117,
+      "pass": false
+    },
+    "pauseHeldKey": {
+      "beforePauseZ": 2.5,
+      "whilePausedZ": 2.5,
+      "firstResumedTickZ": 2.45000004768,
+      "heldCleared": false,
+      "pass": false
+    },
+    "blurHeldKey": {
+      "beforeBlurZ": 2.5,
+      "afterTenTicksZ": 2.5,
+      "heldCleared": true,
+      "pass": true
+    },
+    "resizeDprPass": true
+  },
+  "contextRecovery": {
+    "supported": true,
+    "losses": 1,
+    "restores": 1,
+    "postRestoreCaptureDataUrlLength": 2920166,
+    "finalRendererErrors": [],
+    "finalReviewErrors": [],
+    "pass": true
+  },
+  "performance": {
+    "canonicalUrl": "http://127.0.0.1:4173/?review=1&post=0",
+    "freshPagePerSample": true,
+    "headed": true,
+    "postEnabled": false,
+    "viewport": { "width": 1600, "height": 900, "dpr": 1 },
+    "warmupRafFrames": 120,
+    "measurementMs": 30000,
+    "samples": [
+      {
+        "sample": 1,
+        "durationMs": 30000.5,
+        "frames": 1801,
+        "medianMs": 16.7,
+        "p95Ms": 18.5,
+        "p99Ms": 18.7,
+        "maxMs": 18.7,
+        "calls": 75,
+        "triangles": 176017,
+        "textures": 30,
+        "geometries": 30,
+        "errors": []
+      },
+      {
+        "sample": 2,
+        "durationMs": 30001.2,
+        "frames": 1801,
+        "medianMs": 16.7,
+        "p95Ms": 18.5,
+        "p99Ms": 18.7,
+        "maxMs": 18.8,
+        "calls": 75,
+        "triangles": 176017,
+        "textures": 30,
+        "geometries": 30,
+        "errors": []
+      },
+      {
+        "sample": 3,
+        "durationMs": 30016.6,
+        "frames": 1801,
+        "medianMs": 16.7,
+        "p95Ms": 18.5,
+        "p99Ms": 18.7,
+        "maxMs": 32.1,
+        "calls": 75,
+        "triangles": 176017,
+        "textures": 30,
+        "geometries": 30,
+        "errors": []
+      }
+    ],
+    "ceilings": {
+      "medianMs": 16.7,
+      "p95Ms": 20,
+      "p99Ms": 25,
+      "calls": 120,
+      "triangles": 1500000,
+      "textures": 32,
+      "geometries": 120
+    },
+    "allSamplesPass": true
+  },
+  "blindComparison": {
+    "candidateWins": 0,
+    "comparisons": 6,
+    "requiredWins": 5,
+    "overwhelmingDecisions": 6,
+    "decisionsLockedBeforeReveal": true,
+    "privateIdentityIncluded": false,
+    "pass": false
+  },
+  "captures": [
+    { "file": "S01.png", "width": 1600, "height": 900, "bytes": 1856423, "sha256": "2778f4977419ae5359112269c7bc5bea85853b8694981d7a481f13c78bb4f5ea" },
+    { "file": "S02.png", "width": 1600, "height": 900, "bytes": 1938739, "sha256": "d5a5e81646c8e4700d7bb7d627d86ffa7e4cd9b840714d9debae035d24b58481" },
+    { "file": "S03.png", "width": 1600, "height": 900, "bytes": 1939232, "sha256": "5069db9126757f1e20354571472ae528c512a4879f399a6b8940fab5967076b7" },
+    { "file": "S04.png", "width": 1600, "height": 900, "bytes": 1944994, "sha256": "abfeded25dc817036833fd3193f08fd137eb8f0ad3673e72a8186295494d3ebe" },
+    { "file": "S05.png", "width": 1600, "height": 900, "bytes": 1940413, "sha256": "c872f69aa24676c0dcbadbb3c837785fa3957506292c53c2979a41de1c323ccf" },
+    { "file": "S06.png", "width": 1600, "height": 900, "bytes": 1933207, "sha256": "74b6f4bd9ed7a31ec388339a8487e3511d1ba5ad580a9ea1a59c538f9809b5e6" }
+  ],
+  "biggestRemainingGap": {
+    "id": "character_combat_fidelity",
+    "prescription": "Replace and tune only the hero, Hollow, and claymore render assets, their materials, rig/grip/contact offsets, and existing attack/reaction presentation clips; freeze every other domain.",
+    "successCriterion": "Fresh independent S03-S05 captures win 3/3 scenario-matched blind comparisons."
+  },
+  "privacy": {
+    "benchmarkIdentityInArtifacts": false,
+    "privateWorkspaceDeleted": true,
+    "absenceVerified": true
+  }
+}

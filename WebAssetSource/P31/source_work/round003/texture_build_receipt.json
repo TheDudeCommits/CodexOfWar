@@ -1,0 +1,157 @@
+{
+  "access_date": "2026-08-01",
+  "cwebp": "1.6.0\nlibsharpyuv: 0.4.2",
+  "outputs": [
+    {
+      "command": [
+        "cwebp",
+        "-q",
+        "84",
+        "-sharp_yuv",
+        "-m",
+        "6",
+        "-mt",
+        "-metadata",
+        "none",
+        "mossy_cobblestone_diff_1k.jpg",
+        "-o",
+        "ashwake_ground_basecolor.webp"
+      ],
+      "output_bytes": 349700,
+      "output_path": "processed/polyhaven/round003/materials/ground/ashwake_ground_basecolor.webp",
+      "output_sha256": "6f603e8df23bd5032024c1c38f12bdf69ce5ce151405a3056a6c0ad92ba71371",
+      "role": "ground-basecolor",
+      "source_bytes": 1089617,
+      "source_id": "PH-COBBLE",
+      "source_path": "raw/polyhaven/textures/mossy_cobblestone_1k/mossy_cobblestone_diff_1k.jpg",
+      "source_sha256": "105d6209ff99952ca316e814eebf06c1c3cb244da62184137a97e29aee74b7d7"
+    },
+    {
+      "command": [
+        "cwebp",
+        "-q",
+        "92",
+        "-sharp_yuv",
+        "-m",
+        "6",
+        "-mt",
+        "-metadata",
+        "none",
+        "mossy_cobblestone_nor_gl_1k.jpg",
+        "-o",
+        "ashwake_ground_normal.webp"
+      ],
+      "output_bytes": 394730,
+      "output_path": "processed/polyhaven/round003/materials/ground/ashwake_ground_normal.webp",
+      "output_sha256": "3903a0a795c1584283b5983f1fdbd32435f13b9a7656bf940023054da2769c67",
+      "role": "ground-normal-opengl",
+      "source_bytes": 980112,
+      "source_id": "PH-COBBLE",
+      "source_path": "raw/polyhaven/textures/mossy_cobblestone_1k/mossy_cobblestone_nor_gl_1k.jpg",
+      "source_sha256": "32a128c921cf0311798ebb6c6a766db900a10419233c87cc52f8d226b2aa4cc0"
+    },
+    {
+      "command": [
+        "cwebp",
+        "-q",
+        "90",
+        "-sharp_yuv",
+        "-m",
+        "6",
+        "-mt",
+        "-metadata",
+        "none",
+        "mossy_cobblestone_arm_1k.jpg",
+        "-o",
+        "ashwake_ground_orm.webp"
+      ],
+      "output_bytes": 161986,
+      "output_path": "processed/polyhaven/round003/materials/ground/ashwake_ground_orm.webp",
+      "output_sha256": "98558a0b83e34439512b0c6315d687990457a3f3d20234c8564080365fdb3842",
+      "role": "ground-orm",
+      "source_bytes": 715595,
+      "source_id": "PH-COBBLE",
+      "source_path": "raw/polyhaven/textures/mossy_cobblestone_1k/mossy_cobblestone_arm_1k.jpg",
+      "source_sha256": "8d737b10700257d179dc0413f278477c1bdc79d346f2bf6e8b504e850bde7c82"
+    },
+    {
+      "command": [
+        "cwebp",
+        "-q",
+        "84",
+        "-sharp_yuv",
+        "-m",
+        "6",
+        "-mt",
+        "-metadata",
+        "none",
+        "modular_fort_01_wall_diff_1k.jpg",
+        "-o",
+        "ashwake_sector_basecolor.webp"
+      ],
+      "output_bytes": 295418,
+      "output_path": "processed/polyhaven/round003/materials/sector/ashwake_sector_basecolor.webp",
+      "output_sha256": "98ffd6f778300a99c4a5c7ae43fa6726c1881621599b99c4143d6f4a6f31a064",
+      "role": "sector-basecolor",
+      "source_bytes": 978641,
+      "source_id": "PH-FORT",
+      "source_path": "raw/polyhaven/round003/modular_fort_01_1k/textures/modular_fort_01_wall_diff_1k.jpg",
+      "source_sha256": "8bdefadca0688e9b3fd91b4d12f341918b0a3670c25537c18a777fa51bb90bea"
+    },
+    {
+      "command": [
+        "cwebp",
+        "-q",
+        "92",
+        "-sharp_yuv",
+        "-m",
+        "6",
+        "-mt",
+        "-metadata",
+        "none",
+        "modular_fort_01_wall_nor_gl_1k.jpg",
+        "-o",
+        "ashwake_sector_normal.webp"
+      ],
+      "output_bytes": 517172,
+      "output_path": "processed/polyhaven/round003/materials/sector/ashwake_sector_normal.webp",
+      "output_sha256": "b8fa399819f39545500fa1d818fe3cd10d70808ed344542bacca11ccbfcbc97a",
+      "role": "sector-normal-opengl",
+      "source_bytes": 1194253,
+      "source_id": "PH-FORT",
+      "source_path": "raw/polyhaven/round003/modular_fort_01_1k/textures/modular_fort_01_wall_nor_gl_1k.jpg",
+      "source_sha256": "6e8b0e1abac9c6ab0f9a36c04300ea3d0ca83dede3b49485c969a71494ce8d53"
+    },
+    {
+      "command": [
+        "cwebp",
+        "-q",
+        "90",
+        "-sharp_yuv",
+        "-m",
+        "6",
+        "-mt",
+        "-metadata",
+        "none",
+        "modular_fort_01_wall_arm_1k.jpg",
+        "-o",
+        "ashwake_sector_orm.webp"
+      ],
+      "output_bytes": 306880,
+      "output_path": "processed/polyhaven/round003/materials/sector/ashwake_sector_orm.webp",
+      "output_sha256": "511ee8f569e261b2217ec7362f4194f9edabfb5b43ac6ccc708528010a2da9f5",
+      "role": "sector-orm",
+      "source_bytes": 936858,
+      "source_id": "PH-FORT",
+      "source_path": "raw/polyhaven/round003/modular_fort_01_1k/textures/modular_fort_01_wall_arm_1k.jpg",
+      "source_sha256": "6d3327658794a90fc1b52c19dfbb57059b7ea9801f59abd13417e4be7bf40a34"
+    }
+  ],
+  "policy": "ordinary 1024x1024 WebP; basecolor is sRGB; OpenGL normals and packed AO/roughness/metallic are linear",
+  "schema": "p31.round003.texture-build.v1",
+  "totals": {
+    "files": 6,
+    "output_bytes": 2025886,
+    "source_bytes": 5895076
+  }
+}

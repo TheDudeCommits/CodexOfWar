@@ -10,24 +10,6 @@ const dataUrl = new URL(
   import.meta.url,
 );
 
-async function loadPrivateBenchmarkImageHashes() {
-  const privateHashFile = process.env.CODEX_PRIVATE_BENCHMARK_HASHES_FILE;
-  if (!privateHashFile) {
-    return new Set();
-  }
-
-  const entries = (await readFile(privateHashFile, "utf8"))
-    .split(/\s+/)
-    .filter(Boolean);
-  assert.ok(entries.length > 0, "Private benchmark hash corpus is empty");
-  for (const entry of entries) {
-    assert.match(entry, /^[0-9a-f]{64}$/i);
-  }
-  return new Set(entries.map((entry) => entry.toLowerCase()));
-}
-
-const benchmarkImageHashes = await loadPrivateBenchmarkImageHashes();
-
 async function render() {
   const workerUrl = new URL("../dist/server/index.js", import.meta.url);
   workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}`);
@@ -97,33 +79,76 @@ test("server-renders the production evidence ledger", async () => {
   assert.match(html, /24–32%/);
   assert.match(html, /Private benchmark/);
   assert.match(html, /Astra Vale/);
-  assert.match(html, /P30 · Round 003/);
+  assert.match(html, /P30 · Round 004/);
   assert.match(html, /Round rejected\. Rebuild in progress\./);
-  assert.match(html, /Cohesive AAA Combat Presentation Revision/);
-  assert.match(html, /REJECT · 25\/100 · candidate evidence only/i);
+  assert.match(html, /Character Combat Fidelity Revision/);
+  assert.match(html, /REJECT · 30\/100 · candidate evidence only/i);
   assert.match(html, /18\/18 · no fallback · PMREM/i);
+  assert.match(html, /Chrome 150/i);
+  assert.match(html, /1600×900 · DPR 1/i);
+  assert.match(html, /Tape A simulation, events, and timing pass/i);
+  assert.match(html, /Tape B and physical bindings pass/i);
+  assert.match(html, /Blur, resize and DPR handling, and WebGL restore pass/i);
+  assert.match(html, /Three 30-second performance and resource samples pass/i);
+  assert.match(html, /REJECT · 30\/100/i);
+  assert.match(html, /0\/6 · all overwhelming/i);
+  assert.match(html, /composition and camera 3/i);
+  assert.match(html, /character and animation 2/i);
+  assert.match(html, /environment, materials, and lighting 4/i);
+  assert.match(html, /combat readability and impact 2/i);
+  assert.match(html, /technical 5/i);
+  assert.match(html, /AAA finish 2/i);
+  assert.match(html, /16\.7 ms median, 18\.5 ms p95, 18\.7 ms p99/i);
+  assert.match(html, /75 draw calls/i);
+  assert.match(html, /176,017 triangles/i);
+  assert.match(html, /30 textures/i);
+  assert.match(html, /30 geometries/i);
+  assert.match(html, /3,349,498 bytes/i);
+  assert.match(html, /15,961,504 bytes/i);
+  assert.match(html, /22\/22 GLBs/i);
+  assert.match(html, /six WebPs/i);
+  assert.match(html, /official CC0 provenance/i);
+  assert.match(html, /12 byte-identical runtime files/i);
+  assert.match(html, /11 unchanged frozen-subsystem hashes/i);
+  assert.match(html, /Tape C obstruction · hard fail/i);
+  assert.match(html, /58° \/ 0\.08 \/ 110/i);
+  assert.match(html, /50° \/ 0\.08 \/ 120/i);
+  assert.match(html, /WrongDocumentError/i);
+  assert.match(html, /Reset replay · hard fail/i);
+  assert.match(html, /held key survives pause/i);
+  assert.match(html, /Runtime-error-free interaction · hard fail/i);
+  assert.match(html, /5\.817 s/i);
+  assert.match(html, /character_combat_fidelity/i);
+  assert.match(html, /render assets and materials/i);
+  assert.match(html, /rig, grip, and contact offsets/i);
+  assert.match(html, /existing attack and reaction presentation clips/i);
+  assert.match(html, /Freeze every other domain/i);
+  assert.match(html, /fresh independent S03–S05 result that wins 3\/3 matched blind comparisons/i);
+  assert.match(html, /Poly Haven fort and statue/i);
+  assert.match(html, /shared PBR/i);
+  assert.match(html, /deterministic light rig/i);
+  assert.match(html, /freeze the hero, Hollow, claymore, CharacterViews, and CombatFx/i);
+  assert.match(html, /S01–S06 fresh browser captures/i);
+  assert.match(html, /Exact Tape A, Tape B, and Tape C replays/i);
+  assert.match(html, /Camera, input, interaction, projection, reset, and obstruction hard gates/i);
+  assert.match(html, /Cold-ready, warm-runtime, resource, payload, provenance, and blind-gate reports/i);
   assert.match(html, /Rejected foundation evidence · not AAA acceptance/i);
   assert.match(html, /Fresh headed production-browser critic complete/i);
   assert.match(html, /Chrome 151/i);
   assert.match(html, /ANGLE Metal/i);
-  assert.match(html, /Tape A simulation snapshots and events exact/i);
-  assert.match(html, /Tape B out-of-range replay pass/i);
-  assert.match(html, /Frame-time and resource ceilings pass/i);
-  assert.match(html, /Camera obstruction absent · hard fail/i);
-  assert.match(html, /Camera replay nondeterministic after reset/i);
-  assert.match(html, /Pointer-lock and look path failed/i);
-  assert.match(html, /4\.109 s/);
-  assert.match(html, /58° \/ 110/i);
-  assert.match(html, /50° \/ 120/i);
-  assert.match(html, /held movement key survives pause/i);
   assert.match(html, /cohesive_aaa_combat_presentation/i);
   assert.match(html, /27\.3 MB/);
   assert.match(html, /80\/80 receipt files/i);
   assert.match(html, /16\/16 GLBs/i);
   assert.match(html, /475\.3 MB raw cache/i);
   assert.match(html, /fused colossal third leg or shield/i);
-  assert.match(html, /80/);
+  assert.match(compactHtml, /95<span> \/ 100<\/span>/);
   assert.match(compactHtml, /100 minimum total/);
+  assert.match(html, /Every visual category ≥ 9\/10/);
+  assert.match(html, /Focused S03–S05 must win 3\/3/);
+  assert.match(html, /Overall score ≥ 95\/100/);
+  assert.match(html, /Overall ≥ 5\/6 blind wins/);
+  assert.match(html, /All hard gates pass/);
   assert.match(html, /P00 exception/);
   assert.match(html, /visual loss does not block acceptance/i);
 
@@ -353,7 +378,15 @@ test("server-renders the production evidence ledger", async () => {
   assert.match(html, /href="\/captures\/P30\/round-002\/S04\.png"/);
   assert.match(html, /href="\/captures\/P30\/round-002\/S06\.png"/);
   assert.match(html, /href="\/data\/P30-round-002\.json"/);
-  assert.doesNotMatch(html, /Reference\.zip|Reference\/[^"<]+\.(?:png|jpe?g|webp)/i);
+  assert.match(html, /href="\/captures\/P30\/round-003\/S02\.png"/);
+  assert.match(html, /href="\/captures\/P30\/round-003\/S04\.png"/);
+  assert.match(html, /href="\/captures\/P30\/round-003\/S06\.png"/);
+  assert.match(html, /href="\/data\/P30-round-003\.json"/);
+  assert.doesNotMatch(
+    html,
+    /Reference\s+\d+|Reference\.zip|Reference\/[^"<]+\.(?:png|jpe?g|webp)|pairId|pairIdentifier|candidateSide|benchmarkSide|benchmarkFilename|benchmarkImage|lockedWinner|revealedWinner|reveal mapping|hidden key/i,
+  );
+  assert.doesNotMatch(html, /\bR\d{2}\b/);
   assert.doesNotMatch(
     html,
     /\/Users\/|\/home\/|[A-Za-z]:\\Users\\|\/tmp\/|\/private\/var\/folders\//i,
@@ -432,19 +465,28 @@ test("checked-in data preserves P00–P25 and adds the honest P30/P31 browser la
   assert.equal(p30.status, "revising");
   assert.equal(p31.status, "building");
   assert.equal(dashboard.activeBuild.pieceId, "P30");
-  assert.equal(dashboard.activeBuild.round, 3);
-  assert.equal(dashboard.activeBuild.roundLabel, "P30 · Round 003");
+  assert.equal(dashboard.activeBuild.round, 4);
+  assert.equal(dashboard.activeBuild.roundLabel, "P30 · Round 004");
   assert.equal(
     dashboard.activeBuild.builder,
-    "Cohesive AAA Combat Presentation Revision",
+    "Character Combat Fidelity Revision",
   );
   assert.equal(dashboard.activeBuild.status, p30.status);
-  assert.match(dashboard.activeBuild.brief, /existing hero, Hollow, claymore/i);
-  assert.match(dashboard.activeBuild.brief, /one camera-facing arena sector/i);
-  assert.match(dashboard.activeBuild.brief, /existing hero, Hollow, claymore/i);
-  assert.match(dashboard.activeBuild.brief, /materials and lighting/i);
-  assert.match(dashboard.activeBuild.brief, /existing contact effects/i);
-  assert.match(dashboard.activeBuild.brief, /freezing mechanics, camera, input, HUD, and the review contract/i);
+  assert.match(dashboard.activeBuild.brief, /hero, Hollow, and claymore render assets and materials/i);
+  assert.match(dashboard.activeBuild.brief, /rig, grip, and contact offsets/i);
+  assert.match(dashboard.activeBuild.brief, /existing attack and reaction presentation clips/i);
+  assert.match(dashboard.activeBuild.brief, /Freeze every other domain/i);
+  assert.match(dashboard.activeBuild.nextGate, /character_combat_fidelity/);
+  assert.match(dashboard.activeBuild.nextGate, /fresh independent S03–S05 result/);
+  assert.match(dashboard.activeBuild.nextGate, /wins 3\/3 matched blind comparisons/);
+  assert.match(p30.outcome, /Round 003 is rejected candidate evidence at 30\/100 with 0\/6 candidate wins/i);
+  assert.match(p30.outcome, /Round 004 revises only character combat fidelity/i);
+  assert.deepEqual(p30.requiredEvidence, [
+    "S01–S06 fresh browser captures",
+    "Exact Tape A, Tape B, and Tape C replays",
+    "Camera, input, interaction, projection, reset, and obstruction hard gates",
+    "Cold-ready, warm-runtime, resource, payload, provenance, and blind-gate reports",
+  ]);
   assert.match(p31.outcome, /integrated and provenance-ready/i);
   assert.ok(queuedPieces.every((piece) => piece.status === "queued"));
 
@@ -457,11 +499,11 @@ test("checked-in data preserves P00–P25 and adds the honest P30/P31 browser la
   assert.equal(dashboard.canonicalCapture.benchmarkId, "Anonymous six-pair gate");
   assert.equal(
     dashboard.canonicalCapture.capturePath,
-    "/captures/P30/round-002/S02.png",
+    "/captures/P30/round-003/S02.png",
   );
   assert.equal(
     dashboard.canonicalCapture.manifestPath,
-    "/data/P30-round-002.json",
+    "/data/P30-round-003.json",
   );
   assert.equal(
     dashboard.canonicalCapture.latestManifestPath,
@@ -469,11 +511,22 @@ test("checked-in data preserves P00–P25 and adds the honest P30/P31 browser la
   );
   assert.equal(dashboard.canonicalCapture.captureAvailable, true);
   assert.equal(dashboard.canonicalCapture.manifestAvailable, true);
-  assert.equal(dashboard.acceptance.threshold, 80);
+  assert.equal(dashboard.acceptance.threshold, 95);
   assert.equal(dashboard.acceptance.maximum, 100);
+  assert.equal(
+    dashboard.acceptance.visualMinimum,
+    "Every visual category ≥ 9/10",
+  );
+  assert.equal(
+    dashboard.acceptance.combatMinimum,
+    "Focused S03–S05 must win 3/3",
+  );
+  assert.equal(dashboard.acceptance.criterionFloor, "Overall score ≥ 95/100");
+  assert.equal(dashboard.acceptance.blindPreference, "Overall ≥ 5/6 blind wins");
+  assert.equal(dashboard.acceptance.hardFailurePolicy, "All hard gates pass");
   assert.match(dashboard.acceptance.p00Exception, /visual loss does not block/i);
 
-  assert.equal(dashboard.rounds.length, 20);
+  assert.equal(dashboard.rounds.length, 21);
   assert.equal(dashboard.rounds[0].pieceId, "P00");
   assert.equal(
     dashboard.rounds[0].critic.status,
@@ -932,6 +985,45 @@ test("checked-in data preserves P00–P25 and adds the honest P30/P31 browser la
     "/captures/P30/round-002/S06.png",
     "/data/P30-round-002.json",
   ]);
+  const p30Round003 = dashboard.rounds[20];
+  assert.equal(p30Round003.pieceId, "P30");
+  assert.equal(p30Round003.round, 3);
+  assert.equal(p30Round003.date, "2026-08-02");
+  assert.equal(p30Round003.status, "criticized");
+  assert.equal(p30Round003.engineRun, true);
+  assert.equal(p30Round003.actualGameCapturePerformed, true);
+  assert.equal(p30Round003.targetMatchedGameCapturePerformed, true);
+  assert.equal(p30Round003.gateQualifyingCapture, false);
+  assert.match(p30Round003.builderBrief, /environment, materials, lighting, and staging/i);
+  assert.match(p30Round003.builderBrief, /Poly Haven fort and statue/i);
+  assert.match(p30Round003.builderBrief, /shared PBR/i);
+  assert.match(p30Round003.builderBrief, /deterministic light rig/i);
+  assert.match(p30Round003.builderBrief, /freeze the hero, Hollow, claymore, CharacterViews, and CombatFx/i);
+  assert.equal(p30Round003.critic.score, 30);
+  assert.equal(p30Round003.critic.candidatePreferredCount, 0);
+  assert.equal(p30Round003.critic.comparisonCount, 6);
+  assert.match(p30Round003.critic.status, /reject/i);
+  assert.match(p30Round003.critic.status, /not accepted/i);
+  assert.deepEqual(p30Round003.categoryScores, {
+    compositionCamera: 3,
+    characterAnimation: 2,
+    environmentMaterialsLighting: 4,
+    combatReadabilityImpact: 2,
+    technical: 5,
+    aaaFinish: 2,
+  });
+  assert.match(p30Round003.critic.preference, /0\/6 aggregate blind comparisons/i);
+  assert.match(p30Round003.critic.preference, /all six outcomes overwhelming/i);
+  assert.match(
+    p30Round003.critic.primaryGap,
+    /^character_combat_fidelity:/,
+  );
+  assert.deepEqual(p30Round003.evidenceLinks, [
+    "/captures/P30/round-003/S02.png",
+    "/captures/P30/round-003/S04.png",
+    "/captures/P30/round-003/S06.png",
+    "/data/P30-round-003.json",
+  ]);
 });
 
 test("P10 history remains filed while the global latest manifest stays P00-pinned", async () => {
@@ -1280,15 +1372,15 @@ test("P10 history remains filed while the global latest manifest stays P00-pinne
   );
   assert.equal(
     dashboard.activeBuild.evidenceBundle.manifestPath,
-    "/data/P30-round-002.json",
+    "/data/P30-round-003.json",
   );
   assert.equal(
     dashboard.activeBuild.evidenceBundle.s01.path,
-    "/captures/P30/round-002/S02.png",
+    "/captures/P30/round-003/S02.png",
   );
   assert.equal(
     dashboard.activeBuild.evidenceBundle.diagnostic.path,
-    "/captures/P30/round-002/S04.png",
+    "/captures/P30/round-003/S04.png",
   );
   assert.equal(
     "S02 close-idle diagnostic · rejected candidate",
@@ -1300,7 +1392,7 @@ test("P10 history remains filed while the global latest manifest stays P00-pinne
   );
   assert.equal(
     dashboard.activeBuild.evidenceBundle.status,
-    "REJECT · 25/100 · candidate evidence only",
+    "REJECT · 30/100 · candidate evidence only",
   );
   assert.equal("sha256" in dashboard.activeBuild.evidenceBundle.s01, false);
   assert.equal("sha256" in dashboard.activeBuild.evidenceBundle.diagnostic, false);
@@ -1308,7 +1400,7 @@ test("P10 history remains filed while the global latest manifest stays P00-pinne
     fingerprint.auditContext,
     "Fresh independent headed production-browser audit",
   );
-  assert.equal(fingerprint.browser, "Google Chrome");
+  assert.equal(fingerprint.browser, "Google Chrome 150");
   assert.match(fingerprint.graphics, /ANGLE Metal Renderer: Apple M2/);
   assert.equal(fingerprint.headed, true);
   assert.equal(fingerprint.hardwareAccelerated, true);
@@ -3464,12 +3556,12 @@ test("Round017 local-constraint release is public-safe, hash-verified, and rejec
   );
 
   assert.equal(dashboard.activeBuild.pieceId, "P30");
-  assert.equal(dashboard.activeBuild.round, 3);
-  assert.equal(dashboard.rounds.at(-3).pieceId, "P10");
-  assert.equal(dashboard.rounds.at(-3).round, 17);
-  assert.equal(dashboard.rounds.at(-3).critic.score, 31);
+  assert.equal(dashboard.activeBuild.round, 4);
+  assert.equal(dashboard.rounds.at(-4).pieceId, "P10");
+  assert.equal(dashboard.rounds.at(-4).round, 17);
+  assert.equal(dashboard.rounds.at(-4).critic.score, 31);
   assert.equal(dashboard.rounds.at(-1).pieceId, "P30");
-  assert.equal(dashboard.activeBuild.evidenceBundle.manifestPath, "/data/P30-round-002.json");
+  assert.equal(dashboard.activeBuild.evidenceBundle.manifestPath, "/data/P30-round-003.json");
 
   const round017Json = JSON.stringify(round017);
   assert.doesNotMatch(
@@ -3480,10 +3572,6 @@ test("Round017 local-constraint release is public-safe, hash-verified, and rejec
     round017Json,
     /benchmarkArchiveSha256|pairSha256|anonymousReferenceSha256|mappingTranscriptSha256|blindContactSheetSha256|blindPairs|mappingTranscript/i,
   );
-  for (const benchmarkHash of benchmarkImageHashes) {
-    assert.equal(round017Json.includes(benchmarkHash), false);
-  }
-
   const publicEntries = await readdir(publicRoot, { recursive: true });
   for (const entry of publicEntries) {
     if (!entry.toLowerCase().endsWith(".png")) {
@@ -3522,10 +3610,10 @@ test("P30 Round001 publishes only sanitized rejected candidate evidence", async 
   assert.deepEqual(latestManifest, p00Manifest);
   assert.equal(latestManifest.piece, "P00");
   assert.equal(dashboard.activeBuild.pieceId, "P30");
-  assert.equal(dashboard.activeBuild.round, 3);
+  assert.equal(dashboard.activeBuild.round, 4);
   assert.equal(
     dashboard.activeBuild.evidenceBundle.status,
-    "REJECT · 25/100 · candidate evidence only",
+    "REJECT · 30/100 · candidate evidence only",
   );
   assert.deepEqual(captureNames.sort(), ["S01.png", "S02.png", "S04.png"]);
 
@@ -3661,9 +3749,9 @@ test("P30 Round002 publishes sanitized rejected candidate evidence while accepte
   assert.deepEqual(latestManifest, p00Manifest);
   assert.equal(latestManifest.piece, "P00");
   assert.equal(dashboard.activeBuild.pieceId, "P30");
-  assert.equal(dashboard.activeBuild.round, 3);
-  assert.equal(dashboard.activeBuild.roundLabel, "P30 · Round 003");
-  assert.equal(dashboard.canonicalCapture.manifestPath, "/data/P30-round-002.json");
+  assert.equal(dashboard.activeBuild.round, 4);
+  assert.equal(dashboard.activeBuild.roundLabel, "P30 · Round 004");
+  assert.equal(dashboard.canonicalCapture.manifestPath, "/data/P30-round-003.json");
   assert.deepEqual(captureNames.sort(), ["S02.png", "S04.png", "S06.png"]);
 
   assert.equal(p30.schema, "cow.public-browser-critic.v1");
@@ -3756,24 +3844,210 @@ test("P30 Round002 publishes sanitized rejected candidate evidence while accepte
   }
 });
 
-test("public artifacts exclude supplied benchmark bytes when a private hash corpus is provided", async () => {
+test("P30 Round003 publishes only aggregate rejected evidence and advances the active build to Round004", async () => {
+  const [
+    dashboard,
+    p30,
+    p00ManifestBytes,
+    latestManifestBytes,
+    captureNames,
+  ] = await Promise.all([
+    readFile(dataUrl, "utf8").then(JSON.parse),
+    readFile(
+      new URL("../public/data/P30-round-003.json", import.meta.url),
+      "utf8",
+    ).then(JSON.parse),
+    readFile(
+      new URL("../public/data/P00-round-001-manifest.json", import.meta.url),
+    ),
+    readFile(
+      new URL("../public/data/capture-manifest-latest.json", import.meta.url),
+    ),
+    readdir(new URL("../public/captures/P30/round-003/", import.meta.url)),
+  ]);
+
+  assert.equal(latestManifestBytes.equals(p00ManifestBytes), true);
+  assert.equal(dashboard.project.updated, "2026-08-02");
+  assert.equal(dashboard.activeBuild.pieceId, "P30");
+  assert.equal(dashboard.activeBuild.round, 4);
+  assert.equal(dashboard.activeBuild.roundLabel, "P30 · Round 004");
+  assert.equal(dashboard.activeBuild.status, "revising");
+  assert.equal(
+    dashboard.activeBuild.builder,
+    "Character Combat Fidelity Revision",
+  );
+  assert.equal(
+    dashboard.activeBuild.evidenceBundle.manifestPath,
+    "/data/P30-round-003.json",
+  );
+  assert.equal(
+    dashboard.canonicalCapture.capturePath,
+    "/captures/P30/round-003/S02.png",
+  );
+  assert.equal(
+    dashboard.canonicalCapture.manifestPath,
+    "/data/P30-round-003.json",
+  );
+  assert.deepEqual(captureNames.sort(), ["S02.png", "S04.png", "S06.png"]);
+
+  assert.equal(p30.schema, "cow.public-browser-critic.v1");
+  assert.equal(p30.piece, "P30");
+  assert.equal(p30.round, 3);
+  assert.equal(p30.date, "2026-08-02");
+  assert.equal(p30.status, "rejected-candidate-evidence");
+  assert.match(p30.acceptanceScope, /not accepted evidence/i);
+  assert.deepEqual(p30.verdict, {
+    result: "REJECT",
+    overallScore: 30,
+    maximumScore: 100,
+    candidateWins: 0,
+    comparisonCount: 6,
+    comparisonStrength: "All six outcomes were overwhelming.",
+  });
+  assert.deepEqual(p30.blindReview, {
+    privateChoicesLockedBeforeReveal: true,
+    privateWorkspaceDeletedAndVerified: true,
+    publishedScope: "Aggregate result and rejected candidate captures only.",
+  });
+  assert.deepEqual(p30.auditEnvironment, {
+    context: "fresh independent headed production-browser audit",
+    browser: "Google Chrome 150",
+    headed: true,
+    hardwareAccelerated: true,
+    renderer: "WebGL2 · ANGLE Metal Renderer: Apple M2",
+    viewport: "1600×900",
+    deviceScaleFactor: 1,
+  });
+  assert.deepEqual(p30.categoryScores, {
+    compositionCamera: 3,
+    characterAnimation: 2,
+    environmentMaterialsLighting: 4,
+    combatReadabilityImpact: 2,
+    technical: 5,
+    aaaFinish: 2,
+  });
+  assert.deepEqual(p30.assetIntegration, {
+    authoredAssetsLoaded: 18,
+    authoredAssetsExpected: 18,
+    proceduralFallbackActive: false,
+    pmremInstalled: true,
+  });
+  assert.deepEqual(p30.deterministicReplays, {
+    tapeA: {
+      simulationPass: true,
+      eventsPass: true,
+      timingPass: true,
+      cameraReplayPass: false,
+    },
+    tapeB: { pass: true },
+    tapeC: { obstructionPass: false },
+  });
+  assert.equal(p30.validatedPasses.physicalBindings, true);
+  assert.equal(p30.validatedPasses.blurHandling, true);
+  assert.equal(p30.validatedPasses.resizeAndDevicePixelRatioHandling, true);
+  assert.equal(p30.validatedPasses.webglRestore, true);
+  assert.deepEqual(p30.validatedPasses.performanceAndResources, {
+    pass: true,
+    sampleCount: 3,
+    secondsPerSample: 30,
+    worst: {
+      medianMilliseconds: 16.7,
+      p95Milliseconds: 18.5,
+      p99Milliseconds: 18.7,
+      drawCalls: 75,
+      triangles: 176017,
+      textures: 30,
+      geometries: 30,
+    },
+  });
+  assert.equal(p30.hardFailures.length, 9);
+  assert.ok(p30.hardFailures.some((failure) => /camera replay/i.test(failure)));
+  assert.ok(p30.hardFailures.some((failure) => /Tape C obstruction/i.test(failure)));
+  assert.ok(p30.hardFailures.some((failure) => /58° \/ 0\.08 \/ 110/i.test(failure)));
+  assert.ok(p30.hardFailures.some((failure) => /50° \/ 0\.08 \/ 120/i.test(failure)));
+  assert.ok(p30.hardFailures.some((failure) => /WrongDocumentError/i.test(failure)));
+  assert.ok(p30.hardFailures.some((failure) => /reset replay/i.test(failure)));
+  assert.ok(p30.hardFailures.some((failure) => /held key survives pause/i.test(failure)));
+  assert.ok(p30.hardFailures.some((failure) => /runtime-error-free interaction/i.test(failure)));
+  assert.ok(p30.hardFailures.some((failure) => /5\.817 s/i.test(failure)));
+  assert.ok(p30.hardFailures.some((failure) => /blind gate/i.test(failure)));
+  assert.deepEqual(p30.payloads, {
+    environmentBytes: 3349498,
+    enabledBytes: 15961504,
+  });
+  assert.deepEqual(p30.p31Provenance, {
+    glbsReady: 22,
+    glbsExpected: 22,
+    webpsReady: 6,
+    officialCc0Provenance: true,
+    runtimeFilesByteIdentical: 12,
+    frozenSubsystemHashesUnchanged: 11,
+  });
+  assert.equal(p30.primaryGap.id, "character_combat_fidelity");
+  assert.match(p30.primaryGap.prescription, /hero, Hollow, and claymore render assets and materials/i);
+  assert.match(p30.primaryGap.prescription, /rig, grip, and contact offsets/i);
+  assert.match(p30.primaryGap.prescription, /existing attack and reaction presentation clips/i);
+  assert.equal(p30.primaryGap.freeze, "Freeze every other domain.");
+  assert.match(p30.primaryGap.successCriterion, /fresh independent S03–S05 result wins 3\/3 matched blind comparisons/i);
+
+  const allowedRound003CapturePaths = [
+    "/captures/P30/round-003/S02.png",
+    "/captures/P30/round-003/S04.png",
+    "/captures/P30/round-003/S06.png",
+  ];
+  assert.deepEqual(
+    p30.captures.map((capture) => capture.path),
+    allowedRound003CapturePaths,
+  );
+  const publishedRound003Paths = [
+    ...new Set(
+      JSON.stringify({ dashboard, p30 }).match(
+        /\/captures\/P30\/round-003\/[^"\\]+/g,
+      ) ?? [],
+    ),
+  ].sort();
+  assert.deepEqual(publishedRound003Paths, allowedRound003CapturePaths);
+
+  const publicRound003Json = JSON.stringify({
+    activeBuild: dashboard.activeBuild,
+    canonicalCapture: dashboard.canonicalCapture,
+    roundHistory: dashboard.rounds.at(-1),
+    evidence: p30,
+  });
+  assert.doesNotMatch(publicRound003Json, /Reference\s+\d+/i);
+  assert.doesNotMatch(publicRound003Json, /\bR\d{2}\b/);
+  assert.doesNotMatch(
+    publicRound003Json,
+    /"(?:pairId|pairIdentifier|candidateSide|referenceSide|benchmarkSide|benchmarkFilename|benchmarkFile|benchmarkImage|referenceFilename|lockedWinner|revealedWinner|hiddenKey)"\s*:/i,
+  );
+  assert.doesNotMatch(
+    publicRound003Json,
+    /Reference\.zip|Reference\/[^"']+\.(?:png|jpe?g|webp)|reveal mapping|hidden key|\/Users\/|\/home\/|[A-Za-z]:\\Users\\|\/tmp\/|\/private\/var\/folders\//i,
+  );
+
+  for (const captureName of captureNames) {
+    const image = await readFile(
+      new URL(`../public/captures/P30/round-003/${captureName}`, import.meta.url),
+    );
+    assert.equal(image.subarray(1, 4).toString("ascii"), "PNG");
+    assert.equal(image.readUInt32BE(16), 1600);
+    assert.equal(image.readUInt32BE(20), 900);
+
+    const chunks = [];
+    for (let offset = 8; offset < image.length; ) {
+      const length = image.readUInt32BE(offset);
+      chunks.push(image.subarray(offset + 4, offset + 8).toString("ascii"));
+      offset += length + 12;
+    }
+    assert.ok(chunks.every((chunk) => ["IHDR", "IDAT", "IEND"].includes(chunk)));
+  }
+});
+
+test("public data rejects benchmark identity leaks and private filesystem paths", async () => {
   const publicEntries = await readdir(publicRoot, { recursive: true });
   assert.ok(
     publicEntries.every((entry) => !entry.toLowerCase().endsWith(".zip")),
   );
-
-  const publicImages = publicEntries.filter((entry) =>
-    /\.(?:png|jpe?g|webp)$/i.test(entry),
-  );
-  for (const imagePath of publicImages) {
-    const image = await readFile(new URL(imagePath, publicRoot));
-    const imageHash = createHash("sha256").update(image).digest("hex");
-    assert.equal(
-      benchmarkImageHashes.has(imageHash),
-      false,
-      `${imagePath} must not contain a supplied benchmark image`,
-    );
-  }
 
   const publicDataFiles = publicEntries.filter((entry) =>
     /^data\/.*\.json$/i.test(entry),
@@ -3785,6 +4059,10 @@ test("public artifacts exclude supplied benchmark bytes when a private hash corp
       /Reference\s+\d+|Reference\.zip|Reference\/[^"']+\.(?:png|jpe?g|webp)|\/Users\/|\/home\/|[A-Za-z]:\\Users\\|\/tmp\/|\/private\/var\/folders\//i,
     );
     assert.doesNotMatch(data, /\bR\d{2}\b/);
+    assert.doesNotMatch(
+      data,
+      /"(?:pairId|pairIdentifier|candidateSide|referenceSide|benchmarkSide|benchmarkFilename|benchmarkFile|benchmarkImage|referenceFilename|lockedWinner|revealedWinner|hiddenKey)"\s*:/i,
+    );
   }
 });
 

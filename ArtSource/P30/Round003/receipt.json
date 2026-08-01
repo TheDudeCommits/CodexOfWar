@@ -1,0 +1,303 @@
+{
+  "schema": "p30-round003-builder.v1",
+  "piece": "P30",
+  "round": "Round003",
+  "generatedAt": "2026-08-01T23:58:20+07:00",
+  "role": "builder",
+  "verdict": "candidate-only-no-pass-claim",
+  "scope": {
+    "kind": "environment-material-lighting-staging-only",
+    "implemented": [
+      "Replaced the circular authored arena presentation with a 64 x 64 meter grounded Ashwake cobblestone field and a camera-facing modular fort composition.",
+      "Used five selected Modular Fort 01 meshes and exactly one Gothic Statue, all official Poly Haven CC0 assets.",
+      "Installed two shared manifest-backed PBR material triplets: Mossy Cobblestone for the ground and Modular Fort wall maps for the sector.",
+      "Added a deterministic warm-key/cool-rim lighting rig, fogged depth staging, one arched dark gate field, one statue pedestal, distant silhouettes, edge-bounded fragments, and subtle embers.",
+      "Kept the manifest at version 2 with exactly the same 18 enabled keys; all 18 load with PMREM and no authored fallback in builder production evidence."
+    ],
+    "explicitlyUnchanged": [
+      "hero geometry, materials, rig, clips, and animation presentation",
+      "Hollow geometry, materials, rig, clips, and animation presentation",
+      "claymore geometry and material normalization",
+      "CharacterViews and CombatFx",
+      "60 Hz simulation, mechanics, constants, types, deterministic clocks, tapes, and seed",
+      "physics bridge, input controller/actions, HUD, review harness, camera and viewport contracts",
+      "telemetry schema and capture-hook semantics"
+    ],
+    "notExpanded": [
+      "no gameplay system work",
+      "no additional enemy, hero, or weapon",
+      "no camera, input, physics, simulation, telemetry, or post-processing remediation",
+      "no progress record, Unity project, Git index, branch, commit, push, or deployment change"
+    ]
+  },
+  "finalCandidateFreeze": {
+    "arenaViewSha256": "93bb02f9ac9d95fbcb82de8a14fd587f3b9e3414180b1d47a10bb1c5173e4f1b",
+    "arenaViewMtime": "2026-08-01T23:49:38+07:00",
+    "manifestSha256": "4a897c0792c6efccf0e388cf484d42f7ff903b61e698ccbca15ec51e2debdf86",
+    "independentCriticCaptures": {
+      "note": "These read-only hashes identify the six independent critic images created after the ArenaView freeze. The critic owns the authoritative hard-gate and blind visual verdict.",
+      "files": [
+        {"id": "S01", "path": "ArtSource/P30/Round003/Critic/S01.png", "bytes": 1856423, "sha256": "2778f4977419ae5359112269c7bc5bea85853b8694981d7a481f13c78bb4f5ea", "width": 1600, "height": 900, "mode": "RGB"},
+        {"id": "S02", "path": "ArtSource/P30/Round003/Critic/S02.png", "bytes": 1938739, "sha256": "d5a5e81646c8e4700d7bb7d627d86ffa7e4cd9b840714d9debae035d24b58481", "width": 1600, "height": 900, "mode": "RGB"},
+        {"id": "S03", "path": "ArtSource/P30/Round003/Critic/S03.png", "bytes": 1939232, "sha256": "5069db9126757f1e20354571472ae528c512a4879f399a6b8940fab5967076b7", "width": 1600, "height": 900, "mode": "RGB"},
+        {"id": "S04", "path": "ArtSource/P30/Round003/Critic/S04.png", "bytes": 1944994, "sha256": "abfeded25dc817036833fd3193f08fd137eb8f0ad3673e72a8186295494d3ebe", "width": 1600, "height": 900, "mode": "RGB"},
+        {"id": "S05", "path": "ArtSource/P30/Round003/Critic/S05.png", "bytes": 1940413, "sha256": "c872f69aa24676c0dcbadbb3c837785fa3957506292c53c2979a41de1c323ccf", "width": 1600, "height": 900, "mode": "RGB"},
+        {"id": "S06", "path": "ArtSource/P30/Round003/Critic/S06.png", "bytes": 1933207, "sha256": "74b6f4bd9ed7a31ec388339a8487e3511d1ba5ad580a9ea1a59c538f9809b5e6", "width": 1600, "height": 900, "mode": "RGB"}
+      ],
+      "readOnlyPixelChecks": {
+        "definition": "dark means Rec.709 integer luminance <= 12; clipped means any RGB channel >= 254 inside crop x=450..1149, y=180..779",
+        "S01DarkPixelsPercent": 0.09729,
+        "S02DarkPixelsPercent": 0.11285,
+        "S03DarkPixelsPercent": 0.12014,
+        "S04DarkPixelsPercent": 0.09965,
+        "S04CentralClippedPixelsPercent": 0.0,
+        "S05DarkPixelsPercent": 0.11014,
+        "S06DarkPixelsPercent": 0.1141,
+        "interpretation": "The total dark-pixel share is already far below 15 percent in every frame, so no connected unbroken black region can exceed 15 percent. The S04 central crop is below the 1 percent clipping target."
+      }
+    },
+    "builderCaptureSet": {
+      "path": "ArtSource/P30/Round003/capture-evidence.json",
+      "sha256": "7d31fe97f07080dae7f234ff24745112ce3c2c54c510372ed091442b9cf003c2",
+      "status": "pre-final-freeze-supporting-evidence-only",
+      "note": "The builder capture suite completed at 23:48:09, before the final ArenaView edit at 23:49:38. It remains an honest headed production/load/determinism receipt, but the post-freeze critic images above—not these earlier images—identify the final visual candidate."
+    }
+  },
+  "builderProductionEvidence": {
+    "url": "http://127.0.0.1:4173/?review=1&post=0",
+    "browser": {
+      "name": "Google Chrome",
+      "version": "150.0.7871.187",
+      "headed": true,
+      "webgl": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+      "unmaskedVendor": "Google Inc. (Apple)",
+      "unmaskedRenderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M2, Unspecified Version)"
+    },
+    "surface": {
+      "viewport": {"width": 1600, "height": 900},
+      "canvasCss": {"width": 1600, "height": 900},
+      "canvasBacking": {"width": 1600, "height": 900},
+      "devicePixelRatio": 1,
+      "rendererPixelRatio": 1
+    },
+    "readyReceipt": {
+      "schema": "cow.review.v1",
+      "piece": "P30",
+      "preset": "P30",
+      "seed": 30001,
+      "rapier": "ready",
+      "assets": "ready",
+      "renderer": "compiled-and-warm"
+    },
+    "timingMs": {
+      "navigationToReady": 2424,
+      "round002DoNotRegressBeyond": 4109,
+      "regressedBeyondRound002": false,
+      "coldReadyAcceptanceClaim": false
+    },
+    "httpStatus": 200,
+    "pageErrors": [],
+    "requestFailures": [],
+    "httpErrors": [],
+    "reviewErrors": [],
+    "rendererErrors": [],
+    "webglGetError": 0
+  },
+  "assetLoadReceipt": {
+    "schema": "gauntlet.asset-load.v1",
+    "manifestVersion": 2,
+    "enabledCount": 18,
+    "loadedCount": 18,
+    "failures": [],
+    "complete": true,
+    "productionAuthored": true,
+    "proceduralFallbackActive": false,
+    "pmremInstalled": true,
+    "enabledAndLoadedKeys": [
+      "animation.combat",
+      "animation.player-core",
+      "character.hero",
+      "character.hollow",
+      "environment.ashwake-arena",
+      "environment.ruin-doorway",
+      "environment.ruin-pillar",
+      "environment.ruin-rocks",
+      "environment.ruin-stairs",
+      "environment.ruin-wall",
+      "environment.snowy-forest",
+      "material.brick-arm",
+      "material.brick-diffuse",
+      "material.brick-normal",
+      "material.cobble-arm",
+      "material.cobble-diffuse",
+      "material.cobble-normal",
+      "weapon.claymore"
+    ]
+  },
+  "payload": {
+    "enabledManifest": {
+      "files": 18,
+      "bytes": 15961504,
+      "budgetBytes": 17825792,
+      "within17MiBBudget": true
+    },
+    "round003Environment": {
+      "files": 12,
+      "geometryFiles": 6,
+      "geometryBytes": 1323612,
+      "geometryTriangles": 36297,
+      "textureFiles": 6,
+      "textureBytes": 2025886,
+      "totalBytes": 3349498,
+      "budgetBytes": 6815744,
+      "within6Point5MiBBudget": true,
+      "compression": "ordinary GLB plus ordinary 1024x1024 WebP; no Draco, Meshopt, or KTX2"
+    }
+  },
+  "resourceCeilings": {
+    "limits": {"calls": 100, "triangles": 250000, "textures": 32, "geometries": 64},
+    "builderPreFreezeObservedMaximum": {"capture": "S04", "calls": 80, "triangles": 177121, "textures": 30, "geometries": 33},
+    "independentCriticFinalCandidateMaximum": {"captures": "S01-S06", "calls": 76, "triangles": 175497, "textures": 30, "geometries": 33},
+    "withinEveryCeiling": true,
+    "finalCandidateVerdictOwner": "independent critic"
+  },
+  "determinismEvidence": {
+    "source": "ArtSource/P30/Round003/capture-evidence.json",
+    "tapeA": {
+      "runs": 2,
+      "processedTicksPerRun": 60,
+      "simulationSnapshotsAndEventsExact": true,
+      "run1Sha256": "8730027eb413acf1d94b6a2449b86f8a60a2cfb8a15b03ce7f0448708e51e4c2",
+      "run2Sha256": "8730027eb413acf1d94b6a2449b86f8a60a2cfb8a15b03ce7f0448708e51e4c2",
+      "final": {"tick": 60, "playerZ": 1.6000008583068848, "playerHealth": 100, "targetHealth": 90, "playerAttackPhase": "idle"},
+      "events": [
+        {"tick": 24, "type": "attack_started", "attackSerial": 1},
+        {"tick": 28, "type": "attack_rejected_busy", "attackSerial": 1},
+        {"tick": 33, "type": "enemy_hit", "damage": 10, "hpBefore": 100, "hpAfter": 90, "attackSerial": 1}
+      ]
+    },
+    "tapeB": {
+      "processedTicks": 60,
+      "pass": true,
+      "final": {"tick": 60, "playerZ": 2.5999999046325684, "playerHealth": 100, "targetHealth": 100},
+      "events": [{"tick": 0, "type": "attack_started", "attackSerial": 1}]
+    },
+    "S06ExactQueue": "move.forward value=1 ticks 0-19; move.right value=1 ticks 20-28; dodge down tick 28; dodge up tick 29; capture at processed tick 37"
+  },
+  "provenance": {
+    "license": "CC0-1.0",
+    "officialOnly": true,
+    "sources": [
+      {"id": "PH-FORT", "publisher": "Poly Haven", "author": "Rico Cilliers", "title": "Modular Fort 01", "page": "https://polyhaven.com/a/modular_fort_01", "filesApi": "https://api.polyhaven.com/files/modular_fort_01", "filesHash": "5ccbf62aeee96ea99cf0c2e29e4c8ed843ee7c44"},
+      {"id": "PH-STATUE", "publisher": "Poly Haven", "author": "Benny Weimer", "title": "Gothic Statue", "page": "https://polyhaven.com/a/gothic_statue", "filesApi": "https://api.polyhaven.com/files/gothic_statue", "filesHash": "180fe034aec7158f2550b133e0ba2be9e9c1c241"},
+      {"id": "PH-COBBLE", "publisher": "Poly Haven", "author": "Sơn Nguyễn", "title": "Mossy Cobblestone", "page": "https://polyhaven.com/a/mossy_cobblestone", "filesApi": "https://api.polyhaven.com/files/mossy_cobblestone"}
+    ],
+    "licenseProof": "https://polyhaven.com/license",
+    "rawRoot": "WebAssetSource/P31/raw/polyhaven/round003",
+    "rawRootIgnored": true,
+    "sourceRoot": "WebAssetSource/P31/processed/polyhaven/round003",
+    "runtimeRoot": "web-game/public/assets/environment/ashwake",
+    "runtimeCopiesByteIdentical": true,
+    "receipts": [
+      {"path": "WebAssetSource/P31/source_work/round003/acquisition_receipt.json", "sha256": "fc837794d225ebf15510cc54ded7b41f6424b2283ed2b2eee43633a17af986b1"},
+      {"path": "WebAssetSource/P31/source_work/round003/geometry_build_receipt.json", "sha256": "ec02ec22c520572af9fd6fe9e96a5e951827877a1819aafd56064938f1fdb475"},
+      {"path": "WebAssetSource/P31/source_work/round003/texture_build_receipt.json", "sha256": "d6b74d748a6beb0b42200fecf9038c8f0fb05ce3051af697aa6e8d3e98b06662"},
+      {"path": "WebAssetSource/P31/source_work/round003/validation.json", "sha256": "d9705a4010bc656d4fc9597022e0f5e46f2d51a062ec15d32770e04ac985d507"},
+      {"path": "WebAssetSource/P31/source_work/round003/runtime_publish_receipt.json", "sha256": "a4643ffafd1391f4a85921e51511cfc0e9140b76954ac3b0548e92cadf394789"},
+      {"path": "WebAssetSource/P31/ASSET_RECEIPT.json", "sha256": "8da0864b6c7cb258c2074071c2a52dba204ac0858239dd951241d2780d7971a0"}
+    ],
+    "knownMaterialLimitation": "The Gothic Statue source texture triplet is retained for provenance but not shipped in this bounded slice; the statue intentionally receives the shared Modular Fort sector material at runtime."
+  },
+  "implementationHashes": [
+    {"path": "web-game/src/render/materials/AshwakeMaterials.ts", "sha256": "f35783d279d3b5992bb253b2fd2a1964f99fc5382a398e2a62af13825f53ea26"},
+    {"path": "web-game/src/render/app/LightingRig.ts", "sha256": "d1da05c53a7d059fc39ebee153291835b21009d3c1e14a05383545be38e73e48"},
+    {"path": "web-game/src/render/app/createScene.ts", "sha256": "b5fc23973565cd96a57c565136ad59472c439a8a6a3883b0cfdf4d8df08a7f42"},
+    {"path": "web-game/src/render/app/createRenderer.ts", "sha256": "d1f6f6ccaf387d48d9e8144171dd6446521080b3f02f8fa56d37e11af7097287"},
+    {"path": "web-game/src/render/app/GameApp.ts", "sha256": "5fb9f62c14bd325f4337341d0eb92e3db2c4b36a66d12801afa224efec45c6a7"},
+    {"path": "web-game/src/render/adapters/RenderBridge.ts", "sha256": "441ee1c40f8b7f07ae82539fee85e9091eff1050a526d7df5b82388ef66a9468"},
+    {"path": "web-game/src/render/objects/ArenaView.ts", "sha256": "93bb02f9ac9d95fbcb82de8a14fd587f3b9e3414180b1d47a10bb1c5173e4f1b"},
+    {"path": "web-game/public/assets/manifest.json", "sha256": "4a897c0792c6efccf0e388cf484d42f7ff903b61e698ccbca15ec51e2debdf86"}
+  ],
+  "frozenSubsystemIntegrity": {
+    "allBeforeAndAfterHashesMatch": true,
+    "files": [
+      {"path": "web-game/src/game/input/InputController.ts", "before": "86e0599f939a52e548ad0434eb5e815d1e72a39dda80a20ea8499ff2484000ed", "after": "86e0599f939a52e548ad0434eb5e815d1e72a39dda80a20ea8499ff2484000ed"},
+      {"path": "web-game/src/game/input/actions.ts", "before": "76ff3949700b1eaa17900386a9d46060e460a60ab56b932f9531bcd02e64b161", "after": "76ff3949700b1eaa17900386a9d46060e460a60ab56b932f9531bcd02e64b161"},
+      {"path": "web-game/src/game/simulation/FixedStepClock.ts", "before": "1f99d2125d0e77f6ec9c4a0ae7deabfe80b03a88ca6ddece3a61129cc77ca081", "after": "1f99d2125d0e77f6ec9c4a0ae7deabfe80b03a88ca6ddece3a61129cc77ca081"},
+      {"path": "web-game/src/game/simulation/GameSimulation.ts", "before": "dd51f0266e5b5006c134ffbc1a861158b87939b42927ea521934637d16c11196", "after": "dd51f0266e5b5006c134ffbc1a861158b87939b42927ea521934637d16c11196"},
+      {"path": "web-game/src/game/simulation/constants.ts", "before": "96ccfddbf9141e85370abc550a56a41f62cbce6e9a1e62001fd3a53fd99700f9", "after": "96ccfddbf9141e85370abc550a56a41f62cbce6e9a1e62001fd3a53fd99700f9"},
+      {"path": "web-game/src/game/simulation/math.ts", "before": "a437f63ed8da7b2d9be20da95193c3faaacec2a77e5b5b3260db033fbbe404dc", "after": "a437f63ed8da7b2d9be20da95193c3faaacec2a77e5b5b3260db033fbbe404dc"},
+      {"path": "web-game/src/game/simulation/types.ts", "before": "277dfbad2a00f468a95f7105a259cfecff81e3c120da6166c97c3364739c1c22", "after": "277dfbad2a00f468a95f7105a259cfecff81e3c120da6166c97c3364739c1c22"},
+      {"path": "web-game/src/physics/PhysicsBridge.ts", "before": "c0cdf7832cbb5c25cac51141c5d9ab38a9ad607fe411670035e61ca4c5db4054", "after": "c0cdf7832cbb5c25cac51141c5d9ab38a9ad607fe411670035e61ca4c5db4054"},
+      {"path": "web-game/src/render/app/ThirdPersonCamera.ts", "before": "9fd0b53dc77689581a4a747a3aadc2e592f8ecf5c84d9b69c44273075f3d2fdd", "after": "9fd0b53dc77689581a4a747a3aadc2e592f8ecf5c84d9b69c44273075f3d2fdd"},
+      {"path": "web-game/src/ui/Hud.ts", "before": "027f362bb1446c2606d7a8278b05458335a00f370904c2979bdac87d9b8fe3d5", "after": "027f362bb1446c2606d7a8278b05458335a00f370904c2979bdac87d9b8fe3d5"},
+      {"path": "web-game/src/diagnostics/CowReviewHarness.ts", "before": "28a0631b5f9264ea8a1eccf6dd17cd918b011ab632a44f3d8bce93c2d9e2e34c", "after": "28a0631b5f9264ea8a1eccf6dd17cd918b011ab632a44f3d8bce93c2d9e2e34c"}
+    ]
+  },
+  "validation": [
+    {"command": "PATH=/opt/homebrew/opt/node@24/bin:$PATH npm ci", "status": "pass", "detail": "Clean Node 24 dependency install completed before the runtime freeze."},
+    {"command": "npm run typecheck", "status": "pass", "detail": "TypeScript noEmit completed under Node 24 before the runtime freeze."},
+    {"command": "npm run lint", "status": "pass", "detail": "ESLint completed under Node 24 before the runtime freeze."},
+    {"command": "npm test", "status": "pass", "detail": "Vitest: 2 files passed, 5 tests passed under Node 24 before the runtime freeze."},
+    {"command": "npm run build", "status": "pass", "detail": "The production Vite build completed before the runtime freeze; the independent critic owns the post-freeze production audit."},
+    {"command": "npm run smoke", "status": "not-claimed-by-builder", "detail": "No post-freeze builder smoke claim is made; the independent critic owns the final hard-gate audit."},
+    {"command": "python3 WebAssetSource/P31/source_work/build_receipt.py", "status": "pass", "detail": "Global receipt validation passes 22/22 GLBs, all 16 Round003 publisher dependency MD5s, and 6/6 ordinary WebP maps."},
+    {"command": "jq receipt and hash consistency checks", "status": "pass", "detail": "JSON parses, 18 enabled keys resolve, the enabled payload is 15,961,504 bytes, runtime copies match source hashes, and all 11 frozen-subsystem hashes match."}
+  ],
+  "observedWarnings": [
+    "Rapier reports deprecated initialization parameters inherited from the existing foundation.",
+    "Three.js 0.185 warns that RGBELoader is deprecated in favor of HDRLoader; RGBELoader is retained for the existing HDR contract.",
+    "Three.js 0.185 warns that PCFSoftShadowMap is deprecated and uses PCFShadowMap.",
+    "Vite may report a production JavaScript chunk above its default 500 kB advisory threshold."
+  ],
+  "knownCarriedFailures": [
+    {"id": "camera-replay-divergence", "status": "unchanged-unclaimed", "evidence": "Tape A simulation snapshots/events are exact while the two captured camera poses differ slightly; camera mechanics were frozen."},
+    {"id": "camera-obstruction", "status": "pending-unchanged", "evidence": "Desired/resolved boom telemetry still reports obstructionHook=pending and collisionApplied=false."},
+    {"id": "camera-projection", "status": "unchanged", "evidence": "Existing projection remains outside this environment pass."},
+    {"id": "camera-look-pointer-lock", "status": "not-remediated", "evidence": "Existing camera.look and pointer-lock paths were outside scope."},
+    {"id": "pause-held-input", "status": "not-remediated", "evidence": "Held-input clearing behavior was frozen."},
+    {"id": "reset-camera-shake", "status": "not-remediated", "evidence": "Combat-shake reset determinism was outside scope."},
+    {"id": "cold-ready", "status": "no-acceptance-claim", "evidence": "Builder headed evidence observed 2424 ms navigation-to-ready and no regression beyond Round002, but the independent critic owns the cold-ready gate."},
+    {"id": "character-and-combat-fx-quality", "status": "unchanged", "evidence": "Hero, Hollow, claymore, animation presentation, and CombatFx were explicitly frozen; this slice does not claim to remediate their visual issues."}
+  ],
+  "changedFiles": {
+    "runtimeSource": [
+      "web-game/src/render/materials/AshwakeMaterials.ts",
+      "web-game/src/render/app/LightingRig.ts",
+      "web-game/src/render/app/createScene.ts",
+      "web-game/src/render/app/createRenderer.ts",
+      "web-game/src/render/app/GameApp.ts",
+      "web-game/src/render/adapters/RenderBridge.ts",
+      "web-game/src/render/objects/ArenaView.ts",
+      "web-game/public/assets/manifest.json"
+    ],
+    "runtimeAssets": 12,
+    "provenanceAndPipeline": [
+      "WebAssetSource/P31/source_work/round003/acquire_polyhaven.py",
+      "WebAssetSource/P31/source_work/round003/build_environment.py",
+      "WebAssetSource/P31/source_work/round003/process_textures.py",
+      "WebAssetSource/P31/source_work/round003/validate_environment.py",
+      "WebAssetSource/P31/source_work/round003/publish_runtime.py",
+      "WebAssetSource/P31/source_work/round003/acquisition_receipt.json",
+      "WebAssetSource/P31/source_work/round003/geometry_build_receipt.json",
+      "WebAssetSource/P31/source_work/round003/texture_build_receipt.json",
+      "WebAssetSource/P31/source_work/round003/validation.json",
+      "WebAssetSource/P31/source_work/round003/runtime_publish_receipt.json",
+      "WebAssetSource/P31/source_work/build_receipt.py",
+      "WebAssetSource/P31/ASSET_RECEIPT.json",
+      "WebAssetSource/P31/THIRD_PARTY_ASSETS.md"
+    ],
+    "documentationAndLfs": [".gitattributes", "web-game/README.md", "web-game/public/assets/README.md"],
+    "builderEvidence": ["web-game/scripts/p30-round003-capture.mjs", "ArtSource/P30/Round003/S01.png", "ArtSource/P30/Round003/S02.png", "ArtSource/P30/Round003/S03.png", "ArtSource/P30/Round003/S04.png", "ArtSource/P30/Round003/S05.png", "ArtSource/P30/Round003/S06.png", "ArtSource/P30/Round003/capture-evidence.json", "ArtSource/P30/Round003/receipt.json"],
+    "gitActionsPerformed": false,
+    "progressFilesModified": false,
+    "unityFilesModified": false,
+    "downloadsReferenceInspected": false
+  },
+  "limitations": [
+    "This receipt is builder evidence only; it deliberately makes no pass, acceptance, or blind-comparison claim.",
+    "The independent critic owns the final hard-gate and blind visual verdict and its post-freeze capture set is kept separate.",
+    "The builder capture receipt predates the final ArenaView freeze by 89 seconds and is explicitly not presented as the final visual capture set.",
+    "No camera, input, simulation, physics, telemetry, hero, Hollow, claymore, animation, or CombatFx defect is claimed fixed by this environment slice."
+  ]
+}

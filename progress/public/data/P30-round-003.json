@@ -1,0 +1,124 @@
+{
+  "schema": "cow.public-browser-critic.v1",
+  "piece": "P30",
+  "round": 3,
+  "date": "2026-08-02",
+  "status": "rejected-candidate-evidence",
+  "acceptanceScope": "This round is rejected candidate evidence, not accepted evidence.",
+  "verdict": {
+    "result": "REJECT",
+    "overallScore": 30,
+    "maximumScore": 100,
+    "candidateWins": 0,
+    "comparisonCount": 6,
+    "comparisonStrength": "All six outcomes were overwhelming."
+  },
+  "blindReview": {
+    "privateChoicesLockedBeforeReveal": true,
+    "privateWorkspaceDeletedAndVerified": true,
+    "publishedScope": "Aggregate result and rejected candidate captures only."
+  },
+  "auditEnvironment": {
+    "context": "fresh independent headed production-browser audit",
+    "browser": "Google Chrome 150",
+    "headed": true,
+    "hardwareAccelerated": true,
+    "renderer": "WebGL2 · ANGLE Metal Renderer: Apple M2",
+    "viewport": "1600×900",
+    "deviceScaleFactor": 1
+  },
+  "categoryScores": {
+    "compositionCamera": 3,
+    "characterAnimation": 2,
+    "environmentMaterialsLighting": 4,
+    "combatReadabilityImpact": 2,
+    "technical": 5,
+    "aaaFinish": 2
+  },
+  "assetIntegration": {
+    "authoredAssetsLoaded": 18,
+    "authoredAssetsExpected": 18,
+    "proceduralFallbackActive": false,
+    "pmremInstalled": true
+  },
+  "deterministicReplays": {
+    "tapeA": {
+      "simulationPass": true,
+      "eventsPass": true,
+      "timingPass": true,
+      "cameraReplayPass": false
+    },
+    "tapeB": {
+      "pass": true
+    },
+    "tapeC": {
+      "obstructionPass": false
+    }
+  },
+  "validatedPasses": {
+    "physicalBindings": true,
+    "blurHandling": true,
+    "resizeAndDevicePixelRatioHandling": true,
+    "webglRestore": true,
+    "performanceAndResources": {
+      "pass": true,
+      "sampleCount": 3,
+      "secondsPerSample": 30,
+      "worst": {
+        "medianMilliseconds": 16.7,
+        "p95Milliseconds": 18.5,
+        "p99Milliseconds": 18.7,
+        "drawCalls": 75,
+        "triangles": 176017,
+        "textures": 30,
+        "geometries": 30
+      }
+    }
+  },
+  "hardFailures": [
+    "Camera replay failed.",
+    "Tape C obstruction failed.",
+    "Projection was observed at 58° / 0.08 / 110 rather than the required 50° / 0.08 / 120.",
+    "Pointer lock and look failed with WrongDocumentError.",
+    "Reset replay failed.",
+    "A held key survives pause.",
+    "Runtime-error-free interaction failed.",
+    "Cold ready was 5.817 s.",
+    "The blind gate rejected the candidate at 30/100 with 0/6 candidate wins."
+  ],
+  "payloads": {
+    "environmentBytes": 3349498,
+    "enabledBytes": 15961504
+  },
+  "p31Provenance": {
+    "glbsReady": 22,
+    "glbsExpected": 22,
+    "webpsReady": 6,
+    "officialCc0Provenance": true,
+    "runtimeFilesByteIdentical": 12,
+    "frozenSubsystemHashesUnchanged": 11
+  },
+  "captures": [
+    {
+      "id": "S02",
+      "path": "/captures/P30/round-003/S02.png",
+      "role": "Close idle candidate diagnostic"
+    },
+    {
+      "id": "S04",
+      "path": "/captures/P30/round-003/S04.png",
+      "role": "Active-hit candidate diagnostic"
+    },
+    {
+      "id": "S06",
+      "path": "/captures/P30/round-003/S06.png",
+      "role": "Dodge and side-offset candidate diagnostic"
+    }
+  ],
+  "primaryGap": {
+    "id": "character_combat_fidelity",
+    "prescription": "Replace and tune only the hero, Hollow, and claymore render assets and materials, their rig, grip, and contact offsets, and the existing attack and reaction presentation clips.",
+    "freeze": "Freeze every other domain.",
+    "successCriterion": "A fresh independent S03–S05 result wins 3/3 matched blind comparisons."
+  }
+}

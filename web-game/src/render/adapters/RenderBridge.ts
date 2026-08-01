@@ -26,8 +26,9 @@ export class RenderBridge {
     scene: THREE.Scene,
     private readonly cameraController: ThirdPersonCamera,
     assets: AssetRegistry,
+    maxAnisotropy: number,
   ) {
-    this.arena = new ArenaView(assets);
+    this.arena = new ArenaView(assets, maxAnisotropy);
     this.hero = new HeroView(assets);
     this.zombie = new ZombieView(assets);
     scene.add(this.arena.root, this.hero.root, this.zombie.root, this.combatFx.root);

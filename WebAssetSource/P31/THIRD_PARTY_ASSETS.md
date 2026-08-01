@@ -1,18 +1,18 @@
 # P31 third-party asset ledger
 
-This directory is an acquisition and preparation workspace for the first browser-game playable. All publisher access happened on **2026-08-01**. Every selected asset below is marked CC0 by its original publisher. Raw downloads are retained for reproducibility but are not the preferred runtime payload; use `processed/` plus the preserved license/provenance files for integration.
+This directory is the acquisition and preparation workspace for the browser-game playable through P30 Round003. All publisher access happened on **2026-08-01**. Every selected asset below is marked CC0 by its original publisher. Raw downloads are retained for reproducibility but are not the preferred runtime payload; use `processed/` plus the preserved license/provenance files for integration.
 
-No file was obtained from an unofficial mirror, account-gated page, or paid tier. The modern Quaternius ZIPs were delivered anonymously by the publisher's official Itch distribution through Itch's signed CDN. No Git index, branch, Unity file, `web-game/` file, or progress record was touched.
+No file was obtained from an unofficial mirror, account-gated page, or paid tier. The modern Quaternius ZIPs were delivered anonymously by the publisher's official Itch distribution through Itch's signed CDN. The Round003 Poly Haven models and dependencies came directly from the public official files API/CDN. Acquisition and processing did not touch the Git index, branch, Unity project, or progress records.
 
 ## Runtime payload at a glance
 
-- Integration-ready payload: **39 files, 27,256,682 bytes (25.994 MiB)** under `processed/`.
-- Entire `processed/` tree: **49 files, 27,261,772 bytes (25.999 MiB)**; the difference is ten preserved Quaternius license/readme files.
-- Raw provenance: **29 files, 475,301,175 bytes (453.283 MiB)** under ignored `raw/`; these archives/direct sources are not runtime payloads.
+- Integration-ready payload: **51 files, 30,606,180 bytes (29.188 MiB)** under `processed/`.
+- Entire `processed/` tree: **61 files, 30,611,270 bytes (29.193 MiB)**; the difference is ten preserved Quaternius license/readme files.
+- Raw provenance: **49 files, 490,031,235 bytes (467.330 MiB)** under ignored `raw/`; these archives/direct sources and API snapshots are not runtime payloads.
 - Hero/reference models: `processed/quaternius/models/universal_superhero_female.glb`, `universal_hair_long.glb`, `female_ranger_outfit.glb`, and `claymore.glb`.
 - Animation libraries: `processed/quaternius/animations/player_core.glb` and `combat_zombie.glb`; exact gameplay mapping is below.
 - Enemy: `processed/quaternius/models/zombie_basic.glb`, self-contained with six first-playable actions.
-- Environment: `processed/kenney/ruins/`, `processed/polyhaven/hdri/`, and `processed/polyhaven/materials/`.
+- Environment: the active Round003 set is `processed/polyhaven/round003/` plus `processed/polyhaven/hdri/`; the earlier Kenney ruins and original Poly Haven JPG material copies remain as provenance-backed legacy candidates.
 - Effects/audio: `processed/kenney/vfx/`, `processed/opengameart/vfx/`, and `processed/opengameart/audio/`.
 - Machine receipt: `ASSET_RECEIPT.json`; reproducible generator and QA details are under `source_work/`.
 
@@ -23,6 +23,8 @@ No file was obtained from an unofficial mirror, account-gated page, or paid tier
 | PH-SNOW | Poly Haven / Adrian Kubasa | Snowy Forest; publisher API state accessed 2026-08-01; 1K HDR variant | [asset](https://polyhaven.com/a/snowy_forest), [files API](https://api.polyhaven.com/files/snowy_forest) | [Poly Haven asset license](https://polyhaven.com/license), [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
 | PH-BRICK | Poly Haven / Rob Tuytel | Castle Brick 01; publisher API state accessed 2026-08-01; 1K JPG variants | [asset](https://polyhaven.com/a/castle_brick_01), [files API](https://api.polyhaven.com/files/castle_brick_01) | [Poly Haven asset license](https://polyhaven.com/license), [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
 | PH-COBBLE | Poly Haven / Sơn Nguyễn | Mossy Cobblestone; publisher API state accessed 2026-08-01; 1K JPG variants | [asset](https://polyhaven.com/a/mossy_cobblestone), [files API](https://api.polyhaven.com/files/mossy_cobblestone) | [Poly Haven asset license](https://polyhaven.com/license), [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| PH-FORT | Poly Haven / Rico Cilliers | Modular Fort 01; files hash `5ccbf62aeee96ea99cf0c2e29e4c8ed843ee7c44`; 1K glTF | [asset](https://polyhaven.com/a/modular_fort_01), [files API](https://api.polyhaven.com/files/modular_fort_01) | [Poly Haven asset license](https://polyhaven.com/license), [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| PH-STATUE | Poly Haven / Benny Weimer | Gothic Statue; files hash `180fe034aec7158f2550b133e0ba2be9e9c1c241`; 1K glTF | [asset](https://polyhaven.com/a/gothic_statue), [files API](https://api.polyhaven.com/files/gothic_statue) | [Poly Haven asset license](https://polyhaven.com/license), [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
 | KEN-CASTLE | Kenney | Castle Kit 2.0, complete remake, 2024-03-27 | [asset](https://kenney.nl/assets/castle-kit), [publisher ZIP](https://kenney.nl/media/pages/assets/castle-kit/a395102d20-1711543616/kenney_castle-kit.zip) | [asset page](https://kenney.nl/assets/castle-kit), bundled `License.txt`, [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
 | KEN-SMOKE | Kenney Vleugels | Smoke Particles 1.0 | [asset](https://kenney.nl/assets/smoke-particles), [publisher ZIP](https://kenney.nl/media/pages/assets/smoke-particles/23249a0d35-1677695171/kenney_smoke-particles.zip) | [asset page](https://kenney.nl/assets/smoke-particles), bundled `license.txt`, [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
 | OGA-SLASH | Cethiel, published through OpenGameArt | Weapon Slash - Effect, Classic subset, submission 2019-04-08 | [submission](https://opengameart.org/content/weapon-slash-effect), [publisher-hosted Classic.zip](https://opengameart.org/sites/default/files/Classic.zip) | [submission license field](https://opengameart.org/content/weapon-slash-effect), [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
@@ -128,9 +130,38 @@ All paths are relative to this P31 directory. “Verbatim” means the payload b
 | Q-BASE | `processed/quaternius/licenses/universal-base-characters-License_Standard.txt` | 806 | `0f4beaf0fe360a7732e58bbe3dbf60a2422367fbea60cb9ea4add968f383268e` | Bundled license extracted verbatim and collision-safely renamed. |
 | Q-ZOMBIE | `processed/quaternius/licenses/zombie-apocalypse-kit-License.txt` | 374 | `de990ef6fc68cffd7fd1ae342c4d0c823b541b8848d8f76bca5d3339f4de6f6e` | Publisher license copied verbatim and collision-safely renamed; source-title defect retained. |
 
+## Round003 Ashwake environment lineage
+
+The active environment slice uses only official Poly Haven CC0 sources: Modular Fort 01 supplies five modular fort pieces and the shared sector maps, Gothic Statue supplies exactly one statue mesh, and the already-receipted Mossy Cobblestone maps supply the ground. `source_work/round003/acquire_polyhaven.py` resolves the official public API/CDN URLs and validates publisher byte counts and MD5 values before retaining SHA-256 hashes. The ignored raw root is `raw/polyhaven/round003/`; it contains 16 publisher glTF/dependency files plus four exact API snapshots (20 files, 14,730,060 bytes). The authoritative per-file acquisition ledger is `source_work/round003/acquisition_receipt.json`.
+
+Blender 5.2.0 LTS selected individual source nodes, removed publisher contact-sheet placement, centered each mesh on runtime X/Z, grounded it at Y=0, applied transforms, collapsed it to one texture-free `AshwakeSectorShared` placeholder material, exported ordinary GLB, and re-imported every output for validation. No Draco, Meshopt, KTX2, animation, embedded image, or external URI is present. The six meshes total 36,297 triangles and 1,323,612 bytes.
+
+| Source | Processed geometry | Original node | Triangles | Bytes | SHA-256 |
+| --- | --- | --- | ---: | ---: | --- |
+| PH-FORT | `processed/polyhaven/round003/geometry/fort_buttress.glb` | `modular_fort_01_wall_thick_corner_01` | 816 | 41,956 | `a029b852e57bb2ba954ec69a729c738cf8a8bbc7a507605d49e6f4415b598a97` |
+| PH-FORT | `processed/polyhaven/round003/geometry/fort_gate.glb` | `modular_fort_01_wall_thin_gate_01` | 1,368 | 64,624 | `205bddd127ec4c8e87e13108003c4c1343092a213c77473d3056e7b105ad111f` |
+| PH-FORT | `processed/polyhaven/round003/geometry/fort_wall.glb` | `modular_fort_01_wall_thin_straight_03` | 406 | 19,244 | `e60605cf7f632c9e193cab5e91415a0b0a62556d2121ea569750eaa7f3e3caaf` |
+| PH-FORT | `processed/polyhaven/round003/geometry/fort_tower.glb` | `modular_fort_01_tower_round` | 4,772 | 219,772 | `f3c9d8a491d02e62424bc104eb5fd50fa7e2516c9860e8e8f0cb7ef842725c44` |
+| PH-FORT | `processed/polyhaven/round003/geometry/fort_stairs.glb` | `modular_fort_01_wall_stairs_straight_01` | 1,196 | 55,192 | `48a9af555add02a70362df01323abf050c3e36492c8ee860bd0b5799ca13d98a` |
+| PH-STATUE | `processed/polyhaven/round003/geometry/gothic_statue.glb` | `gothic_statue` | 27,739 | 922,824 | `e0327cf7fda9d308d5f96ca28f86b5851d5501b511f5356db43fca9a90ab380f` |
+
+The two shared PBR triplets are ordinary 1024×1024 WebP files produced with `cwebp 1.6.0`, metadata stripped. Diffuse maps use quality 84, OpenGL normal maps quality 92, and packed AO/roughness/metalness maps quality 90; every invocation uses `-sharp_yuv -m 6 -mt -metadata none`. Exact source/output hashes and full commands are in `source_work/round003/texture_build_receipt.json`.
+
+| Source | Processed texture | Bytes | SHA-256 |
+| --- | --- | ---: | --- |
+| PH-COBBLE | `processed/polyhaven/round003/materials/ground/ashwake_ground_basecolor.webp` | 349,700 | `6f603e8df23bd5032024c1c38f12bdf69ce5ce151405a3056a6c0ad92ba71371` |
+| PH-COBBLE | `processed/polyhaven/round003/materials/ground/ashwake_ground_normal.webp` | 394,730 | `3903a0a795c1584283b5983f1fdbd32435f13b9a7656bf940023054da2769c67` |
+| PH-COBBLE | `processed/polyhaven/round003/materials/ground/ashwake_ground_orm.webp` | 161,986 | `98558a0b83e34439512b0c6315d687990457a3f3d20234c8564080365fdb3842` |
+| PH-FORT | `processed/polyhaven/round003/materials/sector/ashwake_sector_basecolor.webp` | 295,418 | `98ffd6f778300a99c4a5c7ae43fa6726c1881621599b99c4143d6f4a6f31a064` |
+| PH-FORT | `processed/polyhaven/round003/materials/sector/ashwake_sector_normal.webp` | 517,172 | `b8fa399819f39545500fa1d818fe3cd10d70808ed344542bacca11ccbfcbc97a` |
+| PH-FORT | `processed/polyhaven/round003/materials/sector/ashwake_sector_orm.webp` | 306,880 | `511ee8f569e261b2217ec7362f4194f9edabfb5b43ac6ccc708528010a2da9f5` |
+
+`source_work/round003/runtime_publish_receipt.json` proves all twelve files were copied byte-identically into `web-game/public/assets/environment/ashwake/`; that bounded environment payload is 3,349,498 bytes. `source_work/round003/geometry_build_receipt.json` and `validation.json` retain dimensions, UV bounds, mesh/material counts, and Blender re-import results. The Gothic Statue source textures are retained for provenance but not shipped in this bounded slice; the statue intentionally receives the shared fort-sector material at runtime.
+
 ## Validation completed
 
-- Poly Haven: all seven direct downloads match the exact MD5 values returned by the publisher API; file signatures are one Radiance HDR plus six baseline 1024×1024 JPEGs.
+- Poly Haven: all seven earlier direct downloads plus all 16 Round003 publisher glTF/dependency files match the exact MD5 values returned by the publisher API. Exact `info` and `files` API snapshots are retained with SHA-256 hashes.
+- Round003 environment: all six GLBs pass Blender 5.2.0 LTS re-import and structural validation as ordinary, grounded, identity-root, one-mesh/one-material GLBs with UV0 and no images, external URIs, animation, required extensions, Draco, or Meshopt. All six WebP maps decode at 1024×1024 and their `cwebp 1.6.0` source/output hashes match the texture receipt.
 - Kenney raw ZIPs: `unzip -t` passes for every member. All nine selected GLBs have glTF 2.0 headers, one scene, one mesh, identity root transforms, ground-aligned pivots, stable node names, and a relative `Textures/colormap.png` reference. They use `KHR_texture_transform`, supported by Three.js `GLTFLoader`. Blender 5.2.0 LTS imported every GLB successfully.
 - OpenGameArt raw ZIPs: `unzip -t` passes. Selected slash PNGs decode as RGBA; selected OGGs decode with `ffprobe` as stereo Vorbis at 44.1 kHz.
 - Quaternius: all four Standard ZIPs pass `unzip -t`. Direct GLB 2.0 structural inspection and Blender 5.2.0 LTS re-import pass for all seven converted outputs. `player_core.glb`, `combat_zombie.glb`, `universal_superhero_female.glb`, `universal_hair_long.glb`, and `female_ranger_outfit.glb` have the same ordered 65-joint schema (`SHA-256 32702abb0d4c46cf76d2b7d846603c56fd27bbb2c2e65aa6af1e155725615722`). The zombie uses its own validated 50-joint rig. Every converted GLB is self-contained with no external URI.
@@ -138,7 +169,8 @@ All paths are relative to this P31 directory. “Verbatim” means the payload b
 
 ## Integration notes
 
-- Keep `processed/kenney/ruins/Textures/colormap.png` beside the ruin GLBs at that exact relative path and casing.
+- The Round003 manifest remaps the six stable environment keys to the six Ashwake GLBs and its six stable material keys to the two shared WebP triplets. It retains exactly 18 enabled keys; the earlier Kenney/JPG payload remains available as provenance-backed legacy data but is not selected by the active manifest.
+- Keep `processed/kenney/ruins/Textures/colormap.png` beside the legacy ruin GLBs at that exact relative path and casing.
 - Treat Poly Haven diffuse maps as sRGB and normal/ARM maps as linear. The packed ARM texture is suitable for AO/roughness/metalness channel use; meshes need a second UV set for Three.js `aoMap` behavior.
 - Use the 1K HDR through `RGBELoader` and PMREM, not as an ordinary sRGB texture.
 - Slash frames are six separate, variably sized transparent PNGs; preserve aspect ratio on billboards rather than assuming a fixed atlas cell.

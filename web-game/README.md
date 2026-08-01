@@ -68,14 +68,15 @@ The tape travels from `z=2.60` to `z=1.60` at 3 m/s, reports startup ticks 24–
 
 ## GLB asset contract
 
-`public/assets/manifest.json` version 2 keeps the stable character/environment keys and adds the required weapon, animation carriers, ruin pieces, PBR maps, and HDR environment. The visible duel uses:
+`public/assets/manifest.json` version 2 preserves exactly 18 stable enabled keys for the required characters, weapon, animation carriers, environment pieces, PBR maps, and HDR environment. The visible duel uses:
 
 - Quaternius `female_ranger_outfit.glb`, `zombie_basic.glb`, and `claymore.glb`
 - Quaternius `player_core.glb` and `combat_zombie.glb` animation carriers
-- a bounded Kenney ruin sector
-- Poly Haven Mossy Cobblestone / Castle Brick 1K PBR maps and Snowy Forest 1K HDR
+- a bounded Ashwake fort sector assembled from Poly Haven Modular Fort 01 plus exactly one Gothic Statue
+- two shared 1K WebP PBR triplets: Poly Haven Mossy Cobblestone for the ground and Modular Fort wall maps for the sector
+- Poly Haven Snowy Forest 1K HDR loaded through PMREM
 
-All shipped manifest entries are enabled by default. Stable procedural hero, Hollow, and arena fallbacks remain available only for genuine load or required-rig/clip failure, and that state is observable through the asset receipt. Source provenance and publisher hashes live under `WebAssetSource/P31`; raw publisher archives are not part of the runtime.
+All 18 shipped manifest entries are enabled by default. Stable procedural hero, Hollow, and arena fallbacks remain available only for genuine load or required-rig/clip failure, and that state is observable through the asset receipt. The Round003 environment payload under `public/assets/environment/ashwake/` is 3,349,498 bytes and uses ordinary GLB/WebP without Draco, Meshopt, or KTX2. Source provenance, publisher hashes, Blender 5.2 validation, `cwebp` commands, and byte-identical publish proof live under `WebAssetSource/P31`; raw publisher files are not part of the runtime.
 
 ## Verification
 

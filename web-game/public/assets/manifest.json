@@ -44,42 +44,42 @@
     },
     "environment.ashwake-arena": {
       "type": "glb",
-      "url": "/assets/environment/ruins/tower-base.glb",
+      "url": "/assets/environment/ashwake/geometry/fort_buttress.glb",
       "enabled": true,
       "compression": "none",
       "scale": 1
     },
     "environment.ruin-doorway": {
       "type": "glb",
-      "url": "/assets/environment/ruins/wall-doorway.glb",
+      "url": "/assets/environment/ashwake/geometry/fort_gate.glb",
       "enabled": true,
       "compression": "none",
       "scale": 1
     },
     "environment.ruin-wall": {
       "type": "glb",
-      "url": "/assets/environment/ruins/wall-half.glb",
+      "url": "/assets/environment/ashwake/geometry/fort_wall.glb",
       "enabled": true,
       "compression": "none",
       "scale": 1
     },
     "environment.ruin-pillar": {
       "type": "glb",
-      "url": "/assets/environment/ruins/wall-pillar.glb",
+      "url": "/assets/environment/ashwake/geometry/fort_tower.glb",
       "enabled": true,
       "compression": "none",
       "scale": 1
     },
     "environment.ruin-stairs": {
       "type": "glb",
-      "url": "/assets/environment/ruins/stairs-stone.glb",
+      "url": "/assets/environment/ashwake/geometry/fort_stairs.glb",
       "enabled": true,
       "compression": "none",
       "scale": 1
     },
     "environment.ruin-rocks": {
       "type": "glb",
-      "url": "/assets/environment/ruins/rocks-large.glb",
+      "url": "/assets/environment/ashwake/geometry/gothic_statue.glb",
       "enabled": true,
       "compression": "none",
       "scale": 1
@@ -91,42 +91,42 @@
     },
     "material.cobble-diffuse": {
       "type": "texture",
-      "url": "/assets/environment/materials/mossy_cobblestone/mossy_cobblestone_diff_1k.jpg",
+      "url": "/assets/environment/ashwake/materials/ground/ashwake_ground_basecolor.webp",
       "enabled": true,
       "colorSpace": "srgb",
       "wrap": "repeat"
     },
     "material.cobble-normal": {
       "type": "texture",
-      "url": "/assets/environment/materials/mossy_cobblestone/mossy_cobblestone_nor_gl_1k.jpg",
+      "url": "/assets/environment/ashwake/materials/ground/ashwake_ground_normal.webp",
       "enabled": true,
       "colorSpace": "linear",
       "wrap": "repeat"
     },
     "material.cobble-arm": {
       "type": "texture",
-      "url": "/assets/environment/materials/mossy_cobblestone/mossy_cobblestone_arm_1k.jpg",
+      "url": "/assets/environment/ashwake/materials/ground/ashwake_ground_orm.webp",
       "enabled": true,
       "colorSpace": "linear",
       "wrap": "repeat"
     },
     "material.brick-diffuse": {
       "type": "texture",
-      "url": "/assets/environment/materials/castle_brick_01/castle_brick_01_diff_1k.jpg",
+      "url": "/assets/environment/ashwake/materials/sector/ashwake_sector_basecolor.webp",
       "enabled": true,
       "colorSpace": "srgb",
       "wrap": "repeat"
     },
     "material.brick-normal": {
       "type": "texture",
-      "url": "/assets/environment/materials/castle_brick_01/castle_brick_01_nor_gl_1k.jpg",
+      "url": "/assets/environment/ashwake/materials/sector/ashwake_sector_normal.webp",
       "enabled": true,
       "colorSpace": "linear",
       "wrap": "repeat"
     },
     "material.brick-arm": {
       "type": "texture",
-      "url": "/assets/environment/materials/castle_brick_01/castle_brick_01_arm_1k.jpg",
+      "url": "/assets/environment/ashwake/materials/sector/ashwake_sector_orm.webp",
       "enabled": true,
       "colorSpace": "linear",
       "wrap": "repeat"

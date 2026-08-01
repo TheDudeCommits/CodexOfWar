@@ -1,0 +1,212 @@
+{
+  "blender": "5.2.0 LTS",
+  "ordinary_glb_only": true,
+  "results": [
+    {
+      "animations": 0,
+      "bounds": [
+        {
+          "runtime_max_xyz": [
+            2.918851,
+            8.525627,
+            2.918851
+          ],
+          "runtime_min_xyz": [
+            -2.918851,
+            0.0,
+            -2.918851
+          ]
+        }
+      ],
+      "bytes": 41956,
+      "embedded_or_loaded_images": [],
+      "extensions_required": [],
+      "external_uris": [],
+      "grounded": true,
+      "has_uv": true,
+      "identity_transforms": true,
+      "materials": [
+        "AshwakeSectorShared"
+      ],
+      "meshes": 1,
+      "ok": true,
+      "path": "processed/polyhaven/round003/geometry/fort_buttress.glb",
+      "sha256": "a029b852e57bb2ba954ec69a729c738cf8a8bbc7a507605d49e6f4415b598a97",
+      "triangles": 816,
+      "vertices": 892
+    },
+    {
+      "animations": 0,
+      "bounds": [
+        {
+          "runtime_max_xyz": [
+            1.335985,
+            8.616226,
+            3.705119
+          ],
+          "runtime_min_xyz": [
+            -1.335985,
+            0.0,
+            -3.705119
+          ]
+        }
+      ],
+      "bytes": 64624,
+      "embedded_or_loaded_images": [],
+      "extensions_required": [],
+      "external_uris": [],
+      "grounded": true,
+      "has_uv": true,
+      "identity_transforms": true,
+      "materials": [
+        "AshwakeSectorShared"
+      ],
+      "meshes": 1,
+      "ok": true,
+      "path": "processed/polyhaven/round003/geometry/fort_gate.glb",
+      "sha256": "205bddd127ec4c8e87e13108003c4c1343092a213c77473d3056e7b105ad111f",
+      "triangles": 1368,
+      "vertices": 1376
+    },
+    {
+      "animations": 0,
+      "bounds": [
+        {
+          "runtime_max_xyz": [
+            1.274889,
+            7.793655,
+            3.70512
+          ],
+          "runtime_min_xyz": [
+            -1.274889,
+            0.0,
+            -3.70512
+          ]
+        }
+      ],
+      "bytes": 19244,
+      "embedded_or_loaded_images": [],
+      "extensions_required": [],
+      "external_uris": [],
+      "grounded": true,
+      "has_uv": true,
+      "identity_transforms": true,
+      "materials": [
+        "AshwakeSectorShared"
+      ],
+      "meshes": 1,
+      "ok": true,
+      "path": "processed/polyhaven/round003/geometry/fort_wall.glb",
+      "sha256": "e60605cf7f632c9e193cab5e91415a0b0a62556d2121ea569750eaa7f3e3caaf",
+      "triangles": 406,
+      "vertices": 386
+    },
+    {
+      "animations": 0,
+      "bounds": [
+        {
+          "runtime_max_xyz": [
+            7.919222,
+            13.498152,
+            7.919222
+          ],
+          "runtime_min_xyz": [
+            -7.919222,
+            0.0,
+            -7.919222
+          ]
+        }
+      ],
+      "bytes": 219772,
+      "embedded_or_loaded_images": [],
+      "extensions_required": [],
+      "external_uris": [],
+      "grounded": true,
+      "has_uv": true,
+      "identity_transforms": true,
+      "materials": [
+        "AshwakeSectorShared"
+      ],
+      "meshes": 1,
+      "ok": true,
+      "path": "processed/polyhaven/round003/geometry/fort_tower.glb",
+      "sha256": "f3c9d8a491d02e62424bc104eb5fd50fa7e2516c9860e8e8f0cb7ef842725c44",
+      "triangles": 4772,
+      "vertices": 4744
+    },
+    {
+      "animations": 0,
+      "bounds": [
+        {
+          "runtime_max_xyz": [
+            1.769319,
+            7.532776,
+            7.4097
+          ],
+          "runtime_min_xyz": [
+            -1.769319,
+            0.0,
+            -7.4097
+          ]
+        }
+      ],
+      "bytes": 55192,
+      "embedded_or_loaded_images": [],
+      "extensions_required": [],
+      "external_uris": [],
+      "grounded": true,
+      "has_uv": true,
+      "identity_transforms": true,
+      "materials": [
+        "AshwakeSectorShared"
+      ],
+      "meshes": 1,
+      "ok": true,
+      "path": "processed/polyhaven/round003/geometry/fort_stairs.glb",
+      "sha256": "48a9af555add02a70362df01323abf050c3e36492c8ee860bd0b5799ca13d98a",
+      "triangles": 1196,
+      "vertices": 1166
+    },
+    {
+      "animations": 0,
+      "bounds": [
+        {
+          "runtime_max_xyz": [
+            0.738732,
+            1.739898,
+            0.781879
+          ],
+          "runtime_min_xyz": [
+            -0.738732,
+            0.0,
+            -0.781879
+          ]
+        }
+      ],
+      "bytes": 922824,
+      "embedded_or_loaded_images": [],
+      "extensions_required": [],
+      "external_uris": [],
+      "grounded": true,
+      "has_uv": true,
+      "identity_transforms": true,
+      "materials": [
+        "AshwakeSectorShared"
+      ],
+      "meshes": 1,
+      "ok": true,
+      "path": "processed/polyhaven/round003/geometry/gothic_statue.glb",
+      "sha256": "e0327cf7fda9d308d5f96ca28f86b5851d5501b511f5356db43fca9a90ab380f",
+      "triangles": 27739,
+      "vertices": 23598
+    }
+  ],
+  "schema": "p31.round003.environment-validation.v1",
+  "status": "pass",
+  "totals": {
+    "bytes": 1323612,
+    "files": 6,
+    "triangles": 36297,
+    "vertices": 32162
+  }
+}

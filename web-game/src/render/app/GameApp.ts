@@ -116,6 +116,7 @@ export class GameApp {
       this.lighting.scene,
       this.cameraController,
       assetRegistry,
+      this.renderer.capabilities.getMaxAnisotropy(),
     );
     this.input.attach(this.renderer.domElement);
     this.manifestVersion = assetRegistry.manifestVersion;
@@ -254,6 +255,7 @@ export class GameApp {
       0,
       snapCamera,
     );
+    this.lighting.rig.update(state.elapsed);
     this.renderBridge.update(state, FIXED_TIMESTEP);
     this.hud.update(state, this.cameraController.camera, this.lockedOn);
     this.post.render(this.lighting.scene, this.cameraController.camera);
@@ -366,6 +368,7 @@ export class GameApp {
     this.viewport.dispose();
     this.post.dispose();
     this.renderBridge.dispose();
+    this.lighting.rig.dispose();
     this.assetRegistry.dispose();
     this.physics.dispose();
     this.renderer.dispose();
@@ -411,8 +414,7 @@ export class GameApp {
       this.latestInput.lookY,
     );
     this.renderBridge.update(state, delta);
-    this.lighting.pulseLight.intensity = 17 + Math.sin(state.elapsed * 2.3) * 2.2;
-    this.lighting.rimLight.intensity = 14 + Math.sin(state.elapsed * 1.7 + 1.2) * 1.5;
+    this.lighting.rig.update(state.elapsed);
     this.hud.update(state, this.cameraController.camera, this.lockedOn);
     this.post.render(this.lighting.scene, this.cameraController.camera);
 

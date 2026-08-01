@@ -1,0 +1,195 @@
+{
+  "access_date": "2026-08-01",
+  "assets": {
+    "gothic_statue": {
+      "access_date": "2026-08-01",
+      "author": "Benny Weimer",
+      "files": [
+        {
+          "bytes": 912484,
+          "official_download_url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/8k/gothic_statue/gothic_statue.bin",
+          "original_filename_or_member": "gothic_statue.bin",
+          "path": "raw/polyhaven/round003/gothic_statue_1k/gothic_statue.bin",
+          "publisher_md5": "64ff6a07591c56042e01c780dce7685b",
+          "sha256": "8608701ecff6b56e9fd9cddd130541f831ff8131a7758d54e7964af3d0152b9c"
+        },
+        {
+          "bytes": 2900,
+          "official_download_url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/gothic_statue/gothic_statue_1k.gltf",
+          "original_filename_or_member": "gothic_statue_1k.gltf",
+          "path": "raw/polyhaven/round003/gothic_statue_1k/gothic_statue_1k.gltf",
+          "publisher_md5": "4fb49ae8f4278a0f5f1c7ca89a416f69",
+          "sha256": "eecbc67793a1e1efa1359d57fa497cb267fc7a4039823d3feecb6d0fcd2ad2db"
+        },
+        {
+          "bytes": 960949,
+          "official_download_url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/gothic_statue/gothic_statue_arm_1k.jpg",
+          "original_filename_or_member": "textures/gothic_statue_arm_1k.jpg",
+          "path": "raw/polyhaven/round003/gothic_statue_1k/textures/gothic_statue_arm_1k.jpg",
+          "publisher_md5": "0403abefbd62dfc03eb6b237d6d82119",
+          "sha256": "fbe7cec4c4745fb796c98a03209b6d664fca81b8b20d155e39509f85daa61fbb"
+        },
+        {
+          "bytes": 1037433,
+          "official_download_url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/gothic_statue/gothic_statue_diff_1k.jpg",
+          "original_filename_or_member": "textures/gothic_statue_diff_1k.jpg",
+          "path": "raw/polyhaven/round003/gothic_statue_1k/textures/gothic_statue_diff_1k.jpg",
+          "publisher_md5": "a8110eba7602d4d3ff00b05abf25397e",
+          "sha256": "7c74e5a4e5af689d5c7556bb8b0bd60c8cc6c0cac9d8445fbd9f153abd1eddf1"
+        },
+        {
+          "bytes": 1064867,
+          "official_download_url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/gothic_statue/gothic_statue_nor_gl_1k.jpg",
+          "original_filename_or_member": "textures/gothic_statue_nor_gl_1k.jpg",
+          "path": "raw/polyhaven/round003/gothic_statue_1k/textures/gothic_statue_nor_gl_1k.jpg",
+          "publisher_md5": "ecba6e86dc6dd8195710765f4889c895",
+          "sha256": "f0d1de09cb49f38ea5de9fb3b0af80834837616188d0504f07ee0cfc39a1ca91"
+        }
+      ],
+      "files_api_url": "https://api.polyhaven.com/files/gothic_statue",
+      "info_api_url": "https://api.polyhaven.com/info/gothic_statue",
+      "license": "CC0-1.0",
+      "license_proof_url": "https://polyhaven.com/license",
+      "name": "Gothic Statue",
+      "official_page": "https://polyhaven.com/a/gothic_statue",
+      "publisher_state": {
+        "date_published_unix": 1782777600,
+        "description": "Free 8K model of a weathered gothic statue: robed, veiled figure with crown, heavy chains, book and sword. Mossy stone, chipped edges, detailed base.",
+        "dimensions_mm": [
+          1477.4640202522278,
+          1563.7580156326294,
+          1739.8978471755981
+        ],
+        "files_hash": "180fe034aec7158f2550b133e0ba2be9e9c1c241",
+        "max_resolution": [
+          8192,
+          8192
+        ],
+        "polycount": 27739
+      },
+      "raw_files_api_sha256": "61a7b4048de324fe16d7e1daa5d6ec1f88177d561391e4247fb283ad16e796e9",
+      "raw_info_api_sha256": "2a2212624bcc5e545e916c859d12ed5a33079ba83c79640a65e5423f6bb4f8ed",
+      "selected_variant": "official glTF 1K"
+    },
+    "modular_fort_01": {
+      "access_date": "2026-08-01",
+      "author": "Rico Cilliers",
+      "files": [
+        {
+          "bytes": 1288144,
+          "official_download_url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/8k/modular_fort_01/modular_fort_01.bin",
+          "original_filename_or_member": "modular_fort_01.bin",
+          "path": "raw/polyhaven/round003/modular_fort_01_1k/modular_fort_01.bin",
+          "publisher_md5": "49bfa2a55e65c997840799099ad6ffa5",
+          "sha256": "de86e71af4cd5b37006914a8e7ae7de59b245b73364317f1886285a6aa797f57"
+        },
+        {
+          "bytes": 71433,
+          "official_download_url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/modular_fort_01/modular_fort_01_1k.gltf",
+          "original_filename_or_member": "modular_fort_01_1k.gltf",
+          "path": "raw/polyhaven/round003/modular_fort_01_1k/modular_fort_01_1k.gltf",
+          "publisher_md5": "340e7883860599c6b17ab73a893ff9b3",
+          "sha256": "829ac97d4c5c5672d3055d772e0ef4b545ad93cb4b639296f34e3ddf04cf9faf"
+        },
+        {
+          "bytes": 872242,
+          "official_download_url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/modular_fort_01/modular_fort_01_plaster_arm_1k.jpg",
+          "original_filename_or_member": "textures/modular_fort_01_plaster_arm_1k.jpg",
+          "path": "raw/polyhaven/round003/modular_fort_01_1k/textures/modular_fort_01_plaster_arm_1k.jpg",
+          "publisher_md5": "a367aa0d7b6307df5b961f4d339c593c",
+          "sha256": "d51902ce06084dd828cf82d60fcbc733160cc27ada41d5e57b38bafbe5d12327"
+        },
+        {
+          "bytes": 995332,
+          "official_download_url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/modular_fort_01/modular_fort_01_plaster_diff_1k.jpg",
+          "original_filename_or_member": "textures/modular_fort_01_plaster_diff_1k.jpg",
+          "path": "raw/polyhaven/round003/modular_fort_01_1k/textures/modular_fort_01_plaster_diff_1k.jpg",
+          "publisher_md5": "c2b8f298926cb63a8d926cffcab863c8",
+          "sha256": "d453b45cec06da3da9e67b38d016f6358c7c310a99db9b066e07e3a494731f4d"
+        },
+        {
+          "bytes": 1478355,
+          "official_download_url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/modular_fort_01/modular_fort_01_plaster_nor_gl_1k.jpg",
+          "original_filename_or_member": "textures/modular_fort_01_plaster_nor_gl_1k.jpg",
+          "path": "raw/polyhaven/round003/modular_fort_01_1k/textures/modular_fort_01_plaster_nor_gl_1k.jpg",
+          "publisher_md5": "b76724f4bb1ec196728c1a4d704f322c",
+          "sha256": "567953f0b7da39f6d4f173cc98ff948d31e07b516c8d2e0e0b0ec69de35cab3e"
+        },
+        {
+          "bytes": 807245,
+          "official_download_url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/modular_fort_01/modular_fort_01_trim_arm_1k.jpg",
+          "original_filename_or_member": "textures/modular_fort_01_trim_arm_1k.jpg",
+          "path": "raw/polyhaven/round003/modular_fort_01_1k/textures/modular_fort_01_trim_arm_1k.jpg",
+          "publisher_md5": "2ad72ca33693932204ffe68ee7232120",
+          "sha256": "d6a9e67be3f171857bb06af436ebaefedd1fd3ca4e1212c8ad42be7ef6038c91"
+        },
+        {
+          "bytes": 945345,
+          "official_download_url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/modular_fort_01/modular_fort_01_trim_diff_1k.jpg",
+          "original_filename_or_member": "textures/modular_fort_01_trim_diff_1k.jpg",
+          "path": "raw/polyhaven/round003/modular_fort_01_1k/textures/modular_fort_01_trim_diff_1k.jpg",
+          "publisher_md5": "1e5e6e32e599ebaa6471c4c1ce3023fd",
+          "sha256": "fe5811560cf0471321fe6af08114f279a7f957412b8aa6e2c224112990760556"
+        },
+        {
+          "bytes": 1070875,
+          "official_download_url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/modular_fort_01/modular_fort_01_trim_nor_gl_1k.jpg",
+          "original_filename_or_member": "textures/modular_fort_01_trim_nor_gl_1k.jpg",
+          "path": "raw/polyhaven/round003/modular_fort_01_1k/textures/modular_fort_01_trim_nor_gl_1k.jpg",
+          "publisher_md5": "4e87ba7c3ac854d64a6d0de56362f76a",
+          "sha256": "c5a21bd71f1ed0186fedaad18edb74713527a9426f5d136a5b21c3e09a71e1c3"
+        },
+        {
+          "bytes": 936858,
+          "official_download_url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/modular_fort_01/modular_fort_01_wall_arm_1k.jpg",
+          "original_filename_or_member": "textures/modular_fort_01_wall_arm_1k.jpg",
+          "path": "raw/polyhaven/round003/modular_fort_01_1k/textures/modular_fort_01_wall_arm_1k.jpg",
+          "publisher_md5": "9e667ae75549188caa03da56aa276fdb",
+          "sha256": "6d3327658794a90fc1b52c19dfbb57059b7ea9801f59abd13417e4be7bf40a34"
+        },
+        {
+          "bytes": 978641,
+          "official_download_url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/modular_fort_01/modular_fort_01_wall_diff_1k.jpg",
+          "original_filename_or_member": "textures/modular_fort_01_wall_diff_1k.jpg",
+          "path": "raw/polyhaven/round003/modular_fort_01_1k/textures/modular_fort_01_wall_diff_1k.jpg",
+          "publisher_md5": "c3958a33d456a5f2b776dde465024072",
+          "sha256": "8bdefadca0688e9b3fd91b4d12f341918b0a3670c25537c18a777fa51bb90bea"
+        },
+        {
+          "bytes": 1194253,
+          "official_download_url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/modular_fort_01/modular_fort_01_wall_nor_gl_1k.jpg",
+          "original_filename_or_member": "textures/modular_fort_01_wall_nor_gl_1k.jpg",
+          "path": "raw/polyhaven/round003/modular_fort_01_1k/textures/modular_fort_01_wall_nor_gl_1k.jpg",
+          "publisher_md5": "2164dad0582c2ec60e757e6565b1f257",
+          "sha256": "6e8b0e1abac9c6ab0f9a36c04300ea3d0ca83dede3b49485c969a71494ce8d53"
+        }
+      ],
+      "files_api_url": "https://api.polyhaven.com/files/modular_fort_01",
+      "info_api_url": "https://api.polyhaven.com/info/modular_fort_01",
+      "license": "CC0-1.0",
+      "license_proof_url": "https://polyhaven.com/license",
+      "name": "Modular Fort 01",
+      "official_page": "https://polyhaven.com/a/modular_fort_01",
+      "publisher_state": {
+        "date_published_unix": 1654214400,
+        "description": "Free 8K modular fort model - weathered colonial stone blocks, battlements, towers, ramparts and an arched gate with mossy, aged surface detail.",
+        "dimensions_mm": [
+          71375.29754638672,
+          42669.87609863281,
+          13672.092854976654
+        ],
+        "files_hash": "5ccbf62aeee96ea99cf0c2e29e4c8ed843ee7c44",
+        "max_resolution": [
+          8192,
+          8192
+        ],
+        "polycount": 28218
+      },
+      "raw_files_api_sha256": "3cd24326d799f839448923692664b2681b6d08f3eb1dd950366db924cf967e4b",
+      "raw_info_api_sha256": "baff4deb8f3ce4d5b19a405b179c11e05c83907469ff2907fbdd2cad3c448fe1",
+      "selected_variant": "official glTF 1K"
+    }
+  },
+  "policy": "official Poly Haven API and dl.polyhaven.org HTTPS endpoints only; no signed URLs persisted",
+  "schema": "p31.round003.polyhaven-acquisition.v1"
+}

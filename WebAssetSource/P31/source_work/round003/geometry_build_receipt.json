@@ -1,0 +1,273 @@
+{
+  "access_date": "2026-08-01",
+  "blender": "5.2.0 LTS",
+  "compression": "ordinary GLB; no Draco, Meshopt, or KTX2",
+  "material_policy": "one texture-free AshwakeSectorShared placeholder per GLB; runtime assigns the single manifest-backed sector basecolor/normal/ORM set",
+  "outputs": [
+    {
+      "manifest_key": "environment.ashwake-arena",
+      "material_slots": 1,
+      "output_bytes": 41956,
+      "output_path": "processed/polyhaven/round003/geometry/fort_buttress.glb",
+      "output_sha256": "a029b852e57bb2ba954ec69a729c738cf8a8bbc7a507605d49e6f4415b598a97",
+      "runtime_bounds_max_xyz": [
+        2.918851,
+        8.525627,
+        2.918851
+      ],
+      "runtime_bounds_min_xyz": [
+        -2.918851,
+        0.0,
+        -2.918851
+      ],
+      "runtime_dimensions_xyz": [
+        5.837701,
+        8.525627,
+        5.837701
+      ],
+      "runtime_role": "near and midground fort corner mass",
+      "source_material_slots": [
+        "modular_fort_01_wall_1",
+        "modular_fort_01_trim_1"
+      ],
+      "source_object": "modular_fort_01_wall_thick_corner_01",
+      "source_path": "raw/polyhaven/round003/modular_fort_01_1k/modular_fort_01_1k.gltf",
+      "source_sha256": "829ac97d4c5c5672d3055d772e0ef4b545ad93cb4b639296f34e3ddf04cf9faf",
+      "source_uv_bounds": [
+        [
+          -1.0200992822647095,
+          0.00800102949142456
+        ],
+        [
+          2.2578306198120117,
+          0.9018594026565552
+        ]
+      ],
+      "triangles": 816,
+      "vertices": 871
+    },
+    {
+      "manifest_key": "environment.ruin-doorway",
+      "material_slots": 1,
+      "output_bytes": 64624,
+      "output_path": "processed/polyhaven/round003/geometry/fort_gate.glb",
+      "output_sha256": "205bddd127ec4c8e87e13108003c4c1343092a213c77473d3056e7b105ad111f",
+      "runtime_bounds_max_xyz": [
+        1.335985,
+        8.616226,
+        3.705119
+      ],
+      "runtime_bounds_min_xyz": [
+        -1.335985,
+        0.0,
+        -3.705119
+      ],
+      "runtime_dimensions_xyz": [
+        2.67197,
+        8.616226,
+        7.410237
+      ],
+      "runtime_role": "dark central arched gate",
+      "source_material_slots": [
+        "modular_fort_01_wall_1",
+        "modular_fort_01_trim_1"
+      ],
+      "source_object": "modular_fort_01_wall_thin_gate_01",
+      "source_path": "raw/polyhaven/round003/modular_fort_01_1k/modular_fort_01_1k.gltf",
+      "source_sha256": "829ac97d4c5c5672d3055d772e0ef4b545ad93cb4b639296f34e3ddf04cf9faf",
+      "source_uv_bounds": [
+        [
+          -1.931880235671997,
+          -0.0009834766387939453
+        ],
+        [
+          2.2512168884277344,
+          0.999955952167511
+        ]
+      ],
+      "triangles": 1368,
+      "vertices": 1332
+    },
+    {
+      "manifest_key": "environment.ruin-wall",
+      "material_slots": 1,
+      "output_bytes": 19244,
+      "output_path": "processed/polyhaven/round003/geometry/fort_wall.glb",
+      "output_sha256": "e60605cf7f632c9e193cab5e91415a0b0a62556d2121ea569750eaa7f3e3caaf",
+      "runtime_bounds_max_xyz": [
+        1.274889,
+        7.793655,
+        3.70512
+      ],
+      "runtime_bounds_min_xyz": [
+        -1.274889,
+        0.0,
+        -3.70512
+      ],
+      "runtime_dimensions_xyz": [
+        2.549778,
+        7.793655,
+        7.410239
+      ],
+      "runtime_role": "camera-facing wall and distant silhouette",
+      "source_material_slots": [
+        "modular_fort_01_wall_1",
+        "modular_fort_01_trim_1"
+      ],
+      "source_object": "modular_fort_01_wall_thin_straight_03",
+      "source_path": "raw/polyhaven/round003/modular_fort_01_1k/modular_fort_01_1k.gltf",
+      "source_sha256": "829ac97d4c5c5672d3055d772e0ef4b545ad93cb4b639296f34e3ddf04cf9faf",
+      "source_uv_bounds": [
+        [
+          -1.9504438638687134,
+          4.673004150390625e-05
+        ],
+        [
+          2.2512168884277344,
+          0.8910449743270874
+        ]
+      ],
+      "triangles": 406,
+      "vertices": 378
+    },
+    {
+      "manifest_key": "environment.ruin-pillar",
+      "material_slots": 1,
+      "output_bytes": 219772,
+      "output_path": "processed/polyhaven/round003/geometry/fort_tower.glb",
+      "output_sha256": "f3c9d8a491d02e62424bc104eb5fd50fa7e2516c9860e8e8f0cb7ef842725c44",
+      "runtime_bounds_max_xyz": [
+        7.919222,
+        13.498152,
+        7.919222
+      ],
+      "runtime_bounds_min_xyz": [
+        -7.919222,
+        0.0,
+        -7.919222
+      ],
+      "runtime_dimensions_xyz": [
+        15.838445,
+        13.498152,
+        15.838445
+      ],
+      "runtime_role": "flanking round tower",
+      "source_material_slots": [
+        "modular_fort_01_wall_1",
+        "modular_fort_01_trim_1"
+      ],
+      "source_object": "modular_fort_01_tower_round",
+      "source_path": "raw/polyhaven/round003/modular_fort_01_1k/modular_fort_01_1k.gltf",
+      "source_sha256": "829ac97d4c5c5672d3055d772e0ef4b545ad93cb4b639296f34e3ddf04cf9faf",
+      "source_uv_bounds": [
+        [
+          -7.079989433288574,
+          0.001781761646270752
+        ],
+        [
+          10.819561958312988,
+          0.9172970652580261
+        ]
+      ],
+      "triangles": 4772,
+      "vertices": 4544
+    },
+    {
+      "manifest_key": "environment.ruin-stairs",
+      "material_slots": 1,
+      "output_bytes": 55192,
+      "output_path": "processed/polyhaven/round003/geometry/fort_stairs.glb",
+      "output_sha256": "48a9af555add02a70362df01323abf050c3e36492c8ee860bd0b5799ca13d98a",
+      "runtime_bounds_max_xyz": [
+        1.769319,
+        7.532776,
+        7.4097
+      ],
+      "runtime_bounds_min_xyz": [
+        -1.769319,
+        0.0,
+        -7.4097
+      ],
+      "runtime_dimensions_xyz": [
+        3.538637,
+        7.532776,
+        14.819401
+      ],
+      "runtime_role": "gate approach and elevation transition",
+      "source_material_slots": [
+        "modular_fort_01_wall_1",
+        "modular_fort_01_trim_1"
+      ],
+      "source_object": "modular_fort_01_wall_stairs_straight_01",
+      "source_path": "raw/polyhaven/round003/modular_fort_01_1k/modular_fort_01_1k.gltf",
+      "source_sha256": "829ac97d4c5c5672d3055d772e0ef4b545ad93cb4b639296f34e3ddf04cf9faf",
+      "source_uv_bounds": [
+        [
+          -2.2623462677001953,
+          0.0007565021514892578
+        ],
+        [
+          2.6831343173980713,
+          0.7762742042541504
+        ]
+      ],
+      "triangles": 1196,
+      "vertices": 1148
+    },
+    {
+      "manifest_key": "environment.ruin-rocks",
+      "material_slots": 1,
+      "output_bytes": 922824,
+      "output_path": "processed/polyhaven/round003/geometry/gothic_statue.glb",
+      "output_sha256": "e0327cf7fda9d308d5f96ca28f86b5851d5501b511f5356db43fca9a90ab380f",
+      "runtime_bounds_max_xyz": [
+        0.738732,
+        1.739898,
+        0.781879
+      ],
+      "runtime_bounds_min_xyz": [
+        -0.738732,
+        0.0,
+        -0.781879
+      ],
+      "runtime_dimensions_xyz": [
+        1.477464,
+        1.739898,
+        1.563758
+      ],
+      "runtime_role": "single authored Gothic Statue focal prop",
+      "source_material_slots": [
+        "gothic_statue"
+      ],
+      "source_object": "gothic_statue",
+      "source_path": "raw/polyhaven/round003/gothic_statue_1k/gothic_statue_1k.gltf",
+      "source_sha256": "eecbc67793a1e1efa1359d57fa497cb267fc7a4039823d3feecb6d0fcd2ad2db",
+      "source_uv_bounds": [
+        [
+          0.003130262950435281,
+          0.003227531909942627
+        ],
+        [
+          0.9981549382209778,
+          0.9979763627052307
+        ]
+      ],
+      "triangles": 27739,
+      "vertices": 23314
+    }
+  ],
+  "schema": "p31.round003.geometry-build.v1",
+  "source_scope": {
+    "gothic_statues_selected": 1,
+    "modular_fort_objects_available": 22,
+    "modular_fort_objects_pruned": 17,
+    "modular_fort_objects_selected": 5
+  },
+  "totals": {
+    "bytes": 1323612,
+    "files": 6,
+    "triangles": 36297,
+    "vertices": 31587
+  },
+  "transform": "publisher contact-sheet transforms removed; Blender-native metric geometry centered on X/Y and grounded at Z=0, then exported Y-up for runtime X/Z centering and Y=0 grounding; identity root transforms"
+}

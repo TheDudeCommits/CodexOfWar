@@ -41,6 +41,26 @@ SOURCES = {
         "license": "CC0-1.0",
         "license_proof_url": "https://polyhaven.com/license",
     },
+    "PH-FORT": {
+        "publisher": "Poly Haven",
+        "author": "Rico Cilliers",
+        "title": "Modular Fort 01",
+        "version": "publisher API files_hash 5ccbf62aeee96ea99cf0c2e29e4c8ed843ee7c44; 1K glTF; API state 2026-08-01",
+        "official_page": "https://polyhaven.com/a/modular_fort_01",
+        "download_or_listing_url": "https://api.polyhaven.com/files/modular_fort_01",
+        "license": "CC0-1.0",
+        "license_proof_url": "https://polyhaven.com/license",
+    },
+    "PH-STATUE": {
+        "publisher": "Poly Haven",
+        "author": "Benny Weimer",
+        "title": "Gothic Statue",
+        "version": "publisher API files_hash 180fe034aec7158f2550b133e0ba2be9e9c1c241; 1K glTF; API state 2026-08-01",
+        "official_page": "https://polyhaven.com/a/gothic_statue",
+        "download_or_listing_url": "https://api.polyhaven.com/files/gothic_statue",
+        "license": "CC0-1.0",
+        "license_proof_url": "https://polyhaven.com/license",
+    },
     "KEN-CASTLE": {
         "publisher": "Kenney",
         "author": "Kenney",
@@ -162,6 +182,12 @@ SOURCES = {
 
 
 def source_id(path: str) -> str:
+    if "round003/gothic_statue" in path or "round003/geometry/gothic_statue" in path:
+        return "PH-STATUE"
+    if "round003/materials/ground/" in path:
+        return "PH-COBBLE"
+    if "round003/modular_fort_01" in path or "round003/geometry/fort_" in path or "round003/materials/sector/" in path:
+        return "PH-FORT"
     if "snowy_forest" in path:
         return "PH-SNOW"
     if "castle_brick_01" in path:
@@ -209,6 +235,12 @@ def transform(path: str) -> str:
         if "/original-docs/" in path:
             return "extracted verbatim from the named publisher archive for preservation"
         return "downloaded verbatim from the original publisher distribution"
+    if path.startswith("processed/polyhaven/round003/geometry/"):
+        return "Blender 5.2.0 selection from the official 1K glTF; publisher contact-sheet transform removed; metric mesh centered on X/Z, grounded at Y=0, collapsed to one texture-free AshwakeSectorShared placeholder material; ordinary GLB with no Draco, Meshopt, KTX2, animations, images, or external URI; validated by Blender re-import"
+    if path.startswith("processed/polyhaven/round003/materials/ground/"):
+        return "cwebp 1.6.0 conversion of the verified Poly Haven Mossy Cobblestone 1K JPG; ordinary 1024x1024 WebP; shared Round003 ground triplet; exact flags recorded in source_work/round003/texture_build_receipt.json"
+    if path.startswith("processed/polyhaven/round003/materials/sector/"):
+        return "cwebp 1.6.0 conversion of the verified Modular Fort 01 wall 1K JPG; ordinary 1024x1024 WebP; shared Round003 sector triplet; exact flags recorded in source_work/round003/texture_build_receipt.json"
     if path.startswith("processed/polyhaven/"):
         return "verbatim runtime copy of the direct publisher file; no re-encoding"
     if path.startswith("processed/kenney/") or path.startswith("processed/opengameart/"):
@@ -233,7 +265,7 @@ def role(path: str) -> str:
         return "runtime-material-map"
     if "/animations/" in path:
         return "runtime-animation-library"
-    if "/models/" in path or "/ruins/" in path:
+    if "/models/" in path or "/ruins/" in path or "/geometry/" in path:
         return "runtime-model"
     raise ValueError(f"Missing role for {path}")
 
@@ -247,6 +279,18 @@ def original_filename(path: str) -> str:
         "processed/quaternius/models/zombie_basic.glb": "Zombie_Basic.gltf",
         "processed/quaternius/animations/player_core.glb": "Universal Animation Library[Standard].zip / Standard GLB",
         "processed/quaternius/animations/combat_zombie.glb": "Universal Animation Library 2[Standard].zip / Standard GLB",
+        "processed/polyhaven/round003/geometry/fort_buttress.glb": "modular_fort_01_1k.gltf / modular_fort_01_wall_thick_corner_01",
+        "processed/polyhaven/round003/geometry/fort_gate.glb": "modular_fort_01_1k.gltf / modular_fort_01_wall_thin_gate_01",
+        "processed/polyhaven/round003/geometry/fort_wall.glb": "modular_fort_01_1k.gltf / modular_fort_01_wall_thin_straight_03",
+        "processed/polyhaven/round003/geometry/fort_tower.glb": "modular_fort_01_1k.gltf / modular_fort_01_tower_round",
+        "processed/polyhaven/round003/geometry/fort_stairs.glb": "modular_fort_01_1k.gltf / modular_fort_01_wall_stairs_straight_01",
+        "processed/polyhaven/round003/geometry/gothic_statue.glb": "gothic_statue_1k.gltf / gothic_statue",
+        "processed/polyhaven/round003/materials/ground/ashwake_ground_basecolor.webp": "mossy_cobblestone_diff_1k.jpg",
+        "processed/polyhaven/round003/materials/ground/ashwake_ground_normal.webp": "mossy_cobblestone_nor_gl_1k.jpg",
+        "processed/polyhaven/round003/materials/ground/ashwake_ground_orm.webp": "mossy_cobblestone_arm_1k.jpg",
+        "processed/polyhaven/round003/materials/sector/ashwake_sector_basecolor.webp": "modular_fort_01_wall_diff_1k.jpg",
+        "processed/polyhaven/round003/materials/sector/ashwake_sector_normal.webp": "modular_fort_01_wall_nor_gl_1k.jpg",
+        "processed/polyhaven/round003/materials/sector/ashwake_sector_orm.webp": "modular_fort_01_wall_arm_1k.jpg",
         "licenses/Kenney_Castle_Kit_License.txt": "License.txt",
         "licenses/Kenney_Smoke_Particles_license.txt": "license.txt",
     }
@@ -317,7 +361,7 @@ def main() -> None:
     receipt = {
         "schema": "p31-third-party-asset-receipt-v1",
         "access_date": ACCESS_DATE,
-        "scope": "CC0 first-playable browser asset stack; writes confined to WebAssetSource/P31",
+        "scope": "CC0 browser asset stack through P30 Round003; publisher source and processed lineage retained in WebAssetSource/P31",
         "cc0_deed_url": "https://creativecommons.org/publicdomain/zero/1.0/",
         "source_registry": SOURCES,
         "totals": totals,
@@ -340,13 +384,15 @@ def main() -> None:
         "validation": {
             "status": "pass",
             "blender": "5.2.0 LTS",
-            "all_16_glbs_blender_reimported": True,
+            "all_22_glbs_blender_reimported": True,
             "kenney_glbs": "9/9 pass; glTF 2.0; identity roots; ground-aligned pivots; external shared palette present",
             "quaternius_glbs": "7/7 pass; glTF 2.0; no external URIs; selected action sets exact",
+            "round003_environment_glbs": "6/6 pass under Blender 5.2.0; ordinary GLB; one mesh/material; grounded identity pivots; UV0 present; no images, external URIs, animations, required extensions, Draco, or Meshopt; 36,297 triangles and 1,323,612 bytes",
+            "round003_textures": "6/6 ordinary 1024x1024 WebP built with cwebp 1.6.0; exact source/output SHA-256 and command flags recorded",
             "universal_rig_joint_count": 65,
             "universal_rig_joint_sequence_sha256": "32702abb0d4c46cf76d2b7d846603c56fd27bbb2c2e65aa6af1e155725615722",
             "zombie_joint_count": 50,
-            "poly_haven": "publisher API MD5 matched all 7 direct downloads",
+            "poly_haven": "publisher API MD5 matched the original 7 direct files plus all 16 Round003 glTF/dependency files; official info/files API snapshots retain exact SHA-256",
             "zip_integrity": "all 9 retained ZIPs pass unzip -t",
             "audio": "5/5 selected OGGs decode as stereo Vorbis 44.1 kHz",
             "gltf_transform": "not installed; no Draco/Meshopt/KTX2 transform applied",
@@ -358,6 +404,7 @@ def main() -> None:
             "Zombie Apocalypse License.txt incorrectly names Ultimate Platformer Pack; its CC0 declaration is intact and the original file is preserved unchanged.",
             "UAL2 Zombie_* clips use the 65-joint Universal rig and do not directly animate the selected 50-joint Zombie Basic without retargeting; use Zombie Basic's six embedded actions for the first playable.",
             "Kenney ruin GLBs require the relative case-sensitive Textures/colormap.png path.",
+            "The Round003 Gothic Statue geometry intentionally receives the single shared fort-sector texture triplet at runtime; its publisher-specific 1K maps remain in the ignored verified raw cache and are not an additional manifest texture set.",
         ],
         "barriers": [
             {
