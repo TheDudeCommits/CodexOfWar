@@ -1,0 +1,68 @@
+P10 ROUND017 LOCAL CONSTRAINT RELEASE — BUILDER VALIDATION
+
+DISPOSITION: PROMOTE STRONGEST CONNECTED C04 SPLIT-TRANSFORM FOR CRITIC
+BUILDER ELIGIBILITY: FAIL
+IMAGE-GENERATION ATTEMPTS: 0 / 4
+UNITY WORK: NONE
+
+ACCEPTED PNG
+path: ArtSource/P10/Round017/LocalConstraintRelease/P10_Round017_NyraKestrel_LocalConstraintRelease_v1.png
+sha256: de3f1be07757f516c6a194a870cc59903f40a0623872bf7dfa6cf549c5fcbcae
+bytes: 1531662
+dimensions/mode: 1536x1024 RGB
+
+REVISED MASK
+path: ArtSource/P10/Round017/LocalConstraintRelease/P10_Round017_RevisedEditableMask_binary.png
+sha256: 6103d88ffc9bf9073bef39dc863522f9b7119e0cd7d87a04b8843fac3dc22c71
+pixels: 78197
+effective after exact r24 grip restore: 76404
+grip disk pixels: 1793
+
+LOCAL PROTECTION RELEASE
+released total: 54856
+hilt only: 20526
+rear leg only: 25295
+hilt+rear overlap: 9035
+released outside prior corridor but inside dilated triangle: 1698
+final changed hilt-zone pixels: 27638
+final changed rear-zone pixels: 34086
+
+HARD PRESERVATION / CONNECTIVITY
+outside revised mask changed pixels: 0
+grip disk changed pixels: 0
+all changed components: 1 ([75513])
+limb foreground components: 1 ([60922])
+foreground shoulder/elbow/grip-annulus pixels: 3206 / 3209 / 2178
+steep return vector/length/angle: [80, -220] / 234.093998px / 70.016893deg
+green contamination pixels: 0
+
+WEDGE GATE — FAIL
+closed triangle pixels: 10832
+largest uninterrupted pale component: 22
+head-sized r42 proxy pixels: 5525
+ratio: 0.003981900
+theoretical 124/106px tubes leave: 0 pale pixels
+theoretical 70/64px tubes leave: 104 pale pixels
+theoretical 20/16px needle tubes leave: 5479 pale pixels
+
+FAIL-CLOSED REASON
+The fixed-anchor triangle is only 10,832 raster pixels. Anatomical full-width tubes consume it,
+and even 70/64px widths leave only 104 pale pixels. Near-needle 20/16px tubes leave 5,479 pale
+pixels, which approaches but does not reach the 5,525px proxy. Generation cannot change this geometry,
+so no image-generation call was spent. The strongest connected material-matched proof is preserved,
+but it is not builder-eligible because the head-sized pale wedge fails.
+
+HARD CHECKS
+{
+  "accepted_byte_identical_to_candidate01_composite": true,
+  "all_pixels_outside_revised_mask_equal_round013": true,
+  "all_grip_disk_pixels_equal_round013": true,
+  "revised_mask_unique_values_are_0_255": true,
+  "effective_mask_equals_revised_minus_grip_disk": true,
+  "one_connected_foreground_component": true,
+  "all_changed_pixels_one_8_connected_component": true,
+  "foreground_spans_anchor_neighborhoods": true,
+  "steep_up_right_return_survives": true,
+  "no_green_key_contamination": true,
+  "head_sized_pale_wedge": false
+}

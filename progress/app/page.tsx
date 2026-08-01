@@ -109,12 +109,20 @@ type Dashboard = {
     phase: string;
     status: PieceStatus;
     date: string;
+    engineRun?: boolean;
+    actualGameCapturePerformed?: boolean;
+    targetMatchedGameCapturePerformed?: boolean;
+    gateQualifyingCapture?: boolean;
     builderBrief: string;
     evidence: string;
     evidenceLinks: string[];
     critic: {
       status: string;
       score: number | null;
+      categoryFloor?: number;
+      candidatePreferredCount?: number;
+      comparisonCount?: number;
+      requiredCandidatePreferredCount?: number;
       scoreLabel: string | null;
       preference: string | null;
       primaryGap: string | null;
@@ -305,7 +313,7 @@ export default function Home() {
           <aside className="capture-panel" aria-labelledby="capture-heading">
             <div className="capture-header">
               <div>
-                <p className="panel-label">Latest Unity evidence</p>
+                <p className="panel-label">Public Unity context</p>
                 <h2 id="capture-heading">
                   {capture.shotId} <span>{capture.name}</span>
                 </h2>
@@ -487,7 +495,7 @@ export default function Home() {
             <div className="evidence-visual">
               <div className="evidence-visual-header">
                 <div>
-                  <p className="panel-label">Neutral turntable</p>
+                  <p className="panel-label">Critic diagnostic</p>
                   <h3 id="evidence-heading">
                     {dashboard.activeBuild.evidenceBundle.turntable.label}
                   </h3>
@@ -502,7 +510,7 @@ export default function Home() {
                 href={dashboard.activeBuild.evidenceBundle.turntable.path}
               >
                 <object
-                  aria-label="P10 four-view turntable contact sheet"
+                  aria-label={dashboard.activeBuild.evidenceBundle.turntable.label}
                   data={dashboard.activeBuild.evidenceBundle.turntable.path}
                   type="image/png"
                 />
@@ -566,10 +574,10 @@ export default function Home() {
 
               <div className="evidence-links evidence-bundle-links">
                 <a href={dashboard.activeBuild.evidenceBundle.s01.path}>
-                  Open S01
+                  Open engine context
                 </a>
                 <a href={dashboard.activeBuild.evidenceBundle.turntable.path}>
-                  Open turntable
+                  Open diagnostic
                 </a>
                 <a href={dashboard.activeBuild.evidenceBundle.manifestPath}>
                   Open P10 manifest

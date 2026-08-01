@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1536" height="1024" viewBox="0 0 1536 1024" role="img" aria-labelledby="title desc">
+  <title id="title">P10 Round017 original public-safe local-constraint coordinate guide</title>
+  <desc id="desc">Original geometry-only guide for shoulder 604,472; elbow 370,845; grip 450,625; the closed triangle, 62 pixel dilation concept, and 24 pixel grip restore disk. No supplied raster pixels are embedded.</desc>
+  <defs>
+    <pattern id="grid" width="64" height="64" patternUnits="userSpaceOnUse">
+      <path d="M 64 0 L 0 0 0 64" fill="none" stroke="#d8dde6" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="1536" height="1024" fill="#f7f8fb"/>
+  <rect width="1536" height="1024" fill="url(#grid)"/>
+  <rect x="24" y="24" width="1488" height="976" rx="18" fill="none" stroke="#283344" stroke-width="4"/>
+  <path d="M 604 472 L 370 845 L 450 625 Z" fill="#f4d99b" fill-opacity="0.55" stroke="#bb7a16" stroke-width="4" stroke-dasharray="14 10"/>
+  <path d="M 604 472 L 370 845" fill="none" stroke="#315fa8" stroke-width="124" stroke-opacity="0.16" stroke-linecap="round"/>
+  <path d="M 370 845 L 450 625" fill="none" stroke="#7048a8" stroke-width="106" stroke-opacity="0.16" stroke-linecap="round"/>
+  <path d="M 604 472 L 370 845 L 450 625" fill="none" stroke="#172b4d" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="604" cy="472" r="17" fill="#2e7d32" stroke="#ffffff" stroke-width="5"/>
+  <circle cx="370" cy="845" r="17" fill="#c62828" stroke="#ffffff" stroke-width="5"/>
+  <circle cx="450" cy="625" r="24" fill="#ffffff" fill-opacity="0.70" stroke="#00838f" stroke-width="6"/>
+  <g font-family="Arial, Helvetica, sans-serif" fill="#172b4d">
+    <text x="58" y="82" font-size="32" font-weight="700">P10 ROUND017 — LOCAL CONSTRAINT RELEASE</text>
+    <text x="58" y="120" font-size="20">Original public-safe geometry only · 1536 × 1024</text>
+    <text x="630" y="458" font-size="22" font-weight="700">SHOULDER (604,472)</text>
+    <text x="130" y="882" font-size="22" font-weight="700">ELBOW (370,845)</text>
+    <text x="476" y="616" font-size="22" font-weight="700">GRIP (450,625)</text>
+    <text x="470" y="755" font-size="20">closed target triangle</text>
+    <text x="470" y="784" font-size="20">local dilation radius: 62 px</text>
+    <text x="470" y="813" font-size="20">post-composite grip restore: r = 24 px</text>
+  </g>
+</svg>

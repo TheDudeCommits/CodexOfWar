@@ -9,28 +9,24 @@ const dataUrl = new URL(
   "../public/data/codex-of-war.json",
   import.meta.url,
 );
-const benchmarkImageHashes = new Set([
-  "05048268b96a7ea20e52ab4f0c01fbc312b37d7d4b3ae4fd40752ca4f497e71e",
-  "06ac0710130fe19f7c844ecc453bca2d27bcc72b25fef3a2615f8877b53c9778",
-  "a0161b955a1947fcabccc34c8e22ee0ebcb6ade357b51aa974c0057caf9294c9",
-  "1e99a94f8efbbdd9d4811e2706f84616ea9cc379909caee873d212ecfb9a68b0",
-  "1af9ad3cd30a4f90dd97d8fcdced94eee8afcc2828aff1013bf24f90721112b7",
-  "d208c98d2ea91b654fb11070616887e0f8564fe3c5040ae854e3aab8645be98d",
-  "41d924111330b7ead3bb85e85ee8d16d3a66f376939ede3fa3227d6cb591f76a",
-  "d18f1a8f98bfaf720d4400cd3252688ff3200a5585c31d48112a003656c4d41a",
-  "3c5ced3dea47f3197adbcd323e4f7fb1f6b46f56ef79c5575ede85b72f32eb7e",
-  "0293135a1aa7dae0a92f73e018d5f046cd8aa45b9b0e1727e8538ae951276869",
-  "1f7ee6c436dee9599e2ff1191fde973f20c864548881b1cf7f6d483e3e15c1aa",
-  "a57bd1e7251e57eda6e246b45fce3ddc168a89e9b406db78ad261a9513f7df3f",
-  "c4693a135a8f66b17759349dd81e126001989aac894db1714d2d2cad89ae8fe0",
-  "21858656b7887cc37f92c2bab4ed56f6cb273f45fd75193c0cb1c1b37456bc33",
-  "aab7f2b4d72b8d2ffc4faea302e7f8e51a799aaad8ea213351e1de72c2526c8b",
-  "a96d9bf819821b0730be51f5ac4f916e55118b521280e737941b9be868fd0ad2",
-  "c0e6f548000b49247e740c300db014be846c73f4cfdd6ac09246b49ca0c5eb5c",
-  "be4dc9c541780492ad20d96d0afdf64f20478d2b6f52cabcb25b5edb3d2ee597",
-  "3db321cbdd218f19f9834e7ba81432cc94bfd9fb5cf0933af2664d26d61f34f2",
-  "e894db229df4c7bc0be9e01e16a668158a4ae900e1b3749d42f9e47662bb7a62",
-]);
+
+async function loadPrivateBenchmarkImageHashes() {
+  const privateHashFile = process.env.CODEX_PRIVATE_BENCHMARK_HASHES_FILE;
+  if (!privateHashFile) {
+    return new Set();
+  }
+
+  const entries = (await readFile(privateHashFile, "utf8"))
+    .split(/\s+/)
+    .filter(Boolean);
+  assert.ok(entries.length > 0, "Private benchmark hash corpus is empty");
+  for (const entry of entries) {
+    assert.match(entry, /^[0-9a-f]{64}$/i);
+  }
+  return new Set(entries.map((entry) => entry.toLowerCase()));
+}
+
+const benchmarkImageHashes = await loadPrivateBenchmarkImageHashes();
 
 async function render() {
   const workerUrl = new URL("../dist/server/index.js", import.meta.url);
@@ -79,6 +75,18 @@ test("server-renders the production evidence ledger", async () => {
     /href="\/captures\/P10\/round-016-two-segment-limb\/Turntable_FreshEngineGate_OldAstraVale\.png"/,
   );
   assert.match(html, /href="\/data\/P10-round-016-two-segment-limb\.json"/);
+  assert.match(
+    html,
+    /href="\/captures\/P10\/round-017-local-constraint-release\/NyraKestrel_LocalConstraintRelease_CRITIC_REJECTED\.png"/,
+  );
+  assert.match(
+    html,
+    /href="\/captures\/P10\/round-017-local-constraint-release\/P10_Round017_JudgePanel\.png"/,
+  );
+  assert.match(
+    html,
+    /href="\/data\/P10-round-017-local-constraint-release\.json"/,
+  );
   assert.match(html, /href="\/data\/capture-manifest-latest\.json"/);
   assert.doesNotMatch(
     html,
@@ -90,23 +98,31 @@ test("server-renders the production evidence ledger", async () => {
   assert.match(html, /24–32%/);
   assert.match(html, /Reference 09/);
   assert.match(html, /29\.82%/);
-  assert.match(html, /Astra Vale R001/);
-  assert.match(html, /P10 · Round 017/);
+  assert.match(html, /Astra Vale/);
+  assert.match(html, /P10 · Round 018/);
   assert.match(html, /Round rejected\. Rebuild in progress\./);
-  assert.match(html, /Round 016 rejected · real engine run, wrong fighter/);
+  assert.match(html, /Round 017 rejected · real engine run, target absent/);
   assert.match(
     html,
     /46c055eab47a88d102a8ebe52de54b88fa77e9764c75769eae80c74b37da0dab/,
   );
   assert.match(
     html,
-    /4e60630527970c3c628c8bd53d7fdaf7fbeb0f07ee33003b98f7f50a8c8d79e9/,
+    /da5ad839b4a5d27bb255f062fa0a97aca8f36bbbf00a454bc033e130abe41a02/,
   );
-  assert.match(html, /Isolated Unity batch capture PASS · exit 0/i);
-  assert.match(html, /Every transform and protected-pixel claim recomputed exactly/i);
-  assert.match(html, /real engine capture does not contain the reviewed Nyra candidate/i);
-  assert.match(html, /static lookdev shell, not a player build/i);
-  assert.match(html, /severed stump plus detached shard/i);
+  assert.match(
+    html,
+    /afff193d2efeff8d092df787ccb9af69f2b7dad93268806c0539cf3cd0436c81/,
+  );
+  assert.match(
+    html,
+    /982e6e5ebfd84d4929e57e994ad9809f373fafedebce974f9ad3e12b958d95fe/,
+  );
+  assert.match(html, /Fresh Round017 Unity batch capture PASS · exit 0/i);
+  assert.match(html, /All 23 PNGs unchanged through release sanitation/i);
+  assert.match(html, /moved to private Trash after review and not published/i);
+  assert.match(html, /carried-forward Round016 context/i);
+  assert.match(html, /fused third-leg or shield mass/i);
   assert.match(html, /80/);
   assert.match(compactHtml, /100 minimum total/);
   assert.match(html, /P00 exception/);
@@ -320,11 +336,28 @@ test("server-renders the production evidence ledger", async () => {
     /href="\/captures\/P10\/round-016-two-segment-limb\/Turntable_FreshEngineGate_OldAstraVale\.png"/,
   );
   assert.match(html, /href="\/data\/P10-round-016-two-segment-limb\.json"/);
-  assert.match(html, /Local Constraint Release/i);
-  assert.match(html, /dilated 62 pixels/i);
-  assert.match(html, /24-pixel grip disk/i);
-  assert.match(html, /one 8-connected anatomical/i);
-  assert.match(html, /at least 95\/100/i);
+  assert.match(html, /LOCAL CONSTRAINT RELEASE FAIL · TARGET-MATCHED ENGINE CAPTURE FAIL/);
+  assert.match(html, /Fresh engine-backed gate 31\/100 · threshold 95 · category floor 0\/10/);
+  assert.match(
+    html,
+    /href="\/captures\/P10\/round-017-local-constraint-release\/NyraKestrel_LocalConstraintRelease_CRITIC_REJECTED\.png"/,
+  );
+  assert.match(
+    html,
+    /href="\/captures\/P10\/round-017-local-constraint-release\/P10_Round017_JudgePanel\.png"/,
+  );
+  assert.match(html, /href="\/data\/P10-round-017-local-constraint-release\.json"/);
+  assert.match(html, /Elbow Anchor Revision/i);
+  assert.match(html, /move elbow E from \(370,845\) to \(484,894\)/i);
+  assert.match(html, /S=\(604,472\)/);
+  assert.match(html, /G=\(450,625\)/);
+  assert.match(html, /r24 grip restore/i);
+  assert.match(html, /70\/64px/i);
+  assert.match(html, /5,525px/i);
+  assert.match(html, /triangle dilated 62px/i);
+  assert.match(html, /no socket disk, halo, or unauthorized overwrite/i);
+  assert.match(html, /actual 3D Nyra game asset/i);
+  assert.match(html, /2D proof cannot qualify/i);
   assert.doesNotMatch(html, /Reference\.zip|Reference\/[^"<]+\.(?:png|jpe?g|webp)/i);
   assert.doesNotMatch(
     html,
@@ -391,18 +424,24 @@ test("checked-in data contains the complete, honest P00–P25 ledger", async () 
   assert.equal(p00.status, "accepted");
   assert.equal(p10.status, "revising");
   assert.equal(dashboard.activeBuild.pieceId, "P10");
-  assert.equal(dashboard.activeBuild.round, 17);
-  assert.equal(dashboard.activeBuild.roundLabel, "P10 · Round 017");
+  assert.equal(dashboard.activeBuild.round, 18);
+  assert.equal(dashboard.activeBuild.roundLabel, "P10 · Round 018");
   assert.equal(
     dashboard.activeBuild.builder,
-    "Local Constraint Release",
+    "Elbow Anchor Revision",
   );
   assert.equal(dashboard.activeBuild.status, p10.status);
-  assert.match(dashboard.activeBuild.brief, /relaxing exactly one impossible Round016 rule/i);
-  assert.match(dashboard.activeBuild.brief, /dilated 62 pixels/i);
-  assert.match(dashboard.activeBuild.brief, /24-pixel grip disk/i);
-  assert.match(dashboard.activeBuild.brief, /one connected anatomical V/i);
-  assert.match(dashboard.activeBuild.brief, /real Unity gate is now mandatory/i);
+  assert.match(dashboard.activeBuild.brief, /changes exactly one constraint/i);
+  assert.match(dashboard.activeBuild.brief, /E from \(370,845\) to \(484,894\)/i);
+  assert.match(dashboard.activeBuild.brief, /S=\(604,472\)/);
+  assert.match(dashboard.activeBuild.brief, /G=\(450,625\)/);
+  assert.match(dashboard.activeBuild.brief, /r24 grip restore/i);
+  assert.match(dashboard.activeBuild.brief, /70\/64px/i);
+  assert.match(dashboard.activeBuild.brief, /5,525px/i);
+  assert.match(dashboard.activeBuild.brief, /dilated 62px/i);
+  assert.match(dashboard.activeBuild.brief, /no socket disk, halo, or unauthorized overwrite/i);
+  assert.match(dashboard.activeBuild.brief, /actual 3D Nyra game asset/i);
+  assert.match(dashboard.activeBuild.brief, /2D proof cannot qualify/i);
   assert.ok(queuedPieces.every((piece) => piece.status === "queued"));
 
   assert.equal(dashboard.canonicalCapture.camera, "Low shoulder");
@@ -417,7 +456,7 @@ test("checked-in data contains the complete, honest P00–P25 ledger", async () 
   );
   assert.equal(
     dashboard.canonicalCapture.manifestPath,
-    "/data/P10-round-016-two-segment-limb.json",
+    "/data/P10-round-017-local-constraint-release.json",
   );
   assert.equal(
     dashboard.canonicalCapture.latestManifestPath,
@@ -429,7 +468,7 @@ test("checked-in data contains the complete, honest P00–P25 ledger", async () 
   assert.equal(dashboard.acceptance.maximum, 100);
   assert.match(dashboard.acceptance.p00Exception, /visual loss does not block/i);
 
-  assert.equal(dashboard.rounds.length, 17);
+  assert.equal(dashboard.rounds.length, 18);
   assert.equal(dashboard.rounds[0].pieceId, "P00");
   assert.equal(
     dashboard.rounds[0].critic.status,
@@ -810,6 +849,39 @@ test("checked-in data contains the complete, honest P00–P25 ledger", async () 
     "/captures/P10/round-016-two-segment-limb/Turntable_FreshEngineGate_OldAstraVale.png",
     "/data/P10-round-016-two-segment-limb.json",
   ]);
+  assert.equal(dashboard.rounds[17].pieceId, "P10");
+  assert.equal(dashboard.rounds[17].round, 17);
+  assert.equal(dashboard.rounds[17].status, "criticized");
+  assert.equal(dashboard.rounds[17].engineRun, true);
+  assert.equal(dashboard.rounds[17].actualGameCapturePerformed, true);
+  assert.equal(dashboard.rounds[17].targetMatchedGameCapturePerformed, false);
+  assert.equal(dashboard.rounds[17].gateQualifyingCapture, false);
+  assert.equal(
+    dashboard.rounds[17].critic.status,
+    "LOCAL CONSTRAINT RELEASE FAIL · TARGET-MATCHED ENGINE CAPTURE FAIL",
+  );
+  assert.equal(dashboard.rounds[17].critic.score, 31);
+  assert.equal(dashboard.rounds[17].critic.categoryFloor, 0);
+  assert.equal(dashboard.rounds[17].critic.candidatePreferredCount, 0);
+  assert.equal(dashboard.rounds[17].critic.comparisonCount, 6);
+  assert.equal(dashboard.rounds[17].critic.requiredCandidatePreferredCount, 5);
+  assert.equal(
+    dashboard.rounds[17].critic.scoreLabel,
+    "Fresh engine-backed gate 31/100 · threshold 95 · category floor 0/10",
+  );
+  assert.equal(
+    dashboard.rounds[17].critic.preference,
+    "Actual Unity evidence preferred in 0/6 blinded comparisons · 5/6 required",
+  );
+  assert.equal(
+    dashboard.rounds[17].critic.primaryGap,
+    "The trailing limb is a fused, colossal third-leg/shield mass with a punched-through hand and no readable interior wedge, so it destroys anatomy, grip depth, the rear leg, and the gameplay silhouette in one dominant defect.",
+  );
+  assert.deepEqual(dashboard.rounds[17].evidenceLinks, [
+    "/captures/P10/round-017-local-constraint-release/NyraKestrel_LocalConstraintRelease_CRITIC_REJECTED.png",
+    "/captures/P10/round-017-local-constraint-release/P10_Round017_JudgePanel.png",
+    "/data/P10-round-017-local-constraint-release.json",
+  ]);
 });
 
 test("P10 evidence is filed while the global latest manifest remains P00-pinned", async () => {
@@ -1156,17 +1228,48 @@ test("P10 evidence is filed while the global latest manifest remains P00-pinned"
   );
   assert.equal(screenshotHash, p10Manifest.screenshotSha256);
   assert.equal(
-    freshEngineTurntableHash,
     dashboard.activeBuild.evidenceBundle.turntable.sha256,
+    "da5ad839b4a5d27bb255f062fa0a97aca8f36bbbf00a454bc033e130abe41a02",
+  );
+  assert.equal(
+    freshEngineTurntableHash,
+    "4e60630527970c3c628c8bd53d7fdaf7fbeb0f07ee33003b98f7f50a8c8d79e9",
+  );
+  assert.equal(
+    dashboard.activeBuild.evidenceBundle.manifestPath,
+    "/data/P10-round-017-local-constraint-release.json",
+  );
+  assert.equal(
+    dashboard.activeBuild.evidenceBundle.s01.path,
+    "/captures/P10/round-016-two-segment-limb/S01_FreshEngineGate_OldAstraVale.png",
+  );
+  assert.equal(
+    dashboard.activeBuild.evidenceBundle.turntable.path,
+    "/captures/P10/round-017-local-constraint-release/P10_Round017_JudgePanel.png",
+  );
+  assert.equal(
+    "Carried-forward Round016 public Unity S01 context · not the Round017 run",
+    dashboard.activeBuild.evidenceBundle.s01.label,
+  );
+  assert.equal(
+    "Round017 original local-constraint judge panel",
+    dashboard.activeBuild.evidenceBundle.turntable.label,
+  );
+  assert.equal(
+    dashboard.activeBuild.evidenceBundle.status,
+    "Round 017 rejected · real engine run, target absent",
   );
   assert.equal(
     freshEngineS01Hash,
     dashboard.activeBuild.evidenceBundle.s01.sha256,
   );
-  assert.equal(fingerprint.screenshotSha256, freshEngineS01Hash);
+  assert.equal(
+    fingerprint.screenshotSha256,
+    "afff193d2efeff8d092df787ccb9af69f2b7dad93268806c0539cf3cd0436c81",
+  );
   assert.equal(
     fingerprint.captureContractSha256,
-    p10Manifest.captureContractSha256,
+    "f43fdcf09b931a8f4185d7a8df2cc994dcfaafcf7889de8653f5c09d4edb246c",
   );
   assert.equal(
     fingerprint.renderSettingsSha256,
@@ -1179,7 +1282,7 @@ test("P10 evidence is filed while the global latest manifest remains P00-pinned"
   assert.equal(fingerprint.gitState, "isolated-critic-copy");
   assert.equal(fingerprint.seed, p10Manifest.seed);
   assert.equal(fingerprint.preset, p10Manifest.preset);
-  assert.equal(fingerprint.capturedAtUtc, "2026-08-01T08:54:37.500Z");
+  assert.equal(fingerprint.capturedAtUtc, "2026-08-01T09:45:08.478Z");
   assert.equal(p10Manifest.heroScreenHeightFraction, 0.29820388555526736);
   assert.equal(p10Manifest.heroMeshCount, 2);
   assert.equal(p10Manifest.heroRendererCount, 2);
@@ -3042,7 +3145,331 @@ test("P10 evidence is filed while the global latest manifest remains P00-pinned"
   }
 });
 
-test("public artifacts exclude all supplied benchmark image bytes", async () => {
+test("Round017 local-constraint release is public-safe, hash-verified, and rejected", async () => {
+  const [
+    dashboard,
+    p00Manifest,
+    latestManifest,
+    round017,
+    rejectedProof,
+    judgePanel,
+    carriedForwardEngineContext,
+  ] = await Promise.all([
+    readFile(dataUrl, "utf8").then(JSON.parse),
+    readFile(
+      new URL("../public/data/P00-round-001-manifest.json", import.meta.url),
+      "utf8",
+    ).then(JSON.parse),
+    readFile(
+      new URL("../public/data/capture-manifest-latest.json", import.meta.url),
+      "utf8",
+    ).then(JSON.parse),
+    readFile(
+      new URL(
+        "../public/data/P10-round-017-local-constraint-release.json",
+        import.meta.url,
+      ),
+      "utf8",
+    ).then(JSON.parse),
+    readFile(
+      new URL(
+        "../public/captures/P10/round-017-local-constraint-release/NyraKestrel_LocalConstraintRelease_CRITIC_REJECTED.png",
+        import.meta.url,
+      ),
+    ),
+    readFile(
+      new URL(
+        "../public/captures/P10/round-017-local-constraint-release/P10_Round017_JudgePanel.png",
+        import.meta.url,
+      ),
+    ),
+    readFile(
+      new URL(
+        "../public/captures/P10/round-016-two-segment-limb/S01_FreshEngineGate_OldAstraVale.png",
+        import.meta.url,
+      ),
+    ),
+  ]);
+
+  assert.deepEqual(latestManifest, p00Manifest);
+  assert.equal(latestManifest.piece, "P00");
+  assert.equal(round017.schemaVersion, 1);
+  assert.equal(round017.piece, "P10");
+  assert.equal(round017.round, 17);
+  assert.equal(round017.status, "rejected-local-constraint-release");
+  assert.equal(round017.engineRun, true);
+  assert.equal(round017.actualGameCapturePerformed, true);
+  assert.equal(round017.targetMatchedGameCapturePerformed, false);
+  assert.equal(round017.gateQualifyingCapture, false);
+
+  assert.equal(
+    round017.source.receiptSha256,
+    "0279bbc4c551e0271b9fb19e771cd755ccd103eee4e5a61552104a416f349347",
+  );
+  assert.equal(
+    round017.source.validationJsonSha256,
+    "6ec63117ba70285a94b56a937b6056e31c69f1a92e9e277aa5ea0a3955f9c1e1",
+  );
+  assert.equal(
+    round017.source.validationTextSha256,
+    "213174d421a077efe89bf5beed90231ab15d702cbaa316a301150fe69bc638f5",
+  );
+  assert.equal(
+    round017.source.readmeSha256,
+    "0b8936a10f4cf2074327f7f5c9e4465316ef794d883f11b023794c42788c052d",
+  );
+  assert.equal(
+    round017.source.reviewSha256,
+    "982e6e5ebfd84d4929e57e994ad9809f373fafedebce974f9ad3e12b958d95fe",
+  );
+  assert.equal(round017.source.reviewByteSize, 31104);
+
+  assert.deepEqual(
+    round017.releaseSanitization.builderNonvisualOriginalToReleaseSha256,
+    {
+      receipt: {
+        original:
+          "124356a6012cec52035d712bb5ff553e252d279ceac90a26aadc273fea7a3deb",
+        release:
+          "0279bbc4c551e0271b9fb19e771cd755ccd103eee4e5a61552104a416f349347",
+      },
+      validationJson: {
+        original:
+          "13c9623f50aa6182ecf90a180540806ea4e8943934a36060fc98d1eaafbf2e8c",
+        release:
+          "6ec63117ba70285a94b56a937b6056e31c69f1a92e9e277aa5ea0a3955f9c1e1",
+      },
+      readme: {
+        original:
+          "45d4eed17ef408b5e3727fc0dce5af9c1e2b7f326ac694c88ff7f0474586feae",
+        release:
+          "0b8936a10f4cf2074327f7f5c9e4465316ef794d883f11b023794c42788c052d",
+      },
+      compositor: {
+        original:
+          "0ba7d9c840cd670b02923b06ff5447e7a265a00890d20db7832e9ac6e3992e41",
+        release:
+          "fcca2cdb74e076a5e84e6687ff0934e6adf2df2e2329269d80ff16290dedee8a",
+      },
+      sealScript: {
+        original:
+          "b38a56cd4fdb2fb1bb8c124197710551025c6baa144bebbdf2229facf4cb7bca",
+        release:
+          "d4c892cbca358951f965fdbb362570a97f5adc58b8dcf4d36b7adf83d1e00793",
+      },
+    },
+  );
+  assert.deepEqual(round017.releaseSanitization.criticReview, {
+    originalSealedSha256:
+      "bf77d067967b2b530362162a624d84e73ef3269a6a4c5a175820b0babcf2ca02",
+    releaseSha256:
+      "982e6e5ebfd84d4929e57e994ad9809f373fafedebce974f9ad3e12b958d95fe",
+    releaseByteSize: 31104,
+    sanitizedPrivateBenchmarkDerivedHashFieldCount: 16,
+    sanitizedPrivateBlindSeedFieldCount: 1,
+    protectedSemanticComparison: "PASS",
+  });
+  assert.deepEqual(round017.releaseSanitization.visualArtifacts, {
+    pngCount: 23,
+    allPngsByteIdentical: true,
+    statement: "All 23 PNGs are unchanged.",
+  });
+  assert.equal(round017.releaseSanitization.verdictUnchanged, true);
+  assert.equal(round017.releaseSanitization.scoresUnchanged, true);
+  assert.equal(round017.releaseSanitization.engineFactsUnchanged, true);
+  assert.equal(round017.releaseSanitization.decodedPixelFactsUnchanged, true);
+  assert.equal(round017.releaseSanitization.singleBiggestGapUnchanged, true);
+  assert.equal(round017.releaseSanitization.round018PrescriptionUnchanged, true);
+
+  assert.equal(round017.builderDecision.builderEligibility, "FAIL");
+  assert.equal(
+    round017.builderDecision.acceptedSha256,
+    "de3f1be07757f516c6a194a870cc59903f40a0623872bf7dfa6cf549c5fcbcae",
+  );
+  assert.deepEqual(round017.anchorContract.shoulder, [604, 472]);
+  assert.deepEqual(round017.anchorContract.elbow, [370, 845]);
+  assert.deepEqual(round017.anchorContract.grip, [450, 625]);
+  assert.equal(round017.maskIntegrity.triangleDilated62Pixels, 78151);
+  assert.equal(round017.maskIntegrity.gripRestoreDiskRadiusPixels, 24);
+  assert.equal(round017.maskIntegrity.changedPixelsOutsideRevisedMask, 0);
+  assert.equal(round017.maskIntegrity.changedPixelsInsideGripRestoreDisk, 0);
+  assert.equal(
+    round017.maskIntegrity.allChangedPixelsSingle8ConnectedComponent,
+    true,
+  );
+  assert.equal(
+    round017.geometryFinding.actualLargestUninterruptedPaleComponentPixels,
+    22,
+  );
+  assert.equal(round017.geometryFinding.requiredPaleComponentPixels, 5525);
+  assert.deepEqual(
+    round017.geometryFinding.smallestAdmissibleElbowOnlyChange.from,
+    [370, 845],
+  );
+  assert.deepEqual(
+    round017.geometryFinding.smallestAdmissibleElbowOnlyChange.to,
+    [484, 894],
+  );
+
+  assert.equal(round017.visualReview.score, 31);
+  assert.equal(round017.visualReview.maximum, 100);
+  assert.equal(round017.visualReview.observedMinimumCategoryScore, 0);
+  assert.equal(round017.visualReview.candidatePreferredCount, 0);
+  assert.equal(round017.visualReview.comparisonCount, 6);
+  assert.equal(round017.visualReview.requiredCandidatePreferredCount, 5);
+  assert.equal(round017.visualReview.benchmarkGateResult, "FAIL");
+  assert.equal(
+    round017.visualReview.singleBiggestGap,
+    "The trailing limb is a fused, colossal third-leg/shield mass with a punched-through hand and no readable interior wedge, so it destroys anatomy, grip depth, the rear leg, and the gameplay silhouette in one dominant defect.",
+  );
+
+  assert.equal(round017.engineTruth.exitCode, 0);
+  assert.equal(round017.engineTruth.captureResult, "PASS");
+  assert.equal(round017.engineTruth.engineRun, true);
+  assert.equal(round017.engineTruth.actualGameCapturePerformed, true);
+  assert.equal(round017.engineTruth.targetMatchedGameCapturePerformed, false);
+  assert.equal(round017.engineTruth.gateQualifyingCapture, false);
+  assert.equal(round017.engineTruth.round017NyraVisible, false);
+  assert.equal(round017.engineTruth.round017NyraAssetsFound, 0);
+  assert.equal(
+    round017.engineTruth.freshEngineManifestSha256,
+    "af69f4b7825c556e5bf388186f9e0ad17b5545cc4122cdb4e5410cb3993d436c",
+  );
+  assert.equal(
+    round017.engineTruth.freshEngineLogSha256,
+    "7d0d697ded82c1095d728a797d494979db502262b26aaf3c7a075a393f2c8261",
+  );
+  assert.equal(
+    round017.engineTruth.freshS01.sha256,
+    "afff193d2efeff8d092df787ccb9af69f2b7dad93268806c0539cf3cd0436c81",
+  );
+  assert.equal(round017.engineTruth.freshS01.byteSize, 1634951);
+  assert.deepEqual(round017.engineTruth.freshS01.dimensions, {
+    width: 1600,
+    height: 900,
+  });
+  assert.match(
+    round017.engineTruth.freshS01.publicationStatus,
+    /private-run evidence; moved to private Trash after review and not published/i,
+  );
+  assert.equal("publicPath" in round017.engineTruth.freshS01, false);
+
+  const proofSha256 = createHash("sha256").update(rejectedProof).digest("hex");
+  const judgeSha256 = createHash("sha256").update(judgePanel).digest("hex");
+  const contextSha256 = createHash("sha256")
+    .update(carriedForwardEngineContext)
+    .digest("hex");
+  assert.deepEqual(
+    round017.publicEvidence.map((asset) => asset.sha256),
+    [proofSha256, judgeSha256],
+  );
+  assert.deepEqual(
+    round017.publicEvidence.map((asset) => asset.publicPath),
+    [
+      "/captures/P10/round-017-local-constraint-release/NyraKestrel_LocalConstraintRelease_CRITIC_REJECTED.png",
+      "/captures/P10/round-017-local-constraint-release/P10_Round017_JudgePanel.png",
+    ],
+  );
+  assert.deepEqual(
+    round017.publicEvidence.map((asset) => asset.dimensions),
+    [
+      { width: 1536, height: 1024 },
+      { width: 900, height: 1308 },
+    ],
+  );
+  assert.equal(proofSha256, "de3f1be07757f516c6a194a870cc59903f40a0623872bf7dfa6cf549c5fcbcae");
+  assert.equal(judgeSha256, "da5ad839b4a5d27bb255f062fa0a97aca8f36bbbf00a454bc033e130abe41a02");
+  assert.equal(rejectedProof.length, 1531662);
+  assert.equal(judgePanel.length, 772873);
+  assert.equal(rejectedProof.subarray(1, 4).toString("ascii"), "PNG");
+  assert.equal(rejectedProof.readUInt32BE(16), 1536);
+  assert.equal(rejectedProof.readUInt32BE(20), 1024);
+  assert.equal(judgePanel.subarray(1, 4).toString("ascii"), "PNG");
+  assert.equal(judgePanel.readUInt32BE(16), 900);
+  assert.equal(judgePanel.readUInt32BE(20), 1308);
+
+  assert.equal(
+    round017.carriedForwardPublicEngineContext.sha256,
+    contextSha256,
+  );
+  assert.equal(
+    round017.carriedForwardPublicEngineContext.publicPath,
+    "/captures/P10/round-016-two-segment-limb/S01_FreshEngineGate_OldAstraVale.png",
+  );
+  assert.match(
+    round017.carriedForwardPublicEngineContext.label,
+    /carried-forward Round016 public Unity context/i,
+  );
+  assert.notEqual(contextSha256, round017.engineTruth.freshS01.sha256);
+
+  assert.equal(round017.nextRound.round, 18);
+  assert.equal(
+    round017.nextRound.exactlyOneConstraintChange,
+    "Move only elbow E from (370,845) to (484,894).",
+  );
+  assert.deepEqual(round017.nextRound.anchors.shoulderFixed, [604, 472]);
+  assert.deepEqual(round017.nextRound.anchors.elbowFrom, [370, 845]);
+  assert.deepEqual(round017.nextRound.anchors.elbowTo, [484, 894]);
+  assert.deepEqual(round017.nextRound.anchors.gripFixed, [450, 625]);
+  assert.equal(round017.nextRound.gripRestoreRadiusPixels, 24);
+  assert.deepEqual(round017.nextRound.minimumSegmentWidthsPixels, {
+    upper: 70,
+    return: 64,
+  });
+  assert.equal(round017.nextRound.minimumUninterruptedPaleComponentPixels, 5525);
+  assert.match(round017.nextRound.maskRule, /triangle dilated by 62 pixels/i);
+  assert.deepEqual(round017.nextRound.prohibitions, [
+    "no socket disk",
+    "no halo",
+    "no unauthorized overwrite",
+  ]);
+  assert.match(round017.nextRound.gameDelivery, /actual 3D Nyra game asset/i);
+  assert.match(round017.nextRound.gameDelivery, /2D proof cannot qualify/i);
+  assert.equal(
+    round017.nextRound.gate.realTargetRelevantEngineCaptureRequired,
+    true,
+  );
+
+  assert.equal(dashboard.activeBuild.round, 18);
+  assert.equal(dashboard.rounds.at(-1).round, 17);
+  assert.equal(dashboard.rounds.at(-1).critic.score, 31);
+  assert.equal(
+    dashboard.activeBuild.evidenceFingerprint.screenshotSha256,
+    round017.engineTruth.freshS01.sha256,
+  );
+  assert.equal(
+    dashboard.activeBuild.evidenceBundle.turntable.sha256,
+    judgeSha256,
+  );
+
+  const round017Json = JSON.stringify(round017);
+  assert.doesNotMatch(
+    round017Json,
+    /Reference\.zip|Reference\/[^"']+\.(?:png|jpe?g|webp)|\/Users\/|\/home\/|[A-Za-z]:\\Users\\|\/tmp\/|\/private\/var\/folders\//i,
+  );
+  assert.doesNotMatch(
+    round017Json,
+    /benchmarkArchiveSha256|pairSha256|anonymousReferenceSha256|mappingTranscriptSha256|blindContactSheetSha256|blindPairs|mappingTranscript/i,
+  );
+  for (const benchmarkHash of benchmarkImageHashes) {
+    assert.equal(round017Json.includes(benchmarkHash), false);
+  }
+
+  const publicEntries = await readdir(publicRoot, { recursive: true });
+  for (const entry of publicEntries) {
+    if (!entry.toLowerCase().endsWith(".png")) {
+      continue;
+    }
+    const publicPng = await readFile(new URL(entry, publicRoot));
+    assert.notEqual(
+      createHash("sha256").update(publicPng).digest("hex"),
+      round017.engineTruth.freshS01.sha256,
+      `Nonpublished Round017 fresh S01 must not be fabricated at public/${entry}`,
+    );
+  }
+});
+
+test("public artifacts exclude supplied benchmark bytes when a private hash corpus is provided", async () => {
   const publicEntries = await readdir(publicRoot, { recursive: true });
   assert.ok(
     publicEntries.every((entry) => !entry.toLowerCase().endsWith(".zip")),

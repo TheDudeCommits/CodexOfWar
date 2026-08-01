@@ -1,0 +1,262 @@
+{
+  "schemaVersion": 1,
+  "piece": "P10",
+  "round": 17,
+  "status": "rejected-local-constraint-release",
+  "reviewType": "fresh independent local-constraint, pixel, engine, gameplay-scale, and private-benchmark gate",
+  "reviewedAt": "2026-08-01T10:05:29Z",
+  "artifactClass": "original 2D local-constraint proof plus fresh non-qualifying Unity evidence",
+  "engineRun": true,
+  "actualGameCapturePerformed": true,
+  "targetMatchedGameCapturePerformed": false,
+  "gateQualifyingCapture": false,
+  "builderAcceptedFrameFiled": true,
+  "isolatedLocalConstraintTargetPassed": false,
+  "source": {
+    "name": "Nyra Kestrel Local Constraint Release proof",
+    "scope": "Original deterministic 2D constraint evidence and an honest Unity integration check; no gameplay-ready, 3D, rig, animation, or production-asset claim.",
+    "creator": "Deterministic keying, similarity transforms, masking, and compositing via Codex",
+    "referencePixelsUsedInBuilderVisuals": false,
+    "receiptPath": "ArtSource/P10/Round017/LocalConstraintRelease/P10_Round017_LocalConstraintReleaseReceipt.json",
+    "receiptSha256": "0279bbc4c551e0271b9fb19e771cd755ccd103eee4e5a61552104a416f349347",
+    "validationJsonPath": "ArtSource/P10/Round017/LocalConstraintRelease/P10_Round017_Validation.json",
+    "validationJsonSha256": "6ec63117ba70285a94b56a937b6056e31c69f1a92e9e277aa5ea0a3955f9c1e1",
+    "validationTextPath": "ArtSource/P10/Round017/LocalConstraintRelease/P10_Round017_Validation.txt",
+    "validationTextSha256": "213174d421a077efe89bf5beed90231ab15d702cbaa316a301150fe69bc638f5",
+    "readmePath": "ArtSource/P10/Round017/LocalConstraintRelease/README.md",
+    "readmeSha256": "0b8936a10f4cf2074327f7f5c9e4465316ef794d883f11b023794c42788c052d",
+    "reviewPath": "ArtSource/P10/Round017/LocalConstraintRelease/P10_Round017_FreshLocalConstraintReleaseReview.json",
+    "reviewSha256": "982e6e5ebfd84d4929e57e994ad9809f373fafedebce974f9ad3e12b958d95fe",
+    "reviewByteSize": 31104
+  },
+  "releaseSanitization": {
+    "scope": "Only nonvisual text/code provenance and the critic's private benchmark-derived fields were sanitized after judgment; scores, verdict, pixel facts, engine facts, gap, prescription, and visual bytes are unchanged.",
+    "builderNonvisualOriginalToReleaseSha256": {
+      "receipt": {
+        "original": "124356a6012cec52035d712bb5ff553e252d279ceac90a26aadc273fea7a3deb",
+        "release": "0279bbc4c551e0271b9fb19e771cd755ccd103eee4e5a61552104a416f349347"
+      },
+      "validationJson": {
+        "original": "13c9623f50aa6182ecf90a180540806ea4e8943934a36060fc98d1eaafbf2e8c",
+        "release": "6ec63117ba70285a94b56a937b6056e31c69f1a92e9e277aa5ea0a3955f9c1e1"
+      },
+      "readme": {
+        "original": "45d4eed17ef408b5e3727fc0dce5af9c1e2b7f326ac694c88ff7f0474586feae",
+        "release": "0b8936a10f4cf2074327f7f5c9e4465316ef794d883f11b023794c42788c052d"
+      },
+      "compositor": {
+        "original": "0ba7d9c840cd670b02923b06ff5447e7a265a00890d20db7832e9ac6e3992e41",
+        "release": "fcca2cdb74e076a5e84e6687ff0934e6adf2df2e2329269d80ff16290dedee8a"
+      },
+      "sealScript": {
+        "original": "b38a56cd4fdb2fb1bb8c124197710551025c6baa144bebbdf2229facf4cb7bca",
+        "release": "d4c892cbca358951f965fdbb362570a97f5adc58b8dcf4d36b7adf83d1e00793"
+      }
+    },
+    "criticReview": {
+      "originalSealedSha256": "bf77d067967b2b530362162a624d84e73ef3269a6a4c5a175820b0babcf2ca02",
+      "releaseSha256": "982e6e5ebfd84d4929e57e994ad9809f373fafedebce974f9ad3e12b958d95fe",
+      "releaseByteSize": 31104,
+      "sanitizedPrivateBenchmarkDerivedHashFieldCount": 16,
+      "sanitizedPrivateBlindSeedFieldCount": 1,
+      "protectedSemanticComparison": "PASS"
+    },
+    "visualArtifacts": {
+      "pngCount": 23,
+      "allPngsByteIdentical": true,
+      "statement": "All 23 PNGs are unchanged."
+    },
+    "verdictUnchanged": true,
+    "scoresUnchanged": true,
+    "engineFactsUnchanged": true,
+    "decodedPixelFactsUnchanged": true,
+    "singleBiggestGapUnchanged": true,
+    "round018PrescriptionUnchanged": true
+  },
+  "builderDecision": {
+    "disposition": "PROMOTE_STRONGEST_CONNECTED_C04_SPLIT_TRANSFORM_FOR_CRITIC_WITH_FAIL_CLOSED",
+    "builderEligibility": "FAIL",
+    "selectedCandidate": 1,
+    "imageGenerationAttempts": 0,
+    "acceptedSha256": "de3f1be07757f516c6a194a870cc59903f40a0623872bf7dfa6cf549c5fcbcae",
+    "acceptedByteIdenticalToCandidateCompositePreseal": true,
+    "finding": "The deterministic split transform preserves locality and mechanical connectivity, but produces a fused third-leg or shield mass with no viable interior wedge."
+  },
+  "anchorContract": {
+    "shoulder": [604, 472],
+    "elbow": [370, 845],
+    "grip": [450, 625],
+    "fixedCoordinatesPassed": true,
+    "literalExactGripChanged": false,
+    "gripAnnulusProxyReached": true
+  },
+  "maskIntegrity": {
+    "closedTrianglePixels": 10832,
+    "triangleDilated62Pixels": 78151,
+    "locallyReleasedProtectedPixels": 54856,
+    "revisedEditablePixels": 78197,
+    "gripRestoreDiskRadiusPixels": 24,
+    "gripRestoreDiskPixels": 1793,
+    "effectiveCompositeMaskPixels": 76404,
+    "changedPixelsAgainstRound013": 75513,
+    "changedPixelsOutsideRevisedMask": 0,
+    "changedPixelsInsideGripRestoreDisk": 0,
+    "allChangedPixelsSingle8ConnectedComponent": true,
+    "changedHiltZonePixels": 27638,
+    "changedRearLegZonePixels": 34086,
+    "declaredGreenKeyContaminationPixels": 0
+  },
+  "geometryFinding": {
+    "actualUpperMedianWidthPixels": 97,
+    "actualReturnMedianWidthPixels": 139,
+    "actualLargestUninterruptedPaleComponentPixels": 22,
+    "requiredPaleComponentPixels": 5525,
+    "fixedAnchorLowerBoundWidthTest": {
+      "upperWidthPixels": 70,
+      "returnWidthPixels": 64,
+      "largestUninterruptedTheoreticalWedgePixels": 104,
+      "passes": false
+    },
+    "smallestAdmissibleElbowOnlyChange": {
+      "from": [370, 845],
+      "to": [484, 894],
+      "offset": [114, 49],
+      "displacementPixels": 124.08464852672147,
+      "largestUninterruptedTheoreticalWedgePixels": 5526,
+      "uniqueMinimumAtThatSquaredDisplacement": true
+    },
+    "finding": "The fixed Round017 anchor geometry cannot fit anatomical-width 70/64px segments and the required 5,525px wedge; an elbow move is required."
+  },
+  "visualReview": {
+    "score": 31,
+    "maximum": 100,
+    "passThreshold": 95,
+    "criticalFloorPerCategory": 9,
+    "observedMinimumCategoryScore": 0,
+    "thresholdResult": "FAIL",
+    "criticalFloorResult": "FAIL",
+    "verdict": "FAIL_ROUND017_LOCAL_CONSTRAINT_RELEASE_GATE",
+    "comparisonCount": 6,
+    "candidatePreferredCount": 0,
+    "requiredCandidatePreferredCount": 5,
+    "benchmarkGateResult": "FAIL",
+    "benchmarkPolicy": "Aggregate blind results only; no benchmark image, crop, panel, filename, path, pair, mapping, seed, or private derived hash is published.",
+    "singleBiggestGap": "The trailing limb is a fused, colossal third-leg/shield mass with a punched-through hand and no readable interior wedge, so it destroys anatomy, grip depth, the rear leg, and the gameplay silhouette in one dominant defect.",
+    "categoryScores": {
+      "evidenceProvenanceAndReproducibility": 9,
+      "localityMaskAndGripRestore": 10,
+      "fixedAnchorsConnectivityAndSteepReturn": 5,
+      "anatomicalContinuityAndThickness": 1,
+      "originalHandGripHiltAndRearLegIntegration": 1,
+      "uninterruptedHeadSizedPaleWedge": 0,
+      "surfaceCoherenceSeamsAndContamination": 4,
+      "gameplayScaleAaaSilhouette": 1,
+      "targetRelevantUnityIntegrationAndCapture": 0,
+      "privateBenchmarkParity": 0
+    }
+  },
+  "engineTruth": {
+    "reviewWorkspaceGitRevision": "37b29d5a7892c75b7da204f98aaf85c92365d90b",
+    "unityVersion": "6000.5.4f1",
+    "graphicsApi": "Metal",
+    "executeMethod": "CodexOfWar.Editor.Review.P10CaptureCommand.CaptureRound001FromCommandLine",
+    "exitCode": 0,
+    "captureResult": "PASS",
+    "capturedAtUtc": "2026-08-01T09:45:08.478Z",
+    "engineRun": true,
+    "actualGameCapturePerformed": true,
+    "targetMatchedGameCapturePerformed": false,
+    "gateQualifyingCapture": false,
+    "visibleAssetId": "P10_ASTRA_VALE_ORIGINAL",
+    "visibleAssetRound": 1,
+    "round017NyraVisible": false,
+    "round017NyraAssetsFound": 0,
+    "freshEngineManifestSha256": "af69f4b7825c556e5bf388186f9e0ad17b5545cc4122cdb4e5410cb3993d436c",
+    "freshEngineLogSha256": "7d0d697ded82c1095d728a797d494979db502262b26aaf3c7a075a393f2c8261",
+    "freshS01": {
+      "sha256": "afff193d2efeff8d092df787ccb9af69f2b7dad93268806c0539cf3cd0436c81",
+      "byteSize": 1634951,
+      "dimensions": {
+        "width": 1600,
+        "height": 900
+      },
+      "mode": "RGBA",
+      "publicationStatus": "private-run evidence; moved to private Trash after review and not published"
+    },
+    "freshTurntableContactSheetSha256": "4e60630527970c3c628c8bd53d7fdaf7fbeb0f07ee33003b98f7f50a8c8d79e9",
+    "finding": "The fresh Unity run succeeded, but captured obsolete Round001 Astra Vale because no Round017 Nyra game asset exists."
+  },
+  "publicEvidence": [
+    {
+      "label": "CRITIC-REJECTED — builder-promoted Round017 Local Constraint Release proof",
+      "evidenceType": "Rejected original 2D constraint evidence — not gameplay, 3D, or game-ready evidence",
+      "publicPath": "/captures/P10/round-017-local-constraint-release/NyraKestrel_LocalConstraintRelease_CRITIC_REJECTED.png",
+      "sha256": "de3f1be07757f516c6a194a870cc59903f40a0623872bf7dfa6cf549c5fcbcae",
+      "dimensions": {
+        "width": 1536,
+        "height": 1024
+      },
+      "finding": "The mechanically connected construction reads as a fused third leg or shield with a punched-through hand and no readable wedge."
+    },
+    {
+      "label": "Round017 original judge panel",
+      "evidenceType": "Original public-safe builder/critic diagnostic — contains no benchmark or blind-pair pixels",
+      "publicPath": "/captures/P10/round-017-local-constraint-release/P10_Round017_JudgePanel.png",
+      "sha256": "da5ad839b4a5d27bb255f062fa0a97aca8f36bbbf00a454bc033e130abe41a02",
+      "dimensions": {
+        "width": 900,
+        "height": 1308
+      },
+      "finding": "The panel isolates the full frame, local target, mask, connectivity, and wedge failure using original project evidence only."
+    }
+  ],
+  "carriedForwardPublicEngineContext": {
+    "label": "Carried-forward Round016 public Unity context — not the Round017 fresh frame",
+    "publicPath": "/captures/P10/round-016-two-segment-limb/S01_FreshEngineGate_OldAstraVale.png",
+    "sha256": "46c055eab47a88d102a8ebe52de54b88fa77e9764c75769eae80c74b37da0dab",
+    "dimensions": {
+      "width": 1600,
+      "height": 900
+    },
+    "finding": "This already-public wrong-fighter frame is context only. It is not the nonpublished Round017 S01 and is never represented under the fresh afff193d… hash."
+  },
+  "limitations": [
+    "The accepted visual is original 2D constraint evidence, not an engine capture or game-ready asset.",
+    "The fresh Round017 Unity capture is real but does not contain Nyra or the reviewed candidate.",
+    "The actual fresh Round017 S01 was moved to private Trash after review and is not published; no substitute file is published under its hash.",
+    "The carried-forward public Unity image is explicitly separate Round016 context.",
+    "No 3D mesh, rig, deformation, UV, collision, animation, LOD, texture-set, performance, or gameplay claim is made.",
+    "No benchmark images, blind pairs, mappings, seeds, private derived hashes, or temporary review files are published."
+  ],
+  "nextRound": {
+    "round": 18,
+    "status": "revising-elbow-anchor",
+    "exactlyOneConstraintChange": "Move only elbow E from (370,845) to (484,894).",
+    "anchors": {
+      "shoulderFixed": [604, 472],
+      "elbowFrom": [370, 845],
+      "elbowTo": [484, 894],
+      "gripFixed": [450, 625]
+    },
+    "gripRestoreRadiusPixels": 24,
+    "minimumSegmentWidthsPixels": {
+      "upper": 70,
+      "return": 64
+    },
+    "minimumUninterruptedPaleComponentPixels": 5525,
+    "maskRule": "Recompute the closed S-E'-G triangle dilated by 62 pixels and freeze every pixel outside the resulting authorized local mask.",
+    "prohibitions": [
+      "no socket disk",
+      "no halo",
+      "no unauthorized overwrite"
+    ],
+    "gameDelivery": "A target-relevant actual 3D Nyra game asset and fresh matched Unity capture are required; 2D proof cannot qualify.",
+    "gate": {
+      "minimumTotalScore": 95,
+      "minimumScorePerCategory": 9,
+      "blindComparisonCount": 6,
+      "minimumCandidatePreferredCount": 5,
+      "realTargetRelevantEngineCaptureRequired": true
+    }
+  }
+}

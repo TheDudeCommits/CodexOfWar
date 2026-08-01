@@ -1,0 +1,625 @@
+{
+  "schema": "codexofwar.p10-round017-local-constraint-validation",
+  "version": "1.0.0",
+  "generated_utc": "2026-08-01T09:57:31.803518Z",
+  "disposition": "PROMOTE_STRONGEST_C04_SPLIT_TRANSFORM_AS_JUDGEABLE_PROOF_WITH_FAIL_CLOSED",
+  "builder_eligibility": "FAIL",
+  "attempts": {
+    "deterministic_split_transform_attempts": 1,
+    "image_generation_attempts": 0,
+    "image_generation_cap": 4,
+    "reason_no_generation_spent": "Fixed-anchor full-width geometry preflight proves a head-sized interior wedge cannot coexist with anatomical widths; generation cannot change that authorized geometry."
+  },
+  "anchors": {
+    "shoulder": [
+      604,
+      472
+    ],
+    "elbow": [
+      370,
+      845
+    ],
+    "grip": [
+      450,
+      625
+    ]
+  },
+  "mask_definition": {
+    "raster_rule": "integer pixel centers; inclusive closed triangle; Euclidean closed-set dilation distance <= 62 px",
+    "formula": "revised = round016_final OR ((hilt_protection OR rear_leg_protection) AND dilate(closed_triangle, 62px))",
+    "post_composite_restore": "inclusive Euclidean disk distance <= 24 px centered at grip",
+    "effective_formula": "effective = revised AND NOT grip_disk",
+    "counts": {
+      "canvas_pixels": 1572864,
+      "current_round016_final_editable_pixels": 23341,
+      "prior_corridor_pixels": 77360,
+      "closed_triangle_pixels": 10832,
+      "triangle_dilated_62_pixels": 78151,
+      "currently_protected_union_pixels": 162451,
+      "locally_released_protected_pixels": 54856,
+      "released_inside_prior_corridor_pixels": 53158,
+      "released_outside_prior_corridor_but_inside_dilated_triangle_pixels": 1698,
+      "released_hilt_only_pixels": 20526,
+      "released_rear_only_pixels": 25295,
+      "released_hilt_and_rear_overlap_pixels": 9035,
+      "revised_editable_mask_pixels": 78197,
+      "grip_restore_disk_pixels": 1793,
+      "grip_restore_disk_inside_revised_mask_pixels": 1793,
+      "effective_composite_mask_pixels": 76404,
+      "final_changed_pixels": 75513,
+      "final_changed_inside_revised_mask_pixels": 75513,
+      "final_changed_outside_revised_mask_pixels": 0,
+      "final_changed_inside_grip_disk_pixels": 0,
+      "final_changed_hilt_zone_pixels": 27638,
+      "final_changed_rear_zone_pixels": 34086,
+      "changed_limb_foreground_pixels": 60922,
+      "green_key_contamination_pixels_among_changes": 0
+    }
+  },
+  "keying": {
+    "background_rule": "G > R+55 and G > B+55 and G > 120",
+    "alpha_close": "3x3 MaxFilter then 3x3 MinFilter",
+    "native_transparency_claimed": false,
+    "raw_background": "baked chroma-green key field",
+    "source_component_sizes_before_retention": [
+      215287
+    ],
+    "retained_opaque_pixels": 215287,
+    "despilled_foreground_pixels": 1481,
+    "used_alpha_byte_identical_to_round016_keyed_alpha": true,
+    "same_source_texture_socket_closures": [
+      {
+        "center": [
+          1025,
+          235
+        ],
+        "inner_disk_radius_px": 27,
+        "same_limb_texture_copy_offset_xy": [
+          -89,
+          121
+        ],
+        "pixels_replaced": 2289
+      },
+      {
+        "center": [
+          505,
+          940
+        ],
+        "inner_disk_radius_px": 29,
+        "same_limb_texture_copy_offset_xy": [
+          70,
+          -100
+        ],
+        "pixels_replaced": 2629
+      },
+      {
+        "center": [
+          305,
+          575
+        ],
+        "inner_disk_radius_px": 22,
+        "same_limb_texture_copy_offset_xy": [
+          34,
+          62
+        ],
+        "pixels_replaced": 1517
+      }
+    ]
+  },
+  "split_transform": {
+    "source_pairs": [
+      [
+        [
+          931.4,
+          361.9
+        ],
+        [
+          505.0,
+          940.0
+        ]
+      ],
+      [
+        [
+          505.0,
+          940.0
+        ],
+        [
+          329.0,
+          618.8
+        ]
+      ]
+    ],
+    "destination_pairs": [
+      [
+        [
+          604.0,
+          472.0
+        ],
+        [
+          370.0,
+          845.0
+        ]
+      ],
+      [
+        [
+          370.0,
+          845.0
+        ],
+        [
+          450.0,
+          625.0
+        ]
+      ]
+    ],
+    "output_to_input_similarity_coefficients": [
+      [
+        1.626783402532429,
+        -0.12260773138716244,
+        6.693674085153589,
+        0.12260773138716244,
+        1.626783402532429,
+        -479.9968357531527
+      ],
+      [
+        1.0325547445255476,
+        1.1754744525547445,
+        -870.3211678832117,
+        -1.1754744525547445,
+        1.0325547445255476,
+        502.4167883211677
+      ]
+    ],
+    "uniform_similarity_scales": [
+      0.6129714987725519,
+      0.6391493065854249
+    ],
+    "perpendicular_scale_equals_longitudinal_scale": true,
+    "upper_internal_mapping_t": 0.18,
+    "return_internal_mapping_t": 0.88,
+    "terminal_material_retained_beyond_mapped_anchors": true,
+    "elbow_overlap_source_radius_px": 82.0,
+    "joined_component_sizes_before_retention": [
+      69894
+    ]
+  },
+  "connectivity_and_thickness": {
+    "all_changed_pixels_8_connected_component_count": 1,
+    "all_changed_pixels_component_sizes": [
+      75513
+    ],
+    "all_changed_pixels_single_component": true,
+    "changed_pixels_in_shoulder_radius32": 3209,
+    "changed_pixels_in_elbow_radius32": 3209,
+    "changed_pixels_in_grip_annulus_r24_to_r36": 2260,
+    "foreground_8_connected_component_count": 1,
+    "foreground_component_sizes": [
+      60922
+    ],
+    "single_component": true,
+    "foreground_pixels_in_shoulder_radius32": 3206,
+    "foreground_pixels_in_elbow_radius32": 3209,
+    "foreground_pixels_in_grip_annulus_r24_to_r36": 2178,
+    "spans_all_anchor_neighborhoods": true,
+    "upper_cross_section_width_samples_px": [
+      97,
+      96,
+      88,
+      153,
+      132
+    ],
+    "return_cross_section_width_samples_px": [
+      117,
+      128,
+      139,
+      148,
+      152
+    ],
+    "upper_median_width_px": 97.0,
+    "return_median_width_px": 139.0,
+    "elbow_to_grip_vector_px": [
+      80,
+      -220
+    ],
+    "elbow_to_grip_length_px": 234.0939982143925,
+    "up_right_return_angle_degrees_from_positive_x_with_screen_y_inverted": 70.01689347810003,
+    "steep_up_right_return_survives": true
+  },
+  "wedge_metrics": {
+    "triangle_pixels": 10832,
+    "pale_nonforeground_pixels_in_triangle_total": 29,
+    "pale_component_count": 2,
+    "largest_uninterrupted_pale_component_pixels": 22,
+    "head_sized_area_proxy_definition": "integer pixel-center disk of radius 42 px",
+    "head_sized_area_proxy_pixels": 5525,
+    "largest_wedge_to_head_proxy_ratio": 0.003981900452488688,
+    "head_sized_wedge_pass": false,
+    "theoretical_fixed_anchor_width_tradeoff": [
+      {
+        "upper_total_width_px": 124,
+        "return_total_width_px": 106,
+        "triangle_pixels": 10832,
+        "tube_occupied_triangle_pixels": 10832,
+        "pale_triangle_pixels_remaining": 0
+      },
+      {
+        "upper_total_width_px": 70,
+        "return_total_width_px": 64,
+        "triangle_pixels": 10832,
+        "tube_occupied_triangle_pixels": 10728,
+        "pale_triangle_pixels_remaining": 104
+      },
+      {
+        "upper_total_width_px": 20,
+        "return_total_width_px": 16,
+        "triangle_pixels": 10832,
+        "tube_occupied_triangle_pixels": 5353,
+        "pale_triangle_pixels_remaining": 5479
+      }
+    ]
+  },
+  "hard_checks": {
+    "accepted_byte_identical_to_candidate01_composite": true,
+    "all_pixels_outside_revised_mask_equal_round013": true,
+    "all_grip_disk_pixels_equal_round013": true,
+    "revised_mask_unique_values_are_0_255": true,
+    "effective_mask_equals_revised_minus_grip_disk": true,
+    "one_connected_foreground_component": true,
+    "all_changed_pixels_one_8_connected_component": true,
+    "foreground_spans_anchor_neighborhoods": true,
+    "steep_up_right_return_survives": true,
+    "no_green_key_contamination": true,
+    "head_sized_pale_wedge": false
+  },
+  "hard_check_pass_count": 10,
+  "hard_check_total": 11,
+  "limitations": [
+    "The final full-width limb is connected and exact-local, but the largest uninterrupted pale wedge is far below the head-sized area proxy.",
+    "Local hilt and rear-leg protection pixels inside the revised mask are intentionally no longer immutable; exact affected counts are recorded.",
+    "The source is a baked green-field RGB image; transparency is deterministic key-derived, never claimed native.",
+    "This is an isolated builder proof only; no Unity work was performed."
+  ],
+  "authorities": {
+    "round013_base": {
+      "path": "ArtSource/P10/Round013/ElbowReturnTriangle/P10_Round013_NyraKestrel_ElbowReturnTriangle_v1.png",
+      "sha256": "c88489f7af2c0a5d223f431fb322f72ac549283819c3c9b6281a20c1b39fbcd6",
+      "byte_size": 1750551,
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "mode": "RGB",
+      "format": "png"
+    },
+    "round016_current_final_mask": {
+      "path": "ArtSource/P10/Round016/TwoSegmentLimb/P10_Round016_TrailingLimbHardMask_binary.png",
+      "sha256": "76e2aee7ddccfa8aaeee4f711e6740f36df5f49da773e5597a7c1ee024dd1199",
+      "byte_size": 2979,
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "mode": "L",
+      "format": "png"
+    },
+    "round016_corridor": {
+      "path": "ArtSource/P10/Round016/TwoSegmentLimb/P10_Round016_UnprotectedLimbCorridor_binary.png",
+      "sha256": "c19048dbe431952990706d31c86ed745e83a945de01d8f563698ca12aa4c1472",
+      "byte_size": 3371,
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "mode": "L",
+      "format": "png"
+    },
+    "round016_hilt_protection": {
+      "path": "ArtSource/P10/Round016/TwoSegmentLimb/P10_Round016_HiltProtectionZone_binary.png",
+      "sha256": "75fe93e1b7c5f1bf355bf4df092fc2097f16de53bf8c17bf95619ce1d43b36c2",
+      "byte_size": 3845,
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "mode": "L",
+      "format": "png"
+    },
+    "round016_rear_protection": {
+      "path": "ArtSource/P10/Round016/TwoSegmentLimb/P10_Round016_RearLegProtectionZone_binary.png",
+      "sha256": "61d422fa08737ae5db1a9842ea7a118d0181cea8d89e40b85b7490a65cc6a589",
+      "byte_size": 3385,
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "mode": "L",
+      "format": "png"
+    },
+    "round016_c04_raw": {
+      "path": "ArtSource/P10/Round016/TwoSegmentLimb/Iterations/P10_Round016_TwoSegmentLimb_candidate04_raw.png",
+      "sha256": "d8bf57bc12e254ba0f1e9c45c9a62ef31a43f69596566312290bf46057598a1f",
+      "byte_size": 1564568,
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "mode": "RGB",
+      "format": "png"
+    },
+    "round016_c04_keyed": {
+      "path": "ArtSource/P10/Round016/TwoSegmentLimb/Iterations/P10_Round016_TwoSegmentLimb_candidate04_keyed.png",
+      "sha256": "ab02a3f610226afe3121ff6d39a0e6bfcf2fb0c6ade3645874f4e2b7793c931a",
+      "byte_size": 1383386,
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "format": "png"
+    }
+  },
+  "outputs": {
+    "accepted": {
+      "path": "ArtSource/P10/Round017/LocalConstraintRelease/P10_Round017_NyraKestrel_LocalConstraintRelease_v1.png",
+      "sha256": "de3f1be07757f516c6a194a870cc59903f40a0623872bf7dfa6cf549c5fcbcae",
+      "byte_size": 1531662,
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "mode": "RGB",
+      "format": "png"
+    },
+    "candidate01_composite": {
+      "path": "ArtSource/P10/Round017/LocalConstraintRelease/Iterations/P10_Round017_candidate01_composite_preseal.png",
+      "sha256": "de3f1be07757f516c6a194a870cc59903f40a0623872bf7dfa6cf549c5fcbcae",
+      "byte_size": 1531662,
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "mode": "RGB",
+      "format": "png"
+    },
+    "raw_local_copy": {
+      "path": "ArtSource/P10/Round017/LocalConstraintRelease/Iterations/P10_Round017_candidate01_c04_raw_baked_green.png",
+      "sha256": "d8bf57bc12e254ba0f1e9c45c9a62ef31a43f69596566312290bf46057598a1f",
+      "byte_size": 1564568,
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "mode": "RGB",
+      "format": "png"
+    },
+    "prior_keyed_local_copy": {
+      "path": "ArtSource/P10/Round017/LocalConstraintRelease/Iterations/P10_Round017_candidate01_c04_prior_keyed_source.png",
+      "sha256": "ab02a3f610226afe3121ff6d39a0e6bfcf2fb0c6ade3645874f4e2b7793c931a",
+      "byte_size": 1383386,
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "format": "png"
+    },
+    "used_keyed_despilled": {
+      "path": "ArtSource/P10/Round017/LocalConstraintRelease/Iterations/P10_Round017_candidate01_c04_keyed_despilled.png",
+      "sha256": "9ee698b5ae6bce16d56823324062cc1f7ef7ee3f50d7a26c40f7ca3a20d31b1c",
+      "byte_size": 560827,
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "format": "png"
+    },
+    "used_keyed_socket_closed": {
+      "path": "ArtSource/P10/Round017/LocalConstraintRelease/Iterations/P10_Round017_candidate01_c04_keyed_socket_closed.png",
+      "sha256": "6e44f6e4fd10a5b2ace46104099c54047a70c4c1d9c0a114593952f451ecef4a",
+      "byte_size": 563818,
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "format": "png"
+    },
+    "upper_source_piece": {
+      "path": "ArtSource/P10/Round017/LocalConstraintRelease/Iterations/P10_Round017_candidate01_upper_source_piece.png",
+      "sha256": "1c9b74dfa089a52de10f9a8e45777a36d1b02ed7a5acffbc401c4022a61516bf",
+      "byte_size": 399094,
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "format": "png"
+    },
+    "return_source_piece": {
+      "path": "ArtSource/P10/Round017/LocalConstraintRelease/Iterations/P10_Round017_candidate01_return_source_piece.png",
+      "sha256": "963eb2dc1a08c5e6981da8f5efa7ddbf6f54f773ca94ddf29204b9343a6255c4",
+      "byte_size": 204036,
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "format": "png"
+    },
+    "upper_similarity_warp": {
+      "path": "ArtSource/P10/Round017/LocalConstraintRelease/Iterations/P10_Round017_candidate01_upper_similarity_warp.png",
+      "sha256": "cc6a336cfdf6d6f6d1393291812c2f042fea92e263cca95f9b83d99a749ff178",
+      "byte_size": 172402,
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "format": "png"
+    },
+    "return_similarity_warp": {
+      "path": "ArtSource/P10/Round017/LocalConstraintRelease/Iterations/P10_Round017_candidate01_return_similarity_warp.png",
+      "sha256": "c1f1cda2e70ad268b02b5f1b05e20419a8cb92cdc43b572ad7bbd528a51102b0",
+      "byte_size": 95064,
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "format": "png"
+    },
+    "joined_cutout": {
+      "path": "ArtSource/P10/Round017/LocalConstraintRelease/Iterations/P10_Round017_candidate01_joined_at_elbow.png",
+      "sha256": "4737217f9445ca66bbda124b7d93d67d045aa6eaa315f6d4795ba020b0d96589",
+      "byte_size": 203870,
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "format": "png"
+    },
+    "local_clear": {
+      "path": "ArtSource/P10/Round017/LocalConstraintRelease/Iterations/P10_Round017_candidate01_local_clear.png",
+      "sha256": "5bceb62526977716d637d01a9ecf157c167763bb6747fea561a8da7a93ee47a2",
+      "byte_size": 1389033,
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "mode": "RGB",
+      "format": "png"
+    },
+    "foreground_binary": {
+      "path": "ArtSource/P10/Round017/LocalConstraintRelease/Iterations/P10_Round017_candidate01_changed_limb_foreground_binary.png",
+      "sha256": "f7f0358eec958cbd365edc59865c83abc835733871430253afb94639a4a49bd2",
+      "byte_size": 3531,
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "mode": "L",
+      "format": "png"
+    },
+    "coordinate_guide_svg": {
+      "path": "ArtSource/P10/Round017/LocalConstraintRelease/P10_Round017_OriginalLocalConstraintGuide.svg",
+      "sha256": "67e38a308df71897aacbfc545750788171f552d8d9f4c8b1123a8c8fab7bcf07",
+      "byte_size": 2470,
+      "dimensions_px": null,
+      "mode": null,
+      "format": "svg"
+    },
+    "coordinate_guide_png": {
+      "path": "ArtSource/P10/Round017/LocalConstraintRelease/P10_Round017_OriginalLocalConstraintGuide.png",
+      "sha256": "97791d0ee54065b95a03de40df25f50bc77e00e4f6bd171f58f588d8d1522553",
+      "byte_size": 46666,
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "mode": "RGB",
+      "format": "png"
+    },
+    "revised_mask_rendered": {
+      "path": "ArtSource/P10/Round017/LocalConstraintRelease/P10_Round017_RevisedEditableMask_rendered.png",
+      "sha256": "a98ad39a55e33ddd998c41aedb2a381828b4d11455187bf0d3d3ea3195b92823",
+      "byte_size": 8809,
+      "dimensions_px": [
+        1536,
+        1024
+      ],
+      "mode": "RGB",
+      "format": "png"
+    },
+    "strongest_target_crop_2x": {
+      "path": "ArtSource/P10/Round017/LocalConstraintRelease/Analysis/P10_Round017_StrongestTargetCrop_2x.png",
+      "sha256": "feeb6ed6b6d414bd54b4ce30557cea1a344c661204c405c4bf07f95a27f65908",
+      "byte_size": 875874,
+      "dimensions_px": [
+        840,
+        1180
+      ],
+      "mode": "RGB",
+      "format": "png"
+    },
+    "judge_panel": {
+      "path": "ArtSource/P10/Round017/LocalConstraintRelease/Analysis/P10_Round017_JudgePanel.png",
+      "sha256": "da5ad839b4a5d27bb255f062fa0a97aca8f36bbbf00a454bc033e130abe41a02",
+      "byte_size": 772873,
+      "dimensions_px": [
+        900,
+        1308
+      ],
+      "mode": "RGB",
+      "format": "png"
+    },
+    "masks": {
+      "triangle": {
+        "path": "ArtSource/P10/Round017/LocalConstraintRelease/P10_Round017_ClosedTargetTriangle_binary.png",
+        "sha256": "d73d32264bc0c7dc6c0a476252a8ff8b882aa98531cd4f3763a6dae991b7166f",
+        "byte_size": 2892,
+        "dimensions_px": [
+          1536,
+          1024
+        ],
+        "mode": "L",
+        "format": "png"
+      },
+      "dilated_triangle": {
+        "path": "ArtSource/P10/Round017/LocalConstraintRelease/P10_Round017_ClosedTargetTriangleDilated62_binary.png",
+        "sha256": "fcef1dbd4ca0bcfd8427dd0769031514a66e83442f38f2f4773310ac85627ca4",
+        "byte_size": 3383,
+        "dimensions_px": [
+          1536,
+          1024
+        ],
+        "mode": "L",
+        "format": "png"
+      },
+      "released": {
+        "path": "ArtSource/P10/Round017/LocalConstraintRelease/P10_Round017_LocallyReleasedProtection_binary.png",
+        "sha256": "1d84479f09391fcc30cf86d1346c298ac8f7f17aaec19ad2b5013418defedee4",
+        "byte_size": 3409,
+        "dimensions_px": [
+          1536,
+          1024
+        ],
+        "mode": "L",
+        "format": "png"
+      },
+      "revised": {
+        "path": "ArtSource/P10/Round017/LocalConstraintRelease/P10_Round017_RevisedEditableMask_binary.png",
+        "sha256": "6103d88ffc9bf9073bef39dc863522f9b7119e0cd7d87a04b8843fac3dc22c71",
+        "byte_size": 3395,
+        "dimensions_px": [
+          1536,
+          1024
+        ],
+        "mode": "L",
+        "format": "png"
+      },
+      "grip_disk": {
+        "path": "ArtSource/P10/Round017/LocalConstraintRelease/P10_Round017_GripRestoreDisk24_binary.png",
+        "sha256": "ed6d745936915d4a435e07aa63989b68743f4d7c79edb1fe47f0fa28673f05e7",
+        "byte_size": 1813,
+        "dimensions_px": [
+          1536,
+          1024
+        ],
+        "mode": "L",
+        "format": "png"
+      },
+      "effective": {
+        "path": "ArtSource/P10/Round017/LocalConstraintRelease/P10_Round017_EffectiveCompositeMask_binary.png",
+        "sha256": "3b605a5f018a562280408951cde253836db4e29f047c2a6cff38685ceeace040",
+        "byte_size": 3533,
+        "dimensions_px": [
+          1536,
+          1024
+        ],
+        "mode": "L",
+        "format": "png"
+      }
+    }
+  }
+}

@@ -1,0 +1,492 @@
+{
+  "schema": "codexofwar.p10-round017-fresh-local-constraint-release-review",
+  "version": "1.0.0",
+  "reviewId": "P10-Round017-FreshLocalConstraintReleaseReview",
+  "generatedUtc": "2026-08-01T10:05:29Z",
+  "reviewerRole": "fresh independent constraint, engine, gameplay-scale, and private-benchmark critic",
+  "judgedUnit": "P10 Nyra Kestrel Round017 local-constraint trailing-limb proof plus the best fresh actual Unity frame available from the inspected game project",
+  "verdictToken": "FAIL",
+  "gate": "FAIL",
+  "acceptedCandidate": {
+    "path": "ArtSource/P10/Round017/LocalConstraintRelease/P10_Round017_NyraKestrel_LocalConstraintRelease_v1.png",
+    "expectedSha256": "de3f1be07757f516c6a194a870cc59903f40a0623872bf7dfa6cf549c5fcbcae",
+    "actualSha256": "de3f1be07757f516c6a194a870cc59903f40a0623872bf7dfa6cf549c5fcbcae",
+    "hashMatchesExpected": true,
+    "byteSize": 1531662,
+    "dimensionsPx": [1536, 1024],
+    "mode": "RGB",
+    "byteIdenticalPresealPath": "ArtSource/P10/Round017/LocalConstraintRelease/Iterations/P10_Round017_candidate01_composite_preseal.png",
+    "byteIdenticalPresealSha256": "de3f1be07757f516c6a194a870cc59903f40a0623872bf7dfa6cf549c5fcbcae"
+  },
+  "provenance": {
+    "workspaceGitRevisionAtEngineInspection": "37b29d5a7892c75b7da204f98aaf85c92365d90b",
+    "round013Base": {
+      "path": "ArtSource/P10/Round013/ElbowReturnTriangle/P10_Round013_NyraKestrel_ElbowReturnTriangle_v1.png",
+      "sha256": "c88489f7af2c0a5d223f431fb322f72ac549283819c3c9b6281a20c1b39fbcd6"
+    },
+    "finalReleaseArtifacts": {
+      "receipt": {
+        "path": "ArtSource/P10/Round017/LocalConstraintRelease/P10_Round017_LocalConstraintReleaseReceipt.json",
+        "sha256": "0279bbc4c551e0271b9fb19e771cd755ccd103eee4e5a61552104a416f349347"
+      },
+      "validationJson": {
+        "path": "ArtSource/P10/Round017/LocalConstraintRelease/P10_Round017_Validation.json",
+        "sha256": "6ec63117ba70285a94b56a937b6056e31c69f1a92e9e277aa5ea0a3955f9c1e1"
+      },
+      "validationText": {
+        "path": "ArtSource/P10/Round017/LocalConstraintRelease/P10_Round017_Validation.txt",
+        "sha256": "213174d421a077efe89bf5beed90231ab15d702cbaa316a301150fe69bc638f5"
+      },
+      "readme": {
+        "path": "ArtSource/P10/Round017/LocalConstraintRelease/README.md",
+        "sha256": "0b8936a10f4cf2074327f7f5c9e4465316ef794d883f11b023794c42788c052d"
+      },
+      "compositor": {
+        "path": "ArtSource/P10/Round017/LocalConstraintRelease/P10_Round017_DeterministicCompositor.py",
+        "sha256": "fcca2cdb74e076a5e84e6687ff0934e6adf2df2e2329269d80ff16290dedee8a"
+      },
+      "sealScript": {
+        "path": "ArtSource/P10/Round017/LocalConstraintRelease/P10_Round017_SealReceipt.py",
+        "sha256": "d4c892cbca358951f965fdbb362570a97f5adc58b8dcf4d36b7adf83d1e00793"
+      },
+      "revisedMask": {
+        "path": "ArtSource/P10/Round017/LocalConstraintRelease/P10_Round017_RevisedEditableMask_binary.png",
+        "sha256": "6103d88ffc9bf9073bef39dc863522f9b7119e0cd7d87a04b8843fac3dc22c71"
+      },
+      "effectiveMask": {
+        "path": "ArtSource/P10/Round017/LocalConstraintRelease/P10_Round017_EffectiveCompositeMask_binary.png",
+        "sha256": "3b605a5f018a562280408951cde253836db4e29f047c2a6cff38685ceeace040"
+      },
+      "gripRestoreDisk": {
+        "path": "ArtSource/P10/Round017/LocalConstraintRelease/P10_Round017_GripRestoreDisk24_binary.png",
+        "sha256": "ed6d745936915d4a435e07aa63989b68743f4d7c79edb1fe47f0fa28673f05e7"
+      },
+      "foregroundBinary": {
+        "path": "ArtSource/P10/Round017/LocalConstraintRelease/Iterations/P10_Round017_candidate01_changed_limb_foreground_binary.png",
+        "sha256": "f7f0358eec958cbd365edc59865c83abc835733871430253afb94639a4a49bd2"
+      },
+      "judgePanel": {
+        "path": "ArtSource/P10/Round017/LocalConstraintRelease/Analysis/P10_Round017_JudgePanel.png",
+        "sha256": "da5ad839b4a5d27bb255f062fa0a97aca8f36bbbf00a454bc033e130abe41a02"
+      }
+    },
+    "originalBuilderSeal": {
+      "receiptSha256": "124356a6012cec52035d712bb5ff553e252d279ceac90a26aadc273fea7a3deb",
+      "validationSha256": "13c9623f50aa6182ecf90a180540806ea4e8943934a36060fc98d1eaafbf2e8c",
+      "readmeSha256": "45d4eed17ef408b5e3727fc0dce5af9c1e2b7f326ac694c88ff7f0474586feae",
+      "compositorSha256": "0ba7d9c840cd670b02923b06ff5447e7a265a00890d20db7832e9ac6e3992e41",
+      "sealScriptSha256": "b38a56cd4fdb2fb1bb8c124197710551025c6baa144bebbdf2229facf4cb7bca"
+    },
+    "releaseSanitization": {
+      "timing": "Started only after the blind preferences, engine facts, and decoded-pixel visual verdict were locked.",
+      "scope": "Path-only and provenance-portability rewrite of nonvisual text/code records; this is not a builder improvement and earns no visual credit.",
+      "originalToFinalNonvisualHashes": {
+        "receipt": ["124356a6012cec52035d712bb5ff553e252d279ceac90a26aadc273fea7a3deb", "0279bbc4c551e0271b9fb19e771cd755ccd103eee4e5a61552104a416f349347"],
+        "validationJson": ["13c9623f50aa6182ecf90a180540806ea4e8943934a36060fc98d1eaafbf2e8c", "6ec63117ba70285a94b56a937b6056e31c69f1a92e9e277aa5ea0a3955f9c1e1"],
+        "readme": ["45d4eed17ef408b5e3727fc0dce5af9c1e2b7f326ac694c88ff7f0474586feae", "0b8936a10f4cf2074327f7f5c9e4465316ef794d883f11b023794c42788c052d"],
+        "compositor": ["0ba7d9c840cd670b02923b06ff5447e7a265a00890d20db7832e9ac6e3992e41", "fcca2cdb74e076a5e84e6687ff0934e6adf2df2e2329269d80ff16290dedee8a"],
+        "sealScript": ["b38a56cd4fdb2fb1bb8c124197710551025c6baa144bebbdf2229facf4cb7bca", "d4c892cbca358951f965fdbb362570a97f5adc58b8dcf4d36b7adf83d1e00793"]
+      },
+      "visualArtifactCountByteIdentical": 23,
+      "acceptedProofUnchanged": true,
+      "revisedMaskUnchanged": true,
+      "visualFactsUnchanged": true
+    },
+    "finalManifestVerification": {
+      "builderArtifactCount": 29,
+      "verifiedHashAndByteSizeCount": 29,
+      "mismatchCount": 0,
+      "missingCount": 0,
+      "absoluteUserPathHitsInReceipt": 0,
+      "privateTempPathHitsInReceipt": 0,
+      "reviewExcludedFromBuilderManifest": true
+    },
+    "criticReviewReleaseSanitization": {
+      "originalCriticSealedReviewSha256": "bf77d067967b2b530362162a624d84e73ef3269a6a4c5a175820b0babcf2ca02",
+      "timing": "Applied after the fresh critic sealed its review.",
+      "scope": "Private benchmark archive, blind-panel, pair, mapping, judgment, reference-image hash fingerprints, and the private blind randomization seed were replaced with explicit withheld placeholders for public release.",
+      "sanitizedHashFieldCount": 16,
+      "sanitizedSeedFieldCount": 1,
+      "verdictUnchanged": true,
+      "scoresUnchanged": true,
+      "engineFactsUnchanged": true,
+      "decodedPixelFactsUnchanged": true,
+      "singleBiggestGapUnchanged": true,
+      "round018PrescriptionUnchanged": true
+    }
+  },
+  "engineEvidence": {
+    "gameInspection": {
+      "root": "game",
+      "searchTerms": ["P10CaptureCommand", "CaptureRound001FromCommandLine", "Round017", "Nyra", "Kestrel", "Astra", "Round001"],
+      "round017Matches": 0,
+      "nyraMatches": 0,
+      "kestrelMatches": 0,
+      "materialFindings": [
+        "game/Assets/CodexOfWar/Runtime/Review/P10CaptureContract.cs pins Round=1 and Assets/CodexOfWar/Heroes/P10/Models/P10_AstraValeHero.fbx.",
+        "game/Assets/CodexOfWar/Editor/Review/P10HeroSceneBuilder.cs names and instantiates the Astra Vale authored P10 model.",
+        "No Round017 or Nyra Kestrel game asset, scene, contract, or capture command exists in the inspected project."
+      ],
+      "captureCommandSourceSha256": "1305e067a1f2db4a7248281aa05c9ba89499c4d54a60b9eaa5e84b2dd955e06d",
+      "captureContractSourceSha256": "f43fdcf09b931a8f4185d7a8df2cc994dcfaafcf7889de8653f5c09d4edb246c",
+      "pinnedAstraFbxSha256": "e301584e65e5b7c4c005771b93e5ec26e6342ed4af6b89b2db199cd017927af9"
+    },
+    "isolation": {
+      "sharedWorkspaceUsedAsUnityProject": false,
+      "privateCopyRoot": "<private-temporary-workspace>/repository/game",
+      "copyMethod": "copy-on-write recursive private copy of game plus only the exact sibling P10 source and P00 baseline inputs required by the capture contract",
+      "privateCopyCommandAndContractHashesMatchedSharedSource": true,
+      "sharedWorkspaceUnityMutationPrevented": true
+    },
+    "tool": {
+      "name": "Unity",
+      "version": "6000.5.4f1",
+      "binary": "/Applications/Unity/Hub/Editor/6000.5.4f1/Unity.app/Contents/MacOS/Unity",
+      "binarySha256": "5dcf81c5df5a9ff35006ee05832a1a6194c60fc4a386df652b9f49ea3a2a238b"
+    },
+    "exactSanitizedCommand": "/Applications/Unity/Hub/Editor/6000.5.4f1/Unity.app/Contents/MacOS/Unity -batchmode -projectPath <private-temporary-workspace>/repository/game -executeMethod CodexOfWar.Editor.Review.P10CaptureCommand.CaptureRound001FromCommandLine -logFile <private-temporary-workspace>/unity-round017-review.log",
+    "executeMethod": "CodexOfWar.Editor.Review.P10CaptureCommand.CaptureRound001FromCommandLine",
+    "attemptWindowUtc": {
+      "preRunTimestamp": "2026-08-01T09:44:29Z",
+      "manifestCapturedAt": "2026-08-01T09:45:08.478Z",
+      "completionCheckedAt": "2026-08-01T09:45:19Z"
+    },
+    "processExitCode": 0,
+    "resultLine": "[P10 Capture] PASS captures/P10/round-001/S01_Explore.png sha256=afff193d2efeff8d092df787ccb9af69f2b7dad93268806c0539cf3cd0436c81 heroScreenHeight=29.82 % triangles=82906",
+    "logSha256": "7d0d697ded82c1095d728a797d494979db502262b26aaf3c7a075a393f2c8261",
+    "manifest": {
+      "sha256": "af69f4b7825c556e5bf388186f9e0ad17b5545cc4122cdb4e5410cb3993d436c",
+      "piece": "P10",
+      "round": 1,
+      "heroAssetPath": "Assets/CodexOfWar/Heroes/P10/Models/P10_AstraValeHero.fbx",
+      "heroId": "P10_ASTRA_VALE_ORIGINAL",
+      "heroTriangleCount": 82906,
+      "unityVersion": "6000.5.4f1",
+      "graphicsApi": "Metal"
+    },
+    "freshFrames": {
+      "s01": {
+        "relativeCapturePathInPrivateCopy": "progress/public/captures/P10/round-001/S01_Explore.png",
+        "sha256": "afff193d2efeff8d092df787ccb9af69f2b7dad93268806c0539cf3cd0436c81",
+        "byteSize": 1634951,
+        "dimensionsPx": [1600, 900],
+        "mode": "RGBA",
+        "selectedAsBestActualGameFrame": true
+      },
+      "turntableFrontSha256": "c2f39cbb99120f2d6f420f20167fecce668084cfbb93afc698746fedc834f7bd",
+      "turntableThreeQuarterSha256": "8a47d77aee286ddca077688f758f1339fdbaba1e9e5054a035336f6da1664588",
+      "turntableBackSha256": "8c30495866f77acaf78df0556451969e629b36c66ef3594e4c7d908d7ce73871",
+      "turntableProfileSha256": "1067599ed8a5ad80643b4656dc35aa19827c2358225ce7808e7d449f0ed5c649",
+      "turntableContactSheetSha256": "4e60630527970c3c628c8bd53d7fdaf7fbeb0f07ee33003b98f7f50a8c8d79e9"
+    },
+    "decodedFrameFinding": "The real fresh frame is a primitive arena with the old stylized Round001 Astra Vale hero. It is neither Nyra Kestrel nor the Round017 2D construction. The polished 2D proof was not substituted for game evidence.",
+    "engineRun": true,
+    "actualGameCapturePerformed": true,
+    "targetMatchedGameCapturePerformed": false,
+    "gateQualifyingCapture": false
+  },
+  "blindBenchmarkProtocol": {
+    "benchmarkArchive": "<private-benchmark-archive>",
+    "benchmarkArchiveSha256": "<withheld-private-benchmark-derived-hash>",
+    "candidateInput": "fresh Unity S01 frame afff193d2efeff8d092df787ccb9af69f2b7dad93268806c0539cf3cd0436c81",
+    "referenceSelection": "six closest wide third-person gameplay, combat, or traversal framings selected before randomization",
+    "normalization": "Each side center-fitted to 640x360; two anonymous A/B sides placed in a 1280x400 panel with no source name.",
+    "randomization": {
+      "seed": "<withheld-private-blind-seed>",
+      "method": "deterministic shuffled reference order plus one random left/right side bit per pair",
+      "mappingHiddenUntilAfterJudgmentsPersisted": true,
+      "mappingTranscriptSha256": "<withheld-private-benchmark-derived-hash>",
+      "judgmentTranscriptBeforeRevealSha256": "<withheld-private-benchmark-derived-hash>",
+      "blindContactSheetSha256": "<withheld-private-benchmark-derived-hash>"
+    },
+    "criteriaJudgedBlind": [
+      "AAA material fidelity",
+      "scene coherence",
+      "lighting and depth",
+      "action readability",
+      "silhouette",
+      "overall finish"
+    ],
+    "resultsAfterReveal": [
+      {
+        "pairId": "P01",
+        "pairSha256": "<withheld-private-benchmark-derived-hash>",
+        "candidateSide": "A",
+        "blindPreferredSide": "B",
+        "candidatePreferred": false,
+        "anonymousReferenceSha256": "<withheld-private-benchmark-derived-hash>",
+        "blindReason": "B had far richer material response, lighting, pose, environment detail, and combat effect; A read as a primitive blockout."
+      },
+      {
+        "pairId": "P02",
+        "pairSha256": "<withheld-private-benchmark-derived-hash>",
+        "candidateSide": "A",
+        "blindPreferredSide": "B",
+        "candidatePreferred": false,
+        "anonymousReferenceSha256": "<withheld-private-benchmark-derived-hash>",
+        "blindReason": "B had a coherent atmospheric vista, cinematic depth, and readable figures; A was sparse, flat, and visibly unfinished."
+      },
+      {
+        "pairId": "P03",
+        "pairSha256": "<withheld-private-benchmark-derived-hash>",
+        "candidateSide": "A",
+        "blindPreferredSide": "B",
+        "candidatePreferred": false,
+        "anonymousReferenceSha256": "<withheld-private-benchmark-derived-hash>",
+        "blindReason": "B had dynamic combat, terrain, motion, and gameplay feedback; A had a tiny static mannequin in a low-detail arena."
+      },
+      {
+        "pairId": "P04",
+        "pairSha256": "<withheld-private-benchmark-derived-hash>",
+        "candidateSide": "A",
+        "blindPreferredSide": "B",
+        "candidatePreferred": false,
+        "anonymousReferenceSha256": "<withheld-private-benchmark-derived-hash>",
+        "blindReason": "B had authored architecture, layered lighting, depth, and over-shoulder action; A remained an empty blockout."
+      },
+      {
+        "pairId": "P05",
+        "pairSha256": "<withheld-private-benchmark-derived-hash>",
+        "candidateSide": "B",
+        "blindPreferredSide": "A",
+        "candidatePreferred": false,
+        "anonymousReferenceSha256": "<withheld-private-benchmark-derived-hash>",
+        "blindReason": "A had weapon motion, vegetation, materials, destruction, and substantially stronger combat focus."
+      },
+      {
+        "pairId": "P06",
+        "pairSha256": "<withheld-private-benchmark-derived-hash>",
+        "candidateSide": "B",
+        "blindPreferredSide": "A",
+        "candidatePreferred": false,
+        "anonymousReferenceSha256": "<withheld-private-benchmark-derived-hash>",
+        "blindReason": "A had impact VFX, encounter staging, environmental specificity, and depth that decisively exceeded B."
+      }
+    ],
+    "candidatePreferredCount": 0,
+    "comparisonCount": 6,
+    "requiredCandidatePreferredCount": 5,
+    "blindGatePass": false,
+    "benchmarkParityFinding": "0/6. The actual engine frame is a blockout several production tiers below the private benchmark in materials, environment authorship, lighting, action, depth, and finish.",
+    "benchmarkDerivedBytesCopiedIntoRepository": false,
+    "privateExtractsPairsMappingsDisposition": "trashed outside the repository after reveal and audit",
+    "privateTemporaryArtifactsRecoverableFromTrash": true
+  },
+  "decodedPixelRecomputation": {
+    "method": "PIL decode; NumPy exact equality and integer-center geometry; independent 8-neighbor deque flood fills; foreground independently rebuilt as largest8(joined alpha >= 8 AND effective mask). A second independent read-only recomputation matched the decisive counts.",
+    "round013Preservation": {
+      "changedPixelCount": 75513,
+      "changedChannelValueCount": 217157,
+      "changedChannelCountsRgb": [72646, 72044, 72467],
+      "changedBoundingBoxInclusive": {"xMin": 302, "xMax": 665, "yMin": 410, "yMax": 907},
+      "changedOutsideRevisedMask": 0,
+      "changedOutsideEffectiveMask": 0,
+      "changedInsideGripRestoreDisk": 0,
+      "outsideRevisedMaskPixelExactToRound013": true,
+      "gripRestoreDiskPixelExactToRound013": true
+    },
+    "maskRebuild": {
+      "closedTrianglePixels": 10832,
+      "continuousTriangleAreaPx2": 10820.0,
+      "closedTriangleArtifactBitExact": true,
+      "dilatedTriangle62Pixels": 78151,
+      "dilatedTriangleArtifactBitExact": true,
+      "round016CurrentEditablePixels": 23341,
+      "locallyReleasedProtectionPixels": 54856,
+      "releasedArtifactBitExact": true,
+      "revisedEditablePixels": 78197,
+      "revisedArtifactBitExact": true,
+      "gripDiskPixels": 1793,
+      "gripDiskArtifactBitExact": true,
+      "effectivePixels": 76404,
+      "effectiveArtifactBitExact": true
+    },
+    "releasedLocalDamage": {
+      "changedInsidePriorRound016Mask": 22824,
+      "changedInsideNewlyReleasedProtection": 52689,
+      "fractionOfNewlyReleasedProtectionChanged": 0.9604965728452676,
+      "changedHiltZonePixels": 27638,
+      "hiltZonePixels": 93582,
+      "changedRearLegZonePixels": 34086,
+      "rearLegZonePixels": 82664,
+      "changedHiltRearOverlapPixels": 9035,
+      "visualFinding": "The release clears or overwrites enough hilt and rear-leg material to destroy believable hand-to-hilt continuity and depth ordering even though every changed pixel remains formally authorized."
+    },
+    "connectivityAndAnchors": {
+      "changedComponents8": [75513],
+      "oneChangedComponent": true,
+      "foregroundComponents8": [60922],
+      "oneForegroundComponent": true,
+      "foregroundArtifactBitExact": true,
+      "foregroundBoundingBoxInclusive": {"xMin": 320, "xMax": 662, "yMin": 410, "yMax": 896},
+      "anchors": {
+        "shoulder": {"coordinate": [604, 472], "changedAtExactPixel": true, "foregroundAtExactPixel": true},
+        "elbow": {"coordinate": [370, 845], "changedAtExactPixel": true, "foregroundAtExactPixel": true},
+        "grip": {"coordinate": [450, 625], "changedAtExactPixel": false, "foregroundAtExactPixel": false, "nearestChangeDistancePx": 24.020824298928627, "changedPixelsInR24ToR36Annulus": 2260, "foregroundPixelsInR24ToR36Annulus": 2178, "foregroundBoundaryContactPixels": 200}
+      },
+      "literalAllExactAnchorsSpannedByChangedPixels": false,
+      "annulusProxySpansGrip": true,
+      "centerlineContinuity": {
+        "shoulderToElbowForegroundSamples": [374, 374],
+        "elbowToGripForegroundSamplesOutsideRestoreDisk": [198, 198],
+        "terminalCenterlinePixelsAbsentBecauseOfRestoreDisk": 23
+      },
+      "upperCrossSectionWidthsPx": [97, 96, 88, 153, 132],
+      "upperMedianWidthPx": 97,
+      "returnCrossSectionWidthsPx": [117, 128, 139, 148, 152],
+      "returnMedianWidthPx": 139,
+      "anatomicalFinding": "Connectivity is mechanical only. The return width grows toward the wrist and its median is 59.38% of its 234.094px length, producing a club or third-leg mass rather than an arm."
+    },
+    "steepReturn": {
+      "vectorPx": [80, -220],
+      "lengthPx": 234.0939982143925,
+      "angleDegreesFromPositiveXWithScreenYInverted": 70.01689347810003,
+      "steepUpRightPass": true
+    },
+    "contamination": {
+      "declaredGreenKeyRule": "G > R + 55 and G > B + 55 and G > 120 among changed pixels",
+      "declaredRulePixelCount": 0,
+      "sensitivePlus20Floor80PixelCount": 0,
+      "sensitivePlus12Floor60PixelCount": 9,
+      "finalHasAlpha": false,
+      "visibleCheckerFieldObserved": false,
+      "finding": "No visible chroma-key or checker field survives, but an absolute zero-green claim is threshold-dependent; nine mild green-biased foreground edge pixels appear under the softer stated test."
+    },
+    "actualWedge": {
+      "recomputedRule": "closed triangle AND min(R,G,B) >= 220 AND channel spread <= 26 AND not independently derived foreground AND not r24 grip disk",
+      "paleNonforegroundTotalPixels": 29,
+      "componentSizes8": [22, 7],
+      "largestUninterruptedPalePixels": 22,
+      "largestComponentBoundingBoxInclusive": {"xMin": 476, "xMax": 484, "yMin": 592, "yMax": 600},
+      "declaredHeadProxyDefinition": "integer pixel-center disk radius 42px",
+      "declaredHeadProxyPixels": 5525,
+      "ratioToDeclaredProxy": 0.003981900452488688,
+      "meetsDeclaredAtLeast5525": false,
+      "implementationUsesWeakerEightyPercentThresholdPixels": 4420,
+      "meetsImplementationThreshold": false,
+      "definitionMismatchFinding": "The compositor labels 80% of the 5,525px proxy as a pass, while the review requirement says at least 5,525px. The candidate fails both thresholds by orders of magnitude."
+    },
+    "theoreticalWedge": {
+      "fixedAnchors": {"shoulder": [604, 472], "elbow": [370, 845], "grip": [450, 625]},
+      "tubeCases": [
+        {"upperWidthPx": 124, "returnWidthPx": 106, "remainingTotalPixels": 0, "largestUninterruptedPixels": 0, "meets5525": false},
+        {"upperWidthPx": 70, "returnWidthPx": 64, "remainingTotalPixels": 104, "largestUninterruptedPixels": 104, "meets5525": false},
+        {"upperWidthPx": 20, "returnWidthPx": 16, "remainingTotalPixels": 5479, "componentSizes8": [5478, 1], "largestUninterruptedPixels": 5478, "meets5525": false}
+      ],
+      "needleOnlyExamplesThatExceedThreshold": [
+        {"upperWidthPx": 20, "returnWidthPx": 15, "largestUninterruptedPixels": 5559},
+        {"upperWidthPx": 19, "returnWidthPx": 16, "largestUninterruptedPixels": 5636}
+      ],
+      "fixedAnchorGeometryFeasibleAtAnatomicalWidths": false,
+      "plainFinding": "The fixed-anchor geometry is impossible at anatomical widths. Even the deliberately slim 70/64px lower bound leaves only 104px, while approaching the target requires prohibited 20/15px needle limbs. No cosmetic repaint can satisfy the geometry."
+    },
+    "minimumAnchorChangeSearch": {
+      "anatomicalLowerBoundTubeWidthsPx": {"upper": 70, "return": 64},
+      "absoluteSingleAnchorMinimum": {
+        "search": "exhaustive integer-coordinate moves in ascending squared Euclidean displacement across S, E, and G",
+        "testedConfigurationsThroughFirstPass": 28479,
+        "movedAnchor": "grip",
+        "from": [450, 625],
+        "to": [401, 600],
+        "offset": [-49, -25],
+        "displacementPx": 55.00909015790027,
+        "largestUninterruptedTheoreticalWedgePixels": 5579,
+        "admissible": false,
+        "rejectionReason": "Moving G violates the separate hard requirement to preserve and integrate the original hand/grip."
+      },
+      "smallestAdmissiblePreservingShoulderAndGrip": {
+        "search": "exhaustive 48,405 integer-coordinate elbow-only configurations in ascending squared Euclidean displacement, with S and G fixed",
+        "movedAnchor": "elbow",
+        "from": [370, 845],
+        "to": [484, 894],
+        "offset": [114, 49],
+        "squaredDisplacement": 15397,
+        "displacementPx": 124.08464852672147,
+        "trianglePixels": 23317,
+        "largestUninterruptedTheoreticalWedgePixels": 5526,
+        "componentCount": 1,
+        "uniqueMinimumAtThatSquaredDisplacement": true
+      }
+    }
+  },
+  "visualInspection": {
+    "fullFrame": {
+      "scale": "1536x1024 native decoded pixels",
+      "finding": "The construction reads as an enormous armored third leg or shield attached near the shoulder. The V is fused into one solid mass; the restored hand appears through a circular punch-out; the elbow becomes an oversized mechanical disk with a conspicuous white crescent halo; and the upper attachment ends as a hard stump. It visibly overwrites the hilt and rear thigh and breaks depth ordering."
+    },
+    "gameplayScale": {
+      "method": "384x256 downscale inspected separately",
+      "derivedDownscaleSha256": "cb0dc41aa641a8c9b008a19e8ad9fcfbe867f0653232a025106873d25a4f2d9c",
+      "finding": "Surface detail disappears but every structural defect survives: the extra-leg silhouette dominates, the hand aperture becomes an ambiguous dot, and neither elbow articulation nor a readable arm-return wedge remains."
+    },
+    "catastrophicDefect": true,
+    "catastrophicDefectCodes": [
+      "COLOSSAL_THIRD_LEG_OR_SHIELD_LIMB",
+      "HEAD_SIZED_WEDGE_ABSENT",
+      "PUNCHED_OUT_HAND_AND_GRIP",
+      "HILT_REAR_LEG_DEPTH_DAMAGE",
+      "ROUND017_NYRA_ABSENT_FROM_UNITY"
+    ]
+  },
+  "hardChecks": {
+    "round013FrozenOutsideRevisedMask": {"status": "PASS", "evidence": "0 changed pixels outside the exact recomputed revised mask"},
+    "fixedAnchors": {"status": "PASS_COORDINATES_ONLY", "evidence": "S=(604,472), E=(370,845), G=(450,625) are unchanged as prescribed"},
+    "revisedMaskAnd24PxGripRestoreExact": {"status": "PASS", "evidence": "bit-exact rebuilt masks; 78,197 revised, 1,793 grip, 76,404 effective pixels"},
+    "one8ConnectedChangedLimbSpanningAllAnchors": {"status": "FAIL_LITERAL", "evidence": "one 75,513px component contains exact S/E, but exact G is restored and unchanged; only the r24-r36 annulus proxy is reached"},
+    "anatomicalContinuityAndThickness": {"status": "FAIL_CATASTROPHIC", "evidence": "mechanically continuous but club-like 97px/139px median widths, fused silhouette, hard stump, third-leg reading"},
+    "steepReturn": {"status": "PASS", "evidence": "vector (80,-220), length 234.094px, angle 70.017 degrees"},
+    "originalHandGripIntegration": {"status": "FAIL_CATASTROPHIC", "evidence": "the hand reads through a circular punched hole and no believable wrist-to-grip transition remains"},
+    "localHiltRearLegDamageFromRelease": {"status": "FAIL", "evidence": "27,638 hilt-zone and 34,086 rear-leg-zone pixels change; the damage is visually dominant"},
+    "zeroGreenCheckerContamination": {"status": "PASS_WITH_THRESHOLD_CAVEAT", "evidence": "0 pixels at the declared key rule, RGB output with no checker field; 9 mild green-biased edge pixels at a softer +12/floor60 test"},
+    "uninterruptedPaleWedgeAtLeast5525": {"status": "FAIL_CATASTROPHIC", "evidence": "largest recomputed component is 22px, only 0.39819% of 5,525"},
+    "gameplayReadableAaaSilhouette": {"status": "FAIL_CATASTROPHIC", "evidence": "384x256 silhouette still reads as a giant third leg/shield and the wedge disappears"},
+    "targetRelevantUnityIntegrationAndCapture": {"status": "FAIL", "evidence": "real capture succeeded but is Round001 Astra Vale, not Round017 Nyra Kestrel"},
+    "privateBenchmarkParity": {"status": "FAIL", "evidence": "candidate preferred 0/6; requirement is at least 5/6"}
+  },
+  "categoryScores": [
+    {"category": "Evidence provenance and reproducibility", "score": 9, "max": 10, "reason": "Visual bytes and final manifest verify, but the builder validation uses an 80% wedge threshold inconsistent with the declared at-least-5,525 requirement."},
+    {"category": "Locality, Round013 preservation, mask, and grip restore", "score": 10, "max": 10, "reason": "Exact mask rebuilds, zero outside-mask changes, and exact r24 grip restoration all pass."},
+    {"category": "Fixed anchors, connectivity, and steep return", "score": 5, "max": 10, "reason": "One component and the steep return pass, but exact G is necessarily absent and the topology is only mechanically connected."},
+    {"category": "Anatomical continuity and thickness", "score": 1, "max": 10, "reason": "The limb is a widening club/third leg with a hard shoulder stump and no believable joints."},
+    {"category": "Original hand, grip, hilt, and rear-leg integration", "score": 1, "max": 10, "reason": "The restored hand becomes a punch-out and the released composite destroys local depth ordering."},
+    {"category": "Uninterrupted head-sized pale wedge", "score": 0, "max": 10, "reason": "22/5,525 pixels; fixed anchors cannot satisfy the requirement at anatomical widths."},
+    {"category": "Surface coherence, seams, and contamination control", "score": 4, "max": 10, "reason": "Material family mostly matches and no strong key field survives, but the white crescent halo, stump, disk joint, and mild edge bias remain conspicuous."},
+    {"category": "Gameplay-scale AAA silhouette and readability", "score": 1, "max": 10, "reason": "The corruption dominates at 384x256 and the intended V/arm action is unreadable."},
+    {"category": "Target-relevant Unity integration and capture", "score": 0, "max": 10, "reason": "No Round017/Nyra asset exists in the game; the fresh successful capture is Round001 Astra Vale."},
+    {"category": "Private benchmark parity", "score": 0, "max": 10, "reason": "The candidate lost every blind comparison, 0/6."}
+  ],
+  "totalScore": 31,
+  "maximumScore": 100,
+  "categoryFloor": 0,
+  "benchmark": {
+    "candidatePreferred": 0,
+    "comparisons": 6,
+    "required": 5,
+    "pass": false
+  },
+  "gateEvaluation": {
+    "requiresRealTargetRelevantEngineRunAndCapture": true,
+    "engineRun": true,
+    "actualGameCapturePerformed": true,
+    "targetMatchedGameCapturePerformed": false,
+    "gateQualifyingCapture": false,
+    "requiresNoCatastrophicDefect": true,
+    "catastrophicDefectPresent": true,
+    "requiresTotalAtLeast": 95,
+    "actualTotal": 31,
+    "requiresEveryCategoryAtLeast": 9,
+    "actualCategoryFloor": 0,
+    "requiresCandidatePreferredAtLeast": "5/6",
+    "actualCandidatePreferred": "0/6",
+    "allGateConditionsMet": false
+  },
+  "singleBiggestRemainingVisualGap": "The trailing limb is a fused, colossal third-leg/shield mass with a punched-through hand and no readable interior wedge, so it destroys anatomy, grip depth, the rear leg, and the gameplay silhouette in one dominant defect.",
+  "exactRound018Prescription": {
+    "oneConstraintChange": "Move only elbow anchor E from (370,845) to (484,894), offset (+114,+49), while keeping shoulder S=(604,472), original grip G=(450,625), and the exact 24px grip restore fixed.",
+    "whyThisExactChange": "It is the unique smallest integer elbow move preserving S and G that permits one uninterrupted 5,526px theoretical wedge with conservative anatomical lower-bound widths of 70px upper and 64px return; the exhaustive search tested 48,405 configurations. The absolute smaller grip move is inadmissible because it breaks the original hand/grip requirement.",
+    "freeze": "Freeze identity, face, hair, torso, weapon, lighting, framing, original hand/grip pixels, S, G, and every pixel outside the recomputed local triangle-dilated-62 editable mask; retain the exact r24 grip restore.",
+    "requiredRebuild": "Discard the Round017 transplanted limb and rebuild the two-segment arm from geometry at S->E'->G with widths no thinner than 70/64px, one anatomical elbow, no socket disk or halo, no hilt/rear-leg overwrite beyond the recomputed authorized mask, and an independently measured uninterrupted pale component of at least 5,525px.",
+    "requiredGameDelivery": "Integrate the resulting Nyra Kestrel Round018 target as an actual game asset under a Round018/Nyra capture contract and submit a fresh Unity frame whose manifest names that target; a Round001 Astra or a 2D proof cannot satisfy this step.",
+    "cosmeticRepaintAllowedAsSubstitute": false
+  }
+}

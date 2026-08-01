@@ -19,11 +19,11 @@
   ],
   "activeBuild": {
     "pieceId": "P10",
-    "round": 17,
-    "roundLabel": "P10 · Round 017",
+    "round": 18,
+    "roundLabel": "P10 · Round 018",
     "status": "revising",
-    "builder": "Local Constraint Release",
-    "brief": "Round 017 keeps the shoulder, far-low-left elbow, and inward-grip anchors fixed while relaxing exactly one impossible Round016 rule: only protected pixels inside the closed anchor triangle and existing limb corridors, dilated 62 pixels, become editable. The builder must restore a 24-pixel grip disk, freeze every pixel outside that revised mask, and produce one connected anatomical V around a clear head-sized pale wedge. A real Unity gate is now mandatory; the fresh Round016 run proved the toolchain works but also proved Nyra is not integrated.",
+    "builder": "Elbow Anchor Revision",
+    "brief": "Round 018 changes exactly one constraint: move elbow E from (370,845) to (484,894). Keep shoulder S=(604,472), grip G=(450,625), the exact r24 grip restore, segment widths of at least 70/64px, and an uninterrupted pale component of at least 5,525px. Recompute the closed S-E'-G triangle dilated 62px; allow no socket disk, halo, or unauthorized overwrite. A target-relevant actual 3D Nyra game asset and fresh matched Unity capture are required; 2D proof cannot qualify.",
     "facts": [
       "P00 is accepted as infrastructure; its blind visual baseline remains an explicit 28.33–76.67 loss.",
       "Round 001 is mechanically reproducible: two independent critic reruns matched all six filed image hashes, P10 validation passed, focused EditMode passed 8/8, the full suite passed 14/14, and the P00 aggregate stayed byte-identical.",
@@ -65,7 +65,9 @@
       "The fresh Round 015 critic rejected the isolated Inward Return Mask at 40/100, a 0/10 category floor, and 2/6 benchmark comparisons against 5/6 required. The required two-segment trailing-arm topology is absent: there is no far-low-left elbow, no separate steep up-right forearm return, and therefore no uninterrupted head-sized pale wedge. No Round015 integration, gameplay controller, build scene, or player build exists; engine run and actual gameplay capture are false.",
       "Round 016 filed four original isolated-limb attempts, four complete deterministic key/map/composite/protected lineages, an exact-anchor guide, protection-zone diagnostics, and one builder-promoted failed frame. Candidate 04 hit shoulder, elbow, and grip with effectively zero transform residual, but protection removed 54,019 of 77,360 corridor pixels and left only a severed shoulder stump plus floating shard.",
       "The fresh Round 016 critic ran Unity 6000.5.4f1 successfully in an isolated copy and captured a new S01 frame and turntable. That real capture shows the obsolete low-poly Astra Vale Round001 proxy because Nyra Round016 is absent from Unity; the gate failed at 33/100, a 0/10 floor, and 0/6 blind wins.",
-      "Round 017 is active with the critic's smallest viable constraint release: unfreeze only the protected pixels inside the dilated three-anchor triangle, restore a 24-pixel grip disk, and require one 8-connected anatomical arm with a clear pale wedge. The global latest manifest remains pinned to accepted P00."
+      "Round 017 filed one deterministic local-constraint proof and one original judge panel. The builder preserved locality and mechanical connectivity, but the accepted proof became a fused third-leg or shield mass; all 23 PNGs remained byte-identical through release sanitation.",
+      "The fresh Round 017 critic rejected the round at 31/100, a 0/10 floor, and 0/6 blind wins. Unity 6000.5.4f1 ran successfully, but the actual fresh S01 afff193d2efeff8d092df787ccb9af69f2b7dad93268806c0539cf3cd0436c81 was moved to private Trash after review and not published; it showed obsolete Round001 Astra Vale rather than Nyra.",
+      "Round 018 is active with exactly one constraint change: E (370,845) moves to (484,894) while S, G, r24 grip restoration, local-mask authority, anatomical widths, pale-wedge area, and the target-matched 3D Unity gate remain fixed. The global latest manifest remains pinned to accepted P00."
     ],
     "evidenceFingerprint": {
       "gitRevision": "37b29d5a7892c75b7da204f98aaf85c92365d90b",
@@ -76,70 +78,70 @@
       "seed": 24007001,
       "preset": "S01_Explore",
       "resolution": "1600×900",
-      "capturedAtUtc": "2026-08-01T08:54:37.500Z",
+      "capturedAtUtc": "2026-08-01T09:45:08.478Z",
       "renderSettingsSha256": "44c656be7394557e9bc93929faa2256ac71fe0f208d0e1206901f58ae73acc12",
-      "screenshotSha256": "46c055eab47a88d102a8ebe52de54b88fa77e9764c75769eae80c74b37da0dab",
-      "captureContractSha256": "4b0cbf30a29fa7ca0824780d9de90ce29ed78d10572fd2b98c7665b1fc91efa3"
+      "screenshotSha256": "afff193d2efeff8d092df787ccb9af69f2b7dad93268806c0539cf3cd0436c81",
+      "captureContractSha256": "f43fdcf09b931a8f4185d7a8df2cc994dcfaafcf7889de8653f5c09d4edb246c"
     },
     "evidenceBundle": {
-      "roundLabel": "P10 · Round 016 engine gate",
-      "status": "Round 016 rejected · real engine run, wrong fighter",
-      "manifestPath": "/data/P10-round-016-two-segment-limb.json",
+      "roundLabel": "P10 · Round 017 critic gate",
+      "status": "Round 017 rejected · real engine run, target absent",
+      "manifestPath": "/data/P10-round-017-local-constraint-release.json",
       "s01": {
-        "label": "Fresh Unity S01 · obsolete Astra Vale proxy",
+        "label": "Carried-forward Round016 public Unity S01 context · not the Round017 run",
         "path": "/captures/P10/round-016-two-segment-limb/S01_FreshEngineGate_OldAstraVale.png",
         "sha256": "46c055eab47a88d102a8ebe52de54b88fa77e9764c75769eae80c74b37da0dab"
       },
       "turntable": {
-        "label": "Fresh Unity four-view contact sheet · wrong fighter",
-        "path": "/captures/P10/round-016-two-segment-limb/Turntable_FreshEngineGate_OldAstraVale.png",
-        "sha256": "4e60630527970c3c628c8bd53d7fdaf7fbeb0f07ee33003b98f7f50a8c8d79e9"
+        "label": "Round017 original local-constraint judge panel",
+        "path": "/captures/P10/round-017-local-constraint-release/P10_Round017_JudgePanel.png",
+        "sha256": "da5ad839b4a5d27bb255f062fa0a97aca8f36bbbf00a454bc033e130abe41a02"
       },
       "metrics": [
         {
-          "label": "Frame height",
-          "value": "29.82%"
+          "label": "Critic score",
+          "value": "31/100"
         },
         {
-          "label": "Visible hero",
-          "value": "Astra Vale R001"
+          "label": "Category floor",
+          "value": "0/10"
         },
         {
-          "label": "Target hero",
-          "value": "Nyra R016 absent"
+          "label": "Blind wins",
+          "value": "0/6"
         },
         {
-          "label": "Critic gate",
-          "value": "33/100 · 0/6"
+          "label": "Unity target",
+          "value": "Nyra R017 absent"
         }
       ],
       "checks": [
-        "Isolated Unity batch capture PASS · exit 0",
-        "All 52 builder files and 50 receipt artifacts independently audited",
-        "Every transform and protected-pixel claim recomputed exactly",
-        "Private benchmark pixels and temporary blind pairs excluded"
+        "Fresh Round017 Unity batch capture PASS · exit 0",
+        "All 29 builder-manifest artifacts verified · 0 mismatches",
+        "All 23 PNGs unchanged through release sanitation",
+        "Final critic review 982e6e5ebfd84d4929e57e994ad9809f373fafedebce974f9ad3e12b958d95fe"
       ],
       "limitations": [
-        "The real engine capture does not contain the reviewed Nyra candidate",
-        "The runnable project is a static lookdev shell, not a player build",
-        "The Round016 concept composite is a severed stump plus detached shard",
-        "No runtime combat architecture or target-matched gameplay frame exists"
+        "The actual fresh Round017 S01 afff193d… was moved to private Trash after review and not published",
+        "The linked Unity frame is clearly carried-forward Round016 context, not a byte substitute",
+        "The Round017 proof is rejected 2D evidence, not a 3D game asset",
+        "No target-matched Nyra gameplay frame exists"
       ]
     },
-    "nextGate": "Round 017 must keep shoulder (604,472), elbow (370,845), and grip (450,625) fixed while changing exactly one constraint: the editable mask becomes the Round016 final mask union protected pixels inside the closed anchor triangle dilated 62 pixels, followed by exact restoration of a 24-pixel-radius grip disk. Every pixel outside that revised mask stays frozen. The visible changed limb must form one 8-connected anatomical shoulder-to-elbow-to-grip component around a clear head-sized pale wedge, then survive a target-relevant real Unity capture, at least 95/100, a 9/10 category floor, and 5/6 blind wins."
+    "nextGate": "Round 018 changes only E (370,845)->(484,894). Keep S=(604,472), G=(450,625), the exact r24 grip restore, >=70/64px segment widths, and an independently measured uninterrupted pale component >=5525px. Recompute the closed S-E'-G triangle dilated62 local mask; permit no socket disk, halo, or unauthorized overwrite. Deliver a target-relevant actual 3D Nyra game asset and fresh matched Unity capture; 2D proof cannot qualify. Then clear 95/100, a 9/10 floor, and 5/6 blind wins."
   },
   "canonicalCapture": {
     "shotId": "S01",
-    "name": "Explore",
-    "purpose": "World composition and locomotion",
+    "name": "Explore · carried-forward context",
+    "purpose": "Public engine context for the target-matching gate",
     "camera": "Low shoulder",
     "heroHeight": "24–32% of image height",
     "measuredHeroHeight": "29.82% of image height",
-    "sceneRead": "Foreground, playable stage, and distant silhouette visible",
+    "sceneRead": "Carried-forward Round016 public context only; the actual Round017 S01 was moved to private Trash after review, is not published, and is target-mismatched.",
     "benchmarkId": "Reference 09",
     "benchmarkPolicy": "ID only — the local benchmark image is never published",
     "capturePath": "/captures/P10/round-016-two-segment-limb/S01_FreshEngineGate_OldAstraVale.png",
-    "manifestPath": "/data/P10-round-016-two-segment-limb.json",
+    "manifestPath": "/data/P10-round-017-local-constraint-release.json",
     "latestManifestPath": "/data/capture-manifest-latest.json",
     "captureAvailable": true,
     "manifestAvailable": true
@@ -552,6 +554,36 @@
         "scoreLabel": "Fresh engine-backed gate 33/100 · threshold 95 · category floor 0/10",
         "preference": "Actual Unity evidence preferred in 0/6 blinded comparisons · 5/6 required",
         "primaryGap": "The accepted silhouette has no connected shoulder-to-elbow-to-grip arm: protection destroys the elbow and entire steep return, leaving a shoulder stump and floating far-low shard instead of one anatomical V and its uninterrupted pale wedge."
+      }
+    },
+    {
+      "round": 17,
+      "label": "P10 · Round 017",
+      "pieceId": "P10",
+      "phase": "Fresh Local Constraint Release critic and isolated Unity playtest complete",
+      "status": "criticized",
+      "date": "2026-08-01",
+      "engineRun": true,
+      "actualGameCapturePerformed": true,
+      "targetMatchedGameCapturePerformed": false,
+      "gateQualifyingCapture": false,
+      "builderBrief": "Keep S=(604,472), E=(370,845), and G=(450,625) fixed; release only protected overlap inside the closed anchor triangle dilated 62px, restore the exact r24 grip disk, and freeze every pixel outside the revised local mask.",
+      "evidence": "The builder filed one deterministic original 2D local-constraint proof, one original judge panel, exact masks, and a 29-artifact verified manifest. All 23 PNGs remained byte-identical through release sanitation. The proof has one connected changed component and exact locality, but its 97px/139px median segment widths leave only a 22px pale component and read as a fused colossal third leg or shield with a punched-through hand, hilt/rear-leg damage, and no readable wedge. A fresh Unity 6000.5.4f1 run passed at exit 0, but its nonpublished S01 hash afff193d2efeff8d092df787ccb9af69f2b7dad93268806c0539cf3cd0436c81 showed obsolete Round001 Astra Vale because no Round017 Nyra asset exists. The critic rejected the round at 31/100, a 0/10 floor, and 0/6 blind wins.",
+      "evidenceLinks": [
+        "/captures/P10/round-017-local-constraint-release/NyraKestrel_LocalConstraintRelease_CRITIC_REJECTED.png",
+        "/captures/P10/round-017-local-constraint-release/P10_Round017_JudgePanel.png",
+        "/data/P10-round-017-local-constraint-release.json"
+      ],
+      "critic": {
+        "status": "LOCAL CONSTRAINT RELEASE FAIL · TARGET-MATCHED ENGINE CAPTURE FAIL",
+        "score": 31,
+        "categoryFloor": 0,
+        "candidatePreferredCount": 0,
+        "comparisonCount": 6,
+        "requiredCandidatePreferredCount": 5,
+        "scoreLabel": "Fresh engine-backed gate 31/100 · threshold 95 · category floor 0/10",
+        "preference": "Actual Unity evidence preferred in 0/6 blinded comparisons · 5/6 required",
+        "primaryGap": "The trailing limb is a fused, colossal third-leg/shield mass with a punched-through hand and no readable interior wedge, so it destroys anatomy, grip depth, the rear leg, and the gameplay silhouette in one dominant defect."
       }
     }
   ],
