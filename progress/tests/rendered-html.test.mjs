@@ -91,7 +91,7 @@ test("server-renders the production evidence ledger", async () => {
   assert.match(html, /Reference 09/);
   assert.match(html, /29\.82%/);
   assert.match(html, /82,906/);
-  assert.match(html, /P10 · Round 012/);
+  assert.match(html, /P10 · Round 013/);
   assert.match(html, /Round rejected\. Rebuild in progress\./);
   assert.match(html, /Round 001 rejected · mechanically reproducible/);
   assert.match(
@@ -275,11 +275,19 @@ test("server-renders the production evidence ledger", async () => {
     /href="\/captures\/P10\/round-011-kinetic-chain\/NyraKestrel_KineticChain_CRITIC_REJECTED\.png"/,
   );
   assert.match(html, /href="\/data\/P10-round-011-kinetic-chain\.json"/);
-  assert.match(html, /Scapular Counterforce Lock/i);
-  assert.match(html, /one bounded original 2D upper-body counterforce build with no result or capture filed yet/i);
+  assert.match(html, /SCAPULAR COUNTERFORCE FAIL · DENY_PAID_3D_GENERATION/);
+  assert.match(html, /Composite concept preflight 56\/100 · threshold 85 · category floor 3\/10/);
+  assert.match(html, /Candidate met benchmark bar in 1\/6 blinded comparisons · 5\/6 required/);
+  assert.match(
+    html,
+    /href="\/captures\/P10\/round-012-scapular-counterforce\/NyraKestrel_ScapularCounterforce_CRITIC_REJECTED\.png"/,
+  );
+  assert.match(html, /href="\/data\/P10-round-012-scapular-counterforce\.json"/);
+  assert.match(html, /Elbow Return Triangle/i);
+  assert.match(html, /one bounded original 2D elbow-topology build with no result or capture filed yet/i);
   assert.match(html, /complete concept pack must earn at least 85\/100/i);
-  assert.match(html, /one scapula forward\/down, the other back\/up/i);
-  assert.match(html, /one violent stop/i);
+  assert.match(html, /far down-left trailing elbow/i);
+  assert.match(html, /large pale triangle/i);
   assert.doesNotMatch(html, /Reference\.zip|Reference\/[^"<]+\.(?:png|jpe?g|webp)/i);
   assert.doesNotMatch(
     html,
@@ -346,17 +354,17 @@ test("checked-in data contains the complete, honest P00–P25 ledger", async () 
   assert.equal(p00.status, "accepted");
   assert.equal(p10.status, "revising");
   assert.equal(dashboard.activeBuild.pieceId, "P10");
-  assert.equal(dashboard.activeBuild.round, 12);
-  assert.equal(dashboard.activeBuild.roundLabel, "P10 · Round 012");
+  assert.equal(dashboard.activeBuild.round, 13);
+  assert.equal(dashboard.activeBuild.roundLabel, "P10 · Round 013");
   assert.equal(
     dashboard.activeBuild.builder,
-    "Scapular Counterforce Lock",
+    "Elbow Return Triangle",
   );
   assert.equal(dashboard.activeBuild.status, p10.status);
   assert.match(dashboard.activeBuild.brief, /no result or capture filed yet/i);
-  assert.match(dashboard.activeBuild.brief, /upper-body counterforce/i);
-  assert.match(dashboard.activeBuild.brief, /opposing scapular motion/i);
-  assert.match(dashboard.activeBuild.brief, /violent stop/i);
+  assert.match(dashboard.activeBuild.brief, /elbow-topology/i);
+  assert.match(dashboard.activeBuild.brief, /acutely folded leading elbow/i);
+  assert.match(dashboard.activeBuild.brief, /triangular pale negative-space/i);
   assert.match(dashboard.activeBuild.brief, /paid 3D generation and Unity remain locked/i);
   assert.ok(queuedPieces.every((piece) => piece.status === "queued"));
 
@@ -384,7 +392,7 @@ test("checked-in data contains the complete, honest P00–P25 ledger", async () 
   assert.equal(dashboard.acceptance.maximum, 100);
   assert.match(dashboard.acceptance.p00Exception, /visual loss does not block/i);
 
-  assert.equal(dashboard.rounds.length, 12);
+  assert.equal(dashboard.rounds.length, 13);
   assert.equal(dashboard.rounds[0].pieceId, "P00");
   assert.equal(
     dashboard.rounds[0].critic.status,
@@ -643,6 +651,30 @@ test("checked-in data contains the complete, honest P00–P25 ledger", async () 
     "/captures/P10/round-011-kinetic-chain/NyraKestrel_KineticChain_CRITIC_REJECTED.png",
     "/data/P10-round-011-kinetic-chain.json",
   ]);
+  assert.equal(dashboard.rounds[12].pieceId, "P10");
+  assert.equal(dashboard.rounds[12].round, 12);
+  assert.equal(dashboard.rounds[12].status, "criticized");
+  assert.equal(
+    dashboard.rounds[12].critic.status,
+    "SCAPULAR COUNTERFORCE FAIL · DENY_PAID_3D_GENERATION",
+  );
+  assert.equal(dashboard.rounds[12].critic.score, 56);
+  assert.equal(
+    dashboard.rounds[12].critic.scoreLabel,
+    "Composite concept preflight 56/100 · threshold 85 · category floor 3/10",
+  );
+  assert.equal(
+    dashboard.rounds[12].critic.preference,
+    "Candidate met benchmark bar in 1/6 blinded comparisons · 5/6 required",
+  );
+  assert.match(
+    dashboard.rounds[12].critic.primaryGap,
+    /unequal-elbow counterforce topology is absent/i,
+  );
+  assert.deepEqual(dashboard.rounds[12].evidenceLinks, [
+    "/captures/P10/round-012-scapular-counterforce/NyraKestrel_ScapularCounterforce_CRITIC_REJECTED.png",
+    "/data/P10-round-012-scapular-counterforce.json",
+  ]);
 });
 
 test("P10 evidence is filed while the global latest manifest remains P00-pinned", async () => {
@@ -660,6 +692,7 @@ test("P10 evidence is filed while the global latest manifest remains P00-pinned"
     p10Round009MythicForce,
     p10Round010GroundArc,
     p10Round011KineticChain,
+    p10Round012ScapularCounterforce,
     latestManifest,
     p10Screenshot,
     turntableContact,
@@ -685,6 +718,7 @@ test("P10 evidence is filed while the global latest manifest remains P00-pinned"
     round009RejectedMythicForce,
     round010RejectedGroundArc,
     round011RejectedKineticChain,
+    round012RejectedScapularCounterforce,
   ] = await Promise.all([
     readFile(dataUrl, "utf8").then(JSON.parse),
     readFile(
@@ -733,6 +767,13 @@ test("P10 evidence is filed while the global latest manifest remains P00-pinned"
     ).then(JSON.parse),
     readFile(
       new URL("../public/data/P10-round-011-kinetic-chain.json", import.meta.url),
+      "utf8",
+    ).then(JSON.parse),
+    readFile(
+      new URL(
+        "../public/data/P10-round-012-scapular-counterforce.json",
+        import.meta.url,
+      ),
       "utf8",
     ).then(JSON.parse),
     readFile(
@@ -880,6 +921,12 @@ test("P10 evidence is filed while the global latest manifest remains P00-pinned"
     readFile(
       new URL(
         "../public/captures/P10/round-011-kinetic-chain/NyraKestrel_KineticChain_CRITIC_REJECTED.png",
+        import.meta.url,
+      ),
+    ),
+    readFile(
+      new URL(
+        "../public/captures/P10/round-012-scapular-counterforce/NyraKestrel_ScapularCounterforce_CRITIC_REJECTED.png",
         import.meta.url,
       ),
     ),
@@ -1988,6 +2035,147 @@ test("P10 evidence is filed while the global latest manifest remains P00-pinned"
   assert.equal(round011RejectedKineticChain.readUInt32BE(20), 1024);
   assert.doesNotMatch(
     JSON.stringify(p10Round011KineticChain),
+    /Reference\.zip|Reference\/[^"']+\.(?:png|jpe?g|webp)|\/Users\/|\/home\/|[A-Za-z]:\\Users\\|\/tmp\/|\/private\/var\/folders\//i,
+  );
+
+  assert.equal(p10Round012ScapularCounterforce.piece, "P10");
+  assert.equal(p10Round012ScapularCounterforce.round, 12);
+  assert.equal(
+    p10Round012ScapularCounterforce.status,
+    "rejected-scapular-counterforce-preflight",
+  );
+  assert.equal(p10Round012ScapularCounterforce.engineRun, false);
+  assert.equal(
+    p10Round012ScapularCounterforce.actualGameCapturePerformed,
+    false,
+  );
+  assert.equal(p10Round012ScapularCounterforce.unityProjectShellPresent, true);
+  assert.equal(
+    p10Round012ScapularCounterforce.runnableReviewedGameplayDetected,
+    false,
+  );
+  assert.equal(
+    p10Round012ScapularCounterforce.isolatedScapularCounterforceTargetPassed,
+    false,
+  );
+  assert.equal(
+    p10Round012ScapularCounterforce.source.receiptSha256,
+    "6a9a22e40e7c9656548b744617022f6d6dc7bd9a3a59374988c98a7a7c40dc62",
+  );
+  assert.equal(
+    p10Round012ScapularCounterforce.source.readmeSha256,
+    "c270b3adc5aad1400e6c7e484f611643b64c83a02cb4435e54caf67f3d5d4e26",
+  );
+  assert.equal(
+    p10Round012ScapularCounterforce.source.reviewSha256,
+    "8b074b94bc4fdbf9f70c643bed155699486014825ae21b1f50c52520ea48e02e",
+  );
+  assert.equal(
+    p10Round012ScapularCounterforce.source.guidePngSha256,
+    "434cde6efa606f528b09f0596ed020fd7c1549f547bef100e355c4afc9d44da5",
+  );
+  assert.equal(
+    p10Round012ScapularCounterforce.source.guideSvgSha256,
+    "40e6646dce9607aedecb3a95393627e2de07d1c207cccbb5abbd8a6e64e23899",
+  );
+  assert.equal(
+    p10Round012ScapularCounterforce.isolatedDecision.verdict,
+    "FAIL_SCAPULAR_COUNTERFORCE_LOCK_VISUAL_ONLY_GATE",
+  );
+  assert.equal(
+    p10Round012ScapularCounterforce.isolatedDecision.strongestCandidate,
+    "scapular-counterforce-candidate-04",
+  );
+  assert.equal(
+    p10Round012ScapularCounterforce.isolatedDecision.correctHighRightLowLeftShoulderOrderAchieved,
+    true,
+  );
+  assert.equal(
+    p10Round012ScapularCounterforce.isolatedDecision.completeSeparatedSameHiltGripAchieved,
+    true,
+  );
+  assert.equal(
+    p10Round012ScapularCounterforce.isolatedDecision.leadingFoldedElbowAchieved,
+    false,
+  );
+  assert.equal(
+    p10Round012ScapularCounterforce.isolatedDecision.trailingDownLeftReturnElbowAchieved,
+    false,
+  );
+  assert.equal(
+    p10Round012ScapularCounterforce.isolatedDecision.triangularNegativeSpaceAchieved,
+    false,
+  );
+  assert.equal(p10Round012ScapularCounterforce.visualReview.score, 56);
+  assert.equal(
+    p10Round012ScapularCounterforce.visualReview.observedMinimumCategoryScore,
+    3,
+  );
+  assert.equal(
+    p10Round012ScapularCounterforce.visualReview.candidateMetBenchmarkBarCount,
+    1,
+  );
+  assert.equal(
+    p10Round012ScapularCounterforce.visualReview.requiredCandidateMetBenchmarkBarCount,
+    5,
+  );
+  assert.match(
+    p10Round012ScapularCounterforce.visualReview.singleBiggestGap,
+    /unequal-elbow counterforce topology is absent/i,
+  );
+  assert.equal(
+    p10Round012ScapularCounterforce.visualReview.categoryScores.leadingFoldedElbowMechanics,
+    3,
+  );
+  assert.equal(
+    p10Round012ScapularCounterforce.visualReview.categoryScores.trailingElbowReturnAndTriangularNegativeSpace,
+    3,
+  );
+  assert.equal(
+    p10Round012ScapularCounterforce.decision.result,
+    "DENY_PAID_3D_GENERATION",
+  );
+  assert.equal(p10Round012ScapularCounterforce.decision.unityLocked, true);
+  assert.equal(p10Round012ScapularCounterforce.builderAttempts.length, 4);
+  assert.deepEqual(
+    p10Round012ScapularCounterforce.builderAttempts.map(
+      (attempt) => attempt.sha256,
+    ),
+    [
+      "0103e396280a07e223ab3340b52c6f43eec5fd5644b481926835099968634ef7",
+      "68f3581aff525aad917bb8a6b57d6c7e6b730598599e388d0a157a8fca4d151a",
+      "17b75caa6840cef263f357271960fa00b3e2ab015e8ccc4aac86c7c9bfdd3843",
+      "f64cfdad9fa0805d495d5c02db2ae8e0c697fa3b664b0402d8b717a8bd271411",
+    ],
+  );
+  assert.equal(p10Round012ScapularCounterforce.nextRound.round, 13);
+  assert.equal(
+    p10Round012ScapularCounterforce.nextRound.status,
+    "elbow-return-triangle",
+  );
+  assert.match(
+    p10Round012ScapularCounterforce.nextRound.target,
+    /trailing elbow far down-left below the hilt/i,
+  );
+  assert.equal(p10Round012ScapularCounterforce.conceptArt.length, 1);
+  assert.equal(
+    p10Round012ScapularCounterforce.conceptArt[0].publicPath,
+    "/captures/P10/round-012-scapular-counterforce/NyraKestrel_ScapularCounterforce_CRITIC_REJECTED.png",
+  );
+  assert.equal(
+    createHash("sha256")
+      .update(round012RejectedScapularCounterforce)
+      .digest("hex"),
+    p10Round012ScapularCounterforce.conceptArt[0].sha256,
+  );
+  assert.equal(
+    round012RejectedScapularCounterforce.subarray(1, 4).toString("ascii"),
+    "PNG",
+  );
+  assert.equal(round012RejectedScapularCounterforce.readUInt32BE(16), 1536);
+  assert.equal(round012RejectedScapularCounterforce.readUInt32BE(20), 1024);
+  assert.doesNotMatch(
+    JSON.stringify(p10Round012ScapularCounterforce),
     /Reference\.zip|Reference\/[^"']+\.(?:png|jpe?g|webp)|\/Users\/|\/home\/|[A-Za-z]:\\Users\\|\/tmp\/|\/private\/var\/folders\//i,
   );
 

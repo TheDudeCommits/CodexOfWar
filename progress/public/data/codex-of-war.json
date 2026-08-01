@@ -19,11 +19,11 @@
   ],
   "activeBuild": {
     "pieceId": "P10",
-    "round": 12,
-    "roundLabel": "P10 · Round 012",
+    "round": 13,
+    "roundLabel": "P10 · Round 013",
     "status": "revising",
-    "builder": "Scapular Counterforce Lock",
-    "brief": "Round 012 is one bounded original 2D upper-body counterforce build with no result or capture filed yet. It freezes the solved right-leg load, rear toe skid, chest-height hilt, external upper-right blade mass, identity, costume, weapon, and framing, then targets only opposing scapular motion, unequal elbows, and a deep ribcage-pelvis C-curve that resolves the caught blade as one violent stop; paid 3D generation and Unity remain locked.",
+    "builder": "Elbow Return Triangle",
+    "brief": "Round 013 is one bounded original 2D elbow-topology build with no result or capture filed yet. It freezes the corrected shoulder order and jaw gap, complete separated same-hilt grip, lower-body load, rear toe skid, upper-right blade mass, identity, costume, weapon, lighting, and framing, then targets only an acutely folded leading elbow and a far down-left trailing elbow whose returning forearm leaves one unmistakable triangular pale negative-space window; paid 3D generation and Unity remain locked.",
     "facts": [
       "P00 is accepted as infrastructure; its blind visual baseline remains an explicit 28.33–76.67 loss.",
       "Round 001 is mechanically reproducible: two independent critic reruns matched all six filed image hashes, P10 validation passed, focused EditMode passed 8/8, the full suite passed 14/14, and the P00 aggregate stayed byte-identical.",
@@ -55,7 +55,9 @@
       "The Round 010 composite scored 68/100 against 85, failed the category floor at 6/10, and met the benchmark bar in only 2/6 comparisons against 5/6 required. The single gap is a mechanically unified violent deceleration chain rather than another wide posed greatsword hold.",
       "Round 011 filed four bounded original 2D keyframes driven by an original public-safe pose guide. Candidate 04 materially improved the chest-height hilt, external upper-right blade mass, heavy right load column, airborne rear heel, toe skid, and coherent secondary lag, but it also introduced two-tail hair drift and exaggerated blade and boot masses.",
       "The fresh Round 011 critic rejected the isolated kinetic-chain target at 62/100, a 5/10 category floor, and 2/6 benchmark comparisons against 5/6 required. Both scapulae and arms still advance as a paired reach, so blade mass does not resolve through an opposing shoulder girdle and deep ribcage-pelvis C-curve as one violent stop. No integrated gameplay or player build exists for this asset; engine run and actual gameplay capture are false.",
-      "Round 012 is now one bounded original 2D Scapular Counterforce Lock build with no result or capture filed. Round 001 remains the latest filed in-engine P10 evidence, while the global latest manifest remains pinned to accepted P00."
+      "Round 012 filed four bounded original 2D upper-body mechanics attempts driven by an original public-safe guide. Candidate 04 narrowly corrected the high-right/low-left shoulder order and jaw gap while preserving widely separated complete contact, the lower-body load, rear toe skid, and external blade mass; the builder still marked the target failed.",
+      "The fresh Round 012 critic rejected the isolated Scapular Counterforce Lock at 56/100, a 3/10 category floor, and 1/6 benchmark comparisons against 5/6 required. The leading elbow stays long and the trailing elbow never drops down-left and returns, so the triangular push-pull mechanism is absent and the pose reads as paired hauling. No integrated gameplay or player build exists for this asset; engine run and actual gameplay capture are false.",
+      "Round 013 is now one bounded original 2D Elbow Return Triangle build with no result or capture filed. Round 001 remains the latest filed in-engine P10 evidence, while the global latest manifest remains pinned to accepted P00."
     ],
     "evidenceFingerprint": {
       "gitRevision": "2dedf617ace47ea5dbb2cde1817d6119604842d2",
@@ -117,7 +119,7 @@
         "Static lookdev only; no rig, S02, or S06"
       ]
     },
-    "nextGate": "Round 012 must preserve the solved lower-body load, rear toe skid, chest-height hilt, external blade mass, identity, costume, weapon, and framing while an original upper-body guide forces one scapula forward/down, the other back/up, unequal elbows, and a deep ribcage-pelvis C-curve that resolves the caught blade as one violent stop. The complete concept pack must earn at least 85/100 from a fresh critic, keep every category at or above 7, and meet the benchmark bar in at least 5 of 6 blinded comparisons before any paid 3D generation."
+    "nextGate": "Round 013 must preserve the corrected shoulder order and jaw gap, complete separated same-hilt grip, lower-body load, toe skid, blade mass, identity, design, lighting, and framing while an original guide forces an acutely folded leading elbow and a far down-left trailing elbow whose returning forearm leaves one large pale triangle. The complete concept pack must earn at least 85/100 from a fresh critic, keep every category at or above 7, and meet the benchmark bar in at least 5 of 6 blinded comparisons before any paid 3D generation."
   },
   "canonicalCapture": {
     "shotId": "S01",
@@ -436,6 +438,27 @@
         "scoreLabel": "Composite concept preflight 62/100 · threshold 85 · category floor 5/10",
         "preference": "Candidate met benchmark bar in 2/6 blinded comparisons · 5/6 required",
         "primaryGap": "The upper-body force chain is not mechanically arrested: both scapulae and arms still advance as a quiet paired reach, so the upper-right blade mass never resolves through a push-pull shoulder girdle into the ribcage-pelvis C-curve as one violent stop."
+      }
+    },
+    {
+      "round": 12,
+      "label": "P10 · Round 012",
+      "pieceId": "P10",
+      "phase": "Fresh Scapular Counterforce Lock and composite critic complete",
+      "status": "criticized",
+      "date": "2026-08-01",
+      "builderBrief": "Freeze the solved lower-body load, rear toe skid, chest-height hilt, external blade mass, identity, costume, weapon, lighting, and framing while an original upper-body guide forces high-right/low-left shoulder opposition, unequal elbows, and a deep ribcage-pelvis C-curve.",
+      "evidence": "The builder filed one strongest original 1536×1024 Scapular Counterforce frame after four bounded attempts and an original public-safe mechanics guide, while explicitly marking the target failed. Candidate 04 narrowly corrects shoulder order and clears the jaw, and it preserves widely separated complete same-hilt contact, the lower-body load, rear toe skid, and external blade mass. A fresh critic still rejected the isolated target: the leading elbow remains long, the trailing elbow never drops and returns, the triangular push-pull mechanism is absent, and the pose reads as paired hauling. The composite scored 56/100, failed the category floor at 3/10, and met the benchmark bar in 1/6 comparisons against 5/6 required. A Unity review shell exists, but the reviewed asset is not integrated and no gameplay scene or player build exists; engine run and actual gameplay capture are false, and paid 3D generation remains denied.",
+      "evidenceLinks": [
+        "/captures/P10/round-012-scapular-counterforce/NyraKestrel_ScapularCounterforce_CRITIC_REJECTED.png",
+        "/data/P10-round-012-scapular-counterforce.json"
+      ],
+      "critic": {
+        "status": "SCAPULAR COUNTERFORCE FAIL · DENY_PAID_3D_GENERATION",
+        "score": 56,
+        "scoreLabel": "Composite concept preflight 56/100 · threshold 85 · category floor 3/10",
+        "preference": "Candidate met benchmark bar in 1/6 blinded comparisons · 5/6 required",
+        "primaryGap": "The unequal-elbow counterforce topology is absent: the leading elbow stays long instead of folding while the trailing arm never drops down-left and returns, so no triangular push-pull mechanism appears and the pose reads as paired hauling."
       }
     }
   ],

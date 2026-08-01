@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1536" height="1024" viewBox="0 0 1536 1024">
+  <defs>
+    <marker id="arrow" markerUnits="userSpaceOnUse" markerWidth="30" markerHeight="30" refX="26" refY="15" orient="auto">
+      <path d="M0,0 L30,15 L0,30 Z" fill="#db522f"/>
+    </marker>
+    <style>
+      .ink{stroke:#172635;stroke-width:22;stroke-linecap:round;stroke-linejoin:round;fill:none}
+      .frozen{stroke:#738590;stroke-width:34;stroke-linecap:round;stroke-linejoin:round;fill:none;opacity:.62}
+      .bone{stroke:#172635;stroke-width:18;stroke-linecap:round;stroke-linejoin:round;fill:none}
+      .accent{stroke:#db522f;stroke-width:16;stroke-linecap:round;stroke-linejoin:round;fill:none}
+      .guide{stroke:#27728e;stroke-width:14;stroke-linecap:round;stroke-linejoin:round;fill:none}
+      .joint{fill:#f5efe4;stroke:#db522f;stroke-width:8}
+      .label{font-family:Arial,sans-serif;font-size:23px;font-weight:700;fill:#536474}
+      .small{font-family:Arial,sans-serif;font-size:19px;font-weight:700;fill:#536474}
+    </style>
+  </defs>
+  <rect width="1536" height="1024" fill="#f2eee6"/>
+  <text x="64" y="70" font-family="Arial,sans-serif" font-size="29" font-weight="800" fill="#26394b">ORIGINAL SCAPULAR COUNTERFORCE LOCK — UPPER-BODY MECHANICS GUIDE</text>
+  <text x="64" y="105" font-family="Arial,sans-serif" font-size="19" font-weight="700" fill="#627487">Authored vector geometry • frozen Round011 lower load shown in gray • no third-party pose image</text>
+
+  <!-- Frozen lower-body load: pelvis into compressed planted character-right leg; rear toe skid held. -->
+  <path class="frozen" d="M735 607 L610 718 L454 834 L405 896 L474 913"/>
+  <path class="frozen" d="M813 598 L930 688 L1032 800 L1112 894 L1294 910"/>
+  <path d="M386 884 L430 916 L486 919" stroke="#27728e" stroke-width="24" stroke-linecap="round" fill="none"/>
+  <path d="M1086 874 L1262 892 L1332 922 L1104 924 Z" fill="#354a58" opacity=".78"/>
+  <path d="M112 927 C450 917 827 936 1435 920" stroke="#a8acac" stroke-width="6" fill="none"/>
+  <text class="small" x="245" y="963">FROZEN: LEFT TOE SKID / HIGH HEEL</text>
+  <text class="small" x="1082" y="963">FROZEN: RIGHT SOLE / LOAD COLUMN</text>
+
+  <!-- Opposed pelvis and ribcage. -->
+  <path class="bone" d="M705 610 L835 586"/>
+  <path class="accent" d="M680 508 L820 435"/>
+  <path class="guide" d="M779 600 C697 568 646 514 654 454 C661 398 712 358 776 339"/>
+  <path class="guide" d="M652 454 C618 498 625 554 682 594" stroke-dasharray="15 14"/>
+  <text class="label" x="466" y="617">PELVIS HELD DOWN-LEFT</text>
+  <text class="label" x="831" y="458">RIBCAGE ROTATES / SIDE-BENDS OPPOSITE</text>
+  <text class="label" x="513" y="442">VISIBLE LOADED C-CURVE</text>
+
+  <!-- Head and neck counterturn. -->
+  <path class="ink" d="M776 339 L763 291"/>
+  <ellipse cx="747" cy="220" rx="65" ry="78" transform="rotate(-16 747 220)" fill="#dbc7a1" stroke="#172635" stroke-width="18"/>
+  <path class="accent" d="M722 219 L682 211"/>
+
+  <!-- Shoulder girdle: leading (character-right) forward/high; trailing (character-left) back/low. -->
+  <path class="accent" d="M675 394 L736 430"/>
+  <path class="accent" d="M774 365 L862 327"/>
+  <path class="guide" d="M665 381 C690 404 712 419 741 431" marker-end="url(#arrow)"/>
+  <path class="guide" d="M872 316 C838 341 809 360 777 373" marker-end="url(#arrow)"/>
+  <text class="label" x="382" y="364">TRAILING SCAPULA: RETRACT + DEPRESS</text>
+  <text class="label" x="868" y="300">LEADING SCAPULA: PROTRACT</text>
+  <text class="small" x="900" y="328">SHOULDER FORWARD / HIGH</text>
+  <text class="small" x="410" y="394">SHOULDER BACK / LOW</text>
+
+  <!-- Unequal arm chains: trailing elbow opens long and low; leading elbow folds tight and high. -->
+  <path class="bone" d="M675 394 L515 515 L712 544"/>
+  <path class="bone" d="M862 327 L819 402 L866 431"/>
+  <circle class="joint" cx="675" cy="394" r="21"/>
+  <circle class="joint" cx="515" cy="515" r="21"/>
+  <circle class="joint" cx="712" cy="544" r="21"/>
+  <circle class="joint" cx="862" cy="327" r="21"/>
+  <circle class="joint" cx="819" cy="402" r="21"/>
+  <circle class="joint" cx="866" cy="431" r="21"/>
+  <text class="label" x="348" y="548">TRAILING ELBOW: LONG / OPEN</text>
+  <text class="label" x="876" y="414">LEADING ELBOW: SHORT / FOLDED</text>
+
+  <!-- Hilt is displaced from sternum; blade mass remains external upper-right. -->
+  <circle cx="782" cy="456" r="16" fill="#172635"/>
+  <text class="small" x="677" y="486">STERNUM</text>
+  <path d="M640 610 L935 359" stroke="#286a88" stroke-width="34" stroke-linecap="round"/>
+  <path d="M710 552 L902 390" stroke="#db522f" stroke-width="8" stroke-dasharray="13 12"/>
+  <path d="M923 329 L969 388" stroke="#d8bd85" stroke-width="27"/>
+  <path d="M951 355 L1405 90" stroke="#172635" stroke-width="54" stroke-linecap="square"/>
+  <path d="M1334 127 L1430 70 L1410 128" fill="#172635"/>
+  <circle cx="1162" cy="235" r="33" fill="#db522f" opacity=".78"/>
+  <text class="label" x="1025" y="194">BLADE MASS OUTSIDE TORSO</text>
+  <text class="label" x="560" y="664">HILT DISPLACED FROM STERNUM</text>
+  <path class="accent" d="M782 468 C758 496 737 519 710 546" marker-end="url(#arrow)"/>
+
+  <!-- Single force-resolution line: blade mass through opposing shoulder girdle / ribs / pelvis into right plant. -->
+  <path d="M1162 235 C1040 301 930 353 862 382 C810 405 785 446 799 500 C814 560 862 611 928 676 C1000 748 1070 828 1164 890" stroke="#db522f" stroke-width="16" stroke-dasharray="22 16" fill="none" marker-end="url(#arrow)"/>
+  <text class="label" x="966" y="573">LOAD RESOLVES THROUGH</text>
+  <text class="label" x="966" y="604">SHOULDER GIRDLE → RIBS →</text>
+  <text class="label" x="966" y="635">PLANTED RIGHT LEG</text>
+
+  <circle class="joint" cx="735" cy="607" r="21"/>
+  <circle class="joint" cx="813" cy="598" r="21"/>
+  <circle class="joint" cx="930" cy="688" r="21"/>
+  <circle class="joint" cx="1032" cy="800" r="21"/>
+  <circle class="joint" cx="1112" cy="894" r="21"/>
+</svg>

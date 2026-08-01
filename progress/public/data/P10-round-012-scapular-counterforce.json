@@ -1,0 +1,167 @@
+{
+  "schemaVersion": 1,
+  "piece": "P10",
+  "round": 12,
+  "status": "rejected-scapular-counterforce-preflight",
+  "reviewType": "fresh-context Scapular Counterforce Lock and composite 2D concept preflight",
+  "reviewedAt": "2026-08-01T06:17:01Z",
+  "artifactClass": "original 2D guide-driven upper-body mechanics concept art",
+  "engineRun": false,
+  "actualGameCapturePerformed": false,
+  "unityProjectShellPresent": true,
+  "runnableReviewedGameplayDetected": false,
+  "unityCaptureFiled": false,
+  "threeDimensionalAssetFiled": false,
+  "gameReadyEvidenceFiled": false,
+  "builderAcceptedFrameFiled": true,
+  "isolatedScapularCounterforceTargetPassed": false,
+  "paid3DGenerationAuthorized": false,
+  "source": {
+    "name": "Nyra Kestrel Scapular Counterforce Lock mechanics proof",
+    "scope": "Original 2D guide-driven upper-body mechanics evidence only; no gameplay, 3D model, finished game asset, or production-ready implementation claim.",
+    "creator": "OpenAI image generation via Codex",
+    "referencePixelsSuppliedToGeneration": false,
+    "receiptPath": "ArtSource/P10/Round012/ScapularCounterforce/P10_Round012_ScapularCounterforceReceipt.json",
+    "receiptSha256": "6a9a22e40e7c9656548b744617022f6d6dc7bd9a3a59374988c98a7a7c40dc62",
+    "readmePath": "ArtSource/P10/Round012/ScapularCounterforce/README.md",
+    "readmeSha256": "c270b3adc5aad1400e6c7e484f611643b64c83a02cb4435e54caf67f3d5d4e26",
+    "reviewPath": "ArtSource/P10/Round012/ScapularCounterforce/P10_Round012_FreshScapularCounterforceReview.json",
+    "reviewSha256": "8b074b94bc4fdbf9f70c643bed155699486014825ae21b1f50c52520ea48e02e",
+    "guidePngPath": "ArtSource/P10/Round012/ScapularCounterforce/P10_Round012_OriginalScapularMechanicsGuide.png",
+    "guidePngSha256": "434cde6efa606f528b09f0596ed020fd7c1549f547bef100e355c4afc9d44da5",
+    "guideSvgPath": "ArtSource/P10/Round012/ScapularCounterforce/P10_Round012_OriginalScapularMechanicsGuide.svg",
+    "guideSvgSha256": "40e6646dce9607aedecb3a95393627e2de07d1c207cccbb5abbd8a6e64e23899"
+  },
+  "isolatedDecision": {
+    "verdict": "FAIL_SCAPULAR_COUNTERFORCE_LOCK_VISUAL_ONLY_GATE",
+    "strongestCandidate": "scapular-counterforce-candidate-04",
+    "correctHighRightLowLeftShoulderOrderAchieved": true,
+    "jawGapAchieved": true,
+    "completeSeparatedSameHiltGripAchieved": true,
+    "lowerBodyLoadPreserved": true,
+    "leadingFoldedElbowAchieved": false,
+    "trailingDownLeftReturnElbowAchieved": false,
+    "triangularNegativeSpaceAchieved": false,
+    "deepCCurveCounterrotationAchieved": false,
+    "oneViolentStopAchieved": false,
+    "finding": "The strongest frame narrowly fixes shoulder order and the jaw gap while preserving clear separated contact, the lower-body load, rear toe skid, and external blade mass. Both arms remain long, the trailing elbow never drops and returns, the leading elbow never folds, and the quiet torso turns the claimed lock into paired hauling."
+  },
+  "visualReview": {
+    "score": 56,
+    "maximum": 100,
+    "passThreshold": 85,
+    "criticalFloorPerCategory": 7,
+    "observedMinimumCategoryScore": 3,
+    "thresholdResult": "FAIL",
+    "criticalFloorResult": "FAIL",
+    "verdict": "DENY_PAID_3D_GENERATION",
+    "comparisonCount": 6,
+    "candidateMetBenchmarkBarCount": 1,
+    "candidateBelowBenchmarkBarCount": 5,
+    "requiredCandidateMetBenchmarkBarCount": 5,
+    "benchmarkGateResult": "FAIL",
+    "benchmarkPolicy": "Aggregate blinded-comparison results only; no benchmark image, crop, comparison sheet, filename, path, or other benchmark pixel is published.",
+    "singleBiggestGap": "The unequal-elbow counterforce topology is absent: the leading elbow stays long instead of folding while the trailing arm never drops down-left and returns, so no triangular push-pull mechanism appears and the pose reads as paired hauling.",
+    "categoryScores": {
+      "identityAndFrozenDesignContinuity": 6,
+      "shoulderDeltaAndScapularOrder": 6,
+      "leadingFoldedElbowMechanics": 3,
+      "trailingElbowReturnAndTriangularNegativeSpace": 3,
+      "cCurveAndRibcagePelvisCounterrotation": 5,
+      "completeSeparatedSameHiltGrip": 8,
+      "lowerBodyLoadPreservation": 7,
+      "anatomySilhouetteAndWeaponLeverage": 6,
+      "renderMaterialsAndReadability": 7,
+      "benchmarkAuthorshipAndViolentStopQuality": 5
+    }
+  },
+  "engineTruth": {
+    "unityProjectShellPresent": true,
+    "installedUnityEditorDetected": true,
+    "reviewOnlyUnityScenesDetected": true,
+    "round012AssetIntegratedInUnity": false,
+    "runtimeGameplayArchitectureDetected": false,
+    "playerBuildDetected": false,
+    "runnableGameForReviewedAssetDetected": false,
+    "engineRun": false,
+    "actualGameCapturePerformed": false,
+    "finding": "The workspace contains an installed editor and a Unity review shell, but no integrated Round012 asset, runtime gameplay controller, encounter scene, or player build. No unrelated shell run or fabricated gameplay capture was filed."
+  },
+  "decision": {
+    "result": "DENY_PAID_3D_GENERATION",
+    "paid3DGenerationAuthorized": false,
+    "unityLocked": true,
+    "instruction": "Preserve the corrected shoulder order, jaw gap, separated same-hilt grip, lower load, toe skid, and blade mass; do not begin paid 3D generation or Unity integration from this pack."
+  },
+  "limitations": [
+    "The filed image is original 2D concept art, not gameplay or game capture.",
+    "No actual game run was performed because no runnable gameplay integrating the reviewed asset exists.",
+    "The workspace has a Unity review shell, not a player build or integrated combat encounter for this asset.",
+    "No 3D mesh, topology, rig, deformation, UV, collision, animation, LOD, texture, performance, or game-ready claim is made.",
+    "The builder marked the target failed and promoted candidate 04 only for critic handoff; the independent critic also rejected the isolated Scapular Counterforce Lock and complete composite gate.",
+    "The concept review cannot establish legal originality, exclusivity, copyright status, trademark clearance, or absence of all third-party similarity.",
+    "Paid 3D generation and Unity remain locked because the isolated target, total-score, category-floor, and blinded-comparison gates all failed."
+  ],
+  "conceptArt": [
+    {
+      "label": "CRITIC-REJECTED — builder-promoted Scapular Counterforce frame",
+      "disposition": "builder-failed-promoted-for-critic-and-critic-rejected-evidence",
+      "evidenceType": "Rejected 2D mechanics evidence — not gameplay, 3D, or game-ready evidence",
+      "publicPath": "/captures/P10/round-012-scapular-counterforce/NyraKestrel_ScapularCounterforce_CRITIC_REJECTED.png",
+      "sha256": "f64cfdad9fa0805d495d5c02db2ae8e0c697fa3b664b0402d8b717a8bd271411",
+      "dimensions": {
+        "width": 1536,
+        "height": 1024
+      },
+      "format": "PNG",
+      "finding": "The high-right/low-left shoulder order, jaw gap, widely separated complete hands, exposed hilt, lower load, toe skid, and upper-right blade mass read clearly. The absent unequal-elbow return triangle leaves a paired hauling pose."
+    }
+  ],
+  "guide": {
+    "authorship": "Original public-safe SVG authored for Round012; no third-party pose image.",
+    "pngSha256": "434cde6efa606f528b09f0596ed020fd7c1549f547bef100e355c4afc9d44da5",
+    "svgSha256": "40e6646dce9607aedecb3a95393627e2de07d1c207cccbb5abbd8a6e64e23899",
+    "dimensions": {
+      "width": 1536,
+      "height": 1024
+    }
+  },
+  "builderAttempts": [
+    {
+      "candidate": 1,
+      "sha256": "0103e396280a07e223ab3340b52c6f43eec5fd5644b481926835099968634ef7",
+      "disposition": "rejected",
+      "reason": "Shoulder order reverses, the trailing grip collapses, and unequal elbows do not read."
+    },
+    {
+      "candidate": 2,
+      "sha256": "68f3581aff525aad917bb8a6b57d6c7e6b730598599e388d0a157a8fca4d151a",
+      "disposition": "rejected",
+      "reason": "Separated contact improves, but the trailing shoulder remains high and both arms still reach together."
+    },
+    {
+      "candidate": 3,
+      "sha256": "17b75caa6840cef263f357271960fa00b3e2ab015e8ccc4aac86c7c9bfdd3843",
+      "disposition": "rejected",
+      "reason": "The guide-first coordinate rebuild still keeps the trailing shoulder at the jaw and relaxes the torso toward upright."
+    },
+    {
+      "candidate": 4,
+      "sha256": "f64cfdad9fa0805d495d5c02db2ae8e0c697fa3b664b0402d8b717a8bd271411",
+      "disposition": "builder-target-failed-promoted-for-critic-critic-rejected",
+      "reason": "Strongest narrow shoulder-order and contact proof, but both elbows remain long and the triangular push-pull mechanism is absent."
+    }
+  ],
+  "nextRound": {
+    "round": 13,
+    "status": "elbow-return-triangle",
+    "target": "Freeze every other judged fact; re-author only the elbow and forearm paths by folding the leading elbow acutely beneath its existing high shoulder and placing the trailing elbow far down-left below the hilt before returning that forearm to its existing grip, leaving the required pale triangle open.",
+    "compositePackGate": {
+      "minimumTotalScore": 85,
+      "minimumScorePerCategory": 7,
+      "blindComparisonCount": 6,
+      "minimumComparisonsMeetingBenchmarkBar": 5,
+      "paid3DGenerationRequiresFullPass": true
+    }
+  }
+}

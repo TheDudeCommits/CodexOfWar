@@ -1,0 +1,308 @@
+{
+  "schema": "codexofwar.original-2d-scapular-counterforce-receipt",
+  "version": "1.0.0",
+  "receipt_id": "P10-Round012-ScapularCounterforceReceipt",
+  "generated_utc": "2026-08-01T06:03:21Z",
+  "scope": {
+    "project_asset": "P10 Nyra Kestrel",
+    "round": "Round012",
+    "judged_unit": "Scapular Counterforce Lock — upper-body force arrest only",
+    "scope_class": "one original 2D upper-body mechanics proof only",
+    "builder_target_result": "FAIL",
+    "eligibility": "INELIGIBLE_FOR_SCAPULAR_COUNTERFORCE_LOCK",
+    "final_disposition": "PROMOTED_STRONGEST_BOUNDED_NARROW_SHOULDER_ORDER_CONTACT_PROOF_FOR_FRESH_CRITICISM_WITH_TARGET_FAIL",
+    "paid_3d_generation_authorized": false,
+    "engine_integration_authorized": false,
+    "claims_not_made": [
+      "benchmark victory or benchmark pass",
+      "successful Scapular Counterforce Lock",
+      "3D, rig, mesh, UV, deformation, collision, animation, LOD, engine, game-ready, or production-ready status",
+      "legal originality, exclusivity, copyright clearance, or trademark clearance"
+    ]
+  },
+  "bounded_input_policy": {
+    "private_benchmark_archive_accessed": false,
+    "franchise_pixels_used": false,
+    "third_party_pose_pixels_used": false,
+    "read_inputs": [
+      {
+        "role": "Round011 accepted keyframe and frozen identity/design/load authority",
+        "path": "../../Round011/KineticChain/P10_Round011_NyraKestrel_KineticChain_v1.png",
+        "sha256": "d148436582ac130ea6d867db7d7544aa7f1726143be4d9a8ce9206bf19fa7f62",
+        "byte_size": 2086501,
+        "dimensions_px": {"width": 1536, "height": 1024},
+        "format": "png"
+      },
+      {
+        "role": "Round012 original public-safe upper-body mechanics guide",
+        "path": "P10_Round012_OriginalScapularMechanicsGuide.png",
+        "sha256": "434cde6efa606f528b09f0596ed020fd7c1549f547bef100e355c4afc9d44da5",
+        "byte_size": 212067,
+        "dimensions_px": {"width": 1536, "height": 1024},
+        "format": "png"
+      }
+    ],
+    "frozen_invariants": [
+      "Round011 huge planted character-right grounding boot and compressed right ankle/knee/hip load column",
+      "Round011 airborne character-left heel, toe-only skid and gouge",
+      "Round011 chest-height lower-left-to-upper-right hilt axis",
+      "Round011 blade center of mass outside torso toward upper-right",
+      "Nyra identity, face, hair, costume, attached yoke, copper route, capacitor, greaves, palette, materials and weapon design",
+      "one full person, one full weapon and pale warm-neutral studio lighting/background"
+    ]
+  },
+  "original_upper_body_mechanics_guide": {
+    "authorship": "original public-safe SVG authored for Round012 before generation; no third-party pose image or pixels",
+    "canvas_px": {"width": 1536, "height": 1024},
+    "svg": {
+      "path": "P10_Round012_OriginalScapularMechanicsGuide.svg",
+      "sha256": "40e6646dce9607aedecb3a95393627e2de07d1c207cccbb5abbd8a6e64e23899",
+      "byte_size": 6047,
+      "format": "svg"
+    },
+    "rendered_png": {
+      "path": "P10_Round012_OriginalScapularMechanicsGuide.png",
+      "sha256": "434cde6efa606f528b09f0596ed020fd7c1549f547bef100e355c4afc9d44da5",
+      "byte_size": 212067,
+      "dimensions_px": {"width": 1536, "height": 1024},
+      "format": "png"
+    },
+    "exact_authored_geometry": {
+      "ground_path_d": "M 112 927 C 450 917 827 936 1435 920",
+      "frozen_left_lower_chain": [[735,607],[610,718],[454,834],[405,896],[474,913]],
+      "frozen_right_load_chain": [[813,598],[930,688],[1032,800],[1112,894],[1294,910]],
+      "pelvis_segment": [[705,610],[835,586]],
+      "ribcage_opposition_segment": [[680,508],[820,435]],
+      "spine_c_curve_path_d": "M 779 600 C 697 568 646 514 654 454 C 661 398 712 358 776 339",
+      "trailing_scapula_segment": [[675,394],[736,430]],
+      "leading_scapula_segment": [[774,365],[862,327]],
+      "trailing_arm_chain": [[675,394],[515,515],[712,544]],
+      "leading_arm_chain": [[862,327],[819,402],[866,431]],
+      "head": {"center": [747,220], "radii": [65,78], "rotation_degrees": -16},
+      "sternum": [782,456],
+      "hilt_axis": [[640,610],[935,359]],
+      "blade_axis": [[951,355],[1405,90]],
+      "blade_center_of_mass": [1162,235],
+      "force_resolution_path_d": "M1162 235 C1040 301 930 353 862 382 C810 405 785 446 799 500 C814 560 862 611 928 676 C1000 748 1070 828 1164 890"
+    },
+    "intent": [
+      "Leading character-right scapula protracted with shoulder forward and high.",
+      "Trailing character-left scapula retracted and depressed with shoulder back and low.",
+      "Leading elbow sharply flexed while trailing elbow opens long outside the torso.",
+      "Ribcage rotates and side-bends opposite the frozen pelvis to form a visible loaded C-curve.",
+      "Chest-height hilt remains displaced from sternum and blade mass remains outside torso upper-right.",
+      "A single instructional force line resolves through the shoulder girdle and ribs into the already-loaded planted right leg.",
+      "All guide labels and diagram marks are instructional only and prohibited from final art."
+    ]
+  },
+  "generator": {
+    "mode": "identity-preserving multi-image edits",
+    "execution_path": "managed workspace image-edit endpoint",
+    "model": "not exposed by managed tool",
+    "native_output_size": "1536x1024",
+    "output_format": "png",
+    "generation_cap": 4,
+    "outputs_generated": 4,
+    "cap_exhausted": true,
+    "fifth_output_generated": false
+  },
+  "generation_lineage": [
+    {
+      "generation_id": "scapular-counterforce-candidate-01",
+      "taxonomy": "identity-preserve",
+      "mode": "edit",
+      "input_roles": ["Round011 accepted keyframe", "Round012 original mechanics guide"],
+      "input_sha256": ["d148436582ac130ea6d867db7d7544aa7f1726143be4d9a8ce9206bf19fa7f62", "434cde6efa606f528b09f0596ed020fd7c1549f547bef100e355c4afc9d44da5"],
+      "output": "Iterations/P10_Round012_ScapularCounterforce_candidate01.png",
+      "sha256": "0103e396280a07e223ab3340b52c6f43eec5fd5644b481926835099968634ef7",
+      "byte_size": 2102383,
+      "dimensions_px": {"width": 1536, "height": 1024},
+      "format": "png",
+      "root_verdict": "rejected",
+      "rejection_reasons": [
+        "Viewer-right/character-right leading shoulder reads low while viewer-left trailing shoulder is high, opposite contract.",
+        "Only the guard-side hand reads completely; trailing grip is hidden/collapsed.",
+        "Long-open versus short-folded elbows do not form a legible push-pull chain."
+      ],
+      "native_positive_findings": [
+        "Frozen lower-body right load column and left toe skid survive.",
+        "Upper-right blade center of mass survives.",
+        "Torso bow is stronger than Round011."
+      ],
+      "exact_prompt_lines": [
+        "Use case: identity-preserve",
+        "Asset type: original 2D upper-body mechanics correction, P10 Round012 Scapular Counterforce Lock, candidate 01 of at most 04",
+        "Input roles: Image 1 is the exact accepted Round011 art and the absolute authority for Nyra identity, mature face, hair, cobalt/ivory/blackened-steel/oxidized-copper costume and equipment, one exact complete storm-shear weapon, studio lighting/background, framing, and ALL lower-body geometry. Image 2 is an ORIGINAL public-safe mechanics guide and the sole authority for the requested upper-body push-pull geometry; translate only its anatomy/force relationships into natural painted anatomy. Never render its labels, arrows, lines, circles, title, or diagram marks.",
+        "Primary request: Change ONLY the shoulder girdle, ribcage/spine, and elbows/forearms of Image 1 so the instant reads as a violent upper-body counterforce lock arresting the already-frozen upper-right blade mass. Preserve Image 1's lower body pixel-composition as closely as possible: same huge planted character-right boot, same compressed right ankle/knee/hip load column, same airborne character-left heel and exact toe skid/gouge, same pelvis location and leg silhouettes. Preserve the chest-height diagonal hilt, both gripping hands on the same continuous hilt, pommel, guard, full blade axis and upper-right blade center of mass exactly. Do not redesign or polish.",
+        "Scapular lock — intentionally exaggerate beyond comfortable symmetry: character-RIGHT leading scapula is strongly PROTRACTED and drives the leading shoulder far FORWARD and visibly HIGH toward the guard. Character-LEFT trailing scapula is strongly RETRACTED and DEPRESSED, pulling that shoulder far BACK and visibly LOW. The shoulder-height split must be unmistakable at a tiny thumbnail: leading shoulder at least one full shoulder-cap higher than trailing shoulder. Clavicles and upper-back contour twist steeply between them. This is push-pull across the shoulder girdle, not both shoulders reaching forward.",
+        "Unequal elbows — intentionally extreme: leading character-right elbow folds very tightly beneath/behind its fist, acutely flexed close to ribs. Trailing character-left elbow travels far back/left and low, substantially more open, making a long visible upper-arm/forearm chain that returns to the trailing hand. One elbow is short/folded; the other long/open. Never similar flexion, parallel forearms, or paired reaching.",
+        "Torso counterforce: keep pelvis frozen down-left while ribcage rotates hard opposite it and side-bends away from the blade mass. Deepen the spine into a large visible loaded C-curve, with one flank sharply compressed and the other stretched. Sternum is pitched and displaced away from the hilt; the chest must not sit centered under both hands. The blade mass line must read from upper-right blade through wrists, unequal elbows, opposed scapulae, twisted ribs, frozen pelvis, and into the planted right leg.",
+        "Hard freeze: exact Image 1 identity, expression and gaze; exact costume, yoke, copper route, capacitor, greaves, cloth, palette, materials, weapon construction and lighting; exact one-person/full-weapon framing; exact Round011 lower-body load and toe-skid; exact chest-height hilt and upper-right blade center of mass. Both complete hands remain visibly closed around separated regions of the same continuous hilt with plausible digits and straight loaded wrists.",
+        "Composition: native 1536x1024 landscape; one complete adult woman and one complete weapon; all head/hair, yoke, hands, pommel, guard/cage, blade tip, both legs, planted sole, airborne rear heel and toe fully inside the existing margins; pale warm neutral studio only.",
+        "Final-art prohibitions: no text, label, arrow, diagram mark, joint circle, force line, logo, watermark, environment, enemy, lightning, glow, particles, sparks, speed lines, motion blur, dust cloud, added design detail, extra person, duplicate/detached weapon, crop, penetration, or bare/fetish amplification.",
+        "Hard reject: paired reaching; level or quiet shoulders; both scapulae protracted; similar elbow flexion; bilateral upper-body balance; upright/straight torso; hilt centered on sternum; weakened C-curve; changed lower body or toe skid; waist hilt; blade mass moved inward; identity, costume, weapon, or lighting drift."
+      ]
+    },
+    {
+      "generation_id": "scapular-counterforce-candidate-02",
+      "taxonomy": "identity-preserve",
+      "mode": "edit",
+      "input_roles": ["candidate 01 base", "Round011 accepted keyframe", "Round012 original mechanics guide"],
+      "input_sha256": ["0103e396280a07e223ab3340b52c6f43eec5fd5644b481926835099968634ef7", "d148436582ac130ea6d867db7d7544aa7f1726143be4d9a8ce9206bf19fa7f62", "434cde6efa606f528b09f0596ed020fd7c1549f547bef100e355c4afc9d44da5"],
+      "output": "Iterations/P10_Round012_ScapularCounterforce_candidate02.png",
+      "sha256": "68f3581aff525aad917bb8a6b57d6c7e6b730598599e388d0a157a8fca4d151a",
+      "byte_size": 2076975,
+      "dimensions_px": {"width": 1536, "height": 1024},
+      "format": "png",
+      "root_verdict": "rejected",
+      "rejection_reasons": [
+        "Shoulder order remains reversed: viewer-left trailing shoulder is high at jaw and viewer-right leading shoulder is low.",
+        "Trailing elbow remains within/near torso instead of far down-left.",
+        "Arms still read as paired reaching."
+      ],
+      "native_positive_findings": [
+        "Both hands are complete and separated with conspicuous exposed cobalt hilt.",
+        "Lower load/toe skid, blade mass, identity/design/lighting and torso bow largely survive."
+      ],
+      "exact_prompt_lines": [
+        "Use case: identity-preserve",
+        "Asset type: targeted original 2D upper-body mechanics correction, P10 Round012 Scapular Counterforce Lock, candidate 02 of at most 04",
+        "Input roles: Image 1 is the immediate art base and absolute authority for the exact frozen lower body, head, face, braid, blade placement, upper-right blade center of mass, studio lighting/background, palette, materials, costume/equipment, and framing. Image 2 is the accepted Round011 authority for two complete visible hands on separated regions of one continuous chest-height cobalt hilt and the frozen design/load invariants. Image 3 is the ORIGINAL public-safe mechanics guide and controls only upper-body push-pull geometry; translate it into anatomy and never reproduce any text, labels, arrows, circles, lines, or diagram marks.",
+        "Primary request: Re-author ONLY Image 1's shoulder girdle, ribcage/spine surface, elbows, forearms, and hand placement on the already-existing hilt. Preserve everything else as closely as possible. This is one exact correction: make the scapular counterforce lock unmistakable at thumbnail scale.",
+        "Anatomical map, character directions explicit: character-RIGHT is the weapon-side/viewer-right side. Place character-RIGHT leading shoulder visibly FORWARD and VERY HIGH, tucked near the jaw and at least one full shoulder-cap above the opposite shoulder. Protract that scapula around the ribs. Fold the character-right leading elbow sharply underneath and slightly behind the raised shoulder, with an acute angle close to the upper ribs. The complete right hand closes immediately behind the guard.",
+        "Character-LEFT is viewer-left/trailing side. Place character-LEFT trailing shoulder visibly BACK and LOW, retracted and depressed behind the ribcage. Drive the trailing left elbow far DOWN-LEFT, fully outside the torso silhouette near x=500,y=520 on the 1536x1024 canvas, substantially lower and farther left than either hand. Then return the long left forearm up-right to a complete visible left hand gripping near the pommel region of the same hilt. The left arm must form a large open triangular return path. Do not hide it behind chest, armor, guard, or right arm.",
+        "Grip spacing: both complete hands and all plausible digits are unoccluded. Right hand immediately behind guard; left hand far down-hilt toward pommel. Leave a conspicuous uninterrupted stretch of bare cobalt wrap between the hands, roughly one hand-width or more. No guard clustering, fused fingers, hidden trailing grip, crossed wrists, or hand overlap. Preserve the exact chest-height lower-left to upper-right hilt axis and exact blade/pommel/guard construction.",
+        "Torso: force a steep clavicle/shoulder line descending from high weapon-side character-right to low trailing character-left. Keep the pelvis/lower body frozen. Deepen the C-curve and counter-rotation: the high weapon-side torso flank is visibly short/compressed under the folded elbow; the opposite trailing flank is long/stretched down toward the retracted low shoulder and far elbow. Sternum stays displaced away from hilt. Blade load visibly resolves through wrists, asymmetric elbows, opposed scapulae, twisted ribs and frozen pelvis into the planted right leg.",
+        "Absolute freeze from Image 1: every lower-body pixel-composition as closely as possible, including huge planted right boot, compressed right leg, airborne left heel and exact toe skid/gouge; head/identity/expression/gaze/hair; one exact weapon, upper-right blade CoM, chest-height hilt axis; costume, attached yoke, copper route, capacitor, greaves, cloth, palette, materials; pale warm studio lighting/background; full framing. No design polish or new detail.",
+        "Final-art prohibitions: no text, label, arrow, force line, diagram mark, joint circle, logo, watermark, environment, enemy, lightning, glow, particles, sparks, speed lines, blur, dust, crop, extra person, duplicate/detached weapon, body penetration, design change, or bare/fetish amplification.",
+        "Hard reject: viewer-right/character-right leading shoulder low; viewer-left/character-left trailing shoulder high; level shoulders; both shoulders forward; similar elbow flexion; paired reaching; hidden left arm or hand; guard clustering; no cobalt hilt gap; upright quiet torso; hilt centered at sternum; any lower-body/toe-skid, head, blade, design, or lighting drift."
+      ]
+    },
+    {
+      "generation_id": "scapular-counterforce-candidate-03",
+      "taxonomy": "identity-preserve",
+      "mode": "edit",
+      "input_roles": ["Round012 original mechanics guide", "candidate 02 base", "Round011 accepted keyframe"],
+      "input_sha256": ["434cde6efa606f528b09f0596ed020fd7c1549f547bef100e355c4afc9d44da5", "68f3581aff525aad917bb8a6b57d6c7e6b730598599e388d0a157a8fca4d151a", "d148436582ac130ea6d867db7d7544aa7f1726143be4d9a8ce9206bf19fa7f62"],
+      "output": "Iterations/P10_Round012_ScapularCounterforce_candidate03.png",
+      "sha256": "17b75caa6840cef263f357271960fa00b3e2ab015e8ccc4aac86c7c9bfdd3843",
+      "byte_size": 2075964,
+      "dimensions_px": {"width": 1536, "height": 1024},
+      "format": "png",
+      "root_verdict": "rejected",
+      "rejection_reasons": [
+        "Viewer-left trailing shoulder again touches jaw/high while viewer-right leading shoulder remains low.",
+        "Trailing elbow stays across/inside torso despite exact coordinate map.",
+        "Clearest paired-reaching failure and C-curve regresses toward upright."
+      ],
+      "native_positive_findings": [
+        "Complete separated hands, exposed hilt, lower load/toe skid, blade mass and design/light survive."
+      ],
+      "exact_prompt_lines": [
+        "Use case: identity-preserve",
+        "Asset type: genuine upper-limb rebuild, original 2D P10 Round012 Scapular Counterforce Lock, candidate 03 of at most 04",
+        "Authority order: Image 1 is the ORIGINAL public-safe geometry guide and is PRIMARY for all upper-body joint locations and silhouette. Translate its pose skeleton into natural anatomy; do not render its text, labels, arrows, force line, circles, title, or any diagram mark. Image 2 is authority only for the successfully preserved frozen lower body/toe skid, head/identity, blade location, hilt height, separated complete grip treatment, costume/equipment, lighting, materials, and framing. Image 3 freezes the accepted Round011 design and load invariants.",
+        "Primary request: REBUILD the shoulders, upper arms, elbows, forearms, hands, clavicle line, ribcage surface, and spine of Image 2 on Image 1's exact opposing joint map. Do not subtly nudge the prior arms; replace their screen-space geometry. Change no other judged fact.",
+        "Exact screen-space joint contract for 1536x1024 canvas: viewer-right equals character-RIGHT weapon side. Put character-RIGHT leading shoulder CENTER around x=790,y=300, conspicuously HIGH and FORWARD near—but not touching—the jaw; protract its scapula around the ribcage. Put leading elbow around x=760,y=395, tightly folded directly below the high shoulder with an acute angle. Put the complete right hand around x=900,y=385, gripping immediately behind the guard.",
+        "Viewer-left equals character-LEFT trailing side. Put character-LEFT trailing shoulder CENTER around x=610,y=430, conspicuously LOW and BACK, well below and away from the jaw; retract and depress its scapula. Put trailing elbow around x=430,y=565, FAR outside and down-left of the torso silhouette. Return the long left forearm up-right to a complete left hand around x=690,y=500, gripping near the pommel-side region. The left arm makes a large open triangular return; it cannot cross the chest, disappear behind armor, or touch the jaw.",
+        "Grip/hilt contract: preserve one continuous chest-height lower-left-to-upper-right cobalt hilt. Complete left hand around x=690,y=500; leave uninterrupted exposed cobalt wrap from roughly x=720 to x=850; complete right hand around x=900,y=385 behind guard. Hands are separated, fully visible, plausible, unoccluded, with straight loaded wrists. Preserve full pommel, guard/cage, one full blade and exact upper-right blade center of mass.",
+        "Shoulder/torso silhouette: clavicle line rises HARD from low viewer-left shoulder at y430 to high viewer-right shoulder at y300. The viewer-left shoulder must NOT touch the jaw and must not be higher than viewer-right. Deep visible C-curve: torso side under the high leading shoulder is sharply compressed/short; opposite side stretches long down to low trailing shoulder/elbow. Ribcage rotates and side-bends against the frozen pelvis; sternum stays displaced away from hilt. At thumbnail the pose must read like violent arrest and torsion, not paired reaching.",
+        "Absolute freeze: preserve Image 2 lower body as closely as possible—huge planted right sole, compressed right ankle/knee/hip column, exact airborne left heel and toe skid/gouge, pelvis position. Preserve head/face/gaze/identity/hair, exact costume/yoke/copper route/capacitor/greaves/cloth/palette/materials, exact one weapon/blade axis/upper-right CoM/chest hilt, pale studio lighting/background, and full framing. Do not polish or redesign.",
+        "Final-art prohibitions: no guide text, labels, arrows, force lines, joint circles, diagrams, title, logo, watermark, environment, enemy, lightning, glow, particles, sparks, speed lines, blur, dust, crop, extra person, duplicate/detached weapon, body penetration, new design, bare/fetish amplification.",
+        "Hard reject: viewer-left shoulder touches jaw or stays high; viewer-right shoulder stays low; shoulders level; trailing elbow not outside torso; similar elbow flexion; paired reaching; hidden/overlapping hand; no exposed cobalt gap; upright quiet torso; hilt at sternum/waist; lower-body/toe-skid, blade, identity/design, or lighting drift."
+      ]
+    },
+    {
+      "generation_id": "scapular-counterforce-candidate-04",
+      "taxonomy": "identity-preserve",
+      "mode": "edit",
+      "input_roles": ["Round012 original mechanics guide", "Round011 accepted keyframe"],
+      "input_sha256": ["434cde6efa606f528b09f0596ed020fd7c1549f547bef100e355c4afc9d44da5", "d148436582ac130ea6d867db7d7544aa7f1726143be4d9a8ce9206bf19fa7f62"],
+      "output": "Iterations/P10_Round012_ScapularCounterforce_candidate04.png",
+      "sha256": "f64cfdad9fa0805d495d5c02db2ae8e0c697fa3b664b0402d8b717a8bd271411",
+      "byte_size": 2189181,
+      "dimensions_px": {"width": 1536, "height": 1024},
+      "format": "png",
+      "root_verdict": "strongest bounded narrow shoulder-order/contact proof; promoted byte-identically; builder target remains FAIL",
+      "target_rejection_reasons": [
+        "Both elbows are long/extended rather than one tightly folded and one long/open.",
+        "Shoulder-height delta is modest and far below requested 100 pixels.",
+        "No down-left elbow return or triangular negative space exists.",
+        "Torso remains nearly long/upright with modest C-curve and counter-rotation.",
+        "Overall action reads as paired hauling, not a scapular push-pull arrested stop."
+      ],
+      "native_positive_findings": [
+        "First candidate to clear viewer-left trailing shoulder from jaw and place it below viewer-right shoulder.",
+        "Both hands are complete and widely separated with exposed cobalt hilt.",
+        "Upper-right blade center of mass, dominant right load and airborne rear toe survive.",
+        "One complete person and one complete weapon remain inside frame."
+      ],
+      "design_contact_caveats": [
+        "Face and palette remain recognizable, but chest harness/yoke and shoulder armor details simplify and drift from the Round011 freeze.",
+        "Hair response changes and does not perfectly preserve the Round011 braid arrangement.",
+        "Hand contact is readable and complete, but the widely extended arm geometry looks like pulling/hauling rather than load arrest.",
+        "Weapon silhouette and upper-right mass remain recognizable, though hilt/attachment details are not pixel-identical to Round011."
+      ],
+      "accepted_copy": "P10_Round012_NyraKestrel_ScapularCounterforce_v1.png",
+      "exact_prompt_lines": [
+        "Use case: identity-preserve",
+        "Asset type: fresh guide-first original 2D reconstruction, P10 Round012 Scapular Counterforce Lock, candidate 04 of 04 FINAL CAP",
+        "Authority order: Image 1 is the ORIGINAL public-safe authored mechanics guide and the ABSOLUTE silhouette/joint/negative-space authority. Build natural anatomy on its extreme opposing shoulder and elbow geometry. Never render its title, labels, arrows, force line, circles, joint marks, or diagram lines. Image 2 is authority only for exact Nyra identity/design, complete storm-shear construction, frozen Round011 lower-body load/toe skid, chest-height hilt, upper-right blade center of mass, costume/equipment, palette/materials, studio lighting/background and framing. Do not inherit Image 2's high viewer-left shoulder or paired-reaching arms.",
+        "Primary request: reconstruct the exact frozen Image 2 character and weapon on Image 1's upper-body silhouette while preserving Image 2's lower body and blade. Judged unit is ONLY scapular counterforce lock: opposed shoulder levels/scapulae, unequal elbow flexion, ribcage-versus-pelvis counter-rotation, deep visible C-curve, hilt displaced from sternum, and blade load resolving into planted right leg. No design polish.",
+        "NEGATIVE-SPACE TEST A — low viewer-left trailing shoulder: viewer-LEFT shoulder/yoke center must sit at least 120 pixels BELOW the chin. Place it around x610,y430. There must be a LARGE unmistakable wedge of pale studio BACKGROUND between head/jaw/neck and the viewer-left shoulder/yoke. Viewer-left shoulder never touches jaw, neck, hair, or cheek. Retract and depress this scapula; costume and yoke deform downward/back with it.",
+        "TEST B — high viewer-right leading shoulder: viewer-RIGHT weapon-side shoulder center around x790,y300, at least 100 pixels ABOVE the viewer-left shoulder. Shrug/protract it strongly forward near the right ear. Shoulder/clavicle line rises steeply from low viewer-left to high viewer-right. This high-right/low-left order must read at thumbnail.",
+        "TEST C — external trailing elbow triangle: viewer-LEFT trailing elbow around x430,y565, protruding far DOWN-LEFT outside the torso and BELOW the hilt. Upper arm runs from low viewer-left shoulder down-left to that elbow; long forearm returns up-right to the trailing hand around x690,y500. Preserve a LARGE triangular area of pale studio BACKGROUND completely visible between torso, trailing upper arm, and returning forearm. Do not fill this triangle with cloth, armor, hair, weapon, or body. This elbow cannot cross the chest or hide inside the silhouette.",
+        "TEST D — folded leading elbow: viewer-RIGHT leading elbow around x760,y395, tightly folded directly beneath the high viewer-right shoulder with acute flexion close to ribs; complete right hand around x900,y385 immediately behind guard. The right arm is short/folded; left arm long/open. No paired reaching.",
+        "TEST E — two separated contacts: complete left hand around x690,y500 on pommel-side hilt and complete right hand around x900,y385 behind guard. Both hands and plausible digits fully visible and unoccluded on ONE continuous chest-height cobalt hilt. Keep a conspicuous bare cobalt wrap span between them, at least one hand-width. No overlap, fusion, hidden hand, guard clustering, or crossed wrists.",
+        "Torso force: keep pelvis and all lower-body geometry frozen from Image 2. Rotate and side-bend ribcage hard opposite pelvis. Deepen spine into unmistakable loaded C-curve: short compressed side beneath high viewer-right shoulder; long stretched side flowing to low viewer-left shoulder and far elbow. Displace sternum away from hilt. The upper-right blade mass must visibly route through hands, asymmetric elbows, opposed scapulae, twisted ribs and frozen pelvis into the planted right leg.",
+        "Absolute freeze from Image 2: exact huge planted viewer-right grounding boot and compressed right leg/hip load column; exact airborne viewer-left heel, toe-only skid and gouge; pelvis position; mature face/identity/expression/gaze/hair; exact cobalt/ivory/blackened-steel/oxidized-copper costume, attached yoke, protected copper route, capacitor, greaves and cloth; one exact full storm-shear, complete blade/pommel/guard/cage, upper-right blade center of mass and chest-height hilt; pale warm studio lighting/background; full 1536x1024 framing. No redesign, polish, new element, crop, or loss of frozen facts.",
+        "Final-art prohibitions: no text, label, title, arrow, force line, diagram mark, joint circle, logo, watermark, environment, enemy, lightning, glow, particles, sparks, speed lines, motion blur, dust, crop, extra person, duplicate/detached weapon, penetration, bare/fetish amplification.",
+        "Hard reject: viewer-left shoulder touches jaw or is high; absent chin-to-shoulder pale gap; viewer-right shoulder low; shoulder difference under 100 px; no pale triangular elbow gap; left elbow inside torso or above hilt; similar elbow flexion; paired reaching; hidden/overlapping hand; no bare hilt span; upright/straight torso; sternum centered behind hilt; any lower-body/toe-skid, blade, identity/design, or lighting drift."
+      ]
+    }
+  ],
+  "decision": {
+    "accepted_candidate_id": "scapular-counterforce-candidate-04",
+    "accepted_copy": {
+      "path": "P10_Round012_NyraKestrel_ScapularCounterforce_v1.png",
+      "sha256": "f64cfdad9fa0805d495d5c02db2ae8e0c697fa3b664b0402d8b717a8bd271411",
+      "byte_size": 2189181,
+      "dimensions_px": {"width": 1536, "height": 1024},
+      "format": "png"
+    },
+    "accepted_copy_equality": {
+      "applicable": true,
+      "source": "Iterations/P10_Round012_ScapularCounterforce_candidate04.png",
+      "byte_identical": true,
+      "source_sha256": "f64cfdad9fa0805d495d5c02db2ae8e0c697fa3b664b0402d8b717a8bd271411",
+      "accepted_sha256": "f64cfdad9fa0805d495d5c02db2ae8e0c697fa3b664b0402d8b717a8bd271411"
+    },
+    "root_approval_scope": "strongest bounded narrow shoulder-order/contact proof for fresh criticism only",
+    "builder_target_result": "FAIL",
+    "eligibility": "INELIGIBLE_FOR_SCAPULAR_COUNTERFORCE_LOCK",
+    "finding": "Candidate 04 is the first bounded output to clear the viewer-left shoulder from the jaw and lower it beneath viewer-right while preserving complete separated contacts, exposed hilt, upper-right blade mass, dominant right load and rear toe. It still fails the judged Scapular Counterforce Lock because both elbows extend into paired hauling, the shoulder delta is modest, the down-left return triangle is absent, and the torso remains long and nearly upright."
+  },
+  "integrity_validation": {
+    "all_four_outputs_persisted_under_iterations": true,
+    "all_output_sha256_recomputed": true,
+    "all_outputs_native_1536x1024_rgb_png": true,
+    "all_four_outputs_inspected_at_native_resolution": true,
+    "generation_cap_observed": true,
+    "cap_exhausted": true,
+    "no_fifth_output": true,
+    "accepted_copy_present_and_byte_identical_to_candidate_04": true,
+    "guide_svg_and_png_hashes_recomputed": true,
+    "json_validated": true
+  },
+  "privacy_cleanup": {
+    "public_safe": true,
+    "absolute_paths_present": false,
+    "usernames_present": false,
+    "private_archive_name_present": false,
+    "private_benchmark_filenames_or_paths_present": false,
+    "private_benchmark_pixels_embedded": false,
+    "franchise_pixels_embedded": false,
+    "third_party_pose_pixels_embedded": false,
+    "only_round012_repository_files_created_or_modified": true
+  }
+}
