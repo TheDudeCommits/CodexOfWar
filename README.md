@@ -1,55 +1,91 @@
 # Codex of War
 
-Codex of War is a Unity 6 URP combat vertical slice built as a sequence of
-independently judgeable pieces. Every production claim is tied to a fixed
-capture preset, a machine-readable manifest, and a builder/critic round record.
+Codex of War is now a **Three.js/WebGL2 third-person combat vertical slice**.
+The browser runtime in [`web-game/`](web-game/) is authoritative; the earlier
+Unity project remains in the repository only as preserved production and
+evidence history.
 
-P00, the evidence spine, is **accepted as infrastructure**. A fresh critic ran
-the Unity capture twice, confirmed identical screenshot and render-settings
-hashes, passed the standalone validator, passed all 6 focused EditMode tests,
-and passed all 4 dashboard tests. Its anonymous visual baseline comparison was
-an honest loss: the current Unity frame scored `28.33/100` against Reference
-09 at `76.67/100`. No visual win is claimed.
+The game is built as a sequence of independently judgeable pieces. Every
+production claim is tied to a deterministic gameplay tape, a machine-readable
+asset and renderer receipt, fixed 1600×900 capture framings, and a separate
+builder/critic round.
 
-P10 round 1 is mechanically reproducible but visually rejected. A fresh blind
-judge scored our S01 still `9/60` against Reference 09 at `49/60`; the critic
-independently scored it `10/60` against `51/60`. Both preferred the reference,
-and no `/100` score is claimed because motion, contact, crowd behavior, and
-audio were not scoreable from the filed stills.
+The current active loop is P30 Round 005. Round 004 loaded all 18 authored
+assets with no fallback and passed its runtime gates, but the fresh blind critic
+still rejected it at `34/100`, `0/3` focused combat-shot wins, and `0/6`
+overall wins. Its single prescribed gap is the hero/Hollow/weapon contact
+package. No AAA-quality or visual-win claim is made.
 
-P10 round 2 is now revising the critic's one locked gap: replace the
-disconnected plastic-mannequin hero with one continuous, anatomically credible
-authored shell whose face, hands, feet, joints, layered costume, weapon, and
-skin/hair/cloth/metal responses survive the frozen S01 and turntable cameras.
-The same evidence must be refiled with S02 and S06, and character/material
-quality must clear at least `8/13` before another blind review. P01–P09 and
-P11–P25 remain queued; no P10 visual win is claimed.
+## Run the Three.js game
 
-## Requirements
+Requirements:
 
-- macOS on Apple Silicon for the canonical review target
-- Unity `6000.5.4f1` at the path used below
-- Universal Render Pipeline `17.5.0` from `game/Packages/manifest.json`
-- Node.js `>=22.13.0`
-
-## Bootstrap
+- Node.js `24.x`
+- npm `>=11 <12`
+- a WebGL2-capable browser
+- macOS on Apple Silicon with headed Chrome for the canonical critic capture
 
 From the repository root:
 
 ```bash
 REPO_ROOT="/Users/amir/Documents/Gauntlet Loop"
-UNITY_BIN="/Applications/Unity/Hub/Editor/6000.5.4f1/Unity.app/Contents/MacOS/Unity"
-
-mkdir -p "$REPO_ROOT/Artifacts/P00/round-001"
-
-"$UNITY_BIN" \
-  -batchmode \
-  -projectPath "$REPO_ROOT/game" \
-  -quit \
-  -logFile "$REPO_ROOT/Artifacts/P00/round-001/import-compile.log"
-
-cd "$REPO_ROOT/progress"
+cd "$REPO_ROOT/web-game"
 npm ci
+npm run dev
+```
+
+Open [http://localhost:4173](http://localhost:4173). Controls, deterministic
+review API, renderer/asset telemetry, and the complete validation commands are
+documented in [`web-game/README.md`](web-game/README.md).
+
+Validate the authoritative runtime with:
+
+```bash
+cd "$REPO_ROOT/web-game"
+npm run typecheck
+npm run lint
+npm test
+npm run build
+npm run smoke
+```
+
+## Three.js production boundaries
+
+- `web-game/src/game/` owns deterministic 60 Hz simulation and physical input.
+- `web-game/src/physics/` owns the Rapier collision bridge.
+- `web-game/src/render/` owns Three.js rendering, animation, camera, VFX,
+  post-processing, lifecycle recovery, and asset integration.
+- `web-game/public/assets/manifest.json` is the stable 18-key authored asset
+  contract. Fallback use is observable and disqualifying in critic captures.
+- `WebAssetSource/P31/` preserves lawful source provenance, transformations,
+  validation, hashes, and byte-identical runtime publication records.
+- `ArtSource/P30/` preserves builder and critic receipts. Private benchmark
+  originals and blind-comparison workspaces are never published.
+- `progress/` is the evidence ledger and has no authority over gameplay state.
+
+## Live production ledger
+
+The owner-only production ledger is deployed at
+[codex-of-war-progress.thedude6.chatgpt.site](https://codex-of-war-progress.thedude6.chatgpt.site).
+It shows every piece, its current state, rejected round history, sanitized
+critic evidence, and the latest candidate captures. The accepted global
+manifest remains pinned to P00 until a later round actually clears its gate.
+
+## Archived Unity lane
+
+The following commands document the preserved Unity evidence lane. Unity is no
+longer the active runtime and these commands are not required to run the
+Three.js game.
+
+Legacy requirements:
+
+- Unity `6000.5.4f1`
+- Universal Render Pipeline `17.5.0`
+
+```bash
+REPO_ROOT="/Users/amir/Documents/Gauntlet Loop"
+UNITY_BIN="/Applications/Unity/Hub/Editor/6000.5.4f1/Unity.app/Contents/MacOS/Unity"
+mkdir -p "$REPO_ROOT/Artifacts/P00/round-001"
 ```
 
 Unity-generated state stays under the ignored `game/Library`, `game/Temp`, and
@@ -119,7 +155,7 @@ Run focused EditMode tests:
 Do not add `-quit` to the two commands above: both the checked-in command and
 Unity Test Framework terminate batch mode after completion.
 
-## Progress dashboard
+## Local progress dashboard
 
 ```bash
 cd "$REPO_ROOT/progress"
@@ -136,11 +172,11 @@ npm test
 ```
 
 The dashboard reads `progress/public/data/codex-of-war.json`, shows all P00–P25
-piece states, the latest Unity evidence, the frozen S01 and acceptance
-contracts, and round history. Its tests verify that the ledger fingerprint
-matches the filed PNG and both manifests.
+piece states, preserved Unity history, the active Three.js evidence lane,
+frozen capture and acceptance contracts, and round history. Its tests verify
+the filed evidence identities and public-safety boundary.
 
-## Architecture boundaries
+## Legacy Unity architecture boundaries
 
 - `game/Assets/CodexOfWar/Runtime` owns the deterministic capture contract,
   manifest model and validation logic, plus the scene contract component. It
@@ -162,9 +198,9 @@ keep deterministic rules testable without scene traversal.
 Only original material or assets whose licenses permit source redistribution
 may be committed. Paid or restricted assets require a documented local import
 step and license record; they are never silently republished. The local
-benchmark archive and images are not copied into Unity, the dashboard, build
-artifacts, or source control. Review records may mention only benchmark shot
-IDs and derived measurements.
+benchmark archive and images are not copied into either runtime, the dashboard,
+build artifacts, or source control. Review records may mention only benchmark
+shot IDs and derived measurements.
 
 The frozen backlog and review contract live in
 `Docs/Production/BuildPieces.md` and `Docs/Production/ReviewProtocol.md`.
