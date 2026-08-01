@@ -1,0 +1,92 @@
+{
+  "schema": "p30.round005.critic.v1",
+  "reviewRole": "fresh_harsh_critic",
+  "scope": "hero/Hollow/weapon duel-contact replacement only; environment and HUD treated as unchanged context",
+  "candidate": {
+    "commit": "2c180e356040fcafa80f074c905799f01c600efb",
+    "shortCommit": "2c180e3",
+    "verdict": "REJECT",
+    "score": 23,
+    "scoreBasis": "mean blinded candidate score 22.83, rounded to 23"
+  },
+  "captureContract": {
+    "viewportCss": [1600, 900],
+    "devicePixelRatio": 1,
+    "browser": "Google Chrome 150.0.7871.187",
+    "rendering": "headed production preview; hardware WebGL2 via ANGLE Metal on Apple M2",
+    "node": "24.18.0",
+    "captures": [
+      {"scenario":"S01","file":"S01.png","sha256":"2d8deff8edbcba7f7c0a2853feede5f74c00edf03d665410205113ceb48118a2","candidateScore":22},
+      {"scenario":"S02","file":"S02.png","sha256":"9d26fcf4cdaf855ac80b931250074aeb28b73262075e6e04bb2f564bc96ac1cb","candidateScore":20},
+      {"scenario":"S03","tick":29,"phase":"startup","file":"S03.png","sha256":"15c4ed01c270a77a32af2668b6146b8cb09ff4b7741182b4b4ffce27186f95d9","candidateScore":24},
+      {"scenario":"S04","tick":34,"phase":"active contact","file":"S04.png","sha256":"4f74459e544645b2aa2cc24746102fdcaedd77d0e8a28995f95c684c4629d6d3","candidateScore":28},
+      {"scenario":"S05","tick":41,"phase":"recovery","file":"S05.png","sha256":"4dbae021e4bf7a5617a8c683cd531306108963905257fe8fa868951c5824a4d3","candidateScore":25},
+      {"scenario":"S06","file":"S06.png","sha256":"9c35a63867673778345f0cb7cab427a801339af0bf7ce6f039fb49e10fcc3931","candidateScore":18}
+    ]
+  },
+  "blindProtocol": {
+    "candidateBuilderEvidenceViewedBeforeLock": false,
+    "referenceSelection": "closest private God of War frame selected independently for each scenario",
+    "sideRandomization": "independent per frame",
+    "lockSha256": "47a85ad07b9b14de2ba285d3aa499b6e1d820bf781086abbe1a3c166d6b8bacd",
+    "sealedRevealSha256": "e107cef2d08d047d19a98000e41ec5f1ae56a33e6f77b90f1f922d20bd994334",
+    "openRevealSha256": "ec5601c38956ff83b587130bfb6de6194fa8d9e9019d038170e46bb1fabb0aad",
+    "candidateSidesAfterReveal": ["B", "B", "B", "A", "B", "A"],
+    "candidateWinsOverall": "0/6",
+    "candidateWinsFocusedS03S05": "0/3",
+    "requiredFocusedWins": "3/3",
+    "pairSha256": {
+      "S01":"41a3198433addbc05a8c18ca15020c69e653d37cc81b8ead384c355ac0b18fde",
+      "S02":"6974137c43330017a2743427ba0902cfbada18140311b297fb3d1a6fb7122f51",
+      "S03":"955a97e03a8650bca87488a3cc983264e62786c491dd9a270934a0fd3f0b5187",
+      "S04":"3674aa52a143886a334c25afa30aac636315adda1bf21554611d949e970f050a",
+      "S05":"371d9548661a4131607eeeeb37f8c0339acab1c4e36dd7a1c73ed9932f054513",
+      "S06":"5f8a922b6a86f3b57b81b961bd485034edc6812f67c6d00085bc0a79b5eca035"
+    }
+  },
+  "hardGates": [
+    {"gate":"exact_commit_and_lfs_materialization","status":"PASS"},
+    {"gate":"node24_typecheck_lint_unit_build","status":"PASS","evidence":"5/5 unit tests; production build completed"},
+    {"gate":"headed_hardware_capture_contract","status":"PASS"},
+    {"gate":"asset_load_and_required_clips","status":"PASS","evidence":"18/18 enabled assets loaded; no procedural fallback; hero 5/5 and Hollow 3/3 required clips"},
+    {"gate":"resource_caps","status":"PASS","evidence":"maximum 86 calls, 204155 triangles, 26 textures, 38 geometries"},
+    {"gate":"exact_hp_contact","status":"PASS","evidence":"S04 hit at tick 33 reduced target HP 100 to 90"},
+    {"gate":"blender_reimport_and_glb_integrity","status":"PASS","evidence":"Blender 5.2 reimport FINISHED for all three replacements with preserved counts and clips"},
+    {"gate":"focused_blind_win","status":"FAIL","evidence":"0/3; required 3/3"},
+    {"gate":"overall_blind_win","status":"FAIL","evidence":"0/6"},
+    {"gate":"authored_two_palm_grip","status":"FAIL","evidence":"runtime binds weapon to only weapon_socket/hand_r with no left-hand constraint; S05 left palm-to-secondary-grip offset 3.276 cm"},
+    {"gate":"blade_and_contact_integrity","status":"FAIL","evidence":"S05 blade intersects Nyra in 458 triangle pairs across 14 blade triangles; S04 contact-marker-to-target-surface distance 3.677 cm"},
+    {"gate":"focused_pbr_fidelity","status":"FAIL","evidence":"Stormcage and Hollow contain no texture images; candidate reads materially flatter than the private references"},
+    {"gate":"cold_start_under_4109ms","status":"FAIL","evidence":"4924 ms, 6973 ms, 5921 ms"},
+    {"gate":"full_replay_determinism","status":"FAIL","evidence":"simulation hashes matched, but camera hashes did not"},
+    {"gate":"camera_obstruction","status":"FAIL","evidence":"implemented=false; status=pending"},
+    {"gate":"30_second_combat_performance","status":"PASS","evidence":"58.566 FPS average; p95 18.6 ms; no runtime/WebGL errors"},
+    {"gate":"webgl_context_loss_restore","status":"PASS"},
+    {"gate":"console_request_webgl_errors","status":"PASS","evidence":"0 errors; three non-fatal warnings observed"}
+  ],
+  "unfinishedOptionalGates": [
+    {"gate":"supplemental_free_roam_smoke_matrix","status":"NOT_RUN","reason":"rejection was already overdetermined by mandatory blind and hard-gate failures"}
+  ],
+  "postRevealDiagnosis": {
+    "singleDominantGap": "authored duel-contact pose-and-material coherence",
+    "evidence": "The replacement loses every blind comparison; the weapon is single-socket bound, the focused startup/contact/recovery poses do not sustain a convincing two-palm grip, S05 has severe blade-to-hero self-intersection, and weapon/Hollow surfaces lack texture-map depth."
+  },
+  "round006Prescription": {
+    "count": 1,
+    "change": "Replace only the Nyra plus Stormcage authored contact package with one optimized Blender-authored Sword_Regular_A clip: right-hand weapon socket, constrained left palm on an explicit secondary grip, corrected S03/S04/S05 poses, authored target-contact marker, collision-clean blade arc, and non-placeholder base-color/normal/ORM material maps. Keep environment, HUD, simulation timing, and camera presentation unchanged.",
+    "acceptance": [
+      "Blind candidate wins S03, S04, and S05 3/3 at the same ticks and 1600x900 DPR1 contract.",
+      "Both palm-to-grip distances are at most 2.5 cm at ticks 29, 34, and 41.",
+      "Blade-to-hero triangle intersections are zero at ticks 29, 34, and 41; blade-to-target contact exists only at tick 34.",
+      "At tick 34 the authored contact marker is at most 3.0 cm from the target surface.",
+      "Nyra and Stormcage expose non-placeholder base-color, normal, and ORM maps without exceeding current resource caps or the 4109 ms cold-start budget."
+    ]
+  },
+  "cleanup": {
+    "privateReferencePixelsPublished": false,
+    "candidateOnlyBundle": true,
+    "temporaryAndPrivateBytesRemoved": true,
+    "privacySearchPassed": true,
+    "sharedTrackedFreezeVerified": true
+  }
+}
