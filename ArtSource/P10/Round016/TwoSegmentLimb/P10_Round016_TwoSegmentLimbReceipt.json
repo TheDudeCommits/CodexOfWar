@@ -1,0 +1,1220 @@
+{
+  "schema": "codexofwar.original-2d-two-segment-limb-receipt",
+  "version": "1.0.0",
+  "receipt_id": "P10-Round016-TwoSegmentLimbReceipt",
+  "generated_utc": "2026-08-01T08:46:46.585977Z",
+  "scope": {
+    "project_asset": "P10 Nyra Kestrel",
+    "round": "Round016",
+    "judged_unit": "Two-Segment Limb Silhouette only",
+    "scope_class": "one bounded original 2D trailing-limb cutout/composite proof only",
+    "builder_eligibility": "FAIL",
+    "final_disposition": "PROMOTED_CANDIDATE04_PROTECTED_COMPOSITE_BYTE_IDENTICALLY_AS_STRONGEST_BOUNDED_EVIDENCE_WITH_TARGET_FAIL",
+    "attempt_cap": 4,
+    "generated_outputs_spent": 4,
+    "cap_exhausted": true,
+    "fresh_criticism_performed": false,
+    "paid_3d_generation_authorized": false,
+    "engine_integration_authorized": false
+  },
+  "exact_critic_prescription": "Freeze the sealed Round013 authority and its already-correct original grip, hilt, rear leg, leading arm, identity, lighting, and framing; inside one newly verified trailing-arm-only hard mask, replace only the trailing limb between shoulder and preserved grip with an anatomical two-segment silhouette that descends to Round014 candidate04's far-low-left elbow vertex and reverses steeply up-right to the original inward grip, leaving one uninterrupted head-sized pale wedge between the segments; change nothing else.",
+  "authorities": {
+    "sealed_round013_base": {
+      "path": "Round013/ElbowReturnTriangle/Iterations/P10_Round013_ElbowReturnTriangle_candidate04.png",
+      "sha256": "c88489f7af2c0a5d223f431fb322f72ac549283819c3c9b6281a20c1b39fbcd6",
+      "byte_size": 1750551,
+      "dimensions_px": {
+        "width": 1536,
+        "height": 1024
+      },
+      "mode": "RGB",
+      "format": "png",
+      "role": "untouched complete base and absolute authority for grip, hilt, rear leg, leading arm, identity, lighting, framing, and every non-target pixel"
+    },
+    "round014_candidate04_coordinate_authority_only": {
+      "path": "Round014/TrailingReturnWedge/Iterations/P10_Round014_TrailingReturnWedge_candidate04.png",
+      "sha256": "3b4244040c27fc1d3410090c59eea52c5d6f369c38dc38aba88cad4a4353bd42",
+      "byte_size": 2036932,
+      "dimensions_px": {
+        "width": 1536,
+        "height": 1024
+      },
+      "mode": "RGB",
+      "format": "png",
+      "role": "coordinate authority only for the far-low-left elbow vertex at 370,845; its altered pixels were never supplied to generation, keying, compositing, or protection"
+    },
+    "exact_anchors": {
+      "shoulder": [
+        604,
+        472
+      ],
+      "far_low_left_elbow": [
+        370,
+        845
+      ],
+      "preserved_inward_grip": [
+        450,
+        625
+      ],
+      "target_paths": [
+        "M 604 472 L 370 845",
+        "M 370 845 L 450 625"
+      ]
+    }
+  },
+  "original_public_safe_guide": {
+    "authorship": "original SVG; no embedded raster, external image, third-party pose pixels, franchise pixels, or supplied reference pixels",
+    "svg": {
+      "path": "P10_Round016_OriginalTwoSegmentLimbGuide.svg",
+      "sha256": "d56161bc672ab9cd75cf059d645843cf6d057d7830129e3e7640ee076034b283",
+      "byte_size": 4008,
+      "dimensions_px": {
+        "width": 1536,
+        "height": 1024
+      },
+      "mode": null,
+      "format": "svg"
+    },
+    "rendered_png": {
+      "path": "P10_Round016_OriginalTwoSegmentLimbGuide.png",
+      "sha256": "648fc25ecad74cb0eb5a72cadb3d9eed7e56ed8aeea1a0b44c15d487f63bc9aa",
+      "byte_size": 156732,
+      "dimensions_px": {
+        "width": 1536,
+        "height": 1024
+      },
+      "mode": "RGB",
+      "format": "png"
+    }
+  },
+  "hard_mask": {
+    "svg": {
+      "path": "P10_Round016_TrailingLimbHardMask.svg",
+      "sha256": "01ee6c5171881c66685469f4f87cf5148e7626445cdf20566e289cb1894b9dd4",
+      "byte_size": 1728,
+      "dimensions_px": {
+        "width": 1536,
+        "height": 1024
+      },
+      "mode": null,
+      "format": "svg"
+    },
+    "binary_png": {
+      "path": "P10_Round016_TrailingLimbHardMask_binary.png",
+      "sha256": "76e2aee7ddccfa8aaeee4f711e6740f36df5f49da773e5597a7c1ee024dd1199",
+      "byte_size": 2979,
+      "dimensions_px": {
+        "width": 1536,
+        "height": 1024
+      },
+      "mode": "L",
+      "format": "png"
+    },
+    "verified_unique_values": [
+      0,
+      255
+    ],
+    "meaning": "white is editable; black is sealed Round013 authority",
+    "counts": {
+      "canvas_pixels": 1572864,
+      "unprotected_corridor_pixels": 77360,
+      "final_editable_pixels": 23341,
+      "corridor_pixels_removed_total": 54019,
+      "corridor_pixels_occluded_by_hilt_zone": 28050,
+      "corridor_pixels_occluded_by_rear_leg_zone": 34935,
+      "corridor_pixels_occluded_by_both_zones": 8966
+    },
+    "occlusion_breakdown": {
+      "hilt_only": 19084,
+      "rear_leg_only": 25969,
+      "both_hilt_and_rear_leg": 8966
+    },
+    "centerline_samples": [
+      {
+        "point": [
+          604,
+          472
+        ],
+        "protection": "editable"
+      },
+      {
+        "point": [
+          580,
+          510
+        ],
+        "protection": "editable"
+      },
+      {
+        "point": [
+          550,
+          558
+        ],
+        "protection": "hilt"
+      },
+      {
+        "point": [
+          520,
+          606
+        ],
+        "protection": "hilt+rear-leg"
+      },
+      {
+        "point": [
+          490,
+          654
+        ],
+        "protection": "hilt+rear-leg"
+      },
+      {
+        "point": [
+          460,
+          702
+        ],
+        "protection": "rear-leg"
+      },
+      {
+        "point": [
+          430,
+          750
+        ],
+        "protection": "rear-leg"
+      },
+      {
+        "point": [
+          400,
+          798
+        ],
+        "protection": "rear-leg"
+      },
+      {
+        "point": [
+          370,
+          845
+        ],
+        "protection": "rear-leg"
+      },
+      {
+        "point": [
+          390,
+          790
+        ],
+        "protection": "rear-leg"
+      },
+      {
+        "point": [
+          410,
+          735
+        ],
+        "protection": "rear-leg"
+      },
+      {
+        "point": [
+          430,
+          680
+        ],
+        "protection": "hilt"
+      },
+      {
+        "point": [
+          450,
+          625
+        ],
+        "protection": "hilt/preserved-grip"
+      }
+    ],
+    "pixel_equality_evidence": {
+      "every_candidate_all_pixels_outside_final_mask_equal_round013_base": true,
+      "every_candidate_all_hilt_protection_zone_pixels_equal_round013_base": true,
+      "every_candidate_all_rear_leg_protection_zone_pixels_equal_round013_base": true
+    }
+  },
+  "generation": {
+    "execution_path": "managed image-generation tool",
+    "model": "not exposed by managed tool",
+    "native_output_size": "1536x1024",
+    "output_format": "PNG RGB",
+    "workflow": "isolated cutouts only; no Round015 whole-frame inpainting repeated; four raw outputs preserved",
+    "attempts": [
+      {
+        "candidate_id": "two-segment-limb-candidate-01",
+        "generation_mode": "isolated original-2D limb generation from exact-anchor public-safe guide only; no whole-frame generation or inpainting",
+        "input_roles": [
+          {
+            "role": "Round016 original public-safe exact-anchor geometry guide only; no supplied-image pixels",
+            "path": "P10_Round016_OriginalTwoSegmentLimbGuide.png",
+            "sha256": "648fc25ecad74cb0eb5a72cadb3d9eed7e56ed8aeea1a0b44c15d487f63bc9aa"
+          }
+        ],
+        "exact_prompt": "Use case: stylized-concept\nAsset type: isolated original 2D armored trailing-limb cutout, P10 Round016 Two-Segment Limb, candidate 01 of 04\nInput role: Image 1 is an ORIGINAL public-safe exact-anchor geometry guide only. Follow its shoulder center at screen x604,y472, elbow center x370,y845, and terminal wrist/hand interface x450,y625 on a 1536x1024 canvas. Do not render its text, labels, arrows, circles, colored guide lines, protected hilt, protected leg, torso diagram, or border.\nPrimary request: Generate ONLY one isolated armored left arm/sleeve cutout, with no body and no weapon. The upper arm descends from shoulder x604,y472 far down-left to an unmistakable anatomical elbow vertex at x370,y845. At that elbow the forearm makes a sharp reversal and rises steeply up-right to end at the preserved inward grip interface x450,y625. Two distinct connected anatomical segments; deep V silhouette; one uninterrupted pale/transparent head-sized wedge between the segments.\nStyle/material: premium original 2D painterly character-concept cutout matching dark blackened-steel segmented bracers, deep cobalt quilted cloth, tiny restrained oxidized-copper fasteners; realistic anatomy and restrained studio light from upper-left.\nComposition: full 1536x1024 landscape coordinate field; all nontransparent pixels confined to the one arm around the exact anchors.\nOutput: transparent background preferred; otherwise perfectly flat chroma-green keyable field with no shadow.\nConstraints: exactly one arm only; no torso, head, hair, face, hand gripping a weapon, weapon, hilt, leg, boot, character, scenery, text, labels, arrows, circles, logo, watermark, particles, glow, motion blur, cast shadow, detached fragment, extra limb, redesign, or border. Original 2D only.",
+        "native_output_has_alpha": false,
+        "raw_background_disposition": "RGB baked checkerboard",
+        "keying": {
+          "candidates_01_to_03": "background iff minimum RGB > 218 and channel spread < 16; close alpha with 3x3 MaxFilter then 3x3 MinFilter; no native transparency claimed",
+          "candidate_04": "background iff G > R+55, G > B+55, and G > 120; close alpha with 3x3 MaxFilter then 3x3 MinFilter; no native transparency claimed"
+        },
+        "source_anchors_shoulder_elbow_grip": [
+          [
+            1002,
+            158
+          ],
+          [
+            724,
+            866
+          ],
+          [
+            433,
+            502
+          ]
+        ],
+        "destination_anchors_shoulder_elbow_grip": [
+          [
+            604,
+            472
+          ],
+          [
+            370,
+            845
+          ],
+          [
+            450,
+            625
+          ]
+        ],
+        "piecewise_similarity_output_to_input": [
+          [
+            1.697583619155685,
+            0.3196637181834593,
+            -174.22178095262643,
+            -0.3196637181834593,
+            1.697583619155685,
+            -450.1825824586739
+          ],
+          [
+            1.0364963503649636,
+            1.6996350364963504,
+            -1095.6952554744526,
+            -1.6996350364963504,
+            1.0364963503649636,
+            619.0255474452554
+          ]
+        ],
+        "lineage": {
+          "raw": {
+            "path": "Iterations/P10_Round016_TwoSegmentLimb_candidate01_raw.png",
+            "sha256": "7277e6883182f15a486b544d731265a1fbc818546f3e04f4c84f1621a4139066",
+            "byte_size": 1540417
+          },
+          "keyed": {
+            "path": "Iterations/P10_Round016_TwoSegmentLimb_candidate01_keyed.png",
+            "sha256": "17ef80901932ad1eb125d67d20c33fd21329fef7006b2b14e69a79a90d2c60ab",
+            "byte_size": 1433596
+          },
+          "anchored": {
+            "path": "Iterations/P10_Round016_TwoSegmentLimb_candidate01_anchored.png",
+            "sha256": "9b2af03b83f9f7922267d6f96b602c394f4cd8b35a2c096c42c0fbdef4b06db9",
+            "byte_size": 254986
+          },
+          "composite": {
+            "path": "Iterations/P10_Round016_TwoSegmentLimb_candidate01_composite.png",
+            "sha256": "6a8515d2310e078a8e1df1595a3c7b2442ef7c4d18b75b246da1a4301fdc6382",
+            "byte_size": 1535400
+          },
+          "protected": {
+            "path": "Iterations/P10_Round016_TwoSegmentLimb_candidate01_protected.png",
+            "sha256": "0989772bc886bbcae3a6704372638ed6024888d4ad062874189ae7e1c12dcace",
+            "byte_size": 1485301
+          }
+        },
+        "pixel_equality": {
+          "all_pixels_outside_final_mask_equal_base": true,
+          "all_hilt_protection_zone_pixels_equal_base": true,
+          "all_rear_leg_protection_zone_pixels_equal_base": true
+        },
+        "native_builder_decision": "REJECT: clear articulated V and good material family, but no native alpha; checkerboard is baked into RGB and exact placement requires deterministic keying and remapping."
+      },
+      {
+        "candidate_id": "two-segment-limb-candidate-02",
+        "generation_mode": "isolated original-2D limb generation from exact-anchor public-safe guide only; no whole-frame generation or inpainting",
+        "input_roles": [
+          {
+            "role": "Round016 original public-safe exact-anchor geometry guide only; no supplied-image pixels",
+            "path": "P10_Round016_OriginalTwoSegmentLimbGuide.png",
+            "sha256": "648fc25ecad74cb0eb5a72cadb3d9eed7e56ed8aeea1a0b44c15d487f63bc9aa"
+          }
+        ],
+        "exact_prompt": "Use case: stylized-concept\nAsset type: isolated original 2D armored trailing-limb cutout, P10 Round016 Two-Segment Limb, candidate 02 of 04\nInput role: Image 1 is an ORIGINAL public-safe exact-anchor diagram only. Follow the three screen anchors on a 1536x1024 canvas: shoulder (604,472), far-low-left elbow (370,845), terminal inward-grip interface (450,625). Render none of the diagram, labels, arrows, hilt, protected leg, context shapes, or border.\nGenerate ONLY one connected armored limb on transparent background. Segment one runs shoulder to elbow. Segment two visibly reverses direction at the elbow and returns steeply up-right to the terminal interface. Emphasize the far-low-left elbow as the lowest and leftmost limb vertex. Preserve a clean uninterrupted transparent wedge between the two segments at least head-sized.\nAppearance: original 2D painterly realistic fantasy armor; deep cobalt quilted upper sleeve, blackened-steel segmented elbow and forearm plates, restrained oxidized-copper rivets, upper-left studio light; crisp alpha edge.\nNo complete person, torso, head, face, hair, weapon, hilt, hand around an object, leg, boot, ground, shadow, scenery, diagram text, mark, logo, watermark, effect, extra limb, detached part, or crop. Exactly one isolated arm, fully inside 1536x1024.",
+        "native_output_has_alpha": false,
+        "raw_background_disposition": "RGB baked checkerboard",
+        "keying": {
+          "candidates_01_to_03": "background iff minimum RGB > 218 and channel spread < 16; close alpha with 3x3 MaxFilter then 3x3 MinFilter; no native transparency claimed",
+          "candidate_04": "background iff G > R+55, G > B+55, and G > 120; close alpha with 3x3 MaxFilter then 3x3 MinFilter; no native transparency claimed"
+        },
+        "source_anchors_shoulder_elbow_grip": [
+          [
+            1005,
+            145
+          ],
+          [
+            728,
+            535
+          ],
+          [
+            500,
+            872
+          ]
+        ],
+        "destination_anchors_shoulder_elbow_grip": [
+          [
+            604,
+            472
+          ],
+          [
+            370,
+            845
+          ],
+          [
+            450,
+            625
+          ]
+        ],
+        "piecewise_similarity_output_to_input": [
+          [
+            1.0846016968821723,
+            -0.06220697836346288,
+            379.26226887072244,
+            0.06220697836346288,
+            1.0846016968821723,
+            -404.50501585991685
+          ],
+          [
+            -1.6857664233576641,
+            0.4233576642335766,
+            993.9963503649635,
+            -0.4233576642335766,
+            -1.6857664233576641,
+            2116.1149635036495
+          ]
+        ],
+        "lineage": {
+          "raw": {
+            "path": "Iterations/P10_Round016_TwoSegmentLimb_candidate02_raw.png",
+            "sha256": "3c5d7ba64519441a328809e95dc235dcb3863155d89a73772f29c50cde4e0733",
+            "byte_size": 1344879
+          },
+          "keyed": {
+            "path": "Iterations/P10_Round016_TwoSegmentLimb_candidate02_keyed.png",
+            "sha256": "e674528fd6c3c3a0c77d6f72bdf7abe9e7c050ad3da9b24109367503514b8fdb",
+            "byte_size": 1164908
+          },
+          "anchored": {
+            "path": "Iterations/P10_Round016_TwoSegmentLimb_candidate02_anchored.png",
+            "sha256": "e88c3b2b3350f231944e824b8f50458b14a69dd2af03fbfed5e85911b677319e",
+            "byte_size": 255244
+          },
+          "composite": {
+            "path": "Iterations/P10_Round016_TwoSegmentLimb_candidate02_composite.png",
+            "sha256": "93c99fd7ba59eab17e278ab41f853a02428e8f06498cc308b048b0dedc937d99",
+            "byte_size": 1535175
+          },
+          "protected": {
+            "path": "Iterations/P10_Round016_TwoSegmentLimb_candidate02_protected.png",
+            "sha256": "bba88e6d6c6e3a05f51da31db71d4de3e0224e2a7dad7665010759d522cd0ddd",
+            "byte_size": 1490976
+          }
+        },
+        "pixel_equality": {
+          "all_pixels_outside_final_mask_equal_base": true,
+          "all_hilt_protection_zone_pixels_equal_base": true,
+          "all_rear_leg_protection_zone_pixels_equal_base": true
+        },
+        "native_builder_decision": "REJECT: essentially straight/monotonic and ineligible as a two-segment reversal; checkerboard is baked into RGB."
+      },
+      {
+        "candidate_id": "two-segment-limb-candidate-03",
+        "generation_mode": "isolated original-2D limb generation from exact-anchor public-safe guide only; no whole-frame generation or inpainting",
+        "input_roles": [
+          {
+            "role": "Round016 original public-safe exact-anchor geometry guide only; no supplied-image pixels",
+            "path": "P10_Round016_OriginalTwoSegmentLimbGuide.png",
+            "sha256": "648fc25ecad74cb0eb5a72cadb3d9eed7e56ed8aeea1a0b44c15d487f63bc9aa"
+          }
+        ],
+        "exact_prompt": "Use case: stylized-concept\nAsset type: isolated original 2D armored trailing-limb cutout, P10 Round016 Two-Segment Limb, candidate 03 of 04\nImage 1 is an original geometry-only guide. Copy only its exact three anchor positions on the full 1536x1024 canvas: open shoulder socket centered (604,472), armored elbow joint centered (370,845), open wrist/grip-interface cuff centered (450,625). Render none of the guide graphics or contextual hilt/leg/body.\nGenerate exactly one connected bent arm cutout. From the shoulder socket it travels diagonally down-left to the far-low-left elbow. It then visibly reverses and travels steeply up-right to the wrist interface. The elbow is the lowest and leftmost point. The two thick segments must remain separated except at the elbow and leave the triangular interior transparent; do not straighten or mirror the V.\nMaterials: original 2D hand-painted realistic cobalt quilted sleeve and blackened-steel segmented armor, subtle copper rivets, restrained upper-left lighting, crisp silhouette.\nBackground: transparent alpha only, no checkerboard pattern drawn into pixels and no cast shadow.\nHard exclusions: no person, torso, shoulder body, head, face, hair, hand, weapon, hilt, grip object, leg, boot, ground, scenery, text, diagram, arrows, circles, border, watermark, logo, glow, particles, extra limb, detached pieces. One arm only.",
+        "native_output_has_alpha": false,
+        "raw_background_disposition": "RGB baked checkerboard",
+        "keying": {
+          "candidates_01_to_03": "background iff minimum RGB > 218 and channel spread < 16; close alpha with 3x3 MaxFilter then 3x3 MinFilter; no native transparency claimed",
+          "candidate_04": "background iff G > R+55, G > B+55, and G > 120; close alpha with 3x3 MaxFilter then 3x3 MinFilter; no native transparency claimed"
+        },
+        "source_anchors_shoulder_elbow_grip": [
+          [
+            647,
+            160
+          ],
+          [
+            520,
+            847
+          ],
+          [
+            1020,
+            430
+          ]
+        ],
+        "destination_anchors_shoulder_elbow_grip": [
+          [
+            604,
+            472
+          ],
+          [
+            370,
+            845
+          ],
+          [
+            450,
+            625
+          ]
+        ],
+        "piecewise_similarity_output_to_input": [
+          [
+            1.4749413312014854,
+            0.58481574128994,
+            -519.8975939345489,
+            -0.58481574128994,
+            1.4749413312014854,
+            -182.9436005879773
+          ],
+          [
+            2.404014598540146,
+            -1.3985401459854014,
+            812.2810218978103,
+            1.3985401459854014,
+            2.404014598540146,
+            -1701.852189781022
+          ]
+        ],
+        "lineage": {
+          "raw": {
+            "path": "Iterations/P10_Round016_TwoSegmentLimb_candidate03_raw.png",
+            "sha256": "dbd5d8824668e7cdc18014f635b43de68db1f54a6f4ec3728059d917085b9436",
+            "byte_size": 1372073
+          },
+          "keyed": {
+            "path": "Iterations/P10_Round016_TwoSegmentLimb_candidate03_keyed.png",
+            "sha256": "363936163dd6a6d7fd275a7ea72785625e32c42f9cb50ace348045dd31737288",
+            "byte_size": 1243036
+          },
+          "anchored": {
+            "path": "Iterations/P10_Round016_TwoSegmentLimb_candidate03_anchored.png",
+            "sha256": "59e85671f23ed33e65b439488450b3641be489bef9166296e89f8d8f4a962dcb",
+            "byte_size": 182754
+          },
+          "composite": {
+            "path": "Iterations/P10_Round016_TwoSegmentLimb_candidate03_composite.png",
+            "sha256": "df44ca39fa7e293599efd155c5d792afc286429feea335c614b51ce8ee82bc96",
+            "byte_size": 1502409
+          },
+          "protected": {
+            "path": "Iterations/P10_Round016_TwoSegmentLimb_candidate03_protected.png",
+            "sha256": "99d072cd67f9245c1c7a793e0a55da69f1a2ed721c8e7505b13cd5cfff70099e",
+            "byte_size": 1486073
+          }
+        },
+        "pixel_equality": {
+          "all_pixels_outside_final_mask_equal_base": true,
+          "all_hilt_protection_zone_pixels_equal_base": true,
+          "all_rear_leg_protection_zone_pixels_equal_base": true
+        },
+        "native_builder_decision": "REJECT: valid V source with bulky elbow, but checkerboard is baked into RGB and exact placement requires deterministic keying and remapping."
+      },
+      {
+        "candidate_id": "two-segment-limb-candidate-04",
+        "generation_mode": "isolated original-2D limb generation from exact-anchor public-safe guide only; no whole-frame generation or inpainting",
+        "input_roles": [
+          {
+            "role": "Round016 original public-safe exact-anchor geometry guide only; no supplied-image pixels",
+            "path": "P10_Round016_OriginalTwoSegmentLimbGuide.png",
+            "sha256": "648fc25ecad74cb0eb5a72cadb3d9eed7e56ed8aeea1a0b44c15d487f63bc9aa"
+          }
+        ],
+        "exact_prompt": "Use case: stylized-concept\nAsset type: isolated original 2D armored trailing-limb cutout, P10 Round016 Two-Segment Limb, candidate 04 of 04 FINAL CAP\nImage 1 is original coordinate geometry only. On its full 1536x1024 field, place the shoulder opening exactly at (604,472), the anatomical elbow center exactly at (370,845), and the wrist opening exactly at (450,625). Render no guide graphics or context.\nONE OBJECT ONLY: a single connected deep-V armored arm. Upper arm descends down-left from shoulder to elbow. Forearm sharply reverses and rises steeply up-right from elbow to wrist. The elbow is the far-low-left vertex; preserve a clear open triangular wedge between segments. Do not straighten, mirror, rotate away from, or relocate this topology.\nAppearance: original 2D realistic painterly concept-art cutout; deep cobalt quilted sleeve, blackened-steel segmented plates, restrained copper rivets; crisp edge, no shadow.\nBackground: perfectly uniform flat pure chroma green #00FF00 across every non-object pixel, with no checkerboard, texture, gradient, shadow, or halo.\nNo full character, torso, head, face, hair, hand, weapon, hilt, leg, boot, ground, scenery, labels, text, arrows, circles, border, logo, watermark, effects, extra limb, detached fragment. Exactly one isolated arm only. Final generation cap.",
+        "native_output_has_alpha": false,
+        "raw_background_disposition": "RGB clean keyable green field; requested green approximated rather than literal uniform #00FF00",
+        "keying": {
+          "candidates_01_to_03": "background iff minimum RGB > 218 and channel spread < 16; close alpha with 3x3 MaxFilter then 3x3 MinFilter; no native transparency claimed",
+          "candidate_04": "background iff G > R+55, G > B+55, and G > 120; close alpha with 3x3 MaxFilter then 3x3 MinFilter; no native transparency claimed"
+        },
+        "source_anchors_shoulder_elbow_grip": [
+          [
+            1025,
+            235
+          ],
+          [
+            505,
+            940
+          ],
+          [
+            305,
+            575
+          ]
+        ],
+        "destination_anchors_shoulder_elbow_grip": [
+          [
+            604,
+            472
+          ],
+          [
+            370,
+            845
+          ],
+          [
+            450,
+            625
+          ]
+        ],
+        "piecewise_similarity_output_to_input": [
+          [
+            1.9838821982102792,
+            -0.1495216236428811,
+            -102.69064135956887,
+            0.1495216236428811,
+            1.9838821982102792,
+            -791.703458235552
+          ],
+          [
+            1.1733576642335766,
+            1.3357664233576643,
+            -1057.8649635036495,
+            -1.3357664233576643,
+            1.1733576642335766,
+            442.7463503649636
+          ]
+        ],
+        "lineage": {
+          "raw": {
+            "path": "Iterations/P10_Round016_TwoSegmentLimb_candidate04_raw.png",
+            "sha256": "d8bf57bc12e254ba0f1e9c45c9a62ef31a43f69596566312290bf46057598a1f",
+            "byte_size": 1564568
+          },
+          "keyed": {
+            "path": "Iterations/P10_Round016_TwoSegmentLimb_candidate04_keyed.png",
+            "sha256": "ab02a3f610226afe3121ff6d39a0e6bfcf2fb0c6ade3645874f4e2b7793c931a",
+            "byte_size": 1383386
+          },
+          "anchored": {
+            "path": "Iterations/P10_Round016_TwoSegmentLimb_candidate04_anchored.png",
+            "sha256": "7aa6789e4823caf0dfa06c8da5fedddc9a84f849b1c5bd3cb97690eb44faecd9",
+            "byte_size": 148610
+          },
+          "composite": {
+            "path": "Iterations/P10_Round016_TwoSegmentLimb_candidate04_composite.png",
+            "sha256": "4cea1efeacd37a342036351f6acf46f43123cdd807ea5debdff2372b029dcca6",
+            "byte_size": 1491110
+          },
+          "protected": {
+            "path": "Iterations/P10_Round016_TwoSegmentLimb_candidate04_protected.png",
+            "sha256": "b84864e8675c8919798a3d2fe8de2d46dc723efcdc3941df256f912b54ef96ce",
+            "byte_size": 1462445
+          }
+        },
+        "pixel_equality": {
+          "all_pixels_outside_final_mask_equal_base": true,
+          "all_hilt_protection_zone_pixels_equal_base": true,
+          "all_rear_leg_protection_zone_pixels_equal_base": true
+        },
+        "native_builder_decision": "STRONGEST SOURCE / PROTECTED FINAL FAIL: clean keyable green field and clearest deep V. Piecewise similarity mapping hits all anchors, but mandatory hilt/rear-leg restoration breaks the visible V and wedge and leaves a detached residual."
+      }
+    ]
+  },
+  "accepted_copy": {
+    "path": "P10_Round016_NyraKestrel_TwoSegmentLimb_v1.png",
+    "sha256": "b84864e8675c8919798a3d2fe8de2d46dc723efcdc3941df256f912b54ef96ce",
+    "byte_size": 1462445,
+    "dimensions_px": {
+      "width": 1536,
+      "height": 1024
+    },
+    "mode": "RGB",
+    "format": "png",
+    "source_candidate": "Iterations/P10_Round016_TwoSegmentLimb_candidate04_protected.png",
+    "source_sha256": "b84864e8675c8919798a3d2fe8de2d46dc723efcdc3941df256f912b54ef96ce",
+    "byte_identical_to_source": true,
+    "promotion_reason": "candidate04 is the cleanest keyable, most legible native deep-V source and the strongest deterministic exact-anchor composite, even though protection makes the final target fail"
+  },
+  "feasibility_finding": {
+    "status": "MUTUALLY_INCOMPATIBLE_CONSTRAINTS_AT_CURRENT_ANCHORS",
+    "finding": "The required elbow at 370,845 and the return centerline to the preserved grip at 450,625 lie on the sealed Round013 rear-leg and/or hilt/grip pixels. An honest mask that protects every such pixel necessarily occludes the elbow and every sampled point on the return, so it cannot simultaneously show one continuous elbow-to-grip forearm and an uninterrupted head-sized wedge.",
+    "visible_protected_result": "Only a shoulder-side armored fragment and a small far-low residual remain visible after authoritative restoration; the V is broken, the return is not continuous, and the wedge is not established.",
+    "builder_eligibility": "FAIL"
+  },
+  "native_decision": {
+    "selected_candidate": 4,
+    "unprotected_composite": "Has the intended deep-V source topology at exact anchors but includes socket-like holes and necessarily overwrites protected authority before restoration.",
+    "protected_composite": "FAIL: protected hilt and rear leg are restored exactly, breaking the visible two-segment path and leaving a detached residual; no uninterrupted head-sized pale wedge.",
+    "not_independent_criticism": true
+  },
+  "candid_limitations": [
+    "No generated raw has native alpha; candidates01-03 bake a checkerboard and candidate04 uses an approximated green key field.",
+    "Exact anchors require deterministic piecewise similarity remapping rather than native generator placement.",
+    "Candidate04 contains socket-like openings at limb endpoints and elbow that are not natural final anatomy.",
+    "Mandatory protection removes 54,019 of 77,360 corridor pixels and makes the final visible limb discontinuous.",
+    "The accepted copy is evidence preservation only and remains ineligible for the requested Two-Segment Limb Silhouette target."
+  ],
+  "privacy_and_originality_scope": {
+    "private_benchmark_archive_accessed": false,
+    "third_party_pose_pixels_used": false,
+    "franchise_pixels_used": false,
+    "supplied_reference_pixels_beyond_bounded_project_authorities": false,
+    "round014_pixels_used_in_generation_or_compositing": false,
+    "personal_data_in_prompts_or_artifacts": false,
+    "original_2d_only": true,
+    "claims_not_made": [
+      "benchmark pass, benchmark comparison, or benchmark victory",
+      "successful Two-Segment Limb Silhouette",
+      "paid-3D, 3D, rig, mesh, UV, deformation, collision, animation, LOD, engine, game-ready, or production-ready status",
+      "legal originality, exclusivity, copyright clearance, or trademark clearance"
+    ]
+  },
+  "round016_artifact_manifest_excluding_receipt_and_readme": [
+    {
+      "path": "Iterations/P10_Round016_TwoSegmentLimb_candidate01_anchored.png",
+      "sha256": "9b2af03b83f9f7922267d6f96b602c394f4cd8b35a2c096c42c0fbdef4b06db9",
+      "byte_size": 254986,
+      "dimensions_px": {
+        "width": 1536,
+        "height": 1024
+      },
+      "mode": "RGBA",
+      "format": "png"
+    },
+    {
+      "path": "Iterations/P10_Round016_TwoSegmentLimb_candidate01_anchored_affine_preliminary.png",
+      "sha256": "be748389ebdb783d4a4561389ed6fbe943593047e972694544942497682c91d2",
+      "byte_size": 80420,
+      "dimensions_px": {
+        "width": 1536,
+        "height": 1024
+      },
+      "mode": "RGBA",
+      "format": "png"
+    },
+    {
+      "path": "Iterations/P10_Round016_TwoSegmentLimb_candidate01_composite.png",
+      "sha256": "6a8515d2310e078a8e1df1595a3c7b2442ef7c4d18b75b246da1a4301fdc6382",
+      "byte_size": 1535400,
+      "dimensions_px": {
+        "width": 1536,
+        "height": 1024
+      },
+      "mode": "RGB",
+      "format": "png"
+    },
+    {
+      "path": "Iterations/P10_Round016_TwoSegmentLimb_candidate01_composite_affine_preliminary.png",
+      "sha256": "c3c1276de3fb845b6e2b12255151cb39380b871914a78bde122418ae1e2cd9dc",
+      "byte_size": 1436431,
+      "dimensions_px": {
+        "width": 1536,
+        "height": 1024
+      },
+      "mode": "RGB",
+      "format": "png"
+    },
+    {
+      "path": "Iterations/P10_Round016_TwoSegmentLimb_candidate01_keyed.png",
+      "sha256": "17ef80901932ad1eb125d67d20c33fd21329fef7006b2b14e69a79a90d2c60ab",
+      "byte_size": 1433596,
+      "dimensions_px": {
+        "width": 1536,
+        "height": 1024
+      },
+      "mode": "RGBA",
+      "format": "png"
+    },
+    {
+      "path": "Iterations/P10_Round016_TwoSegmentLimb_candidate01_protected.png",
+      "sha256": "0989772bc886bbcae3a6704372638ed6024888d4ad062874189ae7e1c12dcace",
+      "byte_size": 1485301,
+      "dimensions_px": {
+        "width": 1536,
+        "height": 1024
+      },
+      "mode": "RGB",
+      "format": "png"
+    },
+    {
+      "path": "Iterations/P10_Round016_TwoSegmentLimb_candidate01_protected_affine_preliminary.png",
+      "sha256": "9d0a20ba633a1f402b507728a8c5ac84725f6f612520a7f8b3167f7a3bf1d3b7",
+      "byte_size": 1455660,
+      "dimensions_px": {
+        "width": 1536,
+        "height": 1024
+      },
+      "mode": "RGB",
+      "format": "png"
+    },
+    {
+      "path": "Iterations/P10_Round016_TwoSegmentLimb_candidate01_raw.png",
+      "sha256": "7277e6883182f15a486b544d731265a1fbc818546f3e04f4c84f1621a4139066",
+      "byte_size": 1540417,
+      "dimensions_px": {
+        "width": 1536,
+        "height": 1024
+      },
+      "mode": "RGB",
+      "format": "png"
+    },
+    {
+      "path": "Iterations/P10_Round016_TwoSegmentLimb_candidate02_anchored.png",
+      "sha256": "e88c3b2b3350f231944e824b8f50458b14a69dd2af03fbfed5e85911b677319e",
+      "byte_size": 255244,
+      "dimensions_px": {
+        "width": 1536,
+        "height": 1024
+      },
+      "mode": "RGBA",
+      "format": "png"
+    },
+    {
+      "path": "Iterations/P10_Round016_TwoSegmentLimb_candidate02_anchored_affine_preliminary.png",
+      "sha256": "d5d90ab821221561539701b2c15b92a4edf85ca515edc15395e504a4419d89b4",
+      "byte_size": 302388,
+      "dimensions_px": {
+        "width": 1536,
+        "height": 1024
+      },
+      "mode": "RGBA",
+      "format": "png"
+    },
+    {
+      "path": "Iterations/P10_Round016_TwoSegmentLimb_candidate02_composite.png",
+      "sha256": "93c99fd7ba59eab17e278ab41f853a02428e8f06498cc308b048b0dedc937d99",
+      "byte_size": 1535175,
+      "dimensions_px": {
+        "width": 1536,
+        "height": 1024
+      },
+      "mode": "RGB",
+      "format": "png"
+    },
+    {
+      "path": "Iterations/P10_Round016_TwoSegmentLimb_candidate02_composite_affine_preliminary.png",
+      "sha256": "c114cf14ee79a7e68a4d688ce956f4ef4721794d177ee4ed38417475c03aa561",
+      "byte_size": 1509126,
+      "dimensions_px": {
+        "width": 1536,
+        "height": 1024
+      },
+      "mode": "RGB",
+      "format": "png"
+    },
+    {
+      "path": "Iterations/P10_Round016_TwoSegmentLimb_candidate02_keyed.png",
+      "sha256": "e674528fd6c3c3a0c77d6f72bdf7abe9e7c050ad3da9b24109367503514b8fdb",
+      "byte_size": 1164908,
+      "dimensions_px": {
+        "width": 1536,
+        "height": 1024
+      },
+      "mode": "RGBA",
+      "format": "png"
+    },
+    {
+      "path": "Iterations/P10_Round016_TwoSegmentLimb_candidate02_protected.png",
+      "sha256": "bba88e6d6c6e3a05f51da31db71d4de3e0224e2a7dad7665010759d522cd0ddd",
+      "byte_size": 1490976,
+      "dimensions_px": {
+        "width": 1536,
+        "height": 1024
+      },
+      "mode": "RGB",
+      "format": "png"
+    },
+    {
+      "path": "Iterations/P10_Round016_TwoSegmentLimb_candidate02_protected_affine_preliminary.png",
+      "sha256": "b13413074ad96c7bafd6eeffce37f10b0525b19dfbbca2ca2c669706269664f3",
+      "byte_size": 1483399,
+      "dimensions_px": {
+        "width": 1536,
+        "height": 1024
+      },
+      "mode": "RGB",
+      "format": "png"
+    },
+    {
+      "path": "Iterations/P10_Round016_TwoSegmentLimb_candidate02_raw.png",
+      "sha256": "3c5d7ba64519441a328809e95dc235dcb3863155d89a73772f29c50cde4e0733",
+      "byte_size": 1344879,
+      "dimensions_px": {
+        "width": 1536,
+        "height": 1024
+      },
+      "mode": "RGB",
+      "format": "png"
+    },
+    {
+      "path": "Iterations/P10_Round016_TwoSegmentLimb_candidate03_anchored.png",
+      "sha256": "59e85671f23ed33e65b439488450b3641be489bef9166296e89f8d8f4a962dcb",
+      "byte_size": 182754,
+      "dimensions_px": {
+        "width": 1536,
+        "height": 1024
+      },
+      "mode": "RGBA",
+      "format": "png"
+    },
+    {
+      "path": "Iterations/P10_Round016_TwoSegmentLimb_candidate03_anchored_affine_preliminary.png",
+      "sha256": "7495482eaa7a9147e05c09edfd9ccfce70418b7ad9f9c86aa1ee393706aec948",
+      "byte_size": 70015,
+      "dimensions_px": {
+        "width": 1536,
+        "height": 1024
+      },
+      "mode": "RGBA",
+      "format": "png"
+    },
+    {
+      "path": "Iterations/P10_Round016_TwoSegmentLimb_candidate03_composite.png",
+      "sha256": "df44ca39fa7e293599efd155c5d792afc286429feea335c614b51ce8ee82bc96",
+      "byte_size": 1502409,
+      "dimensions_px": {
+        "width": 1536,
+        "height": 1024
+      },
+      "mode": "RGB",
+      "format": "png"
+    },
+    {
+      "path": "Iterations/P10_Round016_TwoSegmentLimb_candidate03_composite_affine_preliminary.png",
+      "sha256": "472d16b9bec3c2490f35c3999fe35f11a5622c23360bfa80887d23cf9941d642",
+      "byte_size": 1429991,
+      "dimensions_px": {
+        "width": 1536,
+        "height": 1024
+      },
+      "mode": "RGB",
+      "format": "png"
+    },
+    {
+      "path": "Iterations/P10_Round016_TwoSegmentLimb_candidate03_keyed.png",
+      "sha256": "363936163dd6a6d7fd275a7ea72785625e32c42f9cb50ace348045dd31737288",
+      "byte_size": 1243036,
+      "dimensions_px": {
+        "width": 1536,
+        "height": 1024
+      },
+      "mode": "RGBA",
+      "format": "png"
+    },
+    {
+      "path": "Iterations/P10_Round016_TwoSegmentLimb_candidate03_protected.png",
+      "sha256": "99d072cd67f9245c1c7a793e0a55da69f1a2ed721c8e7505b13cd5cfff70099e",
+      "byte_size": 1486073,
+      "dimensions_px": {
+        "width": 1536,
+        "height": 1024
+      },
+      "mode": "RGB",
+      "format": "png"
+    },
+    {
+      "path": "Iterations/P10_Round016_TwoSegmentLimb_candidate03_protected_affine_preliminary.png",
+      "sha256": "15308d89db220e08500220338e7367f14ccf350a6ea3564545db6a1ac6cb15f6",
+      "byte_size": 1450432,
+      "dimensions_px": {
+        "width": 1536,
+        "height": 1024
+      },
+      "mode": "RGB",
+      "format": "png"
+    },
+    {
+      "path": "Iterations/P10_Round016_TwoSegmentLimb_candidate03_raw.png",
+      "sha256": "dbd5d8824668e7cdc18014f635b43de68db1f54a6f4ec3728059d917085b9436",
+      "byte_size": 1372073,
+      "dimensions_px": {
+        "width": 1536,
+        "height": 1024
+      },
+      "mode": "RGB",
+      "format": "png"
+    },
+    {
+      "path": "Iterations/P10_Round016_TwoSegmentLimb_candidate04_anchored.png",
+      "sha256": "7aa6789e4823caf0dfa06c8da5fedddc9a84f849b1c5bd3cb97690eb44faecd9",
+      "byte_size": 148610,
+      "dimensions_px": {
+        "width": 1536,
+        "height": 1024
+      },
+      "mode": "RGBA",
+      "format": "png"
+    },
+    {
+      "path": "Iterations/P10_Round016_TwoSegmentLimb_candidate04_anchored_affine_preliminary.png",
+      "sha256": "75c7e63c527c69eb4e0501bb48e8c285f2f090f2a77b4de5997394754851ec15",
+      "byte_size": 56545,
+      "dimensions_px": {
+        "width": 1536,
+        "height": 1024
+      },
+      "mode": "RGBA",
+      "format": "png"
+    },
+    {
+      "path": "Iterations/P10_Round016_TwoSegmentLimb_candidate04_composite.png",
+      "sha256": "4cea1efeacd37a342036351f6acf46f43123cdd807ea5debdff2372b029dcca6",
+      "byte_size": 1491110,
+      "dimensions_px": {
+        "width": 1536,
+        "height": 1024
+      },
+      "mode": "RGB",
+      "format": "png"
+    },
+    {
+      "path": "Iterations/P10_Round016_TwoSegmentLimb_candidate04_composite_affine_preliminary.png",
+      "sha256": "14235229760eae3266702c9bd8ba90daf612008b1217326a0180daf50b9903d6",
+      "byte_size": 1418481,
+      "dimensions_px": {
+        "width": 1536,
+        "height": 1024
+      },
+      "mode": "RGB",
+      "format": "png"
+    },
+    {
+      "path": "Iterations/P10_Round016_TwoSegmentLimb_candidate04_keyed.png",
+      "sha256": "ab02a3f610226afe3121ff6d39a0e6bfcf2fb0c6ade3645874f4e2b7793c931a",
+      "byte_size": 1383386,
+      "dimensions_px": {
+        "width": 1536,
+        "height": 1024
+      },
+      "mode": "RGBA",
+      "format": "png"
+    },
+    {
+      "path": "Iterations/P10_Round016_TwoSegmentLimb_candidate04_protected.png",
+      "sha256": "b84864e8675c8919798a3d2fe8de2d46dc723efcdc3941df256f912b54ef96ce",
+      "byte_size": 1462445,
+      "dimensions_px": {
+        "width": 1536,
+        "height": 1024
+      },
+      "mode": "RGB",
+      "format": "png"
+    },
+    {
+      "path": "Iterations/P10_Round016_TwoSegmentLimb_candidate04_protected_affine_preliminary.png",
+      "sha256": "3ead4e64f577c97abf5534d0ae25a9bd45a4cb35d224b2004018fa2d13fdec7c",
+      "byte_size": 1446973,
+      "dimensions_px": {
+        "width": 1536,
+        "height": 1024
+      },
+      "mode": "RGB",
+      "format": "png"
+    },
+    {
+      "path": "Iterations/P10_Round016_TwoSegmentLimb_candidate04_raw.png",
+      "sha256": "d8bf57bc12e254ba0f1e9c45c9a62ef31a43f69596566312290bf46057598a1f",
+      "byte_size": 1564568,
+      "dimensions_px": {
+        "width": 1536,
+        "height": 1024
+      },
+      "mode": "RGB",
+      "format": "png"
+    },
+    {
+      "path": "P10_Round016_DeterministicCompositeEvidence.json",
+      "sha256": "29731c0577d33d4177388606f496df55842fa570f3f415a30bc24811446fbd9e",
+      "byte_size": 8726,
+      "dimensions_px": null,
+      "mode": null,
+      "format": "json"
+    },
+    {
+      "path": "P10_Round016_DeterministicCompositor.py",
+      "sha256": "38932818796fe663ad4f21aea4a6aed3ba073af0c3f426c36577bae32dc63634",
+      "byte_size": 8957,
+      "dimensions_px": null,
+      "mode": null,
+      "format": "py"
+    },
+    {
+      "path": "P10_Round016_HiltProtectionZone.svg",
+      "sha256": "afcda0629c4ba4ef727ef1f0ff4bfcf69c908368e414e8905754d6c65073b8e3",
+      "byte_size": 381,
+      "dimensions_px": {
+        "width": 1536,
+        "height": 1024
+      },
+      "mode": null,
+      "format": "svg"
+    },
+    {
+      "path": "P10_Round016_HiltProtectionZone_binary.png",
+      "sha256": "75fe93e1b7c5f1bf355bf4df092fc2097f16de53bf8c17bf95619ce1d43b36c2",
+      "byte_size": 3845,
+      "dimensions_px": {
+        "width": 1536,
+        "height": 1024
+      },
+      "mode": "L",
+      "format": "png"
+    },
+    {
+      "path": "P10_Round016_HiltProtectionZone_rendered.png",
+      "sha256": "4354682123916ae5d8a50f4a8736ccf81c341809837f99d95dbc2d46539c1211",
+      "byte_size": 19466,
+      "dimensions_px": {
+        "width": 1536,
+        "height": 1024
+      },
+      "mode": "RGB",
+      "format": "png"
+    },
+    {
+      "path": "P10_Round016_NyraKestrel_TwoSegmentLimb_v1.png",
+      "sha256": "b84864e8675c8919798a3d2fe8de2d46dc723efcdc3941df256f912b54ef96ce",
+      "byte_size": 1462445,
+      "dimensions_px": {
+        "width": 1536,
+        "height": 1024
+      },
+      "mode": "RGB",
+      "format": "png"
+    },
+    {
+      "path": "P10_Round016_OriginalTwoSegmentLimbGuide.png",
+      "sha256": "648fc25ecad74cb0eb5a72cadb3d9eed7e56ed8aeea1a0b44c15d487f63bc9aa",
+      "byte_size": 156732,
+      "dimensions_px": {
+        "width": 1536,
+        "height": 1024
+      },
+      "mode": "RGB",
+      "format": "png"
+    },
+    {
+      "path": "P10_Round016_OriginalTwoSegmentLimbGuide.svg",
+      "sha256": "d56161bc672ab9cd75cf059d645843cf6d057d7830129e3e7640ee076034b283",
+      "byte_size": 4008,
+      "dimensions_px": {
+        "width": 1536,
+        "height": 1024
+      },
+      "mode": null,
+      "format": "svg"
+    },
+    {
+      "path": "P10_Round016_RearLegProtectionZone.svg",
+      "sha256": "b5202e9a6dcf3af165dffc6b05d035774e42cc9a35e01ff103691f6f4674a16e",
+      "byte_size": 361,
+      "dimensions_px": {
+        "width": 1536,
+        "height": 1024
+      },
+      "mode": null,
+      "format": "svg"
+    },
+    {
+      "path": "P10_Round016_RearLegProtectionZone_binary.png",
+      "sha256": "61d422fa08737ae5db1a9842ea7a118d0181cea8d89e40b85b7490a65cc6a589",
+      "byte_size": 3385,
+      "dimensions_px": {
+        "width": 1536,
+        "height": 1024
+      },
+      "mode": "L",
+      "format": "png"
+    },
+    {
+      "path": "P10_Round016_RearLegProtectionZone_rendered.png",
+      "sha256": "9aadc6087cb6edf9df08fc575bdc7206283d01d0f4e4f6816dd8665ec85381a2",
+      "byte_size": 17091,
+      "dimensions_px": {
+        "width": 1536,
+        "height": 1024
+      },
+      "mode": "RGB",
+      "format": "png"
+    },
+    {
+      "path": "P10_Round016_SealReceipt.py",
+      "sha256": "4199590eb0483f9a6c604c214ba0a9c85c4df30d89e1fde896c07bbf4ea9bf90",
+      "byte_size": 21572,
+      "dimensions_px": null,
+      "mode": null,
+      "format": "py"
+    },
+    {
+      "path": "P10_Round016_TrailingLimbHardMask.svg",
+      "sha256": "01ee6c5171881c66685469f4f87cf5148e7626445cdf20566e289cb1894b9dd4",
+      "byte_size": 1728,
+      "dimensions_px": {
+        "width": 1536,
+        "height": 1024
+      },
+      "mode": null,
+      "format": "svg"
+    },
+    {
+      "path": "P10_Round016_TrailingLimbHardMask_binary.png",
+      "sha256": "76e2aee7ddccfa8aaeee4f711e6740f36df5f49da773e5597a7c1ee024dd1199",
+      "byte_size": 2979,
+      "dimensions_px": {
+        "width": 1536,
+        "height": 1024
+      },
+      "mode": "L",
+      "format": "png"
+    },
+    {
+      "path": "P10_Round016_TrailingLimbHardMask_rendered.png",
+      "sha256": "f83cbf1eaa3480f6a3b623f24f8b7e5c8760d6fdfc4c25bf0883ff925ee84105",
+      "byte_size": 11845,
+      "dimensions_px": {
+        "width": 1536,
+        "height": 1024
+      },
+      "mode": "RGB",
+      "format": "png"
+    },
+    {
+      "path": "P10_Round016_UnprotectedLimbCorridor.svg",
+      "sha256": "22831a24718fd68469dc065b11f7d4d0d3641c64c1efd2b57cb6c628266f77db",
+      "byte_size": 645,
+      "dimensions_px": {
+        "width": 1536,
+        "height": 1024
+      },
+      "mode": null,
+      "format": "svg"
+    },
+    {
+      "path": "P10_Round016_UnprotectedLimbCorridor_binary.png",
+      "sha256": "c19048dbe431952990706d31c86ed745e83a945de01d8f563698ca12aa4c1472",
+      "byte_size": 3371,
+      "dimensions_px": {
+        "width": 1536,
+        "height": 1024
+      },
+      "mode": "L",
+      "format": "png"
+    },
+    {
+      "path": "P10_Round016_UnprotectedLimbCorridor_rendered.png",
+      "sha256": "5533b6d5edac964194b738b441feb1f4fbbdf18f0cc3de2cf3921eb7e2e7b91a",
+      "byte_size": 16447,
+      "dimensions_px": {
+        "width": 1536,
+        "height": 1024
+      },
+      "mode": "RGB",
+      "format": "png"
+    }
+  ]
+}

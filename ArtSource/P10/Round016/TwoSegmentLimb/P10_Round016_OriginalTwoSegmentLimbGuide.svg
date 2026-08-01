@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1536" height="1024" viewBox="0 0 1536 1024" role="img" aria-labelledby="title desc">
+  <title id="title">P10 Round016 original exact-anchor two-segment limb guide</title>
+  <desc id="desc">Original public-safe geometry diagram with no embedded raster or supplied-image pixels. It fixes the trailing shoulder at 604,472, the Round014 candidate04 coordinate-only far-low-left elbow at 370,845, and the preserved Round013 inward grip at 450,625.</desc>
+  <defs>
+    <style>
+      .title { font: 700 30px system-ui, sans-serif; fill: #202936; }
+      .label { font: 700 24px system-ui, sans-serif; fill: #263443; }
+      .small { font: 500 20px system-ui, sans-serif; fill: #475665; }
+      .target { fill: none; stroke: #923b34; stroke-linecap: round; stroke-linejoin: round; }
+    </style>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 Z" fill="#2a6091"/>
+    </marker>
+  </defs>
+
+  <rect width="1536" height="1024" fill="#f4efe6"/>
+  <rect x="34" y="34" width="1468" height="956" rx="28" fill="none" stroke="#d4c8b7" stroke-width="4"/>
+  <text x="76" y="92" class="title">P10 ROUND016 — TWO-SEGMENT LIMB SILHOUETTE</text>
+  <text x="76" y="130" class="small">Original public-safe exact-anchor guide • coordinate geometry only • no source pixels</text>
+
+  <!-- Context is intentionally abstract diagram geometry, never traced source art. -->
+  <path d="M 675 360 C 628 390 603 430 604 472 C 610 545 650 610 711 660" fill="#d8dee3" stroke="#66727d" stroke-width="12"/>
+  <path d="M 700 662 C 610 705 515 810 420 956" fill="none" stroke="#67717a" stroke-width="112" stroke-linecap="round"/>
+  <text x="735" y="820" class="small">protected rear-leg zone</text>
+
+  <!-- Preserved Round013 hilt axis is context only; it remains outside the generated cutout. -->
+  <path d="M 150 798 L 1010 352" fill="none" stroke="#244d78" stroke-width="34" stroke-linecap="round"/>
+  <path d="M 150 798 L 1010 352" fill="none" stroke="#94aec7" stroke-width="7" stroke-linecap="round"/>
+  <text x="92" y="852" class="small">protected original hilt</text>
+
+  <!-- Exact target centerlines. -->
+  <path d="M 604 472 L 370 845" class="target" stroke-width="112"/>
+  <path d="M 370 845 L 450 625" class="target" stroke-width="94"/>
+
+  <!-- Uninterrupted pale wedge bounded by the two segments and shoulder-to-grip opening. -->
+  <path d="M 563 515 L 397 801 L 438 664 Z" fill="#fffaf1" stroke="#d39a32" stroke-width="8" stroke-dasharray="16 13"/>
+
+  <!-- Anchors are drawn last for exact public-safe verification. -->
+  <circle cx="604" cy="472" r="16" fill="#202936" stroke="#ffffff" stroke-width="5"/>
+  <circle cx="370" cy="845" r="22" fill="#f4efe6" stroke="#762d29" stroke-width="10"/>
+  <circle cx="450" cy="625" r="22" fill="#244d78" stroke="#ffffff" stroke-width="6"/>
+  <text x="635" y="465" class="label">SHOULDER 604,472</text>
+  <text x="72" y="925" class="label">ELBOW 370,845</text>
+  <text x="488" y="610" class="label">PRESERVED GRIP 450,625</text>
+  <text x="440" y="772" class="label" transform="rotate(-62 440 772)">PALE WEDGE</text>
+
+  <path d="M 274 878 L 347 853" fill="none" stroke="#2a6091" stroke-width="7" marker-end="url(#arrow)"/>
+  <text x="68" y="868" class="small">far-low-left external vertex</text>
+  <path d="M 320 734 L 423 646" fill="none" stroke="#2a6091" stroke-width="7" marker-end="url(#arrow)"/>
+  <text x="76" y="700" class="small">steep up-right return</text>
+
+  <g transform="translate(1060 730)">
+    <rect width="392" height="192" rx="22" fill="#ffffff" stroke="#cbbdaa" stroke-width="4"/>
+    <text x="24" y="44" class="label">CUTOUT RULE</text>
+    <text x="24" y="82" class="small">Generate only one armored limb.</text>
+    <text x="24" y="116" class="small">No body, weapon, leg, face, text,</text>
+    <text x="24" y="150" class="small">shadow field, effects, or scenery.</text>
+  </g>
+</svg>

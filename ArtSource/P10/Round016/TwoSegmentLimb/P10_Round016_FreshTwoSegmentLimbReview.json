@@ -1,0 +1,648 @@
+{
+  "schema": "codexofwar.fresh-two-segment-limb-review",
+  "version": "1.0.0",
+  "review_id": "P10-Round016-FreshTwoSegmentLimbReview",
+  "reviewed_utc": "2026-08-01T09:05:51Z",
+  "reviewer_mode": "fresh-context separate hostile AAA visual critic with real-engine playtest evidence",
+  "scope": {
+    "project_asset": "P10 Nyra Kestrel",
+    "round": "Round016",
+    "judged_unit": "Two-Segment Limb Silhouette only",
+    "accepted_candidate": "P10_Round016_NyraKestrel_TwoSegmentLimb_v1.png",
+    "evaluation_standard": "God of War Ragnarok gameplay-level silhouette clarity; web-game plausibility is failure",
+    "required_gate": "real target-relevant engine run/capture, no catastrophic defect, total at least 95/100, every category at least 9/10, and candidate preferred in at least 5 of 6 blind comparisons"
+  },
+  "hashes_and_provenance": {
+    "accepted_candidate": {
+      "path": "P10_Round016_NyraKestrel_TwoSegmentLimb_v1.png",
+      "sha256": "b84864e8675c8919798a3d2fe8de2d46dc723efcdc3941df256f912b54ef96ce",
+      "expected_sha256": "b84864e8675c8919798a3d2fe8de2d46dc723efcdc3941df256f912b54ef96ce",
+      "expected_hash_matched": true,
+      "byte_size": 1462445,
+      "dimensions_px": {
+        "width": 1536,
+        "height": 1024
+      },
+      "mode": "RGB",
+      "source": "Iterations/P10_Round016_TwoSegmentLimb_candidate04_protected.png",
+      "source_sha256": "b84864e8675c8919798a3d2fe8de2d46dc723efcdc3941df256f912b54ef96ce",
+      "byte_identical_to_source": true
+    },
+    "authoritative_round013_base": {
+      "path": "../../Round013/ElbowReturnTriangle/Iterations/P10_Round013_ElbowReturnTriangle_candidate04.png",
+      "sha256": "c88489f7af2c0a5d223f431fb322f72ac549283819c3c9b6281a20c1b39fbcd6",
+      "byte_size": 1750551,
+      "role": "absolute pixel authority outside the final hard mask and for the original grip, hilt, rear leg, identity, lighting, and framing"
+    },
+    "sealed_builder_evidence": {
+      "receipt": {
+        "path": "P10_Round016_TwoSegmentLimbReceipt.json",
+        "sha256": "46023c8bf566def0efbcd24a19571733f6609342696e52bc56b60b6812cc7743",
+        "byte_size": 47092
+      },
+      "deterministic_composite_evidence": {
+        "path": "P10_Round016_DeterministicCompositeEvidence.json",
+        "sha256": "29731c0577d33d4177388606f496df55842fa570f3f415a30bc24811446fbd9e",
+        "byte_size": 8726
+      },
+      "readme": {
+        "path": "README.md",
+        "sha256": "8ba2121e35c1beaea9ce87c2fe594218a2b5b89d3f3eef9d8b9345c56304bc8e",
+        "byte_size": 2148
+      },
+      "final_binary_hard_mask": {
+        "path": "P10_Round016_TrailingLimbHardMask_binary.png",
+        "sha256": "76e2aee7ddccfa8aaeee4f711e6740f36df5f49da773e5597a7c1ee024dd1199",
+        "byte_size": 2979
+      },
+      "hilt_protection_mask": {
+        "path": "P10_Round016_HiltProtectionZone_binary.png",
+        "sha256": "75fe93e1b7c5f1bf355bf4df092fc2097f16de53bf8c17bf95619ce1d43b36c2",
+        "byte_size": 3845
+      },
+      "rear_leg_protection_mask": {
+        "path": "P10_Round016_RearLegProtectionZone_binary.png",
+        "sha256": "61d422fa08737ae5db1a9842ea7a118d0181cea8d89e40b85b7490a65cc6a589",
+        "byte_size": 3385
+      }
+    },
+    "game_project_fingerprints": {
+      "project_version_file_sha256": "dc39b76877cad51588645e7b18e8c1c90e462ddcec948e3d9e60214dee3c09fc",
+      "editor_build_settings_sha256": "8d1712535531522f729d34e843ea20772c01d002227338f8f802f472d7e8d78e",
+      "p10_capture_command_sha256": "1305e067a1f2db4a7248281aa05c9ba89499c4d54a60b9eaa5e84b2dd955e06d",
+      "p10_lookdev_scene_sha256": "1f0ae1476431bfd7394ccd798463bc9939e175d5141bfc8a136e2763261d9779",
+      "captured_astra_vale_model_sha256": "e301584e65e5b7c4c005771b93e5ec26e6342ed4af6b89b2db199cd017927af9"
+    }
+  },
+  "engine_and_actual_game_capture": {
+    "project_inspected": "game/",
+    "unity_project_present": true,
+    "declared_unity_version": "6000.5.4f1",
+    "tool": "/Applications/Unity/Hub/Editor/6000.5.4f1/Unity.app/Contents/MacOS/Unity",
+    "toolchain": "Unity 6000.5.4f1, Metal on Apple M2",
+    "run_isolation": "A private clone of the actual project was run so Unity could not mutate shared repository assets.",
+    "private_project_path": "<private-temporary-workspace>/game",
+    "exact_run_command": "'/Applications/Unity/Hub/Editor/6000.5.4f1/Unity.app/Contents/MacOS/Unity' -batchmode -quit -projectPath '<private-temporary-workspace>/game' -executeMethod CodexOfWar.Editor.Review.P10CaptureCommand.CaptureRound001FromCommandLine -logFile '<private-temporary-workspace>/unity-p10-capture.log'",
+    "execute_method": "CodexOfWar.Editor.Review.P10CaptureCommand.CaptureRound001FromCommandLine",
+    "exit_code": 0,
+    "result": "PASS: Unity logged [P10 Capture] PASS and wrote fresh S01 plus four turntable views and a contact sheet.",
+    "captured_at_utc": "2026-08-01T08:54:37.500Z",
+    "engineRun": true,
+    "actualGameCapturePerformed": true,
+    "capture_type": "fresh Unity editor engine Camera.Render output from the repository's P10 lookdev/contact-sheet scenes; not a player build",
+    "requestedRound016FrameProduced": false,
+    "reviewedRound016CandidateCaptured": false,
+    "targetMatchedGameCapturePerformed": false,
+    "gateQualifyingCapture": false,
+    "best_actual_engine_evidence": {
+      "selection_reason": "S01 is the only fresh engine frame with an arena-like wide fighter composition and is closer to third-person gameplay framing than the neutral turntable views.",
+      "scene": "Assets/CodexOfWar/Review/Scenes/P10_HeroLookdev.unity",
+      "path": "<private-temporary-workspace>/progress/public/captures/P10/round-001/S01_Explore.png",
+      "sha256": "46c055eab47a88d102a8ebe52de54b88fa77e9764c75769eae80c74b37da0dab",
+      "byte_size": 1635072,
+      "dimensions_px": {
+        "width": 1600,
+        "height": 900
+      },
+      "hero_screen_height_fraction": 0.2982,
+      "visible_asset": "P10_AstraValeHero Round001",
+      "round016_nyra_visible": false
+    },
+    "fresh_contact_sheet": {
+      "path": "<private-temporary-workspace>/progress/public/captures/P10/round-001/Turntable_ContactSheet.png",
+      "sha256": "4e60630527970c3c628c8bd53d7fdaf7fbeb0f07ee33003b98f7f50a8c8d79e9",
+      "byte_size": 838108,
+      "dimensions_px": {
+        "width": 1600,
+        "height": 900
+      }
+    },
+    "fresh_manifest": {
+      "path": "<private-temporary-workspace>/progress/public/data/P10-round-001-manifest.json",
+      "sha256": "1ac132c3f1a34f0c0ff6cb40294d66c9bd624b0457c35d25e4e570175bc26158",
+      "byte_size": 10334
+    },
+    "run_log": {
+      "path": "<private-temporary-workspace>/unity-p10-capture.log",
+      "sha256": "f5c1555cc724656a5eb4a2b313015d4b68f8f2c6fe44726bf2b3fdceda806d9a",
+      "byte_size": 203948
+    },
+    "project_truth": {
+      "enabled_build_scenes": [
+        "Assets/Scenes/SampleScene.unity"
+      ],
+      "enabled_build_scene_description": "template SampleScene containing only Main Camera, Directional Light, and Global Volume",
+      "round016_nyra_or_two_segment_text_reference_count_in_assets_and_project_settings": 0,
+      "round016_nyra_or_two_segment_named_asset_count": 0,
+      "accepted_candidate_byte_size_match_count_under_assets": 0,
+      "runtime_gameplay_architecture_detected": false,
+      "player_build_detected": false,
+      "finding": "The engine and capture command are real, but the project has no Nyra Kestrel Round016 import, reference, scene integration, gameplay runtime, or player build. The fresh frame therefore proves engine availability only; it does not prove this candidate in game."
+    }
+  },
+  "actual_pixel_authority_audit": {
+    "authority_rule": "Actual decoded pixels override prompts, transforms, labels, and builder intent.",
+    "canvas_pixels": 1572864,
+    "final_mask_unique_values": [
+      0,
+      255
+    ],
+    "final_mask_editable_pixels": 23341,
+    "final_mask_sealed_pixels": 1549523,
+    "changed_pixels_against_round013_base": 22598,
+    "changed_inside_final_mask_pixels": 22598,
+    "changed_outside_final_mask_pixels": 0,
+    "outside_mask_preservation_exact": true,
+    "hilt_protection_zone_pixels": 93582,
+    "changed_hilt_protection_zone_pixels": 0,
+    "rear_leg_protection_zone_pixels": 82664,
+    "changed_rear_leg_protection_zone_pixels": 0,
+    "preserved_inward_grip_hilt_and_rear_leg_exact": true,
+    "changed_pixel_bbox_xyxy": [
+      302,
+      410,
+      665,
+      878
+    ],
+    "changed_pixel_components_8_connected": [
+      {
+        "pixels": 18193,
+        "bbox_xyxy": [
+          438,
+          410,
+          665,
+          575
+        ],
+        "visual_read": "large shoulder-side armored stump with an open cuff and no elbow"
+      },
+      {
+        "pixels": 4399,
+        "bbox_xyxy": [
+          302,
+          713,
+          417,
+          878
+        ],
+        "visual_read": "detached far-low dark shard"
+      },
+      {
+        "pixels": 3,
+        "bbox_xyxy": [
+          596,
+          410,
+          596,
+          412
+        ]
+      },
+      {
+        "pixels": 2,
+        "bbox_xyxy": [
+          351,
+          757,
+          352,
+          757
+        ]
+      },
+      {
+        "pixels": 1,
+        "bbox_xyxy": [
+          583,
+          413,
+          583,
+          413
+        ]
+      }
+    ],
+    "single_connected_limb_component_present": false,
+    "candidate04_anchor_transform_verification": [
+      {
+        "required_mapping": "upper-right to shoulder",
+        "source_xy": [
+          1025,
+          235
+        ],
+        "destination_xy": [
+          604,
+          472
+        ],
+        "output_to_input_reprojection_error_px": 0.0,
+        "transform_math_exact": true,
+        "visible_final_status": "shoulder-side pixels survive"
+      },
+      {
+        "required_mapping": "joint to elbow",
+        "source_xy": [
+          505,
+          940
+        ],
+        "destination_xy": [
+          370,
+          845
+        ],
+        "output_to_input_reprojection_error_px": 1.1368683772161603e-13,
+        "transform_math_exact": true,
+        "visible_final_status": "the destination pixel is protected pale base, not a visible joint"
+      },
+      {
+        "required_mapping": "upper-left to grip",
+        "source_xy": [
+          305,
+          575
+        ],
+        "destination_xy": [
+          450,
+          625
+        ],
+        "output_to_input_reprojection_error_px": 0.0,
+        "transform_math_exact": true,
+        "visible_final_status": "the destination pixel is the protected original grip, with no returning forearm attached"
+      }
+    ],
+    "final_anchor_pixels": {
+      "shoulder_604_472": {
+        "candidate_rgb": [
+          4,
+          1,
+          0
+        ],
+        "round013_base_rgb": [
+          69,
+          87,
+          117
+        ],
+        "equals_base": false,
+        "final_mask_value": 255
+      },
+      "elbow_370_845": {
+        "candidate_rgb": [
+          245,
+          241,
+          231
+        ],
+        "round013_base_rgb": [
+          245,
+          241,
+          231
+        ],
+        "equals_base": true,
+        "final_mask_value": 0,
+        "rear_leg_protected": true
+      },
+      "grip_450_625": {
+        "candidate_rgb": [
+          131,
+          81,
+          54
+        ],
+        "round013_base_rgb": [
+          131,
+          81,
+          54
+        ],
+        "equals_base": true,
+        "final_mask_value": 0,
+        "hilt_and_grip_protected": true
+      }
+    },
+    "keying_and_composite": {
+      "candidate04_raw_native_alpha": false,
+      "candidate04_keyed_mode": "RGBA",
+      "keyed_alpha_values_are_binary": true,
+      "keyed_alpha_zero_pixels": 1357577,
+      "keyed_alpha_opaque_pixels": 215287,
+      "anchored_alpha_partial_pixels_from_resampling": 1078,
+      "finding": "The chroma extraction is deterministic and mostly clean in isolation, but the accepted protected composite is visually catastrophic: a hard-truncated shoulder stump, a detached blade-like residual, edge speckling, and no continuous anatomy."
+    },
+    "required_visual_checks": [
+      {
+        "check": "exact outside-mask preservation",
+        "status": "PASS",
+        "finding": "Zero mismatches across all 1,549,523 sealed pixels."
+      },
+      {
+        "check": "candidate04 upper-right to shoulder, joint to elbow, upper-left to grip",
+        "status": "PIPELINE_MATH_PASS_FINAL_VISIBILITY_FAIL",
+        "finding": "All three transform equations reproject exactly, but protection removes the elbow and return from the visible final."
+      },
+      {
+        "check": "anatomical two-segment silhouette",
+        "status": "FAIL",
+        "finding": "The visible edit is a shoulder stump plus a detached shard, not one arm."
+      },
+      {
+        "check": "visibly continuous steep up-right return",
+        "status": "FAIL",
+        "finding": "No elbow-to-grip return pixel chain survives."
+      },
+      {
+        "check": "preserved inward grip, hilt, and rear leg",
+        "status": "PASS",
+        "finding": "All pixels in both complete protection zones equal the Round013 authority."
+      },
+      {
+        "check": "one uninterrupted head-sized pale wedge",
+        "status": "FAIL",
+        "finding": "There are not two connected segments to bound a wedge; the low shard is detached."
+      },
+      {
+        "check": "keying and composite cleanliness",
+        "status": "FAIL",
+        "finding": "Clean isolated keying cannot rescue the guillotined cuff, detached residual, and speckled cut edges."
+      },
+      {
+        "check": "gameplay-readable AAA silhouette",
+        "status": "FAIL",
+        "finding": "At gameplay scale the edit reads as corruption, not articulation."
+      }
+    ],
+    "catastrophic_defect_present": true,
+    "catastrophic_defect": "The requested arm is physically disconnected into a shoulder stump and a floating far-low shard; the elbow, return, and wedge do not exist in the final silhouette."
+  },
+  "sealed_feasibility_claim_audit": {
+    "claim_accurate_for_the_sealed_constraints": true,
+    "constraint_set": "MUTUALLY_INCOMPATIBLE",
+    "finding": "The builder's feasibility claim is accurate for the exact anchors and final protection mask. Exact transform placement is possible before protection, but exact visible topology is impossible after protection.",
+    "unprotected_corridor_pixels": 77360,
+    "final_editable_pixels": 23341,
+    "corridor_pixels_removed_by_hilt_or_rear_leg_protection": 54019,
+    "removed_fraction": 0.698281,
+    "centerline_audit": [
+      {
+        "segment": "shoulder (604,472) to elbow (370,845)",
+        "unique_centerline_pixels": 374,
+        "editable_pixels": 74,
+        "protected_pixels": 300,
+        "protected_fraction": 0.802139
+      },
+      {
+        "segment": "elbow (370,845) to grip (450,625)",
+        "unique_centerline_pixels": 221,
+        "editable_pixels": 0,
+        "protected_pixels": 221,
+        "protected_fraction": 1.0
+      }
+    ],
+    "interpretation": "Because every sampled elbow-to-grip centerline pixel is black in the final mask, no compositor obeying exact outside-mask preservation can show a continuous return. The elbow anchor itself and grip anchor are also protected."
+  },
+  "private_blind_benchmark": {
+    "benchmark_archive_sha256": "4653a7a92d6f6bde910f39d3190df0adb112677851815443144505b8b420a6dd",
+    "benchmark_pixels_published_or_embedded": false,
+    "method": "Six closest relevant private gameplay frames were presented sequentially as anonymous A/B pairs against the fresh S01 engine frame. Side assignment was independently randomized with system entropy and hidden until all six choices were recorded. Each source retained its aspect ratio inside equal 760x428 letterboxed panels; there was no crop, stretch, retouch, or concept-art substitution.",
+    "evidence_used": {
+      "type": "fresh actual Unity engine capture",
+      "sha256": "46c055eab47a88d102a8ebe52de54b88fa77e9764c75769eae80c74b37da0dab",
+      "reviewed_round016_asset_visible": false,
+      "limitation_handling": "The identity/integration mismatch was judged as shown and was not concealed by substituting the polished sealed PNG."
+    },
+    "comparison_count": 6,
+    "required_candidate_preferred_count": 5,
+    "candidatePreferredCount": 0,
+    "referencePreferredCount": 6,
+    "benchmarkPreference": "REFERENCE_6_OF_6",
+    "passed": false,
+    "blind_choices_recorded_before_reveal": [
+      "B",
+      "B",
+      "A",
+      "B",
+      "A",
+      "B"
+    ],
+    "candidate_positions_revealed_after_judgment": [
+      "A",
+      "A",
+      "B",
+      "A",
+      "B",
+      "A"
+    ],
+    "closest_reference": {
+      "benchmark_id": "PRIVATE-BM-TSL-01",
+      "sha256": "0293135a1aa7dae0a92f73e018d5f046cd8aa45b9b0e1727e8538ae951276869",
+      "dimensions_px": {
+        "width": 679,
+        "height": 452
+      },
+      "format": "jpeg",
+      "selection_basis": "closest wide third-person spatial framing available in the private set"
+    },
+    "comparisons": [
+      {
+        "comparison_id": "TSL01",
+        "focus": "wide third-person spatial framing and player hierarchy",
+        "benchmark_id": "PRIVATE-BM-TSL-01",
+        "benchmark_sha256": "0293135a1aa7dae0a92f73e018d5f046cd8aa45b9b0e1727e8538ae951276869",
+        "benchmark_dimensions_px": [
+          679,
+          452
+        ],
+        "benchmark_format": "jpeg",
+        "candidate_position": "A",
+        "blind_choice": "B",
+        "preferred": "REFERENCE"
+      },
+      {
+        "comparison_id": "TSL02",
+        "focus": "third-person traversal depth and silhouette scale",
+        "benchmark_id": "PRIVATE-BM-TSL-02",
+        "benchmark_sha256": "c0e6f548000b49247e740c300db014be846c73f4cfdd6ac09246b49ca0c5eb5c",
+        "benchmark_dimensions_px": [
+          596,
+          335
+        ],
+        "benchmark_format": "jpeg",
+        "candidate_position": "A",
+        "blind_choice": "B",
+        "preferred": "REFERENCE"
+      },
+      {
+        "comparison_id": "TSL03",
+        "focus": "melee threat hierarchy and combat readability",
+        "benchmark_id": "PRIVATE-BM-TSL-03",
+        "benchmark_sha256": "a57bd1e7251e57eda6e246b45fce3ddc168a89e9b406db78ad261a9513f7df3f",
+        "benchmark_dimensions_px": [
+          739,
+          415
+        ],
+        "benchmark_format": "jpeg",
+        "candidate_position": "B",
+        "blind_choice": "A",
+        "preferred": "REFERENCE"
+      },
+      {
+        "comparison_id": "TSL04",
+        "focus": "effect readability without losing character silhouette",
+        "benchmark_id": "PRIVATE-BM-TSL-04",
+        "benchmark_sha256": "1f7ee6c436dee9599e2ff1191fde973f20c864548881b1cf7f6d483e3e15c1aa",
+        "benchmark_dimensions_px": [
+          596,
+          335
+        ],
+        "benchmark_format": "jpeg",
+        "candidate_position": "A",
+        "blind_choice": "B",
+        "preferred": "REFERENCE"
+      },
+      {
+        "comparison_id": "TSL05",
+        "focus": "impact phase, force direction, and gameplay framing",
+        "benchmark_id": "PRIVATE-BM-TSL-05",
+        "benchmark_sha256": "aab7f2b4d72b8d2ffc4faea302e7f8e51a799aaad8ea213351e1de72c2526c8b",
+        "benchmark_dimensions_px": [
+          739,
+          415
+        ],
+        "benchmark_format": "jpeg",
+        "candidate_position": "B",
+        "blind_choice": "A",
+        "preferred": "REFERENCE"
+      },
+      {
+        "comparison_id": "TSL06",
+        "focus": "defensive silhouette and violent-stop legibility",
+        "benchmark_id": "PRIVATE-BM-TSL-06",
+        "benchmark_sha256": "05048268b96a7ea20e52ab4f0c01fbc312b37d7d4b3ae4fd40752ca4f497e71e",
+        "benchmark_dimensions_px": [
+          770,
+          433
+        ],
+        "benchmark_format": "jpeg",
+        "candidate_position": "A",
+        "blind_choice": "B",
+        "preferred": "REFERENCE"
+      }
+    ],
+    "temporary_private_archive_copy_deleted": true,
+    "temporary_private_extraction_deleted": true,
+    "temporary_contact_sheet_deleted": true,
+    "temporary_blind_pairs_and_mappings_deleted": true,
+    "private_source_paths_or_filenames_published": false
+  },
+  "scorecard": {
+    "scale": "0-10 per category; ten categories sum directly to 100",
+    "categories": [
+      {
+        "category": "exact outside-mask preservation",
+        "score": 10,
+        "finding": "All 1,549,523 sealed pixels match the Round013 authority exactly."
+      },
+      {
+        "category": "candidate04 three-anchor transform accuracy",
+        "score": 10,
+        "finding": "Upper-right to shoulder, joint to elbow, and upper-left to grip reproject with zero or floating-point-epsilon error."
+      },
+      {
+        "category": "anatomical two-segment silhouette",
+        "score": 0,
+        "finding": "The visible edit is a stump and detached shard, not one anatomical arm."
+      },
+      {
+        "category": "continuous steep up-right elbow-to-grip return",
+        "score": 0,
+        "finding": "No return survives; every centerline pixel from elbow to grip is protected."
+      },
+      {
+        "category": "preserved inward grip, hilt, and rear leg",
+        "score": 10,
+        "finding": "Both protection zones have zero changed pixels and the original grip remains exact."
+      },
+      {
+        "category": "uninterrupted head-sized pale wedge",
+        "score": 0,
+        "finding": "A wedge cannot be bounded because the second segment is absent and the low fragment is detached."
+      },
+      {
+        "category": "keying and protected-composite cleanliness",
+        "score": 2,
+        "finding": "The isolated binary key is usable, but the accepted composite has a guillotined cuff, detached residual, edge speckling, and severe topology damage."
+      },
+      {
+        "category": "gameplay-readable AAA silhouette",
+        "score": 1,
+        "finding": "At gameplay scale the altered limb reads as corruption; surface rendering polish cannot rescue missing anatomy."
+      },
+      {
+        "category": "Round016 engine integration and matched capture fidelity",
+        "score": 0,
+        "finding": "The fresh engine frame is real but shows old Astra Vale Round001; Nyra Round016 is absent from Unity."
+      },
+      {
+        "category": "private benchmark parity",
+        "score": 0,
+        "finding": "The actual engine evidence was preferred in 0 of 6 blinded comparisons."
+      }
+    ],
+    "total": 33,
+    "maximum": 100,
+    "required_total": 95,
+    "total_requirement_passed": false,
+    "category_floor": 0,
+    "required_category_floor": 9,
+    "category_floor_requirement_passed": false
+  },
+  "hard_gate": {
+    "requirements": [
+      {
+        "requirement": "real engine run and capture of the reviewed Round016 candidate",
+        "required": true,
+        "observed": false,
+        "passed": false,
+        "finding": "A real engine run/capture occurred, but it captured old Astra Vale rather than the reviewed candidate."
+      },
+      {
+        "requirement": "no catastrophic defect",
+        "required": true,
+        "observed_catastrophic_defect": true,
+        "passed": false
+      },
+      {
+        "requirement": "total at least 95",
+        "required": 95,
+        "observed": 33,
+        "passed": false
+      },
+      {
+        "requirement": "every category at least 9",
+        "required": 9,
+        "observed_floor": 0,
+        "passed": false
+      },
+      {
+        "requirement": "candidate preferred in at least 5 of 6 blind comparisons",
+        "required": 5,
+        "observed": 0,
+        "comparison_count": 6,
+        "passed": false
+      }
+    ],
+    "all_conditions_passed": false
+  },
+  "verdict": "FAIL",
+  "verdict_token": "FAIL_ROUND016_TWO_SEGMENT_LIMB_GATE",
+  "verdict_summary": "FAIL. The transform and hard-mask bookkeeping are exact, but the authoritative final pixels show no two-segment limb: only a severed shoulder stump and detached shard survive. The target is not integrated in Unity, the fresh engine evidence is the wrong fighter, the score is 33/100 with a 0 floor, and the blind result is 0/6.",
+  "single_biggest_remaining_visual_gap": "The accepted silhouette has no connected shoulder-to-elbow-to-grip arm: protection destroys the elbow and entire steep return, leaving a shoulder stump and floating far-low shard instead of one anatomical V and its uninterrupted pale wedge.",
+  "round017_exact_actionable_prescription": "Keep the three anchors fixed at shoulder (604,472), elbow (370,845), and grip (450,625), but change exactly one constraint: inside only the existing target triangle and limb corridors, stop treating overlapping hilt/rear-leg protection pixels as immutable. Define the Round017 editable mask as the current final mask union the currently protected pixels inside the closed triangle [(604,472),(370,845),(450,625)] dilated by 62 px, then restore only a 24 px-radius disk centered on grip (450,625) after compositing; freeze every pixel outside that revised mask. Composite one connected arm whose changed pixels form one 8-connected component from shoulder to elbow to the restored grip disk and whose two segments bound a clear pale head-sized wedge. This is the smallest viable constraint relaxation; moving no anchors preserves all geometry while unfreezing only the local pixels that currently make the topology impossible.",
+  "release_sanitization": {
+    "originalCriticSealedSha256": "da7da4d4ab3d6f765166c3a10e7fd0a59162be4ccf690fd8799da0aad45aef21",
+    "scope": "Path-only release sanitization after critic seal.",
+    "changes": "Seven machine-specific workspace and temporary paths were replaced with repository-relative or explicit private-temporary placeholders. Scores, hashes, dimensions, pixel findings, engine results, blind choices, verdict, gap, and prescription are unchanged."
+  },
+  "integrity_and_privacy": {
+    "accepted_candidate_hash_recomputed": true,
+    "accepted_candidate_byte_identity_recomputed": true,
+    "outside_mask_preservation_recomputed_from_pixels": true,
+    "anchor_transform_math_recomputed": true,
+    "centerline_protection_recomputed": true,
+    "actual_game_project_inspected": true,
+    "fresh_isolated_unity_run_completed": true,
+    "fresh_engine_frames_inspected": true,
+    "six_blind_comparisons_completed_before_reveal": true,
+    "private_benchmark_pixels_in_repository": false,
+    "private_temporary_extracts_and_pairs_deleted": true,
+    "non_review_repository_files_modified_by_reviewer": false,
+    "exactly_one_review_file_created_by_reviewer": true,
+    "category_scores_sum_to_total": true,
+    "single_biggest_gap_count": 1,
+    "round017_prescription_count": 1
+  }
+}

@@ -72,13 +72,13 @@ test("server-renders the production evidence ledger", async () => {
 
   assert.match(
     html,
-    /href="\/captures\/P10\/round-001\/S01_Explore\.png"/,
+    /href="\/captures\/P10\/round-016-two-segment-limb\/S01_FreshEngineGate_OldAstraVale\.png"/,
   );
   assert.match(
     html,
-    /href="\/captures\/P10\/round-001\/Turntable_ContactSheet\.png"/,
+    /href="\/captures\/P10\/round-016-two-segment-limb\/Turntable_FreshEngineGate_OldAstraVale\.png"/,
   );
-  assert.match(html, /href="\/data\/P10-round-001-manifest\.json"/);
+  assert.match(html, /href="\/data\/P10-round-016-two-segment-limb\.json"/);
   assert.match(html, /href="\/data\/capture-manifest-latest\.json"/);
   assert.doesNotMatch(
     html,
@@ -90,24 +90,23 @@ test("server-renders the production evidence ledger", async () => {
   assert.match(html, /24–32%/);
   assert.match(html, /Reference 09/);
   assert.match(html, /29\.82%/);
-  assert.match(html, /82,906/);
-  assert.match(html, /P10 · Round 016/);
+  assert.match(html, /Astra Vale R001/);
+  assert.match(html, /P10 · Round 017/);
   assert.match(html, /Round rejected\. Rebuild in progress\./);
-  assert.match(html, /Round 001 rejected · mechanically reproducible/);
+  assert.match(html, /Round 016 rejected · real engine run, wrong fighter/);
   assert.match(
     html,
-    /5c7317c59b610f2d6ae4c2c6e89cf6828a964f336a20176592100435eb180dcf/,
+    /46c055eab47a88d102a8ebe52de54b88fa77e9764c75769eae80c74b37da0dab/,
   );
   assert.match(
     html,
-    /c4acdf3d6a3e206d4181735831c59a9d05e7a9f3247692fd146e38cb3f1378b9/,
+    /4e60630527970c3c628c8bd53d7fdaf7fbeb0f07ee33003b98f7f50a8c8d79e9/,
   );
-  assert.match(html, /all six image hashes/i);
-  assert.match(html, /Focused EditMode 8\/8 · full suite 14\/14/);
-  assert.match(html, /Blind visual subtotal: ours 9\/60 · Reference 09 49\/60/);
-  assert.match(html, /Critic visual subtotal: ours 10\/60 · Reference 09 51\/60/);
-  assert.match(html, /Character\/material: 2\/13 · required floor 8\/13/);
-  assert.match(html, /Static lookdev only; no rig, S02, or S06/);
+  assert.match(html, /Isolated Unity batch capture PASS · exit 0/i);
+  assert.match(html, /Every transform and protected-pixel claim recomputed exactly/i);
+  assert.match(html, /real engine capture does not contain the reviewed Nyra candidate/i);
+  assert.match(html, /static lookdev shell, not a player build/i);
+  assert.match(html, /severed stump plus detached shard/i);
   assert.match(html, /80/);
   assert.match(compactHtml, /100 minimum total/);
   assert.match(html, /P00 exception/);
@@ -305,11 +304,27 @@ test("server-renders the production evidence ledger", async () => {
     /href="\/captures\/P10\/round-015-inward-return-mask\/NyraKestrel_InwardReturnMask_CRITIC_REJECTED\.png"/,
   );
   assert.match(html, /href="\/data\/P10-round-015-inward-return-mask\.json"/);
-  assert.match(html, /Two-Segment Limb Silhouette/i);
-  assert.match(html, /one bounded original 2D isolated-limb build with no result or capture filed yet/i);
-  assert.match(html, /complete concept pack must earn at least 85\/100/i);
-  assert.match(html, /fixed shoulder, far-low-left elbow, and original inward-grip anchors/i);
-  assert.match(html, /uninterrupted head-sized pale wedge/i);
+  assert.match(html, /TWO-SEGMENT LIMB FAIL · TARGET-MATCHED ENGINE CAPTURE FAIL/);
+  assert.match(html, /Fresh engine-backed gate 33\/100 · threshold 95 · category floor 0\/10/);
+  assert.match(html, /Actual Unity evidence preferred in 0\/6 blinded comparisons · 5\/6 required/);
+  assert.match(
+    html,
+    /href="\/captures\/P10\/round-016-two-segment-limb\/NyraKestrel_TwoSegmentLimb_CRITIC_REJECTED\.png"/,
+  );
+  assert.match(
+    html,
+    /href="\/captures\/P10\/round-016-two-segment-limb\/S01_FreshEngineGate_OldAstraVale\.png"/,
+  );
+  assert.match(
+    html,
+    /href="\/captures\/P10\/round-016-two-segment-limb\/Turntable_FreshEngineGate_OldAstraVale\.png"/,
+  );
+  assert.match(html, /href="\/data\/P10-round-016-two-segment-limb\.json"/);
+  assert.match(html, /Local Constraint Release/i);
+  assert.match(html, /dilated 62 pixels/i);
+  assert.match(html, /24-pixel grip disk/i);
+  assert.match(html, /one 8-connected anatomical/i);
+  assert.match(html, /at least 95\/100/i);
   assert.doesNotMatch(html, /Reference\.zip|Reference\/[^"<]+\.(?:png|jpe?g|webp)/i);
   assert.doesNotMatch(
     html,
@@ -376,18 +391,18 @@ test("checked-in data contains the complete, honest P00–P25 ledger", async () 
   assert.equal(p00.status, "accepted");
   assert.equal(p10.status, "revising");
   assert.equal(dashboard.activeBuild.pieceId, "P10");
-  assert.equal(dashboard.activeBuild.round, 16);
-  assert.equal(dashboard.activeBuild.roundLabel, "P10 · Round 016");
+  assert.equal(dashboard.activeBuild.round, 17);
+  assert.equal(dashboard.activeBuild.roundLabel, "P10 · Round 017");
   assert.equal(
     dashboard.activeBuild.builder,
-    "Two-Segment Limb Silhouette",
+    "Local Constraint Release",
   );
   assert.equal(dashboard.activeBuild.status, p10.status);
-  assert.match(dashboard.activeBuild.brief, /no result or capture filed yet/i);
-  assert.match(dashboard.activeBuild.brief, /isolated-limb build/i);
-  assert.match(dashboard.activeBuild.brief, /armored trailing-limb cutout/i);
-  assert.match(dashboard.activeBuild.brief, /uninterrupted head-sized pale wedge/i);
-  assert.match(dashboard.activeBuild.brief, /paid 3D generation and Unity remain locked/i);
+  assert.match(dashboard.activeBuild.brief, /relaxing exactly one impossible Round016 rule/i);
+  assert.match(dashboard.activeBuild.brief, /dilated 62 pixels/i);
+  assert.match(dashboard.activeBuild.brief, /24-pixel grip disk/i);
+  assert.match(dashboard.activeBuild.brief, /one connected anatomical V/i);
+  assert.match(dashboard.activeBuild.brief, /real Unity gate is now mandatory/i);
   assert.ok(queuedPieces.every((piece) => piece.status === "queued"));
 
   assert.equal(dashboard.canonicalCapture.camera, "Low shoulder");
@@ -398,11 +413,11 @@ test("checked-in data contains the complete, honest P00–P25 ledger", async () 
   assert.equal(dashboard.canonicalCapture.benchmarkId, "Reference 09");
   assert.equal(
     dashboard.canonicalCapture.capturePath,
-    "/captures/P10/round-001/S01_Explore.png",
+    "/captures/P10/round-016-two-segment-limb/S01_FreshEngineGate_OldAstraVale.png",
   );
   assert.equal(
     dashboard.canonicalCapture.manifestPath,
-    "/data/P10-round-001-manifest.json",
+    "/data/P10-round-016-two-segment-limb.json",
   );
   assert.equal(
     dashboard.canonicalCapture.latestManifestPath,
@@ -414,7 +429,7 @@ test("checked-in data contains the complete, honest P00–P25 ledger", async () 
   assert.equal(dashboard.acceptance.maximum, 100);
   assert.match(dashboard.acceptance.p00Exception, /visual loss does not block/i);
 
-  assert.equal(dashboard.rounds.length, 16);
+  assert.equal(dashboard.rounds.length, 17);
   assert.equal(dashboard.rounds[0].pieceId, "P00");
   assert.equal(
     dashboard.rounds[0].critic.status,
@@ -769,6 +784,32 @@ test("checked-in data contains the complete, honest P00–P25 ledger", async () 
     "/captures/P10/round-015-inward-return-mask/NyraKestrel_InwardReturnMask_CRITIC_REJECTED.png",
     "/data/P10-round-015-inward-return-mask.json",
   ]);
+  assert.equal(dashboard.rounds[16].pieceId, "P10");
+  assert.equal(dashboard.rounds[16].round, 16);
+  assert.equal(dashboard.rounds[16].status, "criticized");
+  assert.equal(
+    dashboard.rounds[16].critic.status,
+    "TWO-SEGMENT LIMB FAIL · TARGET-MATCHED ENGINE CAPTURE FAIL",
+  );
+  assert.equal(dashboard.rounds[16].critic.score, 33);
+  assert.equal(
+    dashboard.rounds[16].critic.scoreLabel,
+    "Fresh engine-backed gate 33/100 · threshold 95 · category floor 0/10",
+  );
+  assert.equal(
+    dashboard.rounds[16].critic.preference,
+    "Actual Unity evidence preferred in 0/6 blinded comparisons · 5/6 required",
+  );
+  assert.match(
+    dashboard.rounds[16].critic.primaryGap,
+    /no connected shoulder-to-elbow-to-grip arm/i,
+  );
+  assert.deepEqual(dashboard.rounds[16].evidenceLinks, [
+    "/captures/P10/round-016-two-segment-limb/NyraKestrel_TwoSegmentLimb_CRITIC_REJECTED.png",
+    "/captures/P10/round-016-two-segment-limb/S01_FreshEngineGate_OldAstraVale.png",
+    "/captures/P10/round-016-two-segment-limb/Turntable_FreshEngineGate_OldAstraVale.png",
+    "/data/P10-round-016-two-segment-limb.json",
+  ]);
 });
 
 test("P10 evidence is filed while the global latest manifest remains P00-pinned", async () => {
@@ -790,9 +831,9 @@ test("P10 evidence is filed while the global latest manifest remains P00-pinned"
     p10Round013ElbowReturnTriangle,
     p10Round014TrailingReturnWedge,
     p10Round015InwardReturnMask,
+    p10Round016TwoSegmentLimb,
     latestManifest,
     p10Screenshot,
-    turntableContact,
     round002Neutral,
     round002CombatFailure,
     round003Front,
@@ -819,6 +860,9 @@ test("P10 evidence is filed while the global latest manifest remains P00-pinned"
     round013RejectedElbowReturnTriangle,
     round014RejectedTrailingReturnWedge,
     round015RejectedInwardReturnMask,
+    round016RejectedTwoSegmentLimb,
+    round016FreshEngineS01,
+    round016FreshEngineTurntable,
   ] = await Promise.all([
     readFile(dataUrl, "utf8").then(JSON.parse),
     readFile(
@@ -898,18 +942,19 @@ test("P10 evidence is filed while the global latest manifest remains P00-pinned"
       "utf8",
     ).then(JSON.parse),
     readFile(
+      new URL(
+        "../public/data/P10-round-016-two-segment-limb.json",
+        import.meta.url,
+      ),
+      "utf8",
+    ).then(JSON.parse),
+    readFile(
       new URL("../public/data/capture-manifest-latest.json", import.meta.url),
       "utf8",
     ).then(JSON.parse),
     readFile(
       new URL(
         "../public/captures/P10/round-001/S01_Explore.png",
-        import.meta.url,
-      ),
-    ),
-    readFile(
-      new URL(
-        "../public/captures/P10/round-001/Turntable_ContactSheet.png",
         import.meta.url,
       ),
     ),
@@ -1069,13 +1114,34 @@ test("P10 evidence is filed while the global latest manifest remains P00-pinned"
         import.meta.url,
       ),
     ),
+    readFile(
+      new URL(
+        "../public/captures/P10/round-016-two-segment-limb/NyraKestrel_TwoSegmentLimb_CRITIC_REJECTED.png",
+        import.meta.url,
+      ),
+    ),
+    readFile(
+      new URL(
+        "../public/captures/P10/round-016-two-segment-limb/S01_FreshEngineGate_OldAstraVale.png",
+        import.meta.url,
+      ),
+    ),
+    readFile(
+      new URL(
+        "../public/captures/P10/round-016-two-segment-limb/Turntable_FreshEngineGate_OldAstraVale.png",
+        import.meta.url,
+      ),
+    ),
   ]);
   const fingerprint = dashboard.activeBuild.evidenceFingerprint;
   const screenshotHash = createHash("sha256")
     .update(p10Screenshot)
     .digest("hex");
-  const turntableHash = createHash("sha256")
-    .update(turntableContact)
+  const freshEngineS01Hash = createHash("sha256")
+    .update(round016FreshEngineS01)
+    .digest("hex");
+  const freshEngineTurntableHash = createHash("sha256")
+    .update(round016FreshEngineTurntable)
     .digest("hex");
 
   assert.deepEqual(latestManifest, p00Manifest);
@@ -1086,14 +1152,18 @@ test("P10 evidence is filed while the global latest manifest remains P00-pinned"
   assert.deepEqual(p10Manifest.resolution, { width: 1600, height: 900 });
   assert.equal(
     p10Manifest.screenshotRelativePath,
-    dashboard.canonicalCapture.capturePath.slice(1),
+    "captures/P10/round-001/S01_Explore.png",
   );
   assert.equal(screenshotHash, p10Manifest.screenshotSha256);
   assert.equal(
-    turntableHash,
+    freshEngineTurntableHash,
     dashboard.activeBuild.evidenceBundle.turntable.sha256,
   );
-  assert.equal(fingerprint.screenshotSha256, p10Manifest.screenshotSha256);
+  assert.equal(
+    freshEngineS01Hash,
+    dashboard.activeBuild.evidenceBundle.s01.sha256,
+  );
+  assert.equal(fingerprint.screenshotSha256, freshEngineS01Hash);
   assert.equal(
     fingerprint.captureContractSha256,
     p10Manifest.captureContractSha256,
@@ -1102,11 +1172,14 @@ test("P10 evidence is filed while the global latest manifest remains P00-pinned"
     fingerprint.renderSettingsSha256,
     p10Manifest.renderSettingsSha256,
   );
-  assert.equal(fingerprint.gitRevision, p10Manifest.gitRevision);
-  assert.equal(fingerprint.gitState, p10Manifest.gitState);
+  assert.equal(
+    fingerprint.gitRevision,
+    "37b29d5a7892c75b7da204f98aaf85c92365d90b",
+  );
+  assert.equal(fingerprint.gitState, "isolated-critic-copy");
   assert.equal(fingerprint.seed, p10Manifest.seed);
   assert.equal(fingerprint.preset, p10Manifest.preset);
-  assert.equal(fingerprint.capturedAtUtc, p10Manifest.capturedAtUtc);
+  assert.equal(fingerprint.capturedAtUtc, "2026-08-01T08:54:37.500Z");
   assert.equal(p10Manifest.heroScreenHeightFraction, 0.29820388555526736);
   assert.equal(p10Manifest.heroMeshCount, 2);
   assert.equal(p10Manifest.heroRendererCount, 2);
@@ -2791,6 +2864,170 @@ test("P10 evidence is filed while the global latest manifest remains P00-pinned"
   assert.equal(round015RejectedInwardReturnMask.readUInt32BE(20), 1024);
   assert.doesNotMatch(
     JSON.stringify(p10Round015InwardReturnMask),
+    /Reference\.zip|Reference\/[^"']+\.(?:png|jpe?g|webp)|\/Users\/|\/home\/|[A-Za-z]:\\Users\\|\/tmp\/|\/private\/var\/folders\//i,
+  );
+
+  assert.equal(p10Round016TwoSegmentLimb.piece, "P10");
+  assert.equal(p10Round016TwoSegmentLimb.round, 16);
+  assert.equal(
+    p10Round016TwoSegmentLimb.status,
+    "rejected-two-segment-limb",
+  );
+  assert.equal(p10Round016TwoSegmentLimb.engineRun, true);
+  assert.equal(
+    p10Round016TwoSegmentLimb.actualGameCapturePerformed,
+    true,
+  );
+  assert.equal(
+    p10Round016TwoSegmentLimb.targetMatchedGameCapturePerformed,
+    false,
+  );
+  assert.equal(p10Round016TwoSegmentLimb.gateQualifyingCapture, false);
+  assert.equal(
+    p10Round016TwoSegmentLimb.source.receiptSha256,
+    "46023c8bf566def0efbcd24a19571733f6609342696e52bc56b60b6812cc7743",
+  );
+  assert.equal(
+    p10Round016TwoSegmentLimb.source.readmeSha256,
+    "8ba2121e35c1beaea9ce87c2fe594218a2b5b89d3f3eef9d8b9345c56304bc8e",
+  );
+  assert.equal(
+    p10Round016TwoSegmentLimb.source.reviewSha256,
+    "639816c57ed54f77a59eb5e0fa3817f7519a20e0e02e42ecc78447ce106cd60d",
+  );
+  assert.equal(
+    p10Round016TwoSegmentLimb.source.deterministicEvidenceSha256,
+    "29731c0577d33d4177388606f496df55842fa570f3f415a30bc24811446fbd9e",
+  );
+  assert.equal(
+    p10Round016TwoSegmentLimb.source.guidePngSha256,
+    "648fc25ecad74cb0eb5a72cadb3d9eed7e56ed8aeea1a0b44c15d487f63bc9aa",
+  );
+  assert.equal(
+    p10Round016TwoSegmentLimb.source.guideSvgSha256,
+    "d56161bc672ab9cd75cf059d645843cf6d057d7830129e3e7640ee076034b283",
+  );
+  assert.equal(
+    p10Round016TwoSegmentLimb.source.finalMaskBinarySha256,
+    "76e2aee7ddccfa8aaeee4f711e6740f36df5f49da773e5597a7c1ee024dd1199",
+  );
+  assert.equal(
+    p10Round016TwoSegmentLimb.builderDecision.builderEligibility,
+    "FAIL",
+  );
+  assert.equal(
+    p10Round016TwoSegmentLimb.builderDecision.acceptedSha256,
+    "b84864e8675c8919798a3d2fe8de2d46dc723efcdc3941df256f912b54ef96ce",
+  );
+  assert.deepEqual(p10Round016TwoSegmentLimb.anchorContract.shoulder, [604, 472]);
+  assert.deepEqual(p10Round016TwoSegmentLimb.anchorContract.elbow, [370, 845]);
+  assert.deepEqual(p10Round016TwoSegmentLimb.anchorContract.grip, [450, 625]);
+  assert.equal(
+    p10Round016TwoSegmentLimb.maskIntegrity.unprotectedCorridorPixels,
+    77360,
+  );
+  assert.equal(
+    p10Round016TwoSegmentLimb.maskIntegrity.finalEditablePixels,
+    23341,
+  );
+  assert.equal(
+    p10Round016TwoSegmentLimb.maskIntegrity.corridorPixelsRemovedByProtection,
+    54019,
+  );
+  assert.equal(
+    p10Round016TwoSegmentLimb.maskIntegrity.outsideMaskMismatchCountPerCandidate,
+    0,
+  );
+  assert.equal(
+    p10Round016TwoSegmentLimb.actualPixelAudit.singleConnectedLimbComponentPresent,
+    false,
+  );
+  assert.equal(
+    p10Round016TwoSegmentLimb.feasibilityFinding.constraintSet,
+    "MUTUALLY_INCOMPATIBLE",
+  );
+  assert.equal(
+    p10Round016TwoSegmentLimb.feasibilityFinding.elbowToGripProtectedFraction,
+    1,
+  );
+  assert.equal(p10Round016TwoSegmentLimb.visualReview.score, 33);
+  assert.equal(p10Round016TwoSegmentLimb.visualReview.passThreshold, 95);
+  assert.equal(
+    p10Round016TwoSegmentLimb.visualReview.observedMinimumCategoryScore,
+    0,
+  );
+  assert.equal(
+    p10Round016TwoSegmentLimb.visualReview.candidatePreferredCount,
+    0,
+  );
+  assert.equal(
+    p10Round016TwoSegmentLimb.visualReview.requiredCandidatePreferredCount,
+    5,
+  );
+  assert.equal(
+    p10Round016TwoSegmentLimb.visualReview.categoryScores
+      .anatomicalTwoSegmentSilhouette,
+    0,
+  );
+  assert.equal(
+    p10Round016TwoSegmentLimb.visualReview.categoryScores
+      .round016EngineIntegrationAndMatchedCaptureFidelity,
+    0,
+  );
+  assert.match(
+    p10Round016TwoSegmentLimb.visualReview.singleBiggestGap,
+    /no connected shoulder-to-elbow-to-grip arm/i,
+  );
+  assert.equal(p10Round016TwoSegmentLimb.engineTruth.exitCode, 0);
+  assert.equal(
+    p10Round016TwoSegmentLimb.engineTruth.visibleAsset,
+    "P10_AstraValeHero Round001",
+  );
+  assert.equal(p10Round016TwoSegmentLimb.engineTruth.round016NyraVisible, false);
+  assert.equal(p10Round016TwoSegmentLimb.publicEvidence.length, 3);
+  assert.deepEqual(
+    p10Round016TwoSegmentLimb.publicEvidence.map((asset) => asset.sha256),
+    [
+      createHash("sha256").update(round016RejectedTwoSegmentLimb).digest("hex"),
+      createHash("sha256").update(round016FreshEngineS01).digest("hex"),
+      createHash("sha256").update(round016FreshEngineTurntable).digest("hex"),
+    ],
+  );
+  assert.deepEqual(
+    p10Round016TwoSegmentLimb.publicEvidence.map((asset) => asset.dimensions),
+    [
+      { width: 1536, height: 1024 },
+      { width: 1600, height: 900 },
+      { width: 1600, height: 900 },
+    ],
+  );
+  assert.equal(p10Round016TwoSegmentLimb.builderAttempts.length, 4);
+  assert.equal(
+    p10Round016TwoSegmentLimb.builderAttempts[3].protectedSha256,
+    "b84864e8675c8919798a3d2fe8de2d46dc723efcdc3941df256f912b54ef96ce",
+  );
+  assert.equal(p10Round016TwoSegmentLimb.nextRound.round, 17);
+  assert.equal(
+    p10Round016TwoSegmentLimb.nextRound.status,
+    "local-constraint-release",
+  );
+  assert.match(
+    p10Round016TwoSegmentLimb.nextRound.target,
+    /closed anchor triangle dilated 62 pixels/i,
+  );
+  assert.equal(
+    p10Round016TwoSegmentLimb.nextRound.gate.realTargetRelevantEngineCaptureRequired,
+    true,
+  );
+  for (const image of [
+    round016RejectedTwoSegmentLimb,
+    round016FreshEngineS01,
+    round016FreshEngineTurntable,
+  ]) {
+    assert.equal(image.subarray(1, 4).toString("ascii"), "PNG");
+  }
+  assert.doesNotMatch(
+    JSON.stringify(p10Round016TwoSegmentLimb),
     /Reference\.zip|Reference\/[^"']+\.(?:png|jpe?g|webp)|\/Users\/|\/home\/|[A-Za-z]:\\Users\\|\/tmp\/|\/private\/var\/folders\//i,
   );
 

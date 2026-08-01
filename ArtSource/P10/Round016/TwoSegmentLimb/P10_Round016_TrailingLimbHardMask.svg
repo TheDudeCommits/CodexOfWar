@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1536" height="1024" viewBox="0 0 1536 1024" role="img" aria-labelledby="title desc">
+  <title id="title">P10 Round016 trailing-limb-only binary hard mask</title>
+  <desc id="desc">White is the sole editable union of source-limb removal and exact shoulder-to-elbow-to-preserved-grip target corridors. Black protects the original hilt, preserved inward grip, rear leg, and every pixel outside that union.</desc>
+  <rect width="1536" height="1024" fill="#000000"/>
+
+  <!-- Source trailing-limb removal corridor, bounded shoulder to preserved grip. -->
+  <path d="M 604 472 C 566 503 520 550 450 625" fill="none" stroke="#ffffff" stroke-width="116" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Exact target two-segment corridor. -->
+  <path d="M 604 472 L 370 845" fill="none" stroke="#ffffff" stroke-width="124" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 370 845 L 450 625" fill="none" stroke="#ffffff" stroke-width="106" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="370" cy="845" r="68" fill="#ffffff"/>
+
+  <!-- Restore complete authoritative Round013 hilt/pommel/guard corridor and inward grip to protected black. -->
+  <path d="M 132 818 L 1025 345" fill="none" stroke="#000000" stroke-width="82" stroke-linecap="round" stroke-linejoin="round"/>
+  <ellipse cx="450" cy="625" rx="68" ry="72" fill="#000000"/>
+
+  <!-- Restore a conservative complete authoritative Round013 rear-leg silhouette to protected black. -->
+  <path d="M 343 966 C 380 880 448 762 558 657 C 605 618 646 602 690 602" fill="none" stroke="#000000" stroke-width="132" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

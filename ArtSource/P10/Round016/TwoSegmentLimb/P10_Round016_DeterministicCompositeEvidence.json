@@ -1,0 +1,295 @@
+{
+  "base": {
+    "sha256": "c88489f7af2c0a5d223f431fb322f72ac549283819c3c9b6281a20c1b39fbcd6",
+    "byte_size": 1750551,
+    "dimensions_px": [
+      1536,
+      1024
+    ]
+  },
+  "destination_anchors": [
+    [
+      604,
+      472
+    ],
+    [
+      370,
+      845
+    ],
+    [
+      450,
+      625
+    ]
+  ],
+  "candidates": [
+    {
+      "candidate": 1,
+      "source_anchors": [
+        [
+          1002,
+          158
+        ],
+        [
+          724,
+          866
+        ],
+        [
+          433,
+          502
+        ]
+      ],
+      "piecewise_similarity_output_to_input": [
+        [
+          1.697583619155685,
+          0.3196637181834593,
+          -174.22178095262643,
+          -0.3196637181834593,
+          1.697583619155685,
+          -450.1825824586739
+        ],
+        [
+          1.0364963503649636,
+          1.6996350364963504,
+          -1095.6952554744526,
+          -1.6996350364963504,
+          1.0364963503649636,
+          619.0255474452554
+        ]
+      ],
+      "raw": {
+        "path": "Iterations/P10_Round016_TwoSegmentLimb_candidate01_raw.png",
+        "sha256": "7277e6883182f15a486b544d731265a1fbc818546f3e04f4c84f1621a4139066",
+        "byte_size": 1540417
+      },
+      "keyed": {
+        "path": "Iterations/P10_Round016_TwoSegmentLimb_candidate01_keyed.png",
+        "sha256": "17ef80901932ad1eb125d67d20c33fd21329fef7006b2b14e69a79a90d2c60ab",
+        "byte_size": 1433596
+      },
+      "anchored": {
+        "path": "Iterations/P10_Round016_TwoSegmentLimb_candidate01_anchored.png",
+        "sha256": "9b2af03b83f9f7922267d6f96b602c394f4cd8b35a2c096c42c0fbdef4b06db9",
+        "byte_size": 254986
+      },
+      "composite": {
+        "path": "Iterations/P10_Round016_TwoSegmentLimb_candidate01_composite.png",
+        "sha256": "6a8515d2310e078a8e1df1595a3c7b2442ef7c4d18b75b246da1a4301fdc6382",
+        "byte_size": 1535400
+      },
+      "protected": {
+        "path": "Iterations/P10_Round016_TwoSegmentLimb_candidate01_protected.png",
+        "sha256": "0989772bc886bbcae3a6704372638ed6024888d4ad062874189ae7e1c12dcace",
+        "byte_size": 1485301
+      },
+      "pixel_equality": {
+        "all_pixels_outside_final_mask_equal_base": true,
+        "all_hilt_protection_zone_pixels_equal_base": true,
+        "all_rear_leg_protection_zone_pixels_equal_base": true
+      }
+    },
+    {
+      "candidate": 2,
+      "source_anchors": [
+        [
+          1005,
+          145
+        ],
+        [
+          728,
+          535
+        ],
+        [
+          500,
+          872
+        ]
+      ],
+      "piecewise_similarity_output_to_input": [
+        [
+          1.0846016968821723,
+          -0.06220697836346288,
+          379.26226887072244,
+          0.06220697836346288,
+          1.0846016968821723,
+          -404.50501585991685
+        ],
+        [
+          -1.6857664233576641,
+          0.4233576642335766,
+          993.9963503649635,
+          -0.4233576642335766,
+          -1.6857664233576641,
+          2116.1149635036495
+        ]
+      ],
+      "raw": {
+        "path": "Iterations/P10_Round016_TwoSegmentLimb_candidate02_raw.png",
+        "sha256": "3c5d7ba64519441a328809e95dc235dcb3863155d89a73772f29c50cde4e0733",
+        "byte_size": 1344879
+      },
+      "keyed": {
+        "path": "Iterations/P10_Round016_TwoSegmentLimb_candidate02_keyed.png",
+        "sha256": "e674528fd6c3c3a0c77d6f72bdf7abe9e7c050ad3da9b24109367503514b8fdb",
+        "byte_size": 1164908
+      },
+      "anchored": {
+        "path": "Iterations/P10_Round016_TwoSegmentLimb_candidate02_anchored.png",
+        "sha256": "e88c3b2b3350f231944e824b8f50458b14a69dd2af03fbfed5e85911b677319e",
+        "byte_size": 255244
+      },
+      "composite": {
+        "path": "Iterations/P10_Round016_TwoSegmentLimb_candidate02_composite.png",
+        "sha256": "93c99fd7ba59eab17e278ab41f853a02428e8f06498cc308b048b0dedc937d99",
+        "byte_size": 1535175
+      },
+      "protected": {
+        "path": "Iterations/P10_Round016_TwoSegmentLimb_candidate02_protected.png",
+        "sha256": "bba88e6d6c6e3a05f51da31db71d4de3e0224e2a7dad7665010759d522cd0ddd",
+        "byte_size": 1490976
+      },
+      "pixel_equality": {
+        "all_pixels_outside_final_mask_equal_base": true,
+        "all_hilt_protection_zone_pixels_equal_base": true,
+        "all_rear_leg_protection_zone_pixels_equal_base": true
+      }
+    },
+    {
+      "candidate": 3,
+      "source_anchors": [
+        [
+          647,
+          160
+        ],
+        [
+          520,
+          847
+        ],
+        [
+          1020,
+          430
+        ]
+      ],
+      "piecewise_similarity_output_to_input": [
+        [
+          1.4749413312014854,
+          0.58481574128994,
+          -519.8975939345489,
+          -0.58481574128994,
+          1.4749413312014854,
+          -182.9436005879773
+        ],
+        [
+          2.404014598540146,
+          -1.3985401459854014,
+          812.2810218978103,
+          1.3985401459854014,
+          2.404014598540146,
+          -1701.852189781022
+        ]
+      ],
+      "raw": {
+        "path": "Iterations/P10_Round016_TwoSegmentLimb_candidate03_raw.png",
+        "sha256": "dbd5d8824668e7cdc18014f635b43de68db1f54a6f4ec3728059d917085b9436",
+        "byte_size": 1372073
+      },
+      "keyed": {
+        "path": "Iterations/P10_Round016_TwoSegmentLimb_candidate03_keyed.png",
+        "sha256": "363936163dd6a6d7fd275a7ea72785625e32c42f9cb50ace348045dd31737288",
+        "byte_size": 1243036
+      },
+      "anchored": {
+        "path": "Iterations/P10_Round016_TwoSegmentLimb_candidate03_anchored.png",
+        "sha256": "59e85671f23ed33e65b439488450b3641be489bef9166296e89f8d8f4a962dcb",
+        "byte_size": 182754
+      },
+      "composite": {
+        "path": "Iterations/P10_Round016_TwoSegmentLimb_candidate03_composite.png",
+        "sha256": "df44ca39fa7e293599efd155c5d792afc286429feea335c614b51ce8ee82bc96",
+        "byte_size": 1502409
+      },
+      "protected": {
+        "path": "Iterations/P10_Round016_TwoSegmentLimb_candidate03_protected.png",
+        "sha256": "99d072cd67f9245c1c7a793e0a55da69f1a2ed721c8e7505b13cd5cfff70099e",
+        "byte_size": 1486073
+      },
+      "pixel_equality": {
+        "all_pixels_outside_final_mask_equal_base": true,
+        "all_hilt_protection_zone_pixels_equal_base": true,
+        "all_rear_leg_protection_zone_pixels_equal_base": true
+      }
+    },
+    {
+      "candidate": 4,
+      "source_anchors": [
+        [
+          1025,
+          235
+        ],
+        [
+          505,
+          940
+        ],
+        [
+          305,
+          575
+        ]
+      ],
+      "piecewise_similarity_output_to_input": [
+        [
+          1.9838821982102792,
+          -0.1495216236428811,
+          -102.69064135956887,
+          0.1495216236428811,
+          1.9838821982102792,
+          -791.703458235552
+        ],
+        [
+          1.1733576642335766,
+          1.3357664233576643,
+          -1057.8649635036495,
+          -1.3357664233576643,
+          1.1733576642335766,
+          442.7463503649636
+        ]
+      ],
+      "raw": {
+        "path": "Iterations/P10_Round016_TwoSegmentLimb_candidate04_raw.png",
+        "sha256": "d8bf57bc12e254ba0f1e9c45c9a62ef31a43f69596566312290bf46057598a1f",
+        "byte_size": 1564568
+      },
+      "keyed": {
+        "path": "Iterations/P10_Round016_TwoSegmentLimb_candidate04_keyed.png",
+        "sha256": "ab02a3f610226afe3121ff6d39a0e6bfcf2fb0c6ade3645874f4e2b7793c931a",
+        "byte_size": 1383386
+      },
+      "anchored": {
+        "path": "Iterations/P10_Round016_TwoSegmentLimb_candidate04_anchored.png",
+        "sha256": "7aa6789e4823caf0dfa06c8da5fedddc9a84f849b1c5bd3cb97690eb44faecd9",
+        "byte_size": 148610
+      },
+      "composite": {
+        "path": "Iterations/P10_Round016_TwoSegmentLimb_candidate04_composite.png",
+        "sha256": "4cea1efeacd37a342036351f6acf46f43123cdd807ea5debdff2372b029dcca6",
+        "byte_size": 1491110
+      },
+      "protected": {
+        "path": "Iterations/P10_Round016_TwoSegmentLimb_candidate04_protected.png",
+        "sha256": "b84864e8675c8919798a3d2fe8de2d46dc723efcdc3941df256f912b54ef96ce",
+        "byte_size": 1462445
+      },
+      "pixel_equality": {
+        "all_pixels_outside_final_mask_equal_base": true,
+        "all_hilt_protection_zone_pixels_equal_base": true,
+        "all_rear_leg_protection_zone_pixels_equal_base": true
+      }
+    }
+  ],
+  "mask_counts": {
+    "canvas_pixels": 1572864,
+    "unprotected_corridor_pixels": 77360,
+    "final_editable_pixels": 23341,
+    "corridor_pixels_removed_total": 54019,
+    "corridor_pixels_occluded_by_hilt_zone": 28050,
+    "corridor_pixels_occluded_by_rear_leg_zone": 34935,
+    "corridor_pixels_occluded_by_both_zones": 8966
+  }
+}

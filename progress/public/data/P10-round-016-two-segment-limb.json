@@ -1,0 +1,238 @@
+{
+  "schemaVersion": 1,
+  "piece": "P10",
+  "round": 16,
+  "status": "rejected-two-segment-limb",
+  "reviewType": "fresh-context Two-Segment Limb visual gate with isolated Unity playtest",
+  "reviewedAt": "2026-08-01T09:05:51Z",
+  "artifactClass": "original 2D isolated-limb concept composite plus fresh non-qualifying Unity evidence",
+  "engineRun": true,
+  "actualGameCapturePerformed": true,
+  "targetMatchedGameCapturePerformed": false,
+  "gateQualifyingCapture": false,
+  "builderAcceptedFrameFiled": true,
+  "isolatedTwoSegmentLimbTargetPassed": false,
+  "paid3DGenerationAuthorized": false,
+  "source": {
+    "name": "Nyra Kestrel Two-Segment Limb mechanics proof",
+    "scope": "Original 2D exact-anchor limb evidence and an honest Unity integration check; no gameplay-ready, 3D, rig, animation, or production-asset claim.",
+    "creator": "OpenAI image generation and deterministic keying/compositing via Codex",
+    "referencePixelsSuppliedToGeneration": false,
+    "receiptPath": "ArtSource/P10/Round016/TwoSegmentLimb/P10_Round016_TwoSegmentLimbReceipt.json",
+    "receiptSha256": "46023c8bf566def0efbcd24a19571733f6609342696e52bc56b60b6812cc7743",
+    "readmePath": "ArtSource/P10/Round016/TwoSegmentLimb/README.md",
+    "readmeSha256": "8ba2121e35c1beaea9ce87c2fe594218a2b5b89d3f3eef9d8b9345c56304bc8e",
+    "reviewPath": "ArtSource/P10/Round016/TwoSegmentLimb/P10_Round016_FreshTwoSegmentLimbReview.json",
+    "reviewSha256": "639816c57ed54f77a59eb5e0fa3817f7519a20e0e02e42ecc78447ce106cd60d",
+    "originalCriticSealedReviewSha256BeforePathOnlySanitization": "da7da4d4ab3d6f765166c3a10e7fd0a59162be4ccf690fd8799da0aad45aef21",
+    "deterministicEvidencePath": "ArtSource/P10/Round016/TwoSegmentLimb/P10_Round016_DeterministicCompositeEvidence.json",
+    "deterministicEvidenceSha256": "29731c0577d33d4177388606f496df55842fa570f3f415a30bc24811446fbd9e",
+    "guidePngPath": "ArtSource/P10/Round016/TwoSegmentLimb/P10_Round016_OriginalTwoSegmentLimbGuide.png",
+    "guidePngSha256": "648fc25ecad74cb0eb5a72cadb3d9eed7e56ed8aeea1a0b44c15d487f63bc9aa",
+    "guideSvgPath": "ArtSource/P10/Round016/TwoSegmentLimb/P10_Round016_OriginalTwoSegmentLimbGuide.svg",
+    "guideSvgSha256": "d56161bc672ab9cd75cf059d645843cf6d057d7830129e3e7640ee076034b283",
+    "finalMaskBinaryPath": "ArtSource/P10/Round016/TwoSegmentLimb/P10_Round016_TrailingLimbHardMask_binary.png",
+    "finalMaskBinarySha256": "76e2aee7ddccfa8aaeee4f711e6740f36df5f49da773e5597a7c1ee024dd1199"
+  },
+  "releaseSanitization": {
+    "scope": "Whitespace-only cleanup in README and its generator plus seven path-only placeholders in the fresh critic review; all visual assets, scores, pixel metrics, engine results, blind choices, verdict, gap, and prescription are unchanged.",
+    "originalBuilderReceiptSha256": "f8adf7268d87668614d7d6a2fb803ebc9a07cbf1b25edf2a5dbb704c6a955fb0",
+    "releaseBuilderReceiptSha256": "46023c8bf566def0efbcd24a19571733f6609342696e52bc56b60b6812cc7743",
+    "originalBuilderReadmeSha256": "7db532e956c350cb6d49255200132d9a0ccd9081d119cc07d783d274c7175139",
+    "releaseBuilderReadmeSha256": "8ba2121e35c1beaea9ce87c2fe594218a2b5b89d3f3eef9d8b9345c56304bc8e",
+    "originalCriticReviewSha256": "da7da4d4ab3d6f765166c3a10e7fd0a59162be4ccf690fd8799da0aad45aef21",
+    "releaseCriticReviewSha256": "639816c57ed54f77a59eb5e0fa3817f7519a20e0e02e42ecc78447ce106cd60d"
+  },
+  "builderDecision": {
+    "disposition": "PROMOTED_CANDIDATE04_PROTECTED_COMPOSITE_BYTE_IDENTICALLY_AS_STRONGEST_BOUNDED_EVIDENCE_WITH_TARGET_FAIL",
+    "builderEligibility": "FAIL",
+    "selectedCandidate": 4,
+    "acceptedSha256": "b84864e8675c8919798a3d2fe8de2d46dc723efcdc3941df256f912b54ef96ce",
+    "acceptedByteIdenticalToCandidate04Protected": true,
+    "finding": "Candidate 04 supplied the strongest keyed deep-V source and its transforms hit all three anchors, but mandatory hilt and rear-leg restoration removed the elbow and complete return, leaving a shoulder stump and detached shard."
+  },
+  "anchorContract": {
+    "shoulder": [604, 472],
+    "elbow": [370, 845],
+    "grip": [450, 625],
+    "candidate04UpperRightToShoulder": true,
+    "candidate04JointToElbow": true,
+    "candidate04UpperLeftToGrip": true,
+    "maximumTransformResidualPixels": 2.274e-13
+  },
+  "maskIntegrity": {
+    "unprotectedCorridorPixels": 77360,
+    "finalEditablePixels": 23341,
+    "finalSealedPixels": 1549523,
+    "corridorPixelsRemovedByProtection": 54019,
+    "removedFraction": 0.698281,
+    "hiltOnlyProtectedPixels": 19084,
+    "rearLegOnlyProtectedPixels": 25969,
+    "hiltAndRearLegProtectedPixels": 8966,
+    "candidateCountVerified": 4,
+    "outsideMaskMismatchCountPerCandidate": 0,
+    "hiltZoneMismatchCountPerCandidate": 0,
+    "rearLegZoneMismatchCountPerCandidate": 0
+  },
+  "actualPixelAudit": {
+    "changedPixelsAgainstRound013": 22598,
+    "changedInsideFinalMaskPixels": 22598,
+    "changedOutsideFinalMaskPixels": 0,
+    "changedPixelComponentCount8Connected": 5,
+    "singleConnectedLimbComponentPresent": false,
+    "largestComponentPixels": 18193,
+    "largestComponentRead": "shoulder-side armored stump with open cuff and no elbow",
+    "secondLargestComponentPixels": 4399,
+    "secondLargestComponentRead": "detached far-low dark shard",
+    "preservedGripHiltAndRearLegExact": true,
+    "catastrophicDefectPresent": true
+  },
+  "feasibilityFinding": {
+    "claimAccurateForSealedConstraints": true,
+    "constraintSet": "MUTUALLY_INCOMPATIBLE",
+    "shoulderToElbowProtectedFraction": 0.802139,
+    "elbowToGripProtectedFraction": 1.0,
+    "finding": "Exact anchor placement exists before protection, but the sealed mask protects the elbow and every elbow-to-grip centerline pixel. Exact visible topology is therefore impossible after protection."
+  },
+  "visualReview": {
+    "score": 33,
+    "maximum": 100,
+    "passThreshold": 95,
+    "criticalFloorPerCategory": 9,
+    "observedMinimumCategoryScore": 0,
+    "thresholdResult": "FAIL",
+    "criticalFloorResult": "FAIL",
+    "verdict": "FAIL_ROUND016_TWO_SEGMENT_LIMB_GATE",
+    "comparisonCount": 6,
+    "candidatePreferredCount": 0,
+    "referencePreferredCount": 6,
+    "requiredCandidatePreferredCount": 5,
+    "benchmarkGateResult": "FAIL",
+    "benchmarkPolicy": "Aggregate blind results only; no supplied benchmark image, crop, sheet, filename, or path is published.",
+    "singleBiggestGap": "The accepted silhouette has no connected shoulder-to-elbow-to-grip arm: protection destroys the elbow and entire steep return, leaving a shoulder stump and floating far-low shard instead of one anatomical V and its uninterrupted pale wedge.",
+    "categoryScores": {
+      "exactOutsideMaskPreservation": 10,
+      "candidate04ThreeAnchorTransformAccuracy": 10,
+      "anatomicalTwoSegmentSilhouette": 0,
+      "continuousSteepUpRightElbowToGripReturn": 0,
+      "preservedInwardGripHiltAndRearLeg": 10,
+      "uninterruptedHeadSizedPaleWedge": 0,
+      "keyingAndProtectedCompositeCleanliness": 2,
+      "gameplayReadableAAASilhouette": 1,
+      "round016EngineIntegrationAndMatchedCaptureFidelity": 0,
+      "privateBenchmarkParity": 0
+    }
+  },
+  "engineTruth": {
+    "unityVersion": "6000.5.4f1",
+    "toolchain": "Unity 6000.5.4f1, Metal on Apple M2",
+    "executeMethod": "CodexOfWar.Editor.Review.P10CaptureCommand.CaptureRound001FromCommandLine",
+    "exitCode": 0,
+    "captureResult": "PASS",
+    "capturedAtUtc": "2026-08-01T08:54:37.500Z",
+    "engineRun": true,
+    "actualGameCapturePerformed": true,
+    "captureType": "fresh Unity editor Camera.Render output from the repository P10 lookdev and contact-sheet scenes; not a player build",
+    "requestedRound016FrameProduced": false,
+    "reviewedRound016CandidateCaptured": false,
+    "targetMatchedGameCapturePerformed": false,
+    "gateQualifyingCapture": false,
+    "visibleAsset": "P10_AstraValeHero Round001",
+    "round016NyraVisible": false,
+    "round016NamedAssetsInUnity": 0,
+    "runtimeGameplayArchitectureDetected": false,
+    "playerBuildDetected": false,
+    "freshS01Sha256": "46c055eab47a88d102a8ebe52de54b88fa77e9764c75769eae80c74b37da0dab",
+    "freshTurntableContactSheetSha256": "4e60630527970c3c628c8bd53d7fdaf7fbeb0f07ee33003b98f7f50a8c8d79e9",
+    "finding": "The isolated engine run proves the toolchain works, but it captures the obsolete Astra Vale Round001 proxy because Nyra Round016 is absent from Unity."
+  },
+  "publicEvidence": [
+    {
+      "label": "CRITIC-REJECTED — builder-promoted protected Two-Segment Limb frame",
+      "evidenceType": "Rejected original 2D mechanics evidence — not gameplay, 3D, or game-ready evidence",
+      "publicPath": "/captures/P10/round-016-two-segment-limb/NyraKestrel_TwoSegmentLimb_CRITIC_REJECTED.png",
+      "sha256": "b84864e8675c8919798a3d2fe8de2d46dc723efcdc3941df256f912b54ef96ce",
+      "dimensions": {
+        "width": 1536,
+        "height": 1024
+      },
+      "finding": "Exact preservation survives, but only a severed shoulder stump and floating shard remain."
+    },
+    {
+      "label": "Fresh actual Unity S01 used for the Round016 engine gate",
+      "evidenceType": "Real non-qualifying engine capture — wrong fighter",
+      "publicPath": "/captures/P10/round-016-two-segment-limb/S01_FreshEngineGate_OldAstraVale.png",
+      "sha256": "46c055eab47a88d102a8ebe52de54b88fa77e9764c75769eae80c74b37da0dab",
+      "dimensions": {
+        "width": 1600,
+        "height": 900
+      },
+      "finding": "Unity capture passed, but the visible hero is the obsolete low-poly Astra Vale Round001 proxy; Nyra Round016 is absent."
+    },
+    {
+      "label": "Fresh actual Unity contact sheet used for the Round016 engine gate",
+      "evidenceType": "Real non-qualifying engine turntable — wrong fighter",
+      "publicPath": "/captures/P10/round-016-two-segment-limb/Turntable_FreshEngineGate_OldAstraVale.png",
+      "sha256": "4e60630527970c3c628c8bd53d7fdaf7fbeb0f07ee33003b98f7f50a8c8d79e9",
+      "dimensions": {
+        "width": 1600,
+        "height": 900
+      },
+      "finding": "The four-view contact sheet is freshly rendered and mechanically valid, but shows the unrelated Round001 hero."
+    }
+  ],
+  "builderAttempts": [
+    {
+      "candidate": 1,
+      "rawSha256": "7277e6883182f15a486b544d731265a1fbc818546f3e04f4c84f1621a4139066",
+      "keyedSha256": "17ef80901932ad1eb125d67d20c33fd21329fef7006b2b14e69a79a90d2c60ab",
+      "anchoredSha256": "9b2af03b83f9f7922267d6f96b602c394f4cd8b35a2c096c42c0fbdef4b06db9",
+      "protectedSha256": "0989772bc886bbcae3a6704372638ed6024888d4ad062874189ae7e1c12dcace",
+      "disposition": "rejected"
+    },
+    {
+      "candidate": 2,
+      "rawSha256": "3c5d7ba64519441a328809e95dc235dcb3863155d89a73772f29c50cde4e0733",
+      "keyedSha256": "e674528fd6c3c3a0c77d6f72bdf7abe9e7c050ad3da9b24109367503514b8fdb",
+      "anchoredSha256": "e88c3b2b3350f231944e824b8f50458b14a69dd2af03fbfed5e85911b677319e",
+      "protectedSha256": "bba88e6d6c6e3a05f51da31db71d4de3e0224e2a7dad7665010759d522cd0ddd",
+      "disposition": "rejected"
+    },
+    {
+      "candidate": 3,
+      "rawSha256": "dbd5d8824668e7cdc18014f635b43de68db1f54a6f4ec3728059d917085b9436",
+      "keyedSha256": "363936163dd6a6d7fd275a7ea72785625e32c42f9cb50ace348045dd31737288",
+      "anchoredSha256": "59e85671f23ed33e65b439488450b3641be489bef9166296e89f8d8f4a962dcb",
+      "protectedSha256": "99d072cd67f9245c1c7a793e0a55da69f1a2ed721c8e7505b13cd5cfff70099e",
+      "disposition": "rejected"
+    },
+    {
+      "candidate": 4,
+      "rawSha256": "d8bf57bc12e254ba0f1e9c45c9a62ef31a43f69596566312290bf46057598a1f",
+      "keyedSha256": "ab02a3f610226afe3121ff6d39a0e6bfcf2fb0c6ade3645874f4e2b7793c931a",
+      "anchoredSha256": "7aa6789e4823caf0dfa06c8da5fedddc9a84f849b1c5bd3cb97690eb44faecd9",
+      "protectedSha256": "b84864e8675c8919798a3d2fe8de2d46dc723efcdc3941df256f912b54ef96ce",
+      "disposition": "builder-target-failed-promoted-for-critic-critic-rejected"
+    }
+  ],
+  "limitations": [
+    "The polished Nyra frame is original 2D concept evidence, not an engine capture or game-ready asset.",
+    "The fresh engine capture is real but does not contain the reviewed Nyra candidate.",
+    "The runnable project exposes only a static lookdev shell and obsolete hero proxy; no player build or combat runtime was found.",
+    "Exact keying, transforms, and preservation cannot substitute for missing connected anatomy.",
+    "No 3D mesh, rig, deformation, UV, collision, animation, LOD, texture-set, performance, or gameplay claim is made.",
+    "Private benchmark pixels and temporary blind-comparison files are excluded from the repository."
+  ],
+  "nextRound": {
+    "round": 17,
+    "status": "local-constraint-release",
+    "target": "Keep shoulder (604,472), elbow (370,845), and grip (450,625) fixed. Define the editable mask as the Round016 final mask union the protected pixels inside the closed anchor triangle dilated 62 pixels, restore only a 24-pixel-radius disk at the grip after compositing, freeze every pixel outside that revised mask, and form one 8-connected anatomical V with a clear head-sized pale wedge.",
+    "gate": {
+      "minimumTotalScore": 95,
+      "minimumScorePerCategory": 9,
+      "blindComparisonCount": 6,
+      "minimumCandidatePreferredCount": 5,
+      "realTargetRelevantEngineCaptureRequired": true
+    }
+  }
+}
