@@ -1,0 +1,59 @@
+{
+  "acceptance_claimed": false,
+  "assets": {
+    "hero": {
+      "actions": [
+        "Idle_Loop",
+        "Roll",
+        "Sprint_Loop",
+        "Sword_Regular_A",
+        "Walk_Loop"
+      ],
+      "armatures": 1,
+      "bones": 65,
+      "file": "glb/vespera_hero.glb",
+      "meshes": 9,
+      "ok": true,
+      "required_nodes": [
+        "weapon_socket"
+      ],
+      "triangles": 37508
+    },
+    "hollow": {
+      "actions": [
+        "Death",
+        "HitReact",
+        "Idle"
+      ],
+      "armatures": 1,
+      "bones": 50,
+      "file": "glb/ossuary_hollow.glb",
+      "meshes": 6,
+      "ok": true,
+      "required_nodes": [
+        "impact_socket"
+      ],
+      "triangles": 11558
+    },
+    "weapon": {
+      "actions": [],
+      "armatures": 0,
+      "bones": 0,
+      "file": "glb/dawnbreak_claymore.glb",
+      "meshes": 9,
+      "ok": true,
+      "required_nodes": [
+        "BladeTip",
+        "ClaymoreRoot",
+        "ContactMarker",
+        "GripPrimary",
+        "GripSecondary"
+      ],
+      "triangles": 1244
+    }
+  },
+  "blender": "5.2.0 LTS",
+  "integrated": false,
+  "schema": "p31.round005.alt-duel-blender-reimport.v1",
+  "status": "pass"
+}

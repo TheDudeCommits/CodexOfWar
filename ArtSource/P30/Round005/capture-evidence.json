@@ -1,0 +1,1423 @@
+{
+  "schema": "p30.round005.production-capture-evidence.v1",
+  "candidateOnly": true,
+  "acceptanceClaimed": false,
+  "headed": true,
+  "url": "http://127.0.0.1:4173/?review=1&post=0",
+  "httpStatus": 200,
+  "browser": "150.0.7871.187",
+  "readyMs": 1825,
+  "coldReadyLimitMs": 4109,
+  "viewport": {
+    "width": 1600,
+    "height": 900,
+    "dpr": 1
+  },
+  "runtimeBinding": {
+    "heroScale": 1.22,
+    "hollowScale": 1.16,
+    "weaponScale": 1,
+    "weaponAxialRoll": 0.6,
+    "weaponSocket": "weapon_socket",
+    "visualToeInYaw": 0.5,
+    "visualLateralOffset": 0.62
+  },
+  "captures": [
+    {
+      "id": "S01",
+      "path": "ArtSource/P30/Round005/S01.png",
+      "bytes": 1852494,
+      "sha256": "dd70db8c04d732f6a940f1ef6dfd60dbf778fe2be4905efbdba92b48e78d9314",
+      "processedTicks": 120,
+      "state": {
+        "tick": 120,
+        "seed": 30001,
+        "piece": "P30",
+        "preset": "combat-tape-c",
+        "paused": false,
+        "pointerLocked": false,
+        "coordinates": "+Y up / +X right / -Z forward",
+        "player": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 5.60000467300415
+          },
+          "yaw": 3.1415925533994935,
+          "health": 100,
+          "stamina": 100,
+          "motion": "idle",
+          "attackPhase": "idle",
+          "attackFrame": -1
+        },
+        "target": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "health": 100,
+          "motion": "idle"
+        },
+        "state": {
+          "tick": 120,
+          "elapsed": 1.9999999999999978,
+          "objectiveComplete": false,
+          "player": {
+            "position": {
+              "x": 0,
+              "z": 5.60000467300415
+            },
+            "yaw": 3.1415925533994935,
+            "health": 100,
+            "maxHealth": 100,
+            "stamina": 100,
+            "maxStamina": 100,
+            "motion": "idle",
+            "speed01": 0,
+            "attackElapsed": 0,
+            "attackFrame": -1,
+            "attackPhase": "idle",
+            "attackSerial": 0,
+            "attackHasHit": false,
+            "dodgeRemaining": 0,
+            "dodgeDirection": {
+              "x": 0,
+              "z": -1
+            },
+            "invulnerableRemaining": 0
+          },
+          "enemy": {
+            "position": {
+              "x": 0,
+              "z": 0
+            },
+            "yaw": 3.141592653589793,
+            "health": 100,
+            "maxHealth": 100,
+            "motion": "idle",
+            "hitStunRemaining": 0,
+            "idlePhase": 1.9999999999999978
+          }
+        }
+      },
+      "events": [],
+      "camera": {
+        "position": [
+          1.3494233232887176,
+          2.971010924261904,
+          12.6064095892162
+        ],
+        "quaternion": [
+          -0.110552162719975,
+          0.08040985418836617,
+          0.008974095344674318,
+          0.9905715220417386
+        ],
+        "projectionMatrix": [
+          1.0147768623401758,
+          0,
+          0,
+          0,
+          0,
+          1.8040477552714236,
+          0,
+          0,
+          0,
+          0,
+          -1.0014556040756915,
+          -1,
+          0,
+          0,
+          -0.16011644832605532,
+          0
+        ],
+        "yaw": 0,
+        "pitch": 0.2,
+        "boom": {
+          "desiredDistance": 7.15,
+          "resolvedDistance": 7.15,
+          "collisionApplied": false,
+          "obstructionHook": "pending"
+        }
+      },
+      "renderer": {
+        "calls": 82,
+        "triangles": 203867,
+        "points": 64,
+        "lines": 0,
+        "textures": 26,
+        "geometries": 35,
+        "pixelRatio": 1,
+        "size": {
+          "width": 1600,
+          "height": 900
+        },
+        "errors": [],
+        "context": {
+          "lost": false,
+          "losses": 0,
+          "restores": 0
+        }
+      },
+      "assetLoad": {
+        "schema": "gauntlet.asset-load.v1",
+        "registry": {
+          "schema": "gauntlet.asset-registry.v1",
+          "manifestVersion": 2,
+          "enabled": [
+            "animation.combat",
+            "animation.player-core",
+            "character.hero",
+            "character.hollow",
+            "environment.ashwake-arena",
+            "environment.ruin-doorway",
+            "environment.ruin-pillar",
+            "environment.ruin-rocks",
+            "environment.ruin-stairs",
+            "environment.ruin-wall",
+            "environment.snowy-forest",
+            "material.brick-arm",
+            "material.brick-diffuse",
+            "material.brick-normal",
+            "material.cobble-arm",
+            "material.cobble-diffuse",
+            "material.cobble-normal",
+            "weapon.claymore"
+          ],
+          "loaded": [
+            "animation.combat",
+            "animation.player-core",
+            "character.hero",
+            "character.hollow",
+            "environment.ashwake-arena",
+            "environment.ruin-doorway",
+            "environment.ruin-pillar",
+            "environment.ruin-rocks",
+            "environment.ruin-stairs",
+            "environment.ruin-wall",
+            "environment.snowy-forest",
+            "material.brick-arm",
+            "material.brick-diffuse",
+            "material.brick-normal",
+            "material.cobble-arm",
+            "material.cobble-diffuse",
+            "material.cobble-normal",
+            "weapon.claymore"
+          ],
+          "failures": [],
+          "complete": true
+        },
+        "presentation": {
+          "schema": "gauntlet.presentation-assets.v1",
+          "proceduralFallbackActive": false,
+          "views": {
+            "hero": {
+              "authored": true,
+              "fallbackReason": null,
+              "animations": [
+                "Idle_Loop",
+                "Roll",
+                "Sprint_Loop",
+                "Sword_Regular_A",
+                "Walk_Loop"
+              ]
+            },
+            "hollow": {
+              "authored": true,
+              "fallbackReason": null,
+              "animations": [
+                "Death",
+                "HitReact",
+                "Idle"
+              ]
+            },
+            "arenaSector": {
+              "authored": true,
+              "fallbackReason": null
+            }
+          }
+        },
+        "environment": {
+          "key": "environment.snowy-forest",
+          "pmremInstalled": true
+        },
+        "productionAuthored": true
+      },
+      "reviewErrors": []
+    },
+    {
+      "id": "S02",
+      "path": "ArtSource/P30/Round005/S02.png",
+      "bytes": 1932265,
+      "sha256": "144e52090de2f9d7f4fb609c8add900a0df72f9e27637a0c155956dcfde7616d",
+      "processedTicks": 23,
+      "state": {
+        "tick": 23,
+        "seed": 30001,
+        "piece": "P30",
+        "preset": "combat-idle",
+        "paused": false,
+        "pointerLocked": false,
+        "coordinates": "+Y up / +X right / -Z forward",
+        "player": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 1.6000008583068848
+          },
+          "yaw": 0,
+          "health": 100,
+          "stamina": 100,
+          "motion": "idle",
+          "attackPhase": "idle",
+          "attackFrame": -1
+        },
+        "target": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "health": 100,
+          "motion": "idle"
+        },
+        "state": {
+          "tick": 23,
+          "elapsed": 0.3833333333333333,
+          "objectiveComplete": false,
+          "player": {
+            "position": {
+              "x": 0,
+              "z": 1.6000008583068848
+            },
+            "yaw": 0,
+            "health": 100,
+            "maxHealth": 100,
+            "stamina": 100,
+            "maxStamina": 100,
+            "motion": "idle",
+            "speed01": 0,
+            "attackElapsed": 0,
+            "attackFrame": -1,
+            "attackPhase": "idle",
+            "attackSerial": 0,
+            "attackHasHit": false,
+            "dodgeRemaining": 0,
+            "dodgeDirection": {
+              "x": 0,
+              "z": -1
+            },
+            "invulnerableRemaining": 0
+          },
+          "enemy": {
+            "position": {
+              "x": 0,
+              "z": 0
+            },
+            "yaw": 3.141592653589793,
+            "health": 100,
+            "maxHealth": 100,
+            "motion": "idle",
+            "hitStunRemaining": 0,
+            "idlePhase": 0.3833333333333333
+          }
+        }
+      },
+      "events": [],
+      "camera": {
+        "position": [
+          1.35,
+          2.9704857151846875,
+          8.75566356918258
+        ],
+        "quaternion": [
+          -0.11051353411655625,
+          0.08043957815992038,
+          0.008974258653665622,
+          0.9905734176345234
+        ],
+        "projectionMatrix": [
+          1.0147768623401758,
+          0,
+          0,
+          0,
+          0,
+          1.8040477552714236,
+          0,
+          0,
+          0,
+          0,
+          -1.0014556040756915,
+          -1,
+          0,
+          0,
+          -0.16011644832605532,
+          0
+        ],
+        "yaw": 0,
+        "pitch": 0.2,
+        "boom": {
+          "desiredDistance": 7.15,
+          "resolvedDistance": 7.15,
+          "collisionApplied": false,
+          "obstructionHook": "pending"
+        }
+      },
+      "renderer": {
+        "calls": 81,
+        "triangles": 203051,
+        "points": 64,
+        "lines": 0,
+        "textures": 26,
+        "geometries": 35,
+        "pixelRatio": 1,
+        "size": {
+          "width": 1600,
+          "height": 900
+        },
+        "errors": [],
+        "context": {
+          "lost": false,
+          "losses": 0,
+          "restores": 0
+        }
+      },
+      "assetLoad": {
+        "schema": "gauntlet.asset-load.v1",
+        "registry": {
+          "schema": "gauntlet.asset-registry.v1",
+          "manifestVersion": 2,
+          "enabled": [
+            "animation.combat",
+            "animation.player-core",
+            "character.hero",
+            "character.hollow",
+            "environment.ashwake-arena",
+            "environment.ruin-doorway",
+            "environment.ruin-pillar",
+            "environment.ruin-rocks",
+            "environment.ruin-stairs",
+            "environment.ruin-wall",
+            "environment.snowy-forest",
+            "material.brick-arm",
+            "material.brick-diffuse",
+            "material.brick-normal",
+            "material.cobble-arm",
+            "material.cobble-diffuse",
+            "material.cobble-normal",
+            "weapon.claymore"
+          ],
+          "loaded": [
+            "animation.combat",
+            "animation.player-core",
+            "character.hero",
+            "character.hollow",
+            "environment.ashwake-arena",
+            "environment.ruin-doorway",
+            "environment.ruin-pillar",
+            "environment.ruin-rocks",
+            "environment.ruin-stairs",
+            "environment.ruin-wall",
+            "environment.snowy-forest",
+            "material.brick-arm",
+            "material.brick-diffuse",
+            "material.brick-normal",
+            "material.cobble-arm",
+            "material.cobble-diffuse",
+            "material.cobble-normal",
+            "weapon.claymore"
+          ],
+          "failures": [],
+          "complete": true
+        },
+        "presentation": {
+          "schema": "gauntlet.presentation-assets.v1",
+          "proceduralFallbackActive": false,
+          "views": {
+            "hero": {
+              "authored": true,
+              "fallbackReason": null,
+              "animations": [
+                "Idle_Loop",
+                "Roll",
+                "Sprint_Loop",
+                "Sword_Regular_A",
+                "Walk_Loop"
+              ]
+            },
+            "hollow": {
+              "authored": true,
+              "fallbackReason": null,
+              "animations": [
+                "Death",
+                "HitReact",
+                "Idle"
+              ]
+            },
+            "arenaSector": {
+              "authored": true,
+              "fallbackReason": null
+            }
+          }
+        },
+        "environment": {
+          "key": "environment.snowy-forest",
+          "pmremInstalled": true
+        },
+        "productionAuthored": true
+      },
+      "reviewErrors": []
+    },
+    {
+      "id": "S03",
+      "path": "ArtSource/P30/Round005/S03.png",
+      "bytes": 1945168,
+      "sha256": "993e4e94b18b1555b60d4ac322db7250b57a8335e25a187dd86e0648fa2c44e9",
+      "processedTicks": 29,
+      "state": {
+        "tick": 29,
+        "seed": 30001,
+        "piece": "P30",
+        "preset": "combat-startup",
+        "paused": false,
+        "pointerLocked": false,
+        "coordinates": "+Y up / +X right / -Z forward",
+        "player": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 1.6000008583068848
+          },
+          "yaw": 0,
+          "health": 100,
+          "stamina": 100,
+          "motion": "attack",
+          "attackPhase": "startup",
+          "attackFrame": 5
+        },
+        "target": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "health": 100,
+          "motion": "idle"
+        },
+        "state": {
+          "tick": 29,
+          "elapsed": 0.4833333333333333,
+          "objectiveComplete": false,
+          "player": {
+            "position": {
+              "x": 0,
+              "z": 1.6000008583068848
+            },
+            "yaw": 0,
+            "health": 100,
+            "maxHealth": 100,
+            "stamina": 100,
+            "maxStamina": 100,
+            "motion": "attack",
+            "speed01": 0,
+            "attackElapsed": 0.08333333333333333,
+            "attackFrame": 5,
+            "attackPhase": "startup",
+            "attackSerial": 1,
+            "attackHasHit": false,
+            "dodgeRemaining": 0,
+            "dodgeDirection": {
+              "x": 0,
+              "z": -1
+            },
+            "invulnerableRemaining": 0
+          },
+          "enemy": {
+            "position": {
+              "x": 0,
+              "z": 0
+            },
+            "yaw": 3.141592653589793,
+            "health": 100,
+            "maxHealth": 100,
+            "motion": "idle",
+            "hitStunRemaining": 0,
+            "idlePhase": 0.4833333333333333
+          }
+        }
+      },
+      "events": [
+        {
+          "tick": 24,
+          "type": "attack_started",
+          "attackSerial": 1
+        }
+      ],
+      "camera": {
+        "position": [
+          1.35,
+          2.9704857151846875,
+          8.664786757890752
+        ],
+        "quaternion": [
+          -0.11051353411655625,
+          0.08043957815992038,
+          0.008974258653665622,
+          0.9905734176345234
+        ],
+        "projectionMatrix": [
+          1.0147768623401758,
+          0,
+          0,
+          0,
+          0,
+          1.8040477552714236,
+          0,
+          0,
+          0,
+          0,
+          -1.0014556040756915,
+          -1,
+          0,
+          0,
+          -0.16011644832605532,
+          0
+        ],
+        "yaw": 0,
+        "pitch": 0.2,
+        "boom": {
+          "desiredDistance": 7.15,
+          "resolvedDistance": 7.15,
+          "collisionApplied": false,
+          "obstructionHook": "pending"
+        }
+      },
+      "renderer": {
+        "calls": 81,
+        "triangles": 203051,
+        "points": 64,
+        "lines": 0,
+        "textures": 26,
+        "geometries": 35,
+        "pixelRatio": 1,
+        "size": {
+          "width": 1600,
+          "height": 900
+        },
+        "errors": [],
+        "context": {
+          "lost": false,
+          "losses": 0,
+          "restores": 0
+        }
+      },
+      "assetLoad": {
+        "schema": "gauntlet.asset-load.v1",
+        "registry": {
+          "schema": "gauntlet.asset-registry.v1",
+          "manifestVersion": 2,
+          "enabled": [
+            "animation.combat",
+            "animation.player-core",
+            "character.hero",
+            "character.hollow",
+            "environment.ashwake-arena",
+            "environment.ruin-doorway",
+            "environment.ruin-pillar",
+            "environment.ruin-rocks",
+            "environment.ruin-stairs",
+            "environment.ruin-wall",
+            "environment.snowy-forest",
+            "material.brick-arm",
+            "material.brick-diffuse",
+            "material.brick-normal",
+            "material.cobble-arm",
+            "material.cobble-diffuse",
+            "material.cobble-normal",
+            "weapon.claymore"
+          ],
+          "loaded": [
+            "animation.combat",
+            "animation.player-core",
+            "character.hero",
+            "character.hollow",
+            "environment.ashwake-arena",
+            "environment.ruin-doorway",
+            "environment.ruin-pillar",
+            "environment.ruin-rocks",
+            "environment.ruin-stairs",
+            "environment.ruin-wall",
+            "environment.snowy-forest",
+            "material.brick-arm",
+            "material.brick-diffuse",
+            "material.brick-normal",
+            "material.cobble-arm",
+            "material.cobble-diffuse",
+            "material.cobble-normal",
+            "weapon.claymore"
+          ],
+          "failures": [],
+          "complete": true
+        },
+        "presentation": {
+          "schema": "gauntlet.presentation-assets.v1",
+          "proceduralFallbackActive": false,
+          "views": {
+            "hero": {
+              "authored": true,
+              "fallbackReason": null,
+              "animations": [
+                "Idle_Loop",
+                "Roll",
+                "Sprint_Loop",
+                "Sword_Regular_A",
+                "Walk_Loop"
+              ]
+            },
+            "hollow": {
+              "authored": true,
+              "fallbackReason": null,
+              "animations": [
+                "Death",
+                "HitReact",
+                "Idle"
+              ]
+            },
+            "arenaSector": {
+              "authored": true,
+              "fallbackReason": null
+            }
+          }
+        },
+        "environment": {
+          "key": "environment.snowy-forest",
+          "pmremInstalled": true
+        },
+        "productionAuthored": true
+      },
+      "reviewErrors": []
+    },
+    {
+      "id": "S04",
+      "path": "ArtSource/P30/Round005/S04.png",
+      "bytes": 1948993,
+      "sha256": "deb3ae27fd433c4356207a0de6a1de98b1328307d48c7f0536ec26c8c01b3dde",
+      "processedTicks": 34,
+      "state": {
+        "tick": 34,
+        "seed": 30001,
+        "piece": "P30",
+        "preset": "combat-active-hit",
+        "paused": false,
+        "pointerLocked": false,
+        "coordinates": "+Y up / +X right / -Z forward",
+        "player": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 1.6000008583068848
+          },
+          "yaw": 0,
+          "health": 100,
+          "stamina": 100,
+          "motion": "attack",
+          "attackPhase": "active",
+          "attackFrame": 10
+        },
+        "target": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "health": 90,
+          "motion": "hit"
+        },
+        "state": {
+          "tick": 34,
+          "elapsed": 0.5666666666666668,
+          "objectiveComplete": false,
+          "player": {
+            "position": {
+              "x": 0,
+              "z": 1.6000008583068848
+            },
+            "yaw": 0,
+            "health": 100,
+            "maxHealth": 100,
+            "stamina": 100,
+            "maxStamina": 100,
+            "motion": "attack",
+            "speed01": 0,
+            "attackElapsed": 0.16666666666666666,
+            "attackFrame": 10,
+            "attackPhase": "active",
+            "attackSerial": 1,
+            "attackHasHit": true,
+            "dodgeRemaining": 0,
+            "dodgeDirection": {
+              "x": 0,
+              "z": -1
+            },
+            "invulnerableRemaining": 0
+          },
+          "enemy": {
+            "position": {
+              "x": 0,
+              "z": 0
+            },
+            "yaw": 3.141592653589793,
+            "health": 90,
+            "maxHealth": 100,
+            "motion": "hit",
+            "hitStunRemaining": 0.28,
+            "idlePhase": 0.5666666666666668
+          }
+        }
+      },
+      "events": [
+        {
+          "tick": 24,
+          "type": "attack_started",
+          "attackSerial": 1
+        },
+        {
+          "tick": 33,
+          "type": "enemy_hit",
+          "damage": 10,
+          "hpBefore": 100,
+          "hpAfter": 90,
+          "attackSerial": 1
+        }
+      ],
+      "camera": {
+        "position": [
+          1.3751824359380218,
+          2.952513372539638,
+          8.633443361652942
+        ],
+        "quaternion": [
+          -0.10943579925268201,
+          0.08191967389994381,
+          0.009050279344102652,
+          0.9905710803944598
+        ],
+        "projectionMatrix": [
+          1.0147768623401758,
+          0,
+          0,
+          0,
+          0,
+          1.8040477552714236,
+          0,
+          0,
+          0,
+          0,
+          -1.0014556040756915,
+          -1,
+          0,
+          0,
+          -0.16011644832605532,
+          0
+        ],
+        "yaw": 0,
+        "pitch": 0.2,
+        "boom": {
+          "desiredDistance": 7.15,
+          "resolvedDistance": 7.15,
+          "collisionApplied": false,
+          "obstructionHook": "pending"
+        }
+      },
+      "renderer": {
+        "calls": 86,
+        "triangles": 204155,
+        "points": 90,
+        "lines": 0,
+        "textures": 26,
+        "geometries": 38,
+        "pixelRatio": 1,
+        "size": {
+          "width": 1600,
+          "height": 900
+        },
+        "errors": [],
+        "context": {
+          "lost": false,
+          "losses": 0,
+          "restores": 0
+        }
+      },
+      "assetLoad": {
+        "schema": "gauntlet.asset-load.v1",
+        "registry": {
+          "schema": "gauntlet.asset-registry.v1",
+          "manifestVersion": 2,
+          "enabled": [
+            "animation.combat",
+            "animation.player-core",
+            "character.hero",
+            "character.hollow",
+            "environment.ashwake-arena",
+            "environment.ruin-doorway",
+            "environment.ruin-pillar",
+            "environment.ruin-rocks",
+            "environment.ruin-stairs",
+            "environment.ruin-wall",
+            "environment.snowy-forest",
+            "material.brick-arm",
+            "material.brick-diffuse",
+            "material.brick-normal",
+            "material.cobble-arm",
+            "material.cobble-diffuse",
+            "material.cobble-normal",
+            "weapon.claymore"
+          ],
+          "loaded": [
+            "animation.combat",
+            "animation.player-core",
+            "character.hero",
+            "character.hollow",
+            "environment.ashwake-arena",
+            "environment.ruin-doorway",
+            "environment.ruin-pillar",
+            "environment.ruin-rocks",
+            "environment.ruin-stairs",
+            "environment.ruin-wall",
+            "environment.snowy-forest",
+            "material.brick-arm",
+            "material.brick-diffuse",
+            "material.brick-normal",
+            "material.cobble-arm",
+            "material.cobble-diffuse",
+            "material.cobble-normal",
+            "weapon.claymore"
+          ],
+          "failures": [],
+          "complete": true
+        },
+        "presentation": {
+          "schema": "gauntlet.presentation-assets.v1",
+          "proceduralFallbackActive": false,
+          "views": {
+            "hero": {
+              "authored": true,
+              "fallbackReason": null,
+              "animations": [
+                "Idle_Loop",
+                "Roll",
+                "Sprint_Loop",
+                "Sword_Regular_A",
+                "Walk_Loop"
+              ]
+            },
+            "hollow": {
+              "authored": true,
+              "fallbackReason": null,
+              "animations": [
+                "Death",
+                "HitReact",
+                "Idle"
+              ]
+            },
+            "arenaSector": {
+              "authored": true,
+              "fallbackReason": null
+            }
+          }
+        },
+        "environment": {
+          "key": "environment.snowy-forest",
+          "pmremInstalled": true
+        },
+        "productionAuthored": true
+      },
+      "reviewErrors": []
+    },
+    {
+      "id": "S05",
+      "path": "ArtSource/P30/Round005/S05.png",
+      "bytes": 1957952,
+      "sha256": "8d166678843b45f76541ae3a463a044e0b73f09c05038343f98f89eb14fef53b",
+      "processedTicks": 41,
+      "state": {
+        "tick": 41,
+        "seed": 30001,
+        "piece": "P30",
+        "preset": "combat-recovery",
+        "paused": false,
+        "pointerLocked": false,
+        "coordinates": "+Y up / +X right / -Z forward",
+        "player": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 1.6000008583068848
+          },
+          "yaw": 0,
+          "health": 100,
+          "stamina": 100,
+          "motion": "attack",
+          "attackPhase": "recovery",
+          "attackFrame": 17
+        },
+        "target": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "health": 90,
+          "motion": "hit"
+        },
+        "state": {
+          "tick": 41,
+          "elapsed": 0.6833333333333338,
+          "objectiveComplete": false,
+          "player": {
+            "position": {
+              "x": 0,
+              "z": 1.6000008583068848
+            },
+            "yaw": 0,
+            "health": 100,
+            "maxHealth": 100,
+            "stamina": 100,
+            "maxStamina": 100,
+            "motion": "attack",
+            "speed01": 0,
+            "attackElapsed": 0.2833333333333333,
+            "attackFrame": 17,
+            "attackPhase": "recovery",
+            "attackSerial": 1,
+            "attackHasHit": true,
+            "dodgeRemaining": 0,
+            "dodgeDirection": {
+              "x": 0,
+              "z": -1
+            },
+            "invulnerableRemaining": 0
+          },
+          "enemy": {
+            "position": {
+              "x": 0,
+              "z": 0
+            },
+            "yaw": 3.141592653589793,
+            "health": 90,
+            "maxHealth": 100,
+            "motion": "hit",
+            "hitStunRemaining": 0.16333333333333339,
+            "idlePhase": 0.6833333333333338
+          }
+        }
+      },
+      "events": [
+        {
+          "tick": 24,
+          "type": "attack_started",
+          "attackSerial": 1
+        },
+        {
+          "tick": 33,
+          "type": "enemy_hit",
+          "damage": 10,
+          "hpBefore": 100,
+          "hpAfter": 90,
+          "attackSerial": 1
+        }
+      ],
+      "camera": {
+        "position": [
+          1.3432370875435684,
+          2.9651699758999857,
+          8.616048647699193
+        ],
+        "quaternion": [
+          -0.11023148884040976,
+          0.08004700947467522,
+          0.008907095954621663,
+          0.9906372488372538
+        ],
+        "projectionMatrix": [
+          1.0147768623401758,
+          0,
+          0,
+          0,
+          0,
+          1.8040477552714236,
+          0,
+          0,
+          0,
+          0,
+          -1.0014556040756915,
+          -1,
+          0,
+          0,
+          -0.16011644832605532,
+          0
+        ],
+        "yaw": 0,
+        "pitch": 0.2,
+        "boom": {
+          "desiredDistance": 7.15,
+          "resolvedDistance": 7.15,
+          "collisionApplied": false,
+          "obstructionHook": "pending"
+        }
+      },
+      "renderer": {
+        "calls": 83,
+        "triangles": 203915,
+        "points": 90,
+        "lines": 0,
+        "textures": 26,
+        "geometries": 38,
+        "pixelRatio": 1,
+        "size": {
+          "width": 1600,
+          "height": 900
+        },
+        "errors": [],
+        "context": {
+          "lost": false,
+          "losses": 0,
+          "restores": 0
+        }
+      },
+      "assetLoad": {
+        "schema": "gauntlet.asset-load.v1",
+        "registry": {
+          "schema": "gauntlet.asset-registry.v1",
+          "manifestVersion": 2,
+          "enabled": [
+            "animation.combat",
+            "animation.player-core",
+            "character.hero",
+            "character.hollow",
+            "environment.ashwake-arena",
+            "environment.ruin-doorway",
+            "environment.ruin-pillar",
+            "environment.ruin-rocks",
+            "environment.ruin-stairs",
+            "environment.ruin-wall",
+            "environment.snowy-forest",
+            "material.brick-arm",
+            "material.brick-diffuse",
+            "material.brick-normal",
+            "material.cobble-arm",
+            "material.cobble-diffuse",
+            "material.cobble-normal",
+            "weapon.claymore"
+          ],
+          "loaded": [
+            "animation.combat",
+            "animation.player-core",
+            "character.hero",
+            "character.hollow",
+            "environment.ashwake-arena",
+            "environment.ruin-doorway",
+            "environment.ruin-pillar",
+            "environment.ruin-rocks",
+            "environment.ruin-stairs",
+            "environment.ruin-wall",
+            "environment.snowy-forest",
+            "material.brick-arm",
+            "material.brick-diffuse",
+            "material.brick-normal",
+            "material.cobble-arm",
+            "material.cobble-diffuse",
+            "material.cobble-normal",
+            "weapon.claymore"
+          ],
+          "failures": [],
+          "complete": true
+        },
+        "presentation": {
+          "schema": "gauntlet.presentation-assets.v1",
+          "proceduralFallbackActive": false,
+          "views": {
+            "hero": {
+              "authored": true,
+              "fallbackReason": null,
+              "animations": [
+                "Idle_Loop",
+                "Roll",
+                "Sprint_Loop",
+                "Sword_Regular_A",
+                "Walk_Loop"
+              ]
+            },
+            "hollow": {
+              "authored": true,
+              "fallbackReason": null,
+              "animations": [
+                "Death",
+                "HitReact",
+                "Idle"
+              ]
+            },
+            "arenaSector": {
+              "authored": true,
+              "fallbackReason": null
+            }
+          }
+        },
+        "environment": {
+          "key": "environment.snowy-forest",
+          "pmremInstalled": true
+        },
+        "productionAuthored": true
+      },
+      "reviewErrors": []
+    },
+    {
+      "id": "S06",
+      "path": "ArtSource/P30/Round005/S06.png",
+      "bytes": 1931524,
+      "sha256": "5b50d94a960f7e7069633241c33b871412bd1ad78c55f135eba74d01c71a0a72",
+      "processedTicks": 37,
+      "state": {
+        "tick": 37,
+        "seed": 30001,
+        "piece": "P30",
+        "preset": "combat-dodge-side-offset",
+        "paused": false,
+        "pointerLocked": false,
+        "coordinates": "+Y up / +X right / -Z forward",
+        "player": {
+          "position": {
+            "x": 2.260000228881836,
+            "y": 0,
+            "z": 1.6000008583068848
+          },
+          "yaw": 1.5707963267948966,
+          "health": 100,
+          "stamina": 74,
+          "motion": "dodge",
+          "attackPhase": "idle",
+          "attackFrame": -1
+        },
+        "target": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "health": 100,
+          "motion": "idle"
+        },
+        "state": {
+          "tick": 37,
+          "elapsed": 0.6166666666666669,
+          "objectiveComplete": false,
+          "player": {
+            "position": {
+              "x": 2.260000228881836,
+              "z": 1.6000008583068848
+            },
+            "yaw": 1.5707963267948966,
+            "health": 100,
+            "maxHealth": 100,
+            "stamina": 74,
+            "maxStamina": 100,
+            "motion": "dodge",
+            "speed01": 1,
+            "attackElapsed": 0,
+            "attackFrame": -1,
+            "attackPhase": "idle",
+            "attackSerial": 0,
+            "attackHasHit": false,
+            "dodgeRemaining": 0.16000000000000003,
+            "dodgeDirection": {
+              "x": 1,
+              "z": 0
+            },
+            "invulnerableRemaining": 0.08986666666666668
+          },
+          "enemy": {
+            "position": {
+              "x": 0,
+              "z": 0
+            },
+            "yaw": 2.186847898473873,
+            "health": 100,
+            "maxHealth": 100,
+            "motion": "idle",
+            "hitStunRemaining": 0,
+            "idlePhase": 0.6166666666666669
+          }
+        }
+      },
+      "events": [
+        {
+          "tick": 28,
+          "type": "dodge_started"
+        }
+      ],
+      "camera": {
+        "position": [
+          2.7860785890528907,
+          2.9704857151846875,
+          8.623625050641598
+        ],
+        "quaternion": [
+          -0.11051353411655625,
+          0.08043957815992037,
+          0.00897425865366562,
+          0.9905734176345234
+        ],
+        "projectionMatrix": [
+          1.0147768623401758,
+          0,
+          0,
+          0,
+          0,
+          1.8040477552714236,
+          0,
+          0,
+          0,
+          0,
+          -1.0014556040756915,
+          -1,
+          0,
+          0,
+          -0.16011644832605532,
+          0
+        ],
+        "yaw": 0,
+        "pitch": 0.2,
+        "boom": {
+          "desiredDistance": 7.15,
+          "resolvedDistance": 7.15,
+          "collisionApplied": false,
+          "obstructionHook": "pending"
+        }
+      },
+      "renderer": {
+        "calls": 81,
+        "triangles": 203051,
+        "points": 64,
+        "lines": 0,
+        "textures": 26,
+        "geometries": 38,
+        "pixelRatio": 1,
+        "size": {
+          "width": 1600,
+          "height": 900
+        },
+        "errors": [],
+        "context": {
+          "lost": false,
+          "losses": 0,
+          "restores": 0
+        }
+      },
+      "assetLoad": {
+        "schema": "gauntlet.asset-load.v1",
+        "registry": {
+          "schema": "gauntlet.asset-registry.v1",
+          "manifestVersion": 2,
+          "enabled": [
+            "animation.combat",
+            "animation.player-core",
+            "character.hero",
+            "character.hollow",
+            "environment.ashwake-arena",
+            "environment.ruin-doorway",
+            "environment.ruin-pillar",
+            "environment.ruin-rocks",
+            "environment.ruin-stairs",
+            "environment.ruin-wall",
+            "environment.snowy-forest",
+            "material.brick-arm",
+            "material.brick-diffuse",
+            "material.brick-normal",
+            "material.cobble-arm",
+            "material.cobble-diffuse",
+            "material.cobble-normal",
+            "weapon.claymore"
+          ],
+          "loaded": [
+            "animation.combat",
+            "animation.player-core",
+            "character.hero",
+            "character.hollow",
+            "environment.ashwake-arena",
+            "environment.ruin-doorway",
+            "environment.ruin-pillar",
+            "environment.ruin-rocks",
+            "environment.ruin-stairs",
+            "environment.ruin-wall",
+            "environment.snowy-forest",
+            "material.brick-arm",
+            "material.brick-diffuse",
+            "material.brick-normal",
+            "material.cobble-arm",
+            "material.cobble-diffuse",
+            "material.cobble-normal",
+            "weapon.claymore"
+          ],
+          "failures": [],
+          "complete": true
+        },
+        "presentation": {
+          "schema": "gauntlet.presentation-assets.v1",
+          "proceduralFallbackActive": false,
+          "views": {
+            "hero": {
+              "authored": true,
+              "fallbackReason": null,
+              "animations": [
+                "Idle_Loop",
+                "Roll",
+                "Sprint_Loop",
+                "Sword_Regular_A",
+                "Walk_Loop"
+              ]
+            },
+            "hollow": {
+              "authored": true,
+              "fallbackReason": null,
+              "animations": [
+                "Death",
+                "HitReact",
+                "Idle"
+              ]
+            },
+            "arenaSector": {
+              "authored": true,
+              "fallbackReason": null
+            }
+          }
+        },
+        "environment": {
+          "key": "environment.snowy-forest",
+          "pmremInstalled": true
+        },
+        "productionAuthored": true
+      },
+      "reviewErrors": []
+    }
+  ],
+  "errors": {
+    "console": [
+      {
+        "type": "warning",
+        "text": "using deprecated parameters for the initialization function; pass a single object instead"
+      },
+      {
+        "type": "warning",
+        "text": "RGBELoader has been deprecated. Please use HDRLoader instead."
+      },
+      {
+        "type": "warning",
+        "text": "THREE.WebGLShadowMap: PCFSoftShadowMap has been deprecated. Using PCFShadowMap instead."
+      }
+    ],
+    "page": [],
+    "requests": [],
+    "http": []
+  }
+}

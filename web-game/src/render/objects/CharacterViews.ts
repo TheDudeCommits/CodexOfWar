@@ -15,6 +15,10 @@ const HERO_REQUIRED_CLIPS = [
   "Sword_Regular_A",
 ] as const;
 
+const ROUND005_VISUAL_LANE_OFFSET = 0.62;
+const ROUND005_TOE_IN_YAW = 0.5;
+const ROUND005_WEAPON_AXIAL_ROLL = 0.6;
+
 function shadowBlob(radius: number, opacity: number): {
   mesh: THREE.Mesh;
   geometry: THREE.BufferGeometry;
@@ -117,17 +121,21 @@ export class HeroView {
   constructor(assets: AssetRegistry) {
     const hero = assets.instantiateWithAnimations("character.hero");
     const weapon = assets.instantiateWithAnimations("weapon.claymore");
-    const clips = [
+    const legacyClips = [
       ...assets.getAnimations("animation.player-core"),
       ...assets.getAnimations("animation.combat"),
     ];
+    const clips = hero && hero.animations.length > 0 ? hero.animations : legacyClips;
     const available = new Set(clips.map((clip) => clip.name));
-    const rightHand = hero?.scene.getObjectByName("hand_r") ?? null;
+    const weaponSocket =
+      hero?.scene.getObjectByName("weapon_socket") ??
+      hero?.scene.getObjectByName("hand_r") ??
+      null;
     const missingClips = HERO_REQUIRED_CLIPS.filter((name) => !available.has(name));
     const missing: string[] = [];
     if (!hero) missing.push("character.hero");
     if (!weapon) missing.push("weapon.claymore");
-    if (!rightHand) missing.push("character.hero:hand_r");
+    if (!weaponSocket) missing.push("character.hero:weapon_socket");
     if (missingClips.length > 0) missing.push(`clips:${missingClips.join("|")}`);
     this.usingFallback = missing.length > 0;
     this.fallbackReason = missing.length > 0 ? `missing ${missing.join(", ")}` : null;
@@ -139,11 +147,12 @@ export class HeroView {
     this.root.add(blob.mesh, this.visual);
 
     if (this.usingFallback) this.buildProceduralFallback();
-    else if (hero && weapon && rightHand) {
-      this.root.name = "character.hero.nyra.round004";
+    else if (hero && weapon && weaponSocket) {
+      this.root.name = "character.hero.nyra.round005";
       hero.scene.name = "nyra-visible-model";
-      hero.scene.scale.setScalar(1.36);
-      hero.scene.rotation.y = Math.PI;
+      hero.scene.scale.setScalar(1.22);
+      hero.scene.rotation.y = Math.PI - ROUND005_TOE_IN_YAW;
+      hero.scene.position.x = -ROUND005_VISUAL_LANE_OFFSET;
       configureAndCloneMaterials(hero.scene, this.ownedMaterials, (material) => {
         if (material instanceof THREE.MeshStandardMaterial) {
           material.envMapIntensity = 1.25;
@@ -165,13 +174,14 @@ export class HeroView {
           }
         }
       });
-      weapon.scene.name = "stormcage-right-hand";
-      weapon.scene.position.set(0.004, -0.209, 0.018);
-      // Stormcage preserves the prior +Y blade convention but is centered on its
-      // two-hand grip, so the local offset seats the upper grip in Nyra's palm.
-      weapon.scene.rotation.set(-Math.PI / 2, 0.05, Math.PI);
-      weapon.scene.scale.setScalar(0.87);
-      rightHand.add(weapon.scene);
+      weapon.scene.name = "stormcage-two-hand-socket";
+      weapon.scene.position.set(0, 0, 0);
+      // Roll around the authored +Y blade axis so the broad face remains
+      // readable from the frozen gameplay camera without moving either grip
+      // marker or the contact line.
+      weapon.scene.rotation.set(0, ROUND005_WEAPON_AXIAL_ROLL, 0);
+      weapon.scene.scale.setScalar(1);
+      weaponSocket.add(weapon.scene);
       this.visual.add(hero.scene);
       this.animator = new DeterministicAnimator(hero.scene, clips);
     }
@@ -226,9 +236,11 @@ export class HeroView {
   private updateAuthoredAnimation(state: PlayerState, elapsed: number): void {
     const animator = this.animator!;
     if (state.motion === "attack") {
-      const duration = animator.getDuration("Sword_Regular_A");
-      const attack01 = clamp(state.attackElapsed / ATTACK_DURATION, 0, 1);
-      animator.setTime("Sword_Regular_A", attack01 * duration, false);
+      // The Round005 attack key times were authored directly against the
+      // deterministic simulation clock (24 fps). Preserve that clock so the
+      // frame-4 contact pose lands on runtime tick 34 instead of compressing
+      // the 0.4167 s clip across the 0.4333 s attack state.
+      animator.setTime("Sword_Regular_A", state.attackElapsed, false);
       return;
     }
     if (state.motion === "dodge") {
@@ -331,17 +343,23 @@ export class ZombieView {
 
     if (this.usingFallback) this.buildProceduralFallback();
     else if (zombie) {
-      this.root.name = "character.hollow.round004";
+      this.root.name = "character.hollow.round005";
       zombie.scene.name = "hollow-visible-model";
-      zombie.scene.scale.setScalar(1.74);
-      zombie.scene.rotation.y = Math.PI;
+      zombie.scene.scale.setScalar(1.16);
+      zombie.scene.rotation.y = Math.PI - ROUND005_TOE_IN_YAW;
+      // The frozen simulation centers stay untouched; a small visual-only
+      // offset keeps the opposed silhouettes readable at combat distance.
+      // The enemy root faces the opposite direction, so the matching local-X
+      // sign produces the opposing world-space side of the combat lane.
+      zombie.scene.position.x = -ROUND005_VISUAL_LANE_OFFSET;
       configureAndCloneMaterials(zombie.scene, this.ownedMaterials, (material) => {
         if (material instanceof THREE.MeshStandardMaterial) {
           material.envMapIntensity = 1.15;
           material.roughness = Math.min(0.86, material.roughness);
           if (
             material.name.includes("WetWounds") ||
-            material.name.includes("HotEye")
+            material.name.includes("HotEye") ||
+            material.name.includes("GravefireRot")
           ) {
             this.flashMaterials.push({
               material,

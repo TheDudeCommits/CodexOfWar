@@ -1,0 +1,107 @@
+{
+  "schema": "gauntlet.p31.round005.duel-validation.v1",
+  "status": "pass",
+  "assets": [
+    {
+      "id": "hero",
+      "path": "WebAssetSource/P31/processed/round005/characters/nyra.glb",
+      "runtimePath": "web-game/public/assets/models/ashwake/nyra.glb",
+      "bytes": 4393768,
+      "sha256": "6f67a33bc0628f3b47e6dd9ff6df3842c0c6b2d66c27a98dc0b0a61353a4a30d",
+      "triangles": 37428,
+      "primitives": 8,
+      "geometries": 8,
+      "materials": [
+        "Nyra_CopperArmor",
+        "Nyra_FaceSkinEyes",
+        "Nyra_Hair",
+        "Nyra_IvoryArmor",
+        "Nyra_TealCloth",
+        "Vespera_AetherInlay",
+        "Vespera_CrimsonMantle",
+        "Vespera_Nightsteel"
+      ],
+      "textures": 2,
+      "images": 2,
+      "skins": 1,
+      "nodes": 75,
+      "animations": {
+        "Idle_Loop": 2.5,
+        "Roll": 1.4583333333333333,
+        "Sprint_Loop": 0.6666666666666666,
+        "Sword_Regular_A": 0.4166666666666667,
+        "Walk_Loop": 1.3333333333333333
+      },
+      "socketPresent": true,
+      "byteIdentical": true
+    },
+    {
+      "id": "hollow",
+      "path": "WebAssetSource/P31/processed/round005/characters/hollow.glb",
+      "runtimePath": "web-game/public/assets/models/ashwake/hollow.glb",
+      "bytes": 1448388,
+      "sha256": "f53a481f118c48dff825b8f98427957e6201434848416ff265f22eb2b07e689d",
+      "triangles": 11478,
+      "primitives": 5,
+      "geometries": 5,
+      "materials": [
+        "Ossuary_ExposedBone",
+        "Ossuary_BlackIron",
+        "Ossuary_GravefireRot",
+        "Ossuary_RotShroud",
+        "Ossuary_CharredCorpse"
+      ],
+      "textures": 0,
+      "images": 0,
+      "skins": 1,
+      "nodes": 57,
+      "animations": {
+        "Death": 0.75,
+        "HitReact": 0.5833333333333334,
+        "Idle": 1
+      },
+      "socketPresent": null,
+      "byteIdentical": true
+    },
+    {
+      "id": "weapon",
+      "path": "WebAssetSource/P31/processed/round005/weapons/stormcage.glb",
+      "runtimePath": "web-game/public/assets/models/ashwake/stormcage.glb",
+      "bytes": 94240,
+      "sha256": "098c834ac5fce4ce92c117362f1cf1b9225954295bad9d2ee9275f8be7234206",
+      "triangles": 1244,
+      "primitives": 9,
+      "geometries": 9,
+      "materials": [
+        "Dawnbreak_Steel",
+        "Dawnbreak_DarkHilt",
+        "Dawnbreak_Rune"
+      ],
+      "textures": 0,
+      "images": 0,
+      "skins": 0,
+      "nodes": 14,
+      "animations": {},
+      "socketPresent": null,
+      "byteIdentical": true
+    }
+  ],
+  "package": {
+    "visibleTriangles": 50150,
+    "projectedRenderedTrianglesS04": 204155,
+    "projectedCallsS04": 86,
+    "projectedTexturesS04": 23,
+    "hardLimits": {
+      "renderedTrianglesS04": 250000,
+      "callsS04": 100,
+      "textures": 32
+    }
+  },
+  "assertions": {
+    "processedRuntimeByteIdentity": true,
+    "exactClipSets": true,
+    "heroWeaponSocket": true,
+    "actorSkins": true,
+    "visibleTriangleCeiling": true
+  }
+}

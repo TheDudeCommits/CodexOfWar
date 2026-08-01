@@ -1,0 +1,223 @@
+{
+  "schema": "p30-round005-builder.v1",
+  "piece": "P30",
+  "round": "Round005",
+  "generatedAt": "2026-08-02T06:07:34+07:00",
+  "role": "builder",
+  "verdict": "candidate-only-no-pass-claim",
+  "scope": {
+    "kind": "combat-character-contact-package-only",
+    "implemented": [
+      "Replaced only the hero, Hollow, and weapon GLBs with the selected deterministic Revision B package.",
+      "Authored one camera-aware two-handed heavy strike and synchronized Hollow HitReact.",
+      "Added a stable weapon_socket, baked the secondary palm to the grip, and selected fixed visual toe-in, lane, and blade-roll transforms.",
+      "Kept the environment, HUD, camera, input, physics, simulation constants, manifest keys, and stable asset URLs unchanged."
+    ],
+    "notExpanded": [
+      "no environment, HUD, camera, physics, input, audio, progress, Unity, Git, or deployment work",
+      "no blind-test, AAA, or acceptance claim"
+    ]
+  },
+  "runtimeTuning": {
+    "heroScale": 1.22,
+    "hollowScale": 1.16,
+    "weaponScale": 1,
+    "visualToeInYawRad": 0.5,
+    "visualLateralOffsetM": 0.62,
+    "weaponAxialRollRad": 0.6,
+    "weaponSocket": "weapon_socket"
+  },
+  "shippingAssets": [
+    {
+      "manifestKey": "character.hero",
+      "url": "/assets/models/ashwake/nyra.glb",
+      "bytes": 4393768,
+      "sha256": "6f67a33bc0628f3b47e6dd9ff6df3842c0c6b2d66c27a98dc0b0a61353a4a30d",
+      "triangles": 37428,
+      "bones": 65,
+      "draws": 8,
+      "textures": 2,
+      "clips": [
+        "Idle_Loop",
+        "Roll",
+        "Sprint_Loop",
+        "Sword_Regular_A",
+        "Walk_Loop"
+      ],
+      "byteIdenticalRuntimePublish": true
+    },
+    {
+      "manifestKey": "character.hollow",
+      "url": "/assets/models/ashwake/hollow.glb",
+      "bytes": 1448388,
+      "sha256": "f53a481f118c48dff825b8f98427957e6201434848416ff265f22eb2b07e689d",
+      "triangles": 11478,
+      "bones": 50,
+      "draws": 5,
+      "textures": 0,
+      "clips": [
+        "Death",
+        "HitReact",
+        "Idle"
+      ],
+      "byteIdenticalRuntimePublish": true
+    },
+    {
+      "manifestKey": "weapon.claymore",
+      "url": "/assets/models/ashwake/stormcage.glb",
+      "bytes": 94240,
+      "sha256": "098c834ac5fce4ce92c117362f1cf1b9225954295bad9d2ee9275f8be7234206",
+      "triangles": 1244,
+      "draws": 9,
+      "textures": 0,
+      "byteIdenticalRuntimePublish": true
+    }
+  ],
+  "contactEvidence": {
+    "source": "WebAssetSource/P31/source_work/round005_alt/reports/validation.json",
+    "sourceSha256": "4714e140f83fca26b27888b2b197e3846c8640ac61e24eba7adbf55423677c63",
+    "runtimeContactSeconds": 0.16666666666666666,
+    "s04RenderedHollowSurfaceDistanceM": 0.03676729276776314,
+    "surfaceDistanceLimitM": 0.08,
+    "secondaryPalmDistanceM": {
+      "S03": 0.000008775708666186348,
+      "S04": 0.0000025348184812162847,
+      "S05": 0.028732042392503456
+    },
+    "secondaryPalmLimitM": 0.04,
+    "s04GripToContactPx": 109.49980009250797,
+    "s04BladeFaceWidthPx": 33.007659912109375,
+    "s04TorsoClearanceM": 1.228839112016688,
+    "grounded": true
+  },
+  "builderProductionEvidence": {
+    "source": "ArtSource/P30/Round005/capture-evidence.json",
+    "sourceSha256": "08028784eb7921a92e329ca4144d8062f678714eaf55a1ed01c87c0912e0adff",
+    "url": "http://127.0.0.1:4173/?review=1&post=0",
+    "browser": {
+      "name": "Google Chrome",
+      "version": "150.0.7871.187",
+      "headed": true
+    },
+    "viewport": {
+      "width": 1600,
+      "height": 900,
+      "devicePixelRatio": 1
+    },
+    "navigationToReadyMs": 1825,
+    "coldReadyLimitMs": 4109,
+    "httpStatus": 200,
+    "pageErrors": [],
+    "requestFailures": [],
+    "httpErrors": [],
+    "reviewErrors": [],
+    "knownWarnings": [
+      "Rapier deprecated initialization parameters",
+      "RGBELoader deprecated in favor of HDRLoader",
+      "PCFSoftShadowMap deprecated and mapped to PCFShadowMap"
+    ]
+  },
+  "captures": [
+    {
+      "id": "S01",
+      "path": "ArtSource/P30/Round005/S01.png",
+      "sha256": "dd70db8c04d732f6a940f1ef6dfd60dbf778fe2be4905efbdba92b48e78d9314",
+      "tick": 120,
+      "calls": 82,
+      "triangles": 203867,
+      "textures": 26,
+      "geometries": 35
+    },
+    {
+      "id": "S02",
+      "path": "ArtSource/P30/Round005/S02.png",
+      "sha256": "144e52090de2f9d7f4fb609c8add900a0df72f9e27637a0c155956dcfde7616d",
+      "tick": 23,
+      "calls": 81,
+      "triangles": 203051,
+      "textures": 26,
+      "geometries": 35
+    },
+    {
+      "id": "S03",
+      "path": "ArtSource/P30/Round005/S03.png",
+      "sha256": "993e4e94b18b1555b60d4ac322db7250b57a8335e25a187dd86e0648fa2c44e9",
+      "tick": 29,
+      "attackPhase": "startup",
+      "targetHealth": 100,
+      "calls": 81,
+      "triangles": 203051,
+      "textures": 26,
+      "geometries": 35
+    },
+    {
+      "id": "S04",
+      "path": "ArtSource/P30/Round005/S04.png",
+      "sha256": "deb3ae27fd433c4356207a0de6a1de98b1328307d48c7f0536ec26c8c01b3dde",
+      "tick": 34,
+      "attackPhase": "active",
+      "targetHealth": 90,
+      "calls": 86,
+      "triangles": 204155,
+      "textures": 26,
+      "geometries": 38
+    },
+    {
+      "id": "S05",
+      "path": "ArtSource/P30/Round005/S05.png",
+      "sha256": "8d166678843b45f76541ae3a463a044e0b73f09c05038343f98f89eb14fef53b",
+      "tick": 41,
+      "attackPhase": "recovery",
+      "targetHealth": 90,
+      "calls": 83,
+      "triangles": 203915,
+      "textures": 26,
+      "geometries": 38
+    },
+    {
+      "id": "S06",
+      "path": "ArtSource/P30/Round005/S06.png",
+      "sha256": "5b50d94a960f7e7069633241c33b871412bd1ad78c55f135eba74d01c71a0a72",
+      "tick": 37,
+      "calls": 81,
+      "triangles": 203051,
+      "textures": 26,
+      "geometries": 38
+    }
+  ],
+  "resourceCeilings": {
+    "limits": {
+      "calls": 100,
+      "triangles": 250000,
+      "textures": 32,
+      "geometries": 64
+    },
+    "observedMaximum": {
+      "capture": "S04",
+      "calls": 86,
+      "triangles": 204155,
+      "textures": 26,
+      "geometries": 38
+    },
+    "withinEveryCeiling": true
+  },
+  "validation": {
+    "assetValidator": "pass",
+    "blenderReimport": "pass",
+    "twoCleanProcessAssetHashesExact": true,
+    "typecheck": "pass",
+    "lint": "pass",
+    "simulationTests": "5/5 pass",
+    "productionBuild": "pass",
+    "enabledAssets": 18,
+    "loadedAssets": 18,
+    "proceduralFallbackActive": false,
+    "productionAuthored": true
+  },
+  "knownRemainingGaps": [
+    "No independent blind critic verdict is included in this builder receipt.",
+    "Camera obstruction handling remains telemetry-pending.",
+    "Three runtime dependencies emit three deprecation warnings.",
+    "The selected character package remains materially below God of War Ragnarök fidelity until proven otherwise by blind comparison."
+  ]
+}

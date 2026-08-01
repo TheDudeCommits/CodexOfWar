@@ -1,15 +1,18 @@
 # P31 third-party asset ledger
 
-This directory is the acquisition and preparation workspace for the browser-game playable through P30 Round004. The original CC0 stack was accessed on **2026-08-01**; Blender Studio Rain was accessed on **2026-08-02** under CC BY 4.0. Raw downloads are retained for reproducibility but are not the preferred runtime payload; use `processed/` plus the preserved license/provenance files for integration.
+This directory is the acquisition and preparation workspace for the browser-game playable through P30 Round005. The original CC0 stack was accessed on **2026-08-01**; Blender Studio Rain was accessed on **2026-08-02** under CC BY 4.0. Raw downloads are retained for reproducibility but are not the preferred runtime payload; use `processed/` plus the preserved license/provenance files for integration.
 
 No file was obtained from an unofficial mirror, account-gated page, or paid tier. The modern Quaternius ZIPs were delivered anonymously by the publisher's official Itch distribution through Itch's signed CDN. The Round003 Poly Haven models and dependencies came directly from the public official files API/CDN. Acquisition and processing did not touch the Git index, branch, Unity project, or progress records.
 
 ## Runtime payload at a glance
 
-- Integration-ready payload: **54 files, 38,195,156 bytes (36.426 MiB)** under `processed/`; the Round004 increase is exactly the three shipping GLBs.
-- Entire `processed/` tree: **68 files, 39,560,225 bytes (37.728 MiB)**; Round004 build-input PNGs and the Stormcage audit JSON are deliberately not runtime payloads.
+- Integration-ready payload now includes the three Round005 shipping GLBs. The
+  complete `processed/` tree is **71 files, 45,496,621 bytes (43.389 MiB)**;
+  earlier round packages remain as reproducible inputs and rollback evidence.
 - Raw provenance: **49 files, 490,031,235 bytes (467.330 MiB)** under ignored `raw/`; these archives/direct sources and API snapshots are not runtime payloads.
-- Active Round004 actors: `processed/round004/characters/nyra.glb`, `processed/round004/characters/hollow.glb`, and project-original `processed/round004/weapons/stormcage.glb`.
+- Active Round005 actors: `processed/round005/characters/nyra.glb`,
+  `processed/round005/characters/hollow.glb`, and project-original
+  `processed/round005/weapons/stormcage.glb`.
 - Earlier hero/reference models remain at `processed/quaternius/models/universal_superhero_female.glb`, `universal_hair_long.glb`, `female_ranger_outfit.glb`, and `claymore.glb`.
 - Animation libraries: `processed/quaternius/animations/player_core.glb` and `combat_zombie.glb`; exact gameplay mapping is below.
 - Enemy: `processed/quaternius/models/zombie_basic.glb`, self-contained with six first-playable actions.
@@ -45,6 +48,25 @@ No file was obtained from an unofficial mirror, account-gated page, or paid tier
 - **Stormcage** is a project-original procedural mesh authored from deterministic Blender primitives and profiles. The former Quaternius claymore was inspected only as an orientation reference; no third-party geometry or texture was copied into Stormcage.
 - The three source/runtime GLB pairs are byte-identical and total **7,588,976 bytes**: Nyra `f3e93e…d7101`, Hollow `626a71…8881`, Stormcage `a25554…a11`.
 - Rain acquisition proof, official-page snapshot, CC BY legalcode, extracted blend and selected exact texture inputs are under `source_work/round004/originals/blender-studio-rain/`. Build and clean-reimport receipts are under `source_work/round004/`; exact texture recipes are in `texture_build_receipt.json`.
+
+## Round005 combat-contact supplement
+
+- **Vespera/Nyra** retains the BS-RAIN CC BY 4.0 lineage and credit while adding
+  project-original nightsteel armor, aether inlay, crimson mantle elements, and
+  camera-authored two-hand heavy-strike choreography on the existing 65-bone
+  gameplay rig.
+- **Ossuary Hollow** derives from Q-ZOMBIE (CC0) and the Blender Human Base
+  Meshes bundle's `Skull - Realistic` by Paul Kotelevets and Tonatiuh de San
+  Julián (CC0). The selected derivative adds project-original corpse, bone,
+  black-iron, rot, crown, talon, and shroud treatments plus synchronized
+  `HitReact`.
+- **Dawnbreak/Stormcage** is project-original geometry with explicit primary
+  grip, secondary grip, contact, and blade-tip nodes.
+- The selected GLBs total **5,936,396 bytes** and **50,150 visible triangles**:
+  hero `6f67a3…a30d`, Hollow `f53a48…e689d`, and weapon `098c83…4206`.
+  Source, processed, and runtime validation records are under
+  `source_work/round005_alt/`; the three processed/runtime pairs are
+  byte-identical.
 
 ## Raw acquisition ledger
 

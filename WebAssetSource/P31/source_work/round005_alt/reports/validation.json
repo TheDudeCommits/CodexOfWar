@@ -1,0 +1,148 @@
+{
+  "acceptance_claimed": false,
+  "assertions": {
+    "actor_skins_and_joint_counts": true,
+    "build_report_byte_current": true,
+    "contact_thresholds": true,
+    "evidence_byte_current_1600x900": true,
+    "exact_animation_sets": true,
+    "glb_2_self_contained": true,
+    "non_integrated_no_acceptance_claim": true,
+    "package_budget": true,
+    "required_nodes": true
+  },
+  "assets": {
+    "hero": {
+      "animations": {
+        "Idle_Loop": 2.5,
+        "Roll": 1.4583333333333333,
+        "Sprint_Loop": 0.6666666666666666,
+        "Sword_Regular_A": 0.4166666666666667,
+        "Walk_Loop": 1.3333333333333333
+      },
+      "bytes": 4393768,
+      "file": "glb/vespera_hero.glb",
+      "images": 2,
+      "joints": 65,
+      "materials": 8,
+      "primitives": 8,
+      "required_nodes": [
+        "weapon_socket"
+      ],
+      "self_contained": true,
+      "sha256": "6f67a33bc0628f3b47e6dd9ff6df3842c0c6b2d66c27a98dc0b0a61353a4a30d",
+      "skins": 1,
+      "textures": 2,
+      "triangles": 37428
+    },
+    "hollow": {
+      "animations": {
+        "Death": 0.75,
+        "HitReact": 0.5833333333333334,
+        "Idle": 1.0
+      },
+      "bytes": 1448388,
+      "file": "glb/ossuary_hollow.glb",
+      "images": 0,
+      "joints": 50,
+      "materials": 5,
+      "primitives": 5,
+      "required_nodes": [
+        "impact_socket"
+      ],
+      "self_contained": true,
+      "sha256": "f53a481f118c48dff825b8f98427957e6201434848416ff265f22eb2b07e689d",
+      "skins": 1,
+      "textures": 0,
+      "triangles": 11478
+    },
+    "weapon": {
+      "animations": {},
+      "bytes": 94240,
+      "file": "glb/dawnbreak_claymore.glb",
+      "images": 0,
+      "joints": 0,
+      "materials": 3,
+      "primitives": 9,
+      "required_nodes": [
+        "BladeTip",
+        "ClaymoreRoot",
+        "ContactMarker",
+        "GripPrimary",
+        "GripSecondary"
+      ],
+      "self_contained": true,
+      "sha256": "098c834ac5fce4ce92c117362f1cf1b9225954295bad9d2ee9275f8be7234206",
+      "skins": 0,
+      "textures": 0,
+      "triangles": 1244
+    }
+  },
+  "contact_gates": {
+    "s04_actual_hollow_surface_limit_m": 0.08,
+    "s04_actual_hollow_surface_m": 0.03676729276776314,
+    "s04_torso_clearance_m": 1.228839112016688,
+    "secondary_palm_limit_m": 0.04,
+    "secondary_palm_m": {
+      "S03_startup": 8.775708666186348e-06,
+      "S04_contact": 2.5348184812162847e-06,
+      "S05_recovery": 0.028732042392503456
+    }
+  },
+  "integrated": false,
+  "package": {
+    "frozen_non_package_s04_triangles": 103855,
+    "materials": 16,
+    "projected_s04_headroom": 45845,
+    "projected_s04_limit": 250000,
+    "projected_s04_renderer_triangles": 204155,
+    "textures": 2,
+    "visible_primitives": 22,
+    "visible_triangle_limit": 68000,
+    "visible_triangles": 50150
+  },
+  "renders": {
+    "S03_startup.png": {
+      "bytes": 1431392,
+      "resolution": [
+        1600,
+        900
+      ],
+      "sha256": "b9bae14442b270e040e0779464cf44f2bf460f541ffb4ab7b8a4739c21fd5d06"
+    },
+    "S04_contact.png": {
+      "bytes": 1431257,
+      "resolution": [
+        1600,
+        900
+      ],
+      "sha256": "11b127e900ca60ab2fa11e0b516d04e3ce7b956dae96017810f496cf8472de51"
+    },
+    "S05_recovery.png": {
+      "bytes": 1433370,
+      "resolution": [
+        1600,
+        900
+      ],
+      "sha256": "e16af4643aa286fb64e961dab227fa071d6027a88f85fdf6371e677fcaf7dd51"
+    },
+    "neutral.png": {
+      "bytes": 1435587,
+      "resolution": [
+        1600,
+        900
+      ],
+      "sha256": "427041b9c5fdf7aea872e978432489cd1f299a45f82ae2d88f4ff0a6d97cf10a"
+    },
+    "neutral_close.png": {
+      "bytes": 1471387,
+      "resolution": [
+        1600,
+        900
+      ],
+      "sha256": "a15a572c5a5dc5a29bef5578300f94d46796220834132b317968580027c5220b"
+    }
+  },
+  "schema": "p31.round005.alt-duel-validation.v1",
+  "status": "pass"
+}
