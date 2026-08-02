@@ -36,6 +36,7 @@ import {
   composeAnonymousEqualBoard,
   computeMissOffsetExtrema,
   counterfactualCommit,
+  createEvidenceCustodyProof,
   cropScaleRgbaLanczos3,
   decodeReferenceImagePixels,
   deriveActionCrop,
@@ -853,11 +854,36 @@ test('package-map domain binds exactly two fully specified custody entries', () 
   );
 });
 
+let cachedAliasEvidenceCustodyProof = null;
+
+function aliasEvidenceCustodyProofFixture() {
+  if (cachedAliasEvidenceCustodyProof !== null) return cachedAliasEvidenceCustodyProof;
+  const manifest = evidenceManifestFixture();
+  manifest.privateBoardHashes.forEach((board, index) => {
+    manifest.custodyBytesByPath.delete(board.path);
+    const bytes = new Uint8Array(1600 * 900 * 4).fill(0x41 + index);
+    board.byteCount = bytes.byteLength;
+    board.sha256 = createHash('sha256').update(bytes).digest('hex');
+    board.path = privateBoardClaimPath(board);
+    manifest.custodyBytesByPath.set(board.path, bytes);
+  });
+  cachedAliasEvidenceCustodyProof = createEvidenceCustodyProof(
+    manifest,
+    manifest.custodyBytesByPath,
+    manifest.blindOrderManifest,
+    manifest.blindOrderManifest.presentationCommit,
+    manifest.publicPackageReceipt
+  );
+  return cachedAliasEvidenceCustodyProof;
+}
+
 function aliasScoreFixture() {
   const seed = Buffer.alloc(32, 0x11);
   const aliases = ['candidate-1111111111111111', 'candidate-eeeeeeeeeeeeeeee'];
   const order = buildBlindOrderManifest(seed, aliases);
-  const digest = 'a'.repeat(64);
+  const digest = 'b'.repeat(64);
+  const evidenceCustodyProof = aliasEvidenceCustodyProofFixture();
+  const boardsByID = new Map(evidenceCustodyProof.boardClaims.map((board) => [board.boardID, board]));
   const section = (name) => ({
     schema: `p30.r012a.${name}.v1`,
     receiptSha256: digest,
@@ -880,7 +906,7 @@ function aliasScoreFixture() {
       rightToken: ballot.right,
       winner: ballot.left === alias ? 'LEFT' : 'RIGHT',
       castCount: 1,
-      boardSha256: digest
+      boardSha256: boardsByID.get(ballot.itemID).sha256
     }));
     return {
       alias,
@@ -953,11 +979,11 @@ function aliasScoreFixture() {
       rightToken: ballot.right,
       winner: null,
       castCount: 1,
-      boardSha256: digest
+      boardSha256: boardsByID.get(ballot.itemID).sha256
     })),
     strongerAlias: aliases[0],
     provisionalOutcome: 'PROVISIONAL_ACCEPTED_CANDIDATE_EXISTS',
-    evidenceManifestSha256: digest,
+    evidenceManifestSha256: evidenceCustodyProof.evidenceManifestSha256,
     blindOrderManifestSha256: order.manifestSha256,
     disqualifiers: []
   };
@@ -965,7 +991,7 @@ function aliasScoreFixture() {
     roundCommitmentSha256: digest,
     referenceCommit: digest,
     packageMapCommit: digest,
-    evidenceManifestSha256: digest,
+    evidenceManifestSha256: evidenceCustodyProof.evidenceManifestSha256,
     blindOrderManifestSha256: order.manifestSha256,
     evaluatorHelperSha256: digest,
     publicPackageReceipt: {
@@ -983,6 +1009,7 @@ function aliasScoreFixture() {
   };
   Object.defineProperty(document, 'blindOrderManifest', { value: order, enumerable: false });
   Object.defineProperty(document, 'custodyBindings', { value: custodyBindings, enumerable: false });
+  Object.defineProperty(document, 'evidenceCustodyProof', { value: evidenceCustodyProof, enumerable: false });
   return document;
 }
 
@@ -991,8 +1018,16 @@ function validateAliasScoreFixture(document, fixture) {
     document,
     fixture.blindOrderManifest,
     fixture.blindOrderManifest.presentationCommit,
-    fixture.custodyBindings
+    fixture.custodyBindings,
+    fixture.evidenceCustodyProof
   );
+}
+
+function aliasScoreBallots(document) {
+  return [
+    ...document.candidates.flatMap((candidate) => candidate.referenceBallots),
+    ...document.pairwiseBallots
+  ];
 }
 
 function resummarizeAliasCandidate(candidate) {
@@ -1065,18 +1100,20 @@ function assertStrengthScenario(document, fixture, expectedAlias) {
 test('alias-only score is exact, two-candidate, alias-only, one-cast, and domain committed', () => {
   const fixture = aliasScoreFixture();
   assert.doesNotThrow(() => validateAliasOnlyScore(
-    fixture, fixture.blindOrderManifest, fixture.blindOrderManifest.presentationCommit, fixture.custodyBindings
+    fixture, fixture.blindOrderManifest, fixture.blindOrderManifest.presentationCommit,
+    fixture.custodyBindings, fixture.evidenceCustodyProof
   ));
   assert.equal(ALIAS_SCORE_COMMIT_DOMAIN, 'P30R012A/alias-score/v1');
   assert.match(aliasScoreCommit(
     fixture, Buffer.alloc(32, 0x66), fixture.blindOrderManifest,
-    fixture.blindOrderManifest.presentationCommit, fixture.custodyBindings
+    fixture.blindOrderManifest.presentationCommit, fixture.custodyBindings, fixture.evidenceCustodyProof
   ), /^[0-9a-f]{64}$/u);
   const hidden = structuredClone(fixture);
   hidden.candidates[0].identity = 'forbidden';
   assert.throws(
     () => validateAliasOnlyScore(
-      hidden, fixture.blindOrderManifest, fixture.blindOrderManifest.presentationCommit, fixture.custodyBindings
+      hidden, fixture.blindOrderManifest, fixture.blindOrderManifest.presentationCommit,
+      fixture.custodyBindings, fixture.evidenceCustodyProof
     ),
     (error) => evaluatorCode(error, 'ALIAS_SCORE_CANDIDATE_SHAPE_MISMATCH')
   );
@@ -1084,9 +1121,319 @@ test('alias-only score is exact, two-candidate, alias-only, one-cast, and domain
   wrongToken.candidates[0].referenceBallots[0].rightToken = fixture.candidates[1].alias;
   assert.throws(
     () => validateAliasOnlyScore(
-      wrongToken, fixture.blindOrderManifest, fixture.blindOrderManifest.presentationCommit, fixture.custodyBindings
+      wrongToken, fixture.blindOrderManifest, fixture.blindOrderManifest.presentationCommit,
+      fixture.custodyBindings, fixture.evidenceCustodyProof
     ),
     (error) => evaluatorCode(error, 'INVALID_REFERENCE_BALLOT_TOKEN')
+  );
+});
+
+test('alias score binds all six reference and three pairwise ballots to exact custody board claims', () => {
+  const fixture = aliasScoreFixture();
+  const rejects = (mutate, code = 'ALIAS_SCORE_EVIDENCE_CUSTODY_BOARD_BINDING_MISMATCH') => {
+    const document = structuredClone(fixture);
+    mutate(document);
+    assert.throws(
+      () => validateAliasScoreFixture(document, fixture),
+      (error) => evaluatorCode(error, code)
+    );
+  };
+  assert.equal(aliasScoreBallots(fixture).length, 9);
+  assert.deepEqual(
+    aliasScoreBallots(fixture).map((ballot) => ballot.itemID),
+    fixture.evidenceCustodyProof.boardClaims.map((board) => board.boardID)
+  );
+
+  rejects((document) => {
+    aliasScoreBallots(document).forEach((ballot) => { ballot.boardSha256 = 'c'.repeat(64); });
+  });
+  rejects((document) => {
+    document.candidates[0].referenceBallots[0].boardSha256 =
+      fixture.evidenceCustodyProof.boardClaims[1].sha256;
+  });
+  rejects((document) => {
+    document.candidates[0].referenceBallots[1].boardSha256 =
+      document.candidates[0].referenceBallots[0].boardSha256;
+  });
+  rejects((document) => {
+    document.pairwiseBallots[0].boardSha256 = document.candidates[0].referenceBallots[0].boardSha256;
+  });
+  rejects((document) => {
+    document.candidates[1].referenceBallots[0].boardSha256 =
+      document.candidates[0].referenceBallots[0].boardSha256;
+  });
+  rejects((document) => {
+    document.candidates[0].referenceBallots[1] = structuredClone(document.candidates[0].referenceBallots[0]);
+  }, 'ALIAS_SCORE_BALLOT_ID_MISMATCH');
+  rejects((document) => {
+    document.pairwiseBallots[0].itemID = document.candidates[0].referenceBallots[0].itemID;
+  }, 'ALIAS_SCORE_BALLOT_ID_MISMATCH');
+});
+
+test('alias score rejects missing, cloned, proxied, accessor, typed-array, and caller-map custody proofs', () => {
+  const fixture = aliasScoreFixture();
+  const validateWith = (proof) => validateAliasOnlyScore(
+    fixture,
+    fixture.blindOrderManifest,
+    fixture.blindOrderManifest.presentationCommit,
+    fixture.custodyBindings,
+    proof
+  );
+  assert.throws(
+    () => validateAliasOnlyScore(
+      fixture,
+      fixture.blindOrderManifest,
+      fixture.blindOrderManifest.presentationCommit,
+      fixture.custodyBindings
+    ),
+    (error) => evaluatorCode(error, 'ALIAS_SCORE_EVIDENCE_CUSTODY_PROOF_REQUIRED')
+  );
+  const cloned = structuredClone(fixture.evidenceCustodyProof);
+  cloned.boardClaims[0].path = 'evidence/private/boards/forged.rgba';
+  assert.throws(
+    () => validateWith(cloned),
+    (error) => evaluatorCode(error, 'ALIAS_SCORE_EVIDENCE_CUSTODY_PROOF_INVALID')
+  );
+  assert.throws(
+    () => validateWith(new Proxy(fixture.evidenceCustodyProof, {})),
+    (error) => evaluatorCode(error, 'ALIAS_SCORE_EVIDENCE_CUSTODY_PROOF_INVALID')
+  );
+  let accessorReads = 0;
+  const accessorProof = {};
+  Object.defineProperty(accessorProof, 'boardClaims', {
+    enumerable: true,
+    get() {
+      accessorReads += 1;
+      return fixture.evidenceCustodyProof.boardClaims;
+    }
+  });
+  assert.throws(
+    () => validateWith(accessorProof),
+    (error) => evaluatorCode(error, 'ALIAS_SCORE_EVIDENCE_CUSTODY_PROOF_INVALID')
+  );
+  assert.equal(accessorReads, 0);
+  const typedArrayProof = new Uint8Array(0);
+  typedArrayProof.boardClaims = fixture.evidenceCustodyProof.boardClaims;
+  assert.throws(
+    () => validateWith(typedArrayProof),
+    (error) => evaluatorCode(error, 'ALIAS_SCORE_EVIDENCE_CUSTODY_PROOF_INVALID')
+  );
+  assert.throws(
+    () => validateWith(new Map(fixture.evidenceCustodyProof.boardClaims.map((board) => [board.boardID, board]))),
+    (error) => evaluatorCode(error, 'ALIAS_SCORE_EVIDENCE_CUSTODY_PROOF_INVALID')
+  );
+
+  const originalWeakSetHas = WeakSet.prototype.has;
+  const originalWeakMapGet = WeakMap.prototype.get;
+  let poisonedWeakSetHasCalls = 0;
+  let poisonedWeakMapGetCalls = 0;
+  let poisonedError = null;
+  try {
+    WeakSet.prototype.has = () => {
+      poisonedWeakSetHasCalls += 1;
+      return true;
+    };
+    WeakMap.prototype.get = () => {
+      poisonedWeakMapGetCalls += 1;
+      return {
+        evidenceManifestSha256: cloned.evidenceManifestSha256,
+        blindOrderManifestSha256: cloned.blindOrderManifestSha256,
+        boardClaims: cloned.boardClaims
+      };
+    };
+    try { validateWith(cloned); } catch (error) { poisonedError = error; }
+  } finally {
+    WeakSet.prototype.has = originalWeakSetHas;
+    WeakMap.prototype.get = originalWeakMapGet;
+  }
+  assert.ok(evaluatorCode(poisonedError, 'ALIAS_SCORE_EVIDENCE_CUSTODY_PROOF_INVALID'));
+  assert.equal(poisonedWeakSetHasCalls, 0);
+  assert.equal(poisonedWeakMapGetCalls, 0);
+});
+
+test('custody-proof minting resists post-import WeakSet, WeakMap, and freeze poisoning', () => {
+  const source = evidenceManifestFixture();
+  const originalWeakSetAdd = WeakSet.prototype.add;
+  const originalWeakSetHas = WeakSet.prototype.has;
+  const originalWeakMapSet = WeakMap.prototype.set;
+  const originalWeakMapGet = WeakMap.prototype.get;
+  const originalFreeze = Object.freeze;
+  let leakedWeakSet = null;
+  let leakedWeakMap = null;
+  let proof = null;
+  let mintError = null;
+  try {
+    WeakSet.prototype.add = function poisonedWeakSetAdd(value) {
+      leakedWeakSet = this;
+      return Reflect.apply(originalWeakSetAdd, this, [value]);
+    };
+    WeakSet.prototype.has = () => true;
+    WeakMap.prototype.set = function poisonedWeakMapSet(key, value) {
+      leakedWeakMap = this;
+      return Reflect.apply(originalWeakMapSet, this, [key, value]);
+    };
+    WeakMap.prototype.get = () => ({ forged: true });
+    Object.freeze = (value) => value;
+    try {
+      proof = createEvidenceCustodyProof(
+        source,
+        source.custodyBytesByPath,
+        source.blindOrderManifest,
+        source.blindOrderManifest.presentationCommit,
+        source.publicPackageReceipt
+      );
+    } catch (error) {
+      mintError = error;
+    }
+  } finally {
+    WeakSet.prototype.add = originalWeakSetAdd;
+    WeakSet.prototype.has = originalWeakSetHas;
+    WeakMap.prototype.set = originalWeakMapSet;
+    WeakMap.prototype.get = originalWeakMapGet;
+    Object.freeze = originalFreeze;
+  }
+  assert.ifError(mintError);
+  assert.equal(leakedWeakSet, null);
+  assert.equal(leakedWeakMap, null);
+  assert.ok(Object.isFrozen(proof));
+  assert.ok(Object.isFrozen(proof.boardClaims));
+  assert.ok(proof.boardClaims.every(Object.isFrozen));
+  assert.throws(() => { proof.boardClaims[0].sha256 = 'd'.repeat(64); }, TypeError);
+
+  const fakeCustody = new Map();
+  for (const [path, bytes] of source.custodyBytesByPath) {
+    fakeCustody.set(path, {
+      byteCount: bytes.byteLength,
+      sha256: createHash('sha256').update(bytes).digest('hex')
+    });
+  }
+  let fakeCustodyError = null;
+  try {
+    WeakSet.prototype.has = () => true;
+    try {
+      createEvidenceCustodyProof(
+        source,
+        fakeCustody,
+        source.blindOrderManifest,
+        source.blindOrderManifest.presentationCommit,
+        source.publicPackageReceipt
+      );
+    } catch (error) {
+      fakeCustodyError = error;
+    }
+  } finally {
+    WeakSet.prototype.has = originalWeakSetHas;
+  }
+  assert.ok(evaluatorCode(fakeCustodyError, 'EVIDENCE_CUSTODY_BYTES_INVALID'));
+});
+
+test('evidence custody proof snapshots the exact manifest and binds its manifest and order hashes', () => {
+  const fixture = aliasScoreFixture();
+  const source = evidenceManifestFixture();
+  const proof = createEvidenceCustodyProof(
+    source,
+    source.custodyBytesByPath,
+    source.blindOrderManifest,
+    source.blindOrderManifest.presentationCommit,
+    source.publicPackageReceipt
+  );
+  assert.equal(
+    proof.evidenceManifestSha256,
+    createHash('sha256').update(Buffer.from(proof.evidenceManifestCanonicalJson, 'utf8')).digest('hex')
+  );
+  assert.equal(proof.evidenceManifestByteCount, Buffer.byteLength(proof.evidenceManifestCanonicalJson, 'utf8'));
+  assert.ok(Object.isFrozen(proof));
+  assert.ok(Object.isFrozen(proof.boardClaims));
+  assert.ok(proof.boardClaims.every(Object.isFrozen));
+  assert.deepEqual(
+    proof.boardClaims,
+    source.privateBoardHashes.map((board) => ({
+      boardID: board.boardID,
+      path: board.path,
+      byteCount: board.byteCount,
+      sha256: board.sha256,
+      orderDigest: board.orderDigest,
+      leftToken: board.leftToken,
+      rightToken: board.rightToken
+    }))
+  );
+  const originalBoard = { ...proof.boardClaims[0] };
+  source.privateBoardHashes[0].sha256 = 'c'.repeat(64);
+  source.privateBoardHashes[0].path = 'evidence/private/boards/post-proof-mutation.rgba';
+  assert.deepEqual(proof.boardClaims[0], originalBoard);
+  assert.throws(() => { proof.boardClaims[0].sha256 = 'd'.repeat(64); }, TypeError);
+
+  const localScore = structuredClone(fixture);
+  const localBindings = structuredClone(fixture.custodyBindings);
+  localScore.evidenceManifestSha256 = proof.evidenceManifestSha256;
+  localBindings.evidenceManifestSha256 = proof.evidenceManifestSha256;
+  const boardsByID = new Map(proof.boardClaims.map((board) => [board.boardID, board]));
+  aliasScoreBallots(localScore).forEach((ballot) => {
+    ballot.boardSha256 = boardsByID.get(ballot.itemID).sha256;
+  });
+  assert.doesNotThrow(() => validateAliasOnlyScore(
+    localScore,
+    fixture.blindOrderManifest,
+    fixture.blindOrderManifest.presentationCommit,
+    localBindings,
+    proof
+  ));
+  localScore.candidates[0].referenceBallots[0].boardSha256 = source.privateBoardHashes[0].sha256;
+  assert.throws(
+    () => validateAliasOnlyScore(
+      localScore,
+      fixture.blindOrderManifest,
+      fixture.blindOrderManifest.presentationCommit,
+      localBindings,
+      proof
+    ),
+    (error) => evaluatorCode(error, 'ALIAS_SCORE_EVIDENCE_CUSTODY_BOARD_BINDING_MISMATCH')
+  );
+  assert.throws(
+    () => validateAliasOnlyScore(
+      fixture,
+      fixture.blindOrderManifest,
+      fixture.blindOrderManifest.presentationCommit,
+      fixture.custodyBindings,
+      proof
+    ),
+    (error) => evaluatorCode(error, 'ALIAS_SCORE_EVIDENCE_CUSTODY_MANIFEST_MISMATCH')
+  );
+
+  const otherOrderSource = evidenceManifestFixture();
+  const otherOrder = buildBlindOrderManifest(Buffer.alloc(32, 0x22), otherOrderSource.aliases);
+  otherOrderSource.privateBoardHashes.forEach((board, index) => {
+    const bytes = otherOrderSource.custodyBytesByPath.get(board.path);
+    otherOrderSource.custodyBytesByPath.delete(board.path);
+    const order = otherOrder.ballots[index];
+    board.boardID = order.itemID;
+    board.orderDigest = order.orderDigest;
+    board.leftToken = order.left;
+    board.rightToken = order.right;
+    board.path = privateBoardClaimPath(board);
+    otherOrderSource.custodyBytesByPath.set(board.path, bytes);
+  });
+  otherOrderSource.blindOrderManifestSha256 = otherOrder.manifestSha256;
+  const otherOrderProof = createEvidenceCustodyProof(
+    otherOrderSource,
+    otherOrderSource.custodyBytesByPath,
+    otherOrder,
+    otherOrder.presentationCommit,
+    otherOrderSource.publicPackageReceipt
+  );
+  const otherOrderScore = structuredClone(fixture);
+  const otherOrderBindings = structuredClone(fixture.custodyBindings);
+  otherOrderScore.evidenceManifestSha256 = otherOrderProof.evidenceManifestSha256;
+  otherOrderBindings.evidenceManifestSha256 = otherOrderProof.evidenceManifestSha256;
+  assert.throws(
+    () => validateAliasOnlyScore(
+      otherOrderScore,
+      fixture.blindOrderManifest,
+      fixture.blindOrderManifest.presentationCommit,
+      otherOrderBindings,
+      otherOrderProof
+    ),
+    (error) => evaluatorCode(error, 'ALIAS_SCORE_EVIDENCE_CUSTODY_ORDER_MANIFEST_MISMATCH')
   );
 });
 
@@ -1117,11 +1464,11 @@ test('section-11 exact tie selects the raw UTF-8 lower alias and rejects the cri
   assert.equal(
     aliasScoreCommit(
       stateful, salt, fixture.blindOrderManifest,
-      fixture.blindOrderManifest.presentationCommit, fixture.custodyBindings
+      fixture.blindOrderManifest.presentationCommit, fixture.custodyBindings, fixture.evidenceCustodyProof
     ),
     aliasScoreCommit(
       fixture, salt, fixture.blindOrderManifest,
-      fixture.blindOrderManifest.presentationCommit, fixture.custodyBindings
+      fixture.blindOrderManifest.presentationCommit, fixture.custodyBindings, fixture.evidenceCustodyProof
     )
   );
 });
@@ -1860,16 +2207,35 @@ test('filesystem evidence verification requires the exact declared file set', as
     await mkdir(dirname(absolute), { recursive: true });
     await writeFile(absolute, bytes);
   }
-  const verified = await verifyEvidenceManifestFiles(
-    fixture,
-    evidenceRoot,
-    fixture.blindOrderManifest,
-    fixture.blindOrderManifest.presentationCommit,
-    fixture.publicPackageReceipt
-  );
+  const originalWeakSetAdd = WeakSet.prototype.add;
+  let poisonedWeakSetAddCalls = 0;
+  let verified;
+  try {
+    WeakSet.prototype.add = function poisonedWeakSetAdd(value) {
+      poisonedWeakSetAddCalls += 1;
+      return Reflect.apply(originalWeakSetAdd, this, [value]);
+    };
+    verified = await verifyEvidenceManifestFiles(
+      fixture,
+      evidenceRoot,
+      fixture.blindOrderManifest,
+      fixture.blindOrderManifest.presentationCommit,
+      fixture.publicPackageReceipt
+    );
+  } finally {
+    WeakSet.prototype.add = originalWeakSetAdd;
+  }
+  assert.equal(poisonedWeakSetAddCalls, 0);
   assert.equal(verified.evidenceFilesVerified, 581);
   assert.equal(verified.privateBoardFilesVerified, 9);
   assert.match(verified.evidenceTreeSha256, /^[0-9a-f]{64}$/u);
+  assert.equal(verified.evidenceCustodyProof.boardClaims.length, 9);
+  assert.equal(
+    verified.evidenceCustodyProof.evidenceManifestSha256,
+    createHash('sha256')
+      .update(Buffer.from(verified.evidenceCustodyProof.evidenceManifestCanonicalJson, 'utf8'))
+      .digest('hex')
+  );
 
   const expanded = structuredClone(fixture);
   const expandedBytes = new Map(fixture.custodyBytesByPath);

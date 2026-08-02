@@ -23,6 +23,15 @@ import {
   validateRelativePath
 } from './tree-helper.mjs';
 
+const PRISTINE_REFLECT_APPLY = Reflect.apply;
+const PRISTINE_WEAK_SET_ADD = WeakSet.prototype.add;
+const PRISTINE_WEAK_SET_HAS = WeakSet.prototype.has;
+const PRISTINE_WEAK_MAP_SET = WeakMap.prototype.set;
+const PRISTINE_WEAK_MAP_GET = WeakMap.prototype.get;
+const PRISTINE_OBJECT_FREEZE = Object.freeze;
+const PRISTINE_OBJECT_DEFINE_PROPERTY = Object.defineProperty;
+const PRISTINE_BUFFER_TO_STRING = Buffer.prototype.toString;
+
 export const PROTOCOL_ID = 'P30-R012A-BLIND-v1';
 export const ROUND_COMMITMENT_SCHEMA = 'p30.r012a.round-commitment.v1';
 export const PROTOCOL_PAYLOAD_SHA256 = '204678dff34363c4f408a750b662fc1ebf429b28ca13946283edde5180cc1577';
@@ -2534,6 +2543,8 @@ const ALIAS_SCORE_KEYS = Object.freeze([
   'runtime', 'executionOrder', 'candidates', 'pairwiseBallots', 'strongerAlias',
   'provisionalOutcome', 'evidenceManifestSha256', 'blindOrderManifestSha256', 'disqualifiers'
 ]);
+const EVIDENCE_CUSTODY_PROOFS = new WeakSet();
+const EVIDENCE_CUSTODY_RECORDS = new WeakMap();
 const RUNTIME_KEYS = Object.freeze([
   'nodeExecutable', 'nodeVersion', 'npmVersion', 'browserExecutable', 'browserVersion',
   'launchArguments', 'gpuRenderer', 'viewportWidth', 'viewportHeight', 'deviceScaleFactor',
@@ -2744,7 +2755,25 @@ function deriveStrongerAlias(normalizedCandidates, pairwiseWinCounts) {
   return ranked[0].alias;
 }
 
-export function validateAliasOnlyScore(document, blindOrderManifest, expectedPresentationCommit, custodyBindings) {
+function requireEvidenceCustodyProof(proof) {
+  if (proof === null || proof === undefined) evaluatorFail('ALIAS_SCORE_EVIDENCE_CUSTODY_PROOF_REQUIRED');
+  if (
+    (typeof proof !== 'object' && typeof proof !== 'function') ||
+    !PRISTINE_REFLECT_APPLY(PRISTINE_WEAK_SET_HAS, EVIDENCE_CUSTODY_PROOFS, [proof])
+  ) evaluatorFail('ALIAS_SCORE_EVIDENCE_CUSTODY_PROOF_INVALID');
+  const record = PRISTINE_REFLECT_APPLY(PRISTINE_WEAK_MAP_GET, EVIDENCE_CUSTODY_RECORDS, [proof]);
+  if (!record) evaluatorFail('ALIAS_SCORE_EVIDENCE_CUSTODY_PROOF_INVALID');
+  return record;
+}
+
+export function validateAliasOnlyScore(
+  document,
+  blindOrderManifest,
+  expectedPresentationCommit,
+  custodyBindings,
+  evidenceCustodyProof
+) {
+  const evidenceCustody = requireEvidenceCustodyProof(evidenceCustodyProof);
   document = canonicalValidationSnapshot(document, 'ALIAS_SCORE_SNAPSHOT_INVALID');
   blindOrderManifest = canonicalValidationSnapshot(blindOrderManifest, 'ALIAS_SCORE_BLIND_ORDER_SNAPSHOT_INVALID');
   custodyBindings = canonicalValidationSnapshot(custodyBindings, 'ALIAS_SCORE_CUSTODY_SNAPSHOT_INVALID');
@@ -2826,32 +2855,75 @@ export function validateAliasOnlyScore(document, blindOrderManifest, expectedPre
   if (blindOrderManifest.manifestSha256 !== document.blindOrderManifestSha256) {
     evaluatorFail('ALIAS_SCORE_BLIND_ORDER_MANIFEST_HASH_MISMATCH');
   }
+  if (
+    evidenceCustody.evidenceManifestSha256 !== document.evidenceManifestSha256 ||
+    evidenceCustody.evidenceManifestSha256 !== custodyBindings.evidenceManifestSha256
+  ) evaluatorFail('ALIAS_SCORE_EVIDENCE_CUSTODY_MANIFEST_MISMATCH');
+  if (
+    evidenceCustody.blindOrderManifestSha256 !== blindOrderManifest.manifestSha256 ||
+    evidenceCustody.blindOrderManifestSha256 !== document.blindOrderManifestSha256 ||
+    evidenceCustody.blindOrderManifestSha256 !== custodyBindings.blindOrderManifestSha256
+  ) evaluatorFail('ALIAS_SCORE_EVIDENCE_CUSTODY_ORDER_MANIFEST_MISMATCH');
   if (canonicalBytes(document.executionOrder).compare(canonicalBytes(blindOrderManifest.executionOrder)) !== 0) {
     evaluatorFail('ALIAS_SCORE_EXECUTION_ORDER_BINDING_MISMATCH');
   }
-  const scoreOrders = [
-    ...document.candidates.flatMap((candidate) => candidate.referenceBallots.map((ballot) => ({
+  const scoreBallots = [];
+  let scoreBallotCount = 0;
+  for (let candidateIndex = 0; candidateIndex < document.candidates.length; candidateIndex += 1) {
+    const ballots = document.candidates[candidateIndex].referenceBallots;
+    for (let ballotIndex = 0; ballotIndex < ballots.length; ballotIndex += 1) {
+      scoreBallots[scoreBallotCount] = ballots[ballotIndex];
+      scoreBallotCount += 1;
+    }
+  }
+  for (let ballotIndex = 0; ballotIndex < document.pairwiseBallots.length; ballotIndex += 1) {
+    scoreBallots[scoreBallotCount] = document.pairwiseBallots[ballotIndex];
+    scoreBallotCount += 1;
+  }
+  const scoreOrders = [];
+  for (let index = 0; index < scoreBallots.length; index += 1) {
+    const ballot = scoreBallots[index];
+    scoreOrders[index] = {
       itemID: ballot.itemID,
       left: ballot.leftToken,
       right: ballot.rightToken,
       orderDigest: ballot.orderDigest
-    }))),
-    ...document.pairwiseBallots.map((ballot) => ({
-      itemID: ballot.itemID,
-      left: ballot.leftToken,
-      right: ballot.rightToken,
-      orderDigest: ballot.orderDigest
-    }))
-  ];
+    };
+  }
   if (canonicalBytes(scoreOrders).compare(canonicalBytes(blindOrderManifest.ballots)) !== 0) {
     evaluatorFail('ALIAS_SCORE_BALLOT_ORDER_BINDING_MISMATCH');
+  }
+  if (scoreBallots.length !== evidenceCustody.boardClaims.length) {
+    evaluatorFail('ALIAS_SCORE_EVIDENCE_CUSTODY_BOARD_COUNT_MISMATCH');
+  }
+  for (let index = 0; index < scoreBallots.length; index += 1) {
+    const ballot = scoreBallots[index];
+    const board = evidenceCustody.boardClaims[index];
+    if (
+      board.boardID !== ballot.itemID || board.sha256 !== ballot.boardSha256 ||
+      board.orderDigest !== ballot.orderDigest || board.leftToken !== ballot.leftToken ||
+      board.rightToken !== ballot.rightToken
+    ) evaluatorFail('ALIAS_SCORE_EVIDENCE_CUSTODY_BOARD_BINDING_MISMATCH');
   }
   canonicalBytes(document);
   return document;
 }
 
-export function aliasScoreCommit(document, salt, blindOrderManifest, expectedPresentationCommit, custodyBindings) {
-  const validated = validateAliasOnlyScore(document, blindOrderManifest, expectedPresentationCommit, custodyBindings);
+export function aliasScoreCommit(
+  document,
+  salt,
+  blindOrderManifest,
+  expectedPresentationCommit,
+  custodyBindings,
+  evidenceCustodyProof
+) {
+  const validated = validateAliasOnlyScore(
+    document,
+    blindOrderManifest,
+    expectedPresentationCommit,
+    custodyBindings,
+    evidenceCustodyProof
+  );
   return saltedDocumentCommit(ALIAS_SCORE_COMMIT_DOMAIN, validated, salt);
 }
 
@@ -3036,7 +3108,13 @@ function validateCustodyBytes(custodyBytesByPath, claimsByPath) {
       throw error;
     }
     if (!claimsByPath.has(path)) evaluatorFail('EVIDENCE_UNDECLARED_BYTES');
-    if (!(bytes instanceof Uint8Array) && (!bytes || typeof bytes !== 'object' || !EVIDENCE_FILE_PROOFS.has(bytes))) {
+    if (
+      !(bytes instanceof Uint8Array) &&
+      (
+        !bytes || typeof bytes !== 'object' ||
+        !PRISTINE_REFLECT_APPLY(PRISTINE_WEAK_SET_HAS, EVIDENCE_FILE_PROOFS, [bytes])
+      )
+    ) {
       evaluatorFail('EVIDENCE_CUSTODY_BYTES_INVALID');
     }
   }
@@ -3283,6 +3361,71 @@ export function validateEvidenceManifest(
   return document;
 }
 
+function mintEvidenceCustodyProof(validatedManifest) {
+  const evidenceManifestCanonicalBytes = canonicalBytes(validatedManifest);
+  const evidenceManifestCanonicalJson = PRISTINE_REFLECT_APPLY(
+    PRISTINE_BUFFER_TO_STRING,
+    evidenceManifestCanonicalBytes,
+    ['utf8']
+  );
+  const privateBoardClaims = [];
+  const publicBoardClaims = [];
+  for (let index = 0; index < validatedManifest.privateBoardHashes.length; index += 1) {
+    const board = validatedManifest.privateBoardHashes[index];
+    const claim = {
+      boardID: board.boardID,
+      path: board.path,
+      byteCount: board.byteCount,
+      sha256: board.sha256,
+      orderDigest: board.orderDigest,
+      leftToken: board.leftToken,
+      rightToken: board.rightToken
+    };
+    privateBoardClaims[index] = PRISTINE_OBJECT_FREEZE({ ...claim });
+    publicBoardClaims[index] = PRISTINE_OBJECT_FREEZE({ ...claim });
+  }
+  PRISTINE_OBJECT_FREEZE(privateBoardClaims);
+  PRISTINE_OBJECT_FREEZE(publicBoardClaims);
+  const record = PRISTINE_OBJECT_FREEZE({
+    evidenceManifestSha256: sha256Hex(evidenceManifestCanonicalBytes),
+    blindOrderManifestSha256: validatedManifest.blindOrderManifestSha256,
+    boardClaims: privateBoardClaims
+  });
+  const proof = PRISTINE_OBJECT_FREEZE({
+    schema: 'p30.r012a.evidence-custody-proof.v1',
+    protocolID: PROTOCOL_ID,
+    evidenceManifestCanonicalJson,
+    evidenceManifestByteCount: PRISTINE_REFLECT_APPLY(
+      TYPED_ARRAY_BYTE_LENGTH,
+      evidenceManifestCanonicalBytes,
+      []
+    ),
+    evidenceManifestSha256: record.evidenceManifestSha256,
+    blindOrderManifestSha256: record.blindOrderManifestSha256,
+    boardClaims: publicBoardClaims
+  });
+  PRISTINE_REFLECT_APPLY(PRISTINE_WEAK_SET_ADD, EVIDENCE_CUSTODY_PROOFS, [proof]);
+  PRISTINE_REFLECT_APPLY(PRISTINE_WEAK_MAP_SET, EVIDENCE_CUSTODY_RECORDS, [proof, record]);
+  return proof;
+}
+
+export function createEvidenceCustodyProof(
+  document,
+  custodyBytesByPath,
+  blindOrderManifest,
+  expectedPresentationCommit,
+  publicPackageReceipt
+) {
+  const validatedManifest = validateEvidenceManifest(
+    document,
+    custodyBytesByPath,
+    blindOrderManifest,
+    expectedPresentationCommit,
+    publicPackageReceipt
+  );
+  return mintEvidenceCustodyProof(validatedManifest);
+}
+
 export async function verifyEvidenceManifestFiles(
   document,
   evidenceRoot,
@@ -3299,21 +3442,27 @@ export async function verifyEvidenceManifestFiles(
       byteCount,
       sha256: entry.sha256
     };
-    EVIDENCE_FILE_PROOFS.add(proof);
+    PRISTINE_REFLECT_APPLY(PRISTINE_WEAK_SET_ADD, EVIDENCE_FILE_PROOFS, [proof]);
     proofsByPath.set(entry.path, proof);
   }
-  validateEvidenceManifest(
+  const validatedManifest = validateEvidenceManifest(
     document,
     proofsByPath,
     blindOrderManifest,
     expectedPresentationCommit,
     publicPackageReceipt
   );
-  return {
+  const evidenceCustodyProof = mintEvidenceCustodyProof(validatedManifest);
+  const verification = {
     evidenceFilesVerified: tree.fileCount,
     evidenceTreeSha256: tree.treeSha256,
     privateBoardFilesVerified: REFERENCE_BALLOT_IDS.length * 2 + PAIRWISE_BALLOT_IDS.length
   };
+  PRISTINE_OBJECT_DEFINE_PROPERTY(verification, 'evidenceCustodyProof', {
+    value: evidenceCustodyProof,
+    enumerable: false
+  });
+  return verification;
 }
 
 export function buildBlindOrderManifest(presentationSeed, aliasesValue) {
