@@ -161,6 +161,20 @@ function safeEnvironment(extra = {}) {
   };
 }
 
+export function validateSubprocessTranscript(transcript, identityTokens, evaluatorOwnedPaths) {
+  if (typeof transcript !== 'string' || !Array.isArray(evaluatorOwnedPaths)) {
+    packagingFail('INVALID_TRANSCRIPT_SCAN_INPUT');
+  }
+  let redacted = transcript;
+  const paths = [...new Set(evaluatorOwnedPaths)]
+    .filter((value) => typeof value === 'string' && isAbsolute(value))
+    .sort((left, right) => right.length - left.length || compareUtf8(left, right));
+  for (const evaluatorPath of paths) {
+    redacted = redacted.replaceAll(evaluatorPath, '<evaluator-owned-path>');
+  }
+  validateTextForClues(redacted, identityTokens);
+}
+
 async function writePrivateLog(path, stdout, stderr) {
   await mkdir(dirname(path), { recursive: true, mode: 0o700 });
   const body = Buffer.concat([
@@ -561,7 +575,15 @@ async function terminateServer(child) {
   }
 }
 
-async function verifyServe(packageRoot, criticInterface, environment, logPath, identityTokens) {
+async function verifyServe(
+  packageRoot,
+  criticInterface,
+  environment,
+  logPath,
+  artifactIdentityTokens,
+  transcriptIdentityTokens,
+  evaluatorOwnedPaths
+) {
   const port = await allocatePort();
   const child = spawn(
     NPM24_EXECUTABLE,
@@ -594,8 +616,8 @@ async function verifyServe(packageRoot, criticInterface, environment, logPath, i
   });
   let readiness;
   try {
-    readiness = await waitForServerReadiness(port, criticInterface.readyPath, child, identityTokens);
-    const repeatedReadiness = await waitForServerReadiness(port, criticInterface.readyPath, child, identityTokens);
+    readiness = await waitForServerReadiness(port, criticInterface.readyPath, child, artifactIdentityTokens);
+    const repeatedReadiness = await waitForServerReadiness(port, criticInterface.readyPath, child, artifactIdentityTokens);
     if (readiness.bytes !== repeatedReadiness.bytes || readiness.sha256 !== repeatedReadiness.sha256) {
       packagingFail('READY_RESPONSE_NOT_DETERMINISTIC');
     }
@@ -618,7 +640,7 @@ async function verifyServe(packageRoot, criticInterface, environment, logPath, i
   const transcript = `${Buffer.concat(stdoutChunks).toString('utf8')}\n${Buffer.concat(stderrChunks).toString('utf8')}`;
   if (spawnFailed) packagingFail('SERVE_PROCESS_SPAWN_FAILED');
   if (overflow) packagingFail('SUBPROCESS_OUTPUT_LIMIT_EXCEEDED');
-  validateTextForClues(transcript, identityTokens);
+  validateSubprocessTranscript(transcript, transcriptIdentityTokens, evaluatorOwnedPaths);
   return readiness;
 }
 
@@ -641,6 +663,7 @@ async function verifyCandidateCommands(packageRoot, candidate, criticInterface, 
   await mkdir(npmCache, { recursive: true, mode: 0o700 });
   await mkdir(temporary, { recursive: true, mode: 0o700 });
   const commandTokens = [...identityTokens, verificationRoot, sessionRoot];
+  const evaluatorOwnedPaths = [verificationRoot, sessionRoot];
   const environment = safeEnvironment({
     TMPDIR: temporary,
     npm_config_cache: npmCache,
@@ -658,7 +681,7 @@ async function verifyCandidateCommands(packageRoot, candidate, criticInterface, 
       code: 'NPM_CI_FAILED'
     }
   );
-  validateTextForClues(install.transcript, commandTokens);
+  validateSubprocessTranscript(install.transcript, identityTokens, evaluatorOwnedPaths);
   const lockAfterInstall = await fileSha256(resolve(verificationRoot, 'package-lock.json'));
   if (lockAfterInstall.bytes !== lockBefore.bytes || lockAfterInstall.sha256 !== lockBefore.sha256) {
     packagingFail('PACKAGE_LOCK_MUTATED_BY_INSTALL');
@@ -671,7 +694,7 @@ async function verifyCandidateCommands(packageRoot, candidate, criticInterface, 
     logPath: resolve(logDirectory, candidate.alias, 'test-critic.log'),
     code: 'TEST_CRITIC_FAILED'
   });
-  validateTextForClues(testResult.transcript, commandTokens);
+  validateSubprocessTranscript(testResult.transcript, identityTokens, evaluatorOwnedPaths);
   validateTestTranscript(testResult.transcript);
 
   const buildResult = await runCaptured(NPM24_EXECUTABLE, ['run', 'build:critic'], {
@@ -681,7 +704,7 @@ async function verifyCandidateCommands(packageRoot, candidate, criticInterface, 
     logPath: resolve(logDirectory, candidate.alias, 'build-critic.log'),
     code: 'BUILD_CRITIC_FAILED'
   });
-  validateTextForClues(buildResult.transcript, commandTokens);
+  validateSubprocessTranscript(buildResult.transcript, identityTokens, evaluatorOwnedPaths);
   const outputRoot = resolve(verificationRoot, criticInterface.buildOutputDirectory);
   const outputDigest = await validateProductionOutput(outputRoot, commandTokens);
   const readiness = await verifyServe(
@@ -689,7 +712,9 @@ async function verifyCandidateCommands(packageRoot, candidate, criticInterface, 
     criticInterface,
     environment,
     resolve(logDirectory, candidate.alias, 'serve-critic.log'),
-    commandTokens
+    commandTokens,
+    identityTokens,
+    evaluatorOwnedPaths
   );
 
   await rm(resolve(verificationRoot, 'node_modules'), { recursive: true, force: true });
