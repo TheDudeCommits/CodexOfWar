@@ -43,7 +43,11 @@ import {
   validateTextForClues,
   writeCanonicalExclusive
 } from './packaging-core.mjs';
-import { privateTokensForAllCandidates, verifyPublicDelivery } from './package-candidates.mjs';
+import {
+  privateTokensForAllCandidates,
+  validateSubprocessTranscript,
+  verifyPublicDelivery
+} from './package-candidates.mjs';
 
 const TOOL_PATH = resolve(dirname(fileURLToPath(import.meta.url)), 'package-candidates.mjs');
 
@@ -422,6 +426,21 @@ test('private token derivation omits only unusably short worktree basenames', ()
   assert.equal(tokens.includes('A'), false);
   assert.equal(tokens.includes('/tmp/private-source/A'), true);
   assert.equal(tokens.includes('private builder identity'), true);
+});
+
+test('subprocess scan redacts exact evaluator paths but rejects identity and unrelated absolute paths', () => {
+  const evaluatorPath = '/Users/evaluator/private/session/verification/candidate-aaaaaaaaaaaaaaaa';
+  assert.doesNotThrow(() =>
+    validateSubprocessTranscript(`RUN v3 ${evaluatorPath}\nTests 3 passed\n`, ['private-builder-token'], [evaluatorPath])
+  );
+  assert.throws(
+    () => validateSubprocessTranscript(`RUN v3 ${evaluatorPath}\nowner=private-builder-token\n`, ['private-builder-token'], [evaluatorPath]),
+    (error) => error.code === 'PRIVATE_IDENTITY_CLUE_FOUND'
+  );
+  assert.throws(
+    () => validateSubprocessTranscript(`RUN v3 ${evaluatorPath}\nloaded /Users/another/source/file.ts\n`, [], [evaluatorPath]),
+    (error) => error.code === 'ABSOLUTE_PATH_CLUE_FOUND'
+  );
 });
 
 test('public commitment is sorted, canonical, and binds deterministic archives end to end', async (context) => {
