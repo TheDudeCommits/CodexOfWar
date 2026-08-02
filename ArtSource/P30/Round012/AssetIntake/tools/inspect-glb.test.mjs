@@ -1,11 +1,12 @@
 import assert from "node:assert/strict";
 import { spawnSync } from "node:child_process";
+import { generateKeyPairSync, sign } from "node:crypto";
 import { mkdtemp, readFile, writeFile } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import test from "node:test";
 
-import { sha256Hex } from "./artifact-authorization.mjs";
+import { canonicalAuthorizationBytes, sha256Hex } from "./artifact-authorization.mjs";
 import { inspectArtifact, measureGlb, parseGlb } from "./inspect-glb.mjs";
 
 function pad4(buffer, byte = 0) {
@@ -62,18 +63,34 @@ function fixtureGlb(generator = "Round012 deterministic fixture") {
 
 function fixturePolicy() {
   return {
+    schema: "p30.r012.zombie-glb-intake-policy.v2",
     candidateUid: "31ca8d86b4074312a51170d8e7dbe07c",
     format: "glb",
     authorization: {
       required: true,
       bindingPath: "AUTHORIZED_ARTIFACT.json",
       bindingSha256: null,
-      bindingSchema: "p30.r012.authorized-artifact-binding.v1",
-      acquisitionReceiptSchema: "p30.r012.acquisition-receipt.v1",
+      bindingSchema: "p30.r012.authorized-artifact-binding.v2",
+      acquisitionReceiptSchema: "p30.r012.acquisition-receipt.v2",
+      sourceRecordSchema: "p30.r012.sketchfab-data-api-v3-source-download-record.v1",
+      signaturePayloadSchema: "p30.r012.acquisition-authorization.v1",
       licenseId: "CC-BY-4.0",
+      licenseUid: "322a749bcfa841b29dff1e8a1bb74b0b",
+      licenseSlug: "by",
       licenseRecordUrl: "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+      licenseCanonicalUrl: "https://creativecommons.org/licenses/by/4.0/",
+      sourceProvider: "sketchfab",
+      sourceApiVersion: "v3",
+      modelEndpoint: "https://api.sketchfab.com/v3/models/31ca8d86b4074312a51170d8e7dbe07c",
       sourceEndpoint: "https://api.sketchfab.com/v3/models/31ca8d86b4074312a51170d8e7dbe07c/download",
-      allowedAuthorizationMethods: ["sketchfab-authenticated-download-api"]
+      sourceHttpMethod: "GET",
+      archiveFormat: "glb",
+      allowedAuthorizationMethods: ["sketchfab-authenticated-download-api"],
+      authority: {
+        algorithm: "Ed25519",
+        publicKeySpkiBase64: null,
+        publicKeySha256: null
+      }
     },
     maxFileSizeBytes: 1048576,
     triangles: { min: 1, max: 1 },
@@ -107,58 +124,130 @@ function jsonBytes(value) {
   return Buffer.from(`${JSON.stringify(value, null, 2)}\n`, "utf8");
 }
 
-async function writeAuthorizationChain(directory, artifactBytes, policy) {
-  const sourceRecordBytes = jsonBytes({
-    schema: "synthetic.first-party-download-record.v1",
-    candidateUid: policy.candidateUid,
-    endpoint: policy.authorization.sourceEndpoint
-  });
-  const sourceRecordSha256 = sha256Hex(sourceRecordBytes);
+function pinAuthority(policy, publicKey) {
+  const publicKeyDer = publicKey.export({ format: "der", type: "spki" });
+  policy.authorization.authority.publicKeySpkiBase64 = publicKeyDer.toString("base64");
+  policy.authorization.authority.publicKeySha256 = sha256Hex(publicKeyDer);
+}
+
+async function writeAuthorizationChain(directory, artifactBytes, policy, {
+  signingKey = null,
+  writeSignature = signingKey !== null,
+  mutateSourceRecord = null
+} = {}) {
+  const authorization = policy.authorization;
   const artifactSha256 = sha256Hex(artifactBytes);
-  const receiptBytes = jsonBytes({
-    schema: policy.authorization.acquisitionReceiptSchema,
-    authorizationGranted: true,
+  const sourceRecord = {
+    schema: authorization.sourceRecordSchema,
+    provider: authorization.sourceProvider,
+    apiVersion: authorization.sourceApiVersion,
+    modelRequest: {
+      endpoint: authorization.modelEndpoint,
+      method: authorization.sourceHttpMethod,
+      status: 200
+    },
+    modelResponse: {
+      uid: policy.candidateUid,
+      isDownloadable: true,
+      license: {
+        uid: authorization.licenseUid,
+        slug: authorization.licenseSlug,
+        url: authorization.licenseCanonicalUrl
+      }
+    },
+    downloadRequest: {
+      endpoint: authorization.sourceEndpoint,
+      method: authorization.sourceHttpMethod,
+      authenticationMethod: authorization.allowedAuthorizationMethods[0],
+      status: 200
+    },
+    downloadResponse: {
+      archiveFormat: authorization.archiveFormat,
+      archiveKey: authorization.archiveFormat,
+      archive: {
+        sizeBytes: artifactBytes.length,
+        sha256SuppliedByProvider: true,
+        sha256: artifactSha256
+      }
+    }
+  };
+  mutateSourceRecord?.(sourceRecord);
+  const sourceRecordBytes = jsonBytes(sourceRecord);
+  const sourceRecordSha256 = sha256Hex(sourceRecordBytes);
+  const receipt = {
+    schema: authorization.acquisitionReceiptSchema,
+    authorizationDecision: "allow",
     candidateUid: policy.candidateUid,
     artifact: {
-      sha256: artifactSha256,
-      byteLength: artifactBytes.length
-    },
-    licenseId: policy.authorization.licenseId,
-    source: {
-      endpoint: policy.authorization.sourceEndpoint,
-      recordSha256: sourceRecordSha256
-    },
-    authorizationMethod: "sketchfab-authenticated-download-api"
-  });
-  const bindingBytes = jsonBytes({
-    schema: policy.authorization.bindingSchema,
-    candidateUid: policy.candidateUid,
-    artifact: {
-      format: "glb",
       sha256: artifactSha256,
       byteLength: artifactBytes.length
     },
     license: {
-      id: policy.authorization.licenseId,
-      recordUrl: policy.authorization.licenseRecordUrl
+      id: authorization.licenseId,
+      uid: authorization.licenseUid,
+      slug: authorization.licenseSlug,
+      recordUrl: authorization.licenseRecordUrl
     },
     source: {
-      endpoint: policy.authorization.sourceEndpoint,
+      provider: authorization.sourceProvider,
+      apiVersion: authorization.sourceApiVersion,
+      modelEndpoint: authorization.modelEndpoint,
+      endpoint: authorization.sourceEndpoint,
+      method: authorization.sourceHttpMethod,
+      archiveFormat: authorization.archiveFormat,
+      recordSha256: sourceRecordSha256
+    },
+    authorizationMethod: authorization.allowedAuthorizationMethods[0]
+  };
+  const receiptBytes = jsonBytes(receipt);
+  const binding = {
+    schema: authorization.bindingSchema,
+    candidateUid: policy.candidateUid,
+    artifact: {
+      format: policy.format,
+      sha256: artifactSha256,
+      byteLength: artifactBytes.length
+    },
+    license: {
+      id: authorization.licenseId,
+      uid: authorization.licenseUid,
+      slug: authorization.licenseSlug,
+      recordUrl: authorization.licenseRecordUrl
+    },
+    source: {
+      provider: authorization.sourceProvider,
+      apiVersion: authorization.sourceApiVersion,
+      modelEndpoint: authorization.modelEndpoint,
+      endpoint: authorization.sourceEndpoint,
+      method: authorization.sourceHttpMethod,
+      archiveFormat: authorization.archiveFormat,
       recordPath: "source-record.json",
       recordSha256: sourceRecordSha256
     },
     acquisition: {
-      authorizationMethod: "sketchfab-authenticated-download-api",
+      authorizationMethod: authorization.allowedAuthorizationMethods[0],
+      authorizationDecision: "allow",
       receiptPath: "acquisition-receipt.json",
-      receiptSha256: sha256Hex(receiptBytes)
+      receiptSha256: sha256Hex(receiptBytes),
+      signaturePath: "acquisition-authorization.ed25519",
+      signatureAlgorithm: authorization.authority.algorithm
     }
-  });
-  await Promise.all([
+  };
+  const bindingBytes = jsonBytes(binding);
+  const writes = [
     writeFile(path.join(directory, "source-record.json"), sourceRecordBytes),
     writeFile(path.join(directory, "acquisition-receipt.json"), receiptBytes),
     writeFile(path.join(directory, "AUTHORIZED_ARTIFACT.json"), bindingBytes)
-  ]);
+  ];
+  let signatureBytes = null;
+  if (writeSignature) {
+    assert.ok(signingKey, "writeSignature requires an in-memory signing key");
+    signatureBytes = sign(null, canonicalAuthorizationBytes(binding, policy), signingKey);
+    writes.push(writeFile(path.join(directory, binding.acquisition.signaturePath), signatureBytes));
+  }
+  await Promise.all(writes);
   policy.authorization.bindingSha256 = sha256Hex(bindingBytes);
+  return { binding, bindingBytes, receipt, receiptBytes, sourceRecord, sourceRecordBytes, signatureBytes };
 }
 
 test("measures GLB triangles, materials, textures, animation, rig, and size", () => {
@@ -179,14 +268,14 @@ test("rejects malformed GLB bytes before measuring", () => {
   assert.throws(() => parseGlb(Buffer.alloc(20)), /magic/u);
 });
 
-test("unrelated technically valid GLB rejects before technical evaluation without a pinned binding", async () => {
+test("unrelated technically valid GLB rejects before technical evaluation without trust anchors", async () => {
   const directory = await mkdtemp(path.join(os.tmpdir(), "p30-r012-glb-"));
   const assetPath = path.join(directory, "fixture.glb");
   await writeFile(assetPath, fixtureGlb());
   const report = await inspectArtifact(assetPath, fixturePolicy(), { policyDirectory: directory });
   assert.equal(report.decision, "reject");
   assert.equal(report.stage, "authorization");
-  assert.equal(report.authorization.code, "AUTHORIZATION_BINDING_UNSET");
+  assert.equal(report.authorization.code, "AUTHORIZATION_TRUST_ANCHORS_UNSET_OR_INVALID");
   assert.equal(report.evaluation.status, "not-run");
   assert.equal(report.metrics, null);
 });
@@ -196,6 +285,8 @@ test("missing binding rejects even when policy pins an expected binding hash", a
   const assetPath = path.join(directory, "fixture.glb");
   await writeFile(assetPath, fixtureGlb());
   const policy = fixturePolicy();
+  const { publicKey } = generateKeyPairSync("ed25519");
+  pinAuthority(policy, publicKey);
   policy.authorization.bindingSha256 = "a".repeat(64);
   const report = await inspectArtifact(assetPath, policy, { policyDirectory: directory });
   assert.equal(report.decision, "reject");
@@ -210,22 +301,122 @@ test("artifact hash mismatch rejects a different technically valid GLB", async (
   const unrelatedPath = path.join(directory, "unrelated.glb");
   await writeFile(unrelatedPath, unrelatedBytes);
   const policy = fixturePolicy();
-  await writeAuthorizationChain(directory, authorizedBytes, policy);
+  const { publicKey, privateKey } = generateKeyPairSync("ed25519");
+  pinAuthority(policy, publicKey);
+  await writeAuthorizationChain(directory, authorizedBytes, policy, { signingKey: privateKey });
   const report = await inspectArtifact(unrelatedPath, policy, { policyDirectory: directory });
   assert.equal(report.decision, "reject");
   assert.equal(report.authorization.code, "ARTIFACT_HASH_MISMATCH");
   assert.equal(report.evaluation.status, "not-run");
 });
 
-test("correctly bound synthetic fixture reaches technical evaluation", async () => {
+test("unsigned fabricated official-schema records reject before technical evaluation", async () => {
+  const directory = await mkdtemp(path.join(os.tmpdir(), "p30-r012-glb-"));
+  const bytes = fixtureGlb("Round012 unsigned fixture");
+  const assetPath = path.join(directory, "unsigned.glb");
+  await writeFile(assetPath, bytes);
+  const policy = fixturePolicy();
+  const { publicKey } = generateKeyPairSync("ed25519");
+  pinAuthority(policy, publicKey);
+  await writeAuthorizationChain(directory, bytes, policy);
+  const report = await inspectArtifact(assetPath, policy, { policyDirectory: directory });
+  assert.equal(report.decision, "reject");
+  assert.equal(report.authorization.code, "ACQUISITION_SIGNATURE_MISSING_OR_UNSAFE");
+  assert.equal(report.evaluation.status, "not-run");
+});
+
+test("self-signed fabricated official-schema records reject against the pinned authority", async () => {
+  const directory = await mkdtemp(path.join(os.tmpdir(), "p30-r012-glb-"));
+  const bytes = fixtureGlb("Round012 self-signed fixture");
+  const assetPath = path.join(directory, "self-signed.glb");
+  await writeFile(assetPath, bytes);
+  const policy = fixturePolicy();
+  const trusted = generateKeyPairSync("ed25519");
+  const attacker = generateKeyPairSync("ed25519");
+  pinAuthority(policy, trusted.publicKey);
+  await writeAuthorizationChain(directory, bytes, policy, { signingKey: attacker.privateKey });
+  const report = await inspectArtifact(assetPath, policy, { policyDirectory: directory });
+  assert.equal(report.decision, "reject");
+  assert.equal(report.authorization.code, "ACQUISITION_AUTHORITY_SIGNATURE_INVALID");
+  assert.equal(report.evaluation.status, "not-run");
+});
+
+test("a valid signature cannot authorize a semantically invalid Sketchfab record", async () => {
+  const directory = await mkdtemp(path.join(os.tmpdir(), "p30-r012-glb-"));
+  const bytes = fixtureGlb("Round012 bad record fixture");
+  const assetPath = path.join(directory, "bad-record.glb");
+  await writeFile(assetPath, bytes);
+  const policy = fixturePolicy();
+  const { publicKey, privateKey } = generateKeyPairSync("ed25519");
+  pinAuthority(policy, publicKey);
+  await writeAuthorizationChain(directory, bytes, policy, {
+    signingKey: privateKey,
+    mutateSourceRecord: (record) => {
+      record.modelResponse.uid = "f".repeat(32);
+    }
+  });
+  const report = await inspectArtifact(assetPath, policy, { policyDirectory: directory });
+  assert.equal(report.decision, "reject");
+  assert.equal(report.authorization.code, "SKETCHFAB_SOURCE_RECORD_SEMANTICS_INVALID");
+  assert.equal(report.evaluation.status, "not-run");
+});
+
+test("field-tampering after a valid signature rejects", async () => {
+  const directory = await mkdtemp(path.join(os.tmpdir(), "p30-r012-glb-"));
+  const bytes = fixtureGlb("Round012 tampered fixture");
+  const assetPath = path.join(directory, "tampered.glb");
+  await writeFile(assetPath, bytes);
+  const policy = fixturePolicy();
+  const { publicKey, privateKey } = generateKeyPairSync("ed25519");
+  pinAuthority(policy, publicKey);
+  const chain = await writeAuthorizationChain(directory, bytes, policy, { signingKey: privateKey });
+  const tamperedRecordUrl = `${policy.authorization.licenseRecordUrl}?tampered=1`;
+  policy.authorization.licenseRecordUrl = tamperedRecordUrl;
+  chain.binding.license.recordUrl = tamperedRecordUrl;
+  chain.receipt.license.recordUrl = tamperedRecordUrl;
+  const tamperedReceiptBytes = jsonBytes(chain.receipt);
+  chain.binding.acquisition.receiptSha256 = sha256Hex(tamperedReceiptBytes);
+  const tamperedBindingBytes = jsonBytes(chain.binding);
+  policy.authorization.bindingSha256 = sha256Hex(tamperedBindingBytes);
+  await Promise.all([
+    writeFile(path.join(directory, "acquisition-receipt.json"), tamperedReceiptBytes),
+    writeFile(path.join(directory, "AUTHORIZED_ARTIFACT.json"), tamperedBindingBytes)
+  ]);
+  const report = await inspectArtifact(assetPath, policy, { policyDirectory: directory });
+  assert.equal(report.decision, "reject");
+  assert.equal(report.authorization.code, "ACQUISITION_AUTHORITY_SIGNATURE_INVALID");
+  assert.equal(report.evaluation.status, "not-run");
+});
+
+test("a valid fixture signature rejects when policy pins the wrong authority", async () => {
+  const directory = await mkdtemp(path.join(os.tmpdir(), "p30-r012-glb-"));
+  const bytes = fixtureGlb("Round012 wrong authority fixture");
+  const assetPath = path.join(directory, "wrong-authority.glb");
+  await writeFile(assetPath, bytes);
+  const policy = fixturePolicy();
+  const signer = generateKeyPairSync("ed25519");
+  const wrongAuthority = generateKeyPairSync("ed25519");
+  pinAuthority(policy, signer.publicKey);
+  await writeAuthorizationChain(directory, bytes, policy, { signingKey: signer.privateKey });
+  pinAuthority(policy, wrongAuthority.publicKey);
+  const report = await inspectArtifact(assetPath, policy, { policyDirectory: directory });
+  assert.equal(report.decision, "reject");
+  assert.equal(report.authorization.code, "ACQUISITION_AUTHORITY_SIGNATURE_INVALID");
+  assert.equal(report.evaluation.status, "not-run");
+});
+
+test("correctly signed synthetic official-schema fixture alone reaches technical evaluation", async () => {
   const directory = await mkdtemp(path.join(os.tmpdir(), "p30-r012-glb-"));
   const bytes = fixtureGlb("Round012 authorized fixture");
   const assetPath = path.join(directory, "authorized.glb");
   await writeFile(assetPath, bytes);
   const policy = fixturePolicy();
-  await writeAuthorizationChain(directory, bytes, policy);
+  const { publicKey, privateKey } = generateKeyPairSync("ed25519");
+  pinAuthority(policy, publicKey);
+  await writeAuthorizationChain(directory, bytes, policy, { signingKey: privateKey });
   const report = await inspectArtifact(assetPath, policy, { policyDirectory: directory });
-  assert.equal(report.authorization.code, "AUTHORIZED_ARTIFACT_BOUND");
+  assert.equal(report.authorization.code, "AUTHORIZED_ARTIFACT_BOUND_AND_SIGNED");
+  assert.equal(report.authorization.evidence.detachedSignatureVerified, true);
   assert.equal(report.stage, "technical");
   assert.equal(report.evaluation.status, "evaluated");
   assert.equal(report.validation.errors, 0, JSON.stringify(report.validation.messages));
@@ -239,12 +430,14 @@ test("checked-in rejected candidate remains unbound", async () => {
   const policy = JSON.parse(await readFile(path.join(directory, "INTAKE_POLICY.json"), "utf8"));
   assert.equal(policy.authorization.required, true);
   assert.equal(policy.authorization.bindingSha256, null);
+  assert.equal(policy.authorization.authority.publicKeySpkiBase64, null);
+  assert.equal(policy.authorization.authority.publicKeySha256, null);
   const artifactDirectory = await mkdtemp(path.join(os.tmpdir(), "p30-r012-glb-"));
   const assetPath = path.join(artifactDirectory, "fixture.glb");
   await writeFile(assetPath, fixtureGlb());
   const report = await inspectArtifact(assetPath, policy, { policyDirectory: directory });
   assert.equal(report.decision, "reject");
-  assert.equal(report.authorization.code, "AUTHORIZATION_BINDING_UNSET");
+  assert.equal(report.authorization.code, "AUTHORIZATION_TRUST_ANCHORS_UNSET_OR_INVALID");
   assert.equal(report.evaluation.status, "not-run");
 
   const cli = spawnSync(process.execPath, [path.join(directory, "tools/inspect-glb.mjs"), assetPath], {
@@ -253,6 +446,6 @@ test("checked-in rejected candidate remains unbound", async () => {
   });
   assert.equal(cli.status, 2, cli.stderr);
   const cliReport = JSON.parse(cli.stdout);
-  assert.equal(cliReport.authorization.code, "AUTHORIZATION_BINDING_UNSET");
+  assert.equal(cliReport.authorization.code, "AUTHORIZATION_TRUST_ANCHORS_UNSET_OR_INVALID");
   assert.equal(cliReport.evaluation.status, "not-run");
 });

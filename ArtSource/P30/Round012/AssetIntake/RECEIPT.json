@@ -1,5 +1,5 @@
 {
-  "schema": "p30.r012.asset-intake-receipt.v1",
+  "schema": "p30.r012.asset-intake-receipt.v2",
   "candidateUid": "31ca8d86b4074312a51170d8e7dbe07c",
   "candidateName": "Zombie 3D",
   "decision": "reject",
@@ -19,13 +19,27 @@
   "authorizationBoundary": {
     "required": true,
     "bindingPath": "AUTHORIZED_ARTIFACT.json",
-    "bindingSchema": "p30.r012.authorized-artifact-binding.v1",
-    "acquisitionReceiptSchema": "p30.r012.acquisition-receipt.v1",
+    "bindingSchema": "p30.r012.authorized-artifact-binding.v2",
+    "acquisitionReceiptSchema": "p30.r012.acquisition-receipt.v2",
+    "sourceRecordSchema": "p30.r012.sketchfab-data-api-v3-source-download-record.v1",
+    "signaturePayloadSchema": "p30.r012.acquisition-authorization.v1",
     "policyBindingSha256": null,
     "bindingPresent": false,
+    "authorityAlgorithm": "Ed25519",
+    "policyAuthorityPublicKeySpkiBase64": null,
+    "policyAuthorityPublicKeySha256": null,
+    "detachedSignaturePresent": false,
+    "detachedSignatureVerified": false,
     "candidateUid": "31ca8d86b4074312a51170d8e7dbe07c",
     "licenseId": "CC-BY-4.0",
+    "licenseUid": "322a749bcfa841b29dff1e8a1bb74b0b",
+    "licenseSlug": "by",
+    "sourceProvider": "sketchfab",
+    "sourceApiVersion": "v3",
+    "modelEndpoint": "https://api.sketchfab.com/v3/models/31ca8d86b4074312a51170d8e7dbe07c",
     "sourceEndpoint": "https://api.sketchfab.com/v3/models/31ca8d86b4074312a51170d8e7dbe07c/download",
+    "sourceHttpMethod": "GET",
+    "archiveFormat": "glb",
     "allowedAuthorizationMethods": [
       "sketchfab-authenticated-download-api"
     ],
@@ -37,15 +51,17 @@
   },
   "rejectionCodes": [
     "AUTHORIZED_ARTIFACT_BINDING_ABSENT",
+    "ACQUISITION_AUTHORITY_PUBLIC_KEY_UNSET",
+    "ACQUISITION_AUTHORITY_SIGNATURE_ABSENT",
     "AUTHORITATIVE_SOURCE_NOT_RIGGED",
     "AUTHORITATIVE_SOURCE_NOT_ORIGINAL_GLB",
     "AUTHORITATIVE_SOURCE_PBR_CLAIMS_UNSUBSTANTIATED",
     "AUTHORIZED_DOWNLOAD_UNAVAILABLE"
   ],
-  "rejectionSummary": "License passes, but first-party artifact metadata proves the uploaded source is a static OBJ/MTL plus one 2K PNG, official download requires authentication, and no authorized-artifact binding exists. No artifact bytes were admitted and technical evaluation is unreachable.",
+  "rejectionSummary": "License passes, but first-party artifact metadata proves the uploaded source is a static OBJ/MTL plus one 2K PNG, official download requires authentication, and neither policy trust anchor is configured: no authorized-artifact binding hash and no acquisition-authority public key/signature. No artifact bytes were admitted and technical evaluation is unreachable.",
   "targetArtifactValidation": {
     "status": "not-run",
-    "reason": "No source artifact or policy-pinned authorized-artifact binding was available; arbitrary, viewer-derived, or substitute bytes are rejected before technical evaluation.",
+    "reason": "No source artifact, policy-pinned binding hash, policy-pinned Ed25519 acquisition-authority key, or detached authority signature was available; arbitrary, viewer-derived, substitute, unsigned, and self-signed bytes are rejected before technical evaluation.",
     "gltfValidator": {
       "version": "2.0.0-dev.3.10",
       "errors": null,
@@ -87,20 +103,23 @@
     "command": "env PATH=/opt/homebrew/opt/node@24/bin:$PATH npm run gate -- /absolute/path/to/official-zombie-3d.glb",
     "policy": "INTAKE_POLICY.json",
     "binding": "AUTHORIZED_ARTIFACT.json (currently absent; exact file SHA-256 must be pinned in policy after review)",
-    "note": "An authenticated acquisition must supply a hashed source record and acquisition receipt cross-bound to the exact artifact bytes. Any creator-supplied rigged FBX/GLB is a new artifact and requires new license-to-bytes provenance."
+    "sourceRecord": "p30.r012.sketchfab-data-api-v3-source-download-record.v1 (currently absent; strict official API field capture)",
+    "signature": "Raw detached Ed25519 signature (currently absent; verified only against the policy-pinned SPKI key/hash)",
+    "note": "An authenticated acquisition must supply a strict hashed Sketchfab source/download record and acquisition receipt cross-bound to the exact artifact bytes, followed by an acquisition-authority signature over the canonical authorization payload. No private key may enter the repository. Any creator-supplied rigged FBX/GLB is a new artifact and requires new license-to-bytes provenance."
   },
   "deterministicEvidence": {
     "files": {
       "ATTRIBUTION.md": "bedbbabcf7ac69505c7466d07fe990e1ea220a566dc2c71f291a88c6a4ea96db",
-      "INTAKE_POLICY.json": "7dd03dc1a6dc457ed839ea5f5d8c62689676829f3886c6e29bdde217236b1a65",
+      "INTAKE_POLICY.json": "448c7b8b02e35448a8fa4fcf84720384314c589ccba644a2c0dd367b0e513b2b",
       "LICENSE.md": "9113469618d055d813ec2f07eb838f1d13c7f4bc25970c92b1c55e20789003f6",
       "PROVENANCE.json": "e50fa69d494a8e68606dfa6403a2744e78732ba0267225ec1b45c6d73d9c1c8b",
-      "README.md": "47186c6594c89539667596a756b29e21feedf528a280a2c2dddbabeb5361e9db",
-      "package-lock.json": "4cc45253a021f72daf180489028738da849c36834b709e43f3cec604013c3916",
-      "tools/artifact-authorization.mjs": "59a1f9c2edc011fceb19fa9a37f6debb4536e8456bbef84ff0a3ac307d4181e2",
+      "README.md": "5c4e00e357c4ba2b5c6503c48d37398bee9225bd872a451f159722fd7095296c",
+      "package.json": "d27ce62cf0c86ad8a00933f56adc421659a5318651882ed53743aaed70d4a29f",
+      "package-lock.json": "5c0d3569dc8ce4ffea39eab417c43ba3971fc678c52f45d0c20c57a2c2672c2f",
+      "tools/artifact-authorization.mjs": "c589a304e9c537b419d66bb10233a3283fa205716b3f35ff5194a08d23fec4e2",
       "tools/inspect-glb.mjs": "cb12b2295ffbd5deb1114d7d800e5c7ce06b5228e7228a8f51ac8c6cc920afb5",
-      "tools/inspect-glb.test.mjs": "fd2cd7fd5f0100a862d14da8d1211cc015b64259ba775292bade02941d26d66b",
-      "tools/verify-receipt.mjs": "1290c01fcaadfbad4059b0c551f3bfa064165c0187dd245eaeed1a3dbb43741e"
+      "tools/inspect-glb.test.mjs": "3323726d031a73b7c22dd96a18087e55ae707e3cc1ab88cedabe914e5d9f2e54",
+      "tools/verify-receipt.mjs": "c7918501a691ea1dcc6130af1ecc6b45d75c46060b5f8ab2e1570895c320582c"
     },
     "verificationCommand": "env PATH=/opt/homebrew/opt/node@24/bin:$PATH npm ci && env PATH=/opt/homebrew/opt/node@24/bin:$PATH npm run verify"
   },

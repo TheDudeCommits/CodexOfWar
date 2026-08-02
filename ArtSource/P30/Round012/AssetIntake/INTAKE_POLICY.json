@@ -1,19 +1,34 @@
 {
-  "schema": "p30.r012.zombie-glb-intake-policy.v1",
+  "schema": "p30.r012.zombie-glb-intake-policy.v2",
   "candidateUid": "31ca8d86b4074312a51170d8e7dbe07c",
   "format": "glb",
   "authorization": {
     "required": true,
     "bindingPath": "AUTHORIZED_ARTIFACT.json",
     "bindingSha256": null,
-    "bindingSchema": "p30.r012.authorized-artifact-binding.v1",
-    "acquisitionReceiptSchema": "p30.r012.acquisition-receipt.v1",
+    "bindingSchema": "p30.r012.authorized-artifact-binding.v2",
+    "acquisitionReceiptSchema": "p30.r012.acquisition-receipt.v2",
+    "sourceRecordSchema": "p30.r012.sketchfab-data-api-v3-source-download-record.v1",
+    "signaturePayloadSchema": "p30.r012.acquisition-authorization.v1",
     "licenseId": "CC-BY-4.0",
+    "licenseUid": "322a749bcfa841b29dff1e8a1bb74b0b",
+    "licenseSlug": "by",
     "licenseRecordUrl": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+    "licenseCanonicalUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "sourceProvider": "sketchfab",
+    "sourceApiVersion": "v3",
+    "modelEndpoint": "https://api.sketchfab.com/v3/models/31ca8d86b4074312a51170d8e7dbe07c",
     "sourceEndpoint": "https://api.sketchfab.com/v3/models/31ca8d86b4074312a51170d8e7dbe07c/download",
+    "sourceHttpMethod": "GET",
+    "archiveFormat": "glb",
     "allowedAuthorizationMethods": [
       "sketchfab-authenticated-download-api"
-    ]
+    ],
+    "authority": {
+      "algorithm": "Ed25519",
+      "publicKeySpkiBase64": null,
+      "publicKeySha256": null
+    }
   },
   "maxFileSizeBytes": 67108864,
   "triangles": {
