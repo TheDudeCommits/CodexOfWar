@@ -1,0 +1,192 @@
+{
+  "schema": "p30.round007.independent-critic-verification.v1",
+  "generatedAtUtc": "2026-08-02T02:50:03Z",
+  "candidateCommit": "6b953f563c68a81f4635aaa081bfeb664f3aee57",
+  "candidateCommitExact": true,
+  "candidateRuntimeTechnicalStatus": "PASS",
+  "repositoryWideLfsHistoryStatus": "FAIL",
+  "nodeValidation": {
+    "node": "v24.18.0",
+    "npm": "11.16.0",
+    "npmCi": {
+      "status": "PASS",
+      "packages": 191,
+      "vulnerabilities": 0
+    },
+    "typecheck": "PASS",
+    "lint": "PASS",
+    "simulationTests": "5/5 PASS",
+    "cameraTests": "5/5 PASS",
+    "productionBuild": {
+      "status": "PASS",
+      "modules": 48,
+      "nonFatalWarning": "The production bundle exceeds Vite's default chunk-size advisory."
+    },
+    "browserSmoke": {
+      "status": "PASS",
+      "tests": "3/3",
+      "independentHeadedRepeat": "3/3 PASS"
+    }
+  },
+  "enabledRuntimeAssets": {
+    "status": "PASS",
+    "manifest": "web-game/public/assets/manifest.json",
+    "manifestVersion": 2,
+    "manifestSha256": "373e2af4dd5173f68c4e45cc7c0b5eede06fc135839c25f43a512369a760ba75",
+    "enabled": 18,
+    "loadedInRuntime": 18,
+    "runtimeFailures": 0,
+    "proceduralFallbackActive": false,
+    "realWorktreeBytes": 18,
+    "worktreeLfsPointers": 0,
+    "headLfsOidsMatched": 18,
+    "magicPassed": 18,
+    "typeCounts": {
+      "glb": 11,
+      "radianceHdr": 1,
+      "webp": 6
+    },
+    "assets": [
+      { "key": "character.hero", "bytes": 4452708, "sha256": "56e569e529cd0d281bd60ad483d5c52bf6c3eab29f1c52829eb3a85dc7610caf", "magic": "glTF 2" },
+      { "key": "character.hollow", "bytes": 1448388, "sha256": "f53a481f118c48dff825b8f98427957e6201434848416ff265f22eb2b07e689d", "magic": "glTF 2" },
+      { "key": "weapon.claymore", "bytes": 151264, "sha256": "29565b76739e2d0f5491c55c5c382c7e172c7bc99d04a2382044f782170b7c1d", "magic": "glTF 2" },
+      { "key": "animation.player-core", "bytes": 1010988, "sha256": "261156c05d74ea8cded6da1b6853feb7e9c89721e782536d0813a0c15f47fdc6", "magic": "glTF 2" },
+      { "key": "animation.combat", "bytes": 876188, "sha256": "66bd8332a4c58d94114cf23444dfc8de3a399234e2cd62012efdb5d78f6c5f9e", "magic": "glTF 2" },
+      { "key": "environment.ashwake-arena", "bytes": 41956, "sha256": "a029b852e57bb2ba954ec69a729c738cf8a8bbc7a507605d49e6f4415b598a97", "magic": "glTF 2" },
+      { "key": "environment.ruin-doorway", "bytes": 64624, "sha256": "205bddd127ec4c8e87e13108003c4c1343092a213c77473d3056e7b105ad111f", "magic": "glTF 2" },
+      { "key": "environment.ruin-wall", "bytes": 19244, "sha256": "e60605cf7f632c9e193cab5e91415a0b0a62556d2121ea569750eaa7f3e3caaf", "magic": "glTF 2" },
+      { "key": "environment.ruin-pillar", "bytes": 219772, "sha256": "f3c9d8a491d02e62424bc104eb5fd50fa7e2516c9860e8e8f0cb7ef842725c44", "magic": "glTF 2" },
+      { "key": "environment.ruin-stairs", "bytes": 55192, "sha256": "48a9af555add02a70362df01323abf050c3e36492c8ee860bd0b5799ca13d98a", "magic": "glTF 2" },
+      { "key": "environment.ruin-rocks", "bytes": 922824, "sha256": "e0327cf7fda9d308d5f96ca28f86b5851d5501b511f5356db43fca9a90ab380f", "magic": "glTF 2" },
+      { "key": "environment.snowy-forest", "bytes": 1894914, "sha256": "0c3bd168c04dacc5c15002cabf0fb3c682500eb49befa53627c0f8eb52aa4baf", "magic": "Radiance HDR" },
+      { "key": "material.cobble-diffuse", "bytes": 349700, "sha256": "6f603e8df23bd5032024c1c38f12bdf69ce5ce151405a3056a6c0ad92ba71371", "magic": "RIFF WebP" },
+      { "key": "material.cobble-normal", "bytes": 394730, "sha256": "3903a0a795c1584283b5983f1fdbd32435f13b9a7656bf940023054da2769c67", "magic": "RIFF WebP" },
+      { "key": "material.cobble-arm", "bytes": 161986, "sha256": "98558a0b83e34439512b0c6315d687990457a3f3d20234c8564080365fdb3842", "magic": "RIFF WebP" },
+      { "key": "material.brick-diffuse", "bytes": 295418, "sha256": "98ffd6f778300a99c4a5c7ae43fa6726c1881621599b99c4143d6f4a6f31a064", "magic": "RIFF WebP" },
+      { "key": "material.brick-normal", "bytes": 517172, "sha256": "b8fa399819f39545500fa1d818fe3cd10d70808ed344542bacca11ccbfcbc97a", "magic": "RIFF WebP" },
+      { "key": "material.brick-arm", "bytes": 306880, "sha256": "511ee8f569e261b2217ec7362f4194f9edabfb5b43ac6ccc708528010a2da9f5", "magic": "RIFF WebP" }
+    ]
+  },
+  "round006Freeze": {
+    "status": "PASS",
+    "manifestSha256": "89e0105edb27ad2db6c4543ed03c3f21018723b56db3537795ba1b478701db8d",
+    "entries": 106,
+    "exact": 103,
+    "authorizedChanged": 3,
+    "missing": 0,
+    "unexpectedChanged": 0,
+    "authorizedFiles": [
+      "web-game/src/diagnostics/CowReviewHarness.ts",
+      "web-game/src/render/app/GameApp.ts",
+      "web-game/src/render/app/ThirdPersonCamera.ts"
+    ],
+    "frozenCategoriesExact": {
+      "simulationAndTiming": true,
+      "assets": true,
+      "characters": true,
+      "combat": true,
+      "environment": true,
+      "hud": true,
+      "lighting": true,
+      "fx": true,
+      "post": true,
+      "manifest": true
+    }
+  },
+  "repositoryLfsFsck": {
+    "status": "FAIL",
+    "command": "git lfs fsck HEAD",
+    "exitCode": 1,
+    "unexpectedGitObjects": 8,
+    "objectsOnlyFsck": "PASS",
+    "pointersOnlyFsck": "FAIL",
+    "explanation": "Eight historical PNGs are direct Git blobs although current attributes require LFS pointers. Their worktree bytes are present and exact to HEAD. This pointer-policy defect is unrelated to the 18 enabled runtime assets, whose full bytes, magic, and HEAD LFS oids all pass. History was not rewritten."
+  },
+  "headedCaptureContract": {
+    "status": "PASS",
+    "browser": "Google Chrome 150.0.7871.187",
+    "headed": true,
+    "httpStatus": 200,
+    "viewportCss": [1600, 900],
+    "canvasCss": [1600, 900],
+    "canvasBacking": [1600, 900],
+    "devicePixelRatio": 1,
+    "webgl": "WebGL 2.0",
+    "gpu": "ANGLE Metal Renderer: Apple M2",
+    "captures": [
+      { "id": "S01", "tick": 120, "sha256": "fb6ac5c71e6e3d54ef32e27ee300afc59cdb96621fb5fa26993cea8ec261a11f" },
+      { "id": "S02", "tick": 23, "sha256": "3e2144458d0e0b72674a925f54a4b67a162a0df9e3fa82e29866b2b53db34b2d" },
+      { "id": "S03", "tick": 29, "sha256": "5c8398ae257f73e779d60c26d0e3c07399b9f82e77067f4bf4cd111544c598e1" },
+      { "id": "S04", "tick": 34, "sha256": "abfcd5e7986a9703bfd17f91246f5b200fb9e54a52dc8f38749575df7d5260fd" },
+      { "id": "S05", "tick": 41, "sha256": "fbbaffd91498e4f01a12386dabe99dee6e27122426dbcec40692af74edcc7f60" },
+      { "id": "S06", "tick": 37, "sha256": "eea4452b4e26fb885954ad5f303a70602945e28bae3b195eeb0c29886877b7db" }
+    ],
+    "pngContract": "All six files are 1600x900, 8-bit RGB, non-interlaced PNGs with no text or EXIF chunks.",
+    "consoleErrors": 0,
+    "pageErrors": 0,
+    "requestFailures": 0,
+    "httpErrors": 0
+  },
+  "coldReady": {
+    "status": "PASS",
+    "launchesMs": [1763.63, 2599.002, 1877.481],
+    "maximumMs": 2599.002,
+    "limitMs": 4109
+  },
+  "resources": {
+    "status": "PASS",
+    "maximumObserved": { "calls": 86, "triangles": 204155, "textures": 32, "geometries": 38 },
+    "limits": { "calls": 100, "triangles": 250000, "textures": 32, "geometries": 64 }
+  },
+  "runtimeStability": {
+    "status": "PASS",
+    "durationMs": 30126.3,
+    "frames": 1787,
+    "meanFps": 59.468,
+    "p95RafMs": 18.6,
+    "p99RafMs": 18.7,
+    "maxRafMs": 118,
+    "framesOver25Ms": 5,
+    "resourceGrowth": false,
+    "webglError": 0
+  },
+  "webglLossRestore": {
+    "status": "PASS",
+    "supported": true,
+    "losses": 1,
+    "restores": 1,
+    "finalLost": false,
+    "rendererErrors": 0
+  },
+  "cameraReplay": {
+    "status": "PASS",
+    "runs": 3,
+    "sampleTicks": [29, 34, 41, 60],
+    "byteIdentical": true
+  },
+  "focusedFraming": {
+    "status": "PASS",
+    "nyraHeightPixels": { "S03": 406.8921348906387, "S04": 388.32664305641754, "S05": 397.3052171030063 },
+    "requiredRangePixels": [360, 540],
+    "minimumActorOrBladeMarginPixels": { "S03": 127.69169680182506, "S04": 102.77141406611713, "S05": 80.09813701156725 },
+    "requiredMinimumMarginPixels": 80,
+    "s04ContactPixels": { "x": 957.9162357168238, "y": 513.339840973781 },
+    "s04InsideCentral40Percent": true
+  },
+  "cameraObstruction": {
+    "status": "PASS",
+    "requiredClearanceMeters": 0.45,
+    "wallOnBoom": {
+      "desiredDistance": 5.26,
+      "resolvedDistance": 2.443428040081452,
+      "collisionApplied": true,
+      "clearance": 0.4500000000000002
+    },
+    "unobstructed": {
+      "desiredDistance": 5.26,
+      "resolvedDistance": 5.26,
+      "collisionApplied": false,
+      "exactDistanceEquality": true
+    }
+  }
+}

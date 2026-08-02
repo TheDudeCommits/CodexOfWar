@@ -1,0 +1,62 @@
+{
+  "schema": "p30.round007.blind-mapping-public-seal.v1",
+  "sealedAtUtc": "2026-08-02T02:55:58Z",
+  "candidateCommit": "6b953f563c68a81f4635aaa081bfeb664f3aee57",
+  "pairCount": 6,
+  "mappingLockSha256": "1d97a0a72da6672e43e822eba8433339cfff58300ebd00ea7a000f9a3ee2b4d1",
+  "mappingBalanced": true,
+  "candidateSideCounts": {
+    "A": 3,
+    "B": 3
+  },
+  "mappingSealedBeforeScoring": true,
+  "privatePreimageBinds": [
+    "cryptographic salt",
+    "pair identifiers",
+    "candidate capture hashes",
+    "private source identities and hashes",
+    "private crop transforms",
+    "anonymous side assignments",
+    "pair-construction tool and version"
+  ],
+  "publicExclusions": [
+    "mapping preimage",
+    "source pixels",
+    "source filenames or identities",
+    "source hashes",
+    "crop transforms",
+    "side mapping",
+    "pair pixels",
+    "pair hashes",
+    "randomization material",
+    "private paths"
+  ],
+  "anonymousScoringProtocol": {
+    "pairLabels": ["A", "B"],
+    "identityMetadataVisibleToScorer": false,
+    "scoreScalePerCategory": [0, 10],
+    "scorePrecision": "whole points",
+    "categories": [
+      "camera_and_composition",
+      "character_scale_and_silhouette",
+      "anatomy_and_pose_credibility",
+      "materials_and_surface_detail",
+      "lighting_and_tonal_separation",
+      "environment_depth_and_world_density",
+      "combat_contact_and_impact",
+      "motion_fx_and_readability",
+      "cinematic_cohesion_and_atmosphere",
+      "overall_finish_and_artifact_control"
+    ],
+    "sideTotal": "sum of ten category scores, out of 100",
+    "pairWinner": "the side with the greater total; a tie is not a candidate win",
+    "postRevealQualityScore": "mean candidate-side total across six pairs",
+    "postRevealCategoryScore": "mean candidate-side category score across six pairs"
+  },
+  "hardVisualGates": {
+    "focusedCandidateWins": "3/3 across S03-S05",
+    "overallCandidateWins": ">=5/6",
+    "qualityScore": ">=95/100",
+    "eachCategoryMean": ">=9/10"
+  }
+}
