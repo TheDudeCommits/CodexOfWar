@@ -1,0 +1,41 @@
+{
+  "schema": "p30.round008.builder-b-freeze-audit.v1",
+  "generatedAtUtc": "2026-08-02T03:58:40Z",
+  "baseCommit": "2cb09a9b8f496d24f93a05dd351051cd89351329",
+  "productionScope": {
+    "authorizedTrackedChanges": [
+      "web-game/src/render/objects/CharacterViews.ts",
+      "web-game/src/render/objects/CombatFx.ts"
+    ],
+    "actualTrackedWebGameChanges": [
+      "web-game/src/render/objects/CharacterViews.ts",
+      "web-game/src/render/objects/CombatFx.ts"
+    ],
+    "exactMatch": true
+  },
+  "sourceFreeze": {
+    "trackedSourceFilesAtBase": 27,
+    "authorizedSourceFiles": 2,
+    "byteExactFrozenSourceFiles": 25,
+    "mismatchesOutsideAuthorizedSourceFiles": [],
+    "passed": true
+  },
+  "focusedFrozenHashes": {
+    "web-game/package.json": "bd3db641d08b4aad170ca1fc917d27a308011c75",
+    "web-game/package-lock.json": "5110a60178824b2e4d605c630ed2a833ade0af95",
+    "web-game/public/assets/manifest.json": "627b0854d63677bdb22b918034bffbcd7a73af82",
+    "web-game/src/render/app/ThirdPersonCamera.ts": "fd7b258cdfda884771c8ce4507f84cb211b69c27",
+    "web-game/src/render/app/createRenderer.ts": "0cd1f0aa36eb2c3759a07c39960666ffba6ea5c8",
+    "web-game/src/render/loaders/AssetRegistry.ts": "e7465624a4cae26f52c80452d5871dbca4d6a6ce",
+    "web-game/src/render/post/PostStack.ts": "5a0e0494727968a47fe53920a001a37844c69b18"
+  },
+  "focusedFrozenFilesMatchBase": true,
+  "inheritedWorktreeAnomaly": {
+    "path": "progress/public/social-card.png",
+    "scope": "outside web-game and outside this candidate",
+    "staged": false,
+    "committed": false,
+    "note": "Pre-existing Git LFS checkout anomaly retained untouched and explicitly excluded from staging."
+  },
+  "acceptanceClaimed": false
+}

@@ -1,0 +1,35 @@
+{
+  "schema": "p30.round007.camera-obstruction-evidence.v1",
+  "testGeometry": {
+    "kind": "THREE.Mesh",
+    "geometry": "BoxGeometry",
+    "name": "round007-wall-on-boom-path",
+    "position": [
+      0.59584,
+      2.1236,
+      3.5605723864040897
+    ]
+  },
+  "requiredClearanceMeters": 0.45,
+  "wallOnBoom": {
+    "desiredDistance": 5.26,
+    "resolvedDistance": 2.443428040081452,
+    "collisionApplied": true,
+    "status": "obstructed",
+    "clearance": 0.4500000000000002,
+    "hitDistance": 2.893428040081452,
+    "colliderCount": 1,
+    "passed": true
+  },
+  "unobstructed": {
+    "desiredDistance": 5.26,
+    "resolvedDistance": 5.26,
+    "collisionApplied": false,
+    "status": "clear",
+    "clearance": null,
+    "hitDistance": null,
+    "colliderCount": 0,
+    "exactDistanceEquality": true,
+    "passed": true
+  }
+}

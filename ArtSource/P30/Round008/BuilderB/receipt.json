@@ -1,0 +1,149 @@
+{
+  "schema": "p30.round008.builder-b-receipt.v1",
+  "generatedAtUtc": "2026-08-02T03:58:40Z",
+  "candidate": "Round008 Combat-FX Builder B",
+  "baseCommit": "2cb09a9b8f496d24f93a05dd351051cd89351329",
+  "node": "v24.18.0",
+  "browser": "Chrome 150.0.7871.187",
+  "graphics": "WebGL2 / ANGLE Metal / Apple M2",
+  "viewport": {
+    "css": [1600, 900],
+    "backing": [1600, 900],
+    "devicePixelRatio": 1
+  },
+  "productionChanges": [
+    "web-game/src/render/objects/CharacterViews.ts: weapon-local narrow layered blade-edge ribbon, hot core, tapered afterimage, deterministic curved slivers, FX telemetry",
+    "web-game/src/render/objects/CombatFx.ts: compact contact-local flash and 22 deterministic directional tapered crossed-fin streaks, lifecycle/reset/disposal, FX telemetry"
+  ],
+  "focusedAdditions": [
+    "web-game/tests/fx/CombatFx.test.ts",
+    "web-game/scripts/p30-round008-fx-builder-b-audit.mjs",
+    "ArtSource/P30/Round008/BuilderB"
+  ],
+  "lifecycle": {
+    "S03": "blade and contact FX absent",
+    "S04": "blade and contact FX peak",
+    "S05": "blade FX absent and contact FX dissipated"
+  },
+  "determinism": {
+    "cleanReplays": 3,
+    "ticks": [29, 34, 41],
+    "byteIdentical": true,
+    "hashes": {
+      "29": "35b57a12a7e014d8aee80eda0ff8a07b0d94910d194787b25ff65d62eefc1cdf",
+      "34": "cdfed8de142cf1cea828fff28b9c2e9f73b1083a16b11413c98ac4ad0e62f428",
+      "41": "a785c5e8d037fa53186a96ba49a9c0238bce427b315f4724a73afc0f26b52dfc"
+    }
+  },
+  "contactProjection": {
+    "fxPx": [954.469423409635, 522.3512017355157],
+    "markerPx": [957.9162357168238, 513.339840973781],
+    "errorPx": 9.648063943565091,
+    "limitPx": 24,
+    "passed": true
+  },
+  "occlusionProof": {
+    "method": "same-tick WebGL readback with only FX audit visibility toggled",
+    "targetChangedPixels": 9244,
+    "targetRegionPixels": 80898,
+    "targetChangedRatio": 0.11426734900739202,
+    "bladeChangedPixels": 7367,
+    "bladeRegionPixels": 76713,
+    "bladeChangedRatio": 0.09603326685177219,
+    "playerChangedPixels": 141,
+    "playerRegionPixels": 115736,
+    "darkenedPixelsAllRegions": 0,
+    "maximumDarkeningAllRegions": 0,
+    "passed": true
+  },
+  "resourceCaps": {
+    "maximumObserved": {
+      "calls": 87,
+      "triangles": 203175,
+      "textures": 32,
+      "geometries": 41
+    },
+    "limits": {
+      "calls": 100,
+      "triangles": 250000,
+      "textures": 32,
+      "geometries": 64
+    },
+    "passed": true
+  },
+  "stability": {
+    "durationMs": 30164.8,
+    "frames": 1763,
+    "meanFps": 58.734,
+    "p95RafMs": 18.6,
+    "p99RafMs": 18.7,
+    "rendererBefore": {
+      "calls": 80,
+      "triangles": 203051,
+      "textures": 32,
+      "geometries": 41
+    },
+    "rendererAfter": {
+      "calls": 80,
+      "triangles": 203051,
+      "textures": 32,
+      "geometries": 41
+    },
+    "resourceGrowth": false,
+    "webglError": 0,
+    "passed": true
+  },
+  "coldReady": {
+    "launchesMs": [1787.409, 2544.564, 2727.154],
+    "maximumMs": 2727.154,
+    "limitMs": 4109,
+    "passed": true
+  },
+  "contextLossRestore": {
+    "losses": 1,
+    "restores": 1,
+    "lostAtEnd": false,
+    "errors": 0,
+    "passed": true
+  },
+  "assets": {
+    "enabled": 18,
+    "loaded": 18,
+    "failures": 0,
+    "fallbacks": 0,
+    "passed": true
+  },
+  "captures": {
+    "S01.png": "fb6ac5c71e6e3d54ef32e27ee300afc59cdb96621fb5fa26993cea8ec261a11f",
+    "S02.png": "3e2144458d0e0b72674a925f54a4b67a162a0df9e3fa82e29866b2b53db34b2d",
+    "S03.png": "5c8398ae257f73e779d60c26d0e3c07399b9f82e77067f4bf4cd111544c598e1",
+    "S04.png": "c8c2ba2df5296bf92e9b64a173e4f9c364c6e432bfec8250de05b5f2b8296ce5",
+    "S05.png": "6bae9a8d3d7337c1a9292fd1edcd4c0db6598400f81166086b521a0dc042ea3b",
+    "S06.png": "eea4452b4e26fb885954ad5f303a70602945e28bae3b195eeb0c29886877b7db"
+  },
+  "captureContract": {
+    "format": "PNG RGB color type 2, 8-bit",
+    "dimensions": [1600, 900],
+    "forbiddenMetadata": [],
+    "headed": true,
+    "allSixPassed": true
+  },
+  "validation": {
+    "npmCiNode24": "passed, 0 vulnerabilities",
+    "typecheck": "passed",
+    "lint": "passed",
+    "focusedFxTests": "4/4 passed",
+    "simulation": "5/5 passed",
+    "camera": "5/5 passed",
+    "browserSmoke": "3/3 passed",
+    "productionBuild": "passed",
+    "headedFxAudit": "all 16 gates passed",
+    "obstructionProbe": "wall-on-boom and unobstructed cases passed"
+  },
+  "visualSelfCritique": {
+    "strength": "S04 now reads as a narrow cyan blade-bound contour with a bright core and curved slivers, plus a compact warm directional contact burst; S03 and S05 are clean.",
+    "remainingWeakness": "The frozen authored weapon lattice remains visually busy, the cyan slivers can read somewhat graphic at this stylized fidelity, and broader character/environment/animation fidelity is unchanged."
+  },
+  "candidateOnly": true,
+  "acceptanceClaimed": false
+}

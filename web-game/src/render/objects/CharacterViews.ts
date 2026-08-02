@@ -19,6 +19,114 @@ const ROUND005_VISUAL_LANE_OFFSET = 0.62;
 const ROUND005_TOE_IN_YAW = 0.5;
 const ROUND005_WEAPON_AXIAL_ROLL = 0.6;
 
+const BLADE_FX_LOCAL_ENVELOPE = Object.freeze({
+  minX: -0.31,
+  maxX: 0.36,
+  minY: 0.2,
+  maxY: 1.71,
+  maxZ: 0.064,
+});
+
+interface RibbonPoint {
+  x: number;
+  y: number;
+  halfWidth: number;
+}
+
+interface BladeTrailLayer {
+  name: "edge-halo" | "hot-core" | "afterimage" | "energy-slivers";
+  material: THREE.MeshBasicMaterial;
+  peakOpacity: number;
+}
+
+export interface BladeTrailFxSample {
+  phase: "absent" | "peak";
+  active: boolean;
+  intensity: number;
+  attack01: number;
+}
+
+export interface BladeTrailFxTelemetry extends BladeTrailFxSample {
+  schema: "cow.blade-fx.v1";
+  attachment: "authored-weapon-local" | "fallback-weapon-local" | "hero-local";
+  bladePoseDriven: true;
+  bladeAxis: "+Y";
+  layers: Array<{
+    name: BladeTrailLayer["name"];
+    opacity: number;
+    additive: true;
+    depthWrite: false;
+  }>;
+  localEnvelope: typeof BLADE_FX_LOCAL_ENVELOPE;
+  textures: 0;
+}
+
+export interface BladeTrailFxAuditApi {
+  telemetry: () => BladeTrailFxTelemetry;
+  setAuditVisible: (visible: boolean) => void;
+}
+
+declare global {
+  interface Window {
+    __COW_BLADE_FX__?: BladeTrailFxAuditApi;
+  }
+}
+
+function roundFx(value: number): number {
+  return Math.round(value * 1_000_000) / 1_000_000;
+}
+
+export function sampleBladeTrailFx(
+  attackPhase: PlayerState["attackPhase"],
+  attackElapsed: number,
+): BladeTrailFxSample {
+  const attack01 = attackElapsed > 0
+    ? clamp(attackElapsed / ATTACK_DURATION, 0, 1)
+    : 0;
+  if (attackPhase !== "active") {
+    return { phase: "absent", active: false, intensity: 0, attack01: roundFx(attack01) };
+  }
+
+  // The authored active window is only four fixed ticks. Keep the blade-bound
+  // stack fully legible through that window, with its crest at the tick-34
+  // contact pose, instead of expanding a screen-space sweep fan.
+  const contactCrest = 1 - Math.min(1, Math.abs(attack01 - 0.42) / 0.16);
+  return {
+    phase: "peak",
+    active: true,
+    intensity: roundFx(0.78 + contactCrest * 0.22),
+    attack01: roundFx(attack01),
+  };
+}
+
+function createRibbonGeometry(
+  paths: readonly (readonly RibbonPoint[])[],
+  z: number,
+): THREE.BufferGeometry {
+  const positions: number[] = [];
+  const indices: number[] = [];
+  let vertexOffset = 0;
+
+  for (const path of paths) {
+    for (const point of path) {
+      positions.push(point.x - point.halfWidth, point.y, z);
+      positions.push(point.x + point.halfWidth, point.y, z);
+    }
+    for (let index = 0; index < path.length - 1; index += 1) {
+      const base = vertexOffset + index * 2;
+      indices.push(base, base + 1, base + 2, base + 1, base + 3, base + 2);
+    }
+    vertexOffset += path.length * 2;
+  }
+
+  const geometry = new THREE.BufferGeometry();
+  geometry.setAttribute("position", new THREE.Float32BufferAttribute(positions, 3));
+  geometry.setIndex(indices);
+  geometry.computeBoundingBox();
+  geometry.computeBoundingSphere();
+  return geometry;
+}
+
 function shadowBlob(radius: number, opacity: number): {
   mesh: THREE.Mesh;
   geometry: THREE.BufferGeometry;
@@ -113,8 +221,18 @@ export class HeroView {
   private readonly ownedGeometries: THREE.BufferGeometry[] = [];
   private readonly ownedMaterials: THREE.Material[] = [];
   private readonly visual = new THREE.Group();
-  private readonly weaponTrail: THREE.Mesh;
-  private readonly trailMaterial: THREE.MeshBasicMaterial;
+  private readonly weaponTrail = new THREE.Group();
+  private readonly trailLayers: BladeTrailLayer[] = [];
+  private readonly bladeFxAuditApi: BladeTrailFxAuditApi = {
+    telemetry: () => this.getFxTelemetry(),
+    setAuditVisible: (visible) => {
+      this.trailAuditVisible = visible;
+      this.applyTrailVisuals();
+    },
+  };
+  private trailAttachment: BladeTrailFxTelemetry["attachment"] = "hero-local";
+  private trailSample = sampleBladeTrailFx("idle", 0);
+  private trailAuditVisible = true;
   private animator: DeterministicAnimator | null = null;
   private fallbackWeapon: THREE.Group | null = null;
 
@@ -186,24 +304,115 @@ export class HeroView {
       this.animator = new DeterministicAnimator(hero.scene, clips);
     }
 
-    this.trailMaterial = new THREE.MeshBasicMaterial({
-      color: 0x3191a8,
-      transparent: true,
-      opacity: 0,
-      blending: THREE.AdditiveBlending,
-      depthWrite: false,
-      side: THREE.DoubleSide,
-      toneMapped: false,
-    });
-    this.ownedMaterials.push(this.trailMaterial);
-    const trailGeometry = new THREE.RingGeometry(0.96, 1.52, 40, 1, -0.65, 2.05);
-    this.ownedGeometries.push(trailGeometry);
-    this.weaponTrail = new THREE.Mesh(trailGeometry, this.trailMaterial);
     this.weaponTrail.name = "fx.weapon-trail";
-    this.weaponTrail.position.set(0.05, 1.22, -0.1);
-    this.weaponTrail.rotation.set(0, 0, -0.62);
     this.weaponTrail.visible = false;
-    this.root.add(this.weaponTrail);
+
+    const addLayer = (
+      name: BladeTrailLayer["name"],
+      geometry: THREE.BufferGeometry,
+      color: number,
+      peakOpacity: number,
+      renderOrder: number,
+    ): void => {
+      const material = new THREE.MeshBasicMaterial({
+        color,
+        transparent: true,
+        opacity: 0,
+        blending: THREE.AdditiveBlending,
+        depthTest: true,
+        depthWrite: false,
+        side: THREE.DoubleSide,
+        toneMapped: false,
+      });
+      material.forceSinglePass = true;
+      const mesh = new THREE.Mesh(geometry, material);
+      mesh.name = `fx.weapon-trail.${name}`;
+      mesh.renderOrder = renderOrder;
+      mesh.frustumCulled = true;
+      this.ownedGeometries.push(geometry);
+      this.ownedMaterials.push(material);
+      this.trailLayers.push({ name, material, peakOpacity });
+      this.weaponTrail.add(mesh);
+    };
+
+    addLayer(
+      "edge-halo",
+      createRibbonGeometry([[
+        { x: 0.16, y: 0.2, halfWidth: 0.008 },
+        { x: 0.19, y: 0.44, halfWidth: 0.036 },
+        { x: 0.205, y: 0.78, halfWidth: 0.052 },
+        { x: 0.2, y: 1.12, halfWidth: 0.046 },
+        { x: 0.175, y: 1.47, halfWidth: 0.028 },
+        { x: 0.055, y: 1.71, halfWidth: 0.003 },
+      ]], 0.058),
+      0x27c9ff,
+      0.3,
+      22,
+    );
+    addLayer(
+      "afterimage",
+      createRibbonGeometry([[
+        { x: -0.17, y: 0.61, halfWidth: 0.004 },
+        { x: -0.225, y: 0.84, halfWidth: 0.02 },
+        { x: -0.27, y: 1.08, halfWidth: 0.035 },
+        { x: -0.245, y: 1.34, halfWidth: 0.029 },
+        { x: -0.16, y: 1.57, halfWidth: 0.014 },
+        { x: -0.045, y: 1.7, halfWidth: 0.002 },
+      ]], 0.055),
+      0x1688bc,
+      0.2,
+      23,
+    );
+    addLayer(
+      "hot-core",
+      createRibbonGeometry([[
+        { x: 0.158, y: 0.25, halfWidth: 0.003 },
+        { x: 0.174, y: 0.51, halfWidth: 0.008 },
+        { x: 0.181, y: 0.84, halfWidth: 0.01 },
+        { x: 0.176, y: 1.18, halfWidth: 0.009 },
+        { x: 0.15, y: 1.49, halfWidth: 0.006 },
+        { x: 0.045, y: 1.705, halfWidth: 0.001 },
+      ]], 0.064),
+      0xd8ffff,
+      0.94,
+      24,
+    );
+    addLayer(
+      "energy-slivers",
+      createRibbonGeometry([
+        [
+          { x: 0.245, y: 0.57, halfWidth: 0.001 },
+          { x: 0.302, y: 0.67, halfWidth: 0.012 },
+          { x: 0.326, y: 0.8, halfWidth: 0.009 },
+          { x: 0.287, y: 0.92, halfWidth: 0.001 },
+        ],
+        [
+          { x: 0.238, y: 0.98, halfWidth: 0.001 },
+          { x: 0.306, y: 1.09, halfWidth: 0.013 },
+          { x: 0.347, y: 1.22, halfWidth: 0.009 },
+          { x: 0.298, y: 1.34, halfWidth: 0.001 },
+        ],
+        [
+          { x: 0.22, y: 1.36, halfWidth: 0.001 },
+          { x: 0.286, y: 1.46, halfWidth: 0.011 },
+          { x: 0.304, y: 1.55, halfWidth: 0.008 },
+          { x: 0.253, y: 1.62, halfWidth: 0.001 },
+        ],
+      ], 0.061),
+      0x79efff,
+      0.68,
+      25,
+    );
+
+    const authoredWeapon = this.root.getObjectByName("stormcage-two-hand-socket");
+    const weaponFxParent = authoredWeapon ?? this.fallbackWeapon ?? this.root;
+    this.trailAttachment = authoredWeapon
+      ? "authored-weapon-local"
+      : this.fallbackWeapon
+        ? "fallback-weapon-local"
+        : "hero-local";
+    weaponFxParent.add(this.weaponTrail);
+    if (typeof window !== "undefined") window.__COW_BLADE_FX__ = this.bladeFxAuditApi;
   }
 
   update(state: PlayerState, elapsed: number): void {
@@ -213,24 +422,51 @@ export class HeroView {
     if (this.animator) this.updateAuthoredAnimation(state, elapsed);
     else this.updateFallbackAnimation(state, elapsed);
 
-    const attack01 = state.attackElapsed > 0
-      ? clamp(state.attackElapsed / ATTACK_DURATION, 0, 1)
-      : 0;
-    const trailActive = state.attackPhase === "active";
-    this.weaponTrail.visible = trailActive;
-    this.weaponTrail.rotation.z = -0.72 + attack01 * 1.28;
-    this.weaponTrail.scale.setScalar(0.82 + Math.sin(attack01 * Math.PI) * 0.22);
-    this.trailMaterial.opacity = trailActive
-      ? 0.055 + Math.sin(clamp((attack01 - 0.26) * 4.6, 0, 1) * Math.PI) * 0.145
-      : 0;
+    this.trailSample = sampleBladeTrailFx(state.attackPhase, state.attackElapsed);
+    this.applyTrailVisuals();
+  }
+
+  getFxTelemetry(): BladeTrailFxTelemetry {
+    return {
+      schema: "cow.blade-fx.v1",
+      ...this.trailSample,
+      attachment: this.trailAttachment,
+      bladePoseDriven: true,
+      bladeAxis: "+Y",
+      layers: this.trailLayers.map((layer) => ({
+        name: layer.name,
+        opacity: roundFx(layer.material.opacity),
+        additive: true,
+        depthWrite: false,
+      })),
+      localEnvelope: BLADE_FX_LOCAL_ENVELOPE,
+      textures: 0,
+    };
   }
 
   dispose(): void {
+    if (
+      typeof window !== "undefined" &&
+      window.__COW_BLADE_FX__ === this.bladeFxAuditApi
+    ) {
+      window.__COW_BLADE_FX__ = undefined;
+    }
     this.animator?.dispose();
     for (const geometry of this.ownedGeometries) geometry.dispose();
     for (const material of this.ownedMaterials) material.dispose();
     this.ownedGeometries.length = 0;
     this.ownedMaterials.length = 0;
+  }
+
+  private applyTrailVisuals(): void {
+    const visible = this.trailSample.active && this.trailAuditVisible;
+    this.weaponTrail.visible = visible;
+    this.weaponTrail.scale.x = 0.92 + this.trailSample.intensity * 0.08;
+    for (const layer of this.trailLayers) {
+      layer.material.opacity = visible
+        ? roundFx(layer.peakOpacity * this.trailSample.intensity)
+        : 0;
+    }
   }
 
   private updateAuthoredAnimation(state: PlayerState, elapsed: number): void {
