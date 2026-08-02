@@ -1,0 +1,98 @@
+{
+  "schema": "cow.public-browser-critic.v1",
+  "piece": "P30",
+  "round": 5,
+  "date": "2026-08-02",
+  "status": "rejected-candidate-evidence",
+  "acceptanceScope": "This round is rejected candidate evidence, not accepted evidence.",
+  "verdict": {
+    "result": "REJECT",
+    "overallScore": 23,
+    "maximumScore": 100,
+    "candidateWins": 0,
+    "comparisonCount": 6,
+    "focusedCandidateWins": 0,
+    "focusedComparisonCount": 3
+  },
+  "blindReview": {
+    "publishedScope": "Aggregate result and rejected candidate captures only."
+  },
+  "auditEnvironment": {
+    "context": "fresh independent headed production-browser audit",
+    "browser": "Google Chrome 150",
+    "headed": true,
+    "hardwareAccelerated": true,
+    "renderer": "WebGL2 · ANGLE Metal Renderer: Apple M2",
+    "viewport": "1600×900",
+    "deviceScaleFactor": 1
+  },
+  "assetIntegration": {
+    "authoredAssetsLoaded": 18,
+    "authoredAssetsExpected": 18,
+    "proceduralFallbackActive": false,
+    "requiredHeroClipsExercised": 5,
+    "requiredHollowClipsExercised": 3,
+    "replacementGlbsReimported": 3
+  },
+  "resourceEnvelope": {
+    "drawCalls": 86,
+    "triangles": 204155,
+    "textures": 26,
+    "geometries": 38,
+    "withinCaps": true
+  },
+  "hardGateSummary": {
+    "passed": 10,
+    "failed": 8,
+    "total": 18
+  },
+  "validatedPasses": [
+    "Node 24 typecheck, lint, five unit tests, and production build",
+    "Headed hardware capture contract",
+    "18/18 authored assets, required clips, and no procedural fallback",
+    "Resource caps",
+    "Exact S04 HP contact",
+    "Blender reimport and GLB integrity for all three replacements",
+    "30-second combat performance",
+    "WebGL context restoration and error-free runtime"
+  ],
+  "hardFailures": [
+    "Focused blind gate: 0/3 candidate wins; 3/3 required.",
+    "Overall blind gate: 0/6 candidate wins.",
+    "The authored strike does not sustain a constrained two-palm grip; S05 left-palm offset is 3.276 cm.",
+    "S05 contains 458 blade-to-Nyra triangle intersections across 14 blade triangles; the S04 contact marker remains 3.677 cm from the target surface.",
+    "Stormcage and Hollow lack texture-image depth for the focused material-fidelity gate.",
+    "Cold starts were 4.924 s, 6.973 s, and 5.921 s against a 4.109 s ceiling.",
+    "Simulation replay matched, but full camera replay did not.",
+    "Camera obstruction remains unimplemented."
+  ],
+  "captures": [
+    {
+      "id": "S03",
+      "path": "/captures/P30/round-005/S03.png",
+      "role": "Attack-startup rejected candidate diagnostic"
+    },
+    {
+      "id": "S04",
+      "path": "/captures/P30/round-005/S04.png",
+      "role": "Active-hit rejected candidate diagnostic"
+    },
+    {
+      "id": "S05",
+      "path": "/captures/P30/round-005/S05.png",
+      "role": "Recovery rejected candidate diagnostic"
+    }
+  ],
+  "primaryGap": {
+    "id": "authored-duel-contact-pose-and-material-coherence",
+    "summary": "The focused startup, contact, and recovery poses do not preserve a convincing constrained two-palm grip and collision-clean blade arc, while the weapon and Hollow materials lack texture-map depth.",
+    "round006Prescription": "Replace only the Nyra plus Stormcage authored contact package with one optimized Blender-authored Sword_Regular_A clip: right-hand weapon socket, constrained left palm on an explicit secondary grip, corrected S03/S04/S05 poses, authored target-contact marker, collision-clean blade arc, and non-placeholder base-color, normal, and ORM maps. Keep environment, HUD, simulation timing, and camera presentation unchanged.",
+    "acceptanceGates": [
+      "Win S03, S04, and S05 3/3 at the same ticks and 1600×900 DPR 1 contract.",
+      "Keep both palm-to-grip distances at or below 2.5 cm at ticks 29, 34, and 41.",
+      "Keep blade-to-hero triangle intersections at zero at ticks 29, 34, and 41; target contact exists only at tick 34.",
+      "Keep the tick-34 authored contact marker at or below 3.0 cm from the target surface.",
+      "Expose non-placeholder base-color, normal, and ORM maps for Nyra and Stormcage without exceeding current resource caps or the 4.109 s cold-start budget."
+    ]
+  }
+}
