@@ -1,0 +1,65 @@
+{
+  "schema": "p30.round006.critic-privacy-freeze-proof.v1",
+  "candidateCommit": "01a4c652a5a30137ae0c82cc6cd6f063f2c91ca6",
+  "bundleRoot": "ArtSource/P30/Round006/Critic",
+  "allowedFiles": [
+    "S01.png",
+    "S02.png",
+    "S03.png",
+    "S04.png",
+    "S05.png",
+    "S06.png",
+    "critic-report.md",
+    "privacy-freeze-proof.json",
+    "result.json"
+  ],
+  "candidateOnlyCaptures": {
+    "status": "PASS",
+    "count": 6,
+    "allRgb1600x900": true,
+    "sha256": {
+      "S01.png": "4a91ff58f270289ef1070e5b8b1497647cbdac2aa5569c6160d2273d4afc5d74",
+      "S02.png": "58c28e4f511271daeaf1ebaedc076de63e8626caf51c8268a087c63a53623e5c",
+      "S03.png": "b0319e0f6ec46619418ead2f18da79845dde580542323a9fe15ed3c6ca4d4e67",
+      "S04.png": "bb51bf1e9ac505f0932518be7f82427ee6f830531cfb3ab092f4b0ce8436f9fc",
+      "S05.png": "01351ea34c69df9a9ab292821c622681e141951cdb03aa363f6ac3841dcd44f5",
+      "S06.png": "222adab0cfd62a618a6102d964ebbb4e4c55f1c1d4ac0ea30be3cbfb4d0c0fd1"
+    }
+  },
+  "publishedEvidenceHashes": {
+    "result.json": "9f51f0e68a33b718d75300b067fe616920b8f6b8628c8693a88179ab681dc6fb",
+    "critic-report.md": "8984363103b1deecc64e39ae63dd4f7d68f99fd530ba2d5b7f081f66eb8e7661"
+  },
+  "publicBlindHashes": {
+    "mappingLockSha256": "422a29058860c6134b15d70ed6e4e1c581788631c949bcba7d4d07bcc1890040",
+    "anonymousScoreLockSha256": "aff4a9f4c9e31cfeeb8afbf8e2a197e8b1f2989540e792e444ec7a9d5fadab45",
+    "revealSha256": "22361b19d41d99f00ba2a6b6f336476cbfc62637ab1a91c9e7699c57e9ca726c"
+  },
+  "privacy": {
+    "status": "PASS",
+    "sourcePixelsPublished": false,
+    "pairImagesPublished": false,
+    "sourceNamesPublished": false,
+    "sourceHashesPublished": false,
+    "sideMappingPublished": false,
+    "randomizationMaterialPublished": false,
+    "lockPreimagesPublished": false,
+    "absolutePrivatePathsPublished": false,
+    "bundleTextScanMatches": 0
+  },
+  "freeze": {
+    "status": "PASS",
+    "entryCount": 106,
+    "beforeAfterByteIdentical": true,
+    "beforeManifestSha256": "89e0105edb27ad2db6c4543ed03c3f21018723b56db3537795ba1b478701db8d",
+    "afterManifestSha256": "89e0105edb27ad2db6c4543ed03c3f21018723b56db3537795ba1b478701db8d",
+    "beforeCheckExitCode": 0,
+    "afterCheckExitCode": 0,
+    "allEntryHashesPassed": true
+  },
+  "workspace": {
+    "criticFilesStaged": false,
+    "criticFilesCommitted": false,
+    "writesOutsideBundleInSharedWorkspace": false
+  }
+}

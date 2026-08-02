@@ -1,0 +1,263 @@
+{
+  "schema": "p30.round006.independent-critic.v1",
+  "reviewRole": "independent_brutally_harsh_aaa_critic",
+  "candidate": {
+    "commit": "01a4c652a5a30137ae0c82cc6cd6f063f2c91ca6",
+    "verdict": "REJECT",
+    "accepted": false,
+    "qualityScore": 23,
+    "scoreOutOf": 100,
+    "scoreBasis": "Anonymous losing-side mean was 22.67, rounded to 23. The candidate lost all six comparisons."
+  },
+  "focusedAcceptance": {
+    "required": "S03-S05 candidate wins 3/3",
+    "actual": "0/3",
+    "passed": false,
+    "rule": "Any focused loss rejects the candidate."
+  },
+  "overallBlindResult": {
+    "candidateWins": "0/6",
+    "candidateLosses": "6/6"
+  },
+  "captureContract": {
+    "candidateCapturedBeforePairConstruction": true,
+    "validatedBeforeBlindLock": true,
+    "browser": "Google Chrome 150.0.7871.187",
+    "node": "24.18.0",
+    "headed": true,
+    "webgl": "WebGL 2.0",
+    "gpu": "ANGLE Metal Renderer: Apple M2",
+    "viewportCss": [1600, 900],
+    "devicePixelRatio": 1,
+    "canvasCss": [1600, 900],
+    "canvasBacking": [1600, 900],
+    "pngContract": "All six are 1600x900, RGB, 8-bit, non-interlaced PNG files.",
+    "captures": [
+      {
+        "scenario": "S01",
+        "file": "S01.png",
+        "tick": 120,
+        "sha256": "4a91ff58f270289ef1070e5b8b1497647cbdac2aa5569c6160d2273d4afc5d74"
+      },
+      {
+        "scenario": "S02",
+        "file": "S02.png",
+        "tick": 23,
+        "sha256": "58c28e4f511271daeaf1ebaedc076de63e8626caf51c8268a087c63a53623e5c"
+      },
+      {
+        "scenario": "S03",
+        "file": "S03.png",
+        "tick": 29,
+        "phase": "startup",
+        "sha256": "b0319e0f6ec46619418ead2f18da79845dde580542323a9fe15ed3c6ca4d4e67"
+      },
+      {
+        "scenario": "S04",
+        "file": "S04.png",
+        "tick": 34,
+        "phase": "active contact",
+        "sha256": "bb51bf1e9ac505f0932518be7f82427ee6f830531cfb3ab092f4b0ce8436f9fc"
+      },
+      {
+        "scenario": "S05",
+        "file": "S05.png",
+        "tick": 41,
+        "phase": "recovery",
+        "sha256": "01351ea34c69df9a9ab292821c622681e141951cdb03aa363f6ac3841dcd44f5"
+      },
+      {
+        "scenario": "S06",
+        "file": "S06.png",
+        "tick": 37,
+        "sha256": "222adab0cfd62a618a6102d964ebbb4e4c55f1c1d4ac0ea30be3cbfb4d0c0fd1"
+      }
+    ]
+  },
+  "blindProtocol": {
+    "pairCount": 6,
+    "randomizedAnonymousAB": true,
+    "balancedSides": true,
+    "mappingSealedBeforeScoring": true,
+    "scoresSealedBeforeReveal": true,
+    "mappingLockSha256": "422a29058860c6134b15d70ed6e4e1c581788631c949bcba7d4d07bcc1890040",
+    "anonymousScoreLockSha256": "aff4a9f4c9e31cfeeb8afbf8e2a197e8b1f2989540e792e444ec7a9d5fadab45",
+    "revealSha256": "22361b19d41d99f00ba2a6b6f336476cbfc62637ab1a91c9e7699c57e9ca726c",
+    "anonymousAggregate": {
+      "winnerCounts": {
+        "A": 3,
+        "B": 3
+      },
+      "meanScoreA": 50.67,
+      "meanScoreB": 51.83,
+      "meanWinningScore": 79.83,
+      "meanLosingScore": 22.67
+    },
+    "privateMaterialPersisted": false,
+    "sideMappingPersisted": false
+  },
+  "verification": {
+    "exactDetachedCommit": {
+      "status": "PASS",
+      "head": "01a4c652a5a30137ae0c82cc6cd6f063f2c91ca6"
+    },
+    "runtimeAssetMaterialization": {
+      "status": "PASS",
+      "enabled": 18,
+      "loaded": 18,
+      "failures": 0,
+      "proceduralFallbackActive": false,
+      "allManifestFilesRealBytes": true,
+      "pointerFiles": 0
+    },
+    "repositoryLfsFsck": {
+      "status": "FAIL",
+      "exitCode": 1,
+      "unexpectedRawBlobCount": 8,
+      "explanation": "Eight historical PNGs are committed as ordinary image blobs although current attributes classify them for LFS. Runtime assets are materialized, but repository-level LFS integrity is not clean."
+    },
+    "freeze": {
+      "status": "PASS",
+      "entries": 106,
+      "beforeAfterByteIdentical": true,
+      "beforeManifestSha256": "89e0105edb27ad2db6c4543ed03c3f21018723b56db3537795ba1b478701db8d",
+      "afterManifestSha256": "89e0105edb27ad2db6c4543ed03c3f21018723b56db3537795ba1b478701db8d",
+      "allEntryHashesPassedBeforeAndAfter": true
+    },
+    "nodeBuildAndTests": {
+      "status": "PASS",
+      "npmCi": true,
+      "typecheck": true,
+      "lint": true,
+      "simulationTests": "5/5",
+      "productionBuild": true,
+      "browserSmokeTests": "3/3"
+    },
+    "contactGeometry": {
+      "status": "PASS",
+      "independentBlenderVersion": "5.2.0 LTS",
+      "palmToGripMeters": {
+        "S03": {
+          "primary": 5.960464477539063e-8,
+          "secondary": 0.0000010688402557628928
+        },
+        "S04": {
+          "primary": 1.4901161193847656e-8,
+          "secondary": 8.922050821735086e-7
+        },
+        "S05": {
+          "primary": 5.960464477539063e-8,
+          "secondary": 2.9200193199910854e-7
+        }
+      },
+      "palmLimitMeters": 0.025,
+      "bladeHeroTrianglePairs": {
+        "S03": 0,
+        "S04": 0,
+        "S05": 0
+      },
+      "bladeTargetTrianglePairs": {
+        "S03": 0,
+        "S04": 109,
+        "S05": 0
+      },
+      "bladeTargetOnlyAtS04": true,
+      "s04MarkerToTargetMeters": 0.0000058828941291722,
+      "s04MarkerLimitMeters": 0.03
+    },
+    "embeddedPbr": {
+      "status": "PASS",
+      "nyra": {
+        "embeddedImages": 5,
+        "externalImageUris": 0,
+        "baseUniqueRgb": 69,
+        "normalDetailFraction": 0.82073974609375,
+        "ormChannelRanges": [36, 51, 70]
+      },
+      "stormcage": {
+        "embeddedImages": 3,
+        "externalImageUris": 0,
+        "baseUniqueRgb": 97,
+        "normalDetailFraction": 0.236846923828125,
+        "ormChannelRanges": [22, 110, 38]
+      },
+      "nonPlaceholderBaseNormalOrm": true
+    },
+    "resourceCaps": {
+      "status": "PASS",
+      "maximumObserved": {
+        "calls": 86,
+        "triangles": 204155,
+        "textures": 32,
+        "geometries": 38
+      },
+      "limits": {
+        "calls": 100,
+        "triangles": 250000,
+        "textures": 32,
+        "geometries": 64
+      }
+    },
+    "coldReady": {
+      "status": "PASS",
+      "trueColdHeadedLaunchesMs": [1436.098, 1445.895, 1791.223],
+      "limitMs": 4109
+    },
+    "thirtySecondFrameTiming": {
+      "status": "PASS",
+      "durationMs": 30014.8,
+      "meanFps": 59.87,
+      "p95RafMs": 18.4,
+      "p99RafMs": 18.6,
+      "maxRafMs": 66.7,
+      "framesOver25Ms": 2,
+      "longTasks": 1,
+      "longTaskMaxMs": 56,
+      "resourceGrowth": false,
+      "webglError": 0
+    },
+    "webglLossRestore": {
+      "status": "PASS",
+      "losses": 1,
+      "restores": 1,
+      "finalLost": false,
+      "rendererErrors": 0
+    },
+    "deterministicReplay": {
+      "status": "FAIL",
+      "simulationExact": true,
+      "projectionExact": true,
+      "cameraExact": false,
+      "cameraMaxPositionDeltaMetersAtTick34": 0.051762697118344025,
+      "cameraMaxPositionDeltaMetersAtTick60": 0.0006166734337571533
+    },
+    "cameraObstruction": {
+      "status": "FAIL",
+      "implemented": false,
+      "runtimeStatus": "pending",
+      "desiredBoomMeters": 7.15,
+      "resolvedBoomMeters": 7.15,
+      "collisionApplied": false
+    },
+    "blindFocusedQuality": {
+      "status": "FAIL",
+      "candidateWins": "0/3",
+      "required": "3/3"
+    }
+  },
+  "singleBiggestRemainingVisibleGap": {
+    "name": "combat camera presentation",
+    "evidence": "The distant static camera reduces the duel to small overlapping figures surrounded by dead floor, so even corrected grip and collision geometry does not read with AAA impact or material detail."
+  },
+  "round007Replacement": {
+    "count": 1,
+    "scope": "Replace only the third-person camera module and its telemetry/tests with a deterministic close over-shoulder combat camera that resolves boom obstruction and clears transient shake state on reset. Keep simulation, timing, assets, environment, HUD, and combat geometry unchanged.",
+    "acceptanceGates": [
+      "The candidate wins S03, S04, and S05 3/3 under the same sealed 1600x900 DPR1 blind protocol.",
+      "At S03-S05 Nyra projects to 360-540 pixels head-to-heel, both actors and the full blade stay at least 80 pixels inside the frame, and the S04 contact marker projects inside the central 40 percent of the viewport.",
+      "Three clean replays produce byte-identical camera telemetry at ticks 29, 34, 41, and 60.",
+      "A wall-on-boom-path test reports collisionApplied=true, resolvedDistance below desiredDistance, and at least 0.45 meters of camera clearance; an unobstructed test resolves exactly to the desired boom.",
+      "The existing 4109 ms cold-ready and 100 calls/250000 triangles/32 textures/64 geometries caps remain satisfied."
+    ]
+  }
+}
