@@ -11,6 +11,7 @@ import {
   ALIAS_SCORE_COMMIT_DOMAIN,
   COUNTERFACTUAL_COMMIT_DOMAIN,
   EVALUATOR_HELPER_PATH,
+  EPS,
   PRESENTATION_COMMIT_DOMAIN,
   PACKAGE_MAP_COMMIT_DOMAIN,
   PROTOCOL_AMENDMENT_PATH,
@@ -413,6 +414,59 @@ test('geometry collector rejects duplicate, detached, and zero-weight landmark i
   );
 });
 
+const SWEEP_TEST_CAPSULE_IDS = [
+  'head', 'torso', 'left-upper-arm', 'left-forearm', 'right-upper-arm', 'right-forearm',
+  'left-thigh', 'left-shin', 'right-thigh', 'right-shin'
+];
+
+function sweepTestState(absoluteTick, {
+  bladeGuard = [-1, 0, 0],
+  bladeTip = [1, 0, 0],
+  activeCapsules = {}
+} = {}) {
+  return {
+    absoluteTick,
+    blade: { guard: bladeGuard, tip: bladeTip },
+    targetCapsules: SWEEP_TEST_CAPSULE_IDS.map((id, index) => {
+      const active = activeCapsules[id];
+      return active ? {
+        id,
+        a: active.a,
+        b: active.b,
+        radius: active.radius
+      } : {
+        id,
+        a: [10 + index, 0, 0],
+        b: [10 + index, 0.1, 0],
+        radius: 0.1
+      };
+    })
+  };
+}
+
+function sweepTestSeries(terminalTick, stateForTick) {
+  return Array.from({ length: terminalTick + 2 }, (_, index) => stateForTick(index - 1));
+}
+
+function risingContactCoordinates(result) {
+  return result.risingContacts.map(({ absoluteTick, substep, capsuleID }) => [absoluteTick, substep, capsuleID]);
+}
+
+function endpointSwapSeries(bladeAxisOffset = 0) {
+  return sweepTestSeries(80, (absoluteTick) => {
+    let endpoints = [[0, 0.3, 0], [0, 1.3, 0]];
+    if (absoluteTick === 46) endpoints = [[0, 0.12, 0], [0, 1.12, 0]];
+    if (absoluteTick === 47) endpoints = [[0, 1.12, 0], [0, 0.12, 0]];
+    return sweepTestState(absoluteTick, {
+      bladeGuard: [-1 + bladeAxisOffset, 0, 0],
+      bladeTip: [1 + bladeAxisOffset, 0, 0],
+      activeCapsules: {
+        head: { a: endpoints[0], b: endpoints[1], radius: 0.1 }
+      }
+    });
+  });
+}
+
 test('4096-substep sweep resolves exact tick-46 first contact without endpoint retries', () => {
   const capsuleIDs = [
     'head', 'torso', 'left-upper-arm', 'left-forearm', 'right-upper-arm', 'right-forearm',
@@ -436,10 +490,139 @@ test('4096-substep sweep resolves exact tick-46 first contact without endpoint r
   assert.equal(result.firstContactTick, 46);
   assert.equal(result.risingContactTicks.length, 1);
   assert.equal(result.risingContactTicks[0], 46);
+  assert.deepEqual(risingContactCoordinates(result), [[46, 4096, 'head']]);
   assert.equal(canonicalContactChecks(result).pass, true);
   const frame = canonicalContactFrame(result, { right: [1, 0, 0], up: [0, 1, 0], forward: [0, 0, 1] });
   assert.deepEqual(frame.normal, [1, 0, 0]);
   assert.match(frame.receiptSha256, /^[0-9a-f]{64}$/u);
+});
+
+test('sample-tape transitions reject endpoint-swap separation and recontact within interval 47', () => {
+  const result = evaluateSweptContact(endpointSwapSeries());
+  assert.equal(result.firstContactTick, 46);
+  assert.deepEqual(risingContactCoordinates(result), [
+    [46, 4096, 'head'],
+    [47, 4096, 'head']
+  ]);
+  assert.deepEqual(result.risingContactTicks, [46, 47]);
+  assert.equal(result.intervals[47].firstSample.substep, 4096);
+  assert.ok(Math.abs(result.intervals[47].stateSeparation) <= EPS);
+  const canonical = canonicalContactChecks(result);
+  assert.equal(canonical.checks.noSecondRisingContact, false);
+  assert.equal(canonical.pass, false);
+  assert.equal(
+    Object.entries(canonical.checks)
+      .filter(([key]) => key !== 'noSecondRisingContact')
+      .every(([, value]) => value),
+    true
+  );
+
+  const hitOffsetResult = evaluateSweptContact(endpointSwapSeries(0.05));
+  assert.deepEqual(risingContactCoordinates(hitOffsetResult), risingContactCoordinates(result));
+  assert.equal(canonicalContactChecks(hitOffsetResult).checks.noSecondRisingContact, false);
+});
+
+test('sample tape records two same-interval rises and deterministic multi-capsule ties', () => {
+  const k = 4 / Math.sqrt(3);
+  const sameInterval = sweepTestSeries(0, (absoluteTick) => sweepTestState(absoluteTick, {
+    bladeGuard: [0, 0, 0],
+    bladeTip: [0, 0, 0],
+    activeCapsules: {
+      head: absoluteTick === -1 ?
+        { a: [1, 0, 0], b: [-k, -1, 0], radius: 0.001 } :
+        { a: [1, k, 0], b: [0, -1, 0], radius: 0.001 }
+    }
+  }));
+  const sameIntervalResult = evaluateSweptContact(sameInterval, 0);
+  assert.deepEqual(risingContactCoordinates(sameIntervalResult), [
+    [0, 927, 'head'],
+    [0, 2966, 'head']
+  ]);
+  assert.deepEqual(sameIntervalResult.risingContactTicks, [0, 0]);
+
+  const tieSeries = sweepTestSeries(0, (absoluteTick) => {
+    const x = absoluteTick === -1 ? 0.3 : 0;
+    const capsule = { a: [x, 0, 0], b: [x, 0, 0], radius: 0.1 };
+    return sweepTestState(absoluteTick, {
+      bladeGuard: [0, 0, 0],
+      bladeTip: [0, 0, 0],
+      activeCapsules: { torso: capsule, 'left-upper-arm': capsule }
+    });
+  });
+  const tieResult = evaluateSweptContact(tieSeries, 0);
+  assert.deepEqual(risingContactCoordinates(tieResult), [[0, 2458, 'left-upper-arm']]);
+  assert.equal(tieResult.firstContact.capsuleID, 'left-upper-arm');
+  assert.equal(tieResult.intervals[0].firstSample.capsuleID, 'left-upper-arm');
+});
+
+test('sample tape detects boundary recontact and treats only separation above EPS as clear', () => {
+  const boundarySeries = sweepTestSeries(1, (absoluteTick) => {
+    const x = absoluteTick === -1 || absoluteTick === 1 ? 0.3 : -0.3;
+    return sweepTestState(absoluteTick, {
+      bladeGuard: [0, 0, 0],
+      bladeTip: [0, 0, 0],
+      activeCapsules: { head: { a: [x, 0, 0], b: [x, 0, 0], radius: 0.1 } }
+    });
+  });
+  const boundaryResult = evaluateSweptContact(boundarySeries, 1);
+  assert.deepEqual(risingContactCoordinates(boundaryResult), [
+    [0, 1229, 'head'],
+    [1, 1229, 'head']
+  ]);
+
+  const nearEpsPositions = new Map([
+    [-1, 0.3],
+    [0, 0.12 + EPS * 0.5],
+    [1, 0.12 + EPS * 0.9],
+    [2, 0.12 - EPS * 0.5]
+  ]);
+  const nearEps = sweepTestSeries(2, (absoluteTick) => {
+    const x = nearEpsPositions.get(absoluteTick);
+    return sweepTestState(absoluteTick, {
+      bladeGuard: [0, 0, 0],
+      bladeTip: [0, 0, 0],
+      activeCapsules: { head: { a: [x, 0, 0], b: [x, 0, 0], radius: 0.1 } }
+    });
+  });
+  assert.deepEqual(risingContactCoordinates(evaluateSweptContact(nearEps, 2)), [[0, 4096, 'head']]);
+
+  const aboveEpsPositions = new Map([[-1, 0.3], [0, 0.12], [1, 0.12 + EPS * 2], [2, 0.12]]);
+  const aboveEps = sweepTestSeries(2, (absoluteTick) => {
+    const x = aboveEpsPositions.get(absoluteTick);
+    return sweepTestState(absoluteTick, {
+      bladeGuard: [0, 0, 0],
+      bladeTip: [0, 0, 0],
+      activeCapsules: { head: { a: [x, 0, 0], b: [x, 0, 0], radius: 0.1 } }
+    });
+  });
+  const aboveEpsResult = evaluateSweptContact(aboveEps, 2);
+  assert.equal(aboveEpsResult.risingContacts.length, 2);
+  assert.deepEqual(aboveEpsResult.risingContactTicks, [0, 2]);
+});
+
+test('initial and continuous tangent contact do not create false rising transitions', () => {
+  const initialContact = sweepTestSeries(0, (absoluteTick) => sweepTestState(absoluteTick, {
+    bladeGuard: [0, 0, 0],
+    bladeTip: [0, 0, 0],
+    activeCapsules: { head: { a: [0.12, 0, 0], b: [0.12, 0, 0], radius: 0.1 } }
+  }));
+  const initialResult = evaluateSweptContact(initialContact, 0);
+  assert.equal(initialResult.firstContactTick, 0);
+  assert.deepEqual(initialResult.risingContacts, []);
+  assert.deepEqual(initialResult.risingContactTicks, []);
+
+  const continuous = sweepTestSeries(80, (absoluteTick) => {
+    const bladeX = absoluteTick === 46 || absoluteTick === 47 ? 0.12 : 0.3;
+    return sweepTestState(absoluteTick, {
+      bladeGuard: [bladeX, -0.45, 0],
+      bladeTip: [bladeX, 0.55, 0],
+      activeCapsules: { head: { a: [0, 0, 0], b: [0, 0, 0], radius: 0.1 } }
+    });
+  });
+  const continuousResult = evaluateSweptContact(continuous);
+  assert.deepEqual(risingContactCoordinates(continuousResult), [[46, 4096, 'head']]);
+  assert.deepEqual(continuousResult.risingContactTicks, [46]);
+  assert.equal(canonicalContactChecks(continuousResult).pass, true);
 });
 
 test('miss extrema include every 4096 substep and both expanded endpoint sets', () => {
@@ -765,7 +948,12 @@ test('counterfactual validation binds all three hit offsets and both miss result
   const hitRuns = hitOffsets.map((offset, index) => ({
     index,
     offsetCanonicalMicrometres: offset.canonicalMicrometres,
-    evaluatorResult: { firstContactTick: 46, risingContactTicks: [46], maximumPenetration: -0.011 },
+    evaluatorResult: {
+      firstContactTick: 46,
+      risingContacts: [{ absoluteTick: 46, substep: 4096, capsuleID: 'head' }],
+      risingContactTicks: [46],
+      maximumPenetration: -0.011
+    },
     healthByTick: health(true),
     damageMutations: [{ absoluteTick: 46, before: 100, after: 75, amount: 25 }],
     events: [{ type: 'damage', absoluteTick: 46 }],
@@ -774,7 +962,7 @@ test('counterfactual validation binds all three hit offsets and both miss result
   const missRuns = missOffsets.map((offset, index) => ({
     index,
     offsetCanonicalMicrometres: offset.canonicalMicrometres,
-    evaluatorResult: { firstContactTick: null, risingContactTicks: [], maximumPenetration: 0.25 },
+    evaluatorResult: { firstContactTick: null, risingContacts: [], risingContactTicks: [], maximumPenetration: 0.25 },
     healthByTick: health(false),
     events: [],
     reactionOrRecoil: false,
@@ -783,6 +971,13 @@ test('counterfactual validation binds all three hit offsets and both miss result
   assert.deepEqual(validateCounterfactualRuns({ hitOffsets, missOffsets, hitRuns, missRuns }), {
     hitRunsVerified: 3, missRunsVerified: 2, pass: true
   });
+  const secondRise = structuredClone(hitRuns);
+  secondRise[1].evaluatorResult.risingContacts.push({ absoluteTick: 47, substep: 1, capsuleID: 'torso' });
+  secondRise[1].evaluatorResult.risingContactTicks.push(47);
+  assert.throws(
+    () => validateCounterfactualRuns({ hitOffsets, missOffsets, hitRuns: secondRise, missRuns }),
+    (error) => evaluatorCode(error, 'COUNTERFACTUAL_HIT_GEOMETRY_FAILED')
+  );
   hitRuns[2].offsetCanonicalMicrometres = [99, 0, 0];
   assert.throws(
     () => validateCounterfactualRuns({ hitOffsets, missOffsets, hitRuns, missRuns }),

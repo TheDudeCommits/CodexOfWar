@@ -1495,6 +1495,17 @@ function validateSweepState(state, expectedTick) {
   return { absoluteTick: expectedTick, blade: { guard, tip }, targetCapsules };
 }
 
+function sweepStateHasContact(state) {
+  for (let capsuleIndex = 0; capsuleIndex < state.targetCapsules.length; capsuleIndex += 1) {
+    const capsule = state.targetCapsules[capsuleIndex];
+    const closest = closestSegmentSegment(state.blade.guard, state.blade.tip, capsule.a, capsule.b);
+    const separation = closest.distance - (R_BLADE + capsule.radius);
+    if (!Number.isFinite(separation)) evaluatorFail('SWEEP_SEPARATION_NONFINITE');
+    if (separation <= EPS) return true;
+  }
+  return false;
+}
+
 export function evaluateSweptContact(stateSeries, terminalTick = 80) {
   if (!Number.isSafeInteger(terminalTick) || terminalTick < 0) evaluatorFail('SWEEP_TERMINAL_TICK_INVALID');
   if (!Array.isArray(stateSeries) || stateSeries.length !== terminalTick + 2) evaluatorFail('SWEEP_TICK_SERIES_INVALID');
@@ -1502,7 +1513,8 @@ export function evaluateSweptContact(stateSeries, terminalTick = 80) {
   const intervals = [];
   let firstContact = null;
   let maximumPenetration = Infinity;
-  let priorIntervalContact = false;
+  let priorSampleContact = sweepStateHasContact(states[0]);
+  const risingContacts = [];
   const risingContactTicks = [];
   for (let tick = 0; tick <= terminalTick; tick += 1) {
     const previous = states[tick];
@@ -1515,7 +1527,7 @@ export function evaluateSweptContact(stateSeries, terminalTick = 80) {
       const tau = substep / SUBSTEPS;
       const guard = lerp(previous.blade.guard, current.blade.guard, tau);
       const tip = lerp(previous.blade.tip, current.blade.tip, tau);
-      const contactsAtSubstep = [];
+      let sampleContact = null;
       for (let capsuleIndex = 0; capsuleIndex < current.targetCapsules.length; capsuleIndex += 1) {
         const beforeCapsule = previous.targetCapsules[capsuleIndex];
         const afterCapsule = current.targetCapsules[capsuleIndex];
@@ -1532,24 +1544,37 @@ export function evaluateSweptContact(stateSeries, terminalTick = 80) {
         if (substep === SUBSTEPS) stateSeparation = Math.min(stateSeparation, separation);
         if (separation <= EPS) {
           intervalContact = true;
-          contactsAtSubstep.push({
+          const contact = {
             absoluteTick: tick,
             substep,
             capsuleID: afterCapsule.id,
             separation,
             closestBladePoint: closest.point1,
             closestTargetPoint: closest.point2
-          });
+          };
+          if (sampleContact === null || compareUtf8(contact.capsuleID, sampleContact.capsuleID) < 0) {
+            sampleContact = contact;
+          }
         }
       }
-      if (firstSample === null && contactsAtSubstep.length > 0) {
-        contactsAtSubstep.sort((left, right) => compareUtf8(left.capsuleID, right.capsuleID));
-        [firstSample] = contactsAtSubstep;
-        if (firstContact === null) firstContact = firstSample;
+      if (sampleContact !== null) {
+        if (firstSample === null) {
+          firstSample = sampleContact;
+          if (firstContact === null) firstContact = firstSample;
+        }
+        if (!priorSampleContact) {
+          risingContacts.push({
+            absoluteTick: sampleContact.absoluteTick,
+            substep: sampleContact.substep,
+            capsuleID: sampleContact.capsuleID
+          });
+          risingContactTicks.push(tick);
+        }
+        priorSampleContact = true;
+      } else {
+        priorSampleContact = false;
       }
     }
-    if (intervalContact && !priorIntervalContact) risingContactTicks.push(tick);
-    priorIntervalContact = intervalContact;
     intervals.push({
       absoluteTick: tick,
       contact: intervalContact,
@@ -1561,6 +1586,7 @@ export function evaluateSweptContact(stateSeries, terminalTick = 80) {
   return {
     firstContact,
     firstContactTick: firstContact?.absoluteTick ?? null,
+    risingContacts,
     risingContactTicks,
     maximumPenetration,
     intervals
@@ -1571,6 +1597,8 @@ export function canonicalContactChecks(result) {
   if (!result || !Array.isArray(result.intervals)) evaluatorFail('SWEEP_RESULT_INVALID');
   const byTick = new Map(result.intervals.map((entry) => [entry.absoluteTick, entry]));
   const noContactThrough45 = result.intervals.filter((entry) => entry.absoluteTick <= 45).every((entry) => !entry.contact);
+  const canonicalRise = Array.isArray(result.risingContacts) && result.risingContacts.length === 1 ?
+    result.risingContacts[0] : null;
   const checks = {
     noContactThrough45,
     tick44Clearance: byTick.get(44)?.stateSeparation >= 0.080000,
@@ -1580,7 +1608,13 @@ export function canonicalContactChecks(result) {
       byTick.get(46)?.stateSeparation >= -0.005000 && byTick.get(46)?.stateSeparation <= EPS,
     penetrationBound: result.maximumPenetration >= -0.010000,
     tick48Departure: byTick.get(48)?.stateSeparation >= 0.030000,
-    noSecondRisingContact: result.risingContactTicks.length === 1 && result.risingContactTicks[0] === 46
+    noSecondRisingContact:
+      canonicalRise?.absoluteTick === 46 && Number.isSafeInteger(canonicalRise.substep) &&
+      canonicalRise.substep >= 1 && canonicalRise.substep <= SUBSTEPS &&
+      canonicalRise.capsuleID === result.firstContact?.capsuleID &&
+      canonicalRise.substep === result.firstContact?.substep &&
+      Array.isArray(result.risingContactTicks) && result.risingContactTicks.length === 1 &&
+      result.risingContactTicks[0] === 46
   };
   return { checks, pass: Object.values(checks).every(Boolean) };
 }
@@ -1667,6 +1701,27 @@ function sameIntegerVector(left, right) {
     left.every((value, index) => Number.isSafeInteger(value) && value === right[index]);
 }
 
+function hasExpectedRisingContacts(evaluatorResult, expectedTick) {
+  const expectedCount = expectedTick === null ? 0 : 1;
+  if (
+    !Array.isArray(evaluatorResult?.risingContacts) ||
+    !Array.isArray(evaluatorResult?.risingContactTicks) ||
+    evaluatorResult.risingContacts.length !== expectedCount ||
+    evaluatorResult.risingContactTicks.length !== expectedCount
+  ) return false;
+  for (let index = 0; index < evaluatorResult.risingContacts.length; index += 1) {
+    const rising = evaluatorResult.risingContacts[index];
+    try { assertExactKeys(rising, ['absoluteTick', 'substep', 'capsuleID'], 'RISING_CONTACT_SHAPE_INVALID'); }
+    catch { return false; }
+    if (
+      rising.absoluteTick !== expectedTick || evaluatorResult.risingContactTicks[index] !== rising.absoluteTick ||
+      !Number.isSafeInteger(rising.substep) || rising.substep < 1 || rising.substep > SUBSTEPS ||
+      !CAPSULE_SPECS.some(([capsuleID]) => capsuleID === rising.capsuleID)
+    ) return false;
+  }
+  return true;
+}
+
 export function validateCounterfactualRuns({ hitOffsets, missOffsets, hitRuns, missRuns }) {
   if (!Array.isArray(hitOffsets) || hitOffsets.length !== 3 || !Array.isArray(hitRuns) || hitRuns.length !== 3) {
     evaluatorFail('COUNTERFACTUAL_HIT_RUN_COUNT_INVALID');
@@ -1686,8 +1741,7 @@ export function validateCounterfactualRuns({ hitOffsets, missOffsets, hitRuns, m
     }
     if (
       run.evaluatorResult?.firstContactTick !== 46 ||
-      !Array.isArray(run.evaluatorResult.risingContactTicks) ||
-      run.evaluatorResult.risingContactTicks.length !== 1 || run.evaluatorResult.risingContactTicks[0] !== 46 ||
+      !hasExpectedRisingContacts(run.evaluatorResult, 46) ||
       !Number.isFinite(run.evaluatorResult.maximumPenetration) || run.evaluatorResult.maximumPenetration < -0.012000
     ) evaluatorFail('COUNTERFACTUAL_HIT_GEOMETRY_FAILED');
     validateHealthSeries(run.healthByTick, true);
@@ -1721,7 +1775,7 @@ export function validateCounterfactualRuns({ hitOffsets, missOffsets, hitRuns, m
     }
     if (
       run.evaluatorResult?.firstContactTick !== null ||
-      !Array.isArray(run.evaluatorResult.risingContactTicks) || run.evaluatorResult.risingContactTicks.length !== 0 ||
+      !hasExpectedRisingContacts(run.evaluatorResult, null) ||
       !Number.isFinite(run.evaluatorResult.maximumPenetration) || run.evaluatorResult.maximumPenetration < 0.250000
     ) evaluatorFail('COUNTERFACTUAL_MISS_CLEARANCE_FAILED');
     validateHealthSeries(run.healthByTick, false);
