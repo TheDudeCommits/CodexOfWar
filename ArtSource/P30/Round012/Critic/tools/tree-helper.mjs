@@ -6,8 +6,7 @@ import {
   lstat,
   open,
   readFile,
-  readdir,
-  realpath
+  readdir
 } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { isAbsolute, relative, resolve, sep } from 'node:path';
@@ -326,117 +325,279 @@ export function registerCaseFoldedPath(paths, candidate) {
   paths.set(folded, candidate);
 }
 
-async function hashOpenTreeFile(path, expectedInfo) {
+function snapshotEntry(info) {
+  return {
+    dev: info.dev,
+    ino: info.ino,
+    mode: info.mode,
+    nlink: info.nlink,
+    size: info.size,
+    mtimeNs: info.mtimeNs,
+    ctimeNs: info.ctimeNs
+  };
+}
+
+function sameIdentity(left, right) {
+  return left.dev === right.dev && left.ino === right.ino;
+}
+
+function sameSnapshot(left, right) {
+  return (
+    sameIdentity(left, right) &&
+    left.mode === right.mode &&
+    left.nlink === right.nlink &&
+    left.size === right.size &&
+    left.mtimeNs === right.mtimeNs &&
+    left.ctimeNs === right.ctimeNs
+  );
+}
+
+function entryKind(info) {
+  if (info.isSymbolicLink()) return 'symlink';
+  if (info.isDirectory()) return 'directory';
+  if (info.isFile()) return 'file';
+  return 'special';
+}
+
+async function pathInfo(path, missingCode = 'TREE_ENTRY_REPLACED') {
+  try {
+    return await lstat(path, { bigint: true });
+  } catch {
+    treeFail(missingCode);
+  }
+}
+
+async function openFrozenEntry(path, expectedInfo, kind) {
   let handle;
   try {
-    handle = await open(path, fsConstants.O_RDONLY | (fsConstants.O_NOFOLLOW ?? 0));
-    const before = await handle.stat({ bigint: true });
-    if (!before.isFile()) treeFail('TREE_NOT_REGULAR_FILE');
-    if (before.dev !== expectedInfo.dev || before.ino !== expectedInfo.ino) treeFail('TREE_ENTRY_REPLACED');
-    if (before.nlink !== 1n) treeFail('TREE_HARDLINK_FORBIDDEN');
-    const hash = createHash('sha256');
-    for await (const chunk of handle.createReadStream({ autoClose: false })) hash.update(chunk);
-    const after = await handle.stat({ bigint: true });
-    if (
-      before.dev !== after.dev ||
-      before.ino !== after.ino ||
-      before.size !== after.size ||
-      before.mtimeNs !== after.mtimeNs ||
-      before.mode !== after.mode ||
-      before.nlink !== after.nlink
-    ) {
-      treeFail('TREE_FILE_MUTATED');
+    const directoryFlag = kind === 'directory' ? (fsConstants.O_DIRECTORY ?? 0) : 0;
+    handle = await open(
+      path,
+      fsConstants.O_RDONLY | directoryFlag | (fsConstants.O_NOFOLLOW ?? 0)
+    );
+    const openedInfo = await handle.stat({ bigint: true });
+    if (entryKind(openedInfo) !== kind || !sameIdentity(openedInfo, expectedInfo)) {
+      treeFail('TREE_ENTRY_REPLACED');
     }
+    if (kind === 'file' && openedInfo.nlink !== 1n) treeFail('TREE_HARDLINK_FORBIDDEN');
     return {
-      bytes: before.size,
-      mode: Number(before.mode & 0o777n),
+      path,
+      kind,
+      handle,
+      snapshot: snapshotEntry(openedInfo)
+    };
+  } catch (error) {
+    await handle?.close().catch(() => {});
+    if (error instanceof Round012TreeError) throw error;
+    treeFail('TREE_ENTRY_OPEN_FAILED');
+  }
+}
+
+async function assertFrozenEntry(entry) {
+  const currentPathInfo = await pathInfo(entry.path);
+  if (currentPathInfo.isSymbolicLink()) treeFail('TREE_SYMLINK_FORBIDDEN');
+  if (entryKind(currentPathInfo) !== entry.kind || !sameIdentity(currentPathInfo, entry.snapshot)) {
+    treeFail('TREE_ENTRY_REPLACED');
+  }
+  if (!sameSnapshot(snapshotEntry(currentPathInfo), entry.snapshot)) {
+    treeFail(entry.kind === 'file' ? 'TREE_FILE_MUTATED' : 'TREE_DIRECTORY_MUTATED');
+  }
+
+  let handleInfo;
+  try {
+    handleInfo = await entry.handle.stat({ bigint: true });
+  } catch {
+    treeFail('TREE_FROZEN_HANDLE_FAILED');
+  }
+  if (entryKind(handleInfo) !== entry.kind || !sameSnapshot(snapshotEntry(handleInfo), entry.snapshot)) {
+    treeFail(entry.kind === 'file' ? 'TREE_FILE_MUTATED' : 'TREE_DIRECTORY_MUTATED');
+  }
+  if (entry.kind === 'file' && handleInfo.nlink !== 1n) treeFail('TREE_HARDLINK_FORBIDDEN');
+}
+
+async function closeFrozenTree(selection) {
+  if (!selection) return;
+  for (const entry of [...selection.files, ...selection.directories].reverse()) {
+    await entry.handle.close().catch(() => {});
+  }
+}
+
+async function freezeTree(rootPath) {
+  const root = resolve(rootPath);
+  let rootInfo;
+  try {
+    rootInfo = await lstat(root, { bigint: true });
+  } catch {
+    treeFail('TREE_ROOT_MISSING');
+  }
+  if (rootInfo.isSymbolicLink() || !rootInfo.isDirectory()) treeFail('TREE_ROOT_NOT_DIRECTORY');
+
+  const selection = {
+    root,
+    files: [],
+    directories: [],
+    foldedPaths: new Map(),
+    inodeOwners: new Map()
+  };
+  try {
+    const rootEntry = await openFrozenEntry(root, rootInfo, 'directory');
+    rootEntry.relative = '';
+    selection.directories.push(rootEntry);
+
+    async function walk(directoryEntry) {
+      await assertFrozenEntry(directoryEntry);
+      let names;
+      try {
+        names = await readdir(directoryEntry.path);
+      } catch {
+        treeFail('TREE_DIRECTORY_READ_FAILED');
+      }
+      names.sort(compareUtf8);
+      directoryEntry.names = names;
+
+      for (const name of names) {
+        assertNfcString(name, 'TREE_NON_NFC_PATH');
+        const relativePath = directoryEntry.relative ? `${directoryEntry.relative}/${name}` : name;
+        validateRelativePath(relativePath);
+        registerCaseFoldedPath(selection.foldedPaths, relativePath);
+        const absolute = resolve(directoryEntry.path, name);
+        let calculatedRelative = relative(root, absolute);
+        if (sep !== '/') calculatedRelative = calculatedRelative.split(sep).join('/');
+        if (calculatedRelative !== relativePath) treeFail('TREE_PATH_ESCAPE');
+
+        const info = await pathInfo(absolute);
+        const kind = entryKind(info);
+        if (kind === 'symlink') treeFail('TREE_SYMLINK_FORBIDDEN');
+        if (kind === 'special') treeFail('TREE_SPECIAL_ENTRY_FORBIDDEN');
+        if (kind === 'file' && info.nlink !== 1n) treeFail('TREE_HARDLINK_FORBIDDEN');
+
+        const entry = await openFrozenEntry(absolute, info, kind);
+        entry.relative = relativePath;
+        if (kind === 'directory') {
+          selection.directories.push(entry);
+          await walk(entry);
+        } else {
+          const inodeKey = `${entry.snapshot.dev}:${entry.snapshot.ino}`;
+          if (selection.inodeOwners.has(inodeKey)) {
+            await entry.handle.close().catch(() => {});
+            treeFail('TREE_HARDLINK_ALIAS_FORBIDDEN');
+          }
+          selection.inodeOwners.set(inodeKey, relativePath);
+          selection.files.push(entry);
+        }
+      }
+      await assertFrozenEntry(directoryEntry);
+    }
+
+    await walk(rootEntry);
+    selection.files.sort((left, right) => compareUtf8(left.relative, right.relative));
+    selection.directories.sort((left, right) => compareUtf8(left.relative, right.relative));
+    return selection;
+  } catch (error) {
+    await closeFrozenTree(selection);
+    throw error;
+  }
+}
+
+async function validateFrozenTree(selection) {
+  for (const directory of [...selection.directories].reverse()) {
+    await assertFrozenEntry(directory);
+    let finalNames;
+    try {
+      finalNames = await readdir(directory.path);
+    } catch {
+      treeFail('TREE_DIRECTORY_REENUMERATION_FAILED');
+    }
+    finalNames.sort(compareUtf8);
+    if (
+      finalNames.length !== directory.names.length ||
+      finalNames.some((name, index) => name !== directory.names[index])
+    ) {
+      treeFail('TREE_DIRECTORY_MUTATED');
+    }
+  }
+  for (const file of selection.files) await assertFrozenEntry(file);
+  // A second reverse pass closes the validation window for nested entries:
+  // every child is checked before its parent is checked again.
+  for (const directory of [...selection.directories].reverse()) await assertFrozenEntry(directory);
+}
+
+async function hashFrozenFile(entry) {
+  try {
+    await assertFrozenEntry(entry);
+    const hash = createHash('sha256');
+    for await (const chunk of entry.handle.createReadStream({ autoClose: false })) hash.update(chunk);
+    await assertFrozenEntry(entry);
+    return {
+      bytes: entry.snapshot.size,
+      mode: Number(entry.snapshot.mode & 0o777n),
       digest: hash.digest()
     };
   } catch (error) {
     if (error instanceof Round012TreeError) throw error;
     treeFail('TREE_FILE_HASH_FAILED');
-  } finally {
-    await handle?.close();
   }
 }
 
 export async function enumerateTree(rootPath) {
-  const requestedRoot = resolve(rootPath);
-  let rootInfo;
+  let selection;
   try {
-    rootInfo = await lstat(requestedRoot, { bigint: true });
-  } catch {
-    treeFail('TREE_ROOT_MISSING');
+    selection = await freezeTree(rootPath);
+    await validateFrozenTree(selection);
+    return {
+      root: selection.root,
+      files: selection.files.map((entry) => ({
+        absolute: entry.path,
+        relative: entry.relative,
+        info: entry.snapshot
+      }))
+    };
+  } finally {
+    await closeFrozenTree(selection);
   }
-  if (!rootInfo.isDirectory() || rootInfo.isSymbolicLink()) treeFail('TREE_ROOT_NOT_DIRECTORY');
-  const root = await realpath(requestedRoot);
-  const files = [];
-  const foldedPaths = new Map();
-  const inodeOwners = new Map();
-
-  async function walk(directory, relativeDirectory) {
-    const names = await readdir(directory);
-    names.sort(compareUtf8);
-    for (const name of names) {
-      assertNfcString(name, 'TREE_NON_NFC_PATH');
-      const absolute = resolve(directory, name);
-      let relativePath = relative(root, absolute);
-      if (sep !== '/') relativePath = relativePath.split(sep).join('/');
-      validateRelativePath(relativePath);
-      if (relativeDirectory && !relativePath.startsWith(`${relativeDirectory}/`)) treeFail('TREE_PATH_ESCAPE');
-      registerCaseFoldedPath(foldedPaths, relativePath);
-      const info = await lstat(absolute, { bigint: true });
-      if (info.isSymbolicLink()) treeFail('TREE_SYMLINK_FORBIDDEN');
-      if (info.isDirectory()) {
-        await walk(absolute, relativePath);
-        continue;
-      }
-      if (!info.isFile()) treeFail('TREE_SPECIAL_ENTRY_FORBIDDEN');
-      if (info.nlink !== 1n) treeFail('TREE_HARDLINK_FORBIDDEN');
-      const inodeKey = `${info.dev}:${info.ino}`;
-      if (inodeOwners.has(inodeKey)) treeFail('TREE_HARDLINK_ALIAS_FORBIDDEN');
-      inodeOwners.set(inodeKey, relativePath);
-      files.push({ absolute, relative: relativePath, info });
-    }
-  }
-
-  await walk(root, '');
-  files.sort((left, right) => compareUtf8(left.relative, right.relative));
-  return { root, files };
 }
 
 export async function hashTree(rootPath) {
-  const selection = await enumerateTree(rootPath);
-  const hash = createHash('sha256');
-  hash.update(utf8(TREE_DOMAIN));
-  hash.update(Buffer.from([0]));
-  hash.update(u64be(selection.files.length));
-  let totalBytes = 0n;
-  const entries = [];
-  for (const file of selection.files) {
-    const pathBytes = utf8(file.relative);
-    const content = await hashOpenTreeFile(file.absolute, file.info);
-    hash.update(u32be(pathBytes.length));
-    hash.update(pathBytes);
-    hash.update(u32be(content.mode));
-    hash.update(u64be(content.bytes));
-    hash.update(content.digest);
-    totalBytes += content.bytes;
-    entries.push({
-      path: file.relative,
-      mode: content.mode.toString(8).padStart(3, '0'),
-      bytes: content.bytes.toString(),
-      sha256: content.digest.toString('hex')
-    });
+  let selection;
+  try {
+    selection = await freezeTree(rootPath);
+    await validateFrozenTree(selection);
+    const hash = createHash('sha256');
+    hash.update(utf8(TREE_DOMAIN));
+    hash.update(Buffer.from([0]));
+    hash.update(u64be(selection.files.length));
+    let totalBytes = 0n;
+    const entries = [];
+    for (const file of selection.files) {
+      const pathBytes = utf8(file.relative);
+      const content = await hashFrozenFile(file);
+      hash.update(u32be(pathBytes.length));
+      hash.update(pathBytes);
+      hash.update(u32be(content.mode));
+      hash.update(u64be(content.bytes));
+      hash.update(content.digest);
+      totalBytes += content.bytes;
+      entries.push({
+        path: file.relative,
+        mode: content.mode.toString(8).padStart(3, '0'),
+        bytes: content.bytes.toString(),
+        sha256: content.digest.toString('hex')
+      });
+    }
+    await validateFrozenTree(selection);
+    const result = {
+      schema: TREE_SCHEMA,
+      domain: TREE_DOMAIN,
+      fileCount: entries.length,
+      totalBytes: totalBytes.toString(),
+      treeSha256: hash.digest('hex'),
+      entries
+    };
+    await validateFrozenTree(selection);
+    return result;
+  } finally {
+    await closeFrozenTree(selection);
   }
-  return {
-    schema: TREE_SCHEMA,
-    domain: TREE_DOMAIN,
-    fileCount: entries.length,
-    totalBytes: totalBytes.toString(),
-    treeSha256: hash.digest('hex'),
-    entries
-  };
 }
 
 function usage() {
