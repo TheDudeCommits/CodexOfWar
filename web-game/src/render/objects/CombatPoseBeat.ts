@@ -11,6 +11,11 @@ export interface HeroCombatPoseSample {
   schema: "cow.hero-combat-pose.v1";
   phase: "neutral" | "anticipation" | "contact" | "recoil" | "recovery";
   attackFrame: number;
+  presentation: {
+    authoredAnimationSeconds: number;
+    weaponAxialRoll: number;
+    sameDirection01: number;
+  };
   model: PoseTransform;
   bones: {
     pelvis: PoseVector;
@@ -37,6 +42,7 @@ export interface TargetCombatPoseSample {
 
 interface HeroPoseKey {
   frame: number;
+  presentation: HeroCombatPoseSample["presentation"];
   model: PoseTransform;
   bones: HeroCombatPoseSample["bones"];
 }
@@ -49,18 +55,30 @@ interface TargetPoseKey {
 
 const ZERO: PoseVector = [0, 0, 0];
 const NEUTRAL_TRANSFORM: PoseTransform = { position: ZERO, rotation: ZERO };
+const BASE_WEAPON_AXIAL_ROLL = 0.6;
 
 // These are deliberately additive presentation offsets. The authored clip
-// continues to own the hands, feet, weapon socket, and timing; the keys add a
-// compact whole-body force arc without changing any simulation state.
+// continues to own the hands, feet, and weapon socket; the presentation clock
+// holds its exterior-contact pose while the additive keys carry the body into
+// the same-direction braking arc without changing any simulation state.
 const HERO_KEYS: readonly HeroPoseKey[] = [
   {
     frame: -1,
+    presentation: {
+      authoredAnimationSeconds: 0,
+      weaponAxialRoll: BASE_WEAPON_AXIAL_ROLL,
+      sameDirection01: 0,
+    },
     model: NEUTRAL_TRANSFORM,
     bones: { pelvis: ZERO, spine01: ZERO, spine02: ZERO, spine03: ZERO, neck: ZERO },
   },
   {
     frame: 0,
+    presentation: {
+      authoredAnimationSeconds: 0,
+      weaponAxialRoll: BASE_WEAPON_AXIAL_ROLL,
+      sameDirection01: 0,
+    },
     model: { position: [0, -0.008, 0.006], rotation: [0.008, 0.018, -0.008] },
     bones: {
       pelvis: [0.008, -0.025, 0.012],
@@ -72,6 +90,11 @@ const HERO_KEYS: readonly HeroPoseKey[] = [
   },
   {
     frame: 5,
+    presentation: {
+      authoredAnimationSeconds: 5 / 60,
+      weaponAxialRoll: BASE_WEAPON_AXIAL_ROLL,
+      sameDirection01: 0,
+    },
     model: { position: [-0.026, -0.052, 0.026], rotation: [0.02, 0.07, -0.036] },
     bones: {
       pelvis: [0.032, -0.095, 0.058],
@@ -82,28 +105,73 @@ const HERO_KEYS: readonly HeroPoseKey[] = [
     },
   },
   {
+    frame: 8,
+    presentation: {
+      authoredAnimationSeconds: 8 / 60,
+      weaponAxialRoll: BASE_WEAPON_AXIAL_ROLL,
+      sameDirection01: 0.2,
+    },
+    model: {
+      position: [-0.008254, -0.005714, 0.011111],
+      rotation: [0.006349, 0.022222, -0.011429],
+    },
+    bones: {
+      pelvis: [0.010159, -0.030159, 0.018413],
+      spine01: [-0.010794, 0.01746, -0.013968],
+      spine02: [-0.013968, 0.02381, -0.017143],
+      spine03: [-0.010159, 0.028571, -0.013968],
+      neck: [0.007619, -0.014286, 0.008254],
+    },
+  },
+  {
     frame: 10,
-    model: NEUTRAL_TRANSFORM,
+    presentation: {
+      authoredAnimationSeconds: 10 / 60,
+      weaponAxialRoll: -0.43,
+      sameDirection01: 0.56,
+    },
+    model: { position: [0, 0, 0.19], rotation: ZERO },
     bones: { pelvis: ZERO, spine01: ZERO, spine02: ZERO, spine03: ZERO, neck: ZERO },
   },
   {
     frame: 17,
-    model: { position: [-0.028, 0, 0], rotation: ZERO },
-    bones: { pelvis: ZERO, spine01: ZERO, spine02: ZERO, spine03: ZERO, neck: ZERO },
+    presentation: {
+      authoredAnimationSeconds: 0.2,
+      weaponAxialRoll: 1.82,
+      sameDirection01: 1,
+    },
+    model: { position: [-0.045, 0, 0.13], rotation: [0, 0.02, 0] },
+    bones: {
+      pelvis: [0.02, 0.045, 0.02],
+      spine01: [0.08, -0.16, -0.025],
+      spine02: [0.11, -0.25, -0.035],
+      spine03: [0.14, -0.34, -0.045],
+      neck: [-0.1, 0.18, 0.035],
+    },
   },
   {
     frame: 22,
-    model: { position: [-0.012, -0.018, 0.035], rotation: [0.02, -0.025, -0.018] },
+    presentation: {
+      authoredAnimationSeconds: 0.2,
+      weaponAxialRoll: 1.48,
+      sameDirection01: 0.78,
+    },
+    model: { position: [-0.025, -0.008, 0.1], rotation: [0, 0.012, 0] },
     bones: {
-      pelvis: [0.018, -0.025, 0.026],
-      spine01: [0.022, 0.03, -0.024],
-      spine02: [0.026, 0.036, -0.028],
-      spine03: [0.02, 0.03, -0.022],
-      neck: [-0.012, -0.014, 0.012],
+      pelvis: [0.014, 0.028, 0.014],
+      spine01: [0.05, -0.1, -0.017],
+      spine02: [0.07, -0.16, -0.024],
+      spine03: [0.085, -0.22, -0.03],
+      neck: [-0.065, 0.115, 0.024],
     },
   },
   {
     frame: 25,
+    presentation: {
+      authoredAnimationSeconds: 0.2,
+      weaponAxialRoll: BASE_WEAPON_AXIAL_ROLL,
+      sameDirection01: 0,
+    },
     model: NEUTRAL_TRANSFORM,
     bones: { pelvis: ZERO, spine01: ZERO, spine02: ZERO, spine03: ZERO, neck: ZERO },
   },
@@ -175,6 +243,24 @@ function mixTransform(from: PoseTransform, to: PoseTransform, amount: number): P
   };
 }
 
+function mixPresentation(
+  from: HeroCombatPoseSample["presentation"],
+  to: HeroCombatPoseSample["presentation"],
+  amount: number,
+): HeroCombatPoseSample["presentation"] {
+  return {
+    authoredAnimationSeconds:
+      from.authoredAnimationSeconds +
+      (to.authoredAnimationSeconds - from.authoredAnimationSeconds) * amount,
+    weaponAxialRoll: rounded(
+      from.weaponAxialRoll + (to.weaponAxialRoll - from.weaponAxialRoll) * amount,
+    ),
+    sameDirection01: rounded(
+      from.sameDirection01 + (to.sameDirection01 - from.sameDirection01) * amount,
+    ),
+  };
+}
+
 function heroKeyPair(frame: number): readonly [HeroPoseKey, HeroPoseKey, number] {
   for (let index = 0; index < HERO_KEYS.length - 1; index += 1) {
     const from = HERO_KEYS[index]!;
@@ -241,6 +327,11 @@ export function sampleHeroCombatPose(
       schema: "cow.hero-combat-pose.v1",
       phase: "neutral",
       attackFrame: -1,
+      presentation: {
+        authoredAnimationSeconds: 0,
+        weaponAxialRoll: BASE_WEAPON_AXIAL_ROLL,
+        sameDirection01: 0,
+      },
       model: NEUTRAL_TRANSFORM,
       bones: { pelvis: ZERO, spine01: ZERO, spine02: ZERO, spine03: ZERO, neck: ZERO },
     };
@@ -259,6 +350,7 @@ export function sampleHeroCombatPose(
             ? "recoil"
             : "recovery",
     attackFrame: frame,
+    presentation: mixPresentation(from.presentation, to.presentation, amount),
     model: mixTransform(from.model, to.model, amount),
     bones: mixHeroBones(from.bones, to.bones, amount),
   };

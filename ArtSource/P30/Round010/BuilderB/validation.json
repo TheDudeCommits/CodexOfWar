@@ -1,0 +1,83 @@
+{
+  "schema": "p30.round010.builder-b.validation.v1",
+  "baselineCommit": "ed9cc22717cac6c7c1933e85fa01d1808a38137d",
+  "branch": "codex/p30-r010-cinematic-builder",
+  "candidateOnly": true,
+  "acceptanceClaimed": false,
+  "runtime": {
+    "node": "v24.18.0",
+    "npm": "11.16.0",
+    "cleanInstall": {
+      "passed": true,
+      "packages": 191,
+      "vulnerabilities": 0
+    },
+    "typecheckPassed": true,
+    "lintPassed": true,
+    "unitSuites": {
+      "filesPassed": 5,
+      "testsPassed": 19,
+      "testsFailed": 0
+    },
+    "productionBuildPassed": true,
+    "serialActualGameChrome": {
+      "passed": true,
+      "testsPassed": 4,
+      "testsFailed": 0,
+      "workers": 1,
+      "browser": "Google Chrome 150.0.7871.187"
+    }
+  },
+  "captureValidation": {
+    "headedChrome": true,
+    "viewport": {
+      "width": 1600,
+      "height": 900,
+      "deviceScaleFactor": 1
+    },
+    "receiptGatesPassed": 20,
+    "receiptGateCount": 20,
+    "poseGatesPassed": 9,
+    "poseGateCount": 9,
+    "runtimeGatesPassed": 9,
+    "runtimeGateCount": 9,
+    "focusedCaptures": [
+      {
+        "tick": 29,
+        "path": "ArtSource/P30/Round010/BuilderB/F29-startup.png",
+        "sha256": "93cddc63ef29f67d94923fa59f4b3d76dcc5aceed4fa98f24acfe53ac03ced14"
+      },
+      {
+        "tick": 34,
+        "path": "ArtSource/P30/Round010/BuilderB/F34-impact.png",
+        "sha256": "a86b0be7b6bbc60f99432ad397e39fac1c55be69015471c504448962fc8b4c2d"
+      },
+      {
+        "tick": 41,
+        "path": "ArtSource/P30/Round010/BuilderB/F41-recovery.png",
+        "sha256": "afb140dcded9caafa54785561b473b83ed1e04f0cd3d27861fd528c2f9aa7447"
+      }
+    ],
+    "independentColdBrowserRecapture": {
+      "passed": true,
+      "focusedHashesMatched": 3,
+      "focusedHashCount": 3
+    },
+    "repeatedRenderByteIdentical": true,
+    "cleanReplayByteIdentical": true,
+    "stabilityDurationMilliseconds": 30046.2,
+    "meanFps": 59.667,
+    "resourceGrowth": false,
+    "webglContextLossRestorePassed": true
+  },
+  "sourceAudit": {
+    "authorizedProductionFiles": [
+      "web-game/src/render/objects/CharacterViews.ts",
+      "web-game/src/render/objects/CombatPoseBeat.ts"
+    ],
+    "unchangedUnauthorizedProductionFiles": 67,
+    "unexpectedProductionDifferences": 0,
+    "passed": true
+  },
+  "singleBiggestRemainingVisualWeakness": "The recovery's broad blade face still overlaps part of the Hollow's lower-leg silhouette, so the braking pose reads more clearly than its final actor-to-weapon separation."
+}

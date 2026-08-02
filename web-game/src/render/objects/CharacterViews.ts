@@ -75,11 +75,14 @@ export interface BladeTrailFxAuditApi {
 
 interface PoseAnchorTelemetry {
   pelvisWorld: PoseVector | null;
+  leftFootWorld: PoseVector | null;
+  rightFootWorld: PoseVector | null;
   leadHandWorld: PoseVector | null;
   supportHandWorld: PoseVector | null;
   secondaryGripWorld: PoseVector | null;
   bladeContactWorld: PoseVector | null;
   bladeTipWorld: PoseVector | null;
+  bladeFaceNormalWorld: PoseVector | null;
 }
 
 interface TargetAnchorTelemetry {
@@ -136,11 +139,14 @@ const poseAuditState: {
     weaponParent: null,
     anchors: {
       pelvisWorld: null,
+      leftFootWorld: null,
+      rightFootWorld: null,
       leadHandWorld: null,
       supportHandWorld: null,
       secondaryGripWorld: null,
       bladeContactWorld: null,
       bladeTipWorld: null,
+      bladeFaceNormalWorld: null,
     },
     supportHandToSecondaryGripMeters: null,
   },
@@ -189,6 +195,15 @@ function worldPoint(node: THREE.Object3D | null): PoseVector | null {
   if (!node) return null;
   const point = node.getWorldPosition(new THREE.Vector3());
   return [roundFx(point.x), roundFx(point.y), roundFx(point.z)];
+}
+
+function worldDirection(node: THREE.Object3D | null, local: THREE.Vector3): PoseVector | null {
+  if (!node) return null;
+  const direction = local
+    .clone()
+    .applyQuaternion(node.getWorldQuaternion(new THREE.Quaternion()))
+    .normalize();
+  return [roundFx(direction.x), roundFx(direction.y), roundFx(direction.z)];
 }
 
 function pointDistance(from: PoseVector | null, to: PoseVector | null): number | null {
@@ -366,6 +381,7 @@ export class HeroView {
   private trailSample = sampleBladeTrailFx("idle", 0);
   private trailAuditVisible = true;
   private animator: DeterministicAnimator | null = null;
+  private authoredWeapon: THREE.Object3D | null = null;
   private fallbackWeapon: THREE.Group | null = null;
   private latestPose = sampleHeroCombatPose("idle", -1);
   private readonly poseBones: Record<"pelvis" | "spine01" | "spine02" | "spine03" | "neck", THREE.Object3D | null> = {
@@ -380,9 +396,17 @@ export class HeroView {
     THREE.Quaternion | null
   > = { pelvis: null, spine01: null, spine02: null, spine03: null, neck: null };
   private readonly poseAnchors: Record<
-    "leadHand" | "supportHand" | "secondaryGrip" | "bladeContact" | "bladeTip",
+    | "leftFoot"
+    | "rightFoot"
+    | "leadHand"
+    | "supportHand"
+    | "secondaryGrip"
+    | "bladeContact"
+    | "bladeTip",
     THREE.Object3D | null
   > = {
+    leftFoot: null,
+    rightFoot: null,
     leadHand: null,
     supportHand: null,
     secondaryGrip: null,
@@ -454,6 +478,7 @@ export class HeroView {
       weapon.scene.rotation.set(0, ROUND005_WEAPON_AXIAL_ROLL, 0);
       weapon.scene.scale.setScalar(1);
       weaponSocket.add(weapon.scene);
+      this.authoredWeapon = weapon.scene;
       this.visual.add(hero.scene);
       this.animator = new DeterministicAnimator(hero.scene, clips);
       this.poseBones.pelvis = hero.scene.getObjectByName("pelvis") ?? null;
@@ -461,6 +486,8 @@ export class HeroView {
       this.poseBones.spine02 = hero.scene.getObjectByName("spine_02") ?? null;
       this.poseBones.spine03 = hero.scene.getObjectByName("spine_03") ?? null;
       this.poseBones.neck = hero.scene.getObjectByName("neck_01") ?? null;
+      this.poseAnchors.leftFoot = hero.scene.getObjectByName("foot_l") ?? null;
+      this.poseAnchors.rightFoot = hero.scene.getObjectByName("foot_r") ?? null;
       this.poseAnchors.leadHand = hero.scene.getObjectByName("hand_r") ?? null;
       this.poseAnchors.supportHand = hero.scene.getObjectByName("hand_l") ?? null;
       this.poseAnchors.secondaryGrip = weapon.scene.getObjectByName("GripSecondary") ?? null;
@@ -586,12 +613,15 @@ export class HeroView {
     this.root.position.set(state.position.x, 0, state.position.z);
     this.root.rotation.y = -state.yaw;
 
+    this.latestPose = sampleHeroCombatPose(state.attackPhase, state.attackFrame);
     this.restoreAuthoredPose();
-    if (this.animator) this.updateAuthoredAnimation(state, elapsed);
+    if (this.animator) this.updateAuthoredAnimation(state, elapsed, this.latestPose);
     else this.updateFallbackAnimation(state, elapsed);
     this.captureAuthoredPose();
-    this.latestPose = sampleHeroCombatPose(state.attackPhase, state.attackFrame);
     this.applyCombatPose(this.latestPose);
+    if (this.authoredWeapon) {
+      this.authoredWeapon.rotation.y = this.latestPose.presentation.weaponAxialRoll;
+    }
 
     this.trailSample = sampleBladeTrailFx(state.attackPhase, state.attackElapsed);
     this.applyTrailVisuals();
@@ -689,24 +719,38 @@ export class HeroView {
       weaponParent: this.root.getObjectByName("stormcage-two-hand-socket")?.parent?.name ?? null,
       anchors: {
         pelvisWorld: worldPoint(this.poseBones.pelvis),
+        leftFootWorld: worldPoint(this.poseAnchors.leftFoot),
+        rightFootWorld: worldPoint(this.poseAnchors.rightFoot),
         leadHandWorld: worldPoint(this.poseAnchors.leadHand),
         supportHandWorld,
         secondaryGripWorld,
         bladeContactWorld: worldPoint(this.poseAnchors.bladeContact),
         bladeTipWorld: worldPoint(this.poseAnchors.bladeTip),
+        bladeFaceNormalWorld: worldDirection(
+          this.authoredWeapon ?? this.fallbackWeapon,
+          new THREE.Vector3(0, 0, 1),
+        ),
       },
       supportHandToSecondaryGripMeters: pointDistance(supportHandWorld, secondaryGripWorld),
     };
   }
 
-  private updateAuthoredAnimation(state: PlayerState, elapsed: number): void {
+  private updateAuthoredAnimation(
+    state: PlayerState,
+    elapsed: number,
+    pose: HeroCombatPoseSample,
+  ): void {
     const animator = this.animator!;
     if (state.motion === "attack") {
-      // The Round005 attack key times were authored directly against the
-      // deterministic simulation clock (24 fps). Preserve that clock so the
-      // frame-4 contact pose lands on runtime tick 34 instead of compressing
-      // the 0.4167 s clip across the 0.4333 s attack state.
-      animator.setTime("Sword_Regular_A", state.attackElapsed, false);
+      // The presentation clock follows the deterministic attack through the
+      // authored frame-4 contact at runtime tick 34, then holds that low plane
+      // while the additive torso keys carry the recovery through its braking
+      // arc. Simulation timing and the hit event remain untouched.
+      animator.setTime(
+        "Sword_Regular_A",
+        pose.presentation.authoredAnimationSeconds,
+        false,
+      );
       return;
     }
     if (state.motion === "dodge") {
