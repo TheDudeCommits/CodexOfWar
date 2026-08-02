@@ -21,28 +21,33 @@
     "pieceId": "P30",
     "round": 7,
     "roundLabel": "P30 · Round 007",
-    "status": "building",
-    "builder": "Deterministic Close Over-Shoulder Camera",
-    "brief": "Replace only the third-person camera module and its telemetry and tests with a deterministic close over-shoulder combat profile, complete reset-state clearing, and real boom obstruction. Keep simulation, timing, assets, combat geometry, environment, HUD, lighting, effects, post processing, and manifest unchanged.",
+    "status": "review-ready",
+    "builder": "Selected Adaptive Duel Camera Candidate",
+    "brief": "Two fresh isolated camera builders passed the complete technical gate. Builder B's deterministic adaptive 50-degree duel composer won the root capture selection, is integrated and frozen at commit 6b953f563c68a81f4635aaa081bfeb664f3aee57, and is now under fresh independent headed review. No visual verdict or acceptance claim is made.",
     "facts": [
       "P00 is accepted as infrastructure; its blind visual baseline remains an explicit 28.33–76.67 loss.",
       "P10 remains paused after rejected Round 017 and the unfiled Unity Round 018 stop; it is not the active browser-work lane.",
       "P30 Round 005 remains rejected candidate evidence at 23/100 with 0/3 focused and 0/6 overall candidate wins.",
       "Round006 is frozen at commit 01a4c652a5a30137ae0c82cc6cd6f063f2c91ca6 and is rejected candidate evidence at 23/100 with 0/3 focused and 0/6 overall wins.",
-      "The fresh critic independently proved six RGB 1600×900 headed Chrome 150 captures at DPR 1 on WebGL2 through ANGLE Metal on Apple M2 before sealing the anonymous comparison.",
-      "Round006 passes its palm, blade-clearance, active target-contact, contact-marker, and embedded Nyra plus Stormcage PBR gates.",
-      "All 18 authored runtime assets load without fallback. Maximum cost remains 86 calls, 204,155 triangles, 32 textures, and 38 geometries.",
-      "Three true-cold launches completed in 1.436 s, 1.446 s, and 1.791 s against the 4.109 s ceiling.",
-      "The 30-second sample averaged 59.87 fps with an 18.4 ms p95; WebGL context loss and restore passed.",
-      "Camera replay failed with up to 5.176 cm of position divergence at tick 34, and boom obstruction is still unimplemented.",
+      "Round007 fanned out two fresh isolated implementations from exact baseline d95a0904151de6217838fcf6b69d3aba81e125ca: a fixed 54-degree shoulder rig and an adaptive 50-degree duel composer.",
+      "Both builders independently passed framing, deterministic replay, wall and clear boom obstruction, readiness, resource, authored-asset, build, and browser gates.",
+      "Root inspection selected Builder B because its S03-S05 captures give the duel greater frame occupancy and less dead floor while keeping both actors and the complete blade safe.",
+      "The selected candidate is integrated and frozen at commit 6b953f563c68a81f4635aaa081bfeb664f3aee57; Builder A remains an unmerged alternate.",
+      "Selected S03, S04, and S05 project Nyra at 406.892, 388.327, and 397.305 pixels. The worst actor or blade margin is 80.098 pixels.",
+      "S04 contact lands at 957.916 by 513.340 pixels inside the central 40 percent of the 1600×900 viewport.",
+      "Three clean camera replays are byte-identical at ticks 29, 34, 41, and 60.",
+      "The wall boom resolves from 5.260 m to 2.443 m with collision applied and 0.450 m clearance; the clear boom resolves exactly to 5.260 m.",
+      "Three headed cold launches completed in 3.624 s, 2.294 s, and 1.552 s against the 4.109 s ceiling.",
+      "All 18 authored assets load without fallback. Maximum cost remains 86 calls, 204,155 triangles, 32 textures, and 38 geometries.",
+      "Root Node 24 validation passes clean install, lint, typecheck, five simulation tests, five camera tests, production build, and three browser smoke tests.",
+      "The 106-entry Round006 freeze audit finds only the three authorized camera and diagnostic production differences; every frozen visual payload and simulation system remains exact.",
       "Repository-wide LFS integrity also fails on eight historical PNG blobs, although all 18 runtime assets are real bytes.",
-      "The critic named combat camera presentation as the single biggest visible gap: distant overlapping actors and excessive dead floor hide the corrected contact and materials.",
-      "Round007 is fanned out to two fresh independent camera builders: a conservative fixed shoulder rig and an adaptive duel composer.",
-      "Round007 changes only camera code, minimal wiring, telemetry, and tests; every visual asset, combat state, environment, HUD, and render contract stays frozen.",
+      "A fresh critic with no builder context is recapturing the exact frozen commit and sealing anonymous comparison mappings and scores before reveal.",
+      "The selected camera is builder-pass evidence only. Frozen anatomy, poses, effects, materials, and arena art remain visibly prototype-like pending the critic verdict.",
       "The global latest capture manifest remains intentionally pinned to accepted P00."
     ],
     "evidenceFingerprint": {
-      "auditContext": "Fresh independent Round006 critic complete",
+      "auditContext": "Selected frozen Round007 builder capture; independent critic running",
       "browser": "Google Chrome 150",
       "graphics": "WebGL2 · ANGLE Metal Renderer: Apple M2",
       "headed": true,
@@ -51,33 +56,33 @@
       "deviceScaleFactor": 1
     },
     "evidenceBundle": {
-      "roundLabel": "P30 · Round 006 critic gate",
-      "status": "REJECT · 23/100 · FOCUSED 0/3 · OVERALL 0/6",
-      "manifestPath": "/data/P30-round-006.json",
+      "roundLabel": "P30 · Round 007 selected camera candidate",
+      "status": "BUILDER PASS · FROZEN · CRITIC RUNNING · NO ACCEPTANCE CLAIM",
+      "manifestPath": "/data/P30-round-007.json",
       "s01": {
-        "label": "S03 startup · rejected Round006 candidate",
-        "path": "/captures/P30/round-006/S03.png"
+        "label": "S03 startup · selected Round007 candidate",
+        "path": "/captures/P30/round-007/S03.png"
       },
       "diagnostic": {
-        "label": "S04 active hit · rejected Round006 candidate",
-        "path": "/captures/P30/round-006/S04.png"
+        "label": "S04 active hit · selected Round007 candidate",
+        "path": "/captures/P30/round-007/S04.png"
       },
       "metrics": [
         {
-          "label": "Verdict",
-          "value": "REJECT · 23/100"
+          "label": "Selection",
+          "value": "Builder B · adaptive 50° composer"
         },
         {
-          "label": "Focused / overall",
-          "value": "0/3 · 0/6"
+          "label": "Independent critic",
+          "value": "RUNNING · verdict pending"
         },
         {
-          "label": "True-cold launches",
-          "value": "1.436 s · 1.446 s · 1.791 s"
+          "label": "Focused framing",
+          "value": "406.892 · 388.327 · 397.305 px"
         },
         {
-          "label": "30-second runtime",
-          "value": "59.87 fps · 18.4 ms p95"
+          "label": "Cold ready",
+          "value": "3.624 s · 2.294 s · 1.552 s"
         },
         {
           "label": "Resource maximum",
@@ -85,42 +90,42 @@
         },
         {
           "label": "Camera gates",
-          "value": "Replay fail · obstruction unimplemented"
+          "value": "Framing · replay · obstruction · pass"
         }
       ],
       "checks": [
         "Headed Chrome 150 · Metal M2 · WebGL2 · 1600×900 · DPR 1",
-        "Frozen commit · 01a4c652a5a30137ae0c82cc6cd6f063f2c91ca6",
-        "Anonymous mapping and scores sealed before reveal · public hashes filed",
+        "Frozen commit · 6b953f563c68a81f4635aaa081bfeb664f3aee57",
+        "Two fresh isolated builders · selected Builder B · Builder A preserved as alternate",
         "18/18 authored assets · no fallback · production-authored runtime",
-        "Node 24 clean install, typecheck, lint, five tests, build, and three browser smoke tests",
+        "Node 24 clean install, typecheck, lint, ten unit tests, build, and three browser smoke tests",
         "Resource caps · 86 calls · 204,155 triangles · 32 textures · 38 geometries",
-        "Independent palm, blade-clearance, tick-34 contact, contact-marker, and embedded PBR gates",
-        "Three true-cold launches, 30-second timing, and WebGL loss and restore pass"
+        "S03-S05 hero scale, actor and blade safety, and central S04 contact gates pass",
+        "Three clean deterministic camera replays · ticks 29, 34, 41, and 60 · byte-identical",
+        "Wall and clear boom obstruction gates pass",
+        "Round006 106-entry frozen scope · three authorized production differences · zero unexpected"
       ],
       "limitations": [
-        "Focused blind gate · 0/3 · hard fail",
-        "Overall blind gate · 0/6 · hard fail",
-        "Distant static camera leaves small overlapping actors and excessive dead floor",
-        "Deterministic camera replay · up to 5.176 cm divergence at tick 34",
-        "Camera boom obstruction · unimplemented",
+        "Independent critic · running · no verdict yet",
+        "No visual acceptance or benchmark-win claim is made",
+        "Frozen anatomy, poses, effects, materials, and arena art remain visibly prototype-like",
         "Repository-wide LFS integrity · eight historical raw PNG blobs"
       ]
     },
-    "nextGate": "Round007 must win S03–S05 3/3; project Nyra at 360–540 px; keep both actors and the full blade at least 80 px inside frame; place S04 contact inside the central 40%; replay camera telemetry byte-identically at ticks 29, 34, 41, and 60; resolve obstructed and clear boom paths; retain the 4.109 s and resource ceilings."
+    "nextGate": "The fresh independent critic must recapture all six shots from frozen commit 6b953f563c68a81f4635aaa081bfeb664f3aee57, seal anonymous mapping and scores before reveal, win S03–S05 3/3 and at least 5/6 overall, score at least 95/100 with every category at least 9/10, and pass every technical gate."
   },
   "canonicalCapture": {
     "shotId": "S04",
-    "name": "Round 006 active hit · rejected candidate",
-    "purpose": "P30 Round 006 fresh critic candidate evidence",
-    "camera": "Third-person review camera",
-    "heroHeight": "Below the Round007 360–540 px target",
-    "measuredHeroHeight": "Rejected: subject scale is too small",
-    "sceneRead": "The distant static camera reduces the corrected duel to small overlapping figures surrounded by dead floor. Round006 remains rejected candidate evidence.",
+    "name": "Round 007 active hit · selected review candidate",
+    "purpose": "P30 Round 007 selected frozen builder evidence",
+    "camera": "Adaptive 50-degree duel composer",
+    "heroHeight": "360–540 px target",
+    "measuredHeroHeight": "388.327 px · builder gate pass",
+    "sceneRead": "Nyra owns the near-left combat plane, the Hollow reads center-right, and active contact lands inside the central 40 percent. This remains unaccepted builder evidence pending the fresh critic.",
     "benchmarkId": "Anonymous six-pair gate",
-    "benchmarkPolicy": "Aggregate 0/6 result and public seal hashes only; comparison identities and source imagery are never published",
-    "capturePath": "/captures/P30/round-006/S04.png",
-    "manifestPath": "/data/P30-round-006.json",
+    "benchmarkPolicy": "No aggregate result is published before the fresh critic seals mapping and scores, reveals, and files a sanitized verdict",
+    "capturePath": "/captures/P30/round-007/S04.png",
+    "manifestPath": "/data/P30-round-007.json",
     "latestManifestPath": "/data/capture-manifest-latest.json",
     "captureAvailable": true,
     "manifestAvailable": true
@@ -767,6 +772,33 @@
         "preference": "Candidate won 0/3 focused and 0/6 aggregate blind comparisons",
         "primaryGap": "combat camera presentation: a distant static viewpoint reduces the corrected duel to small overlapping figures surrounded by dead floor, hiding contact and material work."
       }
+    },
+    {
+      "round": 7,
+      "label": "P30 · Round 007",
+      "pieceId": "P30",
+      "phase": "Selected builder integrated; fresh independent critic running",
+      "status": "review-ready",
+      "date": "2026-08-02",
+      "engineRun": true,
+      "actualGameCapturePerformed": true,
+      "targetMatchedGameCapturePerformed": true,
+      "gateQualifyingCapture": false,
+      "builderBrief": "Replace only the third-person camera module, minimal target wiring, telemetry, and tests with a deterministic close duel camera that clears replay, framing, reset, and obstruction gates while every frozen simulation and visual payload remains exact.",
+      "evidence": "Two fresh isolated builders passed the full technical gate from exact baseline d95a0904151de6217838fcf6b69d3aba81e125ca. Root capture inspection selected Builder B's adaptive 50-degree composer, integrated it, repeated Node 24 clean-install validation, and froze commit 6b953f563c68a81f4635aaa081bfeb664f3aee57. S03-S05 framing, three byte-identical replays, wall and clear boom obstruction, three cold launches, 18/18 authored assets, resource caps, build, and browser smoke pass. A fresh independent critic is running; no visual verdict or acceptance is claimed.",
+      "evidenceLinks": [
+        "/captures/P30/round-007/S03.png",
+        "/captures/P30/round-007/S04.png",
+        "/captures/P30/round-007/S05.png",
+        "/data/P30-round-007.json"
+      ],
+      "critic": {
+        "status": "RUNNING · VERDICT PENDING · NO ACCEPTANCE CLAIM",
+        "score": null,
+        "scoreLabel": null,
+        "preference": null,
+        "primaryGap": "combat camera presentation · pending fresh independent verdict"
+      }
     }
   ],
   "pieces": [
@@ -1051,8 +1083,8 @@
       "id": "P30",
       "name": "Three.js playable nucleus",
       "group": "Vertical slice",
-      "status": "building",
-      "outcome": "Round 006 is rejected at 23/100 with 0/3 focused and 0/6 overall wins despite passing contact, material, runtime, and resource gates. Round007 is building two isolated deterministic close over-shoulder camera candidates with replay and boom-obstruction proof while the frozen simulation and presentation payloads remain unchanged.",
+      "status": "review-ready",
+      "outcome": "Round007 selected Builder B's adaptive 50-degree duel camera after two isolated implementations passed. The integrated frozen candidate clears framing, byte-identical replay, boom obstruction, reset, readiness, asset, resource, build, and browser gates. A fresh independent critic is running; no visual verdict or acceptance is claimed.",
       "requiredEvidence": [
         "S01–S06 fresh browser captures",
         "Exact Tape A, Tape B, and Tape C replays",

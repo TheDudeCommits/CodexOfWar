@@ -1,0 +1,158 @@
+{
+  "schema": "cow.public-browser-builder.v1",
+  "piece": "P30",
+  "round": 7,
+  "date": "2026-08-02",
+  "status": "selected-frozen-review-candidate",
+  "acceptanceScope": "Two isolated camera builders passed the technical gate. The stronger adaptive candidate is frozen and a fresh independent critic is running; no visual verdict or acceptance claim is made.",
+  "frozenCommit": "6b953f563c68a81f4635aaa081bfeb664f3aee57",
+  "selection": {
+    "selectedBuilder": "B",
+    "selectedBuilderCommit": "2bfd0a4c86f57378f41107ea205c3ef014a17e22",
+    "alternateBuilderCommit": "d7d5e4e1a9aea759967dc47e55258c058b8291e2",
+    "selectionReceiptSha256": "0a9edb96c3c92cc5101fc487792566798aeec0ca8ea7b94c73db9ae041ab5718",
+    "method": "Root inspection of actual headed 1600x900 captures plus deterministic framing, replay, obstruction, readiness, and resource evidence.",
+    "reason": "The adaptive candidate gives the duel greater frame occupancy and less dead floor while retaining both actors, the complete blade, and central active-hit contact.",
+    "acceptanceClaimed": false
+  },
+  "captureContract": {
+    "browser": "Google Chrome 150",
+    "headed": true,
+    "hardwareAccelerated": true,
+    "renderer": "WebGL2 · ANGLE Metal Renderer: Apple M2",
+    "viewport": {
+      "width": 1600,
+      "height": 900,
+      "deviceScaleFactor": 1
+    },
+    "pngColorType": "RGB",
+    "httpStatus": 200,
+    "runtimeFailures": 0
+  },
+  "camera": {
+    "profile": "Deterministic adaptive 50-degree duel composer",
+    "framing": {
+      "heroHeightRequiredPixels": [360, 540],
+      "minimumActorAndBladeMarginRequiredPixels": 80,
+      "s04ContactRequiredRegion": "central 40 percent",
+      "moments": {
+        "S03": {
+          "heroHeightPixels": 406.892,
+          "minimumActorOrBladeMarginPixels": 127.692,
+          "passed": true
+        },
+        "S04": {
+          "heroHeightPixels": 388.327,
+          "minimumActorOrBladeMarginPixels": 102.771,
+          "contactPixels": {
+            "x": 957.916,
+            "y": 513.34
+          },
+          "contactInsideCentral40Percent": true,
+          "passed": true
+        },
+        "S05": {
+          "heroHeightPixels": 397.305,
+          "minimumActorOrBladeMarginPixels": 80.098,
+          "passed": true
+        }
+      },
+      "passed": true
+    },
+    "replay": {
+      "cleanRuns": 3,
+      "sampleTicks": [29, 34, 41, 60],
+      "byteIdentical": true,
+      "passed": true
+    },
+    "obstruction": {
+      "clearPath": {
+        "desiredDistanceMeters": 5.26,
+        "resolvedDistanceMeters": 5.26,
+        "collisionApplied": false,
+        "passed": true
+      },
+      "wallPath": {
+        "desiredDistanceMeters": 5.26,
+        "resolvedDistanceMeters": 2.443428040081452,
+        "clearanceMeters": 0.4500000000000002,
+        "collisionApplied": true,
+        "passed": true
+      }
+    }
+  },
+  "runtime": {
+    "node": "24.x",
+    "coldReadyLaunchesMilliseconds": [3623.909, 2293.622, 1552.142],
+    "coldReadyLimitMilliseconds": 4109,
+    "coldReadyPassed": true,
+    "authoredAssetsLoaded": 18,
+    "authoredAssetsExpected": 18,
+    "proceduralFallbackActive": false,
+    "resourceMaximum": {
+      "drawCalls": 86,
+      "triangles": 204155,
+      "textures": 32,
+      "geometries": 38
+    },
+    "resourceLimits": {
+      "drawCalls": 100,
+      "triangles": 250000,
+      "textures": 32,
+      "geometries": 64
+    },
+    "resourceCapsPassed": true
+  },
+  "rootValidation": {
+    "cleanInstallPassed": true,
+    "lintPassed": true,
+    "typecheckPassed": true,
+    "simulationTestsPassed": 5,
+    "cameraTestsPassed": 5,
+    "productionBuildPassed": true,
+    "browserSmokeTestsPassed": 3,
+    "softwareHeadlessSmokeTimeoutSeconds": 60
+  },
+  "freezeAudit": {
+    "round006EntriesChecked": 106,
+    "authorizedProductionDifferences": [
+      "Camera diagnostics",
+      "Minimal camera target wiring",
+      "Third-person camera module"
+    ],
+    "unexpectedProductionDifferences": 0,
+    "simulationTimingAssetsCharactersCombatEnvironmentHudLightingFxPostAndManifestExact": true
+  },
+  "captures": [
+    {
+      "id": "S03",
+      "phase": "startup",
+      "tick": 29,
+      "path": "/captures/P30/round-007/S03.png",
+      "bytes": 2127016,
+      "sha256": "5c8398ae257f73e779d60c26d0e3c07399b9f82e77067f4bf4cd111544c598e1"
+    },
+    {
+      "id": "S04",
+      "phase": "active",
+      "tick": 34,
+      "path": "/captures/P30/round-007/S04.png",
+      "bytes": 2142101,
+      "sha256": "abfcd5e7986a9703bfd17f91246f5b200fb9e54a52dc8f38749575df7d5260fd"
+    },
+    {
+      "id": "S05",
+      "phase": "recovery",
+      "tick": 41,
+      "path": "/captures/P30/round-007/S05.png",
+      "bytes": 2138449,
+      "sha256": "56a4efecbe0a57e192d8026bdc2f589191ba7c3022f3073f6e3f79a9c1af28f7"
+    }
+  ],
+  "activeGap": {
+    "id": "combat-camera-presentation",
+    "status": "pending-independent-verdict",
+    "summary": "The selected camera passes every builder and root technical gate. Its visual result remains unaccepted until the fresh independent critic completes the frozen review."
+  },
+  "largestKnownResidualWeakness": "Frozen anatomy, poses, effects, materials, and arena art remain visibly prototype-like even though the duel now fills the frame more effectively."
+}
