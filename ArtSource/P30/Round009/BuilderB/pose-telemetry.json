@@ -1,0 +1,1332 @@
+{
+  "schema": "p30.round009.builder-b.pose-telemetry.v1",
+  "baseCommit": "afc1063812473087a645271e2c33adcd0534225a",
+  "candidateOnly": true,
+  "acceptanceClaimed": false,
+  "focused": [
+    {
+      "tick": 29,
+      "state": {
+        "tick": 29,
+        "seed": 30001,
+        "piece": "P30",
+        "preset": "combat-startup",
+        "paused": false,
+        "pointerLocked": false,
+        "coordinates": "+Y up / +X right / -Z forward",
+        "player": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 1.6000008583068848
+          },
+          "yaw": 0,
+          "health": 100,
+          "stamina": 100,
+          "motion": "attack",
+          "attackPhase": "startup",
+          "attackFrame": 5
+        },
+        "target": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "health": 100,
+          "motion": "idle"
+        },
+        "state": {
+          "tick": 29,
+          "elapsed": 0.4833333333333333,
+          "objectiveComplete": false,
+          "player": {
+            "position": {
+              "x": 0,
+              "z": 1.6000008583068848
+            },
+            "yaw": 0,
+            "health": 100,
+            "maxHealth": 100,
+            "stamina": 100,
+            "maxStamina": 100,
+            "motion": "attack",
+            "speed01": 0,
+            "attackElapsed": 0.08333333333333333,
+            "attackFrame": 5,
+            "attackPhase": "startup",
+            "attackSerial": 1,
+            "attackHasHit": false,
+            "dodgeRemaining": 0,
+            "dodgeDirection": {
+              "x": 0,
+              "z": -1
+            },
+            "invulnerableRemaining": 0
+          },
+          "enemy": {
+            "position": {
+              "x": 0,
+              "z": 0
+            },
+            "yaw": 3.141592653589793,
+            "health": 100,
+            "maxHealth": 100,
+            "motion": "idle",
+            "hitStunRemaining": 0,
+            "idlePhase": 0.4833333333333333
+          }
+        }
+      },
+      "events": [
+        {
+          "tick": 24,
+          "type": "attack_started",
+          "attackSerial": 1
+        }
+      ],
+      "pose": {
+        "schema": "cow.combat-pose-beat.v1",
+        "additivePresentationOnly": true,
+        "hero": {
+          "sample": {
+            "schema": "cow.hero-combat-pose.v1",
+            "phase": "anticipation",
+            "attackFrame": 5,
+            "model": {
+              "position": [
+                -0.026,
+                -0.052,
+                0.026
+              ],
+              "rotation": [
+                0.02,
+                0.07,
+                -0.036
+              ]
+            },
+            "bones": {
+              "pelvis": [
+                0.032,
+                -0.095,
+                0.058
+              ],
+              "spine01": [
+                -0.034,
+                0.055,
+                -0.044
+              ],
+              "spine02": [
+                -0.044,
+                0.075,
+                -0.054
+              ],
+              "spine03": [
+                -0.032,
+                0.09,
+                -0.044
+              ],
+              "neck": [
+                0.024,
+                -0.045,
+                0.026
+              ]
+            }
+          },
+          "rigBindings": {
+            "pelvis": true,
+            "spine01": true,
+            "spine02": true,
+            "spine03": true,
+            "neck": true
+          },
+          "weaponParent": "weapon_socket",
+          "anchors": {
+            "pelvisWorld": [
+              -0.528434,
+              0.890587,
+              1.559251
+            ],
+            "leadHandWorld": [
+              -0.233629,
+              0.875377,
+              1.904407
+            ],
+            "supportHandWorld": [
+              -0.115683,
+              0.756955,
+              1.888561
+            ],
+            "secondaryGripWorld": [
+              -0.115683,
+              0.756954,
+              1.888561
+            ],
+            "bladeContactWorld": [
+              -1.553791,
+              1.895786,
+              2.16492
+            ],
+            "bladeTipWorld": [
+              -1.863832,
+              2.138581,
+              2.160942
+            ]
+          },
+          "supportHandToSecondaryGripMeters": 0.000001
+        },
+        "target": {
+          "sample": {
+            "schema": "cow.target-combat-pose.v1",
+            "phase": "neutral",
+            "reaction01": 1,
+            "animationLeadSeconds": 0,
+            "model": {
+              "position": [
+                0,
+                0,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                0
+              ]
+            },
+            "bones": {
+              "hips": [
+                0,
+                0,
+                0
+              ],
+              "abdomen": [
+                0,
+                0,
+                0
+              ],
+              "torso": [
+                0,
+                0,
+                0
+              ],
+              "neck": [
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "rigBindings": {
+            "hips": true,
+            "abdomen": true,
+            "torso": true,
+            "neck": true
+          },
+          "anchors": {
+            "hipsWorld": [
+              0.710921,
+              0.650338,
+              -0.167113
+            ],
+            "impactWorld": [
+              0.689094,
+              1.146988,
+              -0.127159
+            ],
+            "headWorld": [
+              0.600834,
+              1.301128,
+              0.034399
+            ]
+          }
+        },
+        "contact": {
+          "bladeToTargetMeters": 3.293153
+        }
+      },
+      "framing": {
+        "viewport": {
+          "width": 1600,
+          "height": 900,
+          "safeInset": 80
+        },
+        "player": {
+          "minX": 575.7042481080498,
+          "minY": 380.5783405285741,
+          "maxX": 788.079451822834,
+          "maxY": 788.5019674113738,
+          "width": 212.37520371478422,
+          "height": 407.92362688279974,
+          "margins": {
+            "left": 575.7042481080498,
+            "top": 380.5783405285741,
+            "right": 811.920548177166,
+            "bottom": 111.49803258862619,
+            "minimum": 111.49803258862619
+          },
+          "insideFrame": true,
+          "insideSafeFrame": true
+        },
+        "target": {
+          "minX": 813.4544434418199,
+          "minY": 408.7671397270902,
+          "maxX": 1071.0690314194483,
+          "maxY": 680.6282740858042,
+          "width": 257.6145879776284,
+          "height": 271.86113435871397,
+          "margins": {
+            "left": 813.4544434418199,
+            "top": 408.7671397270902,
+            "right": 528.9309685805517,
+            "bottom": 219.37172591419585,
+            "minimum": 219.37172591419585
+          },
+          "insideFrame": true,
+          "insideSafeFrame": true
+        },
+        "blade": {
+          "minX": 308.1096537996089,
+          "minY": 356.18706769737895,
+          "maxX": 794.6684353769598,
+          "maxY": 722.7068770352162,
+          "width": 486.5587815773509,
+          "height": 366.5198093378372,
+          "margins": {
+            "left": 308.1096537996089,
+            "top": 356.18706769737895,
+            "right": 805.3315646230402,
+            "bottom": 177.29312296478383,
+            "minimum": 177.29312296478383
+          },
+          "insideFrame": true,
+          "insideSafeFrame": true
+        },
+        "contact": {
+          "x": 378.5594689066842,
+          "y": 416.4837192611584,
+          "ndcZ": 0.9627621765179724,
+          "insideCentral40Percent": false
+        },
+        "gates": {
+          "playerHeight360To540": true,
+          "actorsAndBladeInside80": true,
+          "contactInsideCentral40Percent": false
+        }
+      },
+      "fx": {
+        "blade": {
+          "schema": "cow.blade-fx.v1",
+          "phase": "absent",
+          "active": false,
+          "intensity": 0,
+          "attack01": 0.192308,
+          "attachment": "authored-weapon-local",
+          "bladePoseDriven": true,
+          "bladeAxis": "+Y",
+          "layers": [
+            {
+              "name": "edge-halo",
+              "opacity": 0,
+              "additive": true,
+              "depthWrite": false
+            },
+            {
+              "name": "afterimage",
+              "opacity": 0,
+              "additive": true,
+              "depthWrite": false
+            },
+            {
+              "name": "hot-core",
+              "opacity": 0,
+              "additive": true,
+              "depthWrite": false
+            },
+            {
+              "name": "energy-slivers",
+              "opacity": 0,
+              "additive": true,
+              "depthWrite": false
+            }
+          ],
+          "localEnvelope": {
+            "minX": -0.31,
+            "maxX": 0.36,
+            "minY": 0.2,
+            "maxY": 1.71,
+            "maxZ": 0.064
+          },
+          "textures": 0
+        },
+        "contact": {
+          "schema": "cow.contact-fx.v1",
+          "phase": "absent",
+          "active": false,
+          "lastBurstSerial": 0,
+          "contactWorld": [
+            0,
+            0,
+            0
+          ],
+          "sourceAnchorWorld": [
+            0,
+            0,
+            0
+          ],
+          "strikeTravel": [
+            0,
+            0,
+            -1
+          ],
+          "swingTravel": [
+            1,
+            0,
+            0
+          ],
+          "contactOffset": {
+            "tangent": 0.82,
+            "vertical": -0.32,
+            "surface": 0.2
+          },
+          "flash": {
+            "active": false,
+            "life": 0,
+            "opacity": 0,
+            "scale": 1
+          },
+          "streaks": {
+            "active": false,
+            "activeCount": 0,
+            "totalCount": 22,
+            "opacity": 0,
+            "maxDistance": 0,
+            "taperedCrossFins": true
+          },
+          "materialContract": {
+            "additive": true,
+            "transparent": true,
+            "depthWrite": false,
+            "textures": 0
+          }
+        }
+      }
+    },
+    {
+      "tick": 34,
+      "state": {
+        "tick": 34,
+        "seed": 30001,
+        "piece": "P30",
+        "preset": "combat-active-hit",
+        "paused": false,
+        "pointerLocked": false,
+        "coordinates": "+Y up / +X right / -Z forward",
+        "player": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 1.6000008583068848
+          },
+          "yaw": 0,
+          "health": 100,
+          "stamina": 100,
+          "motion": "attack",
+          "attackPhase": "active",
+          "attackFrame": 10
+        },
+        "target": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "health": 90,
+          "motion": "hit"
+        },
+        "state": {
+          "tick": 34,
+          "elapsed": 0.5666666666666668,
+          "objectiveComplete": false,
+          "player": {
+            "position": {
+              "x": 0,
+              "z": 1.6000008583068848
+            },
+            "yaw": 0,
+            "health": 100,
+            "maxHealth": 100,
+            "stamina": 100,
+            "maxStamina": 100,
+            "motion": "attack",
+            "speed01": 0,
+            "attackElapsed": 0.16666666666666666,
+            "attackFrame": 10,
+            "attackPhase": "active",
+            "attackSerial": 1,
+            "attackHasHit": true,
+            "dodgeRemaining": 0,
+            "dodgeDirection": {
+              "x": 0,
+              "z": -1
+            },
+            "invulnerableRemaining": 0
+          },
+          "enemy": {
+            "position": {
+              "x": 0,
+              "z": 0
+            },
+            "yaw": 3.141592653589793,
+            "health": 90,
+            "maxHealth": 100,
+            "motion": "hit",
+            "hitStunRemaining": 0.28,
+            "idlePhase": 0.5666666666666668
+          }
+        }
+      },
+      "events": [
+        {
+          "tick": 24,
+          "type": "attack_started",
+          "attackSerial": 1
+        },
+        {
+          "tick": 33,
+          "type": "enemy_hit",
+          "damage": 10,
+          "hpBefore": 100,
+          "hpAfter": 90,
+          "attackSerial": 1
+        }
+      ],
+      "pose": {
+        "schema": "cow.combat-pose-beat.v1",
+        "additivePresentationOnly": true,
+        "hero": {
+          "sample": {
+            "schema": "cow.hero-combat-pose.v1",
+            "phase": "contact",
+            "attackFrame": 10,
+            "model": {
+              "position": [
+                0,
+                0,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                0
+              ]
+            },
+            "bones": {
+              "pelvis": [
+                0,
+                0,
+                0
+              ],
+              "spine01": [
+                0,
+                0,
+                0
+              ],
+              "spine02": [
+                0,
+                0,
+                0
+              ],
+              "spine03": [
+                0,
+                0,
+                0
+              ],
+              "neck": [
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "rigBindings": {
+            "pelvis": true,
+            "spine01": true,
+            "spine02": true,
+            "spine03": true,
+            "neck": true
+          },
+          "weaponParent": "weapon_socket",
+          "anchors": {
+            "pelvisWorld": [
+              -0.556495,
+              0.716046,
+              1.541751
+            ],
+            "leadHandWorld": [
+              0.192246,
+              0.632076,
+              1.508346
+            ],
+            "supportHandWorld": [
+              0.129504,
+              0.570841,
+              1.651524
+            ],
+            "secondaryGripWorld": [
+              0.129504,
+              0.57084,
+              1.651524
+            ],
+            "bladeContactWorld": [
+              0.828809,
+              1.020795,
+              -0.006783
+            ],
+            "bladeTipWorld": [
+              1.028818,
+              1.13291,
+              -0.326967
+            ]
+          },
+          "supportHandToSecondaryGripMeters": 0.000001
+        },
+        "target": {
+          "sample": {
+            "schema": "cow.target-combat-pose.v1",
+            "phase": "compression",
+            "reaction01": 0,
+            "animationLeadSeconds": 0.041667,
+            "model": {
+              "position": [
+                -0.015,
+                -0.012,
+                0.02
+              ],
+              "rotation": [
+                -0.02,
+                0.008,
+                0.025
+              ]
+            },
+            "bones": {
+              "hips": [
+                -0.01,
+                -0.015,
+                -0.015
+              ],
+              "abdomen": [
+                -0.025,
+                -0.035,
+                -0.028
+              ],
+              "torso": [
+                -0.04,
+                -0.05,
+                -0.04
+              ],
+              "neck": [
+                0.02,
+                0.025,
+                0.02
+              ]
+            }
+          },
+          "rigBindings": {
+            "hips": true,
+            "abdomen": true,
+            "torso": true,
+            "neck": true
+          },
+          "anchors": {
+            "hipsWorld": [
+              0.745162,
+              0.726858,
+              -0.181908
+            ],
+            "impactWorld": [
+              0.809637,
+              1.230803,
+              -0.14501
+            ],
+            "headWorld": [
+              0.789855,
+              1.412741,
+              0.010557
+            ]
+          }
+        },
+        "contact": {
+          "bladeToTargetMeters": 0.252146
+        }
+      },
+      "framing": {
+        "viewport": {
+          "width": 1600,
+          "height": 900,
+          "safeInset": 80
+        },
+        "player": {
+          "minX": 520.9163367017942,
+          "minY": 408.90194287746533,
+          "maxX": 814.3239500151503,
+          "maxY": 797.2285859338829,
+          "width": 293.40761331335614,
+          "height": 388.32664305641754,
+          "margins": {
+            "left": 520.9163367017942,
+            "top": 408.90194287746533,
+            "right": 785.6760499848497,
+            "bottom": 102.77141406611713,
+            "minimum": 102.77141406611713
+          },
+          "insideFrame": true,
+          "insideSafeFrame": true
+        },
+        "target": {
+          "minX": 809.067705429941,
+          "minY": 396.94446253360144,
+          "maxX": 1100.8399513668082,
+          "maxY": 685.1246342443322,
+          "width": 291.7722459368672,
+          "height": 288.1801717107308,
+          "margins": {
+            "left": 809.067705429941,
+            "top": 396.94446253360144,
+            "right": 499.16004863319176,
+            "bottom": 214.87536575566776,
+            "minimum": 214.87536575566776
+          },
+          "insideFrame": true,
+          "insideSafeFrame": true
+        },
+        "blade": {
+          "minX": 725.7555957983932,
+          "minY": 474.94230255916904,
+          "maxX": 1004.7256365839114,
+          "maxY": 745.6597058300607,
+          "width": 278.9700407855182,
+          "height": 270.7174032708917,
+          "margins": {
+            "left": 725.7555957983932,
+            "top": 474.94230255916904,
+            "right": 595.2743634160886,
+            "bottom": 154.34029416993928,
+            "minimum": 154.34029416993928
+          },
+          "insideFrame": true,
+          "insideSafeFrame": true
+        },
+        "contact": {
+          "x": 957.9162357168238,
+          "y": 513.339840973781,
+          "ndcZ": 0.9742923322401954,
+          "insideCentral40Percent": true
+        },
+        "gates": {
+          "playerHeight360To540": true,
+          "actorsAndBladeInside80": true,
+          "contactInsideCentral40Percent": true
+        }
+      },
+      "fx": {
+        "blade": {
+          "schema": "cow.blade-fx.v1",
+          "phase": "peak",
+          "active": true,
+          "intensity": 0.951346,
+          "attack01": 0.384615,
+          "attachment": "authored-weapon-local",
+          "bladePoseDriven": true,
+          "bladeAxis": "+Y",
+          "layers": [
+            {
+              "name": "edge-halo",
+              "opacity": 0.285404,
+              "additive": true,
+              "depthWrite": false
+            },
+            {
+              "name": "afterimage",
+              "opacity": 0.190269,
+              "additive": true,
+              "depthWrite": false
+            },
+            {
+              "name": "hot-core",
+              "opacity": 0.894265,
+              "additive": true,
+              "depthWrite": false
+            },
+            {
+              "name": "energy-slivers",
+              "opacity": 0.646915,
+              "additive": true,
+              "depthWrite": false
+            }
+          ],
+          "localEnvelope": {
+            "minX": -0.31,
+            "maxX": 0.36,
+            "minY": 0.2,
+            "maxY": 1.71,
+            "maxZ": 0.064
+          },
+          "textures": 0
+        },
+        "contact": {
+          "schema": "cow.contact-fx.v1",
+          "phase": "peak",
+          "active": true,
+          "lastBurstSerial": 1,
+          "contactWorld": [
+            0.82,
+            1.02,
+            0.2
+          ],
+          "sourceAnchorWorld": [
+            0,
+            1.34,
+            0
+          ],
+          "strikeTravel": [
+            0,
+            0,
+            -1
+          ],
+          "swingTravel": [
+            1,
+            0,
+            0
+          ],
+          "contactOffset": {
+            "tangent": 0.82,
+            "vertical": -0.32,
+            "surface": 0.2
+          },
+          "flash": {
+            "active": true,
+            "life": 0.075,
+            "opacity": 0.579371,
+            "scale": 0.222
+          },
+          "streaks": {
+            "active": true,
+            "activeCount": 22,
+            "totalCount": 22,
+            "opacity": 0.697069,
+            "maxDistance": 0.550071,
+            "taperedCrossFins": true
+          },
+          "materialContract": {
+            "additive": true,
+            "transparent": true,
+            "depthWrite": false,
+            "textures": 0
+          }
+        }
+      }
+    },
+    {
+      "tick": 41,
+      "state": {
+        "tick": 41,
+        "seed": 30001,
+        "piece": "P30",
+        "preset": "combat-recovery",
+        "paused": false,
+        "pointerLocked": false,
+        "coordinates": "+Y up / +X right / -Z forward",
+        "player": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 1.6000008583068848
+          },
+          "yaw": 0,
+          "health": 100,
+          "stamina": 100,
+          "motion": "attack",
+          "attackPhase": "recovery",
+          "attackFrame": 17
+        },
+        "target": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "health": 90,
+          "motion": "hit"
+        },
+        "state": {
+          "tick": 41,
+          "elapsed": 0.6833333333333338,
+          "objectiveComplete": false,
+          "player": {
+            "position": {
+              "x": 0,
+              "z": 1.6000008583068848
+            },
+            "yaw": 0,
+            "health": 100,
+            "maxHealth": 100,
+            "stamina": 100,
+            "maxStamina": 100,
+            "motion": "attack",
+            "speed01": 0,
+            "attackElapsed": 0.2833333333333333,
+            "attackFrame": 17,
+            "attackPhase": "recovery",
+            "attackSerial": 1,
+            "attackHasHit": true,
+            "dodgeRemaining": 0,
+            "dodgeDirection": {
+              "x": 0,
+              "z": -1
+            },
+            "invulnerableRemaining": 0
+          },
+          "enemy": {
+            "position": {
+              "x": 0,
+              "z": 0
+            },
+            "yaw": 3.141592653589793,
+            "health": 90,
+            "maxHealth": 100,
+            "motion": "hit",
+            "hitStunRemaining": 0.16333333333333339,
+            "idlePhase": 0.6833333333333338
+          }
+        }
+      },
+      "events": [
+        {
+          "tick": 24,
+          "type": "attack_started",
+          "attackSerial": 1
+        },
+        {
+          "tick": 33,
+          "type": "enemy_hit",
+          "damage": 10,
+          "hpBefore": 100,
+          "hpAfter": 90,
+          "attackSerial": 1
+        }
+      ],
+      "pose": {
+        "schema": "cow.combat-pose-beat.v1",
+        "additivePresentationOnly": true,
+        "hero": {
+          "sample": {
+            "schema": "cow.hero-combat-pose.v1",
+            "phase": "recoil",
+            "attackFrame": 17,
+            "model": {
+              "position": [
+                -0.028,
+                0,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                0
+              ]
+            },
+            "bones": {
+              "pelvis": [
+                0,
+                0,
+                0
+              ],
+              "spine01": [
+                0,
+                0,
+                0
+              ],
+              "spine02": [
+                0,
+                0,
+                0
+              ],
+              "spine03": [
+                0,
+                0,
+                0
+              ],
+              "neck": [
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "rigBindings": {
+            "pelvis": true,
+            "spine01": true,
+            "spine02": true,
+            "spine03": true,
+            "neck": true
+          },
+          "weaponParent": "weapon_socket",
+          "anchors": {
+            "pelvisWorld": [
+              -0.613963,
+              0.700193,
+              1.589344
+            ],
+            "leadHandWorld": [
+              -0.956874,
+              1.717302,
+              1.340906
+            ],
+            "supportHandWorld": [
+              -1.006928,
+              1.573089,
+              1.410787
+            ],
+            "secondaryGripWorld": [
+              -1.006928,
+              1.573089,
+              1.410787
+            ],
+            "bladeContactWorld": [
+              -0.230797,
+              3.094158,
+              0.685917
+            ],
+            "bladeTipWorld": [
+              -0.09271,
+              3.44747,
+              0.580117
+            ]
+          },
+          "supportHandToSecondaryGripMeters": 0
+        },
+        "target": {
+          "sample": {
+            "schema": "cow.target-combat-pose.v1",
+            "phase": "recoil",
+            "reaction01": 0.416667,
+            "animationLeadSeconds": 0.024306,
+            "model": {
+              "position": [
+                -0.04,
+                -0.03,
+                0.09
+              ],
+              "rotation": [
+                -0.04,
+                0.016,
+                0.035
+              ]
+            },
+            "bones": {
+              "hips": [
+                -0.02,
+                0.02,
+                0.025
+              ],
+              "abdomen": [
+                -0.06,
+                0.05,
+                0.05
+              ],
+              "torso": [
+                -0.085,
+                0.07,
+                0.065
+              ],
+              "neck": [
+                0.035,
+                -0.04,
+                -0.035
+              ]
+            }
+          },
+          "rigBindings": {
+            "hips": true,
+            "abdomen": true,
+            "torso": true,
+            "neck": true
+          },
+          "anchors": {
+            "hipsWorld": [
+              0.776042,
+              0.70484,
+              -0.243341
+            ],
+            "impactWorld": [
+              1.069728,
+              1.111527,
+              -0.385479
+            ],
+            "headWorld": [
+              1.25647,
+              1.256818,
+              -0.427091
+            ]
+          }
+        },
+        "contact": {
+          "bladeToTargetMeters": 2.601938
+        }
+      },
+      "framing": {
+        "viewport": {
+          "width": 1600,
+          "height": 900,
+          "safeInset": 80
+        },
+        "player": {
+          "minX": 463.54604172059703,
+          "minY": 422.3888470642556,
+          "maxX": 731.7783968748064,
+          "maxY": 819.1839072931863,
+          "width": 268.23235515420936,
+          "height": 396.7950602289307,
+          "margins": {
+            "left": 463.54604172059703,
+            "top": 422.3888470642556,
+            "right": 868.2216031251936,
+            "bottom": 80.81609270681372,
+            "minimum": 80.81609270681372
+          },
+          "insideFrame": true,
+          "insideSafeFrame": true
+        },
+        "target": {
+          "minX": 883.7952816597341,
+          "minY": 422.2612198723741,
+          "maxX": 1090.9145981623424,
+          "maxY": 684.4493345392676,
+          "width": 207.11931650260829,
+          "height": 262.1881146668935,
+          "margins": {
+            "left": 883.7952816597341,
+            "top": 422.2612198723741,
+            "right": 509.0854018376576,
+            "bottom": 215.55066546073238,
+            "minimum": 215.55066546073238
+          },
+          "insideFrame": true,
+          "insideSafeFrame": true
+        },
+        "blade": {
+          "minX": 529.0201751509036,
+          "minY": 83.35183274250448,
+          "maxX": 792.0066928417089,
+          "maxY": 530.8088022150118,
+          "width": 262.9865176908053,
+          "height": 447.45696947250735,
+          "margins": {
+            "left": 529.0201751509036,
+            "top": 83.35183274250448,
+            "right": 807.9933071582911,
+            "bottom": 369.19119778498816,
+            "minimum": 83.35183274250448
+          },
+          "insideFrame": true,
+          "insideSafeFrame": true
+        },
+        "contact": {
+          "x": 758.8561768343416,
+          "y": 152.95710108704304,
+          "ndcZ": 0.9695809604972115,
+          "insideCentral40Percent": false
+        },
+        "gates": {
+          "playerHeight360To540": true,
+          "actorsAndBladeInside80": true,
+          "contactInsideCentral40Percent": false
+        }
+      },
+      "fx": {
+        "blade": {
+          "schema": "cow.blade-fx.v1",
+          "phase": "absent",
+          "active": false,
+          "intensity": 0,
+          "attack01": 0.653846,
+          "attachment": "authored-weapon-local",
+          "bladePoseDriven": true,
+          "bladeAxis": "+Y",
+          "layers": [
+            {
+              "name": "edge-halo",
+              "opacity": 0,
+              "additive": true,
+              "depthWrite": false
+            },
+            {
+              "name": "afterimage",
+              "opacity": 0,
+              "additive": true,
+              "depthWrite": false
+            },
+            {
+              "name": "hot-core",
+              "opacity": 0,
+              "additive": true,
+              "depthWrite": false
+            },
+            {
+              "name": "energy-slivers",
+              "opacity": 0,
+              "additive": true,
+              "depthWrite": false
+            }
+          ],
+          "localEnvelope": {
+            "minX": -0.31,
+            "maxX": 0.36,
+            "minY": 0.2,
+            "maxY": 1.71,
+            "maxZ": 0.064
+          },
+          "textures": 0
+        },
+        "contact": {
+          "schema": "cow.contact-fx.v1",
+          "phase": "dissipated",
+          "active": false,
+          "lastBurstSerial": 1,
+          "contactWorld": [
+            0.82,
+            1.02,
+            0.2
+          ],
+          "sourceAnchorWorld": [
+            0,
+            1.34,
+            0
+          ],
+          "strikeTravel": [
+            0,
+            0,
+            -1
+          ],
+          "swingTravel": [
+            1,
+            0,
+            0
+          ],
+          "contactOffset": {
+            "tangent": 0.82,
+            "vertical": -0.32,
+            "surface": 0.2
+          },
+          "flash": {
+            "active": false,
+            "life": 0,
+            "opacity": 0,
+            "scale": 0.27
+          },
+          "streaks": {
+            "active": false,
+            "activeCount": 0,
+            "totalCount": 22,
+            "opacity": 0,
+            "maxDistance": 0,
+            "taperedCrossFins": true
+          },
+          "materialContract": {
+            "additive": true,
+            "transparent": true,
+            "depthWrite": false,
+            "textures": 0
+          }
+        }
+      }
+    }
+  ],
+  "replay": {
+    "cleanResetRuns": 3,
+    "sampleTicks": [
+      29,
+      34,
+      41
+    ],
+    "byteIdentical": true,
+    "hashesByRun": [
+      {
+        "run": 1,
+        "ticks": {
+          "29": "85f244b2240548012e64d91a9e41eb43033e7dd2943453fb7ef936466323f14c",
+          "34": "db56f56285133ed1e7c599f09f2a7bbb5920cdc50c31600b4880bef3c759d744",
+          "41": "0776890ac279c060d4cef2fd8bc15da3329ebe87a0bd3389da672ac0b025c54b"
+        }
+      },
+      {
+        "run": 2,
+        "ticks": {
+          "29": "85f244b2240548012e64d91a9e41eb43033e7dd2943453fb7ef936466323f14c",
+          "34": "db56f56285133ed1e7c599f09f2a7bbb5920cdc50c31600b4880bef3c759d744",
+          "41": "0776890ac279c060d4cef2fd8bc15da3329ebe87a0bd3389da672ac0b025c54b"
+        }
+      },
+      {
+        "run": 3,
+        "ticks": {
+          "29": "85f244b2240548012e64d91a9e41eb43033e7dd2943453fb7ef936466323f14c",
+          "34": "db56f56285133ed1e7c599f09f2a7bbb5920cdc50c31600b4880bef3c759d744",
+          "41": "0776890ac279c060d4cef2fd8bc15da3329ebe87a0bd3389da672ac0b025c54b"
+        }
+      }
+    ]
+  },
+  "renderIdempotence": [
+    {
+      "tick": 29,
+      "byteIdentical": true,
+      "sha256": "688e9039"
+    },
+    {
+      "tick": 34,
+      "byteIdentical": true,
+      "sha256": "204861d0"
+    },
+    {
+      "tick": 41,
+      "byteIdentical": true,
+      "sha256": "7605b3ad"
+    }
+  ],
+  "contactProjection": {
+    "fx": {
+      "x": 954.469423409635,
+      "y": 522.3512017355157
+    },
+    "authoredBladeMarker": {
+      "x": 957.9162357168238,
+      "y": 513.339840973781
+    },
+    "errorPx": 9.648063943565091,
+    "limitPx": 24
+  },
+  "focusedImageComparison": {
+    "byteIdentical": true,
+    "standard": {
+      "tick29": "614df9d41ea7e745f51364066e6db6bf6960f07fe70eaf96e917c1a39e484465",
+      "tick34": "4ab7b21ba4bf4b9b94c6046b5c3ccfa0d25248b4de92ecc0e8b09b5382f5e480",
+      "tick41": "c6a2d87903b29e6fef9113b984b7f5f4a10317fd834dc605a5499fd0209a7a85"
+    },
+    "cleanFocused": {
+      "tick29": "614df9d41ea7e745f51364066e6db6bf6960f07fe70eaf96e917c1a39e484465",
+      "tick34": "4ab7b21ba4bf4b9b94c6046b5c3ccfa0d25248b4de92ecc0e8b09b5382f5e480",
+      "tick41": "c6a2d87903b29e6fef9113b984b7f5f4a10317fd834dc605a5499fd0209a7a85"
+    },
+    "note": "Focused captures use fresh pages; HUD engagement history may differ while world, pose, and camera remain exact."
+  },
+  "gates": {
+    "exactMechanics": true,
+    "anticipationContactRecoil": true,
+    "repeatedRenderByteIdentical": true,
+    "cleanReplayByteIdentical": true,
+    "focusedCameraIdentical": true,
+    "focusedWorldPoseIdentical": true,
+    "authoredBladeContactWithin24Px": true
+  }
+}

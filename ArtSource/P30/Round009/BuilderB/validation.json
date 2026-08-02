@@ -1,0 +1,89 @@
+{
+  "schema": "p30.round009.builder-b.validation.v1",
+  "baseCommit": "afc1063812473087a645271e2c33adcd0534225a",
+  "branch": "codex/p30-r009-pose-builder-b",
+  "candidateOnly": true,
+  "acceptanceClaimed": false,
+  "toolchain": {
+    "node": "v24.18.0",
+    "npm": "11.16.0",
+    "browser": "Google Chrome 150.0.7871.187",
+    "renderer": "WebGL2 / ANGLE Metal / Apple M2"
+  },
+  "checks": [
+    {
+      "name": "clean-install",
+      "command": "npm ci",
+      "result": "passed: 191 packages installed, 0 vulnerabilities"
+    },
+    {
+      "name": "typecheck-and-build",
+      "command": "npm run build",
+      "result": "passed: TypeScript noEmit and Vite production build"
+    },
+    {
+      "name": "lint",
+      "command": "npm run lint",
+      "result": "passed"
+    },
+    {
+      "name": "focused-unit-contracts",
+      "command": "npx vitest run tests/simulation tests/camera tests/fx tests/pose",
+      "result": "passed: 5 files, 18 tests"
+    },
+    {
+      "name": "built-preview-browser-suite",
+      "command": "npx playwright test against a fresh built preview",
+      "result": "passed: 4 tests covering deterministic review/capture, pose and idempotence, input pause/blur, and forced context restoration"
+    },
+    {
+      "name": "headed-browser-smoke",
+      "command": "Playwright CLI headed smoke against a fresh built preview",
+      "result": "passed: game HUD visible, zero console errors, session closed"
+    },
+    {
+      "name": "headed-capture-audit",
+      "command": "node scripts/p30-round009-pose-builder-b-audit.mjs",
+      "result": "passed: 9 RGB captures at 1600x900 DPR 1, all receipt gates true"
+    },
+    {
+      "name": "production-freeze-audit",
+      "command": "node scripts/p30-round009-pose-builder-b-freeze-audit.mjs",
+      "result": "passed: 67 unauthorized production files byte-exact; no unauthorized additions"
+    }
+  ],
+  "browserSummary": {
+    "headed": true,
+    "httpStatus": 200,
+    "authoredAssetsLoaded": 18,
+    "proceduralFallbackActive": false,
+    "runtimeErrors": 0,
+    "unexpectedWarnings": 0,
+    "resourceMaximum": {
+      "calls": 87,
+      "triangles": 203175,
+      "textures": 32,
+      "geometries": 41
+    },
+    "stability": {
+      "durationMs": 30051.7,
+      "meanFps": 57.598,
+      "p95RafMs": 18.6,
+      "p99RafMs": 18.7,
+      "maxRafMs": 1101.97,
+      "resourceGrowth": false,
+      "webglErrors": 0
+    },
+    "contextLossRestore": {
+      "supported": true,
+      "losses": 1,
+      "restores": 1,
+      "passed": true
+    }
+  },
+  "freezeAudit": {
+    "unauthorizedProductionFilesChecked": 67,
+    "unauthorizedProductionAggregateSha256": "5d73c671d03692ea8468c95d6a80658e760d29e8aab50285e992b74a4b734c31",
+    "passed": true
+  }
+}

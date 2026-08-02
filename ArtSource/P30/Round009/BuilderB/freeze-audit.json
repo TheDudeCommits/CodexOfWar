@@ -1,0 +1,584 @@
+{
+  "schema": "p30.round009.builder-b.freeze-audit.v1",
+  "baseCommit": "afc1063812473087a645271e2c33adcd0534225a",
+  "candidateOnly": true,
+  "acceptanceClaimed": false,
+  "scope": {
+    "prefixes": [
+      "web-game/src/",
+      "web-game/public/"
+    ],
+    "exactFiles": [
+      "web-game/index.html",
+      "web-game/package-lock.json",
+      "web-game/package.json",
+      "web-game/tsconfig.json",
+      "web-game/vite.config.ts"
+    ]
+  },
+  "authorizedProduction": [
+    {
+      "path": "web-game/src/render/objects/CharacterViews.ts",
+      "baselineBlob": "8ced1bb2131fd2cc9f60b7d4d3faac6acab4d3b0",
+      "currentBlob": "54ad35343a876790bee9e319f77cbddf2970023d",
+      "status": "authorized-modification"
+    },
+    {
+      "path": "web-game/src/render/objects/CombatPoseBeat.ts",
+      "baselineBlob": null,
+      "currentBlob": "3f04dbccc2a2088625974c92e2b9b6ae4f22f5c5",
+      "status": "authorized-addition"
+    }
+  ],
+  "unauthorizedProduction": {
+    "checkedFileCount": 67,
+    "aggregateSha256": "5d73c671d03692ea8468c95d6a80658e760d29e8aab50285e992b74a4b734c31",
+    "files": [
+      {
+        "mode": "100644",
+        "type": "blob",
+        "baselineBlob": "19a88675f8af344924571f2123a709d59e701861",
+        "path": "web-game/index.html",
+        "currentBlob": "19a88675f8af344924571f2123a709d59e701861",
+        "match": true
+      },
+      {
+        "mode": "100644",
+        "type": "blob",
+        "baselineBlob": "5110a60178824b2e4d605c630ed2a833ade0af95",
+        "path": "web-game/package-lock.json",
+        "currentBlob": "5110a60178824b2e4d605c630ed2a833ade0af95",
+        "match": true
+      },
+      {
+        "mode": "100644",
+        "type": "blob",
+        "baselineBlob": "bd3db641d08b4aad170ca1fc917d27a308011c75",
+        "path": "web-game/package.json",
+        "currentBlob": "bd3db641d08b4aad170ca1fc917d27a308011c75",
+        "match": true
+      },
+      {
+        "mode": "100644",
+        "type": "blob",
+        "baselineBlob": "b26360437c2515303f382942ae21983885b778ae",
+        "path": "web-game/public/assets/README.md",
+        "currentBlob": "b26360437c2515303f382942ae21983885b778ae",
+        "match": true
+      },
+      {
+        "mode": "100644",
+        "type": "blob",
+        "baselineBlob": "a87a62d5b2044c0844b65d57d7fcedd0bb20ac01",
+        "path": "web-game/public/assets/animations/quaternius/combat_zombie.glb",
+        "currentBlob": "a87a62d5b2044c0844b65d57d7fcedd0bb20ac01",
+        "match": true
+      },
+      {
+        "mode": "100644",
+        "type": "blob",
+        "baselineBlob": "12e4a230bc2e2edb7d36b67147c5d2fec3ea79ad",
+        "path": "web-game/public/assets/animations/quaternius/player_core.glb",
+        "currentBlob": "12e4a230bc2e2edb7d36b67147c5d2fec3ea79ad",
+        "match": true
+      },
+      {
+        "mode": "100644",
+        "type": "blob",
+        "baselineBlob": "ea07e7bbfa67ed4adbf97ba69cfb6701c7280113",
+        "path": "web-game/public/assets/environment/ashwake/geometry/fort_buttress.glb",
+        "currentBlob": "ea07e7bbfa67ed4adbf97ba69cfb6701c7280113",
+        "match": true
+      },
+      {
+        "mode": "100644",
+        "type": "blob",
+        "baselineBlob": "aec080268928c56f37d64d879aeadee26c5233d4",
+        "path": "web-game/public/assets/environment/ashwake/geometry/fort_gate.glb",
+        "currentBlob": "aec080268928c56f37d64d879aeadee26c5233d4",
+        "match": true
+      },
+      {
+        "mode": "100644",
+        "type": "blob",
+        "baselineBlob": "f907f94de82b1da258f0f77efc9f1122403c7f56",
+        "path": "web-game/public/assets/environment/ashwake/geometry/fort_stairs.glb",
+        "currentBlob": "f907f94de82b1da258f0f77efc9f1122403c7f56",
+        "match": true
+      },
+      {
+        "mode": "100644",
+        "type": "blob",
+        "baselineBlob": "42a5d8a5f42efb058a65540bd0eca551e4c64fc5",
+        "path": "web-game/public/assets/environment/ashwake/geometry/fort_tower.glb",
+        "currentBlob": "42a5d8a5f42efb058a65540bd0eca551e4c64fc5",
+        "match": true
+      },
+      {
+        "mode": "100644",
+        "type": "blob",
+        "baselineBlob": "0e8da9414b9a110e7e150edc20b231af21316bf8",
+        "path": "web-game/public/assets/environment/ashwake/geometry/fort_wall.glb",
+        "currentBlob": "0e8da9414b9a110e7e150edc20b231af21316bf8",
+        "match": true
+      },
+      {
+        "mode": "100644",
+        "type": "blob",
+        "baselineBlob": "b0f6279976f165e915f17637ff8c57b22ac1de66",
+        "path": "web-game/public/assets/environment/ashwake/geometry/gothic_statue.glb",
+        "currentBlob": "b0f6279976f165e915f17637ff8c57b22ac1de66",
+        "match": true
+      },
+      {
+        "mode": "100644",
+        "type": "blob",
+        "baselineBlob": "209fc305427d26aaa9962f7a0054c520ebd2eb4b",
+        "path": "web-game/public/assets/environment/ashwake/materials/ground/ashwake_ground_basecolor.webp",
+        "currentBlob": "209fc305427d26aaa9962f7a0054c520ebd2eb4b",
+        "match": true
+      },
+      {
+        "mode": "100644",
+        "type": "blob",
+        "baselineBlob": "b1f19d6635a1aea68064c53a52784c72ac082573",
+        "path": "web-game/public/assets/environment/ashwake/materials/ground/ashwake_ground_normal.webp",
+        "currentBlob": "b1f19d6635a1aea68064c53a52784c72ac082573",
+        "match": true
+      },
+      {
+        "mode": "100644",
+        "type": "blob",
+        "baselineBlob": "ce2e018b75242026a455b71b3146fa4184db3758",
+        "path": "web-game/public/assets/environment/ashwake/materials/ground/ashwake_ground_orm.webp",
+        "currentBlob": "ce2e018b75242026a455b71b3146fa4184db3758",
+        "match": true
+      },
+      {
+        "mode": "100644",
+        "type": "blob",
+        "baselineBlob": "9892195708eda5755ef99736189de38c2da12bbc",
+        "path": "web-game/public/assets/environment/ashwake/materials/sector/ashwake_sector_basecolor.webp",
+        "currentBlob": "9892195708eda5755ef99736189de38c2da12bbc",
+        "match": true
+      },
+      {
+        "mode": "100644",
+        "type": "blob",
+        "baselineBlob": "72dbcdeb9a2093d6bdfc24ab0fa404bbdd1852d5",
+        "path": "web-game/public/assets/environment/ashwake/materials/sector/ashwake_sector_normal.webp",
+        "currentBlob": "72dbcdeb9a2093d6bdfc24ab0fa404bbdd1852d5",
+        "match": true
+      },
+      {
+        "mode": "100644",
+        "type": "blob",
+        "baselineBlob": "5e5e9ced3b71e88d6b02cd425ee06b981f46b07a",
+        "path": "web-game/public/assets/environment/ashwake/materials/sector/ashwake_sector_orm.webp",
+        "currentBlob": "5e5e9ced3b71e88d6b02cd425ee06b981f46b07a",
+        "match": true
+      },
+      {
+        "mode": "100644",
+        "type": "blob",
+        "baselineBlob": "2802119a1f676fc4bf90ae2927cfe19a1e7a7dc7",
+        "path": "web-game/public/assets/environment/hdri/snowy_forest_1k.hdr",
+        "currentBlob": "2802119a1f676fc4bf90ae2927cfe19a1e7a7dc7",
+        "match": true
+      },
+      {
+        "mode": "100644",
+        "type": "blob",
+        "baselineBlob": "5efd86860a0eef774a0563fc071fe1a15b3aee95",
+        "path": "web-game/public/assets/environment/materials/castle_brick_01/castle_brick_01_arm_1k.jpg",
+        "currentBlob": "5efd86860a0eef774a0563fc071fe1a15b3aee95",
+        "match": true
+      },
+      {
+        "mode": "100644",
+        "type": "blob",
+        "baselineBlob": "fe76f6769c0d9fb4b811266bb0a6303b6a05a58a",
+        "path": "web-game/public/assets/environment/materials/castle_brick_01/castle_brick_01_diff_1k.jpg",
+        "currentBlob": "fe76f6769c0d9fb4b811266bb0a6303b6a05a58a",
+        "match": true
+      },
+      {
+        "mode": "100644",
+        "type": "blob",
+        "baselineBlob": "e5e40e676070cbfee0e73cf1fd725c3414b94272",
+        "path": "web-game/public/assets/environment/materials/castle_brick_01/castle_brick_01_nor_gl_1k.jpg",
+        "currentBlob": "e5e40e676070cbfee0e73cf1fd725c3414b94272",
+        "match": true
+      },
+      {
+        "mode": "100644",
+        "type": "blob",
+        "baselineBlob": "b65c4d34f049ba0acccd07567a3d11121e80d361",
+        "path": "web-game/public/assets/environment/materials/mossy_cobblestone/mossy_cobblestone_arm_1k.jpg",
+        "currentBlob": "b65c4d34f049ba0acccd07567a3d11121e80d361",
+        "match": true
+      },
+      {
+        "mode": "100644",
+        "type": "blob",
+        "baselineBlob": "e20e60434f317e65aa2db78226731f72986d2451",
+        "path": "web-game/public/assets/environment/materials/mossy_cobblestone/mossy_cobblestone_diff_1k.jpg",
+        "currentBlob": "e20e60434f317e65aa2db78226731f72986d2451",
+        "match": true
+      },
+      {
+        "mode": "100644",
+        "type": "blob",
+        "baselineBlob": "2f6766057509d7f3fbf2fa55dcd5bc9fc9bc894d",
+        "path": "web-game/public/assets/environment/materials/mossy_cobblestone/mossy_cobblestone_nor_gl_1k.jpg",
+        "currentBlob": "2f6766057509d7f3fbf2fa55dcd5bc9fc9bc894d",
+        "match": true
+      },
+      {
+        "mode": "100644",
+        "type": "blob",
+        "baselineBlob": "e414115845e245f4818cce395dd15fc6098ec508",
+        "path": "web-game/public/assets/environment/ruins/Textures/colormap.png",
+        "currentBlob": "e414115845e245f4818cce395dd15fc6098ec508",
+        "match": true
+      },
+      {
+        "mode": "100644",
+        "type": "blob",
+        "baselineBlob": "3377f0610741a759261f8bcc8221b37b0a20e852",
+        "path": "web-game/public/assets/environment/ruins/rocks-large.glb",
+        "currentBlob": "3377f0610741a759261f8bcc8221b37b0a20e852",
+        "match": true
+      },
+      {
+        "mode": "100644",
+        "type": "blob",
+        "baselineBlob": "2523a435ee1c7a12a9836aa2fa65e5c1ac2cff3c",
+        "path": "web-game/public/assets/environment/ruins/stairs-stone.glb",
+        "currentBlob": "2523a435ee1c7a12a9836aa2fa65e5c1ac2cff3c",
+        "match": true
+      },
+      {
+        "mode": "100644",
+        "type": "blob",
+        "baselineBlob": "7d2a4b773d94dd8d0f0f7e7e25a024314fdbb5ce",
+        "path": "web-game/public/assets/environment/ruins/tower-base.glb",
+        "currentBlob": "7d2a4b773d94dd8d0f0f7e7e25a024314fdbb5ce",
+        "match": true
+      },
+      {
+        "mode": "100644",
+        "type": "blob",
+        "baselineBlob": "98e9421af3ba6fa276805acccca9f3eac42d65fc",
+        "path": "web-game/public/assets/environment/ruins/wall-doorway.glb",
+        "currentBlob": "98e9421af3ba6fa276805acccca9f3eac42d65fc",
+        "match": true
+      },
+      {
+        "mode": "100644",
+        "type": "blob",
+        "baselineBlob": "f2600fb7149c8ea71deae3800f9447fa023d5fe5",
+        "path": "web-game/public/assets/environment/ruins/wall-half.glb",
+        "currentBlob": "f2600fb7149c8ea71deae3800f9447fa023d5fe5",
+        "match": true
+      },
+      {
+        "mode": "100644",
+        "type": "blob",
+        "baselineBlob": "f3054ebd577dddbddee8334e3763f2e0d3337431",
+        "path": "web-game/public/assets/environment/ruins/wall-pillar.glb",
+        "currentBlob": "f3054ebd577dddbddee8334e3763f2e0d3337431",
+        "match": true
+      },
+      {
+        "mode": "100644",
+        "type": "blob",
+        "baselineBlob": "627b0854d63677bdb22b918034bffbcd7a73af82",
+        "path": "web-game/public/assets/manifest.json",
+        "currentBlob": "627b0854d63677bdb22b918034bffbcd7a73af82",
+        "match": true
+      },
+      {
+        "mode": "100644",
+        "type": "blob",
+        "baselineBlob": "371bd704d0d2ad9d6812b34272c936ac63f49c2f",
+        "path": "web-game/public/assets/models/ashwake/hollow.glb",
+        "currentBlob": "371bd704d0d2ad9d6812b34272c936ac63f49c2f",
+        "match": true
+      },
+      {
+        "mode": "100644",
+        "type": "blob",
+        "baselineBlob": "cbb46e500548d94e6b7a8a74d7464d205c87e3f1",
+        "path": "web-game/public/assets/models/ashwake/nyra.glb",
+        "currentBlob": "cbb46e500548d94e6b7a8a74d7464d205c87e3f1",
+        "match": true
+      },
+      {
+        "mode": "100644",
+        "type": "blob",
+        "baselineBlob": "d13556155da29aa0682fe9d4f25c12e09e4cf192",
+        "path": "web-game/public/assets/models/ashwake/stormcage.glb",
+        "currentBlob": "d13556155da29aa0682fe9d4f25c12e09e4cf192",
+        "match": true
+      },
+      {
+        "mode": "100644",
+        "type": "blob",
+        "baselineBlob": "ae2fd24b26a9dd49d99231121d968e18d5b646eb",
+        "path": "web-game/public/assets/models/quaternius/claymore.glb",
+        "currentBlob": "ae2fd24b26a9dd49d99231121d968e18d5b646eb",
+        "match": true
+      },
+      {
+        "mode": "100644",
+        "type": "blob",
+        "baselineBlob": "bb994346fb06ba9f6fd1136576a6534909af1382",
+        "path": "web-game/public/assets/models/quaternius/female_ranger_outfit.glb",
+        "currentBlob": "bb994346fb06ba9f6fd1136576a6534909af1382",
+        "match": true
+      },
+      {
+        "mode": "100644",
+        "type": "blob",
+        "baselineBlob": "32ccad32b1175b2e2a4e47f46de831239f74b5af",
+        "path": "web-game/public/assets/models/quaternius/zombie_basic.glb",
+        "currentBlob": "32ccad32b1175b2e2a4e47f46de831239f74b5af",
+        "match": true
+      },
+      {
+        "mode": "100644",
+        "type": "blob",
+        "baselineBlob": "207f70ddd701ba6acbf1588fb7a7d7a1841fe411",
+        "path": "web-game/src/diagnostics/CowReviewHarness.ts",
+        "currentBlob": "207f70ddd701ba6acbf1588fb7a7d7a1841fe411",
+        "match": true
+      },
+      {
+        "mode": "100644",
+        "type": "blob",
+        "baselineBlob": "09fc425cf66be2ef036a63024ea24acbe237eb17",
+        "path": "web-game/src/diagnostics/PerfDiagnostics.ts",
+        "currentBlob": "09fc425cf66be2ef036a63024ea24acbe237eb17",
+        "match": true
+      },
+      {
+        "mode": "100644",
+        "type": "blob",
+        "baselineBlob": "87299e50206e3c65446df1ff20db4a8e5bfd7ac1",
+        "path": "web-game/src/diagnostics/captureHooks.ts",
+        "currentBlob": "87299e50206e3c65446df1ff20db4a8e5bfd7ac1",
+        "match": true
+      },
+      {
+        "mode": "100644",
+        "type": "blob",
+        "baselineBlob": "84abecb430287ba11266483dd1da633bda70cae8",
+        "path": "web-game/src/game/input/InputController.ts",
+        "currentBlob": "84abecb430287ba11266483dd1da633bda70cae8",
+        "match": true
+      },
+      {
+        "mode": "100644",
+        "type": "blob",
+        "baselineBlob": "5ebcd569cabc2f4b4fdc080c811e06b660e0d3c0",
+        "path": "web-game/src/game/input/actions.ts",
+        "currentBlob": "5ebcd569cabc2f4b4fdc080c811e06b660e0d3c0",
+        "match": true
+      },
+      {
+        "mode": "100644",
+        "type": "blob",
+        "baselineBlob": "56b9b256998c94de1e33c1450489ac47aef7d37b",
+        "path": "web-game/src/game/simulation/FixedStepClock.ts",
+        "currentBlob": "56b9b256998c94de1e33c1450489ac47aef7d37b",
+        "match": true
+      },
+      {
+        "mode": "100644",
+        "type": "blob",
+        "baselineBlob": "1e4bc79e17ced87dc0160908acbd6873fa2ed1ab",
+        "path": "web-game/src/game/simulation/GameSimulation.ts",
+        "currentBlob": "1e4bc79e17ced87dc0160908acbd6873fa2ed1ab",
+        "match": true
+      },
+      {
+        "mode": "100644",
+        "type": "blob",
+        "baselineBlob": "78d9842d4bd3dec377bd901b5137df4b8407d213",
+        "path": "web-game/src/game/simulation/constants.ts",
+        "currentBlob": "78d9842d4bd3dec377bd901b5137df4b8407d213",
+        "match": true
+      },
+      {
+        "mode": "100644",
+        "type": "blob",
+        "baselineBlob": "eb10c0109e7365ba10feee3aff6496b7e02882ee",
+        "path": "web-game/src/game/simulation/math.ts",
+        "currentBlob": "eb10c0109e7365ba10feee3aff6496b7e02882ee",
+        "match": true
+      },
+      {
+        "mode": "100644",
+        "type": "blob",
+        "baselineBlob": "9da0acc4dd4a63f79aec8cbe00772d19d6e62254",
+        "path": "web-game/src/game/simulation/types.ts",
+        "currentBlob": "9da0acc4dd4a63f79aec8cbe00772d19d6e62254",
+        "match": true
+      },
+      {
+        "mode": "100644",
+        "type": "blob",
+        "baselineBlob": "815cc9724a2b0a91cf1cdc1a3c343d8889c0b588",
+        "path": "web-game/src/main.ts",
+        "currentBlob": "815cc9724a2b0a91cf1cdc1a3c343d8889c0b588",
+        "match": true
+      },
+      {
+        "mode": "100644",
+        "type": "blob",
+        "baselineBlob": "6fba8d06ca300cb995e73209fcae65a4045b4e60",
+        "path": "web-game/src/physics/PhysicsBridge.ts",
+        "currentBlob": "6fba8d06ca300cb995e73209fcae65a4045b4e60",
+        "match": true
+      },
+      {
+        "mode": "100644",
+        "type": "blob",
+        "baselineBlob": "92f3ab296cdcb9615a4cc3f8638f62502d183e1d",
+        "path": "web-game/src/render/adapters/RenderBridge.ts",
+        "currentBlob": "92f3ab296cdcb9615a4cc3f8638f62502d183e1d",
+        "match": true
+      },
+      {
+        "mode": "100644",
+        "type": "blob",
+        "baselineBlob": "798ebcb2817f1acc59469c67a01dd970ec7fee9f",
+        "path": "web-game/src/render/app/GameApp.ts",
+        "currentBlob": "798ebcb2817f1acc59469c67a01dd970ec7fee9f",
+        "match": true
+      },
+      {
+        "mode": "100644",
+        "type": "blob",
+        "baselineBlob": "e7060c67ecb7f6ca1164c36fb5972bfa0aeecf66",
+        "path": "web-game/src/render/app/LightingRig.ts",
+        "currentBlob": "e7060c67ecb7f6ca1164c36fb5972bfa0aeecf66",
+        "match": true
+      },
+      {
+        "mode": "100644",
+        "type": "blob",
+        "baselineBlob": "fd7b258cdfda884771c8ce4507f84cb211b69c27",
+        "path": "web-game/src/render/app/ThirdPersonCamera.ts",
+        "currentBlob": "fd7b258cdfda884771c8ce4507f84cb211b69c27",
+        "match": true
+      },
+      {
+        "mode": "100644",
+        "type": "blob",
+        "baselineBlob": "19287cfcaec68140972b37d6169b00f0c3d20de6",
+        "path": "web-game/src/render/app/ViewportController.ts",
+        "currentBlob": "19287cfcaec68140972b37d6169b00f0c3d20de6",
+        "match": true
+      },
+      {
+        "mode": "100644",
+        "type": "blob",
+        "baselineBlob": "0cd1f0aa36eb2c3759a07c39960666ffba6ea5c8",
+        "path": "web-game/src/render/app/createRenderer.ts",
+        "currentBlob": "0cd1f0aa36eb2c3759a07c39960666ffba6ea5c8",
+        "match": true
+      },
+      {
+        "mode": "100644",
+        "type": "blob",
+        "baselineBlob": "250d7e06952d95e8b39d2b54d07c041fc796288b",
+        "path": "web-game/src/render/app/createScene.ts",
+        "currentBlob": "250d7e06952d95e8b39d2b54d07c041fc796288b",
+        "match": true
+      },
+      {
+        "mode": "100644",
+        "type": "blob",
+        "baselineBlob": "e7465624a4cae26f52c80452d5871dbca4d6a6ce",
+        "path": "web-game/src/render/loaders/AssetRegistry.ts",
+        "currentBlob": "e7465624a4cae26f52c80452d5871dbca4d6a6ce",
+        "match": true
+      },
+      {
+        "mode": "100644",
+        "type": "blob",
+        "baselineBlob": "96a3dc37f4733f34a60f6b8d17e858c9c5191374",
+        "path": "web-game/src/render/materials/AshwakeMaterials.ts",
+        "currentBlob": "96a3dc37f4733f34a60f6b8d17e858c9c5191374",
+        "match": true
+      },
+      {
+        "mode": "100644",
+        "type": "blob",
+        "baselineBlob": "620ad61deb2a1c6d392e904fa51af4a2a19eb7a9",
+        "path": "web-game/src/render/objects/ArenaView.ts",
+        "currentBlob": "620ad61deb2a1c6d392e904fa51af4a2a19eb7a9",
+        "match": true
+      },
+      {
+        "mode": "100644",
+        "type": "blob",
+        "baselineBlob": "41366c52465ff67879a75c1f8ac0c2038dde771f",
+        "path": "web-game/src/render/objects/CombatFx.ts",
+        "currentBlob": "41366c52465ff67879a75c1f8ac0c2038dde771f",
+        "match": true
+      },
+      {
+        "mode": "100644",
+        "type": "blob",
+        "baselineBlob": "5a0e0494727968a47fe53920a001a37844c69b18",
+        "path": "web-game/src/render/post/PostStack.ts",
+        "currentBlob": "5a0e0494727968a47fe53920a001a37844c69b18",
+        "match": true
+      },
+      {
+        "mode": "100644",
+        "type": "blob",
+        "baselineBlob": "2a100f8a510938e3fcb76e1fa7b643200897d23a",
+        "path": "web-game/src/styles.css",
+        "currentBlob": "2a100f8a510938e3fcb76e1fa7b643200897d23a",
+        "match": true
+      },
+      {
+        "mode": "100644",
+        "type": "blob",
+        "baselineBlob": "71cce74beb6278f3bc09ab96cc573afaf5cd5588",
+        "path": "web-game/src/ui/Hud.ts",
+        "currentBlob": "71cce74beb6278f3bc09ab96cc573afaf5cd5588",
+        "match": true
+      },
+      {
+        "mode": "100644",
+        "type": "blob",
+        "baselineBlob": "2561b64710cb4f7dec783450e716194dad7bc2ab",
+        "path": "web-game/tsconfig.json",
+        "currentBlob": "2561b64710cb4f7dec783450e716194dad7bc2ab",
+        "match": true
+      },
+      {
+        "mode": "100644",
+        "type": "blob",
+        "baselineBlob": "8675af70c23ee93f24a3bddedd2b0ba200bede00",
+        "path": "web-game/vite.config.ts",
+        "currentBlob": "8675af70c23ee93f24a3bddedd2b0ba200bede00",
+        "match": true
+      }
+    ],
+    "missing": [],
+    "mismatches": [],
+    "unauthorizedNew": []
+  },
+  "gates": {
+    "everyUnauthorizedBaselineFileByteExact": true,
+    "noUnauthorizedNewProductionFiles": true,
+    "authorizedFilesPresent": true
+  },
+  "passed": true
+}

@@ -6,6 +6,13 @@ import {
 import { clamp } from "../../game/simulation/math";
 import type { EnemyState, PlayerState } from "../../game/simulation/types";
 import type { AssetRegistry } from "../loaders/AssetRegistry";
+import {
+  sampleHeroCombatPose,
+  sampleTargetCombatPose,
+  type HeroCombatPoseSample,
+  type PoseVector,
+  type TargetCombatPoseSample,
+} from "./CombatPoseBeat";
 
 const HERO_REQUIRED_CLIPS = [
   "Idle_Loop",
@@ -66,14 +73,139 @@ export interface BladeTrailFxAuditApi {
   setAuditVisible: (visible: boolean) => void;
 }
 
+interface PoseAnchorTelemetry {
+  pelvisWorld: PoseVector | null;
+  leadHandWorld: PoseVector | null;
+  supportHandWorld: PoseVector | null;
+  secondaryGripWorld: PoseVector | null;
+  bladeContactWorld: PoseVector | null;
+  bladeTipWorld: PoseVector | null;
+}
+
+interface TargetAnchorTelemetry {
+  hipsWorld: PoseVector | null;
+  impactWorld: PoseVector | null;
+  headWorld: PoseVector | null;
+}
+
+export interface CombatPoseBeatTelemetry {
+  schema: "cow.combat-pose-beat.v1";
+  additivePresentationOnly: true;
+  hero: {
+    sample: HeroCombatPoseSample;
+    rigBindings: Record<"pelvis" | "spine01" | "spine02" | "spine03" | "neck", boolean>;
+    weaponParent: string | null;
+    anchors: PoseAnchorTelemetry;
+    supportHandToSecondaryGripMeters: number | null;
+  };
+  target: {
+    sample: TargetCombatPoseSample;
+    rigBindings: Record<"hips" | "abdomen" | "torso" | "neck", boolean>;
+    anchors: TargetAnchorTelemetry;
+  };
+  contact: {
+    bladeToTargetMeters: number | null;
+  };
+}
+
+export interface CombatPoseBeatAuditApi {
+  telemetry: () => CombatPoseBeatTelemetry;
+}
+
+interface HeroPoseAuditState {
+  sample: HeroCombatPoseSample;
+  rigBindings: CombatPoseBeatTelemetry["hero"]["rigBindings"];
+  weaponParent: string | null;
+  anchors: PoseAnchorTelemetry;
+  supportHandToSecondaryGripMeters: number | null;
+}
+
+interface TargetPoseAuditState {
+  sample: TargetCombatPoseSample;
+  rigBindings: CombatPoseBeatTelemetry["target"]["rigBindings"];
+  anchors: TargetAnchorTelemetry;
+}
+
+const poseAuditState: {
+  hero: HeroPoseAuditState;
+  target: TargetPoseAuditState;
+} = {
+  hero: {
+    sample: sampleHeroCombatPose("idle", -1),
+    rigBindings: { pelvis: false, spine01: false, spine02: false, spine03: false, neck: false },
+    weaponParent: null,
+    anchors: {
+      pelvisWorld: null,
+      leadHandWorld: null,
+      supportHandWorld: null,
+      secondaryGripWorld: null,
+      bladeContactWorld: null,
+      bladeTipWorld: null,
+    },
+    supportHandToSecondaryGripMeters: null,
+  },
+  target: {
+    sample: sampleTargetCombatPose("idle", 0),
+    rigBindings: { hips: false, abdomen: false, torso: false, neck: false },
+    anchors: { hipsWorld: null, impactWorld: null, headWorld: null },
+  },
+};
+
+const combatPoseAuditApi: CombatPoseBeatAuditApi = {
+  telemetry: () => {
+    const blade = poseAuditState.hero.anchors.bladeContactWorld;
+    const impact = poseAuditState.target.anchors.impactWorld;
+    return {
+      schema: "cow.combat-pose-beat.v1",
+      additivePresentationOnly: true,
+      hero: structuredClone(poseAuditState.hero),
+      target: structuredClone(poseAuditState.target),
+      contact: {
+        bladeToTargetMeters:
+          blade && impact
+            ? roundFx(Math.hypot(
+                blade[0] - impact[0],
+                blade[1] - impact[1],
+                blade[2] - impact[2],
+              ))
+            : null,
+      },
+    };
+  },
+};
+
 declare global {
   interface Window {
     __COW_BLADE_FX__?: BladeTrailFxAuditApi;
+    __COW_COMBAT_POSE__?: CombatPoseBeatAuditApi;
   }
 }
 
 function roundFx(value: number): number {
   return Math.round(value * 1_000_000) / 1_000_000;
+}
+
+function worldPoint(node: THREE.Object3D | null): PoseVector | null {
+  if (!node) return null;
+  const point = node.getWorldPosition(new THREE.Vector3());
+  return [roundFx(point.x), roundFx(point.y), roundFx(point.z)];
+}
+
+function pointDistance(from: PoseVector | null, to: PoseVector | null): number | null {
+  if (!from || !to) return null;
+  return roundFx(Math.hypot(from[0] - to[0], from[1] - to[1], from[2] - to[2]));
+}
+
+function setTransform(target: THREE.Object3D, transform: { position: PoseVector; rotation: PoseVector }): void {
+  target.position.fromArray(transform.position);
+  target.rotation.set(...transform.rotation);
+}
+
+function addLocalRotation(target: THREE.Object3D | null, rotation: PoseVector): void {
+  if (!target) return;
+  target.quaternion.multiply(
+    new THREE.Quaternion().setFromEuler(new THREE.Euler(...rotation, "YXZ")),
+  );
 }
 
 export function sampleBladeTrailFx(
@@ -235,6 +367,28 @@ export class HeroView {
   private trailAuditVisible = true;
   private animator: DeterministicAnimator | null = null;
   private fallbackWeapon: THREE.Group | null = null;
+  private latestPose = sampleHeroCombatPose("idle", -1);
+  private readonly poseBones: Record<"pelvis" | "spine01" | "spine02" | "spine03" | "neck", THREE.Object3D | null> = {
+    pelvis: null,
+    spine01: null,
+    spine02: null,
+    spine03: null,
+    neck: null,
+  };
+  private readonly poseBaseRotations: Record<
+    "pelvis" | "spine01" | "spine02" | "spine03" | "neck",
+    THREE.Quaternion | null
+  > = { pelvis: null, spine01: null, spine02: null, spine03: null, neck: null };
+  private readonly poseAnchors: Record<
+    "leadHand" | "supportHand" | "secondaryGrip" | "bladeContact" | "bladeTip",
+    THREE.Object3D | null
+  > = {
+    leadHand: null,
+    supportHand: null,
+    secondaryGrip: null,
+    bladeContact: null,
+    bladeTip: null,
+  };
 
   constructor(assets: AssetRegistry) {
     const hero = assets.instantiateWithAnimations("character.hero");
@@ -302,6 +456,16 @@ export class HeroView {
       weaponSocket.add(weapon.scene);
       this.visual.add(hero.scene);
       this.animator = new DeterministicAnimator(hero.scene, clips);
+      this.poseBones.pelvis = hero.scene.getObjectByName("pelvis") ?? null;
+      this.poseBones.spine01 = hero.scene.getObjectByName("spine_01") ?? null;
+      this.poseBones.spine02 = hero.scene.getObjectByName("spine_02") ?? null;
+      this.poseBones.spine03 = hero.scene.getObjectByName("spine_03") ?? null;
+      this.poseBones.neck = hero.scene.getObjectByName("neck_01") ?? null;
+      this.poseAnchors.leadHand = hero.scene.getObjectByName("hand_r") ?? null;
+      this.poseAnchors.supportHand = hero.scene.getObjectByName("hand_l") ?? null;
+      this.poseAnchors.secondaryGrip = weapon.scene.getObjectByName("GripSecondary") ?? null;
+      this.poseAnchors.bladeContact = weapon.scene.getObjectByName("ContactMarker") ?? null;
+      this.poseAnchors.bladeTip = weapon.scene.getObjectByName("BladeTip") ?? null;
     }
 
     this.weaponTrail.name = "fx.weapon-trail";
@@ -412,18 +576,26 @@ export class HeroView {
         ? "fallback-weapon-local"
         : "hero-local";
     weaponFxParent.add(this.weaponTrail);
-    if (typeof window !== "undefined") window.__COW_BLADE_FX__ = this.bladeFxAuditApi;
+    if (typeof window !== "undefined") {
+      window.__COW_BLADE_FX__ = this.bladeFxAuditApi;
+      window.__COW_COMBAT_POSE__ = combatPoseAuditApi;
+    }
   }
 
   update(state: PlayerState, elapsed: number): void {
     this.root.position.set(state.position.x, 0, state.position.z);
     this.root.rotation.y = -state.yaw;
 
+    this.restoreAuthoredPose();
     if (this.animator) this.updateAuthoredAnimation(state, elapsed);
     else this.updateFallbackAnimation(state, elapsed);
+    this.captureAuthoredPose();
+    this.latestPose = sampleHeroCombatPose(state.attackPhase, state.attackFrame);
+    this.applyCombatPose(this.latestPose);
 
     this.trailSample = sampleBladeTrailFx(state.attackPhase, state.attackElapsed);
     this.applyTrailVisuals();
+    this.updatePoseAudit();
   }
 
   getFxTelemetry(): BladeTrailFxTelemetry {
@@ -451,6 +623,12 @@ export class HeroView {
     ) {
       window.__COW_BLADE_FX__ = undefined;
     }
+    if (
+      typeof window !== "undefined" &&
+      window.__COW_COMBAT_POSE__ === combatPoseAuditApi
+    ) {
+      window.__COW_COMBAT_POSE__ = undefined;
+    }
     this.animator?.dispose();
     for (const geometry of this.ownedGeometries) geometry.dispose();
     for (const material of this.ownedMaterials) material.dispose();
@@ -467,6 +645,58 @@ export class HeroView {
         ? roundFx(layer.peakOpacity * this.trailSample.intensity)
         : 0;
     }
+  }
+
+  private applyCombatPose(sample: HeroCombatPoseSample): void {
+    setTransform(this.visual, sample.model);
+    addLocalRotation(this.poseBones.pelvis, sample.bones.pelvis);
+    addLocalRotation(this.poseBones.spine01, sample.bones.spine01);
+    addLocalRotation(this.poseBones.spine02, sample.bones.spine02);
+    addLocalRotation(this.poseBones.spine03, sample.bones.spine03);
+    addLocalRotation(this.poseBones.neck, sample.bones.neck);
+  }
+
+  private restoreAuthoredPose(): void {
+    for (const name of Object.keys(this.poseBones) as Array<keyof typeof this.poseBones>) {
+      const bone = this.poseBones[name];
+      const base = this.poseBaseRotations[name];
+      if (bone && base) bone.quaternion.copy(base);
+    }
+  }
+
+  private captureAuthoredPose(): void {
+    for (const name of Object.keys(this.poseBones) as Array<keyof typeof this.poseBones>) {
+      const bone = this.poseBones[name];
+      if (!bone) continue;
+      const base = this.poseBaseRotations[name] ?? new THREE.Quaternion();
+      base.copy(bone.quaternion);
+      this.poseBaseRotations[name] = base;
+    }
+  }
+
+  private updatePoseAudit(): void {
+    const supportHandWorld = worldPoint(this.poseAnchors.supportHand);
+    const secondaryGripWorld = worldPoint(this.poseAnchors.secondaryGrip);
+    poseAuditState.hero = {
+      sample: this.latestPose,
+      rigBindings: {
+        pelvis: this.poseBones.pelvis !== null,
+        spine01: this.poseBones.spine01 !== null,
+        spine02: this.poseBones.spine02 !== null,
+        spine03: this.poseBones.spine03 !== null,
+        neck: this.poseBones.neck !== null,
+      },
+      weaponParent: this.root.getObjectByName("stormcage-two-hand-socket")?.parent?.name ?? null,
+      anchors: {
+        pelvisWorld: worldPoint(this.poseBones.pelvis),
+        leadHandWorld: worldPoint(this.poseAnchors.leadHand),
+        supportHandWorld,
+        secondaryGripWorld,
+        bladeContactWorld: worldPoint(this.poseAnchors.bladeContact),
+        bladeTipWorld: worldPoint(this.poseAnchors.bladeTip),
+      },
+      supportHandToSecondaryGripMeters: pointDistance(supportHandWorld, secondaryGripWorld),
+    };
   }
 
   private updateAuthoredAnimation(state: PlayerState, elapsed: number): void {
@@ -559,6 +789,21 @@ export class ZombieView {
   private readonly flashMaterials: FlashMaterial[] = [];
   private animator: DeterministicAnimator | null = null;
   private deathStartedAt: number | null = null;
+  private latestPose = sampleTargetCombatPose("idle", 0);
+  private readonly poseBones: Record<"hips" | "abdomen" | "torso" | "neck", THREE.Object3D | null> = {
+    hips: null,
+    abdomen: null,
+    torso: null,
+    neck: null,
+  };
+  private readonly poseBaseRotations: Record<
+    "hips" | "abdomen" | "torso" | "neck",
+    THREE.Quaternion | null
+  > = { hips: null, abdomen: null, torso: null, neck: null };
+  private readonly poseAnchors: Record<"impact" | "head", THREE.Object3D | null> = {
+    impact: null,
+    head: null,
+  };
 
   constructor(assets: AssetRegistry) {
     const zombie = assets.instantiateWithAnimations("character.hollow");
@@ -607,19 +852,34 @@ export class ZombieView {
       });
       this.visual.add(zombie.scene);
       this.animator = new DeterministicAnimator(zombie.scene, zombie.animations);
+      this.poseBones.hips = zombie.scene.getObjectByName("Hips") ?? null;
+      this.poseBones.abdomen = zombie.scene.getObjectByName("Abdomen") ?? null;
+      this.poseBones.torso = zombie.scene.getObjectByName("Torso") ?? null;
+      this.poseBones.neck = zombie.scene.getObjectByName("Neck") ?? null;
+      this.poseAnchors.impact = zombie.scene.getObjectByName("impact_socket") ?? null;
+      this.poseAnchors.head = zombie.scene.getObjectByName("Head") ?? null;
     }
+    if (typeof window !== "undefined") window.__COW_COMBAT_POSE__ = combatPoseAuditApi;
   }
 
   update(state: EnemyState, elapsed: number): void {
     this.root.position.set(state.position.x, 0, state.position.z);
     this.root.rotation.y = -state.yaw;
 
+    this.restoreAuthoredPose();
+    this.latestPose = sampleTargetCombatPose(state.motion, state.hitStunRemaining);
+
     if (state.motion === "dead") {
       if (this.deathStartedAt === null) this.deathStartedAt = elapsed;
       const deathElapsed = elapsed - this.deathStartedAt;
-      if (this.animator) this.animator.setTime("Death", deathElapsed, false);
+      if (this.animator) {
+        setTransform(this.visual, this.latestPose.model);
+        this.animator.setTime("Death", deathElapsed, false);
+        this.captureAuthoredPose();
+      }
       else this.visual.rotation.z += (-1.42 - this.visual.rotation.z) * 0.08;
       this.applyHitFlash(0.08);
+      this.updatePoseAudit();
       return;
     }
     this.deathStartedAt = null;
@@ -628,20 +888,32 @@ export class ZombieView {
       const hit01 = clamp(state.hitStunRemaining / 0.28, 0, 1);
       if (this.animator) {
         const duration = this.animator.getDuration("HitReact");
-        this.animator.setTime("HitReact", (1 - hit01) * duration, false);
+        this.animator.setTime(
+          "HitReact",
+          (1 - hit01) * duration + this.latestPose.animationLeadSeconds,
+          false,
+        );
+        this.captureAuthoredPose();
       } else {
         this.visual.rotation.z = Math.sin(hit01 * Math.PI) * 0.22;
         this.visual.position.z = hit01 * 0.2;
       }
+      this.applyCombatPose(this.latestPose);
       this.applyHitFlash(hit01);
+      this.updatePoseAudit();
       return;
     }
 
+    setTransform(this.visual, this.latestPose.model);
     this.visual.rotation.z *= 0.78;
     this.visual.position.z *= 0.75;
     this.applyHitFlash(0);
-    if (this.animator) this.animator.setTime("Idle", elapsed, true);
+    if (this.animator) {
+      this.animator.setTime("Idle", elapsed, true);
+      this.captureAuthoredPose();
+    }
     else this.visual.position.y = Math.sin(elapsed * 2.4 + state.idlePhase * 0.15) * 0.024;
+    this.updatePoseAudit();
   }
 
   dispose(): void {
@@ -662,6 +934,49 @@ export class ZombieView {
         entry.material.emissiveIntensity = entry.intensity;
       }
     }
+  }
+
+  private applyCombatPose(sample: TargetCombatPoseSample): void {
+    setTransform(this.visual, sample.model);
+    addLocalRotation(this.poseBones.hips, sample.bones.hips);
+    addLocalRotation(this.poseBones.abdomen, sample.bones.abdomen);
+    addLocalRotation(this.poseBones.torso, sample.bones.torso);
+    addLocalRotation(this.poseBones.neck, sample.bones.neck);
+  }
+
+  private restoreAuthoredPose(): void {
+    for (const name of Object.keys(this.poseBones) as Array<keyof typeof this.poseBones>) {
+      const bone = this.poseBones[name];
+      const base = this.poseBaseRotations[name];
+      if (bone && base) bone.quaternion.copy(base);
+    }
+  }
+
+  private captureAuthoredPose(): void {
+    for (const name of Object.keys(this.poseBones) as Array<keyof typeof this.poseBones>) {
+      const bone = this.poseBones[name];
+      if (!bone) continue;
+      const base = this.poseBaseRotations[name] ?? new THREE.Quaternion();
+      base.copy(bone.quaternion);
+      this.poseBaseRotations[name] = base;
+    }
+  }
+
+  private updatePoseAudit(): void {
+    poseAuditState.target = {
+      sample: this.latestPose,
+      rigBindings: {
+        hips: this.poseBones.hips !== null,
+        abdomen: this.poseBones.abdomen !== null,
+        torso: this.poseBones.torso !== null,
+        neck: this.poseBones.neck !== null,
+      },
+      anchors: {
+        hipsWorld: worldPoint(this.poseBones.hips),
+        impactWorld: worldPoint(this.poseAnchors.impact),
+        headWorld: worldPoint(this.poseAnchors.head),
+      },
+    };
   }
 
   private buildProceduralFallback(): void {

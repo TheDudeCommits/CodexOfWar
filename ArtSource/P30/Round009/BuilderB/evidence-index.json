@@ -1,0 +1,95 @@
+{
+  "schema": "p30.round009.builder-b.evidence-index.v1",
+  "baseCommit": "afc1063812473087a645271e2c33adcd0534225a",
+  "candidateOnly": true,
+  "acceptanceClaimed": false,
+  "files": [
+    {
+      "path": "ArtSource/P30/Round009/BuilderB/F29-startup.png",
+      "bytes": 2127220,
+      "sha256": "614df9d41ea7e745f51364066e6db6bf6960f07fe70eaf96e917c1a39e484465"
+    },
+    {
+      "path": "ArtSource/P30/Round009/BuilderB/F34-impact.png",
+      "bytes": 2136728,
+      "sha256": "4ab7b21ba4bf4b9b94c6046b5c3ccfa0d25248b4de92ecc0e8b09b5382f5e480"
+    },
+    {
+      "path": "ArtSource/P30/Round009/BuilderB/F41-recovery.png",
+      "bytes": 2137110,
+      "sha256": "c6a2d87903b29e6fef9113b984b7f5f4a10317fd834dc605a5499fd0209a7a85"
+    },
+    {
+      "path": "ArtSource/P30/Round009/BuilderB/S01.png",
+      "bytes": 2025228,
+      "sha256": "fb6ac5c71e6e3d54ef32e27ee300afc59cdb96621fb5fa26993cea8ec261a11f"
+    },
+    {
+      "path": "ArtSource/P30/Round009/BuilderB/S02.png",
+      "bytes": 2108680,
+      "sha256": "3e2144458d0e0b72674a925f54a4b67a162a0df9e3fa82e29866b2b53db34b2d"
+    },
+    {
+      "path": "ArtSource/P30/Round009/BuilderB/S03.png",
+      "bytes": 2127220,
+      "sha256": "614df9d41ea7e745f51364066e6db6bf6960f07fe70eaf96e917c1a39e484465"
+    },
+    {
+      "path": "ArtSource/P30/Round009/BuilderB/S04.png",
+      "bytes": 2136728,
+      "sha256": "4ab7b21ba4bf4b9b94c6046b5c3ccfa0d25248b4de92ecc0e8b09b5382f5e480"
+    },
+    {
+      "path": "ArtSource/P30/Round009/BuilderB/S05.png",
+      "bytes": 2137110,
+      "sha256": "c6a2d87903b29e6fef9113b984b7f5f4a10317fd834dc605a5499fd0209a7a85"
+    },
+    {
+      "path": "ArtSource/P30/Round009/BuilderB/S06.png",
+      "bytes": 2019882,
+      "sha256": "eea4452b4e26fb885954ad5f303a70602945e28bae3b195eeb0c29886877b7db"
+    },
+    {
+      "path": "ArtSource/P30/Round009/BuilderB/SELF_CRITIQUE.md",
+      "bytes": 2429,
+      "sha256": "28066cc369459f1bbcfc62851913fd2aa978e554ca9983bf9a83a4715e4cad3d"
+    },
+    {
+      "path": "ArtSource/P30/Round009/BuilderB/capture-receipt.json",
+      "bytes": 135542,
+      "sha256": "cbf955fac2db939bf11e1498507e145ce19546a54a0794bf2960d5962542ba7a"
+    },
+    {
+      "path": "ArtSource/P30/Round009/BuilderB/freeze-audit.json",
+      "bytes": 21236,
+      "sha256": "7c14cdef46f45ce93e59c1112fc6c6bc83fa3a1b63640634157702da69bf7ea1"
+    },
+    {
+      "path": "ArtSource/P30/Round009/BuilderB/pose-telemetry.json",
+      "bytes": 33833,
+      "sha256": "0cedf9da26356becb53fb36d49b6f5a1c1763a7874a25a952c795f8bb0da3a21"
+    },
+    {
+      "path": "ArtSource/P30/Round009/BuilderB/runtime-telemetry.json",
+      "bytes": 7519,
+      "sha256": "e0936108287ba9b1cedf7297e7f33a174582ff5f83bdc8d1a6605b64eff266d4"
+    },
+    {
+      "path": "ArtSource/P30/Round009/BuilderB/validation.json",
+      "bytes": 2729,
+      "sha256": "89a005513ab554a44649a8afe9e788b995f280fb2f3d058ffd3173798b6336d0"
+    }
+  ],
+  "aggregateSha256": "8002ca487a4fead49476d5bbbf49492335214da924dad706619026ac87ffb6f1",
+  "gates": {
+    "expectedNinePngs": true,
+    "noPrivatePaths": true,
+    "noReferenceOriginals": true,
+    "receiptPresent": true,
+    "freezeAuditPresent": true,
+    "selfCritiquePresent": true
+  },
+  "forbiddenPrivatePathHits": [],
+  "referenceOriginalFiles": [],
+  "passed": true
+}
