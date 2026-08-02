@@ -1138,7 +1138,7 @@ test('evidence custody requires every trace, canonical tick 20-80 frames, strips
       missing, fixture.custodyBytesByPath, fixture.blindOrderManifest, fixture.blindOrderManifest.presentationCommit,
       fixture.publicPackageReceipt
     ),
-    (error) => evaluatorCode(error, 'EVIDENCE_CONTACT_ROI_MISSING')
+    (error) => evaluatorCode(error, 'EVIDENCE_ARTIFACT_SET_CARDINALITY_INVALID')
   );
   const publicBoard = structuredClone(fixture);
   publicBoard.artifacts.push({ ...publicBoard.artifacts[0], path: 'public/board.bin', kind: 'blind-board' });
@@ -1168,6 +1168,38 @@ function assertEvidenceRejects(document, custodyBytesByPath, fixture, code) {
   );
 }
 
+function replaceEvidenceArtifactClaim(document, custodyBytesByPath, artifactIndex, changes, bytes) {
+  const artifact = document.artifacts[artifactIndex];
+  custodyBytesByPath.delete(artifact.path);
+  Object.assign(artifact, changes);
+  artifact.byteCount = bytes.byteLength;
+  artifact.sha256 = createHash('sha256').update(bytes).digest('hex');
+  const run = document.captureRuns.find((entry) =>
+    entry.alias === artifact.alias && entry.runProfileID === artifact.runProfileID
+  );
+  const heavyEdge = run.traceID === 'SHIFT_PLUS_7' ? 31 :
+    ['NO_HEAVY', 'LIGHT_BASELINE'].includes(run.traceID) ? null : 24;
+  artifact.heavyRelativeTicks = artifact.absoluteTicks.map((tick) =>
+    heavyEdge === null || tick < heavyEdge ? null : tick - heavyEdge
+  );
+  artifact.path = evidenceArtifactClaimPath(artifact, run.traceID);
+  custodyBytesByPath.set(artifact.path, bytes);
+  return artifact;
+}
+
+function appendEvidenceArtifactClaim(document, custodyBytesByPath, templateIndex, changes, bytes) {
+  const artifact = structuredClone(document.artifacts[templateIndex]);
+  artifact.path = 'pending-artifact.bin';
+  document.artifacts.push(artifact);
+  return replaceEvidenceArtifactClaim(
+    document,
+    custodyBytesByPath,
+    document.artifacts.length - 1,
+    changes,
+    bytes
+  );
+}
+
 test('evidence custody rejects the one-byte-for-everything critic reproducer', () => {
   const fixture = evidenceManifestFixture();
   assert.equal(fixture.artifacts.length, 572);
@@ -1185,6 +1217,147 @@ test('evidence custody rejects the one-byte-for-everything critic reproducer', (
     new Map([['one-byte-for-everything.bin', sharedBytes]]),
     fixture,
     'EVIDENCE_ARTIFACT_PATH_DUPLICATE'
+  );
+});
+
+test('evidence custody rejects a fully declared and backed 582nd diagnostic artifact', () => {
+  const fixture = evidenceManifestFixture();
+  const expanded = structuredClone(fixture);
+  const expandedBytes = new Map(fixture.custodyBytesByPath);
+  appendEvidenceArtifactClaim(
+    expanded,
+    expandedBytes,
+    0,
+    { kind: 'diagnostic-mask', absoluteTicks: [1] },
+    Uint8Array.of(0xde, 0xad, 0xbe, 0xef)
+  );
+  assert.equal(expanded.artifacts.length, 573);
+  assert.equal(expandedBytes.size, 582);
+  assertEvidenceRejects(
+    expanded,
+    expandedBytes,
+    fixture,
+    'EVIDENCE_ARTIFACT_CLAIM_UNEXPECTED'
+  );
+});
+
+test('exact evidence matrix rejects per-run extras, reclassification, and alternative-slot duplication', () => {
+  const fixture = evidenceManifestFixture();
+
+  const perRunExtra = structuredClone(fixture);
+  const perRunExtraBytes = new Map(fixture.custodyBytesByPath);
+  const noncanonicalIndex = perRunExtra.artifacts.findIndex((artifact) =>
+    artifact.runProfileID.endsWith('KEYK_TAP') && artifact.kind === 'event-log'
+  );
+  appendEvidenceArtifactClaim(
+    perRunExtra,
+    perRunExtraBytes,
+    noncanonicalIndex,
+    { absoluteTicks: [1] },
+    Uint8Array.of(0x10, 0x11)
+  );
+  assertEvidenceRejects(
+    perRunExtra,
+    perRunExtraBytes,
+    fixture,
+    'EVIDENCE_ARTIFACT_CLAIM_UNEXPECTED'
+  );
+
+  const reclassified = structuredClone(fixture);
+  const reclassifiedBytes = new Map(fixture.custodyBytesByPath);
+  replaceEvidenceArtifactClaim(
+    reclassified,
+    reclassifiedBytes,
+    0,
+    { kind: 'diagnostic-mask' },
+    Uint8Array.of(0x20, 0x21)
+  );
+  assert.equal(reclassified.artifacts.length, 572);
+  assert.equal(reclassifiedBytes.size, 581);
+  assertEvidenceRejects(
+    reclassified,
+    reclassifiedBytes,
+    fixture,
+    'EVIDENCE_ARTIFACT_CLAIM_UNEXPECTED'
+  );
+
+  const alternateOnly = structuredClone(fixture);
+  const alternateOnlyBytes = new Map(fixture.custodyBytesByPath);
+  const alternateOnlyIndex = alternateOnly.artifacts.findIndex((artifact) =>
+    artifact.kind === 'lossless-frame-sequence'
+  );
+  replaceEvidenceArtifactClaim(
+    alternateOnly,
+    alternateOnlyBytes,
+    alternateOnlyIndex,
+    { kind: 'lossless-video' },
+    Uint8Array.of(0x2a, 0x2b)
+  );
+  assert.doesNotThrow(() => validateEvidenceFixture(alternateOnly, alternateOnlyBytes, fixture));
+
+  const alternateDuplicate = structuredClone(fixture);
+  const alternateDuplicateBytes = new Map(fixture.custodyBytesByPath);
+  const sequenceIndex = alternateDuplicate.artifacts.findIndex((artifact) =>
+    artifact.kind === 'lossless-frame-sequence'
+  );
+  appendEvidenceArtifactClaim(
+    alternateDuplicate,
+    alternateDuplicateBytes,
+    sequenceIndex,
+    { kind: 'lossless-video' },
+    Uint8Array.of(0x30, 0x31)
+  );
+  assertEvidenceRejects(
+    alternateDuplicate,
+    alternateDuplicateBytes,
+    fixture,
+    'EVIDENCE_ARTIFACT_SLOT_DUPLICATE'
+  );
+});
+
+test('exact evidence matrix rejects missing-plus-extra substitution and cardinality-preserving swaps', () => {
+  const fixture = evidenceManifestFixture();
+
+  const substituted = structuredClone(fixture);
+  const substitutedBytes = new Map(fixture.custodyBytesByPath);
+  const missingIndex = substituted.artifacts.findIndex((artifact) => artifact.kind === 'contact-roi');
+  substitutedBytes.delete(substituted.artifacts[missingIndex].path);
+  substituted.artifacts.splice(missingIndex, 1);
+  appendEvidenceArtifactClaim(
+    substituted,
+    substitutedBytes,
+    0,
+    { kind: 'diagnostic-mask', absoluteTicks: [2] },
+    Uint8Array.of(0x40, 0x41)
+  );
+  assert.equal(substituted.artifacts.length, 572);
+  assert.equal(substitutedBytes.size, 581);
+  assertEvidenceRejects(
+    substituted,
+    substitutedBytes,
+    fixture,
+    'EVIDENCE_ARTIFACT_CLAIM_UNEXPECTED'
+  );
+
+  const swapped = structuredClone(fixture);
+  const swappedBytes = new Map(fixture.custodyBytesByPath);
+  const frameIndex = swapped.artifacts.findIndex((artifact) =>
+    artifact.kind === 'production-frame' && artifact.absoluteTicks[0] === 20
+  );
+  replaceEvidenceArtifactClaim(
+    swapped,
+    swappedBytes,
+    frameIndex,
+    { absoluteTicks: [19] },
+    Uint8Array.of(0x50, 0x51)
+  );
+  assert.equal(swapped.artifacts.length, 572);
+  assert.equal(swappedBytes.size, 581);
+  assertEvidenceRejects(
+    swapped,
+    swappedBytes,
+    fixture,
+    'EVIDENCE_ARTIFACT_CLAIM_UNEXPECTED'
   );
 });
 
@@ -1264,6 +1437,13 @@ test('evidence custody rejects missing and undeclared artifact or private-board 
   const undeclared = new Map(fixture.custodyBytesByPath);
   undeclared.set('evidence/private/boards/UNDECLARED/payload.rgba', Uint8Array.of(0x7f));
   assertEvidenceRejects(fixture, undeclared, fixture, 'EVIDENCE_UNDECLARED_BYTES');
+
+  const extraBoardLikeFile = new Map(fixture.custodyBytesByPath);
+  extraBoardLikeFile.set(
+    `evidence/private/boards/P1/${'a'.repeat(64)}-${'b'.repeat(64)}.rgba`,
+    Uint8Array.of(0x6f)
+  );
+  assertEvidenceRejects(fixture, extraBoardLikeFile, fixture, 'EVIDENCE_UNDECLARED_BYTES');
 
   const forgedProof = new Map(fixture.custodyBytesByPath);
   forgedProof.set(fixture.artifacts[0].path, new Proxy({}, {
@@ -1473,6 +1653,32 @@ test('filesystem evidence verification requires the exact declared file set', as
   assert.equal(verified.evidenceFilesVerified, 581);
   assert.equal(verified.privateBoardFilesVerified, 9);
   assert.match(verified.evidenceTreeSha256, /^[0-9a-f]{64}$/u);
+
+  const expanded = structuredClone(fixture);
+  const expandedBytes = new Map(fixture.custodyBytesByPath);
+  const extraBytes = Uint8Array.of(0xde, 0xad, 0xbe, 0xef);
+  const extraArtifact = appendEvidenceArtifactClaim(
+    expanded,
+    expandedBytes,
+    0,
+    { kind: 'diagnostic-mask', absoluteTicks: [1] },
+    extraBytes
+  );
+  const extraAbsolute = join(evidenceRoot, extraArtifact.path);
+  await mkdir(dirname(extraAbsolute), { recursive: true });
+  await writeFile(extraAbsolute, extraBytes);
+  assert.equal(expanded.artifacts.length + expanded.privateBoardHashes.length, 582);
+  await assert.rejects(
+    () => verifyEvidenceManifestFiles(
+      expanded,
+      evidenceRoot,
+      fixture.blindOrderManifest,
+      fixture.blindOrderManifest.presentationCommit,
+      fixture.publicPackageReceipt
+    ),
+    (error) => evaluatorCode(error, 'EVIDENCE_ARTIFACT_CLAIM_UNEXPECTED')
+  );
+  await rm(extraAbsolute);
 
   await writeFile(join(evidenceRoot, 'undeclared.bin'), Uint8Array.of(0x01));
   await assert.rejects(

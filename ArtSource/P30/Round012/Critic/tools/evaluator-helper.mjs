@@ -2829,6 +2829,87 @@ function sameIntegerArray(actual, expected) {
   return Array.isArray(actual) && actual.length === expected.length && actual.every((value, index) => value === expected[index]);
 }
 
+function evidenceHeavyRelativeTicks(traceID, absoluteTicks) {
+  const heavyEdge = traceID === 'SHIFT_PLUS_7' ? 31 :
+    ['NO_HEAVY', 'LIGHT_BASELINE'].includes(traceID) ? null : 24;
+  return absoluteTicks.map((tick) => heavyEdge === null || tick < heavyEdge ? null : tick - heavyEdge);
+}
+
+function evidenceSemanticClaimKey({
+  alias,
+  runProfileID,
+  traceID,
+  kind,
+  absoluteTicks,
+  heavyRelativeTicks
+}) {
+  return canonicalBytes({
+    alias,
+    runProfileID,
+    traceID,
+    kind,
+    absoluteTicks,
+    heavyRelativeTicks
+  }).toString('hex');
+}
+
+function requiredEvidenceSlotsForRun(run) {
+  const slots = [];
+  const add = (slotID, kinds, absoluteTicks) => {
+    slots.push({
+      slotID,
+      kinds,
+      absoluteTicks,
+      heavyRelativeTicks: evidenceHeavyRelativeTicks(run.traceID, absoluteTicks)
+    });
+  };
+  for (const kind of REQUIRED_PER_RUN_KINDS) add(`core/${kind}`, [kind], [0]);
+  if (CANONICAL_CAPTURE_TRACES.has(run.traceID)) {
+    for (let tick = 20; tick <= 80; tick += 1) add(`production-frame/${tick}`, ['production-frame'], [tick]);
+    for (const tick of FOCUSED_CAPTURE_TICKS) add(`focused-frame/${tick}`, ['focused-frame'], [tick]);
+    for (const [first, last] of [[40, 46], [44, 48], [46, 76]]) {
+      add(
+        `full-frame-strip/${first}-${last}`,
+        ['full-frame-strip'],
+        Array.from({ length: last - first + 1 }, (_, index) => first + index)
+      );
+    }
+    add('contact-roi/46', ['contact-roi'], [46]);
+    for (const tick of FOCUSED_CAPTURE_TICKS) add(`action-crop/${tick}`, ['action-crop'], [tick]);
+    add(
+      'lossless-sequence/0-80',
+      ['lossless-frame-sequence', 'lossless-video'],
+      Array.from({ length: 81 }, (_, tick) => tick)
+    );
+  }
+  return slots;
+}
+
+function buildRequiredEvidenceMatrix(captureRuns) {
+  const slots = new Map();
+  const claimToSlot = new Map();
+  for (const run of captureRuns) {
+    for (const slot of requiredEvidenceSlotsForRun(run)) {
+      const slotKey = `${run.alias}\0${run.runProfileID}\0${run.traceID}\0${slot.slotID}`;
+      if (slots.has(slotKey)) evaluatorFail('EVIDENCE_REQUIRED_MATRIX_COLLISION');
+      slots.set(slotKey, slot);
+      for (const kind of slot.kinds) {
+        const claimKey = evidenceSemanticClaimKey({
+          alias: run.alias,
+          runProfileID: run.runProfileID,
+          traceID: run.traceID,
+          kind,
+          absoluteTicks: slot.absoluteTicks,
+          heavyRelativeTicks: slot.heavyRelativeTicks
+        });
+        if (claimToSlot.has(claimKey)) evaluatorFail('EVIDENCE_REQUIRED_MATRIX_COLLISION');
+        claimToSlot.set(claimKey, slotKey);
+      }
+    }
+  }
+  return { slots, claimToSlot };
+}
+
 function assertPathComponent(value, code) {
   if (typeof value !== 'string' || !/^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$/u.test(value)) evaluatorFail(code);
   return value;
@@ -2997,12 +3078,13 @@ export function validateEvidenceManifest(
       evaluatorFail('EVIDENCE_MANIFEST_TRACE_COVERAGE_INVALID');
     }
   }
+  const requiredEvidenceMatrix = buildRequiredEvidenceMatrix(document.captureRuns);
   if (!Array.isArray(document.artifacts) || document.artifacts.length === 0) evaluatorFail('EVIDENCE_MANIFEST_ARTIFACTS_EMPTY');
   const pathRegistry = new Map();
   const exactPaths = new Set();
   const claimsByPath = new Map();
   const semanticClaims = new Set();
-  const artifactsByRun = new Map();
+  const filledRequiredSlots = new Set();
   for (const artifact of document.artifacts) {
     try { validateRelativePath(artifact?.path); } catch { evaluatorFail('EVIDENCE_ARTIFACT_PATH_INVALID'); }
     if (exactPaths.has(artifact.path)) evaluatorFail('EVIDENCE_ARTIFACT_PATH_DUPLICATE');
@@ -3029,14 +3111,14 @@ export function validateEvidenceManifest(
     assertPathComponent(artifact.runProfileID, 'EVIDENCE_ARTIFACT_RUN_PROFILE_INVALID');
     const run = runByID.get(`${artifact.alias}\0${artifact.runProfileID}`);
     if (!run || run.inputTraceDigest !== artifact.inputTraceDigest) evaluatorFail('EVIDENCE_ARTIFACT_RUN_BINDING_INVALID');
-    const semanticClaim = sha256Hex(canonicalBytes({
+    const semanticClaim = evidenceSemanticClaimKey({
       alias: artifact.alias,
       runProfileID: artifact.runProfileID,
       traceID: run.traceID,
       kind: artifact.kind,
       absoluteTicks: artifact.absoluteTicks,
       heavyRelativeTicks: artifact.heavyRelativeTicks
-    }));
+    });
     if (semanticClaims.has(semanticClaim)) evaluatorFail('EVIDENCE_ARTIFACT_CLAIM_DUPLICATE');
     semanticClaims.add(semanticClaim);
     if (artifact.path !== evidenceArtifactClaimPath(artifact, run.traceID)) {
@@ -3054,11 +3136,13 @@ export function validateEvidenceManifest(
     if (!Array.isArray(artifact.heavyRelativeTicks) || artifact.heavyRelativeTicks.length !== artifact.absoluteTicks.length) {
       evaluatorFail('EVIDENCE_ARTIFACT_HEAVY_TICKS_INVALID');
     }
-    const heavyEdge = run.traceID === 'SHIFT_PLUS_7' ? 31 : ['NO_HEAVY', 'LIGHT_BASELINE'].includes(run.traceID) ? null : 24;
-    artifact.absoluteTicks.forEach((tick, index) => {
-      const expected = heavyEdge === null || tick < heavyEdge ? null : tick - heavyEdge;
-      if (artifact.heavyRelativeTicks[index] !== expected) evaluatorFail('EVIDENCE_ARTIFACT_HEAVY_TICKS_INVALID');
-    });
+    if (!sameIntegerArray(artifact.heavyRelativeTicks, evidenceHeavyRelativeTicks(run.traceID, artifact.absoluteTicks))) {
+      evaluatorFail('EVIDENCE_ARTIFACT_HEAVY_TICKS_INVALID');
+    }
+    const requiredSlot = requiredEvidenceMatrix.claimToSlot.get(semanticClaim);
+    if (requiredSlot === undefined) evaluatorFail('EVIDENCE_ARTIFACT_CLAIM_UNEXPECTED');
+    if (filledRequiredSlots.has(requiredSlot)) evaluatorFail('EVIDENCE_ARTIFACT_SLOT_DUPLICATE');
+    filledRequiredSlots.add(requiredSlot);
     for (const key of ['browser', 'gpu', 'derivation']) assertNfcNonempty(artifact[key], 'EVIDENCE_ARTIFACT_TEXT_PROVENANCE_INVALID');
     if (!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/u.test(artifact.captureTimestamp)) {
       evaluatorFail('EVIDENCE_ARTIFACT_TIMESTAMP_INVALID');
@@ -3066,50 +3150,26 @@ export function validateEvidenceManifest(
     if (!Array.isArray(artifact.sourceArtifactSha256s)) evaluatorFail('EVIDENCE_ARTIFACT_SOURCE_HASHES_INVALID');
     artifact.sourceArtifactSha256s.forEach((digest) => assertHex64(digest, 'EVIDENCE_ARTIFACT_SOURCE_HASHES_INVALID'));
     if (artifact.custody !== 'public') evaluatorFail('EVIDENCE_ARTIFACT_CUSTODY_INVALID');
-    const collection = artifactsByRun.get(`${artifact.alias}\0${artifact.runProfileID}`) ?? [];
-    collection.push(artifact);
-    artifactsByRun.set(`${artifact.alias}\0${artifact.runProfileID}`, collection);
     claimsByPath.set(artifact.path, {
       type: 'artifact',
       byteCount: artifact.byteCount,
       sha256: artifact.sha256
     });
   });
-  for (const run of document.captureRuns) {
-    const artifacts = artifactsByRun.get(`${run.alias}\0${run.runProfileID}`) ?? [];
-    for (const kind of REQUIRED_PER_RUN_KINDS) if (artifacts.filter((artifact) => artifact.kind === kind).length !== 1) {
-      evaluatorFail('EVIDENCE_RUN_CORE_ARTIFACT_MISSING');
-    }
-    if (CANONICAL_CAPTURE_TRACES.has(run.traceID)) {
-      const frames = artifacts.filter((artifact) => artifact.kind === 'production-frame' && artifact.absoluteTicks.length === 1)
-        .map((artifact) => artifact.absoluteTicks[0]);
-      for (let tick = 20; tick <= 80; tick += 1) if (frames.filter((value) => value === tick).length !== 1) evaluatorFail('EVIDENCE_CANONICAL_FRAME_MISSING');
-      for (const tick of FOCUSED_CAPTURE_TICKS) if (artifacts.filter((artifact) => artifact.kind === 'focused-frame' && sameIntegerArray(artifact.absoluteTicks, [tick])).length !== 1) {
-        evaluatorFail('EVIDENCE_FOCUSED_FRAME_MISSING');
-      }
-      const requiredStrips = [[40, 46], [44, 48], [46, 76]].map(([first, last]) => Array.from({ length: last - first + 1 }, (_, index) => first + index));
-      for (const ticks of requiredStrips) if (artifacts.filter((artifact) => artifact.kind === 'full-frame-strip' && sameIntegerArray(artifact.absoluteTicks, ticks)).length !== 1) {
-        evaluatorFail('EVIDENCE_FRAME_STRIP_MISSING');
-      }
-      if (artifacts.filter((artifact) => artifact.kind === 'contact-roi' && sameIntegerArray(artifact.absoluteTicks, [46])).length !== 1) {
-        evaluatorFail('EVIDENCE_CONTACT_ROI_MISSING');
-      }
-      for (const tick of FOCUSED_CAPTURE_TICKS) if (artifacts.filter((artifact) => artifact.kind === 'action-crop' && sameIntegerArray(artifact.absoluteTicks, [tick])).length !== 1) {
-        evaluatorFail('EVIDENCE_ACTION_CROP_MISSING');
-      }
-      const fullTicks = Array.from({ length: 81 }, (_, tick) => tick);
-      if (artifacts.filter((artifact) => ['lossless-frame-sequence', 'lossless-video'].includes(artifact.kind) && sameIntegerArray(artifact.absoluteTicks, fullTicks)).length !== 1) {
-        evaluatorFail('EVIDENCE_LOSSLESS_SEQUENCE_MISSING');
-      }
-    }
-  }
-  if (!Array.isArray(document.privateBoardHashes) || document.privateBoardHashes.length !== 9) {
-    evaluatorFail('EVIDENCE_PRIVATE_BOARD_COUNT_INVALID');
+  if (
+    document.artifacts.length !== requiredEvidenceMatrix.slots.size ||
+    filledRequiredSlots.size !== requiredEvidenceMatrix.slots.size ||
+    claimsByPath.size !== requiredEvidenceMatrix.slots.size
+  ) {
+    evaluatorFail('EVIDENCE_ARTIFACT_SET_CARDINALITY_INVALID');
   }
   const expectedBoardIDs = [
     ...document.aliases.flatMap((alias) => REFERENCE_BALLOT_IDS.map((id) => `${id}/${alias}`)),
     ...PAIRWISE_BALLOT_IDS
   ].sort(compareUtf8);
+  if (!Array.isArray(document.privateBoardHashes) || document.privateBoardHashes.length !== expectedBoardIDs.length) {
+    evaluatorFail('EVIDENCE_PRIVATE_BOARD_COUNT_INVALID');
+  }
   const boardIDs = [];
   for (const board of document.privateBoardHashes) {
     try { validateRelativePath(board?.path); } catch { evaluatorFail('EVIDENCE_PRIVATE_BOARD_PATH_INVALID'); }
@@ -3160,6 +3220,9 @@ export function validateEvidenceManifest(
       order.left !== board.leftToken || order.right !== board.rightToken
     ) evaluatorFail('EVIDENCE_PRIVATE_BOARD_ORDER_MISMATCH');
   });
+  if (claimsByPath.size !== requiredEvidenceMatrix.slots.size + expectedBoardIDs.length) {
+    evaluatorFail('EVIDENCE_TOTAL_FILE_SET_CARDINALITY_INVALID');
+  }
   validateCustodyBytes(custodyBytesByPath, claimsByPath);
   canonicalBytes(document);
   return document;
@@ -3194,7 +3257,7 @@ export async function verifyEvidenceManifestFiles(
   return {
     evidenceFilesVerified: tree.fileCount,
     evidenceTreeSha256: tree.treeSha256,
-    privateBoardFilesVerified: 9
+    privateBoardFilesVerified: REFERENCE_BALLOT_IDS.length * 2 + PAIRWISE_BALLOT_IDS.length
   };
 }
 
