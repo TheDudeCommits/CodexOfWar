@@ -780,10 +780,11 @@ function validatePrivateConfig(config) {
   return config;
 }
 
-function privateTokensForAllCandidates(candidates, resolvedBindings) {
+export function privateTokensForAllCandidates(candidates, resolvedBindings) {
   const tokens = [];
   for (const candidate of candidates) {
     const binding = resolvedBindings.get(candidate.alias);
+    const worktreeBasename = basename(binding.sourceWorktree);
     tokens.push(
       candidate.builderIdentity,
       candidate.sourceBranch,
@@ -791,9 +792,9 @@ function privateTokensForAllCandidates(candidates, resolvedBindings) {
       candidate.sourceGitTree,
       candidate.sourceWorktree,
       binding.sourceWorktree,
-      basename(binding.sourceWorktree),
       ...candidate.forbiddenTokens
     );
+    if (worktreeBasename.length >= 4) tokens.push(worktreeBasename);
   }
   return [...new Set(tokens)].sort(compareUtf8);
 }
