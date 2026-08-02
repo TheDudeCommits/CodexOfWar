@@ -15,7 +15,11 @@ import { AssetRegistry, type RegistryLoadReceipt } from "../loaders/AssetRegistr
 import { PostStack } from "../post/PostStack";
 import { createRenderer } from "./createRenderer";
 import { createScene, type SceneLighting } from "./createScene";
-import { ThirdPersonCamera, type CameraTelemetry } from "./ThirdPersonCamera";
+import {
+  ThirdPersonCamera,
+  type CameraFramingTelemetry,
+  type CameraTelemetry,
+} from "./ThirdPersonCamera";
 import { ViewportController } from "./ViewportController";
 
 interface PendingEdges {
@@ -118,6 +122,7 @@ export class GameApp {
       assetRegistry,
       this.renderer.capabilities.getMaxAnisotropy(),
     );
+    this.cameraController.setObstructionObjects([this.renderBridge.arena.root]);
     this.input.attach(this.renderer.domElement);
     this.manifestVersion = assetRegistry.manifestVersion;
     if (assetFailures.length > 0) {
@@ -190,6 +195,7 @@ export class GameApp {
     if (this.simulationPaused) return [];
     const events = this.fixedTick(input, FIXED_TIMESTEP);
     this.renderBridge.update(this.simulation.state, FIXED_TIMESTEP);
+    this.updateCamera(FIXED_TIMESTEP, 0, 0);
     return events;
   }
 
@@ -241,20 +247,14 @@ export class GameApp {
       };
       this.fixedTick(input, FIXED_TIMESTEP);
       this.renderBridge.update(this.simulation.state, FIXED_TIMESTEP);
+      this.updateCamera(FIXED_TIMESTEP, 0, 0);
     }
-    this.renderOnce(true);
+    this.renderOnce(false, false);
   }
 
-  renderOnce(snapCamera = false): void {
+  renderOnce(snapCamera = false, advanceCamera = true): void {
     const state = this.simulation.state;
-    this.cameraController.update(
-      FIXED_TIMESTEP,
-      state.player.position,
-      this.lockedOn && state.enemy.health > 0 ? state.enemy.position : null,
-      0,
-      0,
-      snapCamera,
-    );
+    if (advanceCamera) this.updateCamera(FIXED_TIMESTEP, 0, 0, snapCamera);
     this.lighting.rig.update(state.elapsed);
     this.renderBridge.update(state, FIXED_TIMESTEP);
     this.hud.update(state, this.cameraController.camera, this.lockedOn);
@@ -262,7 +262,7 @@ export class GameApp {
   }
 
   capturePng(): string {
-    this.renderOnce();
+    this.renderOnce(false, false);
     return this.renderer.domElement.toDataURL("image/png");
   }
 
@@ -276,7 +276,7 @@ export class GameApp {
 
   setPostProcessing(enabled: boolean): void {
     this.post.enabled = enabled;
-    this.renderOnce();
+    this.renderOnce(false, false);
   }
 
   getSnapshot(): WorldState {
@@ -289,6 +289,24 @@ export class GameApp {
 
   getCameraTelemetry(): CameraTelemetry {
     return this.cameraController.getTelemetry();
+  }
+
+  getCameraFramingTelemetry(): CameraFramingTelemetry {
+    this.lighting.scene.updateMatrixWorld(true);
+    const player =
+      this.renderBridge.hero.root.getObjectByName("nyra-visible-model") ??
+      this.renderBridge.hero.root;
+    const target =
+      this.renderBridge.zombie.root.getObjectByName("hollow-visible-model") ??
+      this.renderBridge.zombie.root;
+    const blade = player.getObjectByName("stormcage-two-hand-socket") ?? null;
+    const contact = blade?.getObjectByName("ContactMarker") ?? null;
+    const size = this.renderer.getSize(new THREE.Vector2());
+    return this.cameraController.measureFraming(
+      { player, target, blade, contact },
+      size.x,
+      size.y,
+    );
   }
 
   getRendererTelemetry(): {
@@ -406,13 +424,7 @@ export class GameApp {
 
     const state = this.simulation.state;
     if (state.enemy.health <= 0) this.lockedOn = false;
-    this.cameraController.update(
-      delta,
-      state.player.position,
-      this.lockedOn ? state.enemy.position : null,
-      this.latestInput.lookX,
-      this.latestInput.lookY,
-    );
+    this.updateCamera(delta, this.latestInput.lookX, this.latestInput.lookY);
     this.renderBridge.update(state, delta);
     this.lighting.rig.update(state.elapsed);
     this.hud.update(state, this.cameraController.camera, this.lockedOn);
@@ -450,6 +462,18 @@ export class GameApp {
       dodgePressed: false,
       ...(faceYaw === undefined ? {} : { faceYaw }),
     };
+  }
+
+  private updateCamera(dt: number, lookX: number, lookY: number, snap = false): void {
+    const state = this.simulation.state;
+    this.cameraController.update(
+      dt,
+      state.player.position,
+      state.enemy.health > 0 ? state.enemy.position : null,
+      lookX,
+      lookY,
+      snap,
+    );
   }
 
   private fixedTick(input: InputFrame, dt: number): GameEvent[] {

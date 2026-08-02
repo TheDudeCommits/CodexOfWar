@@ -62,7 +62,7 @@ review.stepTicks(60);
 console.table(review.telemetry().events);
 ```
 
-The tape travels from `z=2.60` to `z=1.60` at 3 m/s, reports startup ticks 24–31, active 32–35, one 10-damage hit on tick 33, recovery 36–49, idle 50, and a busy rejection on tick 28. `telemetry()` includes every processed-tick snapshot, camera pose/projection/boom fields, renderer counters, context lifecycle, and errors.
+The tape travels from `z=2.60` to `z=1.60` at 3 m/s, reports startup ticks 24–31, active 32–35, one 10-damage hit on tick 33, recovery 36–49, idle 50, and a busy rejection on tick 28. `telemetry()` includes every processed-tick snapshot, deterministic camera pose/projection/boom fields, renderer counters, context lifecycle, and errors. Capture validation adds `&framing=1` to include exact animated-vertex framing measurements without charging ordinary smoke telemetry for that audit. The Round007 camera resolves its boom against the authored arena meshes with 0.45 m clearance and clears all smoothing/shake accumulators on reset.
 
 `window.__GAUNTLET__` remains as a lightweight interactive/capture alias. Routes such as `/?capture=combat&post=0` produce a stable paused scenario for screenshots. The additive `telemetry().assetLoad` / `getAssetLoadReceipt()` receipt reports every enabled and loaded key, PMREM installation, authored-view selection, and any active fallback without changing the `cow.review.v1` contract.
 
@@ -92,6 +92,6 @@ npm run smoke
 
 The browser suite runs the exact P30 combat tape, the out-of-range tape, physical keyboard/pause/blur handling, and a 1600×900 capture.
 
-## Known gap
+## Camera evidence
 
-Third-person boom obstruction/camera collision is not implemented in this slice. The camera API exposes desired/resolved boom telemetry and explicitly reports `cameraObstruction.status: "pending"`; it does not claim that the pending tape passes.
+`npm run test:camera` covers reset determinism, the four required replay sample ticks, adaptive distance, a wall-on-boom mesh, and exact clear-path distance. `npm run evidence:camera` writes the numeric obstruction receipt used by the headed Round007 capture script.

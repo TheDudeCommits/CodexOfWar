@@ -39,7 +39,12 @@ test("P30 deterministic review tape and judge capture", async ({ page }) => {
   expect(result.renderer.pixelRatio).toBe(1);
   expect(result.renderer.size).toEqual({ width: 1600, height: 900 });
   expect(result.renderer.errors).toEqual([]);
-  expect(result.cameraObstruction.status).toBe("pending");
+  expect(result.cameraObstruction.implemented).toBe(true);
+  expect(result.cameraObstruction.status).toBe("clear");
+  expect(result.cameraObstruction.collisionApplied).toBe(false);
+  expect(result.cameraObstruction.resolvedDistance).toBe(
+    result.cameraObstruction.desiredDistance,
+  );
   expect(result.assetLoad.registry.complete).toBe(true);
   expect(result.assetLoad.registry.enabled).toHaveLength(18);
   expect(result.assetLoad.registry.loaded).toHaveLength(18);
@@ -48,6 +53,7 @@ test("P30 deterministic review tape and judge capture", async ({ page }) => {
   expect(result.assetLoad.productionAuthored).toBe(true);
   expect(result.assetLoad.presentation.proceduralFallbackActive).toBe(false);
   expect(result.assetLoad.environment.pmremInstalled).toBe(true);
+
   await expect(page.locator("canvas#game-canvas")).toBeVisible();
   await page.evaluate(() => {
     const review = window.__COW_REVIEW__;

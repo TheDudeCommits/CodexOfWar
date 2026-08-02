@@ -1,0 +1,1165 @@
+{
+  "schema": "p30.round007.builder-b-camera-capture.v1",
+  "candidateOnly": true,
+  "acceptanceClaimed": false,
+  "headed": true,
+  "url": "http://127.0.0.1:4173/?review=1&post=0&framing=1",
+  "httpStatus": 200,
+  "browser": "150.0.7871.187",
+  "node": "v24.18.0",
+  "readyMs": 3623.909,
+  "coldReadyLimitMs": 4109,
+  "coldReady": {
+    "launchesMs": [
+      3623.909,
+      2293.622,
+      1552.142
+    ],
+    "maximumMs": 3623.909,
+    "limitMs": 4109,
+    "passed": true
+  },
+  "viewport": {
+    "width": 1600,
+    "height": 900,
+    "dpr": 1
+  },
+  "runtime": {
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+    "inner": {
+      "width": 1600,
+      "height": 900
+    },
+    "dpr": 1,
+    "canvasCss": {
+      "width": 1600,
+      "height": 900
+    },
+    "canvasBacking": {
+      "width": 1600,
+      "height": 900
+    },
+    "webglVersion": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+    "webglRenderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M2, Unspecified Version)",
+    "webglVendor": "Google Inc. (Apple)"
+  },
+  "captures": [
+    {
+      "id": "S03",
+      "phase": "startup",
+      "processedTicks": 29,
+      "path": "ArtSource/P30/Round007/BuilderB/S03.png",
+      "bytes": 2127016,
+      "sha256": "5c8398ae257f73e779d60c26d0e3c07399b9f82e77067f4bf4cd111544c598e1",
+      "png": {
+        "width": 1600,
+        "height": 900,
+        "bitDepth": 8,
+        "colorType": 2,
+        "colorModel": "RGB"
+      },
+      "state": {
+        "tick": 29,
+        "seed": 30001,
+        "piece": "P30",
+        "preset": "combat-startup",
+        "paused": false,
+        "pointerLocked": false,
+        "coordinates": "+Y up / +X right / -Z forward",
+        "player": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 1.6000008583068848
+          },
+          "yaw": 0,
+          "health": 100,
+          "stamina": 100,
+          "motion": "attack",
+          "attackPhase": "startup",
+          "attackFrame": 5
+        },
+        "target": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "health": 100,
+          "motion": "idle"
+        },
+        "state": {
+          "tick": 29,
+          "elapsed": 0.4833333333333333,
+          "objectiveComplete": false,
+          "player": {
+            "position": {
+              "x": 0,
+              "z": 1.6000008583068848
+            },
+            "yaw": 0,
+            "health": 100,
+            "maxHealth": 100,
+            "stamina": 100,
+            "maxStamina": 100,
+            "motion": "attack",
+            "speed01": 0,
+            "attackElapsed": 0.08333333333333333,
+            "attackFrame": 5,
+            "attackPhase": "startup",
+            "attackSerial": 1,
+            "attackHasHit": false,
+            "dodgeRemaining": 0,
+            "dodgeDirection": {
+              "x": 0,
+              "z": -1
+            },
+            "invulnerableRemaining": 0
+          },
+          "enemy": {
+            "position": {
+              "x": 0,
+              "z": 0
+            },
+            "yaw": 3.141592653589793,
+            "health": 100,
+            "maxHealth": 100,
+            "motion": "idle",
+            "hitStunRemaining": 0,
+            "idlePhase": 0.4833333333333333
+          }
+        }
+      },
+      "events": [
+        {
+          "tick": 24,
+          "type": "attack_started",
+          "attackSerial": 1
+        }
+      ],
+      "camera": {
+        "position": [
+          1.0663279425704912,
+          2.5906466507140253,
+          5.796512613357788
+        ],
+        "quaternion": [
+          -0.10068234417887599,
+          0.10339750152078632,
+          0.01052103376791689,
+          0.9894752801855938
+        ],
+        "projectionMatrix": [
+          1.206285142786627,
+          0,
+          0,
+          0,
+          0,
+          2.1445069205095586,
+          0,
+          0,
+          0,
+          0,
+          -1.00133422281521,
+          -1,
+          0,
+          0,
+          -0.1601067378252168,
+          0
+        ],
+        "yaw": 0,
+        "pitch": 0.2028085183772863,
+        "composition": {
+          "targetSeparation": 1.6000008583068848,
+          "shoulderOffset": 1.0640000772476197,
+          "focusProgress": 0.5389999914169312,
+          "focus": [
+            0,
+            1.53,
+            0.7500477255615319
+          ],
+          "safeFrameInsetPx": 80
+        },
+        "boom": {
+          "desiredDistance": 5.265817549302099,
+          "resolvedDistance": 5.265817549302099,
+          "collisionApplied": false,
+          "status": "clear",
+          "clearance": null,
+          "hitDistance": null,
+          "colliderCount": 19
+        }
+      },
+      "cameraObstruction": {
+        "implemented": true,
+        "status": "clear",
+        "telemetryHook": true,
+        "desiredDistance": 5.265817549302099,
+        "resolvedDistance": 5.265817549302099,
+        "collisionApplied": false
+      },
+      "framing": {
+        "viewport": {
+          "width": 1600,
+          "height": 900,
+          "safeInset": 80
+        },
+        "player": {
+          "minX": 587.8576358411067,
+          "minY": 365.4161683075362,
+          "maxX": 795.7653361050806,
+          "maxY": 772.3083031981749,
+          "width": 207.90770026397388,
+          "height": 406.8921348906387,
+          "margins": {
+            "left": 587.8576358411067,
+            "top": 365.4161683075362,
+            "right": 804.2346638949194,
+            "bottom": 127.69169680182506,
+            "minimum": 127.69169680182506
+          },
+          "insideFrame": true,
+          "insideSafeFrame": true
+        },
+        "target": {
+          "minX": 813.4544434418199,
+          "minY": 408.7671397270902,
+          "maxX": 1071.0690314194483,
+          "maxY": 680.6282740858042,
+          "width": 257.6145879776284,
+          "height": 271.86113435871397,
+          "margins": {
+            "left": 813.4544434418199,
+            "top": 408.7671397270902,
+            "right": 528.9309685805517,
+            "bottom": 219.37172591419585,
+            "minimum": 219.37172591419585
+          },
+          "insideFrame": true,
+          "insideSafeFrame": true
+        },
+        "blade": {
+          "minX": 356.67750606076834,
+          "minY": 320.5233645651415,
+          "maxX": 761.9624140059211,
+          "maxY": 714.6183269480268,
+          "width": 405.2849079451528,
+          "height": 394.09496238288534,
+          "margins": {
+            "left": 356.67750606076834,
+            "top": 320.5233645651415,
+            "right": 838.0375859940789,
+            "bottom": 185.38167305197317,
+            "minimum": 185.38167305197317
+          },
+          "insideFrame": true,
+          "insideSafeFrame": true
+        },
+        "contact": {
+          "x": 407.83631759142554,
+          "y": 377.12156439462024,
+          "ndcZ": 0.9659457076193629,
+          "insideCentral40Percent": false
+        },
+        "gates": {
+          "playerHeight360To540": true,
+          "actorsAndBladeInside80": true,
+          "contactInsideCentral40Percent": false
+        }
+      },
+      "renderer": {
+        "calls": 81,
+        "triangles": 203051,
+        "points": 64,
+        "lines": 0,
+        "textures": 32,
+        "geometries": 35,
+        "pixelRatio": 1,
+        "size": {
+          "width": 1600,
+          "height": 900
+        },
+        "errors": [],
+        "context": {
+          "lost": false,
+          "losses": 0,
+          "restores": 0
+        }
+      },
+      "assetLoad": {
+        "schema": "gauntlet.asset-load.v1",
+        "registry": {
+          "schema": "gauntlet.asset-registry.v1",
+          "manifestVersion": 2,
+          "enabled": [
+            "animation.combat",
+            "animation.player-core",
+            "character.hero",
+            "character.hollow",
+            "environment.ashwake-arena",
+            "environment.ruin-doorway",
+            "environment.ruin-pillar",
+            "environment.ruin-rocks",
+            "environment.ruin-stairs",
+            "environment.ruin-wall",
+            "environment.snowy-forest",
+            "material.brick-arm",
+            "material.brick-diffuse",
+            "material.brick-normal",
+            "material.cobble-arm",
+            "material.cobble-diffuse",
+            "material.cobble-normal",
+            "weapon.claymore"
+          ],
+          "loaded": [
+            "animation.combat",
+            "animation.player-core",
+            "character.hero",
+            "character.hollow",
+            "environment.ashwake-arena",
+            "environment.ruin-doorway",
+            "environment.ruin-pillar",
+            "environment.ruin-rocks",
+            "environment.ruin-stairs",
+            "environment.ruin-wall",
+            "environment.snowy-forest",
+            "material.brick-arm",
+            "material.brick-diffuse",
+            "material.brick-normal",
+            "material.cobble-arm",
+            "material.cobble-diffuse",
+            "material.cobble-normal",
+            "weapon.claymore"
+          ],
+          "failures": [],
+          "complete": true
+        },
+        "presentation": {
+          "schema": "gauntlet.presentation-assets.v1",
+          "proceduralFallbackActive": false,
+          "views": {
+            "hero": {
+              "authored": true,
+              "fallbackReason": null,
+              "animations": [
+                "Idle_Loop",
+                "Roll",
+                "Sprint_Loop",
+                "Sword_Regular_A",
+                "Walk_Loop"
+              ]
+            },
+            "hollow": {
+              "authored": true,
+              "fallbackReason": null,
+              "animations": [
+                "Death",
+                "HitReact",
+                "Idle"
+              ]
+            },
+            "arenaSector": {
+              "authored": true,
+              "fallbackReason": null
+            }
+          }
+        },
+        "environment": {
+          "key": "environment.snowy-forest",
+          "pmremInstalled": true
+        },
+        "productionAuthored": true
+      },
+      "reviewErrors": []
+    },
+    {
+      "id": "S04",
+      "phase": "active contact",
+      "processedTicks": 34,
+      "path": "ArtSource/P30/Round007/BuilderB/S04.png",
+      "bytes": 2142101,
+      "sha256": "abfcd5e7986a9703bfd17f91246f5b200fb9e54a52dc8f38749575df7d5260fd",
+      "png": {
+        "width": 1600,
+        "height": 900,
+        "bitDepth": 8,
+        "colorType": 2,
+        "colorModel": "RGB"
+      },
+      "state": {
+        "tick": 34,
+        "seed": 30001,
+        "piece": "P30",
+        "preset": "combat-active-hit",
+        "paused": false,
+        "pointerLocked": false,
+        "coordinates": "+Y up / +X right / -Z forward",
+        "player": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 1.6000008583068848
+          },
+          "yaw": 0,
+          "health": 100,
+          "stamina": 100,
+          "motion": "attack",
+          "attackPhase": "active",
+          "attackFrame": 10
+        },
+        "target": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "health": 90,
+          "motion": "hit"
+        },
+        "state": {
+          "tick": 34,
+          "elapsed": 0.5666666666666668,
+          "objectiveComplete": false,
+          "player": {
+            "position": {
+              "x": 0,
+              "z": 1.6000008583068848
+            },
+            "yaw": 0,
+            "health": 100,
+            "maxHealth": 100,
+            "stamina": 100,
+            "maxStamina": 100,
+            "motion": "attack",
+            "speed01": 0,
+            "attackElapsed": 0.16666666666666666,
+            "attackFrame": 10,
+            "attackPhase": "active",
+            "attackSerial": 1,
+            "attackHasHit": true,
+            "dodgeRemaining": 0,
+            "dodgeDirection": {
+              "x": 0,
+              "z": -1
+            },
+            "invulnerableRemaining": 0
+          },
+          "enemy": {
+            "position": {
+              "x": 0,
+              "z": 0
+            },
+            "yaw": 3.141592653589793,
+            "health": 90,
+            "maxHealth": 100,
+            "motion": "hit",
+            "hitStunRemaining": 0.28,
+            "idlePhase": 0.5666666666666668
+          }
+        }
+      },
+      "events": [
+        {
+          "tick": 24,
+          "type": "attack_started",
+          "attackSerial": 1
+        },
+        {
+          "tick": 33,
+          "type": "enemy_hit",
+          "damage": 10,
+          "hpBefore": 100,
+          "hpAfter": 90,
+          "attackSerial": 1
+        }
+      ],
+      "camera": {
+        "position": [
+          1.0980112021150472,
+          2.5790077160988334,
+          5.793545429842038
+        ],
+        "quaternion": [
+          -0.0993567521706685,
+          0.10627001663163128,
+          0.010672807574153733,
+          0.9893032955275619
+        ],
+        "projectionMatrix": [
+          1.206285142786627,
+          0,
+          0,
+          0,
+          0,
+          2.1445069205095586,
+          0,
+          0,
+          0,
+          0,
+          -1.00133422281521,
+          -1,
+          0,
+          0,
+          -0.1601067378252168,
+          0
+        ],
+        "yaw": 0,
+        "pitch": 0.20287732652582244,
+        "composition": {
+          "targetSeparation": 1.6000008583068848,
+          "shoulderOffset": 1.0640000772476197,
+          "focusProgress": 0.5389999914169312,
+          "focus": [
+            0,
+            1.53,
+            0.7416414613121992
+          ],
+          "safeFrameInsetPx": 80
+        },
+        "boom": {
+          "desiredDistance": 5.261888778464018,
+          "resolvedDistance": 5.261888778464018,
+          "collisionApplied": false,
+          "status": "clear",
+          "clearance": null,
+          "hitDistance": null,
+          "colliderCount": 19
+        }
+      },
+      "cameraObstruction": {
+        "implemented": true,
+        "status": "clear",
+        "telemetryHook": true,
+        "desiredDistance": 5.261888778464018,
+        "resolvedDistance": 5.261888778464018,
+        "collisionApplied": false
+      },
+      "framing": {
+        "viewport": {
+          "width": 1600,
+          "height": 900,
+          "safeInset": 80
+        },
+        "player": {
+          "minX": 520.9163367017942,
+          "minY": 408.90194287746533,
+          "maxX": 814.3239500151503,
+          "maxY": 797.2285859338829,
+          "width": 293.40761331335614,
+          "height": 388.32664305641754,
+          "margins": {
+            "left": 520.9163367017942,
+            "top": 408.90194287746533,
+            "right": 785.6760499848497,
+            "bottom": 102.77141406611713,
+            "minimum": 102.77141406611713
+          },
+          "insideFrame": true,
+          "insideSafeFrame": true
+        },
+        "target": {
+          "minX": 804.2882646801447,
+          "minY": 392.6998715317124,
+          "maxX": 1080.402484527419,
+          "maxY": 681.6191252048361,
+          "width": 276.11421984727417,
+          "height": 288.9192536731237,
+          "margins": {
+            "left": 804.2882646801447,
+            "top": 392.6998715317124,
+            "right": 519.5975154725811,
+            "bottom": 218.3808747951639,
+            "minimum": 218.3808747951639
+          },
+          "insideFrame": true,
+          "insideSafeFrame": true
+        },
+        "blade": {
+          "minX": 725.7555957983932,
+          "minY": 482.85599422462553,
+          "maxX": 996.8607128173555,
+          "maxY": 745.6597058300607,
+          "width": 271.10511701896235,
+          "height": 262.8037116054352,
+          "margins": {
+            "left": 725.7555957983932,
+            "top": 482.85599422462553,
+            "right": 603.1392871826445,
+            "bottom": 154.34029416993928,
+            "minimum": 154.34029416993928
+          },
+          "insideFrame": true,
+          "insideSafeFrame": true
+        },
+        "contact": {
+          "x": 957.9162357168238,
+          "y": 513.339840973781,
+          "ndcZ": 0.9742923322401954,
+          "insideCentral40Percent": true
+        },
+        "gates": {
+          "playerHeight360To540": true,
+          "actorsAndBladeInside80": true,
+          "contactInsideCentral40Percent": true
+        }
+      },
+      "renderer": {
+        "calls": 86,
+        "triangles": 204155,
+        "points": 90,
+        "lines": 0,
+        "textures": 32,
+        "geometries": 38,
+        "pixelRatio": 1,
+        "size": {
+          "width": 1600,
+          "height": 900
+        },
+        "errors": [],
+        "context": {
+          "lost": false,
+          "losses": 0,
+          "restores": 0
+        }
+      },
+      "assetLoad": {
+        "schema": "gauntlet.asset-load.v1",
+        "registry": {
+          "schema": "gauntlet.asset-registry.v1",
+          "manifestVersion": 2,
+          "enabled": [
+            "animation.combat",
+            "animation.player-core",
+            "character.hero",
+            "character.hollow",
+            "environment.ashwake-arena",
+            "environment.ruin-doorway",
+            "environment.ruin-pillar",
+            "environment.ruin-rocks",
+            "environment.ruin-stairs",
+            "environment.ruin-wall",
+            "environment.snowy-forest",
+            "material.brick-arm",
+            "material.brick-diffuse",
+            "material.brick-normal",
+            "material.cobble-arm",
+            "material.cobble-diffuse",
+            "material.cobble-normal",
+            "weapon.claymore"
+          ],
+          "loaded": [
+            "animation.combat",
+            "animation.player-core",
+            "character.hero",
+            "character.hollow",
+            "environment.ashwake-arena",
+            "environment.ruin-doorway",
+            "environment.ruin-pillar",
+            "environment.ruin-rocks",
+            "environment.ruin-stairs",
+            "environment.ruin-wall",
+            "environment.snowy-forest",
+            "material.brick-arm",
+            "material.brick-diffuse",
+            "material.brick-normal",
+            "material.cobble-arm",
+            "material.cobble-diffuse",
+            "material.cobble-normal",
+            "weapon.claymore"
+          ],
+          "failures": [],
+          "complete": true
+        },
+        "presentation": {
+          "schema": "gauntlet.presentation-assets.v1",
+          "proceduralFallbackActive": false,
+          "views": {
+            "hero": {
+              "authored": true,
+              "fallbackReason": null,
+              "animations": [
+                "Idle_Loop",
+                "Roll",
+                "Sprint_Loop",
+                "Sword_Regular_A",
+                "Walk_Loop"
+              ]
+            },
+            "hollow": {
+              "authored": true,
+              "fallbackReason": null,
+              "animations": [
+                "Death",
+                "HitReact",
+                "Idle"
+              ]
+            },
+            "arenaSector": {
+              "authored": true,
+              "fallbackReason": null
+            }
+          }
+        },
+        "environment": {
+          "key": "environment.snowy-forest",
+          "pmremInstalled": true
+        },
+        "productionAuthored": true
+      },
+      "reviewErrors": []
+    },
+    {
+      "id": "S05",
+      "phase": "recovery",
+      "processedTicks": 41,
+      "path": "ArtSource/P30/Round007/BuilderB/S05.png",
+      "bytes": 2138449,
+      "sha256": "56a4efecbe0a57e192d8026bdc2f589191ba7c3022f3073f6e3f79a9c1af28f7",
+      "png": {
+        "width": 1600,
+        "height": 900,
+        "bitDepth": 8,
+        "colorType": 2,
+        "colorModel": "RGB"
+      },
+      "state": {
+        "tick": 41,
+        "seed": 30001,
+        "piece": "P30",
+        "preset": "combat-recovery",
+        "paused": false,
+        "pointerLocked": false,
+        "coordinates": "+Y up / +X right / -Z forward",
+        "player": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 1.6000008583068848
+          },
+          "yaw": 0,
+          "health": 100,
+          "stamina": 100,
+          "motion": "attack",
+          "attackPhase": "recovery",
+          "attackFrame": 17
+        },
+        "target": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "health": 90,
+          "motion": "hit"
+        },
+        "state": {
+          "tick": 41,
+          "elapsed": 0.6833333333333338,
+          "objectiveComplete": false,
+          "player": {
+            "position": {
+              "x": 0,
+              "z": 1.6000008583068848
+            },
+            "yaw": 0,
+            "health": 100,
+            "maxHealth": 100,
+            "stamina": 100,
+            "maxStamina": 100,
+            "motion": "attack",
+            "speed01": 0,
+            "attackElapsed": 0.2833333333333333,
+            "attackFrame": 17,
+            "attackPhase": "recovery",
+            "attackSerial": 1,
+            "attackHasHit": true,
+            "dodgeRemaining": 0,
+            "dodgeDirection": {
+              "x": 0,
+              "z": -1
+            },
+            "invulnerableRemaining": 0
+          },
+          "enemy": {
+            "position": {
+              "x": 0,
+              "z": 0
+            },
+            "yaw": 3.141592653589793,
+            "health": 90,
+            "maxHealth": 100,
+            "motion": "hit",
+            "hitStunRemaining": 0.16333333333333339,
+            "idlePhase": 0.6833333333333338
+          }
+        }
+      },
+      "events": [
+        {
+          "tick": 24,
+          "type": "attack_started",
+          "attackSerial": 1
+        },
+        {
+          "tick": 33,
+          "type": "enemy_hit",
+          "damage": 10,
+          "hpBefore": 100,
+          "hpAfter": 90,
+          "attackSerial": 1
+        }
+      ],
+      "camera": {
+        "position": [
+          1.0641565226302323,
+          2.5900434785083974,
+          5.779825008899136
+        ],
+        "quaternion": [
+          -0.10073047332247322,
+          0.10329378586753409,
+          0.010515440987144643,
+          0.9894812737218569
+        ],
+        "projectionMatrix": [
+          1.206285142786627,
+          0,
+          0,
+          0,
+          0,
+          2.1445069205095586,
+          0,
+          0,
+          0,
+          0,
+          -1.00133422281521,
+          -1,
+          0,
+          0,
+          -0.1601067378252168,
+          0
+        ],
+        "yaw": 0,
+        "pitch": 0.20290358251963297,
+        "composition": {
+          "targetSeparation": 1.6000008583068848,
+          "shoulderOffset": 1.0640000772476197,
+          "focusProgress": 0.5389999914169312,
+          "focus": [
+            0,
+            1.53,
+            0.7384369376764279
+          ],
+          "safeFrameInsetPx": 80
+        },
+        "boom": {
+          "desiredDistance": 5.260391141887766,
+          "resolvedDistance": 5.260391141887766,
+          "collisionApplied": false,
+          "status": "clear",
+          "clearance": null,
+          "hitDistance": null,
+          "colliderCount": 19
+        }
+      },
+      "cameraObstruction": {
+        "implemented": true,
+        "status": "clear",
+        "telemetryHook": true,
+        "desiredDistance": 5.260391141887766,
+        "resolvedDistance": 5.260391141887766,
+        "collisionApplied": false
+      },
+      "framing": {
+        "viewport": {
+          "width": 1600,
+          "height": 900,
+          "safeInset": 80
+        },
+        "player": {
+          "minX": 468.86623687451527,
+          "minY": 422.5966458854264,
+          "maxX": 736.9824293780296,
+          "maxY": 819.9018629884328,
+          "width": 268.1161925035143,
+          "height": 397.3052171030063,
+          "margins": {
+            "left": 468.86623687451527,
+            "top": 422.5966458854264,
+            "right": 863.0175706219704,
+            "bottom": 80.09813701156725,
+            "minimum": 80.09813701156725
+          },
+          "insideFrame": true,
+          "insideSafeFrame": true
+        },
+        "target": {
+          "minX": 876.2134936116995,
+          "minY": 422.01434232002094,
+          "maxX": 1085.2893320440241,
+          "maxY": 681.6123302087949,
+          "width": 209.07583843232464,
+          "height": 259.59798788877396,
+          "margins": {
+            "left": 876.2134936116995,
+            "top": 422.01434232002094,
+            "right": 514.7106679559759,
+            "bottom": 218.3876697912051,
+            "minimum": 218.3876697912051
+          },
+          "insideFrame": true,
+          "insideSafeFrame": true
+        },
+        "blade": {
+          "minX": 534.2768787510706,
+          "minY": 83.16276588248402,
+          "maxX": 797.2443946384426,
+          "maxY": 531.1407698742444,
+          "width": 262.967515887372,
+          "height": 447.9780039917604,
+          "margins": {
+            "left": 534.2768787510706,
+            "top": 83.16276588248402,
+            "right": 802.7556053615574,
+            "bottom": 368.85923012575563,
+            "minimum": 83.16276588248402
+          },
+          "insideFrame": true,
+          "insideSafeFrame": true
+        },
+        "contact": {
+          "x": 764.0591751550797,
+          "y": 152.8463208363642,
+          "ndcZ": 0.9695452496011566,
+          "insideCentral40Percent": false
+        },
+        "gates": {
+          "playerHeight360To540": true,
+          "actorsAndBladeInside80": true,
+          "contactInsideCentral40Percent": false
+        }
+      },
+      "renderer": {
+        "calls": 83,
+        "triangles": 203915,
+        "points": 90,
+        "lines": 0,
+        "textures": 32,
+        "geometries": 38,
+        "pixelRatio": 1,
+        "size": {
+          "width": 1600,
+          "height": 900
+        },
+        "errors": [],
+        "context": {
+          "lost": false,
+          "losses": 0,
+          "restores": 0
+        }
+      },
+      "assetLoad": {
+        "schema": "gauntlet.asset-load.v1",
+        "registry": {
+          "schema": "gauntlet.asset-registry.v1",
+          "manifestVersion": 2,
+          "enabled": [
+            "animation.combat",
+            "animation.player-core",
+            "character.hero",
+            "character.hollow",
+            "environment.ashwake-arena",
+            "environment.ruin-doorway",
+            "environment.ruin-pillar",
+            "environment.ruin-rocks",
+            "environment.ruin-stairs",
+            "environment.ruin-wall",
+            "environment.snowy-forest",
+            "material.brick-arm",
+            "material.brick-diffuse",
+            "material.brick-normal",
+            "material.cobble-arm",
+            "material.cobble-diffuse",
+            "material.cobble-normal",
+            "weapon.claymore"
+          ],
+          "loaded": [
+            "animation.combat",
+            "animation.player-core",
+            "character.hero",
+            "character.hollow",
+            "environment.ashwake-arena",
+            "environment.ruin-doorway",
+            "environment.ruin-pillar",
+            "environment.ruin-rocks",
+            "environment.ruin-stairs",
+            "environment.ruin-wall",
+            "environment.snowy-forest",
+            "material.brick-arm",
+            "material.brick-diffuse",
+            "material.brick-normal",
+            "material.cobble-arm",
+            "material.cobble-diffuse",
+            "material.cobble-normal",
+            "weapon.claymore"
+          ],
+          "failures": [],
+          "complete": true
+        },
+        "presentation": {
+          "schema": "gauntlet.presentation-assets.v1",
+          "proceduralFallbackActive": false,
+          "views": {
+            "hero": {
+              "authored": true,
+              "fallbackReason": null,
+              "animations": [
+                "Idle_Loop",
+                "Roll",
+                "Sprint_Loop",
+                "Sword_Regular_A",
+                "Walk_Loop"
+              ]
+            },
+            "hollow": {
+              "authored": true,
+              "fallbackReason": null,
+              "animations": [
+                "Death",
+                "HitReact",
+                "Idle"
+              ]
+            },
+            "arenaSector": {
+              "authored": true,
+              "fallbackReason": null
+            }
+          }
+        },
+        "environment": {
+          "key": "environment.snowy-forest",
+          "pmremInstalled": true
+        },
+        "productionAuthored": true
+      },
+      "reviewErrors": []
+    }
+  ],
+  "replayEvidence": {
+    "cleanReplays": 3,
+    "sampleTicks": [
+      29,
+      34,
+      41,
+      60
+    ],
+    "byteIdentical": true,
+    "hashesByReplay": [
+      {
+        "replay": 1,
+        "ticks": {
+          "29": "e2e9d0e45de8034e93d493cba428d9c0c6d75edd6e62bc79e0eb458fe978294b",
+          "34": "2ea9623328862a57c22613707df985c1f9843c3dc5d5258f877791c4eb1d7126",
+          "41": "e26f5d98cde8a7045c482c1fa6612fe523641d695f7173e6b8cd0be190222ebe",
+          "60": "96b4b3a9e00c5be538045f156e8e8db9260a75197c3335fd91e84d721621ef88"
+        }
+      },
+      {
+        "replay": 2,
+        "ticks": {
+          "29": "e2e9d0e45de8034e93d493cba428d9c0c6d75edd6e62bc79e0eb458fe978294b",
+          "34": "2ea9623328862a57c22613707df985c1f9843c3dc5d5258f877791c4eb1d7126",
+          "41": "e26f5d98cde8a7045c482c1fa6612fe523641d695f7173e6b8cd0be190222ebe",
+          "60": "96b4b3a9e00c5be538045f156e8e8db9260a75197c3335fd91e84d721621ef88"
+        }
+      },
+      {
+        "replay": 3,
+        "ticks": {
+          "29": "e2e9d0e45de8034e93d493cba428d9c0c6d75edd6e62bc79e0eb458fe978294b",
+          "34": "2ea9623328862a57c22613707df985c1f9843c3dc5d5258f877791c4eb1d7126",
+          "41": "e26f5d98cde8a7045c482c1fa6612fe523641d695f7173e6b8cd0be190222ebe",
+          "60": "96b4b3a9e00c5be538045f156e8e8db9260a75197c3335fd91e84d721621ef88"
+        }
+      }
+    ]
+  },
+  "obstructionEvidence": {
+    "schema": "p30.round007.camera-obstruction-evidence.v1",
+    "testGeometry": {
+      "kind": "THREE.Mesh",
+      "geometry": "BoxGeometry",
+      "name": "round007-wall-on-boom-path",
+      "position": [
+        0.59584,
+        2.1236,
+        3.5605723864040897
+      ]
+    },
+    "requiredClearanceMeters": 0.45,
+    "wallOnBoom": {
+      "desiredDistance": 5.26,
+      "resolvedDistance": 2.443428040081452,
+      "collisionApplied": true,
+      "status": "obstructed",
+      "clearance": 0.4500000000000002,
+      "hitDistance": 2.893428040081452,
+      "colliderCount": 1,
+      "passed": true
+    },
+    "unobstructed": {
+      "desiredDistance": 5.26,
+      "resolvedDistance": 5.26,
+      "collisionApplied": false,
+      "status": "clear",
+      "clearance": null,
+      "hitDistance": null,
+      "colliderCount": 0,
+      "exactDistanceEquality": true,
+      "passed": true
+    }
+  },
+  "resourceCaps": {
+    "maximumObserved": {
+      "calls": 86,
+      "triangles": 204155,
+      "textures": 32,
+      "geometries": 38
+    },
+    "limits": {
+      "calls": 100,
+      "triangles": 250000,
+      "textures": 32,
+      "geometries": 64
+    },
+    "passed": true
+  },
+  "gates": {
+    "rgb1600x900Dpr1": true,
+    "framing": true,
+    "deterministicReplay": true,
+    "obstruction": true,
+    "coldReady": true,
+    "resourceCaps": true,
+    "authoredAssetsNoFallback": true
+  },
+  "errors": {
+    "console": [
+      {
+        "type": "warning",
+        "text": "using deprecated parameters for the initialization function; pass a single object instead"
+      },
+      {
+        "type": "warning",
+        "text": "RGBELoader has been deprecated. Please use HDRLoader instead."
+      },
+      {
+        "type": "warning",
+        "text": "THREE.WebGLShadowMap: PCFSoftShadowMap has been deprecated. Using PCFShadowMap instead."
+      }
+    ],
+    "page": [],
+    "requests": [],
+    "http": []
+  }
+}

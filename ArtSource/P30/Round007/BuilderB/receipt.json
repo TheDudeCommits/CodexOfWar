@@ -1,0 +1,28 @@
+{
+  "schema": "p30.round007.builder-b-camera-receipt.v1",
+  "candidateOnly": true,
+  "acceptanceClaimed": false,
+  "branch": "codex/r007-camera-builder-b",
+  "exactBaseline": "d95a0904151de6217838fcf6b69d3aba81e125ca",
+  "evidence": {
+    "capture": {
+      "path": "ArtSource/P30/Round007/BuilderB/capture-evidence.json",
+      "sha256": "48bf2cfc68262bffd65f3fb576266985cf85d1b4d572ff96708d72430cd50dc8"
+    },
+    "obstruction": {
+      "path": "ArtSource/P30/Round007/BuilderB/obstruction-evidence.json",
+      "sha256": "7cbc0891cfa1e2b34bfd245bbbcfa24af7405ee08cc3d79bb8ba4d168ec0b30d"
+    }
+  },
+  "gates": {
+    "rgb1600x900Dpr1": true,
+    "framing": true,
+    "deterministicReplay": true,
+    "obstruction": true,
+    "coldReady": true,
+    "resourceCaps": true,
+    "authoredAssetsNoFallback": true
+  },
+  "allAutomatedCaptureGatesPassed": true,
+  "visualAcceptanceClaimed": false
+}

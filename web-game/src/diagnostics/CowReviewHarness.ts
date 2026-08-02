@@ -81,11 +81,15 @@ export interface ReviewTelemetry {
   camera: CameraTelemetry;
   renderer: ReturnType<GameApp["getRendererTelemetry"]>;
   assetLoad: ReturnType<GameApp["getAssetLoadReceipt"]>;
+  framing: ReturnType<GameApp["getCameraFramingTelemetry"]> | null;
   errors: string[];
   cameraObstruction: {
-    implemented: false;
-    status: "pending";
+    implemented: true;
+    status: CameraTelemetry["boom"]["status"];
     telemetryHook: true;
+    desiredDistance: number;
+    resolvedDistance: number;
+    collisionApplied: boolean;
   };
 }
 
@@ -170,6 +174,7 @@ class ReviewController {
   private readonly events: ReviewEvent[] = [];
   private readonly history: ReviewSnapshot[] = [];
   private readonly errors: string[] = [];
+  private readonly includeFraming = new URLSearchParams(window.location.search).get("framing") === "1";
 
   constructor(private readonly app: GameApp) {}
 
@@ -206,12 +211,12 @@ class ReviewController {
   stepTicks(count: number): ReviewSnapshot {
     const safeCount = Math.max(0, Math.floor(count));
     for (let index = 0; index < safeCount; index += 1) this.stepOne();
-    this.app.renderOnce();
+    this.app.renderOnce(false, false);
     return this.snapshot();
   }
 
   renderOnce(): ReviewSnapshot {
-    this.app.renderOnce();
+    this.app.renderOnce(false, false);
     return this.snapshot();
   }
 
@@ -244,6 +249,7 @@ class ReviewController {
   }
 
   telemetry(): ReviewTelemetry {
+    const camera = this.app.getCameraTelemetry();
     return {
       ready: true,
       tick: this.tick,
@@ -254,14 +260,18 @@ class ReviewController {
       state: this.snapshot(),
       events: this.events.map((event) => ({ ...event })),
       history: this.history.map((snapshot) => structuredClone(snapshot)),
-      camera: this.app.getCameraTelemetry(),
+      camera,
       renderer: this.app.getRendererTelemetry(),
       assetLoad: this.app.getAssetLoadReceipt(),
+      framing: this.includeFraming ? this.app.getCameraFramingTelemetry() : null,
       errors: [...this.errors],
       cameraObstruction: {
-        implemented: false,
-        status: "pending",
+        implemented: true,
+        status: camera.boom.status,
         telemetryHook: true,
+        desiredDistance: camera.boom.desiredDistance,
+        resolvedDistance: camera.boom.resolvedDistance,
+        collisionApplied: camera.boom.collisionApplied,
       },
     };
   }

@@ -14,7 +14,9 @@
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "lint": "eslint .",
     "test": "vitest run tests/simulation",
+    "test:camera": "vitest run tests/camera",
     "test:watch": "vitest tests/simulation",
+    "evidence:camera": "vite-node scripts/p30-round007-camera-b-probe.ts",
     "smoke": "playwright test"
   },
   "dependencies": {
