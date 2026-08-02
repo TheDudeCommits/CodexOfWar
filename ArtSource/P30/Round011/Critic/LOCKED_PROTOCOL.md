@@ -7,6 +7,8 @@ Lock date: `2026-08-02` (`Asia/Bangkok`)
 Presentation commitment: `5df2ec1607da073c492d94d7f1c47c23606d51b9fdbc267a3ada8d76e853b05f`  
 Reference archive SHA-256: `4653a7a92d6f6bde910f39d3190df0adb112677851815443144505b8b420a6dd`
 
+Protocol Amendment 01: **incorporated before package delivery/access**; it corrects capture tick space from attack-relative to absolute scenario time without changing any visual, objective, technical, blind, ballot, or acceptance threshold. See `PROTOCOL_AMENDMENT_01.md`.
+
 The critic is source- and identity-blind. Before the alias-only score is sealed, the critic will not open candidate source, source maps, Git history, candidate commits, builder worktrees/branches, builder messages, builder evidence, or any mapping from an opaque alias to a person, slot, approach, or rank. The only candidate-authored file the critic may inspect is the strictly identity-free `CRITIC_INTERFACE.json` defined in `PACKAGE_INTERFACE.md`. Commands may execute source without the critic browsing it.
 
 The supplied real God of War Ragnarok gameplay screenshots are the production bar. There is no browser, WebGL, prototype, indie, or “good for a web game” allowance.
@@ -43,7 +45,7 @@ T1 contains a deliberately delayed exact-source-identity subcheck. The alias-onl
 
 The sequence is mandatory and may not be reordered:
 
-1. Commit this complete protocol, interface, receipts, hash helper, tests, and presentation commitment.
+1. Commit this complete protocol, interface, receipts, hash helper, tests, and presentation commitment, including the public pre-access tick-semantics correction in Protocol Amendment 01.
 2. Packaging authority creates two random opaque aliases and exact immutable source archives.
 3. Before package access, authority commits the visible alias/archive/tree hashes plus a salted hidden identity/source map using section 3 and `PACKAGE_INTERFACE.md` section 5.
 4. Critic verifies protocol hash, commitment shape, aliases, archive byte hashes, and bytewise extracted-tree hashes without source browsing.
@@ -133,47 +135,49 @@ Every visual and runtime judgment comes from actual execution of the candidate's
 - Capture hook: may seed, fixed-step, pause, resume, and report state only as specified in `PACKAGE_INTERFACE.md`; it may not alter what is posed or rendered.
 - Evidence: evaluator-created full-page PNG frames and lossless frame sequences from the live page. Builder evidence is ignored.
 
+The scenario uses two explicit clocks. Deterministic reset/start defines absolute scenario simulation tick `0`. The normal mouse light-strike rising edge is sampled at absolute tick `24`, which is attack-relative tick `0`. `attackRelativeTick` is `null` before that edge and equals `absoluteSimulationTick - 24` from absolute tick 24 onward. Thus focused absolute ticks `29`, `34`, and `41` are attack-relative ticks `5`, `10`, and `17`. Unless the phrase “attack-relative” appears explicitly, every numbered tick and range in this protocol is an **absolute scenario simulation tick**. The capture hook accepts absolute ticks only, and every receipt records both clocks.
+
 The actual run receipt must record Node/npm/browser/automation/CDP/OS/GPU/WebGL/GLSL/ffmpeg/helper versions and hashes. A missing or unverifiable version is a T8 failure.
 
 ## 5. Exact objective gates
 
 The full unannotated production frames and continuous neighboring sequence control these gates. Telemetry corroborates; it never excuses a bad visual reading.
 
-### O29 — exact tick 29 anticipation continuity
+### O29 — exact absolute tick 29 / attack-relative tick 5 anticipation continuity
 
 Pass only if all are true:
 
-- Tick 29 is before impact: no contact, hit, damage, health change, or target reaction has occurred.
+- Absolute tick 29 (attack-relative tick 5) is before impact: no contact, hit, damage, health change, or target reaction has occurred.
 - The active blade edge is visibly separated from the target exterior by at least 3% of target screen height.
 - Attacker has a grounded, compressed base; hips/torso/shoulders are visibly loaded; hands and blade show target-directed intent; silhouette reads immediately as anticipation for this light strike.
-- Across ticks 27–34, weapon edge, hands, torso, and camera move continuously into the same strike. The signed distance to the eventual exterior contact reduces without a reversal, teleport, camera cut, animation swap, already-complete pose, or one-frame discontinuity.
-- Tick 29 must read correctly without labels, telemetry, slow motion, or knowledge of tick 34.
+- Across absolute ticks 27–34, weapon edge, hands, torso, and camera move continuously into the same strike. The signed distance to the eventual exterior contact reduces without a reversal, teleport, camera cut, animation swap, already-complete pose, or one-frame discontinuity.
+- Absolute tick 29 must read correctly without labels, telemetry, slow motion, or knowledge of absolute tick 34.
 
 Ambiguous preload, generic idle, already-contacting pose, airborne base, or discontinuity is a hard failure.
 
-### O34 — exact tick 34 exterior blade/target contact
+### O34 — exact absolute tick 34 / attack-relative tick 10 exterior blade/target contact
 
 Pass only if all are true:
 
-- At tick 34, the active cutting edge meets one localized point/band on the target's near exterior contour. The blade body remains outside, separately legible, and does not emerge on the far side.
+- At absolute tick 34 (attack-relative tick 10), the active cutting edge meets one localized point/band on the target's near exterior contour. The blade body remains outside, separately legible, and does not emerge on the far side.
 - There is neither standoff nor penetration. In the original DPR1 pixels, the edge-to-exterior distance at the declared contact is at most 2 pixels, no blade sample is deeper than a 3-pixel antialias/contour tolerance, total blade/target silhouette overlap is at most 0.25% of target silhouette area, and world-space penetration is at most 0.5% of target height.
-- Ticks 32, 33, 34, 35, and 36 show one continuous exterior approach/contact/departure. A one-frame snap into or out of the target, pre-contact hit, post-contact embedded blade, standoff hidden by sparks, or tunneling fails.
+- Absolute ticks 32, 33, 34, 35, and 36 show one continuous exterior approach/contact/departure. A one-frame snap into or out of the target, pre-contact hit, post-contact embedded blade, standoff hidden by sparks, or tunneling fails.
 - Impact effect core, if present, is localized within 6 DPR1 pixels of the geometric contact and does not conceal topology. The unannotated production frame must pass with effects visible; an effects-off diagnostic may expose a failure but cannot rescue the production frame.
-- Exactly one hit/damage event fires at tick 34; health decrements exactly once; no hit event fires at a neighboring tick.
-- A visible causal target response begins at tick 34, away from the transmitted impulse, with head/upper torso/contact-side shoulder rotation or displacement. A static, pre-posed, symmetric, unrelated, or into-the-blade response fails.
+- Exactly one hit/damage event fires at absolute tick 34; health decrements exactly once; no hit event fires at a neighboring absolute tick.
+- A visible causal target response begins at absolute tick 34, away from the transmitted impulse, with head/upper torso/contact-side shoulder rotation or displacement. A static, pre-posed, symmetric, unrelated, or into-the-blade response fails.
 
 Visible standoff, penetration, impalement, broad body overlap, far-side emergence, FX-masked topology, wrong-tick damage, or non-causal response is a hard failure.
 
-### O41 — exact tick 41 low same-direction grounded braking
+### O41 — exact absolute tick 41 / attack-relative tick 17 low same-direction grounded braking
 
-Define swing sign from the continuous active-edge path from tick 29 to tick 34. Pass only if all are true:
+Define swing sign from the continuous active-edge path from absolute tick 29 to absolute tick 34. Pass only if all are true:
 
-- Every sample from ticks 34–41 retains the same swing sign; no reverse step greater than 2 degrees or attack-state re-entry occurs.
-- At tick 41 the active edge has passed the contact plane by at least 5% of target height and is separated from the target by at least 3% of target height.
-- Weapon angular speed at tick 41 is at most 60% of its pre-contact peak and the shrinking step distances visibly read as braking.
-- At least one attacker foot remains in valid ground contact at every tick 34–41. Hips, torso, shoulders, and arms visibly absorb/counter-brace the remaining momentum.
+- Every sample from absolute ticks 34–41 retains the same swing sign; no reverse step greater than 2 degrees or attack-state re-entry occurs.
+- At absolute tick 41 (attack-relative tick 17) the active edge has passed the contact plane by at least 5% of target height and is separated from the target by at least 3% of target height.
+- Weapon angular speed at absolute tick 41 is at most 60% of its pre-contact peak and the shrinking step distances visibly read as braking.
+- At least one attacker foot remains in valid ground contact at every absolute tick 34–41. Hips, torso, shoulders, and arms visibly absorb/counter-brace the remaining momentum.
 - Grip midpoint is at or below the attacker's shoulder line; blade centroid is at or below crown height; the weapon reads low/sideways rather than lifting into a new overhead-ready pose.
-- The unannotated tick 41 frame and tick 34–43 clip read as the same strike continuing and being arrested.
+- The unannotated absolute-tick-41 frame and absolute-tick-34–43 clip read as the same strike continuing and being arrested.
 
 Reverse motion, airborne reset, vertical lift, overhead re-cock, hands-over-head silhouette, new wind-up, or ungrounded slide is a hard failure.
 
@@ -181,11 +185,11 @@ Reverse motion, airborne reset, vertical lift, overhead re-cock, hands-over-head
 
 The reference archive is used privately under `REFERENCE_RECEIPT.json`; no supplied pixels are republished.
 
-For each candidate, evaluator captures full unmodified `1600x900` frames at every tick 27–43 in all three cold profiles. Focused evaluation uses:
+For each candidate, evaluator captures full unmodified `1600x900` frames at every absolute scenario tick 27–43 in all three cold profiles. Focused evaluation uses:
 
-1. Full-frame chronological strips for 27–34, 32–36, and 34–43.
-2. A 1:1, no-resampling O34 topology crop centered on the telemetry-declared contact, while retaining the full frame as controlling evidence.
-3. A fixed 16:9 action crop derived once from the tick-34 union of complete attacker, weapon, and target projected bounds, expanded 15% and then enlarged as needed to include every complete silhouette. That crop is frozen for ticks 27–43 and may never hide a foot, blade, target contour, HUD state, or camera defect.
+1. Full-frame chronological strips for absolute ticks 27–34, 32–36, and 34–43.
+2. A 1:1, no-resampling absolute-tick-34 O34 topology crop centered on the telemetry-declared contact, while retaining the full frame as controlling evidence.
+3. A fixed 16:9 action crop derived once from the absolute-tick-34 union of complete attacker, weapon, and target projected bounds, expanded 15% and then enlarged as needed to include every complete silhouette. That crop is frozen for absolute ticks 27–43 and may never hide a foot, blade, target contour, HUD state, or camera defect.
 4. A private reference-matched board for O29, O34, and O41. Reference frames are selected by combat phase and nearest camera yaw/pitch, actor screen-height ratio, contact-plane exposure, and environment depth. Only crop and uniform scale are allowed—no mirror, warp, relight, color grade, blur, redraw, interpolation, or content removal.
 
 All candidates use equal board dimensions, padding, scaling algorithm, background, chronology, and labels. Full-frame evidence prevents crop normalization from hiding camera/staging weakness. Private reference boards remain outside Git and user-visible reports; only their hashes and textual conclusions enter receipts.
@@ -201,11 +205,11 @@ Each category is an integer `0–10`; no half-points.
 
 The `>=95` threshold permits at most five categories at 9 and all remaining categories at 10. Any category below 9 rejects the candidate regardless of total.
 
-1. **C1 Tick-29 anticipation:** loaded intent, planted weight, separation, readable silhouette, and continuity toward the exact strike.
-2. **C2 Tick-34 contact topology:** localized exterior edge contact, exposed contour/occlusion, zero standoff/penetration reading, and neighboring-frame continuity.
-3. **C3 Tick-34 causal response:** exact hit/damage timing, directional onset, asymmetry, force transfer, and target reaction.
-4. **C4 Tick-41 follow-through/braking:** low same-direction continuation, grounded arrest, credible deceleration, and no overhead re-cock.
-5. **C5 Motion continuity and weight:** one uninterrupted 29→34→41 kinetic phrase with credible path, acceleration, hit-stop, overshoot, and braking.
+1. **C1 Absolute-tick-29 anticipation:** loaded intent, planted weight, separation, readable silhouette, and continuity toward the exact strike.
+2. **C2 Absolute-tick-34 contact topology:** localized exterior edge contact, exposed contour/occlusion, zero standoff/penetration reading, and neighboring-frame continuity.
+3. **C3 Absolute-tick-34 causal response:** exact hit/damage timing, directional onset, asymmetry, force transfer, and target reaction.
+4. **C4 Absolute-tick-41 follow-through/braking:** low same-direction continuation, grounded arrest, credible deceleration, and no overhead re-cock.
+5. **C5 Motion continuity and weight:** one uninterrupted absolute-tick 29→34→41 kinetic phrase with credible path, acceleration, hit-stop, overshoot, and braking.
 6. **C6 Pose craft/anatomy/silhouette:** grips, shoulders, spine, limbs, balance, foot plants, target anatomy, and intersection-free combat readability.
 7. **C7 Camera/staging/depth:** stable production camera, exposed contact plane, scale, composition, negative space, parallax, environment depth, and no defect-hiding crop.
 8. **C8 FX/material/lighting hierarchy:** localized directional effects, trails/sparks that support contact, stable shading, strong material response, and separation of weapon/actors/environment.
@@ -218,17 +222,17 @@ Ballots show only `LEFT` and `RIGHT`; no alias, filename, path, package hash, UI
 
 ### Focused ballots — all `3/3` required
 
-- **F1:** unannotated tick-29 full frame plus equal 27–34 chronological strip; prefer clearer, more physical anticipation continuity.
-- **F2:** unannotated tick-34 full frame plus 1:1 contact ROI and 32–36 chronological strip; prefer exact exterior contact with neither standoff nor penetration and clearer causal response.
-- **F3:** unannotated tick-41 full frame plus 34–43 chronological strip; prefer low same-direction grounded braking with no re-cock.
+- **F1:** unannotated absolute-tick-29 full frame plus equal absolute-tick-27–34 chronological strip; prefer clearer, more physical anticipation continuity.
+- **F2:** unannotated absolute-tick-34 full frame plus 1:1 contact ROI and absolute-tick-32–36 chronological strip; prefer exact exterior contact with neither standoff nor penetration and clearer causal response.
+- **F3:** unannotated absolute-tick-41 full frame plus absolute-tick-34–43 chronological strip; prefer low same-direction grounded braking with no re-cock.
 
 ### Game-wide ballots — at least `5/6` required
 
 - **G1 still:** three unmodified full gameplay frames at fixed neutral/traversal/combat-approach checkpoints; judge environment, camera, staging, HUD, and authored density.
-- **G2 still:** equal full-frame 24/29/34/41/48 combat board; judge holistic animation phrase, silhouettes, effects, and art finish.
+- **G2 still:** equal full-frame absolute-tick 24/29/34/41/48 combat board; judge holistic animation phrase, silhouettes, effects, and art finish.
 - **G3 still:** equal full-frame production frames before loss and five seconds after restore plus a normal post-recovery frame; judge lighting/material/HUD cohesion and presentation integrity, not merely lifecycle pass/fail.
 - **G4 clip:** one uncut 10-second live-input approach→movement/camera→light-strike→recovery clip at real time; judge overall gameplay presentation and responsiveness.
-- **G5 clip:** exact ticks 24–48 at real time followed once by the same frames at 0.25x; judge continuity, weight, contact clarity, target response, and finish.
+- **G5 clip:** exact absolute ticks 24–48 at real time followed once by the same frames at 0.25x; judge continuity, weight, contact clarity, target response, and finish.
 - **G6 clip:** one fixed 12-second excerpt from the committed 30-second live-input soak containing traversal, camera input, at least one light strike, and recovery; judge game-wide consistency, environmental life, HUD restraint, and production polish.
 
 Clips are built from evaluator-captured frame sequences. Editing is limited to synchronized side-by-side layout, lossless trim to the predeclared interval, fixed labels, and the specified one-time slow replay. No reframing, selective loop, retiming, stabilization, post effect, or defect concealment is allowed.
@@ -273,14 +277,14 @@ Warnings are recorded and fail if they indicate missing/deprecated runtime behav
 
 ### T4 — exact tick provenance and three-profile replay determinism
 
-In every cold profile, use seed `30011`, fixed `1/60`, the same normal input trace, and the same production route. Attack rising edge defines tick 0. Capture full frames 27–43 from one uninterrupted light strike; record exact state/event/camera/input receipts and PNG hashes.
+In every cold profile, use seed `30011`, fixed `1/60`, the same normal input trace, and the same production route. Deterministic reset/start defines absolute scenario tick `0`. The normal mouse rising edge is sampled at absolute tick `24`, which defines attack-relative tick `0`. Capture full frames at absolute ticks 27–43 from that one uninterrupted scenario/light-strike run; focused absolute ticks 29/34/41 must be reported simultaneously as attack-relative ticks 5/10/17. Record both clocks in every exact state/event/camera/input receipt and PNG provenance record.
 
 Across all three profiles:
 
-- BCJ quantized authoritative-state digests at every tick 27–43 are bit-identical;
+- BCJ quantized authoritative-state digests at every absolute tick 27–43 are bit-identical;
 - input, hit/damage/health, context, and state-transition event logs are bit-identical;
 - camera matrices/transforms, actor/weapon/target transforms, contact samples, ground contacts, health, and resource mode are bit-identical at the declared precision;
-- corresponding full frames at ticks 29/34/41 have SSIM `>=0.995` and perceptual-hash Hamming distance `<=2`;
+- corresponding full frames at absolute ticks 29/34/41 have SSIM `>=0.995` and perceptual-hash Hamming distance `<=2`;
 - no semantic silhouette, contact, response, HUD, lighting, asset, or camera difference exists.
 
 The critic may pause only after an exact update. Seeking, resampling, interpolation, direct pose control, stitched ticks from different runs, or replay divergence fails T4.
@@ -375,5 +379,4 @@ Candidate-level disqualifiers: procedural/screenshot/static fallback; non-produc
 
 Round-level disqualifiers: identity/source/approach leak before score seal; alias carrying identity; side-by-side ballot identity clue; map/package commitment mismatch; presentation commitment mismatch; critic source inspection before reveal; reference-pixel republication; score salt disclosure before reveal; score or ballot mutation after sealing; identity reveal before score Git commit; any post-access protocol change.
 
-This protocol has no amendment path. Once its Git commit exists, any substantive change requires a new numbered round and a new pre-access protocol/seed/map commitment. Discovery that a gate is inconvenient, unsupported, ambiguous in a candidate, or likely to fail does not permit relaxation.
-
+Protocol Amendment 01 is the sole exception: a pre-candidate audit found that the original text incorrectly labeled the frozen absolute capture ticks as attack-relative, which would have sampled post-recovery frames. The amendment was authorized, documented, and committed before any package delivery/access or package/map commitment; it changes only clock semantics, preserves the existing presentation seed commitment, and weakens no gate or threshold. After the Amendment 01 commit, this protocol has no further amendment path. Any later substantive change requires a new numbered round and a new pre-access protocol/seed/map commitment. Discovery that a gate is inconvenient, unsupported, ambiguous in a candidate, or likely to fail does not permit relaxation.

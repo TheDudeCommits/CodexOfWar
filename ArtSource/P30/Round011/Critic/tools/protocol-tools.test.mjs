@@ -5,12 +5,31 @@ import { join } from 'node:path';
 import test from 'node:test';
 
 import {
+  ATTACK_RISING_EDGE_ABSOLUTE_TICK,
+  CAPTURE_ABSOLUTE_TICKS,
+  FOCUSED_ABSOLUTE_TICKS,
+  attackRelativeTickForAbsolute,
   canonicalize,
   deriveOrders,
+  frozenScenarioTickMap,
   hashTree,
   presentationCommit,
   saltedDocumentCommit
 } from './protocol-tools.mjs';
+
+test('frozen scenario uses absolute captures and honest attack-relative receipts', () => {
+  assert.equal(ATTACK_RISING_EDGE_ABSOLUTE_TICK, 24);
+  assert.deepEqual(CAPTURE_ABSOLUTE_TICKS, Array.from({ length: 17 }, (_, index) => 27 + index));
+  assert.deepEqual(FOCUSED_ABSOLUTE_TICKS, [29, 34, 41]);
+  assert.equal(attackRelativeTickForAbsolute(23), null);
+  assert.equal(attackRelativeTickForAbsolute(24), 0);
+  assert.deepEqual(FOCUSED_ABSOLUTE_TICKS.map(attackRelativeTickForAbsolute), [5, 10, 17]);
+  assert.deepEqual(frozenScenarioTickMap().focusedTicks, [
+    { absoluteSimulationTick: 29, attackRelativeTick: 5 },
+    { absoluteSimulationTick: 34, attackRelativeTick: 10 },
+    { absoluteSimulationTick: 41, attackRelativeTick: 17 }
+  ]);
+});
 
 test('BCJ-v1 orders object keys by raw UTF-8 bytes and rejects decimals', () => {
   assert.equal(canonicalize({ z: 1, a: 'x', nested: [true, null] }), '{"a":"x","nested":[true,null],"z":1}');
@@ -58,4 +77,3 @@ test('order derivation is deterministic and covers all nine ballots', () => {
     assert.deepEqual([ballot.left, ballot.right].sort(), [...aliases].sort());
   }
 });
-
