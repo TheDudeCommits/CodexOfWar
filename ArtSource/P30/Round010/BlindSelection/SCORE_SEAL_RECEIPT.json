@@ -1,0 +1,14 @@
+{
+  "schema": "p30.r010.score-seal-receipt.v1",
+  "protocolID": "P30-R010-BLIND-v1",
+  "scoreDocument": "ALIAS_ONLY_SCORE.json",
+  "scoreDocumentFileSha256": "ae8df258212e7ad7eb28b95d465f526e68c06aed389d5fbb6df5b5f8204f98d5",
+  "scoreDocumentJcsSha256": "d34fb5f5f7bebe7f4a14547003508a3b22aaa558b86c1909c64316205ae9b88f",
+  "scoreDocumentJcsBytes": 11374,
+  "scoreCommitFormula": "SHA256(P30R010-score-v1\\0 || JCS(scoreDoc) || \\0 || lowercase_hex(scoreSalt))",
+  "scoreCommit": "28a39349d6fd4cad30ecec18d2b4cecf65c75391db0ffed9146f2dc4731d5aca",
+  "scoreSaltDisclosure": "withheld-until-map-reveal",
+  "presentationCommit": "5ea0ad1d52d8dc8f44042af157c8a9a0e6450a3c2e3d033dcb34367eb123b0eb",
+  "mapCommit": "58905a28b8b95b9568e52d3ae38b7fa12db0500fd1d64eb3998f3433e3390cc4",
+  "identityRevealReceivedAtSeal": false
+}

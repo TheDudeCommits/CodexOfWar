@@ -1,0 +1,39 @@
+{
+  "schema": "p30.r010.critic-run-receipt.v1",
+  "protocolID": "P30-R010-BLIND-v1",
+  "alias": "candidate-ff5ef7c562581ce6",
+  "packageSha256": "58274c34b0bede5f3686b6d281e486fbfee34a6cec55491b357d80374243f3aa",
+  "runtimeDigest": "58274c34b0bede5f3686b6d281e486fbfee34a6cec55491b357d80374243f3aa",
+  "runtime": {
+    "route": "http://127.0.0.1:43111/?review=1&post=0&framing=1&captureBuffer=1",
+    "normalPlayableRoute": true,
+    "viewport": { "width": 1600, "height": 900, "deviceScaleFactor": 1, "devicePixelRatio": 1, "zoomPercent": 100 },
+    "webgl": {
+      "isWebGL2": true,
+      "version": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+      "renderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M2, Unspecified Version)",
+      "vendor": "Google Inc. (Apple)",
+      "softwareRenderer": false
+    }
+  },
+  "sequence": {
+    "piece": "P30",
+    "preset": "pose-browser",
+    "seed": 30001,
+    "fixedDeltaSeconds": 0.016666666666666666,
+    "focusedTicks": [29, 34, 41],
+    "actions": [
+      { "ticksInclusive": [0, 19], "action": "move.forward", "phase": "value", "value": 1 },
+      { "tick": 24, "action": "attack.primary", "phase": "down" },
+      { "tick": 25, "action": "attack.primary", "phase": "up" }
+    ]
+  },
+  "captures": {
+    "29": { "png": "F29-tick29.png", "telemetry": "F29-tick29.telemetry.json", "pngSha256": "bb5e08dbe1c4b0f23d7b6acf7cef136488a1639da6b35f81c130254e67767243" },
+    "34": { "png": "F34-tick34.png", "fxOffPng": "F34-tick34-fxoff.png", "telemetry": "F34-tick34.telemetry.json", "pngSha256": "aa0800259896ae66dc8bc91f852ea76b2be6b47609901bebe5abd9b49cbe4293", "fxOffPngSha256": "5d830ef180fc896a6f5c6fb642f7309143c5e170abeaf7b96fd209c9a37017e0" },
+    "41": { "png": "F41-tick41.png", "telemetry": "F41-tick41.telemetry.json", "pngSha256": "98f17d64d20e078eb75f43fc67b5956885369447ac3286d411cf669357fc4b10" }
+  },
+  "coldContexts": 3,
+  "cameraIdenticalToOtherAliasAtFocusedTicks": true,
+  "candidatePackageReverifiedAfterCapture": true
+}

@@ -1,0 +1,10 @@
+{
+  "schema": "p30.r010.context-recovery-visual.v1",
+  "alias": "candidate-b42289432d4cc3cb",
+  "beforeImage": "F29-tick29.png",
+  "afterFiveSecondsImage": "context-restored-5s.png",
+  "beforeMeanLuma": 68.3503,
+  "afterMeanLuma": 41.4726,
+  "relativeLumaDrop": 0.393381,
+  "observation": "The scene remains substantially underlit five seconds after forced WebGL2 restore despite responsive controls and a non-lost context."
+}

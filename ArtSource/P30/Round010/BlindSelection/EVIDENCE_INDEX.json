@@ -1,0 +1,40 @@
+{
+  "schema": "p30.r010.blind-evidence-index.v1",
+  "protocolID": "P30-R010-BLIND-v1",
+  "protocol": {
+    "path": "LOCKED_PROTOCOL.md",
+    "sha256": "0bf2e9c51ae06f95a9d91c88572875f4b679c8f8a887845a9327adc9ab5b4575"
+  },
+  "protocolAmendment": {
+    "path": "PROTOCOL_AMENDMENT_01.md",
+    "sha256": "b7d2a3445b3486caa1af94d17973b2c05881d5dc1ddb33ae52dd35683d4c1971"
+  },
+  "score": {
+    "path": "ALIAS_ONLY_SCORE.json",
+    "fileSha256": "ae8df258212e7ad7eb28b95d465f526e68c06aed389d5fbb6df5b5f8204f98d5",
+    "jcsSha256": "d34fb5f5f7bebe7f4a14547003508a3b22aaa558b86c1909c64316205ae9b88f",
+    "sealReceipt": "SCORE_SEAL_RECEIPT.json"
+  },
+  "candidateEvidence": {
+    "candidate-b42289432d4cc3cb": {
+      "manifest": "captures/candidate-b42289432d4cc3cb/capture-manifest.json",
+      "manifestSha256": "ed1312f1ca711daa5372b9ecec43b84606dc55b7fba56c8a016d98b9078fa83d",
+      "manifestedFileCount": 53
+    },
+    "candidate-ff5ef7c562581ce6": {
+      "manifest": "captures/candidate-ff5ef7c562581ce6/capture-manifest.json",
+      "manifestSha256": "80deb77473677459f6f1df4ee54c406cc04607eba125fd90ae1e20a591704078",
+      "manifestedFileCount": 53
+    }
+  },
+  "ballots": {
+    "manifest": "ballots/ballot-manifest.json",
+    "manifestSha256": "3f4e3d12997503ade42ff99292ad9dc5af0733da65e01f809c46909d3dcd7433",
+    "record": "ballots/BALLOT_RECORD.json",
+    "recordSha256": "a542bfec7fda2cc3bcfd4a08c0961d3ec8db0b8159ac130ef45a7d94a09f8e05"
+  },
+  "excludedEvaluatorInternals": [
+    "captures/*/.playwright-cli/"
+  ],
+  "exclusionReason": "Transient browser-controller command logs are not capture evidence; all relevant runtime facts, errors, telemetry, frames, and hashes are preserved in the manifested evaluator artifacts."
+}

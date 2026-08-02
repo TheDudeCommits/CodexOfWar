@@ -1,0 +1,41 @@
+{
+  "schema": "p30.r010.ballot-manifest.v1",
+  "algorithm": "SHA-256 file bytes; raw UTF-8 bytewise path order",
+  "files": [
+    {
+      "path": "B1-tick29-left-b-right-f.png",
+      "bytes": 601994,
+      "sha256": "ec075b821bd7ea0b261ba33b715c905a77dd59e2d957703905d9ea7296c8685e"
+    },
+    {
+      "path": "B2-tick34-left-b-right-f-production-and-fxoff.png",
+      "bytes": 1375621,
+      "sha256": "9854a12ce133269c5b30b464f3a5d00cd1012127640dc271d1b76b3a6f24ae46"
+    },
+    {
+      "path": "B3-tick41-left-f-right-b.png",
+      "bytes": 684138,
+      "sha256": "bc0acb2b8b1da44010cd3be6729e0b3e41a41c361b5ea0be9ad1af5f765676d8"
+    },
+    {
+      "path": "B4-tick24-34-left-b-right-f.mp4",
+      "bytes": 198864,
+      "sha256": "07275fc2a0a9e198201a358b1e5a96eefd489035e419e6a4b858a02079930f43"
+    },
+    {
+      "path": "B5-tick34-46-left-b-right-f.mp4",
+      "bytes": 210764,
+      "sha256": "6160e6b7682e6ae05a4fd5096b89e57f5c349bbe00edd06b604a48c17a950817"
+    },
+    {
+      "path": "B6-tick24-48-left-b-right-f.mp4",
+      "bytes": 894777,
+      "sha256": "1fa5b30f1bd528431d10226caa8faec78ed3c9aec75d4fdf523cae2053a83c03"
+    },
+    {
+      "path": "BALLOT_RECORD.json",
+      "bytes": 3220,
+      "sha256": "a542bfec7fda2cc3bcfd4a08c0961d3ec8db0b8159ac130ef45a7d94a09f8e05"
+    }
+  ]
+}

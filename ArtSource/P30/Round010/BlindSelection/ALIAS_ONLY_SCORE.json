@@ -1,0 +1,173 @@
+{
+  "schema": "p30.r010.alias-only-score.v1",
+  "protocolID": "P30-R010-BLIND-v1",
+  "anonymousOnly": true,
+  "identityRevealReceived": false,
+  "mapCommit": "58905a28b8b95b9568e52d3ae38b7fa12db0500fd1d64eb3998f3433e3390cc4",
+  "supersededMapCommit": "05e35ae720209fceb8a2f9926828f40530dc31f0ad4987ae96fc40ac01268106",
+  "presentationCommit": "5ea0ad1d52d8dc8f44042af157c8a9a0e6450a3c2e3d033dcb34367eb123b0eb",
+  "presentationSeedDisclosure": "withheld-until-score-seal",
+  "captureConfiguration": {
+    "browser": "Chromium",
+    "viewport": [1600, 900],
+    "deviceScaleFactor": 1,
+    "devicePixelRatio": 1,
+    "zoomPercent": 100,
+    "webglVersion": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+    "renderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M2, Unspecified Version)",
+    "piece": "P30",
+    "preset": "pose-browser",
+    "seed": 30001,
+    "fixedDeltaSeconds": 0.016666666666666666,
+    "focusedTicks": [29, 34, 41]
+  },
+  "acceptanceThresholds": {
+    "objectiveGates": "O29-and-O34-and-O41",
+    "technicalGates": "T1-through-T8",
+    "focusedWins": 3,
+    "overallWins": 5,
+    "totalScore": 95,
+    "minimumCategory": 9
+  },
+  "evidence": {
+    "candidate-b42289432d4cc3cb": {
+      "packageSha256": "c438c9f113bb4e3adfcbb166df5f8cce40bb5bf7f944b45bb79dc59ca5d9d1f6",
+      "captureManifest": "captures/candidate-b42289432d4cc3cb/capture-manifest.json",
+      "captureManifestSha256": "ed1312f1ca711daa5372b9ecec43b84606dc55b7fba56c8a016d98b9078fa83d",
+      "focusedPngSha256": {
+        "29": "93cddc63ef29f67d94923fa59f4b3d76dcc5aceed4fa98f24acfe53ac03ced14",
+        "34": "a86b0be7b6bbc60f99432ad397e39fac1c55be69015471c504448962fc8b4c2d",
+        "34-fxoff": "04b892e9b61d908d268a4ff9ec48d7571a395e052750d07ecdd948f684f26db9",
+        "41": "23fe18a98eb0b4bd3f051ea399a031d0fafe6e313dcd67ac8bb78764c24839b9"
+      }
+    },
+    "candidate-ff5ef7c562581ce6": {
+      "packageSha256": "58274c34b0bede5f3686b6d281e486fbfee34a6cec55491b357d80374243f3aa",
+      "captureManifest": "captures/candidate-ff5ef7c562581ce6/capture-manifest.json",
+      "captureManifestSha256": "80deb77473677459f6f1df4ee54c406cc04607eba125fd90ae1e20a591704078",
+      "focusedPngSha256": {
+        "29": "bb5e08dbe1c4b0f23d7b6acf7cef136488a1639da6b35f81c130254e67767243",
+        "34": "aa0800259896ae66dc8bc91f852ea76b2be6b47609901bebe5abd9b49cbe4293",
+        "34-fxoff": "5d830ef180fc896a6f5c6fb642f7309143c5e170abeaf7b96fd209c9a37017e0",
+        "41": "98f17d64d20e078eb75f43fc67b5956885369447ac3286d411cf669357fc4b10"
+      }
+    },
+    "ballotManifest": "ballots/ballot-manifest.json",
+    "ballotManifestSha256": "3f4e3d12997503ade42ff99292ad9dc5af0733da65e01f809c46909d3dcd7433",
+    "ballotRecordSha256": "a542bfec7fda2cc3bcfd4a08c0961d3ec8db0b8159ac130ef45a7d94a09f8e05"
+  },
+  "candidates": {
+    "candidate-b42289432d4cc3cb": {
+      "objectiveGates": {
+        "O29": {
+          "pass": true,
+          "reason": "Tick 29 is a damage-free startup frame with a planted crouch, separated rearward weapon, and an uninterrupted path toward the same strike."
+        },
+        "O34": {
+          "pass": false,
+          "reason": "The production and FX-off frames do not supply the required ID/depth-mask threshold proof, the blade reads inside the target torso rather than at one exterior band, the target remains close to a neutral T-shaped silhouette, and the sole damage event is stamped tick 33 rather than tick 34."
+        },
+        "O41": {
+          "pass": true,
+          "reason": "The tick 34-to-41 sequence continues in the same direction into a low separated blade position with planted feet and visibly slowing increments, without an overhead re-cock."
+        }
+      },
+      "technicalGates": {
+        "T1": { "pass": true, "reason": "Evaluator capture used the live normal playable HTTP route, game canvas, HUD, and normal attack input." },
+        "T2": { "pass": true, "reason": "All focused receipts assert 1600x900 CSS and canvas size, DPR 1, WebGL2, and the Apple M2 ANGLE Metal hardware renderer." },
+        "T3": { "pass": true, "reason": "Three fresh cold contexts reached the authored game with complete required assets and no page, request, shader, or console errors; the only console output was three deprecation warnings." },
+        "T4": { "pass": true, "reason": "The run receipt, uninterrupted per-tick sequence, telemetry, transforms, event log, and PNG hashes preserve exact focused-tick provenance." },
+        "T5": { "pass": true, "reason": "Three cold runs have identical canonical state digests; minimum focused-frame SSIM is 0.997761 and all perceptual-hash Hamming distances are 0." },
+        "T6": { "pass": false, "reason": "The 31.729-second interaction run stayed responsive with no gap over 500 ms but recorded five unhandled WrongDocumentError pointer-lock rejections." },
+        "T7": { "pass": false, "reason": "Context restored in 454 ms and control responded in 472 ms, but mean scene luma remained 39.3381% below the pre-loss frame after five seconds, so the frame was not correctly lit." },
+        "T8": { "pass": true, "reason": "The package was reverified unchanged and every evaluator-created capture, telemetry file, receipt, and ballot artifact is SHA-256 manifested." }
+      },
+      "visualCategories": {
+        "C1": { "score": 6, "reason": "The crouched preload reads, but torso torque, hand intent, and weight compression remain stiff and generic." },
+        "C2": { "score": 4, "reason": "The narrow blade is readable, yet it appears to enter the target torso instead of resolving at a localized exterior contour." },
+        "C3": { "score": 4, "reason": "Damage is synchronized, but the contact frame leaves the opponent close to a neutral T-shaped silhouette with weak directional onset." },
+        "C4": { "score": 7, "reason": "The blade stays low and continues through the target plane with grounded braking, though the pose remains mechanically stiff." },
+        "C5": { "score": 6, "reason": "The path is continuous and deterministic, but acceleration, force transfer, and arrest lack convincing mass and hit-stop." },
+        "C6": { "score": 4, "reason": "Rigid limbs, mannequin-like target arms, coarse grips, and low-detail anatomy prevent a polished combat silhouette." },
+        "C7": { "score": 7, "reason": "The stable camera exposes the combat plane and keeps actors framed, but the flat angle and spacing do not create reference-level depth or drama." },
+        "C8": { "score": 5, "reason": "Lighting separates the figures and effects stay restrained, but the contact cue, material response, and hierarchy are weak." },
+        "C9": { "score": 3, "reason": "Low-poly characters, coarse textures, simplistic materials, and visibly uneven asset integration are far below the supplied reference finish." },
+        "C10": { "score": 6, "reason": "The 1600x900 actual-game capture and HUD are coherent, but the rough placeholder-like character presentation is not production-authored in appearance." }
+      },
+      "totalScore": 52,
+      "minimumCategoryScore": 3,
+      "ballots": { "focusedWins": 0, "overallWins": 0 },
+      "acceptanceChecks": {
+        "allObjectiveGates": false,
+        "allTechnicalGates": false,
+        "focusedThreeOfThree": false,
+        "overallFiveOfSix": false,
+        "scoreAtLeast95": false,
+        "everyCategoryAtLeast9": false
+      },
+      "accepted": false,
+      "biggestRemainingGap": "Biggest remaining gap: the blade's visible entry into the target torso at tick 34 prevents the strike from reading as localized exterior contact."
+    },
+    "candidate-ff5ef7c562581ce6": {
+      "objectiveGates": {
+        "O29": {
+          "pass": true,
+          "reason": "Tick 29 is a damage-free startup frame with a planted crouch, separated rearward weapon, and an uninterrupted path toward the same strike."
+        },
+        "O34": {
+          "pass": false,
+          "reason": "The production and FX-off frames do not supply the required ID/depth-mask threshold proof, the blade stops visibly short of a precise target-contour contact, and the sole damage event is stamped tick 33 rather than tick 34 despite a strong away-from-strike target displacement."
+        },
+        "O41": {
+          "pass": true,
+          "reason": "The tick 34-to-41 sequence continues in the same direction into a low separated blade position with planted feet and sharply slowing increments, without an overhead re-cock."
+        }
+      },
+      "technicalGates": {
+        "T1": { "pass": true, "reason": "Evaluator capture used the live normal playable HTTP route, game canvas, HUD, and normal attack input." },
+        "T2": { "pass": true, "reason": "All focused receipts assert 1600x900 CSS and canvas size, DPR 1, WebGL2, and the Apple M2 ANGLE Metal hardware renderer." },
+        "T3": { "pass": true, "reason": "Three fresh cold contexts reached the authored game with complete required assets and no page, request, shader, or console errors; the only console output was three deprecation warnings." },
+        "T4": { "pass": true, "reason": "The run receipt, uninterrupted per-tick sequence, telemetry, transforms, event log, and PNG hashes preserve exact focused-tick provenance." },
+        "T5": { "pass": true, "reason": "Three cold runs have identical canonical state digests; minimum focused-frame SSIM is 0.997805 and all perceptual-hash Hamming distances are 0." },
+        "T6": { "pass": false, "reason": "The 31.023-second interaction run stayed responsive with no gap over 500 ms but recorded five unhandled WrongDocumentError pointer-lock rejections." },
+        "T7": { "pass": false, "reason": "Context restored in 387 ms and control responded in 398 ms, but mean scene luma remained 39.3050% below the pre-loss frame after five seconds, so the frame was not correctly lit." },
+        "T8": { "pass": true, "reason": "The package was reverified unchanged and every evaluator-created capture, telemetry file, receipt, and ballot artifact is SHA-256 manifested." }
+      },
+      "visualCategories": {
+        "C1": { "score": 6, "reason": "The crouched preload reads, but torso torque, hand intent, and weight compression remain stiff and generic." },
+        "C2": { "score": 3, "reason": "The oversized face-on blade leaves a visible standoff from the target, so neither its edge nor spark establishes a localized exterior contact." },
+        "C3": { "score": 6, "reason": "The target moves decisively away from the strike, but the response is a rigid whole-body translation retaining a T-shaped arm silhouette." },
+        "C4": { "score": 8, "reason": "The strike maintains a low same-direction follow-through with strong separation and an unmistakable grounded brake, though the body mechanics remain stiff." },
+        "C5": { "score": 7, "reason": "The uninterrupted phrase has clearer impulse and deceleration, but the disconnected contact and rigid recoil break credible weight transfer." },
+        "C6": { "score": 4, "reason": "Rigid limbs, mannequin-like target arms, coarse grips, and low-detail anatomy prevent a polished combat silhouette." },
+        "C7": { "score": 7, "reason": "The stable camera exposes the combat plane and keeps actors framed, but the flat angle and spacing do not create reference-level depth or drama." },
+        "C8": { "score": 4, "reason": "The luminous broad blade dominates the hierarchy while the small spark floats away from a readable geometric contact." },
+        "C9": { "score": 3, "reason": "Low-poly characters, coarse textures, simplistic materials, and visibly uneven asset integration are far below the supplied reference finish." },
+        "C10": { "score": 6, "reason": "The 1600x900 actual-game capture and HUD are coherent, but the rough placeholder-like character presentation is not production-authored in appearance." }
+      },
+      "totalScore": 54,
+      "minimumCategoryScore": 3,
+      "ballots": { "focusedWins": 1, "overallWins": 4 },
+      "acceptanceChecks": {
+        "allObjectiveGates": false,
+        "allTechnicalGates": false,
+        "focusedThreeOfThree": false,
+        "overallFiveOfSix": false,
+        "scoreAtLeast95": false,
+        "everyCategoryAtLeast9": false
+      },
+      "accepted": false,
+      "biggestRemainingGap": "Biggest remaining gap: the visible blade-to-target standoff at tick 34 makes the impact read disconnected rather than as localized exterior contact."
+    }
+  },
+  "ballotSummary": {
+    "B1": { "winner": null, "outcome": "tie-or-unclear" },
+    "B2": { "winner": null, "outcome": "tie-or-unclear" },
+    "B3": { "winner": "candidate-ff5ef7c562581ce6", "outcome": "win" },
+    "B4": { "winner": "candidate-ff5ef7c562581ce6", "outcome": "win" },
+    "B5": { "winner": "candidate-ff5ef7c562581ce6", "outcome": "win" },
+    "B6": { "winner": "candidate-ff5ef7c562581ce6", "outcome": "win" }
+  },
+  "strongerAlias": "candidate-ff5ef7c562581ce6",
+  "finalAnonymousVerdict": "NO ACCEPTED CANDIDATE"
+}

@@ -1,0 +1,67 @@
+{
+  "schema": "p30.r010.anonymous-ballot-record.v1",
+  "protocolID": "P30-R010-BLIND-v1",
+  "presentationCommit": "5ea0ad1d52d8dc8f44042af157c8a9a0e6450a3c2e3d033dcb34367eb123b0eb",
+  "presentationSeedDisclosure": "withheld-until-alias-only-score-seal",
+  "ballots": [
+    {
+      "id": "B1",
+      "focusedTick": 29,
+      "presentation": ["candidate-b42289432d4cc3cb", "candidate-ff5ef7c562581ce6"],
+      "artifact": "B1-tick29-left-b-right-f.png",
+      "winner": null,
+      "outcome": "tie-or-unclear",
+      "rationale": "The two anticipation frames are perceptually indistinguishable in preload, planted stance, weapon separation, and target-directed intent; neither establishes a credible superiority."
+    },
+    {
+      "id": "B2",
+      "focusedTick": 34,
+      "presentation": ["candidate-b42289432d4cc3cb", "candidate-ff5ef7c562581ce6"],
+      "artifact": "B2-tick34-left-b-right-f-production-and-fxoff.png",
+      "winner": null,
+      "outcome": "tie-or-unclear",
+      "rationale": "The left frame supplies a narrower blade but reads inside the target with a weak response, while the right frame supplies a stronger response but leaves a visible blade-to-target standoff; neither is clearer on the ballot's combined topology-and-causality criterion."
+    },
+    {
+      "id": "B3",
+      "focusedTick": 41,
+      "presentation": ["candidate-ff5ef7c562581ce6", "candidate-b42289432d4cc3cb"],
+      "artifact": "B3-tick41-left-f-right-b.png",
+      "winner": "candidate-ff5ef7c562581ce6",
+      "outcome": "win",
+      "rationale": "The left frame more clearly preserves the low same-direction weapon path and transmitted target recoil while maintaining planted braking with no overhead re-cock."
+    },
+    {
+      "id": "B4",
+      "range": [24, 34],
+      "presentation": ["candidate-b42289432d4cc3cb", "candidate-ff5ef7c562581ce6"],
+      "artifact": "B4-tick24-34-left-b-right-f.mp4",
+      "winner": "candidate-ff5ef7c562581ce6",
+      "outcome": "win",
+      "rationale": "The right sequence gives the startup-to-impact phrase a clearer transmitted-force transition at the end of the shared acceleration arc."
+    },
+    {
+      "id": "B5",
+      "range": [34, 46],
+      "presentation": ["candidate-b42289432d4cc3cb", "candidate-ff5ef7c562581ce6"],
+      "artifact": "B5-tick34-46-left-b-right-f.mp4",
+      "winner": "candidate-ff5ef7c562581ce6",
+      "outcome": "win",
+      "rationale": "The right sequence more clearly carries impulse through the opponent while the blade continues low into a readable brake."
+    },
+    {
+      "id": "B6",
+      "range": [24, 48],
+      "presentation": ["candidate-b42289432d4cc3cb", "candidate-ff5ef7c562581ce6"],
+      "artifact": "B6-tick24-48-left-b-right-f.mp4",
+      "winner": "candidate-ff5ef7c562581ce6",
+      "outcome": "win",
+      "rationale": "Across real-time, quarter-speed, and focused beats, the right sequence has the stronger overall causal recoil and same-direction finish, although it remains far below the absolute reference bar."
+    }
+  ],
+  "summary": {
+    "candidate-b42289432d4cc3cb": { "focusedWins": 0, "overallWins": 0 },
+    "candidate-ff5ef7c562581ce6": { "focusedWins": 1, "overallWins": 4 },
+    "tiesOrUnclear": 2
+  }
+}

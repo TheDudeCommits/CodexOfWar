@@ -1,0 +1,49 @@
+{
+  "schema": "p30.r010.determinism-summary.v1",
+  "alias": "candidate-ff5ef7c562581ce6",
+  "coldRuns": 3,
+  "seed": 30001,
+  "stateDigestScope": "canonical sorted JSON of snapshot, pose, FX, events, and camera",
+  "ticks": {
+    "29": {
+      "stateDigest": "5772569619f4ff646f0782c49e9a10551120d49792f80d5e8158d4a31969fd2c",
+      "stateIdenticalAcrossRuns": true,
+      "imageSha256": [
+        "bb5e08dbe1c4b0f23d7b6acf7cef136488a1639da6b35f81c130254e67767243",
+        "bb5e08dbe1c4b0f23d7b6acf7cef136488a1639da6b35f81c130254e67767243",
+        "bb5e08dbe1c4b0f23d7b6acf7cef136488a1639da6b35f81c130254e67767243"
+      ],
+      "ssimRun1ToRun2": 1.0,
+      "ssimRun1ToRun3": 1.0,
+      "phashHammingRun1ToRun2": 0,
+      "phashHammingRun1ToRun3": 0
+    },
+    "34": {
+      "stateDigest": "15d187afcba82e09189aea111e5a51bb4556c07f0eefd7962b70ee054858b1bd",
+      "stateIdenticalAcrossRuns": true,
+      "imageSha256": [
+        "aa0800259896ae66dc8bc91f852ea76b2be6b47609901bebe5abd9b49cbe4293",
+        "5a1d7143564e11d4527ff7917ec0c5be6ca1c4322a920249b1c06c9034a179d4",
+        "5a1d7143564e11d4527ff7917ec0c5be6ca1c4322a920249b1c06c9034a179d4"
+      ],
+      "ssimRun1ToRun2": 0.997805,
+      "ssimRun1ToRun3": 0.997805,
+      "phashHammingRun1ToRun2": 0,
+      "phashHammingRun1ToRun3": 0
+    },
+    "41": {
+      "stateDigest": "0ee40001435b040c7ea06cd74e74a7976f73614e8d1c619a65975a2aa2a725dc",
+      "stateIdenticalAcrossRuns": true,
+      "imageSha256": [
+        "98f17d64d20e078eb75f43fc67b5956885369447ac3286d411cf669357fc4b10",
+        "98f17d64d20e078eb75f43fc67b5956885369447ac3286d411cf669357fc4b10",
+        "98f17d64d20e078eb75f43fc67b5956885369447ac3286d411cf669357fc4b10"
+      ],
+      "ssimRun1ToRun2": 1.0,
+      "ssimRun1ToRun3": 1.0,
+      "phashHammingRun1ToRun2": 0,
+      "phashHammingRun1ToRun3": 0
+    }
+  },
+  "passesLockedThresholds": true
+}

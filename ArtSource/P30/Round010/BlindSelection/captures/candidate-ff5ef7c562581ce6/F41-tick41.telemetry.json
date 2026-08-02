@@ -1,0 +1,3617 @@
+{
+  "schema": "p30.r010.critic-capture.v1",
+  "alias": "candidate-ff5ef7c562581ce6",
+  "focusedTick": 41,
+  "route": "http://127.0.0.1:43111/?review=1&post=0&framing=1&captureBuffer=1",
+  "viewport": {
+    "innerWidth": 1600,
+    "innerHeight": 900,
+    "dpr": 1,
+    "canvas": {
+      "width": 1600,
+      "height": 900,
+      "clientWidth": 1600,
+      "clientHeight": 900
+    }
+  },
+  "webgl": {
+    "isWebGL2": true,
+    "version": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+    "renderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M2, Unspecified Version)",
+    "vendor": "Google Inc. (Apple)"
+  },
+  "review": {
+    "ready": true,
+    "tick": 41,
+    "seed": 30001,
+    "piece": "P30",
+    "preset": "pose-browser",
+    "paused": false,
+    "state": {
+      "tick": 41,
+      "seed": 30001,
+      "piece": "P30",
+      "preset": "pose-browser",
+      "paused": false,
+      "pointerLocked": false,
+      "coordinates": "+Y up / +X right / -Z forward",
+      "player": {
+        "position": {
+          "x": 0,
+          "y": 0,
+          "z": 1.6000008583068848
+        },
+        "yaw": 0,
+        "health": 100,
+        "stamina": 100,
+        "motion": "attack",
+        "attackPhase": "recovery",
+        "attackFrame": 17
+      },
+      "target": {
+        "position": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "health": 90,
+        "motion": "hit"
+      },
+      "state": {
+        "tick": 41,
+        "elapsed": 0.6833333333333338,
+        "objectiveComplete": false,
+        "player": {
+          "position": {
+            "x": 0,
+            "z": 1.6000008583068848
+          },
+          "yaw": 0,
+          "health": 100,
+          "maxHealth": 100,
+          "stamina": 100,
+          "maxStamina": 100,
+          "motion": "attack",
+          "speed01": 0,
+          "attackElapsed": 0.2833333333333333,
+          "attackFrame": 17,
+          "attackPhase": "recovery",
+          "attackSerial": 1,
+          "attackHasHit": true,
+          "dodgeRemaining": 0,
+          "dodgeDirection": {
+            "x": 0,
+            "z": -1
+          },
+          "invulnerableRemaining": 0
+        },
+        "enemy": {
+          "position": {
+            "x": 0,
+            "z": 0
+          },
+          "yaw": 3.141592653589793,
+          "health": 90,
+          "maxHealth": 100,
+          "motion": "hit",
+          "hitStunRemaining": 0.16333333333333339,
+          "idlePhase": 0.6833333333333338
+        }
+      }
+    },
+    "events": [
+      {
+        "tick": 24,
+        "type": "attack_started",
+        "attackSerial": 1
+      },
+      {
+        "tick": 33,
+        "type": "enemy_hit",
+        "damage": 10,
+        "hpBefore": 100,
+        "hpAfter": 90,
+        "attackSerial": 1
+      }
+    ],
+    "history": [
+      {
+        "tick": 0,
+        "seed": 30001,
+        "piece": "P30",
+        "preset": "pose-browser",
+        "paused": false,
+        "pointerLocked": false,
+        "coordinates": "+Y up / +X right / -Z forward",
+        "player": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 2.549999952316284
+          },
+          "yaw": 0,
+          "health": 100,
+          "stamina": 100,
+          "motion": "move",
+          "attackPhase": "idle",
+          "attackFrame": -1
+        },
+        "target": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "health": 100,
+          "motion": "idle"
+        },
+        "state": {
+          "tick": 1,
+          "elapsed": 0.016666666666666666,
+          "objectiveComplete": false,
+          "player": {
+            "position": {
+              "x": 0,
+              "z": 2.549999952316284
+            },
+            "yaw": 0,
+            "health": 100,
+            "maxHealth": 100,
+            "stamina": 100,
+            "maxStamina": 100,
+            "motion": "move",
+            "speed01": 0.62,
+            "attackElapsed": 0,
+            "attackFrame": -1,
+            "attackPhase": "idle",
+            "attackSerial": 0,
+            "attackHasHit": false,
+            "dodgeRemaining": 0,
+            "dodgeDirection": {
+              "x": 0,
+              "z": -1
+            },
+            "invulnerableRemaining": 0
+          },
+          "enemy": {
+            "position": {
+              "x": 0,
+              "z": 0
+            },
+            "yaw": 3.141592653589793,
+            "health": 100,
+            "maxHealth": 100,
+            "motion": "idle",
+            "hitStunRemaining": 0,
+            "idlePhase": 0.016666666666666666
+          }
+        }
+      },
+      {
+        "tick": 1,
+        "seed": 30001,
+        "piece": "P30",
+        "preset": "pose-browser",
+        "paused": false,
+        "pointerLocked": false,
+        "coordinates": "+Y up / +X right / -Z forward",
+        "player": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 2.5
+          },
+          "yaw": 0,
+          "health": 100,
+          "stamina": 100,
+          "motion": "move",
+          "attackPhase": "idle",
+          "attackFrame": -1
+        },
+        "target": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "health": 100,
+          "motion": "idle"
+        },
+        "state": {
+          "tick": 2,
+          "elapsed": 0.03333333333333333,
+          "objectiveComplete": false,
+          "player": {
+            "position": {
+              "x": 0,
+              "z": 2.5
+            },
+            "yaw": 0,
+            "health": 100,
+            "maxHealth": 100,
+            "stamina": 100,
+            "maxStamina": 100,
+            "motion": "move",
+            "speed01": 0.62,
+            "attackElapsed": 0,
+            "attackFrame": -1,
+            "attackPhase": "idle",
+            "attackSerial": 0,
+            "attackHasHit": false,
+            "dodgeRemaining": 0,
+            "dodgeDirection": {
+              "x": 0,
+              "z": -1
+            },
+            "invulnerableRemaining": 0
+          },
+          "enemy": {
+            "position": {
+              "x": 0,
+              "z": 0
+            },
+            "yaw": 3.141592653589793,
+            "health": 100,
+            "maxHealth": 100,
+            "motion": "idle",
+            "hitStunRemaining": 0,
+            "idlePhase": 0.03333333333333333
+          }
+        }
+      },
+      {
+        "tick": 2,
+        "seed": 30001,
+        "piece": "P30",
+        "preset": "pose-browser",
+        "paused": false,
+        "pointerLocked": false,
+        "coordinates": "+Y up / +X right / -Z forward",
+        "player": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 2.450000047683716
+          },
+          "yaw": 0,
+          "health": 100,
+          "stamina": 100,
+          "motion": "move",
+          "attackPhase": "idle",
+          "attackFrame": -1
+        },
+        "target": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "health": 100,
+          "motion": "idle"
+        },
+        "state": {
+          "tick": 3,
+          "elapsed": 0.05,
+          "objectiveComplete": false,
+          "player": {
+            "position": {
+              "x": 0,
+              "z": 2.450000047683716
+            },
+            "yaw": 0,
+            "health": 100,
+            "maxHealth": 100,
+            "stamina": 100,
+            "maxStamina": 100,
+            "motion": "move",
+            "speed01": 0.62,
+            "attackElapsed": 0,
+            "attackFrame": -1,
+            "attackPhase": "idle",
+            "attackSerial": 0,
+            "attackHasHit": false,
+            "dodgeRemaining": 0,
+            "dodgeDirection": {
+              "x": 0,
+              "z": -1
+            },
+            "invulnerableRemaining": 0
+          },
+          "enemy": {
+            "position": {
+              "x": 0,
+              "z": 0
+            },
+            "yaw": 3.141592653589793,
+            "health": 100,
+            "maxHealth": 100,
+            "motion": "idle",
+            "hitStunRemaining": 0,
+            "idlePhase": 0.05
+          }
+        }
+      },
+      {
+        "tick": 3,
+        "seed": 30001,
+        "piece": "P30",
+        "preset": "pose-browser",
+        "paused": false,
+        "pointerLocked": false,
+        "coordinates": "+Y up / +X right / -Z forward",
+        "player": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 2.4000000953674316
+          },
+          "yaw": 0,
+          "health": 100,
+          "stamina": 100,
+          "motion": "move",
+          "attackPhase": "idle",
+          "attackFrame": -1
+        },
+        "target": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "health": 100,
+          "motion": "idle"
+        },
+        "state": {
+          "tick": 4,
+          "elapsed": 0.06666666666666667,
+          "objectiveComplete": false,
+          "player": {
+            "position": {
+              "x": 0,
+              "z": 2.4000000953674316
+            },
+            "yaw": 0,
+            "health": 100,
+            "maxHealth": 100,
+            "stamina": 100,
+            "maxStamina": 100,
+            "motion": "move",
+            "speed01": 0.62,
+            "attackElapsed": 0,
+            "attackFrame": -1,
+            "attackPhase": "idle",
+            "attackSerial": 0,
+            "attackHasHit": false,
+            "dodgeRemaining": 0,
+            "dodgeDirection": {
+              "x": 0,
+              "z": -1
+            },
+            "invulnerableRemaining": 0
+          },
+          "enemy": {
+            "position": {
+              "x": 0,
+              "z": 0
+            },
+            "yaw": 3.141592653589793,
+            "health": 100,
+            "maxHealth": 100,
+            "motion": "idle",
+            "hitStunRemaining": 0,
+            "idlePhase": 0.06666666666666667
+          }
+        }
+      },
+      {
+        "tick": 4,
+        "seed": 30001,
+        "piece": "P30",
+        "preset": "pose-browser",
+        "paused": false,
+        "pointerLocked": false,
+        "coordinates": "+Y up / +X right / -Z forward",
+        "player": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 2.3500001430511475
+          },
+          "yaw": 0,
+          "health": 100,
+          "stamina": 100,
+          "motion": "move",
+          "attackPhase": "idle",
+          "attackFrame": -1
+        },
+        "target": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "health": 100,
+          "motion": "idle"
+        },
+        "state": {
+          "tick": 5,
+          "elapsed": 0.08333333333333333,
+          "objectiveComplete": false,
+          "player": {
+            "position": {
+              "x": 0,
+              "z": 2.3500001430511475
+            },
+            "yaw": 0,
+            "health": 100,
+            "maxHealth": 100,
+            "stamina": 100,
+            "maxStamina": 100,
+            "motion": "move",
+            "speed01": 0.62,
+            "attackElapsed": 0,
+            "attackFrame": -1,
+            "attackPhase": "idle",
+            "attackSerial": 0,
+            "attackHasHit": false,
+            "dodgeRemaining": 0,
+            "dodgeDirection": {
+              "x": 0,
+              "z": -1
+            },
+            "invulnerableRemaining": 0
+          },
+          "enemy": {
+            "position": {
+              "x": 0,
+              "z": 0
+            },
+            "yaw": 3.141592653589793,
+            "health": 100,
+            "maxHealth": 100,
+            "motion": "idle",
+            "hitStunRemaining": 0,
+            "idlePhase": 0.08333333333333333
+          }
+        }
+      },
+      {
+        "tick": 5,
+        "seed": 30001,
+        "piece": "P30",
+        "preset": "pose-browser",
+        "paused": false,
+        "pointerLocked": false,
+        "coordinates": "+Y up / +X right / -Z forward",
+        "player": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 2.3000001907348633
+          },
+          "yaw": 0,
+          "health": 100,
+          "stamina": 100,
+          "motion": "move",
+          "attackPhase": "idle",
+          "attackFrame": -1
+        },
+        "target": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "health": 100,
+          "motion": "idle"
+        },
+        "state": {
+          "tick": 6,
+          "elapsed": 0.09999999999999999,
+          "objectiveComplete": false,
+          "player": {
+            "position": {
+              "x": 0,
+              "z": 2.3000001907348633
+            },
+            "yaw": 0,
+            "health": 100,
+            "maxHealth": 100,
+            "stamina": 100,
+            "maxStamina": 100,
+            "motion": "move",
+            "speed01": 0.62,
+            "attackElapsed": 0,
+            "attackFrame": -1,
+            "attackPhase": "idle",
+            "attackSerial": 0,
+            "attackHasHit": false,
+            "dodgeRemaining": 0,
+            "dodgeDirection": {
+              "x": 0,
+              "z": -1
+            },
+            "invulnerableRemaining": 0
+          },
+          "enemy": {
+            "position": {
+              "x": 0,
+              "z": 0
+            },
+            "yaw": 3.141592653589793,
+            "health": 100,
+            "maxHealth": 100,
+            "motion": "idle",
+            "hitStunRemaining": 0,
+            "idlePhase": 0.09999999999999999
+          }
+        }
+      },
+      {
+        "tick": 6,
+        "seed": 30001,
+        "piece": "P30",
+        "preset": "pose-browser",
+        "paused": false,
+        "pointerLocked": false,
+        "coordinates": "+Y up / +X right / -Z forward",
+        "player": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 2.250000238418579
+          },
+          "yaw": 0,
+          "health": 100,
+          "stamina": 100,
+          "motion": "move",
+          "attackPhase": "idle",
+          "attackFrame": -1
+        },
+        "target": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "health": 100,
+          "motion": "idle"
+        },
+        "state": {
+          "tick": 7,
+          "elapsed": 0.11666666666666665,
+          "objectiveComplete": false,
+          "player": {
+            "position": {
+              "x": 0,
+              "z": 2.250000238418579
+            },
+            "yaw": 0,
+            "health": 100,
+            "maxHealth": 100,
+            "stamina": 100,
+            "maxStamina": 100,
+            "motion": "move",
+            "speed01": 0.62,
+            "attackElapsed": 0,
+            "attackFrame": -1,
+            "attackPhase": "idle",
+            "attackSerial": 0,
+            "attackHasHit": false,
+            "dodgeRemaining": 0,
+            "dodgeDirection": {
+              "x": 0,
+              "z": -1
+            },
+            "invulnerableRemaining": 0
+          },
+          "enemy": {
+            "position": {
+              "x": 0,
+              "z": 0
+            },
+            "yaw": 3.141592653589793,
+            "health": 100,
+            "maxHealth": 100,
+            "motion": "idle",
+            "hitStunRemaining": 0,
+            "idlePhase": 0.11666666666666665
+          }
+        }
+      },
+      {
+        "tick": 7,
+        "seed": 30001,
+        "piece": "P30",
+        "preset": "pose-browser",
+        "paused": false,
+        "pointerLocked": false,
+        "coordinates": "+Y up / +X right / -Z forward",
+        "player": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 2.200000286102295
+          },
+          "yaw": 0,
+          "health": 100,
+          "stamina": 100,
+          "motion": "move",
+          "attackPhase": "idle",
+          "attackFrame": -1
+        },
+        "target": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "health": 100,
+          "motion": "idle"
+        },
+        "state": {
+          "tick": 8,
+          "elapsed": 0.13333333333333333,
+          "objectiveComplete": false,
+          "player": {
+            "position": {
+              "x": 0,
+              "z": 2.200000286102295
+            },
+            "yaw": 0,
+            "health": 100,
+            "maxHealth": 100,
+            "stamina": 100,
+            "maxStamina": 100,
+            "motion": "move",
+            "speed01": 0.62,
+            "attackElapsed": 0,
+            "attackFrame": -1,
+            "attackPhase": "idle",
+            "attackSerial": 0,
+            "attackHasHit": false,
+            "dodgeRemaining": 0,
+            "dodgeDirection": {
+              "x": 0,
+              "z": -1
+            },
+            "invulnerableRemaining": 0
+          },
+          "enemy": {
+            "position": {
+              "x": 0,
+              "z": 0
+            },
+            "yaw": 3.141592653589793,
+            "health": 100,
+            "maxHealth": 100,
+            "motion": "idle",
+            "hitStunRemaining": 0,
+            "idlePhase": 0.13333333333333333
+          }
+        }
+      },
+      {
+        "tick": 8,
+        "seed": 30001,
+        "piece": "P30",
+        "preset": "pose-browser",
+        "paused": false,
+        "pointerLocked": false,
+        "coordinates": "+Y up / +X right / -Z forward",
+        "player": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 2.1500003337860107
+          },
+          "yaw": 0,
+          "health": 100,
+          "stamina": 100,
+          "motion": "move",
+          "attackPhase": "idle",
+          "attackFrame": -1
+        },
+        "target": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "health": 100,
+          "motion": "idle"
+        },
+        "state": {
+          "tick": 9,
+          "elapsed": 0.15,
+          "objectiveComplete": false,
+          "player": {
+            "position": {
+              "x": 0,
+              "z": 2.1500003337860107
+            },
+            "yaw": 0,
+            "health": 100,
+            "maxHealth": 100,
+            "stamina": 100,
+            "maxStamina": 100,
+            "motion": "move",
+            "speed01": 0.62,
+            "attackElapsed": 0,
+            "attackFrame": -1,
+            "attackPhase": "idle",
+            "attackSerial": 0,
+            "attackHasHit": false,
+            "dodgeRemaining": 0,
+            "dodgeDirection": {
+              "x": 0,
+              "z": -1
+            },
+            "invulnerableRemaining": 0
+          },
+          "enemy": {
+            "position": {
+              "x": 0,
+              "z": 0
+            },
+            "yaw": 3.141592653589793,
+            "health": 100,
+            "maxHealth": 100,
+            "motion": "idle",
+            "hitStunRemaining": 0,
+            "idlePhase": 0.15
+          }
+        }
+      },
+      {
+        "tick": 9,
+        "seed": 30001,
+        "piece": "P30",
+        "preset": "pose-browser",
+        "paused": false,
+        "pointerLocked": false,
+        "coordinates": "+Y up / +X right / -Z forward",
+        "player": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 2.1000003814697266
+          },
+          "yaw": 0,
+          "health": 100,
+          "stamina": 100,
+          "motion": "move",
+          "attackPhase": "idle",
+          "attackFrame": -1
+        },
+        "target": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "health": 100,
+          "motion": "idle"
+        },
+        "state": {
+          "tick": 10,
+          "elapsed": 0.16666666666666666,
+          "objectiveComplete": false,
+          "player": {
+            "position": {
+              "x": 0,
+              "z": 2.1000003814697266
+            },
+            "yaw": 0,
+            "health": 100,
+            "maxHealth": 100,
+            "stamina": 100,
+            "maxStamina": 100,
+            "motion": "move",
+            "speed01": 0.62,
+            "attackElapsed": 0,
+            "attackFrame": -1,
+            "attackPhase": "idle",
+            "attackSerial": 0,
+            "attackHasHit": false,
+            "dodgeRemaining": 0,
+            "dodgeDirection": {
+              "x": 0,
+              "z": -1
+            },
+            "invulnerableRemaining": 0
+          },
+          "enemy": {
+            "position": {
+              "x": 0,
+              "z": 0
+            },
+            "yaw": 3.141592653589793,
+            "health": 100,
+            "maxHealth": 100,
+            "motion": "idle",
+            "hitStunRemaining": 0,
+            "idlePhase": 0.16666666666666666
+          }
+        }
+      },
+      {
+        "tick": 10,
+        "seed": 30001,
+        "piece": "P30",
+        "preset": "pose-browser",
+        "paused": false,
+        "pointerLocked": false,
+        "coordinates": "+Y up / +X right / -Z forward",
+        "player": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 2.0500004291534424
+          },
+          "yaw": 0,
+          "health": 100,
+          "stamina": 100,
+          "motion": "move",
+          "attackPhase": "idle",
+          "attackFrame": -1
+        },
+        "target": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "health": 100,
+          "motion": "idle"
+        },
+        "state": {
+          "tick": 11,
+          "elapsed": 0.18333333333333332,
+          "objectiveComplete": false,
+          "player": {
+            "position": {
+              "x": 0,
+              "z": 2.0500004291534424
+            },
+            "yaw": 0,
+            "health": 100,
+            "maxHealth": 100,
+            "stamina": 100,
+            "maxStamina": 100,
+            "motion": "move",
+            "speed01": 0.62,
+            "attackElapsed": 0,
+            "attackFrame": -1,
+            "attackPhase": "idle",
+            "attackSerial": 0,
+            "attackHasHit": false,
+            "dodgeRemaining": 0,
+            "dodgeDirection": {
+              "x": 0,
+              "z": -1
+            },
+            "invulnerableRemaining": 0
+          },
+          "enemy": {
+            "position": {
+              "x": 0,
+              "z": 0
+            },
+            "yaw": 3.141592653589793,
+            "health": 100,
+            "maxHealth": 100,
+            "motion": "idle",
+            "hitStunRemaining": 0,
+            "idlePhase": 0.18333333333333332
+          }
+        }
+      },
+      {
+        "tick": 11,
+        "seed": 30001,
+        "piece": "P30",
+        "preset": "pose-browser",
+        "paused": false,
+        "pointerLocked": false,
+        "coordinates": "+Y up / +X right / -Z forward",
+        "player": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 2.000000476837158
+          },
+          "yaw": 0,
+          "health": 100,
+          "stamina": 100,
+          "motion": "move",
+          "attackPhase": "idle",
+          "attackFrame": -1
+        },
+        "target": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "health": 100,
+          "motion": "idle"
+        },
+        "state": {
+          "tick": 12,
+          "elapsed": 0.19999999999999998,
+          "objectiveComplete": false,
+          "player": {
+            "position": {
+              "x": 0,
+              "z": 2.000000476837158
+            },
+            "yaw": 0,
+            "health": 100,
+            "maxHealth": 100,
+            "stamina": 100,
+            "maxStamina": 100,
+            "motion": "move",
+            "speed01": 0.62,
+            "attackElapsed": 0,
+            "attackFrame": -1,
+            "attackPhase": "idle",
+            "attackSerial": 0,
+            "attackHasHit": false,
+            "dodgeRemaining": 0,
+            "dodgeDirection": {
+              "x": 0,
+              "z": -1
+            },
+            "invulnerableRemaining": 0
+          },
+          "enemy": {
+            "position": {
+              "x": 0,
+              "z": 0
+            },
+            "yaw": 3.141592653589793,
+            "health": 100,
+            "maxHealth": 100,
+            "motion": "idle",
+            "hitStunRemaining": 0,
+            "idlePhase": 0.19999999999999998
+          }
+        }
+      },
+      {
+        "tick": 12,
+        "seed": 30001,
+        "piece": "P30",
+        "preset": "pose-browser",
+        "paused": false,
+        "pointerLocked": false,
+        "coordinates": "+Y up / +X right / -Z forward",
+        "player": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 1.950000524520874
+          },
+          "yaw": 0,
+          "health": 100,
+          "stamina": 100,
+          "motion": "move",
+          "attackPhase": "idle",
+          "attackFrame": -1
+        },
+        "target": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "health": 100,
+          "motion": "idle"
+        },
+        "state": {
+          "tick": 13,
+          "elapsed": 0.21666666666666665,
+          "objectiveComplete": false,
+          "player": {
+            "position": {
+              "x": 0,
+              "z": 1.950000524520874
+            },
+            "yaw": 0,
+            "health": 100,
+            "maxHealth": 100,
+            "stamina": 100,
+            "maxStamina": 100,
+            "motion": "move",
+            "speed01": 0.62,
+            "attackElapsed": 0,
+            "attackFrame": -1,
+            "attackPhase": "idle",
+            "attackSerial": 0,
+            "attackHasHit": false,
+            "dodgeRemaining": 0,
+            "dodgeDirection": {
+              "x": 0,
+              "z": -1
+            },
+            "invulnerableRemaining": 0
+          },
+          "enemy": {
+            "position": {
+              "x": 0,
+              "z": 0
+            },
+            "yaw": 3.141592653589793,
+            "health": 100,
+            "maxHealth": 100,
+            "motion": "idle",
+            "hitStunRemaining": 0,
+            "idlePhase": 0.21666666666666665
+          }
+        }
+      },
+      {
+        "tick": 13,
+        "seed": 30001,
+        "piece": "P30",
+        "preset": "pose-browser",
+        "paused": false,
+        "pointerLocked": false,
+        "coordinates": "+Y up / +X right / -Z forward",
+        "player": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 1.9000005722045898
+          },
+          "yaw": 0,
+          "health": 100,
+          "stamina": 100,
+          "motion": "move",
+          "attackPhase": "idle",
+          "attackFrame": -1
+        },
+        "target": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "health": 100,
+          "motion": "idle"
+        },
+        "state": {
+          "tick": 14,
+          "elapsed": 0.2333333333333333,
+          "objectiveComplete": false,
+          "player": {
+            "position": {
+              "x": 0,
+              "z": 1.9000005722045898
+            },
+            "yaw": 0,
+            "health": 100,
+            "maxHealth": 100,
+            "stamina": 100,
+            "maxStamina": 100,
+            "motion": "move",
+            "speed01": 0.62,
+            "attackElapsed": 0,
+            "attackFrame": -1,
+            "attackPhase": "idle",
+            "attackSerial": 0,
+            "attackHasHit": false,
+            "dodgeRemaining": 0,
+            "dodgeDirection": {
+              "x": 0,
+              "z": -1
+            },
+            "invulnerableRemaining": 0
+          },
+          "enemy": {
+            "position": {
+              "x": 0,
+              "z": 0
+            },
+            "yaw": 3.141592653589793,
+            "health": 100,
+            "maxHealth": 100,
+            "motion": "idle",
+            "hitStunRemaining": 0,
+            "idlePhase": 0.2333333333333333
+          }
+        }
+      },
+      {
+        "tick": 14,
+        "seed": 30001,
+        "piece": "P30",
+        "preset": "pose-browser",
+        "paused": false,
+        "pointerLocked": false,
+        "coordinates": "+Y up / +X right / -Z forward",
+        "player": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 1.8500006198883057
+          },
+          "yaw": 0,
+          "health": 100,
+          "stamina": 100,
+          "motion": "move",
+          "attackPhase": "idle",
+          "attackFrame": -1
+        },
+        "target": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "health": 100,
+          "motion": "idle"
+        },
+        "state": {
+          "tick": 15,
+          "elapsed": 0.24999999999999997,
+          "objectiveComplete": false,
+          "player": {
+            "position": {
+              "x": 0,
+              "z": 1.8500006198883057
+            },
+            "yaw": 0,
+            "health": 100,
+            "maxHealth": 100,
+            "stamina": 100,
+            "maxStamina": 100,
+            "motion": "move",
+            "speed01": 0.62,
+            "attackElapsed": 0,
+            "attackFrame": -1,
+            "attackPhase": "idle",
+            "attackSerial": 0,
+            "attackHasHit": false,
+            "dodgeRemaining": 0,
+            "dodgeDirection": {
+              "x": 0,
+              "z": -1
+            },
+            "invulnerableRemaining": 0
+          },
+          "enemy": {
+            "position": {
+              "x": 0,
+              "z": 0
+            },
+            "yaw": 3.141592653589793,
+            "health": 100,
+            "maxHealth": 100,
+            "motion": "idle",
+            "hitStunRemaining": 0,
+            "idlePhase": 0.24999999999999997
+          }
+        }
+      },
+      {
+        "tick": 15,
+        "seed": 30001,
+        "piece": "P30",
+        "preset": "pose-browser",
+        "paused": false,
+        "pointerLocked": false,
+        "coordinates": "+Y up / +X right / -Z forward",
+        "player": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 1.8000006675720215
+          },
+          "yaw": 0,
+          "health": 100,
+          "stamina": 100,
+          "motion": "move",
+          "attackPhase": "idle",
+          "attackFrame": -1
+        },
+        "target": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "health": 100,
+          "motion": "idle"
+        },
+        "state": {
+          "tick": 16,
+          "elapsed": 0.26666666666666666,
+          "objectiveComplete": false,
+          "player": {
+            "position": {
+              "x": 0,
+              "z": 1.8000006675720215
+            },
+            "yaw": 0,
+            "health": 100,
+            "maxHealth": 100,
+            "stamina": 100,
+            "maxStamina": 100,
+            "motion": "move",
+            "speed01": 0.62,
+            "attackElapsed": 0,
+            "attackFrame": -1,
+            "attackPhase": "idle",
+            "attackSerial": 0,
+            "attackHasHit": false,
+            "dodgeRemaining": 0,
+            "dodgeDirection": {
+              "x": 0,
+              "z": -1
+            },
+            "invulnerableRemaining": 0
+          },
+          "enemy": {
+            "position": {
+              "x": 0,
+              "z": 0
+            },
+            "yaw": 3.141592653589793,
+            "health": 100,
+            "maxHealth": 100,
+            "motion": "idle",
+            "hitStunRemaining": 0,
+            "idlePhase": 0.26666666666666666
+          }
+        }
+      },
+      {
+        "tick": 16,
+        "seed": 30001,
+        "piece": "P30",
+        "preset": "pose-browser",
+        "paused": false,
+        "pointerLocked": false,
+        "coordinates": "+Y up / +X right / -Z forward",
+        "player": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 1.7500007152557373
+          },
+          "yaw": 0,
+          "health": 100,
+          "stamina": 100,
+          "motion": "move",
+          "attackPhase": "idle",
+          "attackFrame": -1
+        },
+        "target": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "health": 100,
+          "motion": "idle"
+        },
+        "state": {
+          "tick": 17,
+          "elapsed": 0.2833333333333333,
+          "objectiveComplete": false,
+          "player": {
+            "position": {
+              "x": 0,
+              "z": 1.7500007152557373
+            },
+            "yaw": 0,
+            "health": 100,
+            "maxHealth": 100,
+            "stamina": 100,
+            "maxStamina": 100,
+            "motion": "move",
+            "speed01": 0.62,
+            "attackElapsed": 0,
+            "attackFrame": -1,
+            "attackPhase": "idle",
+            "attackSerial": 0,
+            "attackHasHit": false,
+            "dodgeRemaining": 0,
+            "dodgeDirection": {
+              "x": 0,
+              "z": -1
+            },
+            "invulnerableRemaining": 0
+          },
+          "enemy": {
+            "position": {
+              "x": 0,
+              "z": 0
+            },
+            "yaw": 3.141592653589793,
+            "health": 100,
+            "maxHealth": 100,
+            "motion": "idle",
+            "hitStunRemaining": 0,
+            "idlePhase": 0.2833333333333333
+          }
+        }
+      },
+      {
+        "tick": 17,
+        "seed": 30001,
+        "piece": "P30",
+        "preset": "pose-browser",
+        "paused": false,
+        "pointerLocked": false,
+        "coordinates": "+Y up / +X right / -Z forward",
+        "player": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 1.7000007629394531
+          },
+          "yaw": 0,
+          "health": 100,
+          "stamina": 100,
+          "motion": "move",
+          "attackPhase": "idle",
+          "attackFrame": -1
+        },
+        "target": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "health": 100,
+          "motion": "idle"
+        },
+        "state": {
+          "tick": 18,
+          "elapsed": 0.3,
+          "objectiveComplete": false,
+          "player": {
+            "position": {
+              "x": 0,
+              "z": 1.7000007629394531
+            },
+            "yaw": 0,
+            "health": 100,
+            "maxHealth": 100,
+            "stamina": 100,
+            "maxStamina": 100,
+            "motion": "move",
+            "speed01": 0.62,
+            "attackElapsed": 0,
+            "attackFrame": -1,
+            "attackPhase": "idle",
+            "attackSerial": 0,
+            "attackHasHit": false,
+            "dodgeRemaining": 0,
+            "dodgeDirection": {
+              "x": 0,
+              "z": -1
+            },
+            "invulnerableRemaining": 0
+          },
+          "enemy": {
+            "position": {
+              "x": 0,
+              "z": 0
+            },
+            "yaw": 3.141592653589793,
+            "health": 100,
+            "maxHealth": 100,
+            "motion": "idle",
+            "hitStunRemaining": 0,
+            "idlePhase": 0.3
+          }
+        }
+      },
+      {
+        "tick": 18,
+        "seed": 30001,
+        "piece": "P30",
+        "preset": "pose-browser",
+        "paused": false,
+        "pointerLocked": false,
+        "coordinates": "+Y up / +X right / -Z forward",
+        "player": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 1.650000810623169
+          },
+          "yaw": 0,
+          "health": 100,
+          "stamina": 100,
+          "motion": "move",
+          "attackPhase": "idle",
+          "attackFrame": -1
+        },
+        "target": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "health": 100,
+          "motion": "idle"
+        },
+        "state": {
+          "tick": 19,
+          "elapsed": 0.31666666666666665,
+          "objectiveComplete": false,
+          "player": {
+            "position": {
+              "x": 0,
+              "z": 1.650000810623169
+            },
+            "yaw": 0,
+            "health": 100,
+            "maxHealth": 100,
+            "stamina": 100,
+            "maxStamina": 100,
+            "motion": "move",
+            "speed01": 0.62,
+            "attackElapsed": 0,
+            "attackFrame": -1,
+            "attackPhase": "idle",
+            "attackSerial": 0,
+            "attackHasHit": false,
+            "dodgeRemaining": 0,
+            "dodgeDirection": {
+              "x": 0,
+              "z": -1
+            },
+            "invulnerableRemaining": 0
+          },
+          "enemy": {
+            "position": {
+              "x": 0,
+              "z": 0
+            },
+            "yaw": 3.141592653589793,
+            "health": 100,
+            "maxHealth": 100,
+            "motion": "idle",
+            "hitStunRemaining": 0,
+            "idlePhase": 0.31666666666666665
+          }
+        }
+      },
+      {
+        "tick": 19,
+        "seed": 30001,
+        "piece": "P30",
+        "preset": "pose-browser",
+        "paused": false,
+        "pointerLocked": false,
+        "coordinates": "+Y up / +X right / -Z forward",
+        "player": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 1.6000008583068848
+          },
+          "yaw": 0,
+          "health": 100,
+          "stamina": 100,
+          "motion": "move",
+          "attackPhase": "idle",
+          "attackFrame": -1
+        },
+        "target": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "health": 100,
+          "motion": "idle"
+        },
+        "state": {
+          "tick": 20,
+          "elapsed": 0.3333333333333333,
+          "objectiveComplete": false,
+          "player": {
+            "position": {
+              "x": 0,
+              "z": 1.6000008583068848
+            },
+            "yaw": 0,
+            "health": 100,
+            "maxHealth": 100,
+            "stamina": 100,
+            "maxStamina": 100,
+            "motion": "move",
+            "speed01": 0.62,
+            "attackElapsed": 0,
+            "attackFrame": -1,
+            "attackPhase": "idle",
+            "attackSerial": 0,
+            "attackHasHit": false,
+            "dodgeRemaining": 0,
+            "dodgeDirection": {
+              "x": 0,
+              "z": -1
+            },
+            "invulnerableRemaining": 0
+          },
+          "enemy": {
+            "position": {
+              "x": 0,
+              "z": 0
+            },
+            "yaw": 3.141592653589793,
+            "health": 100,
+            "maxHealth": 100,
+            "motion": "idle",
+            "hitStunRemaining": 0,
+            "idlePhase": 0.3333333333333333
+          }
+        }
+      },
+      {
+        "tick": 20,
+        "seed": 30001,
+        "piece": "P30",
+        "preset": "pose-browser",
+        "paused": false,
+        "pointerLocked": false,
+        "coordinates": "+Y up / +X right / -Z forward",
+        "player": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 1.6000008583068848
+          },
+          "yaw": 0,
+          "health": 100,
+          "stamina": 100,
+          "motion": "idle",
+          "attackPhase": "idle",
+          "attackFrame": -1
+        },
+        "target": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "health": 100,
+          "motion": "idle"
+        },
+        "state": {
+          "tick": 21,
+          "elapsed": 0.35,
+          "objectiveComplete": false,
+          "player": {
+            "position": {
+              "x": 0,
+              "z": 1.6000008583068848
+            },
+            "yaw": 0,
+            "health": 100,
+            "maxHealth": 100,
+            "stamina": 100,
+            "maxStamina": 100,
+            "motion": "idle",
+            "speed01": 0,
+            "attackElapsed": 0,
+            "attackFrame": -1,
+            "attackPhase": "idle",
+            "attackSerial": 0,
+            "attackHasHit": false,
+            "dodgeRemaining": 0,
+            "dodgeDirection": {
+              "x": 0,
+              "z": -1
+            },
+            "invulnerableRemaining": 0
+          },
+          "enemy": {
+            "position": {
+              "x": 0,
+              "z": 0
+            },
+            "yaw": 3.141592653589793,
+            "health": 100,
+            "maxHealth": 100,
+            "motion": "idle",
+            "hitStunRemaining": 0,
+            "idlePhase": 0.35
+          }
+        }
+      },
+      {
+        "tick": 21,
+        "seed": 30001,
+        "piece": "P30",
+        "preset": "pose-browser",
+        "paused": false,
+        "pointerLocked": false,
+        "coordinates": "+Y up / +X right / -Z forward",
+        "player": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 1.6000008583068848
+          },
+          "yaw": 0,
+          "health": 100,
+          "stamina": 100,
+          "motion": "idle",
+          "attackPhase": "idle",
+          "attackFrame": -1
+        },
+        "target": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "health": 100,
+          "motion": "idle"
+        },
+        "state": {
+          "tick": 22,
+          "elapsed": 0.36666666666666664,
+          "objectiveComplete": false,
+          "player": {
+            "position": {
+              "x": 0,
+              "z": 1.6000008583068848
+            },
+            "yaw": 0,
+            "health": 100,
+            "maxHealth": 100,
+            "stamina": 100,
+            "maxStamina": 100,
+            "motion": "idle",
+            "speed01": 0,
+            "attackElapsed": 0,
+            "attackFrame": -1,
+            "attackPhase": "idle",
+            "attackSerial": 0,
+            "attackHasHit": false,
+            "dodgeRemaining": 0,
+            "dodgeDirection": {
+              "x": 0,
+              "z": -1
+            },
+            "invulnerableRemaining": 0
+          },
+          "enemy": {
+            "position": {
+              "x": 0,
+              "z": 0
+            },
+            "yaw": 3.141592653589793,
+            "health": 100,
+            "maxHealth": 100,
+            "motion": "idle",
+            "hitStunRemaining": 0,
+            "idlePhase": 0.36666666666666664
+          }
+        }
+      },
+      {
+        "tick": 22,
+        "seed": 30001,
+        "piece": "P30",
+        "preset": "pose-browser",
+        "paused": false,
+        "pointerLocked": false,
+        "coordinates": "+Y up / +X right / -Z forward",
+        "player": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 1.6000008583068848
+          },
+          "yaw": 0,
+          "health": 100,
+          "stamina": 100,
+          "motion": "idle",
+          "attackPhase": "idle",
+          "attackFrame": -1
+        },
+        "target": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "health": 100,
+          "motion": "idle"
+        },
+        "state": {
+          "tick": 23,
+          "elapsed": 0.3833333333333333,
+          "objectiveComplete": false,
+          "player": {
+            "position": {
+              "x": 0,
+              "z": 1.6000008583068848
+            },
+            "yaw": 0,
+            "health": 100,
+            "maxHealth": 100,
+            "stamina": 100,
+            "maxStamina": 100,
+            "motion": "idle",
+            "speed01": 0,
+            "attackElapsed": 0,
+            "attackFrame": -1,
+            "attackPhase": "idle",
+            "attackSerial": 0,
+            "attackHasHit": false,
+            "dodgeRemaining": 0,
+            "dodgeDirection": {
+              "x": 0,
+              "z": -1
+            },
+            "invulnerableRemaining": 0
+          },
+          "enemy": {
+            "position": {
+              "x": 0,
+              "z": 0
+            },
+            "yaw": 3.141592653589793,
+            "health": 100,
+            "maxHealth": 100,
+            "motion": "idle",
+            "hitStunRemaining": 0,
+            "idlePhase": 0.3833333333333333
+          }
+        }
+      },
+      {
+        "tick": 23,
+        "seed": 30001,
+        "piece": "P30",
+        "preset": "pose-browser",
+        "paused": false,
+        "pointerLocked": false,
+        "coordinates": "+Y up / +X right / -Z forward",
+        "player": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 1.6000008583068848
+          },
+          "yaw": 0,
+          "health": 100,
+          "stamina": 100,
+          "motion": "idle",
+          "attackPhase": "idle",
+          "attackFrame": -1
+        },
+        "target": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "health": 100,
+          "motion": "idle"
+        },
+        "state": {
+          "tick": 24,
+          "elapsed": 0.39999999999999997,
+          "objectiveComplete": false,
+          "player": {
+            "position": {
+              "x": 0,
+              "z": 1.6000008583068848
+            },
+            "yaw": 0,
+            "health": 100,
+            "maxHealth": 100,
+            "stamina": 100,
+            "maxStamina": 100,
+            "motion": "idle",
+            "speed01": 0,
+            "attackElapsed": 0,
+            "attackFrame": -1,
+            "attackPhase": "idle",
+            "attackSerial": 0,
+            "attackHasHit": false,
+            "dodgeRemaining": 0,
+            "dodgeDirection": {
+              "x": 0,
+              "z": -1
+            },
+            "invulnerableRemaining": 0
+          },
+          "enemy": {
+            "position": {
+              "x": 0,
+              "z": 0
+            },
+            "yaw": 3.141592653589793,
+            "health": 100,
+            "maxHealth": 100,
+            "motion": "idle",
+            "hitStunRemaining": 0,
+            "idlePhase": 0.39999999999999997
+          }
+        }
+      },
+      {
+        "tick": 24,
+        "seed": 30001,
+        "piece": "P30",
+        "preset": "pose-browser",
+        "paused": false,
+        "pointerLocked": false,
+        "coordinates": "+Y up / +X right / -Z forward",
+        "player": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 1.6000008583068848
+          },
+          "yaw": 0,
+          "health": 100,
+          "stamina": 100,
+          "motion": "attack",
+          "attackPhase": "startup",
+          "attackFrame": 1
+        },
+        "target": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "health": 100,
+          "motion": "idle"
+        },
+        "state": {
+          "tick": 25,
+          "elapsed": 0.41666666666666663,
+          "objectiveComplete": false,
+          "player": {
+            "position": {
+              "x": 0,
+              "z": 1.6000008583068848
+            },
+            "yaw": 0,
+            "health": 100,
+            "maxHealth": 100,
+            "stamina": 100,
+            "maxStamina": 100,
+            "motion": "attack",
+            "speed01": 0,
+            "attackElapsed": 0.016666666666666666,
+            "attackFrame": 1,
+            "attackPhase": "startup",
+            "attackSerial": 1,
+            "attackHasHit": false,
+            "dodgeRemaining": 0,
+            "dodgeDirection": {
+              "x": 0,
+              "z": -1
+            },
+            "invulnerableRemaining": 0
+          },
+          "enemy": {
+            "position": {
+              "x": 0,
+              "z": 0
+            },
+            "yaw": 3.141592653589793,
+            "health": 100,
+            "maxHealth": 100,
+            "motion": "idle",
+            "hitStunRemaining": 0,
+            "idlePhase": 0.41666666666666663
+          }
+        }
+      },
+      {
+        "tick": 25,
+        "seed": 30001,
+        "piece": "P30",
+        "preset": "pose-browser",
+        "paused": false,
+        "pointerLocked": false,
+        "coordinates": "+Y up / +X right / -Z forward",
+        "player": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 1.6000008583068848
+          },
+          "yaw": 0,
+          "health": 100,
+          "stamina": 100,
+          "motion": "attack",
+          "attackPhase": "startup",
+          "attackFrame": 2
+        },
+        "target": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "health": 100,
+          "motion": "idle"
+        },
+        "state": {
+          "tick": 26,
+          "elapsed": 0.4333333333333333,
+          "objectiveComplete": false,
+          "player": {
+            "position": {
+              "x": 0,
+              "z": 1.6000008583068848
+            },
+            "yaw": 0,
+            "health": 100,
+            "maxHealth": 100,
+            "stamina": 100,
+            "maxStamina": 100,
+            "motion": "attack",
+            "speed01": 0,
+            "attackElapsed": 0.03333333333333333,
+            "attackFrame": 2,
+            "attackPhase": "startup",
+            "attackSerial": 1,
+            "attackHasHit": false,
+            "dodgeRemaining": 0,
+            "dodgeDirection": {
+              "x": 0,
+              "z": -1
+            },
+            "invulnerableRemaining": 0
+          },
+          "enemy": {
+            "position": {
+              "x": 0,
+              "z": 0
+            },
+            "yaw": 3.141592653589793,
+            "health": 100,
+            "maxHealth": 100,
+            "motion": "idle",
+            "hitStunRemaining": 0,
+            "idlePhase": 0.4333333333333333
+          }
+        }
+      },
+      {
+        "tick": 26,
+        "seed": 30001,
+        "piece": "P30",
+        "preset": "pose-browser",
+        "paused": false,
+        "pointerLocked": false,
+        "coordinates": "+Y up / +X right / -Z forward",
+        "player": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 1.6000008583068848
+          },
+          "yaw": 0,
+          "health": 100,
+          "stamina": 100,
+          "motion": "attack",
+          "attackPhase": "startup",
+          "attackFrame": 3
+        },
+        "target": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "health": 100,
+          "motion": "idle"
+        },
+        "state": {
+          "tick": 27,
+          "elapsed": 0.44999999999999996,
+          "objectiveComplete": false,
+          "player": {
+            "position": {
+              "x": 0,
+              "z": 1.6000008583068848
+            },
+            "yaw": 0,
+            "health": 100,
+            "maxHealth": 100,
+            "stamina": 100,
+            "maxStamina": 100,
+            "motion": "attack",
+            "speed01": 0,
+            "attackElapsed": 0.05,
+            "attackFrame": 3,
+            "attackPhase": "startup",
+            "attackSerial": 1,
+            "attackHasHit": false,
+            "dodgeRemaining": 0,
+            "dodgeDirection": {
+              "x": 0,
+              "z": -1
+            },
+            "invulnerableRemaining": 0
+          },
+          "enemy": {
+            "position": {
+              "x": 0,
+              "z": 0
+            },
+            "yaw": 3.141592653589793,
+            "health": 100,
+            "maxHealth": 100,
+            "motion": "idle",
+            "hitStunRemaining": 0,
+            "idlePhase": 0.44999999999999996
+          }
+        }
+      },
+      {
+        "tick": 27,
+        "seed": 30001,
+        "piece": "P30",
+        "preset": "pose-browser",
+        "paused": false,
+        "pointerLocked": false,
+        "coordinates": "+Y up / +X right / -Z forward",
+        "player": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 1.6000008583068848
+          },
+          "yaw": 0,
+          "health": 100,
+          "stamina": 100,
+          "motion": "attack",
+          "attackPhase": "startup",
+          "attackFrame": 4
+        },
+        "target": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "health": 100,
+          "motion": "idle"
+        },
+        "state": {
+          "tick": 28,
+          "elapsed": 0.4666666666666666,
+          "objectiveComplete": false,
+          "player": {
+            "position": {
+              "x": 0,
+              "z": 1.6000008583068848
+            },
+            "yaw": 0,
+            "health": 100,
+            "maxHealth": 100,
+            "stamina": 100,
+            "maxStamina": 100,
+            "motion": "attack",
+            "speed01": 0,
+            "attackElapsed": 0.06666666666666667,
+            "attackFrame": 4,
+            "attackPhase": "startup",
+            "attackSerial": 1,
+            "attackHasHit": false,
+            "dodgeRemaining": 0,
+            "dodgeDirection": {
+              "x": 0,
+              "z": -1
+            },
+            "invulnerableRemaining": 0
+          },
+          "enemy": {
+            "position": {
+              "x": 0,
+              "z": 0
+            },
+            "yaw": 3.141592653589793,
+            "health": 100,
+            "maxHealth": 100,
+            "motion": "idle",
+            "hitStunRemaining": 0,
+            "idlePhase": 0.4666666666666666
+          }
+        }
+      },
+      {
+        "tick": 28,
+        "seed": 30001,
+        "piece": "P30",
+        "preset": "pose-browser",
+        "paused": false,
+        "pointerLocked": false,
+        "coordinates": "+Y up / +X right / -Z forward",
+        "player": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 1.6000008583068848
+          },
+          "yaw": 0,
+          "health": 100,
+          "stamina": 100,
+          "motion": "attack",
+          "attackPhase": "startup",
+          "attackFrame": 5
+        },
+        "target": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "health": 100,
+          "motion": "idle"
+        },
+        "state": {
+          "tick": 29,
+          "elapsed": 0.4833333333333333,
+          "objectiveComplete": false,
+          "player": {
+            "position": {
+              "x": 0,
+              "z": 1.6000008583068848
+            },
+            "yaw": 0,
+            "health": 100,
+            "maxHealth": 100,
+            "stamina": 100,
+            "maxStamina": 100,
+            "motion": "attack",
+            "speed01": 0,
+            "attackElapsed": 0.08333333333333333,
+            "attackFrame": 5,
+            "attackPhase": "startup",
+            "attackSerial": 1,
+            "attackHasHit": false,
+            "dodgeRemaining": 0,
+            "dodgeDirection": {
+              "x": 0,
+              "z": -1
+            },
+            "invulnerableRemaining": 0
+          },
+          "enemy": {
+            "position": {
+              "x": 0,
+              "z": 0
+            },
+            "yaw": 3.141592653589793,
+            "health": 100,
+            "maxHealth": 100,
+            "motion": "idle",
+            "hitStunRemaining": 0,
+            "idlePhase": 0.4833333333333333
+          }
+        }
+      },
+      {
+        "tick": 29,
+        "seed": 30001,
+        "piece": "P30",
+        "preset": "pose-browser",
+        "paused": false,
+        "pointerLocked": false,
+        "coordinates": "+Y up / +X right / -Z forward",
+        "player": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 1.6000008583068848
+          },
+          "yaw": 0,
+          "health": 100,
+          "stamina": 100,
+          "motion": "attack",
+          "attackPhase": "startup",
+          "attackFrame": 6
+        },
+        "target": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "health": 100,
+          "motion": "idle"
+        },
+        "state": {
+          "tick": 30,
+          "elapsed": 0.49999999999999994,
+          "objectiveComplete": false,
+          "player": {
+            "position": {
+              "x": 0,
+              "z": 1.6000008583068848
+            },
+            "yaw": 0,
+            "health": 100,
+            "maxHealth": 100,
+            "stamina": 100,
+            "maxStamina": 100,
+            "motion": "attack",
+            "speed01": 0,
+            "attackElapsed": 0.1,
+            "attackFrame": 6,
+            "attackPhase": "startup",
+            "attackSerial": 1,
+            "attackHasHit": false,
+            "dodgeRemaining": 0,
+            "dodgeDirection": {
+              "x": 0,
+              "z": -1
+            },
+            "invulnerableRemaining": 0
+          },
+          "enemy": {
+            "position": {
+              "x": 0,
+              "z": 0
+            },
+            "yaw": 3.141592653589793,
+            "health": 100,
+            "maxHealth": 100,
+            "motion": "idle",
+            "hitStunRemaining": 0,
+            "idlePhase": 0.49999999999999994
+          }
+        }
+      },
+      {
+        "tick": 30,
+        "seed": 30001,
+        "piece": "P30",
+        "preset": "pose-browser",
+        "paused": false,
+        "pointerLocked": false,
+        "coordinates": "+Y up / +X right / -Z forward",
+        "player": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 1.6000008583068848
+          },
+          "yaw": 0,
+          "health": 100,
+          "stamina": 100,
+          "motion": "attack",
+          "attackPhase": "startup",
+          "attackFrame": 7
+        },
+        "target": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "health": 100,
+          "motion": "idle"
+        },
+        "state": {
+          "tick": 31,
+          "elapsed": 0.5166666666666666,
+          "objectiveComplete": false,
+          "player": {
+            "position": {
+              "x": 0,
+              "z": 1.6000008583068848
+            },
+            "yaw": 0,
+            "health": 100,
+            "maxHealth": 100,
+            "stamina": 100,
+            "maxStamina": 100,
+            "motion": "attack",
+            "speed01": 0,
+            "attackElapsed": 0.11666666666666667,
+            "attackFrame": 7,
+            "attackPhase": "startup",
+            "attackSerial": 1,
+            "attackHasHit": false,
+            "dodgeRemaining": 0,
+            "dodgeDirection": {
+              "x": 0,
+              "z": -1
+            },
+            "invulnerableRemaining": 0
+          },
+          "enemy": {
+            "position": {
+              "x": 0,
+              "z": 0
+            },
+            "yaw": 3.141592653589793,
+            "health": 100,
+            "maxHealth": 100,
+            "motion": "idle",
+            "hitStunRemaining": 0,
+            "idlePhase": 0.5166666666666666
+          }
+        }
+      },
+      {
+        "tick": 31,
+        "seed": 30001,
+        "piece": "P30",
+        "preset": "pose-browser",
+        "paused": false,
+        "pointerLocked": false,
+        "coordinates": "+Y up / +X right / -Z forward",
+        "player": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 1.6000008583068848
+          },
+          "yaw": 0,
+          "health": 100,
+          "stamina": 100,
+          "motion": "attack",
+          "attackPhase": "startup",
+          "attackFrame": 8
+        },
+        "target": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "health": 100,
+          "motion": "idle"
+        },
+        "state": {
+          "tick": 32,
+          "elapsed": 0.5333333333333333,
+          "objectiveComplete": false,
+          "player": {
+            "position": {
+              "x": 0,
+              "z": 1.6000008583068848
+            },
+            "yaw": 0,
+            "health": 100,
+            "maxHealth": 100,
+            "stamina": 100,
+            "maxStamina": 100,
+            "motion": "attack",
+            "speed01": 0,
+            "attackElapsed": 0.13333333333333333,
+            "attackFrame": 8,
+            "attackPhase": "startup",
+            "attackSerial": 1,
+            "attackHasHit": false,
+            "dodgeRemaining": 0,
+            "dodgeDirection": {
+              "x": 0,
+              "z": -1
+            },
+            "invulnerableRemaining": 0
+          },
+          "enemy": {
+            "position": {
+              "x": 0,
+              "z": 0
+            },
+            "yaw": 3.141592653589793,
+            "health": 100,
+            "maxHealth": 100,
+            "motion": "idle",
+            "hitStunRemaining": 0,
+            "idlePhase": 0.5333333333333333
+          }
+        }
+      },
+      {
+        "tick": 32,
+        "seed": 30001,
+        "piece": "P30",
+        "preset": "pose-browser",
+        "paused": false,
+        "pointerLocked": false,
+        "coordinates": "+Y up / +X right / -Z forward",
+        "player": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 1.6000008583068848
+          },
+          "yaw": 0,
+          "health": 100,
+          "stamina": 100,
+          "motion": "attack",
+          "attackPhase": "active",
+          "attackFrame": 9
+        },
+        "target": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "health": 100,
+          "motion": "idle"
+        },
+        "state": {
+          "tick": 33,
+          "elapsed": 0.55,
+          "objectiveComplete": false,
+          "player": {
+            "position": {
+              "x": 0,
+              "z": 1.6000008583068848
+            },
+            "yaw": 0,
+            "health": 100,
+            "maxHealth": 100,
+            "stamina": 100,
+            "maxStamina": 100,
+            "motion": "attack",
+            "speed01": 0,
+            "attackElapsed": 0.15,
+            "attackFrame": 9,
+            "attackPhase": "active",
+            "attackSerial": 1,
+            "attackHasHit": false,
+            "dodgeRemaining": 0,
+            "dodgeDirection": {
+              "x": 0,
+              "z": -1
+            },
+            "invulnerableRemaining": 0
+          },
+          "enemy": {
+            "position": {
+              "x": 0,
+              "z": 0
+            },
+            "yaw": 3.141592653589793,
+            "health": 100,
+            "maxHealth": 100,
+            "motion": "idle",
+            "hitStunRemaining": 0,
+            "idlePhase": 0.55
+          }
+        }
+      },
+      {
+        "tick": 33,
+        "seed": 30001,
+        "piece": "P30",
+        "preset": "pose-browser",
+        "paused": false,
+        "pointerLocked": false,
+        "coordinates": "+Y up / +X right / -Z forward",
+        "player": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 1.6000008583068848
+          },
+          "yaw": 0,
+          "health": 100,
+          "stamina": 100,
+          "motion": "attack",
+          "attackPhase": "active",
+          "attackFrame": 10
+        },
+        "target": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "health": 90,
+          "motion": "hit"
+        },
+        "state": {
+          "tick": 34,
+          "elapsed": 0.5666666666666668,
+          "objectiveComplete": false,
+          "player": {
+            "position": {
+              "x": 0,
+              "z": 1.6000008583068848
+            },
+            "yaw": 0,
+            "health": 100,
+            "maxHealth": 100,
+            "stamina": 100,
+            "maxStamina": 100,
+            "motion": "attack",
+            "speed01": 0,
+            "attackElapsed": 0.16666666666666666,
+            "attackFrame": 10,
+            "attackPhase": "active",
+            "attackSerial": 1,
+            "attackHasHit": true,
+            "dodgeRemaining": 0,
+            "dodgeDirection": {
+              "x": 0,
+              "z": -1
+            },
+            "invulnerableRemaining": 0
+          },
+          "enemy": {
+            "position": {
+              "x": 0,
+              "z": 0
+            },
+            "yaw": 3.141592653589793,
+            "health": 90,
+            "maxHealth": 100,
+            "motion": "hit",
+            "hitStunRemaining": 0.28,
+            "idlePhase": 0.5666666666666668
+          }
+        }
+      },
+      {
+        "tick": 34,
+        "seed": 30001,
+        "piece": "P30",
+        "preset": "pose-browser",
+        "paused": false,
+        "pointerLocked": false,
+        "coordinates": "+Y up / +X right / -Z forward",
+        "player": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 1.6000008583068848
+          },
+          "yaw": 0,
+          "health": 100,
+          "stamina": 100,
+          "motion": "attack",
+          "attackPhase": "active",
+          "attackFrame": 11
+        },
+        "target": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "health": 90,
+          "motion": "hit"
+        },
+        "state": {
+          "tick": 35,
+          "elapsed": 0.5833333333333335,
+          "objectiveComplete": false,
+          "player": {
+            "position": {
+              "x": 0,
+              "z": 1.6000008583068848
+            },
+            "yaw": 0,
+            "health": 100,
+            "maxHealth": 100,
+            "stamina": 100,
+            "maxStamina": 100,
+            "motion": "attack",
+            "speed01": 0,
+            "attackElapsed": 0.18333333333333332,
+            "attackFrame": 11,
+            "attackPhase": "active",
+            "attackSerial": 1,
+            "attackHasHit": true,
+            "dodgeRemaining": 0,
+            "dodgeDirection": {
+              "x": 0,
+              "z": -1
+            },
+            "invulnerableRemaining": 0
+          },
+          "enemy": {
+            "position": {
+              "x": 0,
+              "z": 0
+            },
+            "yaw": 3.141592653589793,
+            "health": 90,
+            "maxHealth": 100,
+            "motion": "hit",
+            "hitStunRemaining": 0.26333333333333336,
+            "idlePhase": 0.5833333333333335
+          }
+        }
+      },
+      {
+        "tick": 35,
+        "seed": 30001,
+        "piece": "P30",
+        "preset": "pose-browser",
+        "paused": false,
+        "pointerLocked": false,
+        "coordinates": "+Y up / +X right / -Z forward",
+        "player": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 1.6000008583068848
+          },
+          "yaw": 0,
+          "health": 100,
+          "stamina": 100,
+          "motion": "attack",
+          "attackPhase": "active",
+          "attackFrame": 12
+        },
+        "target": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "health": 90,
+          "motion": "hit"
+        },
+        "state": {
+          "tick": 36,
+          "elapsed": 0.6000000000000002,
+          "objectiveComplete": false,
+          "player": {
+            "position": {
+              "x": 0,
+              "z": 1.6000008583068848
+            },
+            "yaw": 0,
+            "health": 100,
+            "maxHealth": 100,
+            "stamina": 100,
+            "maxStamina": 100,
+            "motion": "attack",
+            "speed01": 0,
+            "attackElapsed": 0.2,
+            "attackFrame": 12,
+            "attackPhase": "active",
+            "attackSerial": 1,
+            "attackHasHit": true,
+            "dodgeRemaining": 0,
+            "dodgeDirection": {
+              "x": 0,
+              "z": -1
+            },
+            "invulnerableRemaining": 0
+          },
+          "enemy": {
+            "position": {
+              "x": 0,
+              "z": 0
+            },
+            "yaw": 3.141592653589793,
+            "health": 90,
+            "maxHealth": 100,
+            "motion": "hit",
+            "hitStunRemaining": 0.2466666666666667,
+            "idlePhase": 0.6000000000000002
+          }
+        }
+      },
+      {
+        "tick": 36,
+        "seed": 30001,
+        "piece": "P30",
+        "preset": "pose-browser",
+        "paused": false,
+        "pointerLocked": false,
+        "coordinates": "+Y up / +X right / -Z forward",
+        "player": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 1.6000008583068848
+          },
+          "yaw": 0,
+          "health": 100,
+          "stamina": 100,
+          "motion": "attack",
+          "attackPhase": "recovery",
+          "attackFrame": 13
+        },
+        "target": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "health": 90,
+          "motion": "hit"
+        },
+        "state": {
+          "tick": 37,
+          "elapsed": 0.6166666666666669,
+          "objectiveComplete": false,
+          "player": {
+            "position": {
+              "x": 0,
+              "z": 1.6000008583068848
+            },
+            "yaw": 0,
+            "health": 100,
+            "maxHealth": 100,
+            "stamina": 100,
+            "maxStamina": 100,
+            "motion": "attack",
+            "speed01": 0,
+            "attackElapsed": 0.21666666666666667,
+            "attackFrame": 13,
+            "attackPhase": "recovery",
+            "attackSerial": 1,
+            "attackHasHit": true,
+            "dodgeRemaining": 0,
+            "dodgeDirection": {
+              "x": 0,
+              "z": -1
+            },
+            "invulnerableRemaining": 0
+          },
+          "enemy": {
+            "position": {
+              "x": 0,
+              "z": 0
+            },
+            "yaw": 3.141592653589793,
+            "health": 90,
+            "maxHealth": 100,
+            "motion": "hit",
+            "hitStunRemaining": 0.23000000000000004,
+            "idlePhase": 0.6166666666666669
+          }
+        }
+      },
+      {
+        "tick": 37,
+        "seed": 30001,
+        "piece": "P30",
+        "preset": "pose-browser",
+        "paused": false,
+        "pointerLocked": false,
+        "coordinates": "+Y up / +X right / -Z forward",
+        "player": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 1.6000008583068848
+          },
+          "yaw": 0,
+          "health": 100,
+          "stamina": 100,
+          "motion": "attack",
+          "attackPhase": "recovery",
+          "attackFrame": 14
+        },
+        "target": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "health": 90,
+          "motion": "hit"
+        },
+        "state": {
+          "tick": 38,
+          "elapsed": 0.6333333333333336,
+          "objectiveComplete": false,
+          "player": {
+            "position": {
+              "x": 0,
+              "z": 1.6000008583068848
+            },
+            "yaw": 0,
+            "health": 100,
+            "maxHealth": 100,
+            "stamina": 100,
+            "maxStamina": 100,
+            "motion": "attack",
+            "speed01": 0,
+            "attackElapsed": 0.23333333333333334,
+            "attackFrame": 14,
+            "attackPhase": "recovery",
+            "attackSerial": 1,
+            "attackHasHit": true,
+            "dodgeRemaining": 0,
+            "dodgeDirection": {
+              "x": 0,
+              "z": -1
+            },
+            "invulnerableRemaining": 0
+          },
+          "enemy": {
+            "position": {
+              "x": 0,
+              "z": 0
+            },
+            "yaw": 3.141592653589793,
+            "health": 90,
+            "maxHealth": 100,
+            "motion": "hit",
+            "hitStunRemaining": 0.21333333333333337,
+            "idlePhase": 0.6333333333333336
+          }
+        }
+      },
+      {
+        "tick": 38,
+        "seed": 30001,
+        "piece": "P30",
+        "preset": "pose-browser",
+        "paused": false,
+        "pointerLocked": false,
+        "coordinates": "+Y up / +X right / -Z forward",
+        "player": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 1.6000008583068848
+          },
+          "yaw": 0,
+          "health": 100,
+          "stamina": 100,
+          "motion": "attack",
+          "attackPhase": "recovery",
+          "attackFrame": 15
+        },
+        "target": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "health": 90,
+          "motion": "hit"
+        },
+        "state": {
+          "tick": 39,
+          "elapsed": 0.6500000000000004,
+          "objectiveComplete": false,
+          "player": {
+            "position": {
+              "x": 0,
+              "z": 1.6000008583068848
+            },
+            "yaw": 0,
+            "health": 100,
+            "maxHealth": 100,
+            "stamina": 100,
+            "maxStamina": 100,
+            "motion": "attack",
+            "speed01": 0,
+            "attackElapsed": 0.25,
+            "attackFrame": 15,
+            "attackPhase": "recovery",
+            "attackSerial": 1,
+            "attackHasHit": true,
+            "dodgeRemaining": 0,
+            "dodgeDirection": {
+              "x": 0,
+              "z": -1
+            },
+            "invulnerableRemaining": 0
+          },
+          "enemy": {
+            "position": {
+              "x": 0,
+              "z": 0
+            },
+            "yaw": 3.141592653589793,
+            "health": 90,
+            "maxHealth": 100,
+            "motion": "hit",
+            "hitStunRemaining": 0.1966666666666667,
+            "idlePhase": 0.6500000000000004
+          }
+        }
+      },
+      {
+        "tick": 39,
+        "seed": 30001,
+        "piece": "P30",
+        "preset": "pose-browser",
+        "paused": false,
+        "pointerLocked": false,
+        "coordinates": "+Y up / +X right / -Z forward",
+        "player": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 1.6000008583068848
+          },
+          "yaw": 0,
+          "health": 100,
+          "stamina": 100,
+          "motion": "attack",
+          "attackPhase": "recovery",
+          "attackFrame": 16
+        },
+        "target": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "health": 90,
+          "motion": "hit"
+        },
+        "state": {
+          "tick": 40,
+          "elapsed": 0.6666666666666671,
+          "objectiveComplete": false,
+          "player": {
+            "position": {
+              "x": 0,
+              "z": 1.6000008583068848
+            },
+            "yaw": 0,
+            "health": 100,
+            "maxHealth": 100,
+            "stamina": 100,
+            "maxStamina": 100,
+            "motion": "attack",
+            "speed01": 0,
+            "attackElapsed": 0.26666666666666666,
+            "attackFrame": 16,
+            "attackPhase": "recovery",
+            "attackSerial": 1,
+            "attackHasHit": true,
+            "dodgeRemaining": 0,
+            "dodgeDirection": {
+              "x": 0,
+              "z": -1
+            },
+            "invulnerableRemaining": 0
+          },
+          "enemy": {
+            "position": {
+              "x": 0,
+              "z": 0
+            },
+            "yaw": 3.141592653589793,
+            "health": 90,
+            "maxHealth": 100,
+            "motion": "hit",
+            "hitStunRemaining": 0.18000000000000005,
+            "idlePhase": 0.6666666666666671
+          }
+        }
+      },
+      {
+        "tick": 40,
+        "seed": 30001,
+        "piece": "P30",
+        "preset": "pose-browser",
+        "paused": false,
+        "pointerLocked": false,
+        "coordinates": "+Y up / +X right / -Z forward",
+        "player": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 1.6000008583068848
+          },
+          "yaw": 0,
+          "health": 100,
+          "stamina": 100,
+          "motion": "attack",
+          "attackPhase": "recovery",
+          "attackFrame": 17
+        },
+        "target": {
+          "position": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          },
+          "health": 90,
+          "motion": "hit"
+        },
+        "state": {
+          "tick": 41,
+          "elapsed": 0.6833333333333338,
+          "objectiveComplete": false,
+          "player": {
+            "position": {
+              "x": 0,
+              "z": 1.6000008583068848
+            },
+            "yaw": 0,
+            "health": 100,
+            "maxHealth": 100,
+            "stamina": 100,
+            "maxStamina": 100,
+            "motion": "attack",
+            "speed01": 0,
+            "attackElapsed": 0.2833333333333333,
+            "attackFrame": 17,
+            "attackPhase": "recovery",
+            "attackSerial": 1,
+            "attackHasHit": true,
+            "dodgeRemaining": 0,
+            "dodgeDirection": {
+              "x": 0,
+              "z": -1
+            },
+            "invulnerableRemaining": 0
+          },
+          "enemy": {
+            "position": {
+              "x": 0,
+              "z": 0
+            },
+            "yaw": 3.141592653589793,
+            "health": 90,
+            "maxHealth": 100,
+            "motion": "hit",
+            "hitStunRemaining": 0.16333333333333339,
+            "idlePhase": 0.6833333333333338
+          }
+        }
+      }
+    ],
+    "camera": {
+      "position": [
+        1.0641565226302323,
+        2.5900434785083974,
+        5.779825008899136
+      ],
+      "quaternion": [
+        -0.10073047332247322,
+        0.10329378586753409,
+        0.010515440987144643,
+        0.9894812737218569
+      ],
+      "projectionMatrix": [
+        1.206285142786627,
+        0,
+        0,
+        0,
+        0,
+        2.1445069205095586,
+        0,
+        0,
+        0,
+        0,
+        -1.00133422281521,
+        -1,
+        0,
+        0,
+        -0.1601067378252168,
+        0
+      ],
+      "yaw": 0,
+      "pitch": 0.20290358251963297,
+      "composition": {
+        "targetSeparation": 1.6000008583068848,
+        "shoulderOffset": 1.0640000772476197,
+        "focusProgress": 0.5389999914169312,
+        "focus": [
+          0,
+          1.53,
+          0.7384369376764279
+        ],
+        "safeFrameInsetPx": 80
+      },
+      "boom": {
+        "desiredDistance": 5.260391141887766,
+        "resolvedDistance": 5.260391141887766,
+        "collisionApplied": false,
+        "status": "clear",
+        "clearance": null,
+        "hitDistance": null,
+        "colliderCount": 19
+      }
+    },
+    "renderer": {
+      "calls": 81,
+      "triangles": 203095,
+      "points": 64,
+      "lines": 0,
+      "textures": 32,
+      "geometries": 41,
+      "pixelRatio": 1,
+      "size": {
+        "width": 1600,
+        "height": 900
+      },
+      "errors": [],
+      "context": {
+        "lost": false,
+        "losses": 0,
+        "restores": 0
+      }
+    },
+    "assetLoad": {
+      "schema": "gauntlet.asset-load.v1",
+      "registry": {
+        "schema": "gauntlet.asset-registry.v1",
+        "manifestVersion": 2,
+        "enabled": [
+          "animation.combat",
+          "animation.player-core",
+          "character.hero",
+          "character.hollow",
+          "environment.ashwake-arena",
+          "environment.ruin-doorway",
+          "environment.ruin-pillar",
+          "environment.ruin-rocks",
+          "environment.ruin-stairs",
+          "environment.ruin-wall",
+          "environment.snowy-forest",
+          "material.brick-arm",
+          "material.brick-diffuse",
+          "material.brick-normal",
+          "material.cobble-arm",
+          "material.cobble-diffuse",
+          "material.cobble-normal",
+          "weapon.claymore"
+        ],
+        "loaded": [
+          "animation.combat",
+          "animation.player-core",
+          "character.hero",
+          "character.hollow",
+          "environment.ashwake-arena",
+          "environment.ruin-doorway",
+          "environment.ruin-pillar",
+          "environment.ruin-rocks",
+          "environment.ruin-stairs",
+          "environment.ruin-wall",
+          "environment.snowy-forest",
+          "material.brick-arm",
+          "material.brick-diffuse",
+          "material.brick-normal",
+          "material.cobble-arm",
+          "material.cobble-diffuse",
+          "material.cobble-normal",
+          "weapon.claymore"
+        ],
+        "failures": [],
+        "complete": true
+      },
+      "presentation": {
+        "schema": "gauntlet.presentation-assets.v1",
+        "proceduralFallbackActive": false,
+        "views": {
+          "hero": {
+            "authored": true,
+            "fallbackReason": null,
+            "animations": [
+              "Idle_Loop",
+              "Roll",
+              "Sprint_Loop",
+              "Sword_Regular_A",
+              "Walk_Loop"
+            ]
+          },
+          "hollow": {
+            "authored": true,
+            "fallbackReason": null,
+            "animations": [
+              "Death",
+              "HitReact",
+              "Idle"
+            ]
+          },
+          "arenaSector": {
+            "authored": true,
+            "fallbackReason": null
+          }
+        }
+      },
+      "environment": {
+        "key": "environment.snowy-forest",
+        "pmremInstalled": true
+      },
+      "productionAuthored": true
+    },
+    "framing": {
+      "viewport": {
+        "width": 1600,
+        "height": 900,
+        "safeInset": 80
+      },
+      "player": {
+        "minX": 481.5668288443664,
+        "minY": 434.9258407129478,
+        "maxX": 774.2796314788887,
+        "maxY": 819.60230684982,
+        "width": 292.71280263452235,
+        "height": 384.67646613687225,
+        "margins": {
+          "left": 481.5668288443664,
+          "top": 434.9258407129478,
+          "right": 825.7203685211113,
+          "bottom": 80.39769315017998,
+          "minimum": 80.39769315017998
+        },
+        "insideFrame": true,
+        "insideSafeFrame": true
+      },
+      "target": {
+        "minX": 1023.681213173164,
+        "minY": 428.3501143867255,
+        "maxX": 1248.7567403603086,
+        "maxY": 688.8271972529602,
+        "width": 225.07552718714464,
+        "height": 260.4770828662347,
+        "margins": {
+          "left": 1023.681213173164,
+          "top": 428.3501143867255,
+          "right": 351.24325963969136,
+          "bottom": 211.17280274703978,
+          "minimum": 211.17280274703978
+        },
+        "insideFrame": true,
+        "insideSafeFrame": true
+      },
+      "blade": {
+        "minX": 619.7184786439535,
+        "minY": 539.2014844778203,
+        "maxX": 1112.8739994223872,
+        "maxY": 797.7778121237143,
+        "width": 493.1555207784337,
+        "height": 258.576327645894,
+        "margins": {
+          "left": 619.7184786439535,
+          "top": 539.2014844778203,
+          "right": 487.1260005776128,
+          "bottom": 102.22218787628572,
+          "minimum": 102.22218787628572
+        },
+        "insideFrame": true,
+        "insideSafeFrame": true
+      },
+      "contact": {
+        "x": 1055.378924405753,
+        "y": 570.2906451991167,
+        "ndcZ": 0.9672229605429326,
+        "insideCentral40Percent": true
+      },
+      "gates": {
+        "playerHeight360To540": true,
+        "actorsAndBladeInside80": true,
+        "contactInsideCentral40Percent": true
+      }
+    },
+    "errors": [],
+    "cameraObstruction": {
+      "implemented": true,
+      "status": "clear",
+      "telemetryHook": true,
+      "desiredDistance": 5.260391141887766,
+      "resolvedDistance": 5.260391141887766,
+      "collisionApplied": false
+    }
+  },
+  "snapshot": {
+    "tick": 41,
+    "seed": 30001,
+    "piece": "P30",
+    "preset": "pose-browser",
+    "paused": false,
+    "pointerLocked": false,
+    "coordinates": "+Y up / +X right / -Z forward",
+    "player": {
+      "position": {
+        "x": 0,
+        "y": 0,
+        "z": 1.6000008583068848
+      },
+      "yaw": 0,
+      "health": 100,
+      "stamina": 100,
+      "motion": "attack",
+      "attackPhase": "recovery",
+      "attackFrame": 17
+    },
+    "target": {
+      "position": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "health": 90,
+      "motion": "hit"
+    },
+    "state": {
+      "tick": 41,
+      "elapsed": 0.6833333333333338,
+      "objectiveComplete": false,
+      "player": {
+        "position": {
+          "x": 0,
+          "z": 1.6000008583068848
+        },
+        "yaw": 0,
+        "health": 100,
+        "maxHealth": 100,
+        "stamina": 100,
+        "maxStamina": 100,
+        "motion": "attack",
+        "speed01": 0,
+        "attackElapsed": 0.2833333333333333,
+        "attackFrame": 17,
+        "attackPhase": "recovery",
+        "attackSerial": 1,
+        "attackHasHit": true,
+        "dodgeRemaining": 0,
+        "dodgeDirection": {
+          "x": 0,
+          "z": -1
+        },
+        "invulnerableRemaining": 0
+      },
+      "enemy": {
+        "position": {
+          "x": 0,
+          "z": 0
+        },
+        "yaw": 3.141592653589793,
+        "health": 90,
+        "maxHealth": 100,
+        "motion": "hit",
+        "hitStunRemaining": 0.16333333333333339,
+        "idlePhase": 0.6833333333333338
+      }
+    }
+  },
+  "pose": {
+    "schema": "cow.combat-pose-beat.v1",
+    "additivePresentationOnly": true,
+    "hero": {
+      "sample": {
+        "schema": "cow.hero-combat-pose.v1",
+        "phase": "recoil",
+        "attackFrame": 17,
+        "weaponAxialRollOffset": 2.8,
+        "model": {
+          "position": [
+            -0.04,
+            -0.02,
+            0.205
+          ],
+          "rotation": [
+            0.048,
+            -0.12,
+            0.075
+          ]
+        },
+        "bones": {
+          "pelvis": [
+            0.052,
+            -0.105,
+            0.08
+          ],
+          "spine01": [
+            -0.035,
+            -0.07,
+            0.052
+          ],
+          "spine02": [
+            -0.05,
+            -0.095,
+            0.07
+          ],
+          "spine03": [
+            -0.04,
+            -0.08,
+            0.058
+          ],
+          "neck": [
+            0.024,
+            0.045,
+            -0.025
+          ]
+        }
+      },
+      "authoredTiming": {
+        "mode": "contact-to-settle-blend",
+        "primarySeconds": 0.2,
+        "secondarySeconds": 0.416567,
+        "blend01": 0.291212
+      },
+      "weaponAxialRollRadians": 3.4,
+      "rigBindings": {
+        "pelvis": true,
+        "spine01": true,
+        "spine02": true,
+        "spine03": true,
+        "neck": true
+      },
+      "weaponParent": "weapon_socket",
+      "anchors": {
+        "pelvisWorld": [
+          -0.654342,
+          0.650243,
+          1.737036
+        ],
+        "leadHandWorld": [
+          0.005908,
+          0.578068,
+          2.028739
+        ],
+        "supportHandWorld": [
+          -0.118906,
+          0.511168,
+          2.118919
+        ],
+        "secondaryGripWorld": [
+          -0.118904,
+          0.511167,
+          2.118919
+        ],
+        "bladeContactWorld": [
+          1.354318,
+          1.071142,
+          1.140394
+        ],
+        "bladeTipWorld": [
+          1.644778,
+          1.15272,
+          0.887276
+        ],
+        "bladeWidthAxisWorld": [
+          0.59902,
+          -0.129871,
+          0.790132
+        ],
+        "bladeDepthAxisWorld": [
+          -0.154561,
+          0.949449,
+          0.273234
+        ],
+        "leadFootWorld": [
+          -1.21561,
+          0.102224,
+          2.036746
+        ],
+        "supportFootWorld": [
+          -0.29076,
+          0.048281,
+          1.664069
+        ]
+      },
+      "supportHandToSecondaryGripMeters": 0.000002
+    },
+    "target": {
+      "sample": {
+        "schema": "cow.target-combat-pose.v1",
+        "phase": "recoil",
+        "reaction01": 0.416667,
+        "animationLeadSeconds": 0,
+        "model": {
+          "position": [
+            -0.95,
+            -0.052,
+            0.38
+          ],
+          "rotation": [
+            -0.075,
+            0.075,
+            0.135
+          ]
+        },
+        "bones": {
+          "hips": [
+            -0.035,
+            0.05,
+            0.055
+          ],
+          "abdomen": [
+            -0.095,
+            0.105,
+            0.1
+          ],
+          "torso": [
+            -0.14,
+            0.145,
+            0.13
+          ],
+          "neck": [
+            0.065,
+            -0.08,
+            -0.07
+          ]
+        }
+      },
+      "rigBindings": {
+        "hips": true,
+        "abdomen": true,
+        "torso": true,
+        "neck": true
+      },
+      "anchors": {
+        "hipsWorld": [
+          1.742799,
+          0.614188,
+          -0.561451
+        ],
+        "impactWorld": [
+          2.032111,
+          1.019611,
+          -0.726981
+        ],
+        "headWorld": [
+          2.209407,
+          1.171043,
+          -0.78482
+        ]
+      }
+    },
+    "contact": {
+      "bladeToTargetMeters": 1.987246
+    }
+  },
+  "fx": {
+    "schema": "cow.contact-fx.v1",
+    "phase": "dissipating",
+    "active": true,
+    "lastBurstSerial": 1,
+    "contactWorld": [
+      0.82,
+      1.02,
+      0.2
+    ],
+    "sourceAnchorWorld": [
+      0,
+      1.34,
+      0
+    ],
+    "strikeTravel": [
+      0,
+      0,
+      -1
+    ],
+    "swingTravel": [
+      1,
+      0,
+      0
+    ],
+    "contactOffset": {
+      "tangent": 0.82,
+      "vertical": -0.32,
+      "surface": 0.2
+    },
+    "flash": {
+      "active": false,
+      "life": 0,
+      "opacity": 0,
+      "scale": 0.27
+    },
+    "streaks": {
+      "active": true,
+      "activeCount": 19,
+      "totalCount": 22,
+      "opacity": 0.223564,
+      "maxDistance": 0.959599,
+      "taperedCrossFins": true
+    },
+    "materialContract": {
+      "additive": true,
+      "transparent": true,
+      "depthWrite": false,
+      "textures": 0
+    }
+  }
+}
+
