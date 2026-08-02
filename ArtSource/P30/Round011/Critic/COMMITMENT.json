@@ -2,17 +2,30 @@
   "schema": "p30.r011.protocol-commitment.v1",
   "protocolID": "P30-R011-BLIND-v1",
   "createdAtUtc": "2026-08-02T14:12:30Z",
+  "amendedAtUtc": "2026-08-02T14:42:45Z",
   "baselineCommit": "acfe2f63f59ca4e87d3ca20db9dff225008c3817",
+  "candidatePackageDelivered": false,
   "candidatePackageAccessed": false,
   "candidateSourceAccessed": false,
   "candidateIdentityReceived": false,
   "builderStateAccessed": false,
+  "packageMapCommitmentReceived": false,
+  "amendment": {
+    "document": "PROTOCOL_AMENDMENT_01.md",
+    "number": 1,
+    "status": "incorporated-before-candidate-delivery-or-access",
+    "supersededProtocolCommit": "41efb38843601566c577e758eea7aad6a0e04ac6",
+    "supersededProtocolPayloadSha256": "73039f0e07247db6546e157821daadbec61a1acae1a3a04d964c45ea353af38b",
+    "correction": "Capture range 27-43 and focused ticks 29/34/41 are absolute scenario ticks; normal mouse rising edge is absolute tick 24; focused attack-relative ticks are 5/10/17.",
+    "thresholdsChanged": false,
+    "presentationCommitChanged": false
+  },
   "protocolPayload": {
     "hashSchema": "p30.r011.bytewise-tree-digest.v1",
     "hashDomain": "P30R011/package-tree/v1",
-    "fileCount": 7,
-    "totalBytes": 62164,
-    "treeSha256": "73039f0e07247db6546e157821daadbec61a1acae1a3a04d964c45ea353af38b",
+    "fileCount": 8,
+    "totalBytes": 71905,
+    "treeSha256": "bc1e9db54ad38408d6ff369df96ed163d15cf2dfa3fd5403d7a56e374ee85d7b",
     "files": [
       {
         "path": ".gitignore",
@@ -23,14 +36,20 @@
       {
         "path": "LOCKED_PROTOCOL.md",
         "mode": "644",
-        "bytes": 32321,
-        "sha256": "24dd4b6b44354e30afa10d968b1668143e086820793588b6b27d9fd2d3b76615"
+        "bytes": 34683,
+        "sha256": "20c1bb9adfe99bef70bd0070d092af95f38bf2d72f2b92c175d0614cff408995"
       },
       {
         "path": "PACKAGE_INTERFACE.md",
         "mode": "644",
-        "bytes": 11661,
-        "sha256": "e0ace8a089256f4c8323ff7b2b06c4fc2b8fa725d238647d546cd94545610b0e"
+        "bytes": 12561,
+        "sha256": "0d23a9d60ad61d2f1c2986585fdb390f79f9d14c93dc1cc4dc6e2e3284cb53e7"
+      },
+      {
+        "path": "PROTOCOL_AMENDMENT_01.md",
+        "mode": "644",
+        "bytes": 4337,
+        "sha256": "663a0f58afc808c5684e84a6771f183e14707755ed94880361f4e5f51cf51fa6"
       },
       {
         "path": "REFERENCE_RECEIPT.json",
@@ -47,14 +66,14 @@
       {
         "path": "tools/protocol-tools.mjs",
         "mode": "644",
-        "bytes": 12698,
-        "sha256": "9a5356a606c41a3fc4dd0292fad3660f4ee392fc683438c1c1f9c94bec1ae782"
+        "bytes": 13943,
+        "sha256": "3cbf9deb89ae765801b97725d9648b28a87854877c48db3073835e21f107a009"
       },
       {
         "path": "tools/protocol-tools.test.mjs",
         "mode": "644",
-        "bytes": 2672,
-        "sha256": "f10c779fb2149666552974dc4e2c0249d3d5525f6a68888a3c2e6a7a16190b96"
+        "bytes": 3569,
+        "sha256": "d07174f84d7513816882da782d90c7774bbe748325a26295f0339d128ce8eba4"
       }
     ]
   },
@@ -81,10 +100,9 @@
   "helperVerification": {
     "node": "v24.18.0",
     "command": "/opt/homebrew/opt/node@24/bin/node --test ArtSource/P30/Round011/Critic/tools/protocol-tools.test.mjs",
-    "tests": 5,
-    "passed": 5,
+    "tests": 6,
+    "passed": 6,
     "failed": 0
   },
-  "lockRule": "Any substantive edit to a protocol payload file after this commitment requires a new numbered round before candidate access."
+  "lockRule": "Protocol Amendment 01 is the sole pre-access correction. Any substantive edit after its commit requires a new numbered round before candidate access."
 }
-

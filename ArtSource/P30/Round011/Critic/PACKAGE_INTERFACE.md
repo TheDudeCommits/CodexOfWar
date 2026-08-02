@@ -63,6 +63,8 @@ This is the only candidate-authored file the critic may inspect before execution
   "seed": 30011,
   "fixedDeltaNumerator": 1,
   "fixedDeltaDenominator": 60,
+  "captureTickSpace": "absolute-scenario",
+  "attackRisingEdgeAbsoluteTick": 24,
   "lightStrikeInput": {
     "device": "mouse",
     "button": "left"
@@ -74,7 +76,7 @@ This is the only candidate-authored file the critic may inspect before execution
 
 Rules:
 
-- Both candidates must declare the same normal route, scenario ID, seed, fixed delta, and light-strike input. A package-specific route or input accommodation fails comparison integrity.
+- Both candidates must declare the same normal route, scenario ID, seed, fixed delta, absolute capture-tick space, absolute attack rising-edge tick, and light-strike input. A package-specific route, clock, retiming, or input accommodation fails comparison integrity.
 - `normalPlayableRoute` must be the real game route a player uses. Query parameters may select the normal P30 scenario, seed, and deterministic fixed step, but may not select another renderer, camera, scene, pose set, asset tier, screenshot page, or judging-only presentation.
 - `readyPath` returns a small identity-free status response only after the same production build is ready to accept the playable route. It is not a second renderer.
 - Paths are relative POSIX paths, contain no `..`, and disclose no identity.
@@ -88,7 +90,7 @@ The production page exposes `window.__P30_CRITIC__` only as deterministic instru
 
 - `schema === "p30.r011.runtime-hook.v1"`.
 - `whenReady(): Promise<void>` resolving at the first actionable production game frame.
-- `armCaptureTicks(number[]): void`, callable before the strike, which can pause immediately after the authoritative fixed update for a requested attack-relative tick and before the next update.
+- `armCaptureTicks(number[]): void`, callable before the strike, which accepts **absolute scenario simulation ticks only** and can pause immediately after the requested authoritative fixed update and before the next update.
 - `resume(): void`, which only releases that pause.
 - `snapshot(): object`, a read-only receipt of the current authoritative state.
 - `runReceipt(): object`, returning seed/fixed-step/input/event/camera/state-digest history for the current uninterrupted run.
@@ -98,19 +100,21 @@ The hook may set the fixed seed and fixed step before gameplay begins and may pa
 
 Tick convention:
 
-- Attack-relative tick `0` is the first authoritative 1/60-second fixed update that samples the normal light-strike input rising edge.
-- Tick `N` evidence is captured after update `N`, with render interpolation alpha `0`, and before update `N+1`.
-- Ticks 27 through 43 are captured from one uninterrupted strike in every cold profile. Focused ticks are exactly 29, 34, and 41.
+- Deterministic scenario reset/start establishes **absolute scenario simulation tick `0`**. This absolute clock never resets during the capture run.
+- The normal mouse light-strike rising edge is sampled at **absolute tick `24`**. That same update is attack-relative tick `0`; for this frozen tape, `attackRelativeTick` is `null` before the rising edge and equals `absoluteSimulationTick - 24` from absolute tick 24 onward.
+- Absolute tick `N` evidence is captured after absolute update `N`, with render interpolation alpha `0`, and before absolute update `N+1`.
+- Absolute ticks `27` through `43` are captured from one uninterrupted scenario run in every cold profile. Focused absolute ticks are exactly `29`, `34`, and `41`, corresponding honestly to attack-relative ticks `5`, `10`, and `17`.
+- `armCaptureTicks([27, ..., 43])` therefore refers to the absolute scenario clock. Supplying or interpreting those values as attack-relative ticks is a protocol failure.
 - Pausing for a screenshot does not advance wall-clock soak time and is forbidden during the 30-second live-input soak.
 
 `snapshot()` and `runReceipt()` must expose, at minimum:
 
-- absolute simulation tick, attack-relative tick, seed, fixed delta, pause state, and a monotonically increasing render heartbeat;
+- `absoluteSimulationTick` from deterministic scenario reset and `attackRelativeTick` from the absolute-tick-24 mouse rising edge, plus seed, fixed delta, pause state, and a monotonically increasing render heartbeat;
 - camera world transform, view matrix, projection matrix, and viewport;
 - attacker root/hips/torso/head/hands/feet transforms and per-foot ground-contact booleans;
 - weapon root, grip midpoint, active-edge sample points, tip, angular velocity, and velocity direction;
 - target root/head/torso/contact-side shoulder transforms, screen/world height, health, collision surface/contact point, contact normal, and response impulse;
-- input edge log and hit/damage/health event log with exact ticks and unique event IDs;
+- input edge log and hit/damage/health event log with both exact absolute and attack-relative ticks and unique event IDs;
 - a quantized authoritative state object using signed safe integers at `1e-6` world-unit/radian precision, serialized with BCJ-v1 and SHA-256 digested;
 - explicit `rendererMode`, `assetTier`, `fallbackActive`, and context loss/restore counters.
 
@@ -183,4 +187,3 @@ After the immutable score commit, the authority reveals the exact map document a
 6. No file, commit, identity, branch, worktree, or approach differs from the committed map.
 
 No explanatory substitution, equivalent commit, cherry-pick, patch, rebuilt archive, or “same output” claim is accepted. An unavailable object or LFS payload is a failed T1, not an invitation to weaken the gate.
-

@@ -11,6 +11,9 @@ const PRESENTATION_DOMAIN = 'P30R011/presentation-seed/v1';
 const EXECUTION_ORDER_DOMAIN = 'P30R011/execution-order/v1';
 const BALLOT_ORDER_DOMAIN = 'P30R011/ballot-order/v1';
 const BALLOT_IDS = Object.freeze(['F1', 'F2', 'F3', 'G1', 'G2', 'G3', 'G4', 'G5', 'G6']);
+export const ATTACK_RISING_EDGE_ABSOLUTE_TICK = 24;
+export const CAPTURE_ABSOLUTE_TICKS = Object.freeze(Array.from({ length: 17 }, (_, index) => 27 + index));
+export const FOCUSED_ABSOLUTE_TICKS = Object.freeze([29, 34, 41]);
 
 function fail(message) {
   throw new Error(message);
@@ -121,6 +124,27 @@ export function saltedDocumentCommit(domain, value, salt) {
 export function presentationCommit(seed) {
   if (!Buffer.isBuffer(seed) || seed.length !== 32) fail('presentation seed must be exactly 32 raw bytes');
   return hashDomainParts(PRESENTATION_DOMAIN, [seed]).toString('hex');
+}
+
+export function attackRelativeTickForAbsolute(absoluteSimulationTick) {
+  if (!Number.isSafeInteger(absoluteSimulationTick) || absoluteSimulationTick < 0) {
+    fail('absolute scenario simulation tick must be a nonnegative safe integer');
+  }
+  if (absoluteSimulationTick < ATTACK_RISING_EDGE_ABSOLUTE_TICK) return null;
+  return absoluteSimulationTick - ATTACK_RISING_EDGE_ABSOLUTE_TICK;
+}
+
+export function frozenScenarioTickMap() {
+  return {
+    tickSpace: 'absolute-scenario',
+    resetAbsoluteTick: 0,
+    attackRisingEdgeAbsoluteTick: ATTACK_RISING_EDGE_ABSOLUTE_TICK,
+    captureAbsoluteTicks: [...CAPTURE_ABSOLUTE_TICKS],
+    focusedTicks: FOCUSED_ABSOLUTE_TICKS.map((absoluteSimulationTick) => ({
+      absoluteSimulationTick,
+      attackRelativeTick: attackRelativeTickForAbsolute(absoluteSimulationTick)
+    }))
+  };
 }
 
 async function readHex32(path, label) {
@@ -302,6 +326,7 @@ function usage() {
     '  protocol-tools.mjs presentation-commit SEED_HEX_FILE',
     '  protocol-tools.mjs document-commit DOMAIN JSON_FILE SALT_HEX_FILE',
     '  protocol-tools.mjs verify-document-commit DOMAIN JSON_FILE SALT_HEX_FILE EXPECTED_HEX',
+    '  protocol-tools.mjs tick-map',
     '  protocol-tools.mjs orders SEED_HEX_FILE ALIAS_1 ALIAS_2'
   ].join('\n');
 }
@@ -347,6 +372,11 @@ export async function main(argv) {
       output = actual;
       break;
     }
+    case 'tick-map': {
+      if (args.length !== 0) fail(usage());
+      output = JSON.stringify(frozenScenarioTickMap(), null, 2);
+      break;
+    }
     case 'orders': {
       if (args.length !== 3) fail(usage());
       output = JSON.stringify(deriveOrders(await readHex32(args[0], 'presentation seed'), args.slice(1)), null, 2);
@@ -365,4 +395,3 @@ if (invokedPath && fileURLToPath(import.meta.url) === invokedPath) {
     process.exitCode = 1;
   });
 }
-
