@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { chmod, link, mkdir, mkdtemp, rm, symlink, writeFile } from 'node:fs/promises';
+import { chmod, link, mkdir, mkdtemp, open, rename, rm, symlink, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import test from 'node:test';
@@ -12,7 +12,8 @@ import {
   hashTree,
   parseCanonicalFile,
   parseJsonStrict,
-  registerCaseFoldedPath
+  registerCaseFoldedPath,
+  validateRelativePath
 } from './tree-helper.mjs';
 
 async function scratch(context, prefix = 'p30-r012-tree-') {
@@ -23,6 +24,55 @@ async function scratch(context, prefix = 'p30-r012-tree-') {
 
 function code(error, expected) {
   return error instanceof Round012TreeError && error.code === expected;
+}
+
+async function sparseFile(path, bytes = 32 * 1024 * 1024) {
+  const handle = await open(path, 'w');
+  try {
+    await handle.truncate(bytes);
+  } finally {
+    await handle.close();
+  }
+}
+
+async function mutateDuringFirstFileHash(root, mutate) {
+  const probePath = join(root, 'a-large.bin');
+  const probe = await open(probePath, 'r');
+  const fileHandlePrototype = Object.getPrototypeOf(probe);
+  await probe.close();
+
+  const originalCreateReadStream = fileHandlePrototype.createReadStream;
+  let signalStarted;
+  const started = new Promise((resolveStarted) => {
+    signalStarted = resolveStarted;
+  });
+  let didSignal = false;
+  fileHandlePrototype.createReadStream = function (...args) {
+    const stream = originalCreateReadStream.apply(this, args);
+    if (!didSignal) {
+      didSignal = true;
+      signalStarted();
+    }
+    return stream;
+  };
+
+  const outcome = hashTree(root).then(
+    (value) => ({ ok: true, value }),
+    (error) => ({ ok: false, error })
+  );
+  try {
+    const phase = await Promise.race([
+      started.then(() => 'hashing'),
+      outcome.then(() => 'settled')
+    ]);
+    assert.equal(phase, 'hashing', 'tree hash settled before the coordinated mutation point');
+    await mutate();
+    const result = await outcome;
+    if (!result.ok) throw result.error;
+    return result.value;
+  } finally {
+    fileHandlePrototype.createReadStream = originalCreateReadStream;
+  }
 }
 
 test('BCJ-v1 is raw-UTF8 ordered and rejects ambiguous numeric values', () => {
@@ -84,5 +134,89 @@ test('case-fold registry rejects cross-platform path ambiguity', () => {
   assert.throws(
     () => registerCaseFoldedPath(paths, 'nested/case.txt'),
     (error) => code(error, 'TREE_CASE_COLLISION')
+  );
+});
+
+test('relative-path validation rejects traversal, separators, absolute paths, and non-NFC names', () => {
+  assert.equal(validateRelativePath('nested/file.txt'), 'nested/file.txt');
+  for (const invalid of ['../escape', 'nested/../escape', 'nested//file', '/absolute', 'win\\path']) {
+    assert.throws(() => validateRelativePath(invalid), (error) =>
+      error instanceof Round012TreeError && ['TREE_INVALID_PATH', 'TREE_PATH_TRAVERSAL'].includes(error.code)
+    );
+  }
+  assert.throws(
+    () => validateRelativePath('Cafe\u0301/file.txt'),
+    (error) => code(error, 'TREE_NON_NFC_PATH')
+  );
+});
+
+test('tree hash rejects an ancestor directory swapped for a symlink after enumeration', async (context) => {
+  const root = await scratch(context, 'p30-r012-tree-symlink-race-');
+  await sparseFile(join(root, 'a-large.bin'));
+  const ancestor = join(root, 'z-ancestor');
+  const held = join(root, 'z-ancestor-held');
+  await mkdir(ancestor);
+  await writeFile(join(ancestor, 'payload.txt'), 'payload\n');
+
+  await assert.rejects(
+    () => mutateDuringFirstFileHash(root, async () => {
+      await rename(ancestor, held);
+      await symlink('z-ancestor-held', ancestor);
+    }),
+    (error) => code(error, 'TREE_SYMLINK_FORBIDDEN')
+  );
+});
+
+test('tree hash rejects a multi-level nested ancestor symlink swap', async (context) => {
+  const root = await scratch(context, 'p30-r012-tree-nested-race-');
+  await sparseFile(join(root, 'a-large.bin'));
+  const outer = join(root, 'z-outer');
+  const middle = join(outer, 'middle');
+  const held = join(outer, 'middle-held');
+  await mkdir(join(middle, 'inner'), { recursive: true });
+  await writeFile(join(middle, 'inner', 'payload.txt'), 'payload\n');
+
+  await assert.rejects(
+    () => mutateDuringFirstFileHash(root, async () => {
+      await rename(middle, held);
+      await symlink('middle-held', middle);
+    }),
+    (error) => code(error, 'TREE_SYMLINK_FORBIDDEN')
+  );
+});
+
+test('tree hash rejects directory rename-and-replace even with matching names and bytes', async (context) => {
+  const root = await scratch(context, 'p30-r012-tree-replace-race-');
+  await sparseFile(join(root, 'a-large.bin'));
+  const ancestor = join(root, 'z-ancestor');
+  const held = join(root, 'z-ancestor-held');
+  await mkdir(ancestor);
+  await writeFile(join(ancestor, 'payload.txt'), 'payload\n');
+
+  await assert.rejects(
+    () => mutateDuringFirstFileHash(root, async () => {
+      await rename(ancestor, held);
+      await mkdir(ancestor);
+      await writeFile(join(ancestor, 'payload.txt'), 'payload\n');
+    }),
+    (error) => code(error, 'TREE_ENTRY_REPLACED')
+  );
+});
+
+test('tree hash rejects in-place file mutation while its frozen handle is hashing', async (context) => {
+  const root = await scratch(context, 'p30-r012-tree-file-race-');
+  const payload = join(root, 'a-large.bin');
+  await sparseFile(payload);
+
+  await assert.rejects(
+    () => mutateDuringFirstFileHash(root, async () => {
+      const mutator = await open(payload, 'r+');
+      try {
+        await mutator.write(Buffer.from([0x7f]), 0, 1, 0);
+      } finally {
+        await mutator.close();
+      }
+    }),
+    (error) => code(error, 'TREE_FILE_MUTATED')
   );
 });
