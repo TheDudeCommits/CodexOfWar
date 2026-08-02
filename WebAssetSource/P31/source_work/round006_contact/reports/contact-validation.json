@@ -1,0 +1,131 @@
+{
+  "acceptance_claimed": false,
+  "assets": {
+    "frozen_hollow": {
+      "file": "WebAssetSource/P31/processed/round005/characters/hollow.glb",
+      "sha256": "f53a481f118c48dff825b8f98427957e6201434848416ff265f22eb2b07e689d"
+    },
+    "hero": {
+      "file": "glb/nyra.glb",
+      "sha256": "56e569e529cd0d281bd60ad483d5c52bf6c3eab29f1c52829eb3a85dc7610caf"
+    },
+    "weapon": {
+      "file": "glb/stormcage.glb",
+      "sha256": "29565b76739e2d0f5491c55c5c382c7e172c7bc99d04a2382044f782170b7c1d"
+    }
+  },
+  "failures": [],
+  "integrated": false,
+  "limits": {
+    "blade_hero_triangle_pairs": 0,
+    "blade_target_intersection_moments": [
+      "S04"
+    ],
+    "contact_marker_to_blade_surface_m": 0.01,
+    "palm_to_grip_m": 0.025,
+    "s04_contact_marker_to_target_surface_m": 0.03
+  },
+  "measurements": {
+    "S03": {
+      "blade_hero": {
+        "blade_triangles": 0,
+        "intersects": false,
+        "objects": {},
+        "triangle_pairs": 0
+      },
+      "blade_target": {
+        "blade_triangles": 0,
+        "intersects": false,
+        "objects": {},
+        "triangle_pairs": 0
+      },
+      "contact_marker_nearest_target_object": "Zombie",
+      "contact_marker_to_blade_surface_m": 0.00609987135976553,
+      "contact_marker_to_target_surface_m": 2.646940231323242,
+      "hero_frame": 2.0,
+      "hollow_action": "Idle",
+      "hollow_frame": 11.6,
+      "primary_palm_to_grip_m": 5.960464477539063e-08,
+      "secondary_palm_to_grip_m": 1.0688402557628928e-06
+    },
+    "S04": {
+      "blade_hero": {
+        "blade_triangles": 0,
+        "intersects": false,
+        "objects": {},
+        "triangle_pairs": 0
+      },
+      "blade_target": {
+        "blade_triangles": 25,
+        "intersects": true,
+        "objects": {
+          "Ossuary_Draw_iron": {
+            "blade_triangles": 14,
+            "target_triangles": 14,
+            "triangle_pairs": 52
+          },
+          "Zombie": {
+            "blade_triangles": 25,
+            "target_triangles": 22,
+            "triangle_pairs": 57
+          }
+        },
+        "triangle_pairs": 109
+      },
+      "contact_marker_grid_probe": {
+        "distance_m": 5.9234430409560446e-06,
+        "marker_parent_local": [
+          0.029999999329447746,
+          -0.029999999329447746,
+          1.399999976158142
+        ],
+        "nearest_target_world": [
+          0.8288144469261169,
+          0.006780490279197693,
+          1.0207958221435547
+        ],
+        "target_object": "Zombie"
+      },
+      "contact_marker_nearest_target_object": "Zombie",
+      "contact_marker_to_blade_surface_m": 0.006100066937506199,
+      "contact_marker_to_target_surface_m": 5.8828941291722e-06,
+      "hero_frame": 4.0,
+      "hollow_action": "HitReact",
+      "hollow_frame": 0.0,
+      "primary_palm_to_grip_m": 1.4901161193847656e-08,
+      "secondary_palm_to_grip_m": 8.922050821735086e-07
+    },
+    "S05": {
+      "blade_hero": {
+        "blade_triangles": 0,
+        "intersects": false,
+        "objects": {},
+        "triangle_pairs": 0
+      },
+      "blade_target": {
+        "blade_triangles": 0,
+        "intersects": false,
+        "objects": {},
+        "triangle_pairs": 0
+      },
+      "contact_marker_nearest_target_object": "Zombie",
+      "contact_marker_to_blade_surface_m": 0.006100009195506573,
+      "contact_marker_to_target_surface_m": 1.91811203956604,
+      "hero_frame": 6.8,
+      "hollow_action": "HitReact",
+      "hollow_frame": 5.833333333333333,
+      "primary_palm_to_grip_m": 5.960464477539063e-08,
+      "secondary_palm_to_grip_m": 2.9200193199910854e-07
+    }
+  },
+  "runtime_transform": {
+    "hero_center_z": 1.6000008583068848,
+    "hero_scale": 1.22,
+    "hollow_scale": 1.16,
+    "lane_m": 0.62,
+    "toe_rad": 0.5,
+    "weapon_roll_rad": 0.6
+  },
+  "schema": "p31.round006.contact-bvh-validation.v1",
+  "status": "pass"
+}

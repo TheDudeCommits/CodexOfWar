@@ -1,0 +1,560 @@
+{
+  "schema": "p30.round006.builder.v1",
+  "piece": "P30",
+  "round": "Round006",
+  "role": "builder",
+  "status": "pass",
+  "verdict": "integrated-candidate-no-acceptance-claim",
+  "integrated": true,
+  "acceptanceClaimed": false,
+  "frozenCommit": "2c180e3",
+  "scope": {
+    "approvedPayloadCount": 2,
+    "approved": [
+      "Nyra authored character/contact GLB",
+      "Stormcage authored weapon/contact GLB"
+    ],
+    "frozen": [
+      "Hollow",
+      "manifest keys and URLs",
+      "CharacterViews and runtime source",
+      "simulation, physics, input, camera, environment, HUD, and diagnostics",
+      "all Round005 evidence files"
+    ],
+    "noStageOrCommit": true
+  },
+  "integrationInventory": {
+    "source": "ArtSource/P30/Round006/integration-inventory.json",
+    "sourceSha256": "786eda8225f4d7cd90890c890b387193e1b619219b734811d8ef56f6db33a3d4",
+    "inventory": [
+      {
+        "id": "hero",
+        "source": "WebAssetSource/P31/source_work/round006_contact/glb/nyra.glb",
+        "processed": "WebAssetSource/P31/processed/round006/characters/nyra.glb",
+        "runtime": "web-game/public/assets/models/ashwake/nyra.glb",
+        "beforeSha256": "6f67a33bc0628f3b47e6dd9ff6df3842c0c6b2d66c27a98dc0b0a61353a4a30d",
+        "afterSha256": "56e569e529cd0d281bd60ad483d5c52bf6c3eab29f1c52829eb3a85dc7610caf",
+        "bytes": 4452708,
+        "processedRuntimeByteIdentical": true
+      },
+      {
+        "id": "weapon",
+        "source": "WebAssetSource/P31/source_work/round006_contact/glb/stormcage.glb",
+        "processed": "WebAssetSource/P31/processed/round006/weapons/stormcage.glb",
+        "runtime": "web-game/public/assets/models/ashwake/stormcage.glb",
+        "beforeSha256": "098c834ac5fce4ce92c117362f1cf1b9225954295bad9d2ee9275f8be7234206",
+        "afterSha256": "29565b76739e2d0f5491c55c5c382c7e172c7bc99d04a2382044f782170b7c1d",
+        "bytes": 151264,
+        "processedRuntimeByteIdentical": true
+      }
+    ],
+    "manifestBindings": {
+      "character.hero": "/assets/models/ashwake/nyra.glb",
+      "character.hollow": "/assets/models/ashwake/hollow.glb",
+      "weapon.claymore": "/assets/models/ashwake/stormcage.glb"
+    },
+    "processedRound006": {
+      "characters": [
+        "nyra.glb"
+      ],
+      "weapons": [
+        "stormcage.glb"
+      ],
+      "hollowAdded": false
+    },
+    "assertions": {
+      "approvedSourceProcessedRuntimeByteIdentity": true,
+      "onlyNyraAndStormcagePublished": true,
+      "frozenHollowAndRuntimeSource": true,
+      "stableManifestKeysAndUrls": true,
+      "isolatedStaticAndBvhValidationCurrent": true
+    }
+  },
+  "frozenHollow": {
+    "processed": "WebAssetSource/P31/processed/round005/characters/hollow.glb",
+    "runtime": "web-game/public/assets/models/ashwake/hollow.glb",
+    "bytes": 1448388,
+    "sha256": "f53a481f118c48dff825b8f98427957e6201434848416ff265f22eb2b07e689d"
+  },
+  "authoredContracts": {
+    "hero": {
+      "bones": 65,
+      "clips": [
+        "Idle_Loop",
+        "Roll",
+        "Sprint_Loop",
+        "Sword_Regular_A",
+        "Walk_Loop"
+      ],
+      "rightHandSocket": "weapon_socket",
+      "socketParentBone": "hand_r",
+      "leftPalmTarget": "left_palm_grip_target"
+    },
+    "weapon": {
+      "nodes": [
+        "GripPrimary",
+        "GripSecondary",
+        "secondary_grip",
+        "ContactMarker",
+        "BladeTip"
+      ]
+    },
+    "maps": {
+      "nyra": {
+        "base_color": {
+          "bytes": 10074,
+          "channel_ranges": [
+            90,
+            134,
+            144
+          ],
+          "resolution": [
+            256,
+            256
+          ],
+          "sha256": "2cc7395888ff502367edd7dabb0b6e3233fd23f85c74c04709f1f7b687c732b8",
+          "unique_rgb": 69
+        },
+        "colorspace_contract": {
+          "base_color": "sRGB glTF baseColorTexture",
+          "normal": "linear tangent-space normalTexture",
+          "orm": "linear R=occlusion G=roughness B=metallic"
+        },
+        "normal": {
+          "bytes": 10544,
+          "channel_ranges": [
+            189,
+            189,
+            74
+          ],
+          "detail_fraction": 0.82073974609375,
+          "mean_blue": 248.63104248046875,
+          "resolution": [
+            256,
+            256
+          ],
+          "sha256": "c4e596485f35909599a69f95d94163e2064f290e5e9af840c0a60002cdb8f068",
+          "unique_rgb": 128
+        },
+        "orm": {
+          "bytes": 24082,
+          "channel_ranges": [
+            36,
+            51,
+            70
+          ],
+          "resolution": [
+            256,
+            256
+          ],
+          "sha256": "a1d346e05cae548370ab3ea7d830c165a1d077980276e6f7b212d740df276e32",
+          "unique_rgb": 72
+        }
+      },
+      "stormcage": {
+        "base_color": {
+          "bytes": 22101,
+          "channel_ranges": [
+            156,
+            141,
+            162
+          ],
+          "resolution": [
+            256,
+            256
+          ],
+          "sha256": "38a6b4d204f67da2f45703b7df1b4b9d75127a8c06483556b5f36f22b2a8236e",
+          "unique_rgb": 97
+        },
+        "colorspace_contract": {
+          "base_color": "sRGB glTF baseColorTexture",
+          "normal": "linear tangent-space normalTexture",
+          "orm": "linear R=occlusion G=roughness B=metallic"
+        },
+        "normal": {
+          "bytes": 13410,
+          "channel_ranges": [
+            217,
+            217,
+            72
+          ],
+          "detail_fraction": 0.236846923828125,
+          "mean_blue": 246.40602111816406,
+          "resolution": [
+            256,
+            256
+          ],
+          "sha256": "98f13e0d1a3195d679e08dd288e29644dd135c3466f4c757b71f307a5ec26c03",
+          "unique_rgb": 214
+        },
+        "orm": {
+          "bytes": 17793,
+          "channel_ranges": [
+            22,
+            110,
+            38
+          ],
+          "resolution": [
+            256,
+            256
+          ],
+          "sha256": "1347a1d09439780e8f3df633cbf95d52bb582d260c35c7416b200f34ed586542",
+          "unique_rgb": 178
+        }
+      }
+    }
+  },
+  "exactGeometryEvidence": {
+    "source": "WebAssetSource/P31/source_work/round006_contact/reports/contact-validation.json",
+    "sourceSha256": "8415fb1a7902ad4fb477088b8c25ead418f1617540e5e6b58bcc47642f64a160",
+    "limits": {
+      "blade_hero_triangle_pairs": 0,
+      "blade_target_intersection_moments": [
+        "S04"
+      ],
+      "contact_marker_to_blade_surface_m": 0.01,
+      "palm_to_grip_m": 0.025,
+      "s04_contact_marker_to_target_surface_m": 0.03
+    },
+    "measurements": {
+      "S03": {
+        "blade_hero": {
+          "blade_triangles": 0,
+          "intersects": false,
+          "objects": {},
+          "triangle_pairs": 0
+        },
+        "blade_target": {
+          "blade_triangles": 0,
+          "intersects": false,
+          "objects": {},
+          "triangle_pairs": 0
+        },
+        "contact_marker_nearest_target_object": "Zombie",
+        "contact_marker_to_blade_surface_m": 0.00609987135976553,
+        "contact_marker_to_target_surface_m": 2.646940231323242,
+        "hero_frame": 2,
+        "hollow_action": "Idle",
+        "hollow_frame": 11.6,
+        "primary_palm_to_grip_m": 5.960464477539063e-8,
+        "secondary_palm_to_grip_m": 0.0000010688402557628928
+      },
+      "S04": {
+        "blade_hero": {
+          "blade_triangles": 0,
+          "intersects": false,
+          "objects": {},
+          "triangle_pairs": 0
+        },
+        "blade_target": {
+          "blade_triangles": 25,
+          "intersects": true,
+          "objects": {
+            "Ossuary_Draw_iron": {
+              "blade_triangles": 14,
+              "target_triangles": 14,
+              "triangle_pairs": 52
+            },
+            "Zombie": {
+              "blade_triangles": 25,
+              "target_triangles": 22,
+              "triangle_pairs": 57
+            }
+          },
+          "triangle_pairs": 109
+        },
+        "contact_marker_grid_probe": {
+          "distance_m": 0.0000059234430409560446,
+          "marker_parent_local": [
+            0.029999999329447746,
+            -0.029999999329447746,
+            1.399999976158142
+          ],
+          "nearest_target_world": [
+            0.8288144469261169,
+            0.006780490279197693,
+            1.0207958221435547
+          ],
+          "target_object": "Zombie"
+        },
+        "contact_marker_nearest_target_object": "Zombie",
+        "contact_marker_to_blade_surface_m": 0.006100066937506199,
+        "contact_marker_to_target_surface_m": 0.0000058828941291722,
+        "hero_frame": 4,
+        "hollow_action": "HitReact",
+        "hollow_frame": 0,
+        "primary_palm_to_grip_m": 1.4901161193847656e-8,
+        "secondary_palm_to_grip_m": 8.922050821735086e-7
+      },
+      "S05": {
+        "blade_hero": {
+          "blade_triangles": 0,
+          "intersects": false,
+          "objects": {},
+          "triangle_pairs": 0
+        },
+        "blade_target": {
+          "blade_triangles": 0,
+          "intersects": false,
+          "objects": {},
+          "triangle_pairs": 0
+        },
+        "contact_marker_nearest_target_object": "Zombie",
+        "contact_marker_to_blade_surface_m": 0.006100009195506573,
+        "contact_marker_to_target_surface_m": 1.91811203956604,
+        "hero_frame": 6.8,
+        "hollow_action": "HitReact",
+        "hollow_frame": 5.833333333333333,
+        "primary_palm_to_grip_m": 5.960464477539063e-8,
+        "secondary_palm_to_grip_m": 2.9200193199910854e-7
+      }
+    },
+    "assertions": {
+      "bothPalmsWithin25mmAtS03S04S05": true,
+      "bladeHeroTrianglePairsZeroAtS03S04S05": true,
+      "bladeTargetIntersectionOnlyAtS04": true,
+      "s04ContactMarkerWithin30mmOfTargetAnd10mmOfBlade": true
+    }
+  },
+  "isolatedAssetValidation": {
+    "reports": {
+      "WebAssetSource/P31/source_work/round006_contact/reports/build-report.json": "aa253943092713b2a6ce200f3475667d35ea561597ed9d43439925905fd170b0",
+      "WebAssetSource/P31/source_work/round006_contact/reports/static-validation.json": "69db1f2833f80d1e74e4a99fbc26518aa5c282d11f07d709f850d8a859ce6101",
+      "WebAssetSource/P31/source_work/round006_contact/reports/blender-reimport.json": "eabdc602eb9401108fb82721c427d4fac951fa08cffda677e5fcf79fc291d235",
+      "WebAssetSource/P31/source_work/round006_contact/reports/determinism.json": "5d4baf32c148dbd00b2692ce2dafc2804dd5f2531867f728a880ae9d74e844f6"
+    },
+    "deterministicCleanProcesses": 2,
+    "factoryStartup": true,
+    "disableAutoexec": true,
+    "byteIdentical": true,
+    "selfContainedGlb2": true,
+    "blenderReimport": "pass",
+    "package": {
+      "limits": {
+        "calls": 100,
+        "geometries": 64,
+        "textures": 32,
+        "triangles": 250000
+      },
+      "projected_s04": {
+        "calls": 86,
+        "geometries": 38,
+        "textures": 32,
+        "triangles": 204155
+      },
+      "visible_primitives": 22,
+      "visible_triangles": 50150
+    }
+  },
+  "sharedRuntimeNodeValidation": {
+    "source": "WebAssetSource/P31/source_work/round006_contact/reports/shared-runtime-validation.json",
+    "sourceSha256": "8c116fbc7ca5c62b762a55e367c1fa5d5b4d1e7f1eb206ec10c99ebe526515f4",
+    "node": "v24.18.0",
+    "npm": "11.16.0",
+    "checks": [
+      {
+        "id": "typecheck",
+        "command": "/opt/homebrew/opt/node@24/bin/npm run typecheck",
+        "exitCode": 0,
+        "status": "pass"
+      },
+      {
+        "id": "lint",
+        "command": "/opt/homebrew/opt/node@24/bin/npm run lint",
+        "exitCode": 0,
+        "status": "pass"
+      },
+      {
+        "id": "simulation-tests",
+        "command": "/opt/homebrew/opt/node@24/bin/npm test -- --run",
+        "exitCode": 0,
+        "status": "pass"
+      },
+      {
+        "id": "production-build",
+        "command": "/opt/homebrew/opt/node@24/bin/npm run build",
+        "exitCode": 0,
+        "status": "pass"
+      }
+    ],
+    "assertions": {
+      "nodeMajor24": true,
+      "typecheckPassed": true,
+      "lintPassed": true,
+      "simulationTestFilesPassed": 2,
+      "simulationTestsPassed": 5,
+      "productionBuildPassed": true
+    },
+    "knownBuildWarnings": [
+      "Vite output includes the existing >500 kB chunk advisory."
+    ]
+  },
+  "sharedProductionCapture": {
+    "source": "ArtSource/P30/Round006/capture-evidence.json",
+    "sourceSha256": "e827f82612c9fe168e29e4616faf05e1611a39e0e050b94c6b4e8403b777d0df",
+    "schema": "p30.round006.shared-production-capture.v1",
+    "integrated": true,
+    "temporaryRuntime": false,
+    "sharedRuntime": true,
+    "sharedRuntimeRoot": "web-game",
+    "captureScriptWroteRuntime": false,
+    "browser": "150.0.7871.187",
+    "headed": true,
+    "hardwareArgs": [
+      "--use-angle=metal",
+      "--enable-gpu",
+      "--disable-software-rasterizer"
+    ],
+    "viewport": {
+      "width": 1600,
+      "height": 900,
+      "dpr": 1
+    },
+    "httpStatus": 200,
+    "readyMs": 1971,
+    "servedAssets": {
+      "hero": {
+        "url": "/assets/models/ashwake/nyra.glb",
+        "bytes": 4452708,
+        "sha256": "56e569e529cd0d281bd60ad483d5c52bf6c3eab29f1c52829eb3a85dc7610caf",
+        "candidateByteIdentical": true
+      },
+      "weapon": {
+        "url": "/assets/models/ashwake/stormcage.glb",
+        "bytes": 151264,
+        "sha256": "29565b76739e2d0f5491c55c5c382c7e172c7bc99d04a2382044f782170b7c1d",
+        "candidateByteIdentical": true
+      }
+    },
+    "captures": [
+      {
+        "id": "S03",
+        "phase": "startup",
+        "tick": 29,
+        "path": "ArtSource/P30/Round006/S03.png",
+        "bytes": 1945683,
+        "sha256": "b0319e0f6ec46619418ead2f18da79845dde580542323a9fe15ed3c6ca4d4e67",
+        "calls": 81,
+        "triangles": 203051,
+        "textures": 32,
+        "geometries": 35,
+        "rendererErrors": [],
+        "reviewErrors": []
+      },
+      {
+        "id": "S04",
+        "phase": "active",
+        "tick": 34,
+        "path": "ArtSource/P30/Round006/S04.png",
+        "bytes": 1951766,
+        "sha256": "bb51bf1e9ac505f0932518be7f82427ee6f830531cfb3ab092f4b0ce8436f9fc",
+        "calls": 86,
+        "triangles": 204155,
+        "textures": 32,
+        "geometries": 38,
+        "rendererErrors": [],
+        "reviewErrors": []
+      },
+      {
+        "id": "S05",
+        "phase": "recovery",
+        "tick": 41,
+        "path": "ArtSource/P30/Round006/S05.png",
+        "bytes": 1955087,
+        "sha256": "01351ea34c69df9a9ab292821c622681e141951cdb03aa363f6ac3841dcd44f5",
+        "calls": 83,
+        "triangles": 203915,
+        "textures": 32,
+        "geometries": 38,
+        "rendererErrors": [],
+        "reviewErrors": []
+      }
+    ],
+    "resourceLimits": {
+      "readyMs": 4109,
+      "calls": 100,
+      "triangles": 250000,
+      "textures": 32,
+      "geometries": 64
+    },
+    "observedMaximum": {
+      "calls": 86,
+      "triangles": 204155,
+      "textures": 32,
+      "geometries": 38
+    },
+    "assetRegistryFailures": [],
+    "proceduralFallbackActive": false,
+    "productionAuthored": true,
+    "failures": [],
+    "errors": {
+      "page": [],
+      "requests": [],
+      "http": []
+    },
+    "knownWarnings": [
+      {
+        "type": "warning",
+        "text": "using deprecated parameters for the initialization function; pass a single object instead"
+      },
+      {
+        "type": "warning",
+        "text": "RGBELoader has been deprecated. Please use HDRLoader instead."
+      },
+      {
+        "type": "warning",
+        "text": "THREE.WebGLShadowMap: PCFSoftShadowMap has been deprecated. Using PCFShadowMap instead."
+      }
+    ]
+  },
+  "round005FreezeAudit": {
+    "source": "ArtSource/P30/Round005/freeze-after.sha256",
+    "sourceSha256": "2e1db75c11e5583f2be582af453c5ac49add2f7785f4c54d6c633abd466804ea",
+    "entryCount": 15,
+    "unchangedEntryCount": 13,
+    "authorizedRuntimeReplacements": [
+      {
+        "path": "web-game/public/assets/models/ashwake/nyra.glb",
+        "beforeSha256": "6f67a33bc0628f3b47e6dd9ff6df3842c0c6b2d66c27a98dc0b0a61353a4a30d",
+        "afterSha256": "56e569e529cd0d281bd60ad483d5c52bf6c3eab29f1c52829eb3a85dc7610caf"
+      },
+      {
+        "path": "web-game/public/assets/models/ashwake/stormcage.glb",
+        "beforeSha256": "098c834ac5fce4ce92c117362f1cf1b9225954295bad9d2ee9275f8be7234206",
+        "afterSha256": "29565b76739e2d0f5491c55c5c382c7e172c7bc99d04a2382044f782170b7c1d"
+      }
+    ],
+    "unexpectedDrift": [],
+    "allRound005EvidenceFilesIncludedInRound006Freeze": true
+  },
+  "gitScope": {
+    "trackedDiffNameOnly": [
+      "web-game/public/assets/models/ashwake/nyra.glb",
+      "web-game/public/assets/models/ashwake/stormcage.glb"
+    ],
+    "expectedTrackedDiff": [
+      "web-game/public/assets/models/ashwake/nyra.glb",
+      "web-game/public/assets/models/ashwake/stormcage.glb"
+    ],
+    "frozenTrackedRuntimeDiff": [],
+    "untrackedArtifactRoots": [
+      "ArtSource/P30/Round006/",
+      "WebAssetSource/P31/processed/round006/",
+      "WebAssetSource/P31/source_work/round006_contact/"
+    ]
+  },
+  "freezePolicy": {
+    "eligibility": "Every path is tracked or a non-ignored file under an intended Round006 git-add root.",
+    "excludedIgnoredGeneratedSourcePrefixes": [
+      "WebAssetSource/P31/source_work/round006_contact/blends/",
+      "WebAssetSource/P31/source_work/round006_contact/captures/",
+      "WebAssetSource/P31/source_work/round006_contact/glb/",
+      "WebAssetSource/P31/source_work/round006_contact/textures/"
+    ]
+  },
+  "largestResidualWeakness": "The frozen wide gameplay camera and S04 trail/impact effects partly mask the precise blade-edge and two-palm contact, even though the unoccluded geometry measurements and startup/recovery silhouettes are clean.",
+  "claimsNotMade": [
+    "No independent critic/reference verdict is included.",
+    "No acceptance, blind-test, AAA-fidelity, stage, commit, or deployment claim is made."
+  ]
+}

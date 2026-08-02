@@ -1,0 +1,46 @@
+{
+  "schema": "p30.round006.shared-runtime-node-validation.v1",
+  "status": "pass",
+  "integrated": true,
+  "acceptanceClaimed": false,
+  "runtime": "web-game",
+  "node": "v24.18.0",
+  "npm": "11.16.0",
+  "checks": [
+    {
+      "id": "typecheck",
+      "command": "/opt/homebrew/opt/node@24/bin/npm run typecheck",
+      "exitCode": 0,
+      "status": "pass"
+    },
+    {
+      "id": "lint",
+      "command": "/opt/homebrew/opt/node@24/bin/npm run lint",
+      "exitCode": 0,
+      "status": "pass"
+    },
+    {
+      "id": "simulation-tests",
+      "command": "/opt/homebrew/opt/node@24/bin/npm test -- --run",
+      "exitCode": 0,
+      "status": "pass"
+    },
+    {
+      "id": "production-build",
+      "command": "/opt/homebrew/opt/node@24/bin/npm run build",
+      "exitCode": 0,
+      "status": "pass"
+    }
+  ],
+  "assertions": {
+    "nodeMajor24": true,
+    "typecheckPassed": true,
+    "lintPassed": true,
+    "simulationTestFilesPassed": 2,
+    "simulationTestsPassed": 5,
+    "productionBuildPassed": true
+  },
+  "knownBuildWarnings": [
+    "Vite output includes the existing >500 kB chunk advisory."
+  ]
+}

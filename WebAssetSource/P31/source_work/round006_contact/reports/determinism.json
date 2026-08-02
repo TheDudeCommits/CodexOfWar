@@ -1,0 +1,90 @@
+{
+  "acceptance_claimed": false,
+  "byte_identical": true,
+  "clean_processes": 2,
+  "disable_autoexec": true,
+  "factory_startup": true,
+  "integrated": false,
+  "runs": [
+    {
+      "command": "/opt/homebrew/bin/blender --factory-startup --disable-autoexec --background --python /Users/amir/Documents/Gauntlet Loop/WebAssetSource/P31/source_work/round006_contact/build_contact.py",
+      "exit_code": 0,
+      "outputs": {
+        "glb/nyra.glb": {
+          "bytes": 4452708,
+          "sha256": "56e569e529cd0d281bd60ad483d5c52bf6c3eab29f1c52829eb3a85dc7610caf"
+        },
+        "glb/stormcage.glb": {
+          "bytes": 151264,
+          "sha256": "29565b76739e2d0f5491c55c5c382c7e172c7bc99d04a2382044f782170b7c1d"
+        },
+        "textures/nyra_round006_basecolor.png": {
+          "bytes": 10074,
+          "sha256": "2cc7395888ff502367edd7dabb0b6e3233fd23f85c74c04709f1f7b687c732b8"
+        },
+        "textures/nyra_round006_normal.png": {
+          "bytes": 10544,
+          "sha256": "c4e596485f35909599a69f95d94163e2064f290e5e9af840c0a60002cdb8f068"
+        },
+        "textures/nyra_round006_orm.png": {
+          "bytes": 24082,
+          "sha256": "a1d346e05cae548370ab3ea7d830c165a1d077980276e6f7b212d740df276e32"
+        },
+        "textures/stormcage_round006_basecolor.png": {
+          "bytes": 22101,
+          "sha256": "38a6b4d204f67da2f45703b7df1b4b9d75127a8c06483556b5f36f22b2a8236e"
+        },
+        "textures/stormcage_round006_normal.png": {
+          "bytes": 13410,
+          "sha256": "98f13e0d1a3195d679e08dd288e29644dd135c3466f4c757b71f307a5ec26c03"
+        },
+        "textures/stormcage_round006_orm.png": {
+          "bytes": 17793,
+          "sha256": "1347a1d09439780e8f3df633cbf95d52bb582d260c35c7416b200f34ed586542"
+        }
+      },
+      "process": 1
+    },
+    {
+      "command": "/opt/homebrew/bin/blender --factory-startup --disable-autoexec --background --python /Users/amir/Documents/Gauntlet Loop/WebAssetSource/P31/source_work/round006_contact/build_contact.py",
+      "exit_code": 0,
+      "outputs": {
+        "glb/nyra.glb": {
+          "bytes": 4452708,
+          "sha256": "56e569e529cd0d281bd60ad483d5c52bf6c3eab29f1c52829eb3a85dc7610caf"
+        },
+        "glb/stormcage.glb": {
+          "bytes": 151264,
+          "sha256": "29565b76739e2d0f5491c55c5c382c7e172c7bc99d04a2382044f782170b7c1d"
+        },
+        "textures/nyra_round006_basecolor.png": {
+          "bytes": 10074,
+          "sha256": "2cc7395888ff502367edd7dabb0b6e3233fd23f85c74c04709f1f7b687c732b8"
+        },
+        "textures/nyra_round006_normal.png": {
+          "bytes": 10544,
+          "sha256": "c4e596485f35909599a69f95d94163e2064f290e5e9af840c0a60002cdb8f068"
+        },
+        "textures/nyra_round006_orm.png": {
+          "bytes": 24082,
+          "sha256": "a1d346e05cae548370ab3ea7d830c165a1d077980276e6f7b212d740df276e32"
+        },
+        "textures/stormcage_round006_basecolor.png": {
+          "bytes": 22101,
+          "sha256": "38a6b4d204f67da2f45703b7df1b4b9d75127a8c06483556b5f36f22b2a8236e"
+        },
+        "textures/stormcage_round006_normal.png": {
+          "bytes": 13410,
+          "sha256": "98f13e0d1a3195d679e08dd288e29644dd135c3466f4c757b71f307a5ec26c03"
+        },
+        "textures/stormcage_round006_orm.png": {
+          "bytes": 17793,
+          "sha256": "1347a1d09439780e8f3df633cbf95d52bb582d260c35c7416b200f34ed586542"
+        }
+      },
+      "process": 2
+    }
+  ],
+  "schema": "p31.round006.clean-process-determinism.v1",
+  "status": "pass"
+}

@@ -1,0 +1,203 @@
+{
+  "acceptance_claimed": false,
+  "blender": "5.2.0 LTS",
+  "frozen_commit": "2c180e3",
+  "frozen_hollow": {
+    "bytes": 1448388,
+    "file": "WebAssetSource/P31/processed/round005/characters/hollow.glb",
+    "sha256": "f53a481f118c48dff825b8f98427957e6201434848416ff265f22eb2b07e689d"
+  },
+  "hero": {
+    "bones": 65,
+    "bytes": 4452708,
+    "clips": [
+      "Idle_Loop",
+      "Roll",
+      "Sprint_Loop",
+      "Sword_Regular_A",
+      "Walk_Loop"
+    ],
+    "contact_clip": {
+      "axis_error_degrees": {
+        "S04": {
+          "4": 0.0,
+          "5": 0.0
+        },
+        "S05": {
+          "6": 0.0,
+          "7": 0.0,
+          "8": 0.0
+        }
+      },
+      "contact_hold_frames": [
+        4,
+        5
+      ],
+      "desired_blade_axes_hero_local": {
+        "S04": [
+          0.0709715411067009,
+          -0.9655406475067139,
+          0.25038841366767883
+        ],
+        "S05": [
+          -0.1799977570772171,
+          -0.5199934840202332,
+          0.8349895477294922
+        ]
+      },
+      "recovery_hold_frames": [
+        6,
+        8
+      ],
+      "runtime_samples": {
+        "S03": 2.0,
+        "S04": 4.0,
+        "S05": 6.8
+      },
+      "secondary_grip_bake": {
+        "baked_integer_frames": [
+          0,
+          10
+        ],
+        "chain_count": 3,
+        "constraint": "Round006_SecondaryGrip",
+        "critical_sample_m": {
+          "S03": 3.4248366756919634e-07,
+          "S04": 4.3800289799866286e-07,
+          "S05": 7.757264366567155e-07
+        },
+        "max_critical_sample_m": 7.757264366567155e-07,
+        "target_node": "left_palm_grip_target"
+      },
+      "startup_axis": "preserved Round005 source frame 2 orientation"
+    },
+    "maps": {
+      "base_color": "Nyra_Round006_BaseColor",
+      "material": "Nyra_TealCloth",
+      "normal": "Nyra_Round006_Normal",
+      "orm": "Nyra_Round006_ORM"
+    },
+    "material_count": 8,
+    "materials": [
+      "Nyra_CopperArmor",
+      "Nyra_FaceSkinEyes",
+      "Nyra_Hair",
+      "Nyra_IvoryArmor",
+      "Nyra_TealCloth",
+      "Vespera_AetherInlay",
+      "Vespera_CrimsonMantle",
+      "Vespera_Nightsteel"
+    ],
+    "mesh_objects": 8,
+    "output_sha256": "56e569e529cd0d281bd60ad483d5c52bf6c3eab29f1c52829eb3a85dc7610caf",
+    "right_hand_socket": "weapon_socket",
+    "socket_parent_bone": "hand_r",
+    "source": "WebAssetSource/P31/processed/round005/characters/nyra.glb",
+    "source_sha256": "6f67a33bc0628f3b47e6dd9ff6df3842c0c6b2d66c27a98dc0b0a61353a4a30d",
+    "texture_count": 5,
+    "textures": [
+      "Nyra_Round006_BaseColor",
+      "Nyra_Round006_Normal",
+      "Nyra_Round006_ORM",
+      "nyra_face_atlas_2k",
+      "nyra_hair_1k"
+    ],
+    "triangles": 37428,
+    "vertices": 30544
+  },
+  "integrated": false,
+  "largest_residual_weakness": "The frozen wide gameplay camera and S04 trail/impact effects partly mask the precise blade-edge and two-palm contact, even though the unoccluded geometry measurements and startup/recovery silhouettes are clean.",
+  "schema": "p31.round006.nyra-stormcage-build.v1",
+  "scope": [
+    "Nyra Sword_Regular_A contact package",
+    "Stormcage authored package"
+  ],
+  "textures": {
+    "nyra_base": {
+      "bytes": 10074,
+      "file": "textures/nyra_round006_basecolor.png",
+      "resolution": [
+        256,
+        256
+      ],
+      "sha256": "2cc7395888ff502367edd7dabb0b6e3233fd23f85c74c04709f1f7b687c732b8"
+    },
+    "nyra_normal": {
+      "bytes": 10544,
+      "file": "textures/nyra_round006_normal.png",
+      "resolution": [
+        256,
+        256
+      ],
+      "sha256": "c4e596485f35909599a69f95d94163e2064f290e5e9af840c0a60002cdb8f068"
+    },
+    "nyra_orm": {
+      "bytes": 24082,
+      "file": "textures/nyra_round006_orm.png",
+      "resolution": [
+        256,
+        256
+      ],
+      "sha256": "a1d346e05cae548370ab3ea7d830c165a1d077980276e6f7b212d740df276e32"
+    },
+    "weapon_base": {
+      "bytes": 22101,
+      "file": "textures/stormcage_round006_basecolor.png",
+      "resolution": [
+        256,
+        256
+      ],
+      "sha256": "38a6b4d204f67da2f45703b7df1b4b9d75127a8c06483556b5f36f22b2a8236e"
+    },
+    "weapon_normal": {
+      "bytes": 13410,
+      "file": "textures/stormcage_round006_normal.png",
+      "resolution": [
+        256,
+        256
+      ],
+      "sha256": "98f13e0d1a3195d679e08dd288e29644dd135c3466f4c757b71f307a5ec26c03"
+    },
+    "weapon_orm": {
+      "bytes": 17793,
+      "file": "textures/stormcage_round006_orm.png",
+      "resolution": [
+        256,
+        256
+      ],
+      "sha256": "1347a1d09439780e8f3df633cbf95d52bb582d260c35c7416b200f34ed586542"
+    }
+  },
+  "weapon": {
+    "animations": [],
+    "bytes": 151264,
+    "contact_marker": "ContactMarker",
+    "legacy_secondary_grip": "GripSecondary",
+    "maps": {
+      "base_color": "Stormcage_Round006_BaseColor",
+      "material": "Dawnbreak_Steel",
+      "normal": "Stormcage_Round006_Normal",
+      "orm": "Stormcage_Round006_ORM"
+    },
+    "material_count": 3,
+    "materials": [
+      "Dawnbreak_DarkHilt",
+      "Dawnbreak_Rune",
+      "Dawnbreak_Steel"
+    ],
+    "mesh_objects": 9,
+    "output_sha256": "29565b76739e2d0f5491c55c5c382c7e172c7bc99d04a2382044f782170b7c1d",
+    "primary_grip": "GripPrimary",
+    "secondary_grip": "secondary_grip",
+    "source": "WebAssetSource/P31/processed/round005/weapons/stormcage.glb",
+    "source_sha256": "098c834ac5fce4ce92c117362f1cf1b9225954295bad9d2ee9275f8be7234206",
+    "texture_count": 3,
+    "textures": [
+      "Stormcage_Round006_BaseColor",
+      "Stormcage_Round006_Normal",
+      "Stormcage_Round006_ORM"
+    ],
+    "triangles": 1244,
+    "vertices": 3128
+  }
+}

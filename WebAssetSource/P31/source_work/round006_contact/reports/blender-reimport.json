@@ -1,0 +1,55 @@
+{
+  "acceptance_claimed": false,
+  "assets": {
+    "hero": {
+      "actions": [
+        "Idle_Loop",
+        "Roll",
+        "Sprint_Loop",
+        "Sword_Regular_A",
+        "Walk_Loop"
+      ],
+      "armatures": 1,
+      "bones": 65,
+      "embedded_images": [
+        "nyra_round006_basecolor",
+        "nyra_round006_normal",
+        "nyra_round006_orm"
+      ],
+      "file": "glb/nyra.glb",
+      "import_operator": "FINISHED",
+      "meshes": 9,
+      "required_nodes": [
+        "left_palm_grip_target",
+        "weapon_socket"
+      ],
+      "triangles": 37508
+    },
+    "weapon": {
+      "actions": [],
+      "armatures": 0,
+      "bones": 0,
+      "embedded_images": [
+        "stormcage_round006_basecolor",
+        "stormcage_round006_normal",
+        "stormcage_round006_orm"
+      ],
+      "file": "glb/stormcage.glb",
+      "import_operator": "FINISHED",
+      "meshes": 9,
+      "required_nodes": [
+        "BladeTip",
+        "ClaymoreRoot",
+        "ContactMarker",
+        "GripPrimary",
+        "GripSecondary",
+        "secondary_grip"
+      ],
+      "triangles": 1244
+    }
+  },
+  "blender": "5.2.0 LTS",
+  "integrated": false,
+  "schema": "p31.round006.blender-reimport.v1",
+  "status": "pass"
+}
