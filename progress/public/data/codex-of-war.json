@@ -19,29 +19,30 @@
   ],
   "activeBuild": {
     "pieceId": "P30",
-    "round": 6,
-    "roundLabel": "P30 · Round 006",
-    "status": "review-ready",
-    "builder": "Authored Duel-Contact Coherence Candidate",
-    "brief": "The frozen Round006 Nyra plus Stormcage contact package is integrated and passes builder validation at the shared production contract. The independent blind critic is running; no acceptance claim is made. The active single gap remains authored duel-contact pose-and-material coherence pending verdict.",
+    "round": 7,
+    "roundLabel": "P30 · Round 007",
+    "status": "building",
+    "builder": "Deterministic Close Over-Shoulder Camera",
+    "brief": "Replace only the third-person camera module and its telemetry and tests with a deterministic close over-shoulder combat profile, complete reset-state clearing, and real boom obstruction. Keep simulation, timing, assets, combat geometry, environment, HUD, lighting, effects, post processing, and manifest unchanged.",
     "facts": [
       "P00 is accepted as infrastructure; its blind visual baseline remains an explicit 28.33–76.67 loss.",
       "P10 remains paused after rejected Round 017 and the unfiled Unity Round 018 stop; it is not the active browser-work lane.",
       "P30 Round 005 remains rejected candidate evidence at 23/100 with 0/3 focused and 0/6 overall candidate wins.",
-      "Round006 is frozen at commit 01a4c652a5a30137ae0c82cc6cd6f063f2c91ca6. Builder integration passed for exactly two approved payloads, Nyra and Stormcage, with no acceptance claim.",
-      "The headed Chrome 150 shared-production capture is 1600×900 at DPR 1 and became ready in 1.971 s against the 4.109 s limit. All 18 authored assets loaded without fallback.",
-      "The resource envelope passes at 86 calls, 204,155 triangles, 32 textures, and 38 geometries against limits of 100, 250,000, 32, and 64.",
-      "Both palm-to-grip distances are below 0.0011 mm at S03, S04, and S05, comfortably inside the 25 mm gate.",
-      "Blade-to-Nyra triangle pairs are zero at S03, S04, and S05; blade-to-target intersection occurs only at S04 with 109 pairs.",
-      "The S04 contact marker is 0.0059 mm from the target and 6.1001 mm from the blade, inside the 30 mm and 10 mm gates.",
-      "Nyra and Stormcage each expose non-placeholder 256×256 base-color, normal, and ORM maps with filed public checksums.",
-      "Node 24 typecheck, lint, five simulation tests, production build, two clean deterministic asset builds, and processed/runtime byte identity all pass.",
-      "P30 and P31 are builder-pass and pending critic. The independent blind critic is running, so no visual verdict or acceptance is recorded.",
-      "The active single gap remains authored duel-contact pose-and-material coherence pending the critic verdict.",
+      "Round006 is frozen at commit 01a4c652a5a30137ae0c82cc6cd6f063f2c91ca6 and is rejected candidate evidence at 23/100 with 0/3 focused and 0/6 overall wins.",
+      "The fresh critic independently proved six RGB 1600×900 headed Chrome 150 captures at DPR 1 on WebGL2 through ANGLE Metal on Apple M2 before sealing the anonymous comparison.",
+      "Round006 passes its palm, blade-clearance, active target-contact, contact-marker, and embedded Nyra plus Stormcage PBR gates.",
+      "All 18 authored runtime assets load without fallback. Maximum cost remains 86 calls, 204,155 triangles, 32 textures, and 38 geometries.",
+      "Three true-cold launches completed in 1.436 s, 1.446 s, and 1.791 s against the 4.109 s ceiling.",
+      "The 30-second sample averaged 59.87 fps with an 18.4 ms p95; WebGL context loss and restore passed.",
+      "Camera replay failed with up to 5.176 cm of position divergence at tick 34, and boom obstruction is still unimplemented.",
+      "Repository-wide LFS integrity also fails on eight historical PNG blobs, although all 18 runtime assets are real bytes.",
+      "The critic named combat camera presentation as the single biggest visible gap: distant overlapping actors and excessive dead floor hide the corrected contact and materials.",
+      "Round007 is fanned out to two fresh independent camera builders: a conservative fixed shoulder rig and an adaptive duel composer.",
+      "Round007 changes only camera code, minimal wiring, telemetry, and tests; every visual asset, combat state, environment, HUD, and render contract stays frozen.",
       "The global latest capture manifest remains intentionally pinned to accepted P00."
     ],
     "evidenceFingerprint": {
-      "auditContext": "Integrated Round006 builder capture; independent critic running",
+      "auditContext": "Fresh independent Round006 critic complete",
       "browser": "Google Chrome 150",
       "graphics": "WebGL2 · ANGLE Metal Renderer: Apple M2",
       "headed": true,
@@ -50,72 +51,74 @@
       "deviceScaleFactor": 1
     },
     "evidenceBundle": {
-      "roundLabel": "P30 · Round 006 builder candidate",
-      "status": "BUILDER PASS · CRITIC RUNNING · NO ACCEPTANCE CLAIM",
+      "roundLabel": "P30 · Round 006 critic gate",
+      "status": "REJECT · 23/100 · FOCUSED 0/3 · OVERALL 0/6",
       "manifestPath": "/data/P30-round-006.json",
       "s01": {
-        "label": "S03 startup · Round006 candidate",
+        "label": "S03 startup · rejected Round006 candidate",
         "path": "/captures/P30/round-006/S03.png"
       },
       "diagnostic": {
-        "label": "S04 active hit · Round006 candidate",
+        "label": "S04 active hit · rejected Round006 candidate",
         "path": "/captures/P30/round-006/S04.png"
       },
       "metrics": [
         {
-          "label": "Builder",
-          "value": "PASS · no acceptance claim"
+          "label": "Verdict",
+          "value": "REJECT · 23/100"
         },
         {
-          "label": "Independent critic",
-          "value": "RUNNING · verdict pending"
+          "label": "Focused / overall",
+          "value": "0/3 · 0/6"
         },
         {
-          "label": "Cold ready",
-          "value": "1.971 s / 4.109 s · pass"
+          "label": "True-cold launches",
+          "value": "1.436 s · 1.446 s · 1.791 s"
+        },
+        {
+          "label": "30-second runtime",
+          "value": "59.87 fps · 18.4 ms p95"
         },
         {
           "label": "Resource maximum",
           "value": "86 calls · 204,155 triangles · 32 textures · 38 geometries"
         },
         {
-          "label": "Contact geometry",
-          "value": "0 hero intersections · target contact only at S04"
-        },
-        {
-          "label": "Authored maps",
-          "value": "Nyra + Stormcage · base-color / normal / ORM"
+          "label": "Camera gates",
+          "value": "Replay fail · obstruction unimplemented"
         }
       ],
       "checks": [
         "Headed Chrome 150 · Metal M2 · WebGL2 · 1600×900 · DPR 1",
         "Frozen commit · 01a4c652a5a30137ae0c82cc6cd6f063f2c91ca6",
+        "Anonymous mapping and scores sealed before reveal · public hashes filed",
         "18/18 authored assets · no fallback · production-authored runtime",
-        "Node 24 typecheck, lint, five simulation tests, and production build pass",
-        "Two clean deterministic asset builds · byte-identical outputs",
+        "Node 24 clean install, typecheck, lint, five tests, build, and three browser smoke tests",
         "Resource caps · 86 calls · 204,155 triangles · 32 textures · 38 geometries",
-        "Palm, blade-clearance, tick-34 contact, and map gates pass",
-        "Shared production capture · headed Chrome 150 · 1600×900 · DPR 1 · ready 1.971 s"
+        "Independent palm, blade-clearance, tick-34 contact, contact-marker, and embedded PBR gates",
+        "Three true-cold launches, 30-second timing, and WebGL loss and restore pass"
       ],
       "limitations": [
-        "Independent critic · running · no verdict yet",
-        "No acceptance or visual-quality claim is made",
-        "Wide gameplay camera and S04 effects partly mask exact blade-edge and palm contact",
-        "Single active gap · authored duel-contact pose-and-material coherence · pending verdict"
+        "Focused blind gate · 0/3 · hard fail",
+        "Overall blind gate · 0/6 · hard fail",
+        "Distant static camera leaves small overlapping actors and excessive dead floor",
+        "Deterministic camera replay · up to 5.176 cm divergence at tick 34",
+        "Camera boom obstruction · unimplemented",
+        "Repository-wide LFS integrity · eight historical raw PNG blobs"
       ]
     },
-    "nextGate": "The independent critic must complete the frozen Round006 review. Until that verdict is filed, authored duel-contact pose-and-material coherence remains the single active gap and the builder pass is not acceptance."
+    "nextGate": "Round007 must win S03–S05 3/3; project Nyra at 360–540 px; keep both actors and the full blade at least 80 px inside frame; place S04 contact inside the central 40%; replay camera telemetry byte-identically at ticks 29, 34, 41, and 60; resolve obstructed and clear boom paths; retain the 4.109 s and resource ceilings."
   },
   "canonicalCapture": {
     "shotId": "S04",
-    "name": "Round 006 active hit · critic review candidate",
-    "purpose": "P30 Round 006 builder candidate evidence",
+    "name": "Round 006 active hit · rejected candidate",
+    "purpose": "P30 Round 006 fresh critic candidate evidence",
     "camera": "Third-person review camera",
-    "heroHeight": "24–32% of image height",
-    "measuredHeroHeight": "not acceptance-qualified",
-    "sceneRead": "Active-hit Tape A state. Round006 passes builder integration, while the independent critic is running. No acceptance or visual verdict is claimed.",
+    "heroHeight": "Below the Round007 360–540 px target",
+    "measuredHeroHeight": "Rejected: subject scale is too small",
+    "sceneRead": "The distant static camera reduces the corrected duel to small overlapping figures surrounded by dead floor. Round006 remains rejected candidate evidence.",
     "benchmarkId": "Anonymous six-pair gate",
-    "benchmarkPolicy": "No blind result is published before the independent critic completes the frozen review",
+    "benchmarkPolicy": "Aggregate 0/6 result and public seal hashes only; comparison identities and source imagery are never published",
     "capturePath": "/captures/P30/round-006/S04.png",
     "manifestPath": "/data/P30-round-006.json",
     "latestManifestPath": "/data/capture-manifest-latest.json",
@@ -738,15 +741,15 @@
       "round": 6,
       "label": "P30 · Round 006",
       "pieceId": "P30",
-      "phase": "Builder integrated; independent critic review running",
-      "status": "review-ready",
+      "phase": "Fresh independent critic complete",
+      "status": "criticized",
       "date": "2026-08-02",
       "engineRun": true,
       "actualGameCapturePerformed": true,
       "targetMatchedGameCapturePerformed": true,
       "gateQualifyingCapture": false,
       "builderBrief": "Integrate the frozen Nyra and Stormcage duel-contact candidate, constrain both palms to the grip, clear the blade from Nyra, isolate target intersection to the active-hit frame, anchor the contact marker, and provide authored base-color, normal, and ORM maps while preserving the production contract.",
-      "evidence": "Builder integration passed at frozen commit 01a4c652a5a30137ae0c82cc6cd6f063f2c91ca6. Headed Chrome 150 captured S03, S04, and S05 at 1600×900 and DPR 1, ready in 1.971 s, with 18/18 authored assets, no fallback, and a passing maximum envelope of 86 calls, 204,155 triangles, 32 textures, and 38 geometries. Palm, blade-clearance, S04 target-contact, contact-marker, and six-map gates pass. The independent critic is running; no acceptance or visual verdict is claimed.",
+      "evidence": "Builder integration passed at frozen commit 01a4c652a5a30137ae0c82cc6cd6f063f2c91ca6. A fresh independent critic then reproduced six headed Chrome 150 RGB captures at 1600×900 and DPR 1, sealed mapping and scores before reveal, and rejected the candidate at 23/100 with 0/3 focused and 0/6 overall wins. Palm, blade-clearance, S04 target-contact, contact-marker, six-map, runtime, resource, and WebGL recovery gates pass; camera replay and obstruction gates fail.",
       "evidenceLinks": [
         "/captures/P30/round-006/S03.png",
         "/captures/P30/round-006/S04.png",
@@ -754,11 +757,15 @@
         "/data/P30-round-006.json"
       ],
       "critic": {
-        "status": "RUNNING · VERDICT PENDING · NO ACCEPTANCE CLAIM",
-        "score": null,
-        "scoreLabel": null,
-        "preference": null,
-        "primaryGap": "authored duel-contact pose-and-material coherence · pending verdict"
+        "status": "REJECT · FRESH INDEPENDENT CRITIC COMPLETE",
+        "score": 23,
+        "focusedCandidatePreferredCount": 0,
+        "focusedComparisonCount": 3,
+        "candidatePreferredCount": 0,
+        "comparisonCount": 6,
+        "scoreLabel": "Fresh independent headed browser gate 23/100 · focused 0/3 · overall 0/6",
+        "preference": "Candidate won 0/3 focused and 0/6 aggregate blind comparisons",
+        "primaryGap": "combat camera presentation: a distant static viewpoint reduces the corrected duel to small overlapping figures surrounded by dead floor, hiding contact and material work."
       }
     }
   ],
@@ -1044,8 +1051,8 @@
       "id": "P30",
       "name": "Three.js playable nucleus",
       "group": "Vertical slice",
-      "status": "review-ready",
-      "outcome": "Round 006 builder integration passes at the frozen production contract: palm, blade-clearance, active-hit target-contact, contact-marker, map, readiness, and resource gates are filed. The independent critic is running, no acceptance is claimed, and authored duel-contact pose-and-material coherence remains pending verdict.",
+      "status": "building",
+      "outcome": "Round 006 is rejected at 23/100 with 0/3 focused and 0/6 overall wins despite passing contact, material, runtime, and resource gates. Round007 is building two isolated deterministic close over-shoulder camera candidates with replay and boom-obstruction proof while the frozen simulation and presentation payloads remain unchanged.",
       "requiredEvidence": [
         "S01–S06 fresh browser captures",
         "Exact Tape A, Tape B, and Tape C replays",
@@ -1057,8 +1064,8 @@
       "id": "P31",
       "name": "Authored presentation integration",
       "group": "Vertical slice",
-      "status": "review-ready",
-      "outcome": "Round 006 builder integration passes for exactly two approved payloads, Nyra and Stormcage: 18/18 authored assets load without fallback, six non-placeholder 256×256 material maps are filed, and the maximum 86-call / 204,155-triangle / 32-texture / 38-geometry envelope passes. The independent critic remains pending and no acceptance is claimed.",
+      "status": "criticized",
+      "outcome": "Round 006 contact and PBR integration passes for exactly two approved payloads, Nyra and Stormcage: 18/18 authored assets load without fallback, six non-placeholder 256×256 material maps are filed, and the 86-call / 204,155-triangle / 32-texture / 38-geometry envelope passes. The visual candidate is nevertheless rejected at 23/100, so these assets remain frozen during the Round007 camera-only revision.",
       "requiredEvidence": [
         "S01–S06 fresh browser captures",
         "18/18 authored runtime assets loaded with provenance ready",

@@ -1,10 +1,10 @@
 {
-  "schema": "cow.public-browser-builder.v1",
+  "schema": "cow.public-browser-critic.v1",
   "piece": "P30",
   "round": 6,
   "date": "2026-08-02",
-  "status": "builder-integrated-candidate",
-  "acceptanceScope": "Builder validation passed. Independent review is still running; no acceptance claim is made.",
+  "status": "rejected-candidate-evidence",
+  "acceptanceScope": "Builder validation passed, but the fresh independent critic rejected the candidate at 23/100 with 0/3 focused and 0/6 overall wins. This is rejected evidence, not acceptance.",
   "frozenCommit": "01a4c652a5a30137ae0c82cc6cd6f063f2c91ca6",
   "builder": {
     "integrated": true,
@@ -154,10 +154,54 @@
       "geometries": 38
     }
   ],
-  "activeGap": {
-    "id": "authored-duel-contact-pose-and-material-coherence",
-    "status": "pending-independent-verdict",
-    "summary": "Builder gates now pass for constrained palms, collision-clean hero clearance, tick-34 target contact, and authored Nyra and Stormcage maps. Independent review has not yet decided the visual result."
+  "critic": {
+    "status": "REJECT",
+    "accepted": false,
+    "qualityScore": 23,
+    "scoreOutOf": 100,
+    "focusedCandidateWins": 0,
+    "focusedComparisonCount": 3,
+    "overallCandidateWins": 0,
+    "overallComparisonCount": 6,
+    "captureContractPassed": true,
+    "mappingSealedBeforeScoring": true,
+    "scoresSealedBeforeReveal": true,
+    "publicHashes": {
+      "mappingLockSha256": "422a29058860c6134b15d70ed6e4e1c581788631c949bcba7d4d07bcc1890040",
+      "anonymousScoreLockSha256": "aff4a9f4c9e31cfeeb8afbf8e2a197e8b1f2989540e792e444ec7a9d5fadab45",
+      "revealSha256": "22361b19d41d99f00ba2a6b6f336476cbfc62637ab1a91c9e7699c57e9ca726c",
+      "resultSha256": "9f51f0e68a33b718d75300b067fe616920b8f6b8628c8693a88179ab681dc6fb",
+      "reportSha256": "8984363103b1deecc64e39ae63dd4f7d68f99fd530ba2d5b7f081f66eb8e7661",
+      "privacyProofSha256": "4c657d5557b9cbd37fb7c3212c4febf67c5faba4579bbdd773a56e3b7bf325db"
+    },
+    "technicalPasses": [
+      "18/18 authored runtime assets with no fallback",
+      "Independent palm, blade-clearance, target-contact, contact-marker, and embedded PBR gates",
+      "86 calls, 204155 triangles, 32 textures, and 38 geometries within caps",
+      "Three true-cold launches at 1436.098, 1445.895, and 1791.223 milliseconds",
+      "59.87 fps mean and 18.4 millisecond p95 over 30 seconds",
+      "WebGL context loss and restore"
+    ],
+    "technicalFailures": [
+      "Camera replay diverged by up to 0.051763 meters at tick 34",
+      "Camera boom obstruction remained unimplemented",
+      "Repository-wide LFS integrity failed on eight historical PNG blobs"
+    ]
   },
-  "largestResidualWeakness": "The frozen wide gameplay camera and S04 trail and impact effects partly mask the precise blade edge and two-palm contact, even though the public geometry measurements and startup and recovery silhouettes are clean."
+  "activeGap": {
+    "id": "combat-camera-presentation",
+    "status": "round007-building",
+    "summary": "The distant static camera makes the corrected duel read as small overlapping figures surrounded by dead floor. Round007 replaces only the camera module and its telemetry and tests."
+  },
+  "largestResidualWeakness": "Combat camera presentation: the distant static viewpoint prevents corrected hands, blade contact, poses, and material work from reading with AAA force.",
+  "round007Gate": {
+    "scope": "Replace only the third-person camera module and its telemetry and tests with a deterministic close over-shoulder combat camera, reset-safe transient state, and boom obstruction.",
+    "focusedWinsRequired": "3/3",
+    "heroProjectedHeightPixels": [360, 540],
+    "minimumActorAndBladeFrameMarginPixels": 80,
+    "s04ContactViewportRegion": "central 40 percent",
+    "cameraReplay": "byte-identical at ticks 29, 34, 41, and 60 across three clean runs",
+    "obstruction": "wall path resolves below desired distance with at least 0.45 meters clearance; unobstructed path resolves exactly desired",
+    "coldReadyLimitMilliseconds": 4109
+  }
 }

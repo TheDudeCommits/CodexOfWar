@@ -432,6 +432,8 @@ export default function Home() {
               <h3>
                 {dashboard.activeBuild.status === "revising"
                   ? "Round rejected. Rebuild in progress."
+                  : dashboard.activeBuild.status === "building"
+                    ? "Round rejected. Replacement build in progress."
                   : "Proof filed. Critic in progress."}
               </h3>
               <p className="brief-copy">{dashboard.activeBuild.brief}</p>
