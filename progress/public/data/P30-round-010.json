@@ -1,0 +1,152 @@
+{
+  "schema": "cow.public-browser-round.v1",
+  "piece": "P30",
+  "round": 10,
+  "date": "2026-08-02",
+  "status": "critic-rejected-checkpoint-deployed",
+  "acceptanceScope": "Two fresh isolated builders repaired only the frozen light-strike presentation at ticks 29, 34, and 41 from exact baseline ed9cc22717cac6c7c1933e85fa01d1808a38137d. A fresh critic locked the protocol and presentation order before receiving two opaque runtime packages, ran both actual Three.js games at 1600×900 DPR1, sealed anonymous scores before identity reveal, and rejected both. Builder A was stronger and is deployed only as an honest progress checkpoint; no AAA acceptance is claimed.",
+  "playtestUrl": "https://web-game-teal-one.vercel.app/",
+  "deployment": {
+    "provider": "Vercel",
+    "deploymentId": "dpl_8HAgoyTX6nVfo3Gedmy6PzJ5TE9U",
+    "target": "production",
+    "stableAlias": "https://web-game-teal-one.vercel.app/",
+    "ready": true
+  },
+  "selection": {
+    "verdict": "NO ACCEPTED CANDIDATE",
+    "strongerBuilder": "BuilderA",
+    "strongerBuilderCommit": "37ae9f0800fb6851e72b0b83b7cea8e9f0ec6a21",
+    "alternateBuilder": "BuilderB",
+    "alternateBuilderCommit": "a4c977c88ec495e136f3698e7d79620f586fd5c8",
+    "strongerScore": 54,
+    "alternateScore": 52,
+    "strongerFocusedWins": 1,
+    "focusedComparisonCount": 3,
+    "strongerOverallWins": 4,
+    "overallComparisonCount": 6,
+    "minimumCategoryScore": 3,
+    "requiredScore": 95,
+    "requiredMinimumCategoryScore": 9,
+    "acceptanceClaimed": false
+  },
+  "blindIntegrity": {
+    "protocolCommit": "c2ee242a796b9428328efc449d6140806b1ec5c4",
+    "hashAmendmentCommit": "c9da55fee531777e72542466b6f5025b5cc76b75",
+    "sealedEvidenceCommit": "82f2a6f3bbf72d900ac71df56328fc00db5bf846",
+    "revealVerdictCommit": "f9f4d1d3f5745057634273e4c3b1b0f64f5a8a1b",
+    "mapCommitVerified": true,
+    "presentationCommitVerified": true,
+    "scoreCommitVerified": true,
+    "aliasScoreRemainedByteExactAfterReveal": true
+  },
+  "captureContract": {
+    "browser": "Chromium 150",
+    "headed": true,
+    "hardwareAccelerated": true,
+    "renderer": "WebGL2 · ANGLE Metal Renderer: Apple M2",
+    "viewport": {
+      "width": 1600,
+      "height": 900,
+      "deviceScaleFactor": 1
+    },
+    "fixedDeltaSeconds": 0.016666666666666666,
+    "focusedTicks": [29, 34, 41],
+    "authoredAssetsLoaded": 18,
+    "proceduralFallbackActive": false
+  },
+  "rootValidation": {
+    "node": "24.18.0",
+    "cleanInstallPackages": 191,
+    "vulnerabilities": 0,
+    "typecheckPassed": true,
+    "lintPassed": true,
+    "unitTestsPassed": 20,
+    "productionBuildPassed": true,
+    "browserTestsPassedSerially": 4
+  },
+  "gates": {
+    "objective": {
+      "O29": true,
+      "O34": false,
+      "O41": true
+    },
+    "technical": {
+      "T1": true,
+      "T2": true,
+      "T3": true,
+      "T4": true,
+      "T5": true,
+      "T6": false,
+      "T7": false,
+      "T8": true
+    },
+    "T6Failure": "The 31.023-second run stayed responsive with no heartbeat gap over 500 ms but recorded five unhandled pointer-lock WrongDocumentError rejections.",
+    "T7Failure": "Context restored in 387 ms and control responded in 398 ms, but scene luma remained 39.3050% below the pre-loss frame after five seconds."
+  },
+  "captures": [
+    {
+      "id": "S03",
+      "phase": "startup · anticipation",
+      "tick": 29,
+      "path": "/captures/P30/round-010/S03.png",
+      "bytes": 2127919,
+      "sha256": "bb5e08dbe1c4b0f23d7b6acf7cef136488a1639da6b35f81c130254e67767243"
+    },
+    {
+      "id": "S04",
+      "phase": "active · impact",
+      "tick": 34,
+      "path": "/captures/P30/round-010/S04.png",
+      "bytes": 2135530,
+      "sha256": "aa0800259896ae66dc8bc91f852ea76b2be6b47609901bebe5abd9b49cbe4293"
+    },
+    {
+      "id": "S05",
+      "phase": "recovery · grounded braking",
+      "tick": 41,
+      "path": "/captures/P30/round-010/S05.png",
+      "bytes": 2133448,
+      "sha256": "98f17d64d20e078eb75f43fc67b5956885369447ac3286d411cf669357fc4b10"
+    },
+    {
+      "id": "BLIND_TRIPTYCH",
+      "phase": "anonymous 29/34/41 comparison",
+      "path": "/captures/P30/round-010/BlindTriptych.png",
+      "bytes": 1636430,
+      "sha256": "c6172f55af9a2d3466182a3b333510ca8b332c7dd00dfa882c456ed27567942c"
+    }
+  ],
+  "critic": {
+    "status": "REJECT · FRESH BLIND CRITIC COMPLETE",
+    "accepted": false,
+    "qualityScore": 54,
+    "focusedCandidateWins": 1,
+    "focusedComparisonCount": 3,
+    "overallCandidateWins": 4,
+    "overallComparisonCount": 6,
+    "categoriesAtLeastNine": 0,
+    "categoryCount": 10,
+    "categoryScores": {
+      "anticipation": 6,
+      "contactTopology": 3,
+      "causalTargetResponse": 6,
+      "overshootAndBraking": 8,
+      "continuityAndWeight": 7,
+      "poseCraftAndSilhouette": 4,
+      "cameraAndDepth": 7,
+      "fxMaterialLightingHierarchy": 4,
+      "referenceLevelFinish": 3,
+      "gameplayPresentationIntegrity": 6
+    },
+    "singleBiggestGap": "The visible blade-to-target standoff at tick 34 makes the impact read disconnected rather than as localized exterior contact.",
+    "acceptanceClaimed": false
+  },
+  "nextRound": {
+    "round": 11,
+    "status": "queued",
+    "target": "Preserve the passing low same-direction recovery and stronger target response while moving the active cutting edge into one precise exterior contour contact at tick 34, then repair pointer-lock rejection handling and context-restore lighting without changing frozen mechanics.",
+    "followingPiece": "Distinct heavy attack plus heavy hit reaction, followed by dodge cancel and one-zombie AI."
+  },
+  "qualityStatus": "deployed-rejected-progress-checkpoint"
+}

@@ -443,7 +443,11 @@ export default function Home() {
                   ? "Round rejected. Rebuild in progress."
                   : dashboard.activeBuild.status === "building"
                     ? "Round rejected. Replacement build in progress."
-                  : "Proof filed. Critic in progress."}
+                    : dashboard.activeBuild.status === "criticized"
+                      ? "Critic complete. Round rejected."
+                      : dashboard.activeBuild.status === "accepted"
+                        ? "Critic complete. Round accepted."
+                        : "Proof filed. Critic in progress."}
               </h3>
               <p className="brief-copy">{dashboard.activeBuild.brief}</p>
 
