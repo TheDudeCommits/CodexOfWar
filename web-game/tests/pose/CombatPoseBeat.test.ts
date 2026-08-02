@@ -10,6 +10,7 @@ import {
 } from "../../src/game/simulation/GameSimulation";
 import type { InputFrame } from "../../src/game/simulation/types";
 import {
+  sampleHeroAuthoredPoseTiming,
   sampleHeroCombatPose,
   sampleTargetCombatPose,
 } from "../../src/render/objects/CombatPoseBeat";
@@ -54,7 +55,7 @@ function runPoseTape(): Array<{ tick: number; bytes: string }> {
   return samples;
 }
 
-describe("Round009 deterministic sword-contact pose beat", () => {
+describe("Round010 grounded sword-contact pose beat", () => {
   it("resolves the frozen ticks to anticipation, contact, and recoil", () => {
     const samples = Object.fromEntries(
       runPoseTape().map(({ tick, bytes }) => [tick, JSON.parse(bytes)]),
@@ -73,7 +74,7 @@ describe("Round009 deterministic sword-contact pose beat", () => {
     });
   });
 
-  it("carries force through an opposed coil, strike, and weighted reset", () => {
+  it("carries force through exterior contact, same-direction overshoot, and target recoil", () => {
     const coil = sampleHeroCombatPose("startup", 5);
     const contact = sampleHeroCombatPose("active", 10);
     const recoil = sampleHeroCombatPose("recovery", 17);
@@ -82,13 +83,54 @@ describe("Round009 deterministic sword-contact pose beat", () => {
 
     expect(coil.model.position[1]).toBeLessThan(-0.05);
     expect(coil.model.rotation[1]).toBeGreaterThan(0.06);
-    expect(contact.model.rotation[1]).toBe(0);
-    expect(contact.model.position[2]).toBe(0);
-    expect(recoil.model.position[0]).toBeLessThan(-0.02);
-    expect(recoil.model.position[2]).toBe(0);
-    expect(targetContact.model.position[2]).toBeGreaterThan(0);
-    expect(targetRecoil.model.position[2]).toBeGreaterThanOrEqual(0.09);
-    expect(targetRecoil.bones.torso[0]).toBeLessThan(-0.08);
+    expect(contact.weaponAxialRollOffset).toBeGreaterThan(2.5);
+    expect(contact.model.position[0]).toBeLessThan(-0.19);
+    expect(contact.model.position[2]).toBeGreaterThan(0.15);
+    expect(recoil.model.position[0]).toBeGreaterThan(contact.model.position[0]);
+    expect(recoil.model.position[2]).toBeGreaterThan(contact.model.position[2]);
+    expect(recoil.model.rotation[1]).toBeLessThan(contact.model.rotation[1]);
+    expect(targetContact.animationLeadSeconds).toBe(0);
+    expect(targetContact.model.position[0]).toBeLessThanOrEqual(-0.8);
+    expect(targetRecoil.model.position[0]).toBeLessThan(targetContact.model.position[0]);
+    expect(targetRecoil.model.position[2]).toBeGreaterThan(targetContact.model.position[2]);
+    expect(targetRecoil.bones.torso[0]).toBeLessThan(-0.13);
+  });
+
+  it("bypasses the authored overhead guard with a deterministic contact-to-settle blend", () => {
+    const duration = 10 / 24;
+    const contact = sampleHeroAuthoredPoseTiming("active", 10, 10 / 60, duration);
+    const before = sampleHeroAuthoredPoseTiming("recovery", 16, 16 / 60, duration);
+    const focused = sampleHeroAuthoredPoseTiming("recovery", 17, 17 / 60, duration);
+    const after = sampleHeroAuthoredPoseTiming("recovery", 18, 18 / 60, duration);
+
+    expect(contact).toMatchObject({
+      mode: "direct",
+      primarySeconds: 0.166667,
+      blend01: 0,
+    });
+    expect(focused).toMatchObject({
+      mode: "contact-to-settle-blend",
+      primarySeconds: 0.2,
+      secondarySeconds: 0.416567,
+    });
+    expect(before.blend01).toBeLessThan(focused.blend01);
+    expect(focused.blend01).toBeLessThan(after.blend01);
+  });
+
+  it("interpolates continuously around the impact and recovery keys", () => {
+    const preContact = sampleHeroCombatPose("active", 9);
+    const contact = sampleHeroCombatPose("active", 10);
+    const postContact = sampleHeroCombatPose("active", 11);
+    const preOvershoot = sampleHeroCombatPose("recovery", 16);
+    const overshoot = sampleHeroCombatPose("recovery", 17);
+    const postOvershoot = sampleHeroCombatPose("recovery", 18);
+
+    expect(preContact.model.position[0]).toBeGreaterThan(contact.model.position[0]);
+    expect(postContact.model.position[0]).toBeGreaterThan(contact.model.position[0]);
+    expect(preContact.weaponAxialRollOffset).toBeLessThan(contact.weaponAxialRollOffset);
+    expect(postContact.weaponAxialRollOffset).toBe(contact.weaponAxialRollOffset);
+    expect(preOvershoot.model.position[0]).toBeLessThan(overshoot.model.position[0]);
+    expect(postOvershoot.model.position[0]).toBeGreaterThanOrEqual(overshoot.model.position[0]);
   });
 
   it("returns an exact neutral additive layer outside the hit beat", () => {

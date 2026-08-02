@@ -1,0 +1,232 @@
+{
+  "schema": "p30.round010.builder-a.runtime-telemetry.v1",
+  "baseCommit": "ed9cc22717cac6c7c1933e85fa01d1808a38137d",
+  "candidateOnly": true,
+  "acceptanceClaimed": false,
+  "node": "v24.18.0",
+  "headed": true,
+  "browserVersion": "150.0.7871.187",
+  "httpStatus": 200,
+  "ready": {
+    "mainMs": 1453.412,
+    "focusedMs": [
+      1367.831,
+      836.528,
+      910.271
+    ],
+    "receipt": {
+      "schema": "cow.review.v1",
+      "piece": "P30",
+      "preset": "P30",
+      "seed": 30001,
+      "viewport": {
+        "width": 1600,
+        "height": 900,
+        "dpr": 1
+      },
+      "rapier": "ready",
+      "assets": "ready",
+      "renderer": "compiled-and-warm"
+    }
+  },
+  "freshActualGameRun": {
+    "location": {
+      "origin": "http://127.0.0.1:4173",
+      "pathname": "/"
+    },
+    "documentReadyState": "complete",
+    "performanceTimeOrigin": 1785672238027.1,
+    "navigationType": "navigation",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+    "inner": {
+      "width": 1600,
+      "height": 900
+    },
+    "devicePixelRatio": 1,
+    "canvas": {
+      "connected": true,
+      "css": {
+        "width": 1600,
+        "height": 900
+      },
+      "backing": {
+        "width": 1600,
+        "height": 900
+      }
+    },
+    "webgl": {
+      "version": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+      "shadingLanguageVersion": "WebGL GLSL ES 3.00 (OpenGL ES GLSL ES 3.0 Chromium)",
+      "unmaskedVendor": "Google Inc. (Apple)",
+      "unmaskedRenderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M2, Unspecified Version)"
+    },
+    "auditApis": {
+      "review": true,
+      "pose": true,
+      "bladeFx": true,
+      "contactFx": true
+    },
+    "scriptSources": [
+      "/assets/index-CtV2-GZ6.js"
+    ]
+  },
+  "observedAssetPaths": [
+    "/assets/animations/quaternius/combat_zombie.glb",
+    "/assets/animations/quaternius/player_core.glb",
+    "/assets/environment/ashwake/geometry/fort_buttress.glb",
+    "/assets/environment/ashwake/geometry/fort_gate.glb",
+    "/assets/environment/ashwake/geometry/fort_stairs.glb",
+    "/assets/environment/ashwake/geometry/fort_tower.glb",
+    "/assets/environment/ashwake/geometry/fort_wall.glb",
+    "/assets/environment/ashwake/geometry/gothic_statue.glb",
+    "/assets/environment/ashwake/materials/ground/ashwake_ground_basecolor.webp",
+    "/assets/environment/ashwake/materials/ground/ashwake_ground_normal.webp",
+    "/assets/environment/ashwake/materials/ground/ashwake_ground_orm.webp",
+    "/assets/environment/ashwake/materials/sector/ashwake_sector_basecolor.webp",
+    "/assets/environment/ashwake/materials/sector/ashwake_sector_normal.webp",
+    "/assets/environment/ashwake/materials/sector/ashwake_sector_orm.webp",
+    "/assets/environment/hdri/snowy_forest_1k.hdr",
+    "/assets/index-CtV2-GZ6.js",
+    "/assets/index-DCkQZptx.css",
+    "/assets/manifest.json",
+    "/assets/models/ashwake/hollow.glb",
+    "/assets/models/ashwake/nyra.glb",
+    "/assets/models/ashwake/stormcage.glb"
+  ],
+  "resourceCaps": {
+    "maximumObserved": {
+      "calls": 87,
+      "triangles": 203175,
+      "textures": 32,
+      "geometries": 41
+    },
+    "limits": {
+      "calls": 100,
+      "triangles": 250000,
+      "textures": 32,
+      "geometries": 64
+    },
+    "passed": true
+  },
+  "stability": {
+    "durationMs": 30064.7,
+    "frameCount": 1793,
+    "meanFps": 59.7,
+    "p95RafMs": 17.5,
+    "p99RafMs": 17.7,
+    "maxRafMs": 83.4,
+    "framesOver25Ms": 4,
+    "longTaskCount": 4,
+    "longTaskMaxMs": 751,
+    "rendererBefore": {
+      "calls": 80,
+      "triangles": 203051,
+      "points": 64,
+      "lines": 0,
+      "textures": 32,
+      "geometries": 41,
+      "pixelRatio": 1,
+      "size": {
+        "width": 1600,
+        "height": 900
+      },
+      "errors": [],
+      "context": {
+        "lost": false,
+        "losses": 0,
+        "restores": 0
+      }
+    },
+    "rendererAfter": {
+      "calls": 80,
+      "triangles": 203051,
+      "points": 64,
+      "lines": 0,
+      "textures": 32,
+      "geometries": 41,
+      "pixelRatio": 1,
+      "size": {
+        "width": 1600,
+        "height": 900
+      },
+      "errors": [],
+      "context": {
+        "lost": false,
+        "losses": 0,
+        "restores": 0
+      }
+    },
+    "resourceGrowth": false,
+    "webglError": 0
+  },
+  "contextLossRestore": {
+    "supported": true,
+    "restoreRequested": true,
+    "passed": true,
+    "renderer": {
+      "calls": 80,
+      "triangles": 203051,
+      "points": 64,
+      "lines": 0,
+      "textures": 30,
+      "geometries": 34,
+      "pixelRatio": 1,
+      "size": {
+        "width": 1600,
+        "height": 900
+      },
+      "errors": [],
+      "context": {
+        "lost": false,
+        "losses": 1,
+        "restores": 1
+      }
+    }
+  },
+  "runtimeMessages": {
+    "consoleErrors": [],
+    "consoleWarnings": [
+      "using deprecated parameters for the initialization function; pass a single object instead",
+      "RGBELoader has been deprecated. Please use HDRLoader instead.",
+      "THREE.WebGLShadowMap: PCFSoftShadowMap has been deprecated. Using PCFShadowMap instead.",
+      "using deprecated parameters for the initialization function; pass a single object instead",
+      "RGBELoader has been deprecated. Please use HDRLoader instead.",
+      "THREE.WebGLShadowMap: PCFSoftShadowMap has been deprecated. Using PCFShadowMap instead.",
+      "using deprecated parameters for the initialization function; pass a single object instead",
+      "RGBELoader has been deprecated. Please use HDRLoader instead.",
+      "THREE.WebGLShadowMap: PCFSoftShadowMap has been deprecated. Using PCFShadowMap instead.",
+      "using deprecated parameters for the initialization function; pass a single object instead",
+      "RGBELoader has been deprecated. Please use HDRLoader instead.",
+      "THREE.WebGLShadowMap: PCFSoftShadowMap has been deprecated. Using PCFShadowMap instead."
+    ],
+    "pageErrors": [],
+    "requestFailures": [],
+    "httpErrors": [],
+    "expectedKnownWarnings": [
+      "using deprecated parameters for the initialization function; pass a single object instead",
+      "RGBELoader has been deprecated. Please use HDRLoader instead.",
+      "THREE.WebGLShadowMap: PCFSoftShadowMap has been deprecated. Using PCFShadowMap instead.",
+      "using deprecated parameters for the initialization function; pass a single object instead",
+      "RGBELoader has been deprecated. Please use HDRLoader instead.",
+      "THREE.WebGLShadowMap: PCFSoftShadowMap has been deprecated. Using PCFShadowMap instead.",
+      "using deprecated parameters for the initialization function; pass a single object instead",
+      "RGBELoader has been deprecated. Please use HDRLoader instead.",
+      "THREE.WebGLShadowMap: PCFSoftShadowMap has been deprecated. Using PCFShadowMap instead.",
+      "using deprecated parameters for the initialization function; pass a single object instead",
+      "RGBELoader has been deprecated. Please use HDRLoader instead.",
+      "THREE.WebGLShadowMap: PCFSoftShadowMap has been deprecated. Using PCFShadowMap instead."
+    ],
+    "unexpectedWarnings": []
+  },
+  "gates": {
+    "headedChromeWebGL2Metal": true,
+    "cssBackingViewportDpr1": true,
+    "auditApisReady": true,
+    "authoredAssets18Of18NoFallback": true,
+    "runtimeErrorsZero": true,
+    "unexpectedWarningsZero": true,
+    "resourceCaps": true,
+    "thirtySecondStable": true,
+    "contextLossRestore": true
+  }
+}

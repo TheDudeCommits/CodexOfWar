@@ -1,0 +1,30 @@
+{
+  "schema": "p30.round010.builder-a.source-freeze-audit.v1",
+  "baseCommit": "ed9cc22717cac6c7c1933e85fa01d1808a38137d",
+  "authorizedProduction": [
+    {
+      "path": "web-game/src/render/objects/CharacterViews.ts",
+      "currentBlob": "47f289fab67553b405aa7dca96cd68aa54253dc2"
+    },
+    {
+      "path": "web-game/src/render/objects/CombatPoseBeat.ts",
+      "currentBlob": "5bdea83eacb7c397e30cabc8dbf2700e048d2200"
+    }
+  ],
+  "authorizedTests": [
+    "web-game/tests/browser/pose.spec.ts",
+    "web-game/tests/pose/CombatPoseBeat.test.ts"
+  ],
+  "authorizedEvidenceTooling": [
+    "web-game/scripts/p30-round010-grounded-builder-a-audit.mjs"
+  ],
+  "checkedUnrelatedProductionFiles": 67,
+  "unrelatedProductionMismatches": [],
+  "unauthorizedNewProductionFiles": [],
+  "gates": {
+    "exactBaseline": true,
+    "unrelatedProductionByteExact": true,
+    "noUnauthorizedNewProductionFiles": true
+  },
+  "passed": true
+}

@@ -7,8 +7,10 @@ import { clamp } from "../../game/simulation/math";
 import type { EnemyState, PlayerState } from "../../game/simulation/types";
 import type { AssetRegistry } from "../loaders/AssetRegistry";
 import {
+  sampleHeroAuthoredPoseTiming,
   sampleHeroCombatPose,
   sampleTargetCombatPose,
+  type HeroAuthoredPoseTiming,
   type HeroCombatPoseSample,
   type PoseVector,
   type TargetCombatPoseSample,
@@ -80,6 +82,10 @@ interface PoseAnchorTelemetry {
   secondaryGripWorld: PoseVector | null;
   bladeContactWorld: PoseVector | null;
   bladeTipWorld: PoseVector | null;
+  bladeWidthAxisWorld: PoseVector | null;
+  bladeDepthAxisWorld: PoseVector | null;
+  leadFootWorld: PoseVector | null;
+  supportFootWorld: PoseVector | null;
 }
 
 interface TargetAnchorTelemetry {
@@ -93,6 +99,8 @@ export interface CombatPoseBeatTelemetry {
   additivePresentationOnly: true;
   hero: {
     sample: HeroCombatPoseSample;
+    authoredTiming: HeroAuthoredPoseTiming;
+    weaponAxialRollRadians: number;
     rigBindings: Record<"pelvis" | "spine01" | "spine02" | "spine03" | "neck", boolean>;
     weaponParent: string | null;
     anchors: PoseAnchorTelemetry;
@@ -114,6 +122,8 @@ export interface CombatPoseBeatAuditApi {
 
 interface HeroPoseAuditState {
   sample: HeroCombatPoseSample;
+  authoredTiming: HeroAuthoredPoseTiming;
+  weaponAxialRollRadians: number;
   rigBindings: CombatPoseBeatTelemetry["hero"]["rigBindings"];
   weaponParent: string | null;
   anchors: PoseAnchorTelemetry;
@@ -132,6 +142,13 @@ const poseAuditState: {
 } = {
   hero: {
     sample: sampleHeroCombatPose("idle", -1),
+    authoredTiming: {
+      mode: "direct",
+      primarySeconds: 0,
+      secondarySeconds: 0,
+      blend01: 0,
+    },
+    weaponAxialRollRadians: ROUND005_WEAPON_AXIAL_ROLL,
     rigBindings: { pelvis: false, spine01: false, spine02: false, spine03: false, neck: false },
     weaponParent: null,
     anchors: {
@@ -141,6 +158,10 @@ const poseAuditState: {
       secondaryGripWorld: null,
       bladeContactWorld: null,
       bladeTipWorld: null,
+      bladeWidthAxisWorld: null,
+      bladeDepthAxisWorld: null,
+      leadFootWorld: null,
+      supportFootWorld: null,
     },
     supportHandToSecondaryGripMeters: null,
   },
@@ -189,6 +210,16 @@ function worldPoint(node: THREE.Object3D | null): PoseVector | null {
   if (!node) return null;
   const point = node.getWorldPosition(new THREE.Vector3());
   return [roundFx(point.x), roundFx(point.y), roundFx(point.z)];
+}
+
+function worldDirection(
+  node: THREE.Object3D | null,
+  direction: THREE.Vector3,
+): PoseVector | null {
+  if (!node) return null;
+  node.updateWorldMatrix(true, false);
+  const world = direction.clone().transformDirection(node.matrixWorld);
+  return [roundFx(world.x), roundFx(world.y), roundFx(world.z)];
 }
 
 function pointDistance(from: PoseVector | null, to: PoseVector | null): number | null {
@@ -335,6 +366,54 @@ class DeterministicAnimator {
     this.mixer.update(0);
   }
 
+  setBlendedTimes(
+    name: string,
+    primarySeconds: number,
+    secondarySeconds: number,
+    amount: number,
+  ): void {
+    const action = this.actions.get(name);
+    if (!action) return;
+    if (this.activeName !== name) {
+      const previous = this.actions.get(this.activeName);
+      previous?.stop();
+      action.reset();
+      action.enabled = true;
+      action.setEffectiveWeight(1);
+      action.setLoop(THREE.LoopOnce, 1);
+      action.clampWhenFinished = true;
+      action.play();
+      this.activeName = name;
+    }
+
+    const duration = action.getClip().duration;
+    action.time = clamp(primarySeconds, 0, Math.max(0, duration - 0.0001));
+    this.mixer.update(0);
+    const primary = new Map<THREE.Object3D, {
+      position: THREE.Vector3;
+      quaternion: THREE.Quaternion;
+      scale: THREE.Vector3;
+    }>();
+    this.root.traverse((node) => {
+      primary.set(node, {
+        position: node.position.clone(),
+        quaternion: node.quaternion.clone(),
+        scale: node.scale.clone(),
+      });
+    });
+
+    action.time = clamp(secondarySeconds, 0, Math.max(0, duration - 0.0001));
+    this.mixer.update(0);
+    const blend = clamp(amount, 0, 1);
+    this.root.traverse((node) => {
+      const from = primary.get(node);
+      if (!from) return;
+      node.position.lerpVectors(from.position, node.position, blend);
+      node.quaternion.slerpQuaternions(from.quaternion, node.quaternion, blend);
+      node.scale.lerpVectors(from.scale, node.scale, blend);
+    });
+  }
+
   getDuration(name: string): number {
     return this.actions.get(name)?.getClip().duration ?? 0;
   }
@@ -353,6 +432,7 @@ export class HeroView {
   private readonly ownedGeometries: THREE.BufferGeometry[] = [];
   private readonly ownedMaterials: THREE.Material[] = [];
   private readonly visual = new THREE.Group();
+  private readonly shadow: THREE.Mesh;
   private readonly weaponTrail = new THREE.Group();
   private readonly trailLayers: BladeTrailLayer[] = [];
   private readonly bladeFxAuditApi: BladeTrailFxAuditApi = {
@@ -366,8 +446,15 @@ export class HeroView {
   private trailSample = sampleBladeTrailFx("idle", 0);
   private trailAuditVisible = true;
   private animator: DeterministicAnimator | null = null;
+  private authoredWeapon: THREE.Object3D | null = null;
   private fallbackWeapon: THREE.Group | null = null;
   private latestPose = sampleHeroCombatPose("idle", -1);
+  private latestAuthoredTiming: HeroAuthoredPoseTiming = {
+    mode: "direct",
+    primarySeconds: 0,
+    secondarySeconds: 0,
+    blend01: 0,
+  };
   private readonly poseBones: Record<"pelvis" | "spine01" | "spine02" | "spine03" | "neck", THREE.Object3D | null> = {
     pelvis: null,
     spine01: null,
@@ -380,7 +467,13 @@ export class HeroView {
     THREE.Quaternion | null
   > = { pelvis: null, spine01: null, spine02: null, spine03: null, neck: null };
   private readonly poseAnchors: Record<
-    "leadHand" | "supportHand" | "secondaryGrip" | "bladeContact" | "bladeTip",
+    | "leadHand"
+    | "supportHand"
+    | "secondaryGrip"
+    | "bladeContact"
+    | "bladeTip"
+    | "leadFoot"
+    | "supportFoot",
     THREE.Object3D | null
   > = {
     leadHand: null,
@@ -388,6 +481,8 @@ export class HeroView {
     secondaryGrip: null,
     bladeContact: null,
     bladeTip: null,
+    leadFoot: null,
+    supportFoot: null,
   };
 
   constructor(assets: AssetRegistry) {
@@ -414,6 +509,7 @@ export class HeroView {
     this.animationNames = clips.map((clip) => clip.name).sort();
 
     const blob = shadowBlob(0.65, 0.34);
+    this.shadow = blob.mesh;
     this.ownedGeometries.push(blob.geometry);
     this.ownedMaterials.push(blob.material);
     this.root.add(blob.mesh, this.visual);
@@ -452,6 +548,7 @@ export class HeroView {
       // readable from the frozen gameplay camera without moving either grip
       // marker or the contact line.
       weapon.scene.rotation.set(0, ROUND005_WEAPON_AXIAL_ROLL, 0);
+      this.authoredWeapon = weapon.scene;
       weapon.scene.scale.setScalar(1);
       weaponSocket.add(weapon.scene);
       this.visual.add(hero.scene);
@@ -466,6 +563,8 @@ export class HeroView {
       this.poseAnchors.secondaryGrip = weapon.scene.getObjectByName("GripSecondary") ?? null;
       this.poseAnchors.bladeContact = weapon.scene.getObjectByName("ContactMarker") ?? null;
       this.poseAnchors.bladeTip = weapon.scene.getObjectByName("BladeTip") ?? null;
+      this.poseAnchors.leadFoot = hero.scene.getObjectByName("foot_l") ?? null;
+      this.poseAnchors.supportFoot = hero.scene.getObjectByName("foot_r") ?? null;
     }
 
     this.weaponTrail.name = "fx.weapon-trail";
@@ -649,6 +748,14 @@ export class HeroView {
 
   private applyCombatPose(sample: HeroCombatPoseSample): void {
     setTransform(this.visual, sample.model);
+    this.shadow.position.set(sample.model.position[0], 0.014, sample.model.position[2]);
+    if (this.authoredWeapon) {
+      this.authoredWeapon.rotation.set(
+        0,
+        ROUND005_WEAPON_AXIAL_ROLL + sample.weaponAxialRollOffset,
+        0,
+      );
+    }
     addLocalRotation(this.poseBones.pelvis, sample.bones.pelvis);
     addLocalRotation(this.poseBones.spine01, sample.bones.spine01);
     addLocalRotation(this.poseBones.spine02, sample.bones.spine02);
@@ -679,6 +786,10 @@ export class HeroView {
     const secondaryGripWorld = worldPoint(this.poseAnchors.secondaryGrip);
     poseAuditState.hero = {
       sample: this.latestPose,
+      authoredTiming: this.latestAuthoredTiming,
+      weaponAxialRollRadians: roundFx(
+        ROUND005_WEAPON_AXIAL_ROLL + this.latestPose.weaponAxialRollOffset,
+      ),
       rigBindings: {
         pelvis: this.poseBones.pelvis !== null,
         spine01: this.poseBones.spine01 !== null,
@@ -694,6 +805,10 @@ export class HeroView {
         secondaryGripWorld,
         bladeContactWorld: worldPoint(this.poseAnchors.bladeContact),
         bladeTipWorld: worldPoint(this.poseAnchors.bladeTip),
+        bladeWidthAxisWorld: worldDirection(this.authoredWeapon, new THREE.Vector3(1, 0, 0)),
+        bladeDepthAxisWorld: worldDirection(this.authoredWeapon, new THREE.Vector3(0, 0, 1)),
+        leadFootWorld: worldPoint(this.poseAnchors.leadFoot),
+        supportFootWorld: worldPoint(this.poseAnchors.supportFoot),
       },
       supportHandToSecondaryGripMeters: pointDistance(supportHandWorld, secondaryGripWorld),
     };
@@ -702,13 +817,31 @@ export class HeroView {
   private updateAuthoredAnimation(state: PlayerState, elapsed: number): void {
     const animator = this.animator!;
     if (state.motion === "attack") {
-      // The Round005 attack key times were authored directly against the
-      // deterministic simulation clock (24 fps). Preserve that clock so the
-      // frame-4 contact pose lands on runtime tick 34 instead of compressing
-      // the 0.4167 s clip across the 0.4333 s attack state.
-      animator.setTime("Sword_Regular_A", state.attackElapsed, false);
+      const duration = animator.getDuration("Sword_Regular_A");
+      this.latestAuthoredTiming = sampleHeroAuthoredPoseTiming(
+        state.attackPhase,
+        state.attackFrame,
+        state.attackElapsed,
+        duration,
+      );
+      if (this.latestAuthoredTiming.mode === "contact-to-settle-blend") {
+        animator.setBlendedTimes(
+          "Sword_Regular_A",
+          this.latestAuthoredTiming.primarySeconds,
+          this.latestAuthoredTiming.secondarySeconds,
+          this.latestAuthoredTiming.blend01,
+        );
+      } else {
+        animator.setTime("Sword_Regular_A", this.latestAuthoredTiming.primarySeconds, false);
+      }
       return;
     }
+    this.latestAuthoredTiming = {
+      mode: "direct",
+      primarySeconds: 0,
+      secondarySeconds: 0,
+      blend01: 0,
+    };
     if (state.motion === "dodge") {
       const duration = animator.getDuration("Roll");
       const dodge01 = clamp(1 - state.dodgeRemaining / PLAYER_DODGE_DURATION, 0, 1);
@@ -786,6 +919,7 @@ export class ZombieView {
   private readonly ownedGeometries: THREE.BufferGeometry[] = [];
   private readonly ownedMaterials: THREE.Material[] = [];
   private readonly visual = new THREE.Group();
+  private readonly shadow: THREE.Mesh;
   private readonly flashMaterials: FlashMaterial[] = [];
   private animator: DeterministicAnimator | null = null;
   private deathStartedAt: number | null = null;
@@ -818,6 +952,7 @@ export class ZombieView {
     this.animationNames = zombie?.animations.map((clip) => clip.name).sort() ?? [];
 
     const blob = shadowBlob(0.76, 0.38);
+    this.shadow = blob.mesh;
     this.ownedGeometries.push(blob.geometry);
     this.ownedMaterials.push(blob.material);
     this.root.add(blob.mesh, this.visual);
@@ -874,6 +1009,7 @@ export class ZombieView {
       const deathElapsed = elapsed - this.deathStartedAt;
       if (this.animator) {
         setTransform(this.visual, this.latestPose.model);
+        this.syncShadow(this.latestPose.model);
         this.animator.setTime("Death", deathElapsed, false);
         this.captureAuthoredPose();
       }
@@ -905,6 +1041,7 @@ export class ZombieView {
     }
 
     setTransform(this.visual, this.latestPose.model);
+    this.syncShadow(this.latestPose.model);
     this.visual.rotation.z *= 0.78;
     this.visual.position.z *= 0.75;
     this.applyHitFlash(0);
@@ -938,10 +1075,15 @@ export class ZombieView {
 
   private applyCombatPose(sample: TargetCombatPoseSample): void {
     setTransform(this.visual, sample.model);
+    this.syncShadow(sample.model);
     addLocalRotation(this.poseBones.hips, sample.bones.hips);
     addLocalRotation(this.poseBones.abdomen, sample.bones.abdomen);
     addLocalRotation(this.poseBones.torso, sample.bones.torso);
     addLocalRotation(this.poseBones.neck, sample.bones.neck);
+  }
+
+  private syncShadow(transform: TargetCombatPoseSample["model"]): void {
+    this.shadow.position.set(transform.position[0], 0.014, transform.position[2]);
   }
 
   private restoreAuthoredPose(): void {
