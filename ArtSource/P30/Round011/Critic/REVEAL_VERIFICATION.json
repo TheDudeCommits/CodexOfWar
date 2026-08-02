@@ -1,0 +1,45 @@
+{
+  "schema": "p30.r011.reveal-verification.v1",
+  "protocolID": "P30-R011-BLIND-v1",
+  "scoreSealCommit": "f07fadbe6afb945d55def5306f86f0351508242b",
+  "identityRevealAuthorizedAfterScoreSeal": true,
+  "presentationSeedHex": "10ab9b1f69c7a013838bbbab5a6d284a9274c35978634017f213c9d596647744",
+  "scoreSaltHex": "04a792f3e6566cad627cb234de148666cb0d58a096f0b25c920db208f01b3319",
+  "mapSaltHex": "c45280499a88fe2256994d360c81ceeb05e9a005e8beb107e46815a493b8e1cc",
+  "presentationCommitmentVerified": true,
+  "scoreCommitmentVerified": true,
+  "mapCommitmentVerified": true,
+  "publicArchiveVerification": "pass",
+  "revealMapVerification": "pass",
+  "entries": [
+    {
+      "alias": "candidate-8202fa2c3374062a",
+      "builderIdentity": "BuilderA",
+      "sourceBranch": "codex/p30-r011-contact-builder",
+      "sourceCommit": "855da599f2308ebf920312f743da9164a7778b4a",
+      "sourceGitTree": "f19db822eac6dbc990e79b4622cc0423bd594e8d",
+      "packageArchiveSha256": "f04cb4459a0efd9cffdff840555e3ffab35ae4ab14b670471e5aa7a24d9250fc",
+      "packageTreeSha256": "9eaa5a01d9124df0f2896e7f07dbd88b60215721f7921211bcc049b5e6cc9828",
+      "productionOutputTreeSha256": "7e1f49026ce271064029f288ddedb684cf937c7f328961e174fef3fdb1dc8e61",
+      "sourceObjectAndArchiveBinding": "pass",
+      "repeatDetachedBuild": "fail-closed",
+      "finalT1": false
+    },
+    {
+      "alias": "candidate-9442539eea8abc4c",
+      "builderIdentity": "BuilderB",
+      "sourceBranch": "codex/p30-r011-contact-calibration",
+      "sourceCommit": "ed207126794c9d637cbffe101816561deaeda57f",
+      "sourceGitTree": "a7d369ee26535289634a384708fee1714748dec2",
+      "packageArchiveSha256": "01257b4eb73c3b654ccbf068bc5bf605d56c27809406ee8368d14a3a149343ba",
+      "packageTreeSha256": "bd1d8723893e89d486de15813ab5e7e61d1294434d45d9c2fb61e06e614cc6ef",
+      "productionOutputTreeSha256": "e73d2f4788c6a280567b5f81bdc41497af225fab047f822656ef3258679689cc",
+      "sourceObjectAndArchiveBinding": "pass",
+      "repeatDetachedBuild": "fail-closed",
+      "finalT1": false
+    }
+  ],
+  "immutableScoreRecordFinding": "ALIAS_ONLY_SCORE.json labels evidence-manifest candidate-tree hashes as packageTreeSha256; neither value equals the public committed package-tree hash.",
+  "immutableScoreRecordEffect": "This unamended score-record hash mismatch is an evidence-integrity gap: T1 final and T8 fail closed for both aliases. It is not a score mutation and does not void the round under the listed round-level disqualifiers.",
+  "selectionRule": "The sealed focused and overall ballot totals select the higher-ranked rejected alias without changing any sealed score."
+}

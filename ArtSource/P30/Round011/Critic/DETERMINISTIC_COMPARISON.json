@@ -1,0 +1,39 @@
+{
+  "schema": "p30.r011.deterministic-comparison.v1",
+  "protocolID": "P30-R011-BLIND-v1",
+  "identityRevealReceived": false,
+  "referenceArchiveSha256": "4653a7a92d6f6bde910f39d3190df0adb112677851815443144505b8b420a6dd",
+  "referenceConclusion": "Both aliases remain far below the supplied production reference in character anatomy, material fidelity, environmental density, camera intimacy, contact readability, and effects hierarchy. The bright weapon core dominates the contact on both aliases instead of exposing production-grade topology and force transfer.",
+  "candidate-9442539eea8abc4c": {
+    "profileCoverage": "Two complete counted profiles plus one counted cold-start failure before capture.",
+    "determinism": "Profiles 01 and 02 have identical authoritative state digests at 29/34/41; profile 03 is unavailable, so the required three-profile comparison fails closed.",
+    "O29": {
+      "pass": true,
+      "reason": "Tick 29 is pre-impact at health 100 with 2.535192m telemetry separation, a visibly compressed target-directed silhouette, one planted support foot, and continuously reducing separation through tick 34."
+    },
+    "O34": {
+      "pass": false,
+      "reason": "Telemetry reports one zero-separation hit and one 100-to-90 health decrement at tick 34, but the controlling production frame uses a broad opaque white blade core over the target exterior, preventing the required unmasked two-pixel topology judgment."
+    },
+    "O41": {
+      "pass": true,
+      "reason": "Tick 41 is low and separated, both feet are grounded, and angular speed is 1.078423 rad/s versus a 30.349 rad/s pre-contact peak, with the sequence reading as continued braking rather than an overhead re-cock."
+    }
+  },
+  "candidate-8202fa2c3374062a": {
+    "profileCoverage": "Three counted profiles completed exact focused captures and soaks; all failed during required context recovery before complete later-gate evidence.",
+    "determinism": "All three profiles have identical authoritative state digests at ticks 29/34/41 and matching semantic input/hit logs; focused tick-34 PNG bytes vary and no locked SSIM/pHash receipt exists, so T4 fails closed.",
+    "O29": {
+      "pass": false,
+      "reason": "Although tick 29 is clearly pre-impact and grounded, signed separation reverses from 1.683426m at tick 30 to 1.698311m at tick 31, violating the locked no-reversal continuity condition."
+    },
+    "O34": {
+      "pass": false,
+      "reason": "Telemetry declares zero separation and one health decrement at tick 34, but the controlling frame has broad opaque blade bloom across the torso contour and the adjacent tick 35 reports -0.001776m signed separation, so topology is not visibly clean."
+    },
+    "O41": {
+      "pass": true,
+      "reason": "Tick 41 remains low, separated, and two-foot grounded at 1.109 rad/s versus a 55.968 rad/s pre-contact peak; the late tick-43 acceleration weakens polish but does not create a visible overhead re-cock by tick 41."
+    }
+  }
+}

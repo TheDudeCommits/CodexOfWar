@@ -1,0 +1,87 @@
+{
+  "schema": "p30.r011.alias-only-score.v1",
+  "protocolID": "P30-R011-BLIND-v1",
+  "protocolPayloadSha256": "bc1e9db54ad38408d6ff369df96ed163d15cf2dfa3fd5403d7a56e374ee85d7b",
+  "presentationCommitmentSha256": "5df2ec1607da073c492d94d7f1c47c23606d51b9fdbc267a3ada8d76e853b05f",
+  "publicPackageMapCommitmentSha256": "7a9893a52c679d6960f9b3c4b515a06f66ac8ba3c88744caab70b0471da5dc0f",
+  "identityRevealReceived": false,
+  "referenceBar": "Supplied God of War Ragnarok gameplay screenshots; no web-game allowance.",
+  "runtime": {
+    "route": "production playable route",
+    "viewport": "1600x900 DPR1",
+    "required": "headed Chrome hardware WebGL2",
+    "node": "v24.18.0",
+    "npm": "11.16.0",
+    "chrome": "Google Chrome 150.0.7871.187"
+  },
+  "evidence": {
+    "ballotsPath": "BLIND_BALLOTS.json",
+    "ballotsSha256": "415f845b5e7d1d61cbbd695901a468b017e5b459f3cdb1c7427c8f9cc793450f",
+    "deterministicPath": "DETERMINISTIC_COMPARISON.json",
+    "deterministicSha256": "e87593672d70cfc117dcfdf0f734b174fb35c77b246b74fa76981a6157206214",
+    "manifestPath": "EVIDENCE_MANIFEST.json",
+    "manifestSha256": "614016068f1e01d1b3f6af7bd7281e13d312b29900b10e14edd2a3acd401ce5e",
+    "failuresPath": "EVALUATOR_FAILURES.json",
+    "failuresSha256": "e830834f5d2af88e7f25a845b87d09408bc0a300d899c2aeeb4b24687cbe502d"
+  },
+  "aliases": {
+    "candidate-9442539eea8abc4c": {
+      "packageTreeSha256": "429bbef929fe56a03f2a5a9b8782d13d6ee23b48b0b2af839361be5e1706d23d",
+      "T1": "pending-reveal",
+      "T2": "pass",
+      "T3": "fail",
+      "T4": "fail",
+      "T5": "fail-closed",
+      "T6": "fail-closed",
+      "T7": "fail-closed",
+      "T8": "fail",
+      "technicalReason": "Only two complete counted profiles exist; later required evidence is unavailable.",
+      "O29": true,
+      "O34": false,
+      "O41": true,
+      "objectiveReason": "Opaque blade bloom prevents the required exposed O34 exterior-topology judgment.",
+      "scores": { "C1": 6, "C2": 4, "C3": 5, "C4": 6, "C5": 5, "C6": 4, "C7": 3, "C8": 3, "C9": 2, "C10": 3 },
+      "total": 41,
+      "minimum": 2,
+      "focusedWins": 3,
+      "overallWins": 1,
+      "acceptance": false,
+      "biggestRemainingGap": "Biggest remaining gap: opaque blade bloom at absolute tick 34 obscures exterior contact topology, which prevents the reference-level force-transfer read."
+    },
+    "candidate-8202fa2c3374062a": {
+      "packageTreeSha256": "b305b1d049853981ac89fdeb10f17f7058df7a143b7a2ad372a1d9237401d092",
+      "T1": "pending-reveal",
+      "T2": "pass",
+      "T3": "pass",
+      "T4": "fail",
+      "T5": "fail-closed",
+      "T6": "fail",
+      "T7": "fail-closed",
+      "T8": "fail",
+      "technicalReason": "Focused captures completed, but frame-determinism proof is absent and context recovery failed in every counted profile.",
+      "O29": false,
+      "O34": false,
+      "O41": true,
+      "objectiveReason": "The tick-29 separation reversal fails continuity and opaque bloom with tick-35 penetration fails clean O34 topology.",
+      "scores": { "C1": 4, "C2": 3, "C3": 4, "C4": 5, "C5": 4, "C6": 4, "C7": 3, "C8": 3, "C9": 2, "C10": 2 },
+      "total": 34,
+      "minimum": 2,
+      "focusedWins": 0,
+      "overallWins": 0,
+      "acceptance": false,
+      "biggestRemainingGap": "Biggest remaining gap: separation reverses at absolute tick 31, which breaks the reference-level uninterrupted anticipation read."
+    }
+  },
+  "ballots": {
+    "castOnce": true,
+    "focused": { "candidate-9442539eea8abc4c": 3, "candidate-8202fa2c3374062a": 0 },
+    "overall": { "candidate-9442539eea8abc4c": 1, "candidate-8202fa2c3374062a": 0 },
+    "blindOrderManifestSha256": "415f845b5e7d1d61cbbd695901a468b017e5b459f3cdb1c7427c8f9cc793450f"
+  },
+  "conjunctiveChecks": {
+    "candidate-9442539eea8abc4c": { "noDisqualifier": false, "objectives": false, "technical": false, "focused": true, "overall": false, "visualTotal": false, "categoryMinimum": false, "provisionalResult": false },
+    "candidate-8202fa2c3374062a": { "noDisqualifier": false, "objectives": false, "technical": false, "focused": false, "overall": false, "visualTotal": false, "categoryMinimum": false, "provisionalResult": false }
+  },
+  "strongerAlias": "candidate-9442539eea8abc4c",
+  "roundVerdict": "NO ACCEPTED CANDIDATE"
+}
