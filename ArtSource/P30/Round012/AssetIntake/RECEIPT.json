@@ -1,0 +1,82 @@
+{
+  "schema": "p30.r012.asset-intake-receipt.v1",
+  "candidateUid": "31ca8d86b4074312a51170d8e7dbe07c",
+  "candidateName": "Zombie 3D",
+  "decision": "reject",
+  "failClosed": true,
+  "licenseDecision": {
+    "redistributionExplicitlyPermitted": true,
+    "license": "CC BY 4.0",
+    "attributionRequired": true
+  },
+  "artifact": {
+    "addedToRepository": false,
+    "path": null,
+    "sha256": null,
+    "sourceAcquired": false,
+    "generatedGlbAcquired": false
+  },
+  "rejectionCodes": [
+    "AUTHORITATIVE_SOURCE_NOT_RIGGED",
+    "AUTHORITATIVE_SOURCE_NOT_ORIGINAL_GLB",
+    "AUTHORITATIVE_SOURCE_PBR_CLAIMS_UNSUBSTANTIATED",
+    "AUTHORIZED_DOWNLOAD_UNAVAILABLE"
+  ],
+  "rejectionSummary": "License passes, but first-party artifact metadata proves the uploaded source is a static OBJ/MTL plus one 2K PNG, while official download requires authentication. No artifact bytes were admitted.",
+  "targetArtifactValidation": {
+    "status": "not-run",
+    "reason": "No source artifact was available through an authorized download path; validating viewer payloads or substitute bytes would break provenance.",
+    "gltfValidator": {
+      "version": "2.0.0-dev.3.10",
+      "errors": null,
+      "warnings": null
+    },
+    "gltfTransform": {
+      "version": "4.4.2",
+      "validateExitCode": null,
+      "inspectExitCode": null
+    }
+  },
+  "targetArtifactMeasurements": {
+    "fileSizeBytes": null,
+    "sha256": null,
+    "triangles": null,
+    "materials": null,
+    "textures": null,
+    "textureDimensions": null,
+    "animations": null,
+    "skins": null,
+    "uniqueJoints": null,
+    "skinnedNodes": null
+  },
+  "authoritativePublishedMeasurements": {
+    "sourceArchiveSizeBytes": 4387870,
+    "triangles": 22144,
+    "vertices": 11566,
+    "materials": 1,
+    "textures": 1,
+    "textureDimensions": [
+      "2048x2048"
+    ],
+    "animations": 0,
+    "isRigged": false,
+    "skins": null,
+    "morphTargets": 0
+  },
+  "acquisitionReady": {
+    "command": "npm run gate -- /absolute/path/to/official-zombie-3d.glb",
+    "policy": "INTAKE_POLICY.json",
+    "note": "Any creator-supplied rigged FBX/GLB is a new artifact and requires new license-to-bytes provenance."
+  },
+  "deterministicEvidence": {
+    "files": {
+      "ATTRIBUTION.md": "bedbbabcf7ac69505c7466d07fe990e1ea220a566dc2c71f291a88c6a4ea96db",
+      "INTAKE_POLICY.json": "08404970a43485eac30d74120ddb5073b0a0f4f164739617cca6aca2fa4020ad",
+      "LICENSE.md": "9113469618d055d813ec2f07eb838f1d13c7f4bc25970c92b1c55e20789003f6",
+      "PROVENANCE.json": "e50fa69d494a8e68606dfa6403a2744e78732ba0267225ec1b45c6d73d9c1c8b",
+      "tools/inspect-glb.mjs": "82aa9f0e93cbebf7046882a15a1d2ced5b9a531df89091ca70e4b54135ff531f"
+    },
+    "verificationCommand": "npm ci && npm run verify"
+  },
+  "biggestRemainingAssetGap": "A source-verifiable, redistributable, high-detail zombie GLB with a production humanoid rig and real PBR texture set remains missing."
+}

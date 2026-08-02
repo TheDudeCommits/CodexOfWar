@@ -1,0 +1,129 @@
+{
+  "schema": "p30.r012.asset-provenance.v1",
+  "candidate": {
+    "name": "Zombie 3D",
+    "uid": "31ca8d86b4074312a51170d8e7dbe07c",
+    "creatorDisplayName": "Zombie 3D",
+    "creatorUsername": "chuvit",
+    "creatorUid": "d20bb419cced4e67af0151915e556d07",
+    "modelUrl": "https://sketchfab.com/3d-models/zombie-3d-31ca8d86b4074312a51170d8e7dbe07c"
+  },
+  "audit": {
+    "localDate": "2026-08-03",
+    "timezone": "Asia/Bangkok",
+    "observedAtUtc": "2026-08-02T18:45:50Z",
+    "sourceClass": "first-party-publisher-records"
+  },
+  "primarySources": {
+    "publicDataApi": "https://api.sketchfab.com/v3/models/31ca8d86b4074312a51170d8e7dbe07c",
+    "detailedModelRecord": "https://sketchfab.com/i/models/31ca8d86b4074312a51170d8e7dbe07c",
+    "downloadEndpoint": "https://api.sketchfab.com/v3/models/31ca8d86b4074312a51170d8e7dbe07c/download",
+    "licenseRecord": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+    "canonicalLicense": "https://creativecommons.org/licenses/by/4.0/legalcode.en",
+    "downloadApiGuidelines": "https://sketchfab.com/developers/download-api/guidelines"
+  },
+  "license": {
+    "label": "CC Attribution",
+    "fullName": "Creative Commons Attribution",
+    "slug": "by",
+    "version": "4.0",
+    "licenseUid": "322a749bcfa841b29dff1e8a1bb74b0b",
+    "requirementsFromSketchfab": "Author must be credited. Commercial use is allowed.",
+    "redistributionExplicitlyPermitted": true,
+    "attributionRequired": true
+  },
+  "listingClaims": {
+    "fullyRigged": true,
+    "formats": [
+      "OBJ",
+      "FBX",
+      "GLB"
+    ],
+    "textureResolution": "2K/4K",
+    "textureChannels": [
+      "diffuse",
+      "normal",
+      "roughness",
+      "metallic"
+    ],
+    "claimSource": "creator-written model description"
+  },
+  "publicDataApiRecord": {
+    "isDownloadable": true,
+    "faceCount": 22144,
+    "vertexCount": 11566,
+    "animationCount": 0
+  },
+  "detailedModelRecord": {
+    "originalExtension": "obj",
+    "originalFileName": "Zombie 3D",
+    "archiveSizeBytes": 4387870,
+    "downloadType": "free",
+    "mayDownloadThisModelAnonymous": false,
+    "generatedArchives": {
+      "source": true,
+      "gltf": true,
+      "glb": true,
+      "usdz": true
+    },
+    "triangles": 22144,
+    "vertices": 11566,
+    "materialCount": 1,
+    "textureCount": 1,
+    "pbrType": null,
+    "isRigged": false,
+    "animationCount": 0,
+    "morphTargetCount": 0,
+    "hasMeshNormals": true,
+    "hasTangents": false,
+    "uvMapped": true,
+    "sourceFiles": [
+      {
+        "extension": "mtl",
+        "sizeBytes": 259,
+        "path": "Cartoon_Zombie_Charac_0323043318_texture_obj/Cartoon_Zombie_Charac_0323043318_texture.mtl"
+      },
+      {
+        "extension": "obj",
+        "sizeBytes": 1808554,
+        "path": "Cartoon_Zombie_Charac_0323043318_texture_obj/Cartoon_Zombie_Charac_0323043318_texture.obj"
+      },
+      {
+        "extension": "png",
+        "sizeBytes": 3716007,
+        "width": 2048,
+        "height": 2048,
+        "color": "RGB 8-bit",
+        "path": "Cartoon_Zombie_Charac_0323043318_texture_obj/Cartoon_Zombie_Charac_0323043318_texture.png"
+      }
+    ]
+  },
+  "accessAudit": {
+    "anonymousDownloadHttpStatus": 401,
+    "anonymousDownloadResponse": {
+      "detail": "Authentication credentials were not provided."
+    },
+    "browserSessionAuthenticated": false,
+    "browserObservedResult": "Download 3D Model opened the Sketchfab login dialog.",
+    "tokenEnvironmentAvailable": false,
+    "bypassAttempted": false,
+    "artifactAcquired": false
+  },
+  "contradictions": [
+    {
+      "claim": "fully rigged",
+      "authoritativeRecord": "metadata.isRigged=false",
+      "gateImpact": "reject"
+    },
+    {
+      "claim": "OBJ, FBX, and GLB source formats",
+      "authoritativeRecord": "original ext=obj; source contains OBJ, MTL, and PNG; GLB exists only as a generated archive; no FBX source is listed",
+      "gateImpact": "reject"
+    },
+    {
+      "claim": "2K/4K diffuse, normal, roughness, and metallic maps",
+      "authoritativeRecord": "one 2048x2048 RGB PNG; textureCount=1; pbrType=null",
+      "gateImpact": "reject"
+    }
+  ]
+}

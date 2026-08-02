@@ -1,0 +1,42 @@
+{
+  "schema": "p30.r012.zombie-glb-intake-policy.v1",
+  "candidateUid": "31ca8d86b4074312a51170d8e7dbe07c",
+  "format": "glb",
+  "maxFileSizeBytes": 67108864,
+  "triangles": {
+    "min": 20000,
+    "max": 30000
+  },
+  "materials": {
+    "min": 1,
+    "max": 8
+  },
+  "textures": {
+    "minImages": 3,
+    "maxImages": 16,
+    "minLargestDimension": 2048,
+    "maxLargestDimension": 4096,
+    "requiredMaterialChannels": [
+      "baseColor",
+      "normal",
+      "metallicRoughness"
+    ],
+    "externalResourcesAllowed": false
+  },
+  "rig": {
+    "required": true,
+    "minSkins": 1,
+    "minUniqueJoints": 15,
+    "minSkinnedNodes": 1,
+    "inverseBindMatricesRequired": true
+  },
+  "animations": {
+    "minClips": 0
+  },
+  "validation": {
+    "maxErrors": 0,
+    "maxWarnings": 0,
+    "gltfValidatorVersion": "2.0.0-dev.3.10",
+    "gltfTransformVersion": "4.4.2"
+  }
+}
