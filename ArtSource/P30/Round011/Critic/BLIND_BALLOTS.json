@@ -1,0 +1,88 @@
+{
+  "schema": "p30.r011.blind-ballots.v1",
+  "protocolID": "P30-R011-BLIND-v1",
+  "identityRevealReceived": false,
+  "castOnce": true,
+  "ballots": [
+    {
+      "ballotID": "F1",
+      "left": "candidate-9442539eea8abc4c",
+      "right": "candidate-8202fa2c3374062a",
+      "winner": "candidate-9442539eea8abc4c",
+      "outcome": "left-wins",
+      "reason": "The left frame has the more compressed planted base, clearer target-directed load, and more coherent 27-34 anticipation path."
+    },
+    {
+      "ballotID": "F2",
+      "left": "candidate-8202fa2c3374062a",
+      "right": "candidate-9442539eea8abc4c",
+      "winner": "candidate-9442539eea8abc4c",
+      "outcome": "right-wins",
+      "reason": "The right frame has the clearer directional response and slightly better edge/exterior reading, although both fail the absolute topology bar because opaque blade bloom masks the contact."
+    },
+    {
+      "ballotID": "F3",
+      "left": "candidate-8202fa2c3374062a",
+      "right": "candidate-9442539eea8abc4c",
+      "winner": "candidate-9442539eea8abc4c",
+      "outcome": "right-wins",
+      "reason": "The right sequence settles into the low grounded arrest with less late speed resurgence and a cleaner same-strike silhouette."
+    },
+    {
+      "ballotID": "G1",
+      "left": "candidate-8202fa2c3374062a",
+      "right": "candidate-9442539eea8abc4c",
+      "winner": null,
+      "outcome": "tie-or-unclear",
+      "reason": "The neutral and traversal frames share the same sparse courtyard, broad empty staging, HUD treatment, and visible production shortfall with no decisive game-wide advantage."
+    },
+    {
+      "ballotID": "G2",
+      "left": "candidate-9442539eea8abc4c",
+      "right": "candidate-8202fa2c3374062a",
+      "winner": "candidate-9442539eea8abc4c",
+      "outcome": "left-wins",
+      "reason": "Across 24/29/34/41/48, the left attack reads as the more coherent kinetic phrase and avoids the right sequence's stronger late recovery acceleration."
+    },
+    {
+      "ballotID": "G3",
+      "left": "candidate-9442539eea8abc4c",
+      "right": "candidate-8202fa2c3374062a",
+      "winner": null,
+      "outcome": "tie-or-unclear",
+      "reason": "A complete equal pre-loss/five-second/post-recovery triptych was not available for the right side after its counted restore failures, so no blind visual preference can be awarded."
+    },
+    {
+      "ballotID": "G4",
+      "left": "candidate-9442539eea8abc4c",
+      "right": "candidate-8202fa2c3374062a",
+      "winner": null,
+      "outcome": "tie-or-unclear",
+      "reason": "The required equal uncut ten-second real-time ballot master was not sealed for both sides."
+    },
+    {
+      "ballotID": "G5",
+      "left": "candidate-8202fa2c3374062a",
+      "right": "candidate-9442539eea8abc4c",
+      "winner": null,
+      "outcome": "tie-or-unclear",
+      "reason": "The required complete absolute-tick-24-through-48 normal-plus-quarter-speed ballot master was not sealed for both sides."
+    },
+    {
+      "ballotID": "G6",
+      "left": "candidate-8202fa2c3374062a",
+      "right": "candidate-9442539eea8abc4c",
+      "winner": null,
+      "outcome": "tie-or-unclear",
+      "reason": "The required equal fixed twelve-second soak excerpt was not sealed for both sides."
+    }
+  ],
+  "focusedWins": {
+    "candidate-8202fa2c3374062a": 0,
+    "candidate-9442539eea8abc4c": 3
+  },
+  "overallWins": {
+    "candidate-8202fa2c3374062a": 0,
+    "candidate-9442539eea8abc4c": 1
+  }
+}

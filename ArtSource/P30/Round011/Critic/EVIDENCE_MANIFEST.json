@@ -1,0 +1,37 @@
+{
+  "schema": "p30.r011.evidence-manifest.v1",
+  "protocolID": "P30-R011-BLIND-v1",
+  "identityRevealReceived": false,
+  "candidateEvidence": {
+    "candidate-8202fa2c3374062a": {
+      "fileCount": 160,
+      "totalBytes": "180209598",
+      "treeSha256": "b305b1d049853981ac89fdeb10f17f7058df7a143b7a2ad372a1d9237401d092"
+    },
+    "candidate-9442539eea8abc4c": {
+      "fileCount": 144,
+      "totalBytes": "198597069",
+      "treeSha256": "429bbef929fe56a03f2a5a9b8782d13d6ee23b48b0b2af839361be5e1706d23d"
+    }
+  },
+  "publicPackageCommitmentSha256": "7a9893a52c679d6960f9b3c4b515a06f66ac8ba3c88744caab70b0471da5dc0f",
+  "evaluatorFailuresSha256": "e830834f5d2af88e7f25a845b87d09408bc0a300d899c2aeeb4b24687cbe502d",
+  "evaluatorHelpers": [
+    {
+      "path": "tools/run-profile-v1.mjs",
+      "sha256": "2831bffabaf5e17365a16e9ced0978b857bc67588cf274fbff3896dafd8f8e5b"
+    },
+    {
+      "path": "tools/run-profile.mjs",
+      "sha256": "398fc45fbe77b8b1ab2e03d4b94e723191c1650574d82539d80b489a7e59da01"
+    }
+  ],
+  "privateReferenceBoards": {
+    "status": "unavailable-fail-closed",
+    "reason": "No complete private reference-matched board set was sealed before scoring; no supplied reference pixel entered Git."
+  },
+  "ballotMedia": {
+    "status": "incomplete-fail-closed",
+    "reason": "Focused judgments used raw full frames and chronological evidence, while required complete equal clip masters for G3-G6 were not sealed."
+  }
+}

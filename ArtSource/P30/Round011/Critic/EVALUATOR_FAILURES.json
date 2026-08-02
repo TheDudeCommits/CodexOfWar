@@ -1,0 +1,78 @@
+{
+  "schema": "p30.r011.evaluator-failures.v1",
+  "identityRevealReceived": false,
+  "failures": [
+    {
+      "candidateAlias": "candidate-9442539eea8abc4c",
+      "profile": 1,
+      "counted": false,
+      "phase": "post-soak acknowledgement",
+      "error": "page.waitForFunction: Timeout 1000ms exceeded",
+      "cause": "Evaluator watched inputEdgeLog, which intentionally retained the frozen exact trace, instead of attack-started events for later live-input acknowledgement.",
+      "correction": "Watch eventLog attack-started count and record timeout as a gate observation without aborting later phases."
+    },
+    {
+      "candidateAlias": "candidate-9442539eea8abc4c",
+      "profile": 3,
+      "counted": false,
+      "phase": "interrupted lifecycle run",
+      "error": "Evaluator runner remained alive after its controlling wait cell was terminated.",
+      "cause": "The unified command session outlived the terminated orchestration cell.",
+      "correction": "Terminate and audit the exact runner/process tree before any replacement profile."
+    },
+    {
+      "candidateAlias": "candidate-9442539eea8abc4c",
+      "profile": 1,
+      "counted": false,
+      "phase": "overlapping replacement run",
+      "error": "page.evaluate: Target page, context or browser has been closed at run-profile.mjs line 517",
+      "cause": "The replacement profile overlapped the stale profile-03 runner and was invalid for isolation/performance evidence.",
+      "correction": "Invalidate all overlapping output and restart profiles 1 through 3 only after process audit shows no evaluator runner or evaluator Chrome."
+    },
+    {
+      "candidateAlias": "candidate-9442539eea8abc4c",
+      "profile": 1,
+      "counted": false,
+      "phase": "initial tick arming",
+      "error": "Capture tick 1 is not ahead of current absolute tick 1",
+      "cause": "Boot artifact writing and PNG capture delayed armCaptureTicks until the runtime's initial tick-0 pause had released.",
+      "correction": "Focus and apply W immediately after whenReady, then validate tick 0 and arm ticks 1 through 48 atomically in one page task; defer boot artifact writes and PNG capture until the evaluator owns the tick-1 pause."
+    },
+    {
+      "candidateAlias": "candidate-9442539eea8abc4c",
+      "profile": 1,
+      "counted": false,
+      "phase": "final post-cycle resource median",
+      "error": "cdpSession.send: Target page, context or browser has been closed",
+      "cause": "The production page/context closed after the final frame-time sample and before the first final CDP garbage-collection sample; the evaluator had not invoked context.close().",
+      "correction": "Record page/context close lifecycle events and fail-closed final-resource unavailability while still writing the completed prior-phase evidence instead of aborting the profile artifact set."
+    },
+    {
+      "candidateAlias": "candidate-9442539eea8abc4c",
+      "profile": 3,
+      "counted": false,
+      "phase": "initial tick arming",
+      "error": "hook became ready after absolute tick 1; cannot apply exact tick-0 input",
+      "cause": "The fresh process reached tick 1 before the evaluator's atomic arming task despite the pre-whenReady ordering.",
+      "correction": "Discard the fresh profile directory and retry profile 3 unchanged; only a process that atomically observes tick 0 and arms ticks 1 through 48 can count."
+    },
+    {
+      "candidateAlias": "candidate-8202fa2c3374062a",
+      "profile": 1,
+      "counted": false,
+      "phase": "pre-resume evaluator readiness attempt",
+      "error": "waitForPausedTick: Timeout 10000ms waiting for absolute tick 1",
+      "cause": "Helper SHA 2831bffa did not explicitly resume a runtime that remained paused at tick 0 after whenReady, so this was an evaluator handshake omission rather than candidate cold-readiness evidence.",
+      "correction": "Invalidate the partial output; the first isolated run with the explicit resume and dual receipt-schema normalization is counted profile 1."
+    },
+    {
+      "candidateAlias": "candidate-8202fa2c3374062a",
+      "profile": 1,
+      "counted": false,
+      "phase": "supplemental receipt normalization",
+      "error": "TypeError: Cannot read properties of undefined (reading 'map') at run-profile.mjs line 431",
+      "cause": "The evaluator assumed fixedInputHistory while this valid interface exposed inputHistory with equivalent absolute-tick fields.",
+      "correction": "Normalize both locked receipt representations before validating the identical W, idle, pointer-edge, and attack-started semantics."
+    }
+  ]
+}

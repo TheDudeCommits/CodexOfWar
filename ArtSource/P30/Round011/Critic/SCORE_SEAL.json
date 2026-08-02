@@ -1,0 +1,19 @@
+{
+  "schema": "p30.r011.alias-score-seal.v1",
+  "protocolID": "P30-R011-BLIND-v1",
+  "domain": "P30R011/alias-score/v1",
+  "identityRevealReceived": false,
+  "scoreDocument": "ALIAS_ONLY_SCORE.json",
+  "scoreFileSha256": "4c8de963dcbfc4075679493eee004b6a1b02927ebfd0c54b38b5db3a67aaa070",
+  "bcjBytes": 3649,
+  "bcjSha256": "a23f77b1b10fd90903b539fb335ca677e719912b49033691a6a89b62f4ea7fb7",
+  "scoreCommitmentSha256": "1a541a7b6f840642eea8f5ae31a0ca6cf8db7e2e34b6ca0dce335bdda9e67e00",
+  "scoreSalt": "withheld-32-bytes-in-ignored-private-path",
+  "protocolPayloadSha256": "bc1e9db54ad38408d6ff369df96ed163d15cf2dfa3fd5403d7a56e374ee85d7b",
+  "presentationCommitmentSha256": "5df2ec1607da073c492d94d7f1c47c23606d51b9fdbc267a3ada8d76e853b05f",
+  "publicPackageMapCommitmentSha256": "7a9893a52c679d6960f9b3c4b515a06f66ac8ba3c88744caab70b0471da5dc0f",
+  "evidenceManifestSha256": "614016068f1e01d1b3f6af7bd7281e13d312b29900b10e14edd2a3acd401ce5e",
+  "evaluatorFailuresSha256": "e830834f5d2af88e7f25a845b87d09408bc0a300d899c2aeeb4b24687cbe502d",
+  "commitBinding": "The Git commit whose subject is Seal Round011 alias-only blind scores contains this score document and seal before identity reveal.",
+  "sealed": true
+}
