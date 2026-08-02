@@ -43,7 +43,7 @@ import {
   validateTextForClues,
   writeCanonicalExclusive
 } from './packaging-core.mjs';
-import { verifyPublicDelivery } from './package-candidates.mjs';
+import { privateTokensForAllCandidates, verifyPublicDelivery } from './package-candidates.mjs';
 
 const TOOL_PATH = resolve(dirname(fileURLToPath(import.meta.url)), 'package-candidates.mjs');
 
@@ -401,6 +401,27 @@ test('identity and absolute-path transcript scans return stable codes without ec
     () => validateTextForClues('loaded /home/person/project/file.ts'),
     (error) => error.code === 'ABSOLUTE_PATH_CLUE_FOUND'
   );
+});
+
+test('private token derivation omits only unusably short worktree basenames', () => {
+  const candidates = [
+    {
+      alias: 'candidate-aaaaaaaaaaaaaaaa',
+      builderIdentity: 'private builder identity',
+      sourceBranch: 'refs/heads/private-candidate',
+      sourceCommit: '1'.repeat(40),
+      sourceGitTree: '2'.repeat(40),
+      sourceWorktree: '/tmp/private-source/A',
+      forbiddenTokens: ['private-approach']
+    }
+  ];
+  const tokens = privateTokensForAllCandidates(
+    candidates,
+    new Map([[candidates[0].alias, { sourceWorktree: '/tmp/private-source/A' }]])
+  );
+  assert.equal(tokens.includes('A'), false);
+  assert.equal(tokens.includes('/tmp/private-source/A'), true);
+  assert.equal(tokens.includes('private builder identity'), true);
 });
 
 test('public commitment is sorted, canonical, and binds deterministic archives end to end', async (context) => {
