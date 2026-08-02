@@ -10,6 +10,7 @@ import {
   canonicalize,
   hashTree,
   registerCaseFoldedPath,
+  validateCompleteTickSeries,
   validateDeclaredCounts,
   validateVerdictBinding
 } from './baseline-core.mjs';
@@ -114,10 +115,49 @@ test('verdict binding rejects a receipt redirected to another real-looking commi
   );
 });
 
-test('declared count validation rejects custody metadata tampering', () => {
+test('golden trace completeness rejects missing and duplicate camera ticks', () => {
   const trace = {
-    stateDigests: [{ absoluteSimulationTick: 0 }],
-    cameraDigests: [{ absoluteSimulationTick: 0 }],
+    declaredAbsoluteTicks: [0, 1, 2],
+    stateDigests: [0, 1, 2].map((absoluteSimulationTick) => ({
+      absoluteSimulationTick,
+      sha256: '1'.repeat(64)
+    })),
+    cameraDigests: [0, 1, 2].map((absoluteSimulationTick) => ({
+      absoluteSimulationTick,
+      sha256: '2'.repeat(64)
+    }))
+  };
+  validateCompleteTickSeries(trace, 0, 2);
+
+  const missing = structuredClone(trace);
+  missing.cameraDigests.pop();
+  assert.throws(
+    () => validateCompleteTickSeries(missing, 0, 2),
+    (error) => error instanceof BaselineCustodyError &&
+      error.code === 'GOLDEN_TRACE_TICK_SERIES_COUNT_MISMATCH'
+  );
+
+  const duplicate = structuredClone(trace);
+  duplicate.cameraDigests[2].absoluteSimulationTick = 1;
+  assert.throws(
+    () => validateCompleteTickSeries(duplicate, 0, 2),
+    (error) => error instanceof BaselineCustodyError &&
+      error.code === 'GOLDEN_TRACE_TICK_SERIES_MISSING_DUPLICATE_OR_INVALID'
+  );
+});
+
+test('declared count validation rejects custody metadata tampering', () => {
+  const ticks = Array.from({ length: 81 }, (_, index) => index);
+  const trace = {
+    declaredAbsoluteTicks: ticks,
+    stateDigests: ticks.map((absoluteSimulationTick) => ({
+      absoluteSimulationTick,
+      sha256: '1'.repeat(64)
+    })),
+    cameraDigests: ticks.map((absoluteSimulationTick) => ({
+      absoluteSimulationTick,
+      sha256: '2'.repeat(64)
+    })),
     focusedSnapshots: [{ absoluteSimulationTick: 0, targetHealth: 100 }],
     eventLog: []
   };
@@ -140,20 +180,20 @@ test('declared count validation rejects custody metadata tampering', () => {
     },
     goldenTraces: {
       neutral: {
-        declaredStateTickCount: 1,
+        declaredStateTickCount: 81,
         declaredStateTickFirst: 0,
-        declaredStateTickLast: 0,
-        declaredCameraTickCount: 1,
+        declaredStateTickLast: 80,
+        declaredCameraTickCount: 81,
         captureTicks: [0],
         healthStart: 100,
         healthEnd: 100,
         damageEventCount: 0
       },
       lightStrike: {
-        declaredStateTickCount: 1,
+        declaredStateTickCount: 81,
         declaredStateTickFirst: 0,
-        declaredStateTickLast: 0,
-        declaredCameraTickCount: 1,
+        declaredStateTickLast: 80,
+        declaredCameraTickCount: 81,
         captureTicks: [0],
         healthStart: 100,
         healthEnd: 100,

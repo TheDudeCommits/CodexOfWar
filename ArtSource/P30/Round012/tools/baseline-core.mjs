@@ -300,6 +300,38 @@ function equalIntegerArrays(left, right) {
     left.length === right.length && left.every((value, index) => value === right[index]);
 }
 
+export function validateCompleteTickSeries(trace, firstTick = 0, lastTick = 80) {
+  if (
+    !Number.isSafeInteger(firstTick) ||
+    !Number.isSafeInteger(lastTick) ||
+    firstTick < 0 ||
+    lastTick < firstTick
+  ) fail('GOLDEN_TRACE_TICK_SERIES_INVALID_BOUNDS');
+  const declaredTicks = Array.isArray(trace?.declaredAbsoluteTicks) ? trace.declaredAbsoluteTicks : [];
+  const stateDigests = Array.isArray(trace?.stateDigests) ? trace.stateDigests : [];
+  const cameraDigests = Array.isArray(trace?.cameraDigests) ? trace.cameraDigests : [];
+  const expectedCount = lastTick - firstTick + 1;
+  if (
+    declaredTicks.length !== expectedCount ||
+    stateDigests.length !== expectedCount ||
+    cameraDigests.length !== expectedCount
+  ) fail('GOLDEN_TRACE_TICK_SERIES_COUNT_MISMATCH');
+  for (let index = 0; index < expectedCount; index += 1) {
+    const expectedTick = firstTick + index;
+    const state = stateDigests[index];
+    const camera = cameraDigests[index];
+    if (
+      declaredTicks[index] !== expectedTick ||
+      state?.absoluteSimulationTick !== expectedTick ||
+      camera?.absoluteSimulationTick !== expectedTick ||
+      typeof state?.sha256 !== 'string' ||
+      !HEX64.test(state.sha256) ||
+      typeof camera?.sha256 !== 'string' ||
+      !HEX64.test(camera.sha256)
+    ) fail('GOLDEN_TRACE_TICK_SERIES_MISSING_DUPLICATE_OR_INVALID');
+  }
+}
+
 export function validateDeclaredCounts(receipt, evidence) {
   const { sourceTree, outputTree, materializedGit, manifest, neutralTrace, lightTrace } = evidence;
   if (
@@ -321,6 +353,7 @@ export function validateDeclaredCounts(receipt, evidence) {
     tools.length !== receipt.baselineEvidence.evaluatorToolCount
   ) fail('EVIDENCE_DECLARED_COUNT_MISMATCH');
   for (const [key, trace] of [['neutral', neutralTrace], ['lightStrike', lightTrace]]) {
+    validateCompleteTickSeries(trace);
     const declared = receipt.goldenTraces[key];
     const states = Array.isArray(trace.stateDigests) ? trace.stateDigests : [];
     const cameras = Array.isArray(trace.cameraDigests) ? trace.cameraDigests : [];

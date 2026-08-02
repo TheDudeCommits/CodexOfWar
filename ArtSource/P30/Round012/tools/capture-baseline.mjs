@@ -99,6 +99,25 @@ function cameraDigest(entry) {
   return sha256Bytes(canonicalBytes(quantized));
 }
 
+function assertCompleteTickSequence(entries, label, firstTick = 0, lastTick = 80) {
+  const expectedCount = lastTick - firstTick + 1;
+  if (!Array.isArray(entries) || entries.length !== expectedCount) {
+    fail('BASELINE_TICK_SEQUENCE_COUNT_MISMATCH', `${label}:${entries?.length ?? 'not-an-array'}`);
+  }
+  const seen = new Set();
+  for (let index = 0; index < expectedCount; index += 1) {
+    const tick = entries[index]?.absoluteSimulationTick;
+    const expectedTick = firstTick + index;
+    if (!Number.isSafeInteger(tick) || tick !== expectedTick || seen.has(tick)) {
+      fail(
+        'BASELINE_TICK_SEQUENCE_MISSING_DUPLICATE_OR_INVALID',
+        JSON.stringify({ label, index, expectedTick, actualTick: tick })
+      );
+    }
+    seen.add(tick);
+  }
+}
+
 async function writeCanonical(path, value) {
   await mkdir(dirname(path), { recursive: true });
   await writeFile(path, `${canonicalize(value)}\n`, { flag: 'wx', mode: 0o644 });
@@ -160,14 +179,13 @@ async function waitForPausedRenderedTick(page, tick, priorHeartbeat) {
 }
 
 function summarizeTrace(kind, run, snapshots, runtime, browserVersion, playwrightVersion) {
+  assertCompleteTickSequence(run.stateDigestHistory, `${kind}:state`);
+  assertCompleteTickSequence(run.cameraHistory, `${kind}:camera`);
   const stateDigests = run.stateDigestHistory.map((entry) => ({
     absoluteSimulationTick: entry.absoluteSimulationTick,
     sha256: entry.sha256
   }));
-  const cameraByTick = new Map();
-  for (const entry of run.cameraHistory) cameraByTick.set(entry.absoluteSimulationTick, entry);
-  const cameraDigests = [...cameraByTick.values()]
-    .sort((left, right) => left.absoluteSimulationTick - right.absoluteSimulationTick)
+  const cameraDigests = run.cameraHistory
     .map((entry) => ({ absoluteSimulationTick: entry.absoluteSimulationTick, sha256: cameraDigest(entry) }));
   const normalizedInputs = run.fixedInputHistory.map((entry) => ({
     absoluteSimulationTick: entry.absoluteSimulationTick,
@@ -300,14 +318,7 @@ async function runTrace({ chromium, browserVersion, playwrightVersion, urlOrigin
       await mkdir(dirname(captureInitialPath), { recursive: true });
       captures.set(0, await screenshotArtifact(page, captureInitialPath));
     }
-    await page.evaluate(
-      (ticks) => window.__P30_CRITIC__.armCaptureTicks(ticks),
-      [...new Set([
-        1,
-        ...(kind === 'lightStrike' ? [29] : []),
-        ...CAPTURE_TICKS[kind].filter((tick) => tick > 1)
-      ])]
-    );
+    await page.evaluate(() => window.__P30_CRITIC__.armCaptureTicks([1]));
     let heartbeat = initial.renderHeartbeat;
     await page.keyboard.press('Escape');
     const focusedSnapshots = [initial];
@@ -321,20 +332,30 @@ async function runTrace({ chromium, browserVersion, playwrightVersion, urlOrigin
     if (releaseSettled.tick !== 1 || releaseSettled.visibleToasts !== 0) {
       fail('EVALUATOR_RELEASE_DID_NOT_SETTLE');
     }
-    await page.evaluate(() => window.__P30_CRITIC__.resume());
-    const pausedTicks = CAPTURE_TICKS[kind].filter((tick) => tick > 0);
-    for (const tick of pausedTicks) {
-      const snapshot = await waitForPausedRenderedTick(page, tick, heartbeat);
-      heartbeat = snapshot.renderHeartbeat;
-      focusedSnapshots.push(snapshot);
-      const capturePath = join(out, 'captures', `${kind}-tick-${String(tick).padStart(3, '0')}.png`);
-      await mkdir(dirname(capturePath), { recursive: true });
-      captures.set(tick, await screenshotArtifact(page, capturePath));
-      if (kind === 'lightStrike' && tick === 24) {
+    for (let currentTick = 1; currentTick < 80; currentTick += 1) {
+      const nextTick = currentTick + 1;
+      await page.evaluate(
+        (tick) => window.__P30_CRITIC__.armCaptureTicks([tick]),
+        nextTick
+      );
+      if (kind === 'lightStrike' && currentTick === 24) {
         await page.mouse.down({ button: 'left' });
         await page.mouse.up({ button: 'left' });
+      } else {
+        await page.evaluate(() => window.__P30_CRITIC__.resume());
       }
-      if (tick !== pausedTicks.at(-1)) await page.evaluate(() => window.__P30_CRITIC__.resume());
+      const snapshot = await waitForPausedRenderedTick(page, nextTick, heartbeat);
+      heartbeat = snapshot.renderHeartbeat;
+      if (CAPTURE_TICKS[kind].includes(nextTick)) {
+        focusedSnapshots.push(snapshot);
+        const capturePath = join(
+          out,
+          'captures',
+          `${kind}-tick-${String(nextTick).padStart(3, '0')}.png`
+        );
+        await mkdir(dirname(capturePath), { recursive: true });
+        captures.set(nextTick, await screenshotArtifact(page, capturePath));
+      }
     }
     errors.unhandled = await page.evaluate(() => window.__P30_BASELINE_UNHANDLED__ ?? []);
     if (Object.values(errors).some((values) => values.length > 0)) fail('BASELINE_RUNTIME_ERRORS');
@@ -342,9 +363,8 @@ async function runTrace({ chromium, browserVersion, playwrightVersion, urlOrigin
     if (run.errors.length !== 0 || run.stateDigestHistory.length !== 81 || run.fixedInputHistory.length !== 80) {
       fail('BASELINE_TRACE_INCOMPLETE');
     }
-    if (run.stateDigestHistory.some((entry, index) => entry.absoluteSimulationTick !== index)) {
-      fail('BASELINE_STATE_TICKS_NONCONTIGUOUS');
-    }
+    assertCompleteTickSequence(run.stateDigestHistory, `${kind}:state`);
+    assertCompleteTickSequence(run.cameraHistory, `${kind}:camera`);
     if (kind === 'neutral') {
       if (run.inputEdgeLog.length !== 0 || run.eventLog.length !== 0) fail('NEUTRAL_TRACE_NOT_PURE');
       if (focusedSnapshots.some((snapshot) => snapshot.target.health !== 100)) fail('NEUTRAL_HEALTH_MUTATED');
