@@ -16,6 +16,10 @@ import {
 } from "../../src/render/objects/CombatPoseBeat";
 
 const FOCUSED_TICKS = new Set([29, 34, 41]);
+const ROUND010_LOCKED_BYTES = {
+  29: "{\"hero\":{\"schema\":\"cow.hero-combat-pose.v1\",\"phase\":\"anticipation\",\"attackFrame\":5,\"weaponAxialRollOffset\":0,\"model\":{\"position\":[-0.026,-0.052,0.026],\"rotation\":[0.02,0.07,-0.036]},\"bones\":{\"pelvis\":[0.032,-0.095,0.058],\"spine01\":[-0.034,0.055,-0.044],\"spine02\":[-0.044,0.075,-0.054],\"spine03\":[-0.032,0.09,-0.044],\"neck\":[0.024,-0.045,0.026]}},\"target\":{\"schema\":\"cow.target-combat-pose.v1\",\"phase\":\"neutral\",\"reaction01\":1,\"animationLeadSeconds\":0,\"model\":{\"position\":[0,0,0],\"rotation\":[0,0,0]},\"bones\":{\"hips\":[0,0,0],\"abdomen\":[0,0,0],\"torso\":[0,0,0],\"neck\":[0,0,0]}}}",
+  41: "{\"hero\":{\"schema\":\"cow.hero-combat-pose.v1\",\"phase\":\"recoil\",\"attackFrame\":17,\"weaponAxialRollOffset\":2.8,\"model\":{\"position\":[-0.04,-0.02,0.205],\"rotation\":[0.048,-0.12,0.075]},\"bones\":{\"pelvis\":[0.052,-0.105,0.08],\"spine01\":[-0.035,-0.07,0.052],\"spine02\":[-0.05,-0.095,0.07],\"spine03\":[-0.04,-0.08,0.058],\"neck\":[0.024,0.045,-0.025]}},\"target\":{\"schema\":\"cow.target-combat-pose.v1\",\"phase\":\"recoil\",\"reaction01\":0.416667,\"animationLeadSeconds\":0,\"model\":{\"position\":[-0.95,-0.052,0.38],\"rotation\":[-0.075,0.075,0.135]},\"bones\":{\"hips\":[-0.035,0.05,0.055],\"abdomen\":[-0.095,0.105,0.1],\"torso\":[-0.14,0.145,0.13],\"neck\":[0.065,-0.08,-0.07]}}}",
+} as const;
 
 function runPoseTape(): Array<{ tick: number; bytes: string }> {
   const simulation = new GameSimulation(
@@ -55,7 +59,7 @@ function runPoseTape(): Array<{ tick: number; bytes: string }> {
   return samples;
 }
 
-describe("Round010 grounded sword-contact pose beat", () => {
+describe("Round011 exterior sword-contact pose beat", () => {
   it("resolves the frozen ticks to anticipation, contact, and recoil", () => {
     const samples = Object.fromEntries(
       runPoseTape().map(({ tick, bytes }) => [tick, JSON.parse(bytes)]),
@@ -90,7 +94,7 @@ describe("Round010 grounded sword-contact pose beat", () => {
     expect(recoil.model.position[2]).toBeGreaterThan(contact.model.position[2]);
     expect(recoil.model.rotation[1]).toBeLessThan(contact.model.rotation[1]);
     expect(targetContact.animationLeadSeconds).toBe(0);
-    expect(targetContact.model.position[0]).toBeLessThanOrEqual(-0.8);
+    expect(targetContact.model.position).toEqual([-0.660335, -0.020845, -0.076482]);
     expect(targetRecoil.model.position[0]).toBeLessThan(targetContact.model.position[0]);
     expect(targetRecoil.model.position[2]).toBeGreaterThan(targetContact.model.position[2]);
     expect(targetRecoil.bones.torso[0]).toBeLessThan(-0.13);
@@ -149,5 +153,11 @@ describe("Round010 grounded sword-contact pose beat", () => {
     const first = runPoseTape();
     expect(runPoseTape()).toEqual(first);
     expect(runPoseTape()).toEqual(first);
+  });
+
+  it("preserves the accepted Round010 tick-29 anticipation and tick-41 recovery bytes", () => {
+    const focused = Object.fromEntries(runPoseTape().map(({ tick, bytes }) => [tick, bytes]));
+    expect(focused[29]).toBe(ROUND010_LOCKED_BYTES[29]);
+    expect(focused[41]).toBe(ROUND010_LOCKED_BYTES[41]);
   });
 });

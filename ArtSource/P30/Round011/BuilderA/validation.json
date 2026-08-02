@@ -1,0 +1,49 @@
+{
+  "schema": "p30.r011.builder-a.validation.v1",
+  "node": "v24.18.0",
+  "npm": "11.16.0",
+  "commands": [
+    {
+      "command": "npm ci --audit=false --fund=false",
+      "result": "pass",
+      "packages": 191,
+      "vulnerabilities": 0
+    },
+    {
+      "command": "npm run test:critic",
+      "result": "pass",
+      "testFiles": 5,
+      "tests": 19
+    },
+    {
+      "command": "npm run typecheck",
+      "result": "pass"
+    },
+    {
+      "command": "npm run lint",
+      "result": "pass"
+    },
+    {
+      "command": "npm run build:critic",
+      "result": "pass",
+      "optimizedProductionBuild": true,
+      "sourceMapsPresent": false
+    },
+    {
+      "command": "npm run serve:critic -- --host 127.0.0.1 --port 4192",
+      "result": "pass",
+      "readyPathResponse": { "schema": "p30.r011.ready.v1", "ready": true },
+      "normalPlayableRouteStatus": 200,
+      "sigtermClean": true
+    },
+    {
+      "command": "COW_PLAYWRIGHT_BASE_URL=http://127.0.0.1:4181 npx playwright test tests/browser/critic.spec.ts tests/browser/pose.spec.ts tests/browser/review.spec.ts",
+      "result": "pass",
+      "tests": 6
+    }
+  ],
+  "frozenEndpointRegression": {
+    "tick29Round010PoseBytes": "identical",
+    "tick41Round010PoseBytes": "identical"
+  }
+}

@@ -81,6 +81,7 @@ interface PoseAnchorTelemetry {
   supportHandWorld: PoseVector | null;
   secondaryGripWorld: PoseVector | null;
   bladeContactWorld: PoseVector | null;
+  bladeEdgeWorld: PoseVector | null;
   bladeTipWorld: PoseVector | null;
   bladeWidthAxisWorld: PoseVector | null;
   bladeDepthAxisWorld: PoseVector | null;
@@ -91,6 +92,7 @@ interface PoseAnchorTelemetry {
 interface TargetAnchorTelemetry {
   hipsWorld: PoseVector | null;
   impactWorld: PoseVector | null;
+  contourWorld: PoseVector | null;
   headWorld: PoseVector | null;
 }
 
@@ -113,6 +115,11 @@ export interface CombatPoseBeatTelemetry {
   };
   contact: {
     bladeToTargetMeters: number | null;
+    method: "blade-cutting-edge-to-posed-target-closest-surface";
+    bladeEdgeToTargetContourMeters: number | null;
+    signedSeparationMeters: number | null;
+    classification: "gap" | "contact" | "penetration" | "unavailable";
+    toleranceMeters: 0.02;
   };
 }
 
@@ -157,6 +164,7 @@ const poseAuditState: {
       supportHandWorld: null,
       secondaryGripWorld: null,
       bladeContactWorld: null,
+      bladeEdgeWorld: null,
       bladeTipWorld: null,
       bladeWidthAxisWorld: null,
       bladeDepthAxisWorld: null,
@@ -168,19 +176,42 @@ const poseAuditState: {
   target: {
     sample: sampleTargetCombatPose("idle", 0),
     rigBindings: { hips: false, abdomen: false, torso: false, neck: false },
-    anchors: { hipsWorld: null, impactWorld: null, headWorld: null },
+    anchors: { hipsWorld: null, impactWorld: null, contourWorld: null, headWorld: null },
   },
 };
+
+let poseAuditTargetSurfaceRoot: THREE.Object3D | null = null;
+let poseAuditBladeSurface: THREE.Mesh | null = null;
+
+interface ExteriorContactMeasurement {
+  bladeEdgeWorld: PoseVector;
+  targetContourWorld: PoseVector;
+  edgeToContourMeters: number;
+  signedSeparationMeters: number;
+  classification: "gap" | "contact" | "penetration";
+}
+
+const CONTACT_TOLERANCE_METERS = 0.02 as const;
 
 const combatPoseAuditApi: CombatPoseBeatAuditApi = {
   telemetry: () => {
     const blade = poseAuditState.hero.anchors.bladeContactWorld;
     const impact = poseAuditState.target.anchors.impactWorld;
+    const exterior = measureClosestExteriorContact(
+      poseAuditBladeSurface,
+      impact,
+      poseAuditTargetSurfaceRoot,
+    );
+    const bladeEdge = exterior?.bladeEdgeWorld ?? poseAuditState.hero.anchors.bladeEdgeWorld;
+    const hero = structuredClone(poseAuditState.hero);
+    hero.anchors.bladeEdgeWorld = bladeEdge;
+    const target = structuredClone(poseAuditState.target);
+    target.anchors.contourWorld = exterior?.targetContourWorld ?? null;
     return {
       schema: "cow.combat-pose-beat.v1",
       additivePresentationOnly: true,
-      hero: structuredClone(poseAuditState.hero),
-      target: structuredClone(poseAuditState.target),
+      hero,
+      target,
       contact: {
         bladeToTargetMeters:
           blade && impact
@@ -190,6 +221,11 @@ const combatPoseAuditApi: CombatPoseBeatAuditApi = {
                 blade[2] - impact[2],
               ))
             : null,
+        method: "blade-cutting-edge-to-posed-target-closest-surface",
+        bladeEdgeToTargetContourMeters: exterior?.edgeToContourMeters ?? null,
+        signedSeparationMeters: exterior?.signedSeparationMeters ?? null,
+        classification: exterior?.classification ?? "unavailable",
+        toleranceMeters: CONTACT_TOLERANCE_METERS,
       },
     };
   },
@@ -225,6 +261,110 @@ function worldDirection(
 function pointDistance(from: PoseVector | null, to: PoseVector | null): number | null {
   if (!from || !to) return null;
   return roundFx(Math.hypot(from[0] - to[0], from[1] - to[1], from[2] - to[2]));
+}
+
+function measureClosestExteriorContact(
+  bladeSurface: THREE.Mesh | null,
+  targetCenter: PoseVector | null,
+  targetSurfaceRoot: THREE.Object3D | null,
+): ExteriorContactMeasurement | null {
+  if (!bladeSurface || !targetCenter || !targetSurfaceRoot) return null;
+  const bladePositions = bladeSurface.geometry.getAttribute("position");
+  if (!bladePositions) return null;
+  bladeSurface.geometry.computeBoundingBox();
+  const bounds = bladeSurface.geometry.boundingBox;
+  if (!bounds) return null;
+
+  bladeSurface.updateWorldMatrix(true, false);
+  targetSurfaceRoot.updateWorldMatrix(true, true);
+  const bladeEdges: THREE.Vector3[] = [];
+  const uniqueEdges = new Set<string>();
+  const local = new THREE.Vector3();
+  const edgeBand = Math.max(0.004, (bounds.max.x - bounds.min.x) * 0.035);
+  const tipBand = Math.max(0.006, (bounds.max.y - bounds.min.y) * 0.01);
+  for (let index = 0; index < bladePositions.count; index += 1) {
+    local.fromBufferAttribute(bladePositions, index);
+    const onCuttingEdge =
+      local.x <= bounds.min.x + edgeBand ||
+      local.x >= bounds.max.x - edgeBand ||
+      local.y >= bounds.max.y - tipBand;
+    if (!onCuttingEdge) continue;
+    const world = local.clone().applyMatrix4(bladeSurface.matrixWorld);
+    const key = `${roundFx(world.x)}:${roundFx(world.y)}:${roundFx(world.z)}`;
+    if (uniqueEdges.has(key)) continue;
+    uniqueEdges.add(key);
+    bladeEdges.push(world);
+  }
+  if (bladeEdges.length === 0) return null;
+
+  const a = new THREE.Vector3();
+  const b = new THREE.Vector3();
+  const c = new THREE.Vector3();
+  const closest = new THREE.Vector3();
+  const triangle = new THREE.Triangle();
+  const bestEdge = new THREE.Vector3();
+  const bestContour = new THREE.Vector3();
+  let bestDistanceSquared = Infinity;
+
+  targetSurfaceRoot.traverse((node) => {
+    if (!(node instanceof THREE.Mesh)) return;
+    const geometry = node.geometry;
+    const index = geometry.getIndex();
+    const positions = geometry.getAttribute("position");
+    const indexCount = index?.count ?? positions?.count ?? 0;
+    for (let offset = 0; offset + 2 < indexCount; offset += 3) {
+      const ia = index ? index.getX(offset) : offset;
+      const ib = index ? index.getX(offset + 1) : offset + 1;
+      const ic = index ? index.getX(offset + 2) : offset + 2;
+      node.getVertexPosition(ia, a).applyMatrix4(node.matrixWorld);
+      node.getVertexPosition(ib, b).applyMatrix4(node.matrixWorld);
+      node.getVertexPosition(ic, c).applyMatrix4(node.matrixWorld);
+      triangle.set(a, b, c);
+      for (const bladeEdge of bladeEdges) {
+        triangle.closestPointToPoint(bladeEdge, closest);
+        const distanceSquared = closest.distanceToSquared(bladeEdge);
+        if (distanceSquared >= bestDistanceSquared) continue;
+        bestDistanceSquared = distanceSquared;
+        bestEdge.copy(bladeEdge);
+        bestContour.copy(closest);
+      }
+    }
+  });
+  if (!Number.isFinite(bestDistanceSquared)) return null;
+
+  const edgeToContourMeters = roundFx(Math.sqrt(bestDistanceSquared));
+  const center = new THREE.Vector3().fromArray(targetCenter);
+  const outward = bestEdge.clone().sub(center);
+  const edgeRadius = outward.length();
+  let penetrationSign = 1;
+  if (edgeRadius > 0.000001) {
+    outward.multiplyScalar(1 / edgeRadius);
+    const rayOrigin = center.clone().addScaledVector(outward, Math.max(4, edgeRadius + 2));
+    const hit = new THREE.Raycaster(rayOrigin, outward.clone().negate(), 0, 8)
+      .intersectObject(targetSurfaceRoot, true)
+      .find((intersection) => intersection.object instanceof THREE.Mesh);
+    if (hit) {
+      const contourRadius = hit.point.clone().sub(center).dot(outward);
+      penetrationSign = edgeRadius < contourRadius ? -1 : 1;
+    }
+  }
+  const signedSeparationMeters = roundFx(edgeToContourMeters * penetrationSign);
+  const classification = edgeToContourMeters <= CONTACT_TOLERANCE_METERS
+    ? "contact"
+    : signedSeparationMeters < 0
+      ? "penetration"
+      : "gap";
+  return {
+    bladeEdgeWorld: [roundFx(bestEdge.x), roundFx(bestEdge.y), roundFx(bestEdge.z)],
+    targetContourWorld: [
+      roundFx(bestContour.x),
+      roundFx(bestContour.y),
+      roundFx(bestContour.z),
+    ],
+    edgeToContourMeters,
+    signedSeparationMeters,
+    classification,
+  };
 }
 
 function setTransform(target: THREE.Object3D, transform: { position: PoseVector; rotation: PoseVector }): void {
@@ -447,6 +587,7 @@ export class HeroView {
   private trailAuditVisible = true;
   private animator: DeterministicAnimator | null = null;
   private authoredWeapon: THREE.Object3D | null = null;
+  private bladeSurface: THREE.Mesh | null = null;
   private fallbackWeapon: THREE.Group | null = null;
   private latestPose = sampleHeroCombatPose("idle", -1);
   private latestAuthoredTiming: HeroAuthoredPoseTiming = {
@@ -471,6 +612,7 @@ export class HeroView {
     | "supportHand"
     | "secondaryGrip"
     | "bladeContact"
+    | "bladeEdge"
     | "bladeTip"
     | "leadFoot"
     | "supportFoot",
@@ -480,6 +622,7 @@ export class HeroView {
     supportHand: null,
     secondaryGrip: null,
     bladeContact: null,
+    bladeEdge: null,
     bladeTip: null,
     leadFoot: null,
     supportFoot: null,
@@ -562,6 +705,20 @@ export class HeroView {
       this.poseAnchors.supportHand = hero.scene.getObjectByName("hand_l") ?? null;
       this.poseAnchors.secondaryGrip = weapon.scene.getObjectByName("GripSecondary") ?? null;
       this.poseAnchors.bladeContact = weapon.scene.getObjectByName("ContactMarker") ?? null;
+      const blade = weapon.scene.getObjectByName("Dawnbreak_Blade");
+      this.bladeSurface = blade instanceof THREE.Mesh ? blade : null;
+      poseAuditBladeSurface = this.bladeSurface;
+      const bladeEdge = new THREE.Object3D();
+      bladeEdge.name = "ActiveCuttingEdgeContact";
+      const bladeGeometry = blade instanceof THREE.Mesh ? blade.geometry : null;
+      bladeGeometry?.computeBoundingBox();
+      bladeEdge.position.set(
+        bladeGeometry?.boundingBox?.max.x ?? 0.15,
+        this.poseAnchors.bladeContact?.position.y ?? 1.4,
+        0,
+      );
+      weapon.scene.add(bladeEdge);
+      this.poseAnchors.bladeEdge = bladeEdge;
       this.poseAnchors.bladeTip = weapon.scene.getObjectByName("BladeTip") ?? null;
       this.poseAnchors.leadFoot = hero.scene.getObjectByName("foot_l") ?? null;
       this.poseAnchors.supportFoot = hero.scene.getObjectByName("foot_r") ?? null;
@@ -716,6 +873,7 @@ export class HeroView {
   }
 
   dispose(): void {
+    if (poseAuditBladeSurface === this.bladeSurface) poseAuditBladeSurface = null;
     if (
       typeof window !== "undefined" &&
       window.__COW_BLADE_FX__ === this.bladeFxAuditApi
@@ -804,6 +962,7 @@ export class HeroView {
         supportHandWorld,
         secondaryGripWorld,
         bladeContactWorld: worldPoint(this.poseAnchors.bladeContact),
+        bladeEdgeWorld: worldPoint(this.poseAnchors.bladeEdge),
         bladeTipWorld: worldPoint(this.poseAnchors.bladeTip),
         bladeWidthAxisWorld: worldDirection(this.authoredWeapon, new THREE.Vector3(1, 0, 0)),
         bladeDepthAxisWorld: worldDirection(this.authoredWeapon, new THREE.Vector3(0, 0, 1)),
@@ -921,6 +1080,7 @@ export class ZombieView {
   private readonly visual = new THREE.Group();
   private readonly shadow: THREE.Mesh;
   private readonly flashMaterials: FlashMaterial[] = [];
+  private surfaceRoot: THREE.Object3D | null = null;
   private animator: DeterministicAnimator | null = null;
   private deathStartedAt: number | null = null;
   private latestPose = sampleTargetCombatPose("idle", 0);
@@ -986,6 +1146,7 @@ export class ZombieView {
         }
       });
       this.visual.add(zombie.scene);
+      this.surfaceRoot = zombie.scene;
       this.animator = new DeterministicAnimator(zombie.scene, zombie.animations);
       this.poseBones.hips = zombie.scene.getObjectByName("Hips") ?? null;
       this.poseBones.abdomen = zombie.scene.getObjectByName("Abdomen") ?? null;
@@ -994,6 +1155,8 @@ export class ZombieView {
       this.poseAnchors.impact = zombie.scene.getObjectByName("impact_socket") ?? null;
       this.poseAnchors.head = zombie.scene.getObjectByName("Head") ?? null;
     }
+    if (!this.surfaceRoot) this.surfaceRoot = this.visual;
+    poseAuditTargetSurfaceRoot = this.surfaceRoot;
     if (typeof window !== "undefined") window.__COW_COMBAT_POSE__ = combatPoseAuditApi;
   }
 
@@ -1054,6 +1217,7 @@ export class ZombieView {
   }
 
   dispose(): void {
+    if (poseAuditTargetSurfaceRoot === this.surfaceRoot) poseAuditTargetSurfaceRoot = null;
     this.animator?.dispose();
     for (const geometry of this.ownedGeometries) geometry.dispose();
     for (const material of this.ownedMaterials) material.dispose();
@@ -1116,6 +1280,7 @@ export class ZombieView {
       anchors: {
         hipsWorld: worldPoint(this.poseBones.hips),
         impactWorld: worldPoint(this.poseAnchors.impact),
+        contourWorld: null,
         headWorld: worldPoint(this.poseAnchors.head),
       },
     };

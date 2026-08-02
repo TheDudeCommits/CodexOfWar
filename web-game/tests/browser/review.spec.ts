@@ -1,4 +1,30 @@
 import { expect, test } from "@playwright/test";
+import type { Page } from "@playwright/test";
+
+async function canvasMeanLuminance(page: Page): Promise<number> {
+  return page.evaluate(() => {
+    window.__COW_REVIEW__.renderOnce();
+    const canvas = document.querySelector<HTMLCanvasElement>("canvas#game-canvas");
+    if (!canvas) throw new Error("game canvas unavailable");
+    const sample = document.createElement("canvas");
+    sample.width = canvas.width;
+    sample.height = canvas.height;
+    const context = sample.getContext("2d", { willReadFrequently: true });
+    if (!context) throw new Error("2D sampling context unavailable");
+    context.drawImage(canvas, 0, 0);
+    const pixels = context.getImageData(0, 0, sample.width, sample.height).data;
+    let sum = 0;
+    let count = 0;
+    for (let y = 0; y < sample.height; y += 2) {
+      for (let x = 0; x < sample.width; x += 2) {
+        const offset = (y * sample.width + x) * 4;
+        sum += 0.2126 * pixels[offset]! + 0.7152 * pixels[offset + 1]! + 0.0722 * pixels[offset + 2]!;
+        count += 1;
+      }
+    }
+    return sum / count;
+  });
+}
 
 test("P30 deterministic review tape and judge capture", async ({ page }) => {
   await page.setViewportSize({ width: 1600, height: 900 });
@@ -123,10 +149,62 @@ test("out-of-range and physical input pause/blur smoke", async ({ page }) => {
   expect(afterBlurTicks).toBeCloseTo(beforeBlurTicks, 6);
 });
 
-test("forced WebGL context loss restores without a generic error", async ({ page }) => {
+test("rejected pointer-lock races never escape as unhandled rejections", async ({ page }) => {
+  const pageErrors: string[] = [];
+  page.on("pageerror", (error) => pageErrors.push(String(error)));
+  await page.addInitScript(() => {
+    const audit = window as typeof window & { __R011_UNHANDLED__?: string[] };
+    audit.__R011_UNHANDLED__ = [];
+    window.addEventListener("unhandledrejection", (event) => {
+      audit.__R011_UNHANDLED__?.push(String(event.reason));
+    });
+  });
   await page.setViewportSize({ width: 1600, height: 900 });
   await page.goto("/?review=1&post=0");
   await page.evaluate(async () => window.__COW_REVIEW__.ready);
+
+  const probe = await page.evaluate(async () => {
+    const prototype = HTMLCanvasElement.prototype;
+    const original = prototype.requestPointerLock;
+    let calls = 0;
+    prototype.requestPointerLock = function requestPointerLock(): Promise<void> {
+      calls += 1;
+      return Promise.reject(new DOMException(
+        "The root document of this element is not valid for pointer lock.",
+        "WrongDocumentError",
+      ));
+    };
+    const canvas = document.querySelector<HTMLCanvasElement>("canvas#game-canvas");
+    if (!canvas) throw new Error("game canvas unavailable");
+    for (let index = 0; index < 31; index += 1) {
+      canvas.dispatchEvent(new PointerEvent("pointerdown", { button: 0, bubbles: true }));
+      await new Promise((resolve) => window.setTimeout(resolve, 5));
+    }
+    await new Promise((resolve) => window.setTimeout(resolve, 50));
+    prototype.requestPointerLock = original;
+    return {
+      calls,
+      unhandled: (window as typeof window & { __R011_UNHANDLED__?: string[] })
+        .__R011_UNHANDLED__ ?? [],
+      rendererErrors: window.__COW_REVIEW__.telemetry().renderer.errors,
+    };
+  });
+
+  expect(probe.calls).toBe(31);
+  expect(probe.unhandled).toEqual([]);
+  expect(probe.rendererErrors).toEqual([]);
+  expect(pageErrors).toEqual([]);
+});
+
+test("forced WebGL context recovery restores luminance and control", async ({ page }) => {
+  await page.setViewportSize({ width: 1600, height: 900 });
+  await page.goto("/?review=1&post=1");
+  await page.evaluate(async () => window.__COW_REVIEW__.ready);
+  await page.evaluate(() => {
+    window.__COW_REVIEW__.reset({ piece: "P30", preset: "context-restore", seed: 30001 });
+    window.__COW_REVIEW__.renderOnce();
+  });
+  const beforeLuminance = await canvasMeanLuminance(page);
   const supported = await page.evaluate(() => window.__COW_REVIEW__.forceContextLoss());
   test.skip(!supported, "WEBGL_lose_context is unavailable on this browser");
   await page.waitForFunction(() => window.__COW_REVIEW__.telemetry().renderer.context.lost);
@@ -135,6 +213,17 @@ test("forced WebGL context loss restores without a generic error", async ({ page
     const context = window.__COW_REVIEW__.telemetry().renderer.context;
     return !context.lost && context.restores >= 1;
   });
+  const beforeZ = await page.evaluate(() => window.__COW_REVIEW__.snapshot().player.position.z);
+  await page.keyboard.down("KeyW");
+  await page.evaluate(() => window.__COW_REVIEW__.stepTicks(10));
+  await page.keyboard.up("KeyW");
+  const afterZ = await page.evaluate(() => window.__COW_REVIEW__.snapshot().player.position.z);
+  expect(Math.abs(afterZ - beforeZ)).toBeGreaterThan(0.45);
+
+  await expect.poll(async () => {
+    const afterLuminance = await canvasMeanLuminance(page);
+    return Math.abs(afterLuminance - beforeLuminance) / beforeLuminance;
+  }, { timeout: 5_000 }).toBeLessThanOrEqual(0.05);
   const renderer = await page.evaluate(() => window.__COW_REVIEW__.telemetry().renderer);
   expect(renderer.context.losses).toBe(1);
   expect(renderer.context.restores).toBe(1);

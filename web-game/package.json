@@ -10,14 +10,17 @@
   "scripts": {
     "dev": "vite --host 0.0.0.0",
     "build": "npm run typecheck && vite build",
+    "build:critic": "npm run build",
     "preview": "vite preview --host 0.0.0.0",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "lint": "eslint .",
     "test": "vitest run tests/simulation",
+    "test:critic": "vitest run tests/simulation tests/camera tests/pose tests/diagnostics",
     "test:camera": "vitest run tests/camera",
     "test:watch": "vitest tests/simulation",
     "evidence:camera": "vite-node scripts/p30-round007-camera-b-probe.ts",
-    "smoke": "playwright test"
+    "smoke": "playwright test",
+    "serve:critic": "vite preview"
   },
   "dependencies": {
     "@dimforge/rapier3d-compat": "0.19.3",

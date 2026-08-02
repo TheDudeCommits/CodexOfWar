@@ -1,0 +1,107 @@
+{
+  "schema": "p30.r011.builder-a.critic-hook-receipt.v1",
+  "protocolID": "P30-R011-BLIND-v1",
+  "protocolAmendmentCommit": "8d06bc0616fff3bb28eaad1a279a13b0e8892efe",
+  "protocolPayloadSha256": "bc1e9db54ad38408d6ff369df96ed163d15cf2dfa3fd5403d7a56e374ee85d7b",
+  "baseCommit": "acfe2f63f59ca4e87d3ca20db9dff225008c3817",
+  "opaqueAlias": "candidate-8202fa2c3374062a",
+  "route": "/?scenario=P30-light-strike-v1&seed=30011",
+  "input": {
+    "prelude": "normal KeyW input through absolute updates 0-19, released at post-update absolute tick 20",
+    "idle": "normal-input idle through post-update absolute tick 24",
+    "strike": "normal left mouse input sampled at absolute tick 24",
+    "hookIssuedGameplayActions": false
+  },
+  "clock": {
+    "fixedDelta": { "numerator": 1, "denominator": 60 },
+    "captureTickSpace": "absolute-scenario",
+    "initialAbsoluteTick": 0,
+    "attackRisingEdgeAbsoluteTick": 24,
+    "focusedAbsoluteToRelative": {
+      "29": 5,
+      "34": 10,
+      "41": 17
+    },
+    "stateHistoryCountThroughAbsolute41": 42,
+    "stateHistoryFirst": {
+      "absoluteTick": 0,
+      "attackRelativeTick": null,
+      "sha256": "212f52ec365dcc67f6af1f58b7d17f0be1f93f84003a1773b00ef573e5a137cd"
+    },
+    "stateHistoryLast": {
+      "absoluteTick": 41,
+      "attackRelativeTick": 17,
+      "sha256": "94bc25d5e8edbcf493ec1046127778929842e0e7168c2e2d3ae5f16e165a0791"
+    }
+  },
+  "focused": [
+    {
+      "absoluteTick": 29,
+      "attackRelativeTick": 5,
+      "heroPhase": "anticipation",
+      "targetPhase": "neutral",
+      "stateSha256": "4b4dd265537f424a2736c886aafb74dd685eb28da2054b9d614612aa1cbcf993"
+    },
+    {
+      "absoluteTick": 34,
+      "attackRelativeTick": 10,
+      "heroPhase": "contact",
+      "targetPhase": "compression",
+      "stateSha256": "ef7275df9aba66f9977e394aa0c6c2a5fdb68c5a6c0d716ed3f829248bcc0855",
+      "contact": {
+        "method": "blade-cutting-edge-to-posed-target-closest-surface",
+        "bladeEdgeWorld": [1.085991, 1.124227, 0.114137],
+        "targetContourWorld": [1.085991, 1.124227, 0.114137],
+        "bladeEdgeToTargetContourMeters": 0,
+        "signedSeparationMeters": 0,
+        "classification": "contact",
+        "toleranceMeters": 0.02
+      }
+    },
+    {
+      "absoluteTick": 41,
+      "attackRelativeTick": 17,
+      "heroPhase": "recoil",
+      "targetPhase": "recoil",
+      "stateSha256": "94bc25d5e8edbcf493ec1046127778929842e0e7168c2e2d3ae5f16e165a0791"
+    }
+  ],
+  "events": [
+    {
+      "id": "event-1",
+      "type": "attack-started",
+      "absoluteTick": 24,
+      "sourceSimulationTick": 24,
+      "postUpdateAbsoluteTick": 25,
+      "attackRelativeTick": 0,
+      "attackSerial": 1
+    },
+    {
+      "id": "event-2",
+      "type": "enemy-hit",
+      "absoluteTick": 34,
+      "sourceSimulationTick": 33,
+      "postUpdateAbsoluteTick": 34,
+      "attackRelativeTick": 10,
+      "damage": 10,
+      "remainingHealth": 90,
+      "attackSerial": 1
+    }
+  ],
+  "runtime": {
+    "viewport": [1600, 900],
+    "devicePixelRatio": 1,
+    "webgl2": true,
+    "webglVersion": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+    "renderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M2, Unspecified Version)",
+    "assetManifestLoaded": 18,
+    "assetManifestEnabled": 18,
+    "productionAuthored": true,
+    "fallbackActive": false,
+    "canvasCount": 1,
+    "hudCount": 1,
+    "pageErrors": [],
+    "consoleErrors": [],
+    "unhandledRejections": []
+  }
+}

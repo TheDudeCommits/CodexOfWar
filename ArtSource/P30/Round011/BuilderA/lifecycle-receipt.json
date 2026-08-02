@@ -1,0 +1,32 @@
+{
+  "schema": "p30.r011.builder-a.lifecycle-receipt.v1",
+  "headedHardware": {
+    "browser": "Google Chrome 150",
+    "viewport": [1600, 900],
+    "devicePixelRatio": 1,
+    "renderer": "ANGLE Metal / Apple M2"
+  },
+  "pointerLockRejectionProbe": {
+    "requestCount": 31,
+    "rejectionName": "WrongDocumentError",
+    "unhandledRejections": 0,
+    "pageErrors": 0,
+    "consoleErrors": 0,
+    "rendererErrors": 0
+  },
+  "forcedContextRecoveryProbe": {
+    "extension": "WEBGL_lose_context",
+    "losses": 1,
+    "restores": 1,
+    "preMeanLuminance": 62.307931928792804,
+    "postMeanLuminance": 62.525214472125555,
+    "luminanceDeltaPercent": 0.3487237284348752,
+    "firstWithinFivePercentMilliseconds": 538,
+    "controlResponseMilliseconds": 68,
+    "controlDisplacementMeters": 0.4999996185302735,
+    "unhandledRejections": 0,
+    "pageErrors": 0,
+    "consoleErrors": 0,
+    "rendererErrors": 0
+  }
+}

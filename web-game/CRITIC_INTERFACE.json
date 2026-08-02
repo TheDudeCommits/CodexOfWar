@@ -1,0 +1,21 @@
+{
+  "schema": "p30.r011.candidate-interface.v1",
+  "protocolID": "P30-R011-BLIND-v1",
+  "opaqueAlias": "candidate-8202fa2c3374062a",
+  "nodeMajor": 24,
+  "packageManager": "npm",
+  "normalPlayableRoute": "/?scenario=P30-light-strike-v1&seed=30011",
+  "readyPath": "/ready.json",
+  "scenarioID": "P30-light-strike-v1",
+  "seed": 30011,
+  "fixedDeltaNumerator": 1,
+  "fixedDeltaDenominator": 60,
+  "captureTickSpace": "absolute-scenario",
+  "attackRisingEdgeAbsoluteTick": 24,
+  "lightStrikeInput": {
+    "device": "mouse",
+    "button": "left"
+  },
+  "criticHookGlobal": "__P30_CRITIC__",
+  "buildOutputDirectory": "dist"
+}

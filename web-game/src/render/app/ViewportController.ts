@@ -22,6 +22,10 @@ export class ViewportController {
     window.removeEventListener("resize", this.resize);
   }
 
+  refresh(): void {
+    this.resize();
+  }
+
   private readonly resize = (): void => {
     const width = this.fixedSize?.width ?? Math.max(1, this.host.clientWidth);
     const height = this.fixedSize?.height ?? Math.max(1, this.host.clientHeight);

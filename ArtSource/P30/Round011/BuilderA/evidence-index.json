@@ -1,0 +1,58 @@
+{
+  "schema": "p30.r011.builder-a.evidence-index.v1",
+  "candidateOnly": true,
+  "acceptanceClaimed": false,
+  "captures": [
+    {
+      "path": "ArtSource/P30/Round011/BuilderA/F29-startup.png",
+      "absoluteTick": 29,
+      "attackRelativeTick": 5,
+      "width": 1600,
+      "height": 900,
+      "sha256": "1f0f132920931987d9e8319da088e6a75e001b61998c061b6d942dc3ddd597a8"
+    },
+    {
+      "path": "ArtSource/P30/Round011/BuilderA/F34-impact.png",
+      "absoluteTick": 34,
+      "attackRelativeTick": 10,
+      "width": 1600,
+      "height": 900,
+      "sha256": "6796bd74efccfbe63d9e7550e9f7080afb13fed572be121b76c1ee1395628be1"
+    },
+    {
+      "path": "ArtSource/P30/Round011/BuilderA/F34-impact-fxoff.png",
+      "absoluteTick": 34,
+      "attackRelativeTick": 10,
+      "identicalTickAndCamera": true,
+      "width": 1600,
+      "height": 900,
+      "sha256": "30de5036d29444befcbab5497a5909eff2059cc3e7ada227802a8d5288500d91"
+    },
+    {
+      "path": "ArtSource/P30/Round011/BuilderA/F41-recovery.png",
+      "absoluteTick": 41,
+      "attackRelativeTick": 17,
+      "width": 1600,
+      "height": 900,
+      "sha256": "9b83d34c2401a457d46950c9ee06caf92e259670fae4003b7be2111d8b166485"
+    }
+  ],
+  "receipts": [
+    {
+      "path": "ArtSource/P30/Round011/BuilderA/critic-hook-receipt.json",
+      "sha256": "b28ed6e4a0470789658dbae81c1195b22d544e32168d76a5cd486bbf347a2cae"
+    },
+    {
+      "path": "ArtSource/P30/Round011/BuilderA/lifecycle-receipt.json",
+      "sha256": "041958b98eb8bc885c8e00adaed89ec7130884284696715677e4b0585e51b521"
+    },
+    {
+      "path": "ArtSource/P30/Round011/BuilderA/validation.json",
+      "sha256": "b6861bc40f139bef43967a0695641db784fc86e900bca434f2c4895cef580acf"
+    },
+    {
+      "path": "ArtSource/P30/Round011/BuilderA/SELF_CRITIQUE.md",
+      "sha256": "f9cb1a693556ffdd8128c9b8e5ae0d502c0f0f47eaa543422b27de9c9fc80274"
+    }
+  ]
+}

@@ -96,7 +96,7 @@ const HERO_KEYS: readonly HeroPoseKey[] = [
   {
     frame: 10,
     weaponAxialRollOffset: 2.8,
-    model: { position: [-0.2, -0.014, 0.16], rotation: [0.012, -0.025, 0.02] },
+    model: { position: [-0.2, -0.014, 0.16], rotation: [0.012, -0.03, 0.02] },
     bones: {
       pelvis: [0.018, -0.04, 0.035],
       spine01: [-0.012, -0.02, 0.015],
@@ -108,7 +108,7 @@ const HERO_KEYS: readonly HeroPoseKey[] = [
   {
     frame: 12,
     weaponAxialRollOffset: 2.8,
-    model: { position: [-0.14, -0.02, 0.18], rotation: [0.022, -0.025, 0.032] },
+    model: { position: [-0.14, -0.02, 0.18], rotation: [0.022, -0.03, 0.032] },
     bones: {
       pelvis: [0.026, -0.055, 0.042],
       spine01: [-0.018, -0.028, 0.022],
@@ -152,7 +152,10 @@ const HERO_KEYS: readonly HeroPoseKey[] = [
 const TARGET_KEYS: readonly TargetPoseKey[] = [
   {
     reaction01: 0,
-    model: { position: [-0.8, -0.018, -0.12], rotation: [-0.028, 0.035, 0.07] },
+    model: {
+      position: [-0.660335, -0.020845, -0.076482],
+      rotation: [-0.028, 0.035, 0.07],
+    },
     bones: {
       hips: [-0.018, -0.025, -0.025],
       abdomen: [-0.04, -0.055, -0.045],

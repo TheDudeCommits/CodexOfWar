@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 
-test("Round010 contact stays exterior and recovery preserves grounded swing momentum", async ({
+test("Round011 blade edge meets the target exterior while frozen endpoints stay grounded", async ({
   page,
 }) => {
   await page.setViewportSize({ width: 1600, height: 900 });
@@ -62,9 +62,10 @@ test("Round010 contact stays exterior and recovery preserves grounded swing mome
   const impact = result[1]!;
   const recovery = result[2]!;
   const impactBlade = impact.pose.hero.anchors.bladeContactWorld;
-  const impactTip = impact.pose.hero.anchors.bladeTipWorld;
+  const impactEdge = impact.pose.hero.anchors.bladeEdgeWorld;
   const recoveryBlade = recovery.pose.hero.anchors.bladeContactWorld;
   const impactTarget = impact.pose.target.anchors.impactWorld;
+  const impactContour = impact.pose.target.anchors.contourWorld;
   const recoveryTarget = recovery.pose.target.anchors.impactWorld;
   const impactFx = impact.fx!.contactWorld;
 
@@ -74,8 +75,20 @@ test("Round010 contact stays exterior and recovery preserves grounded swing mome
     impactBlade[1] - impactFx[1],
     impactBlade[2] - impactFx[2],
   )).toBeLessThan(0.27);
-  expect(impactTarget[0] - impactTip[0]).toBeGreaterThan(0.45);
-  expect(impact.pose.target.sample.model.position[0]).toBeLessThanOrEqual(-0.8);
+  expect(impact.pose.contact).toEqual({
+    bladeToTargetMeters: 0.752417,
+    method: "blade-cutting-edge-to-posed-target-closest-surface",
+    bladeEdgeToTargetContourMeters: 0,
+    signedSeparationMeters: 0,
+    classification: "contact",
+    toleranceMeters: 0.02,
+  });
+  expect(impactEdge).toEqual(impactContour);
+  expect(impact.pose.target.sample.model.position).toEqual([
+    -0.660335,
+    -0.020845,
+    -0.076482,
+  ]);
 
   expect(impactBlade[0] - startup.pose.hero.anchors.bladeContactWorld[0]).toBeGreaterThan(2.4);
   expect(recoveryBlade[0] - impactBlade[0]).toBeGreaterThan(0.4);

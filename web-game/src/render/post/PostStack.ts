@@ -7,21 +7,28 @@ import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPa
 export class PostStack {
   enabled: boolean;
   lastRenderMilliseconds = 0;
-  private readonly composer: EffectComposer;
+  private composer: EffectComposer;
+  private width = 1;
+  private height = 1;
 
   constructor(
     private readonly renderer: THREE.WebGLRenderer,
-    scene: THREE.Scene,
-    camera: THREE.Camera,
+    private readonly scene: THREE.Scene,
+    private readonly camera: THREE.Camera,
     enabled: boolean,
     private readonly pixelRatio: number,
   ) {
     this.enabled = enabled;
-    this.composer = new EffectComposer(renderer);
-    this.composer.addPass(new RenderPass(scene, camera));
+    this.composer = this.createComposer();
+  }
+
+  private createComposer(): EffectComposer {
+    const composer = new EffectComposer(this.renderer);
+    composer.addPass(new RenderPass(this.scene, this.camera));
     const bloom = new UnrealBloomPass(new THREE.Vector2(1, 1), 0.32, 0.52, 0.82);
-    this.composer.addPass(bloom);
-    this.composer.addPass(new OutputPass());
+    composer.addPass(bloom);
+    composer.addPass(new OutputPass());
+    return composer;
   }
 
   render(scene: THREE.Scene, camera: THREE.Camera): void {
@@ -32,8 +39,16 @@ export class PostStack {
   }
 
   setSize(width: number, height: number): void {
+    this.width = width;
+    this.height = height;
     this.composer.setPixelRatio(this.pixelRatio);
     this.composer.setSize(width, height);
+  }
+
+  restoreAfterContextLoss(): void {
+    this.composer.dispose();
+    this.composer = this.createComposer();
+    this.setSize(this.width, this.height);
   }
 
   toggle(): boolean {
