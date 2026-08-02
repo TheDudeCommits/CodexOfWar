@@ -21,31 +21,32 @@
     "pieceId": "P30",
     "round": 8,
     "roundLabel": "P30 · Round 008",
-    "status": "building",
-    "builder": "Isolated Deterministic Combat-FX Replacement",
-    "brief": "Replace only the weapon-trail FX surface inside CharacterViews.ts and the implementation in CombatFx.ts, plus focused deterministic tests and telemetry. Build a narrow blade-edge ribbon and contact-local directional burst while every camera, simulation, character, material, world, lighting, HUD, post, manifest, and non-FX line remains frozen.",
+    "status": "review-ready",
+    "builder": "Selected Combat-FX Candidate · Independent Critic Running",
+    "brief": "Builder B's blade-bound cyan contour and contact-local warm directional burst are frozen at exact commit 5359f91bad13fe83e70169231e519911a8fbebc4. A fresh isolated critic is recapturing the actual Three.js game and running the sealed blind reference gate. This is pending candidate evidence, not acceptance.",
     "facts": [
       "P00 is accepted as infrastructure; its blind visual baseline remains an explicit 28.33–76.67 loss.",
       "P10 remains paused after rejected Round 017 and the unfiled Unity Round 018 stop; it is not the active browser-work lane.",
-      "P30 Round 005 remains rejected candidate evidence at 23/100 with 0/3 focused and 0/6 overall candidate wins.",
-      "Round006 is frozen at commit 01a4c652a5a30137ae0c82cc6cd6f063f2c91ca6 and is rejected candidate evidence at 23/100 with 0/3 focused and 0/6 overall wins.",
-      "Round007 selected Builder B's adaptive 50-degree duel camera after two isolated implementations passed every builder and root technical gate.",
-      "A fresh independent critic recaptured six headed Chrome 150 RGB frames from frozen commit 6b953f563c68a81f4635aaa081bfeb664f3aee57 and sealed mapping and scores before reveal.",
       "Round007 is rejected at 34/100 with 0/3 focused, 0/6 overall, and 0/10 categories at the required 9/10 floor.",
-      "The camera revision improved the exact critic score from Round006's 23/100 to 34/100, but it did not win a single matched comparison.",
-      "Every candidate-runtime gate passes: exact commit, 18/18 authored assets, no fallback, Node 24 build and tests, headed capture, cold readiness, resource caps, 30-second stability, context recovery, replay, framing, and obstruction.",
-      "Three critic cold launches completed in 1.764 s, 2.599 s, and 1.877 s against the 4.109 s ceiling.",
-      "The 30.126-second headed interval averaged 59.468 fps with an 18.6 ms p95 and no resource growth.",
-      "Maximum cost remains 86 calls, 204,155 triangles, 32 textures, and 38 geometries.",
-      "The lowest visual category is motion FX and readability at 2/10.",
-      "The critic named combat FX language as the single biggest gap: a screen-sized translucent fan, grid trail, block sparks, and detached hit feedback read as debug overlays.",
-      "Round008 changes only two FX surfaces and focused tests or telemetry; every camera and non-FX production system is frozen.",
-      "Round008 is fanned out to two fresh isolated builders: restrained physically grounded blade energy and disciplined anime-cinematic blade energy.",
+      "Round008 fanned the same bounded FX assignment to two fresh isolated builders from exact baseline 2cb09a9b8f496d24f93a05dd351051cd89351329.",
+      "A fresh read-only selector chose Builder B because its localized impact burst and directional slash contour made S04 contact more immediately readable; it explicitly did not claim benchmark quality.",
+      "Root integrated Builder B at production commit 7e88906a168489938ae500ed5cb317b71a312970 and froze critic target 5359f91bad13fe83e70169231e519911a8fbebc4.",
+      "Only CharacterViews.ts and CombatFx.ts differ from the Round007 baseline; the other 25 tracked production source files are byte-exact.",
+      "Root recaptured all six selected frames from the integrated production build and reproduced every PNG byte-for-byte.",
+      "S03 is FX-absent, S04 is peak, and S05 is dissipated; three clean telemetry replays at ticks 29, 34, and 41 are byte-identical.",
+      "The S04 contact projection error is 9.648 px against a 24 px limit; target FX coverage is 11.427%, blade coverage is 9.603%, and zero pixels are darkened.",
+      "All 18 authored assets load with no fallback, no texture slot was added, and all 16 technical gates pass.",
+      "Clean install, typecheck, lint, 5 simulation tests, 5 camera tests, 4 focused FX tests, production build, and 3 browser smoke tests pass.",
+      "Three root cold launches completed in 2.305 s, 2.638 s, and 2.184 s against the 4.109 s ceiling.",
+      "The 30.241-second headed interval averaged 59.537 fps with an 18.6 ms p95 and no resource growth.",
+      "Maximum selected-candidate cost is 87 calls, 203,175 triangles, 32 textures, and 41 geometries.",
+      "A fresh independent critic is now recapturing exact commit 5359f91bad13fe83e70169231e519911a8fbebc4 and must seal anonymous mapping and scores before reveal.",
+      "Round008 has no critic verdict, blind wins, quality score, category floor, or acceptance yet.",
       "Repository-wide LFS integrity also fails on eight historical PNG blobs, although all 18 runtime assets are real bytes.",
       "The global latest capture manifest remains intentionally pinned to accepted P00."
     ],
     "evidenceFingerprint": {
-      "auditContext": "Fresh independent Round007 critic complete",
+      "auditContext": "Root-selected Round008 candidate frozen · independent critic running",
       "browser": "Google Chrome 150",
       "graphics": "WebGL2 · ANGLE Metal Renderer: Apple M2",
       "headed": true,
@@ -54,79 +55,81 @@
       "deviceScaleFactor": 1
     },
     "evidenceBundle": {
-      "roundLabel": "P30 · Round 007 critic gate",
-      "status": "REJECT · 34/100 · FOCUSED 0/3 · OVERALL 0/6",
-      "manifestPath": "/data/P30-round-007.json",
+      "roundLabel": "P30 · Round 008 frozen candidate",
+      "status": "INDEPENDENT CRITIC RUNNING · NOT ACCEPTED",
+      "manifestPath": "/data/P30-round-008.json",
       "s01": {
-        "label": "S03 startup · rejected Round007 candidate",
-        "path": "/captures/P30/round-007/S03.png"
+        "label": "S03 startup · selected candidate · FX absent",
+        "path": "/captures/P30/round-008/S03.png",
+        "sha256": "5c8398ae257f73e779d60c26d0e3c07399b9f82e77067f4bf4cd111544c598e1"
       },
       "diagnostic": {
-        "label": "S04 active hit · rejected Round007 candidate",
-        "path": "/captures/P30/round-007/S04.png"
+        "label": "S04 active hit · selected candidate · verdict pending",
+        "path": "/captures/P30/round-008/S04.png",
+        "sha256": "c8c2ba2df5296bf92e9b64a173e4f9c364c6e432bfec8250de05b5f2b8296ce5"
       },
       "metrics": [
         {
           "label": "Verdict",
-          "value": "REJECT · 34/100"
+          "value": "PENDING · CRITIC RUNNING"
         },
         {
           "label": "Focused / overall",
-          "value": "0/3 · 0/6"
+          "value": "PENDING · PENDING"
         },
         {
           "label": "Category floor",
-          "value": "0/10 at 9/10 · FX 2/10"
+          "value": "PENDING · REQUIRED 9/10"
         },
         {
-          "label": "True-cold launches",
-          "value": "1.764 s · 2.599 s · 1.877 s"
+          "label": "FX contact",
+          "value": "9.648 px · LIMIT 24 px"
         },
         {
           "label": "Resource maximum",
-          "value": "86 calls · 204,155 triangles · 32 textures · 38 geometries"
+          "value": "87 calls · 203,175 triangles · 32 textures · 41 geometries"
         },
         {
-          "label": "Camera gates",
-          "value": "Framing · replay · obstruction · pass"
+          "label": "Root technical gate",
+          "value": "16/16 PASS · QUALITY PENDING"
         }
       ],
       "checks": [
         "Headed Chrome 150 · Metal M2 · WebGL2 · 1600×900 · DPR 1",
-        "Frozen commit · 6b953f563c68a81f4635aaa081bfeb664f3aee57",
-        "Anonymous mapping and scores sealed before reveal · public hashes filed",
+        "Frozen critic commit · 5359f91bad13fe83e70169231e519911a8fbebc4",
+        "Two fresh isolated builders · fresh read-only selector · exact root recapture",
         "18/18 authored assets · no fallback · production-authored runtime",
-        "Node 24 clean install, typecheck, lint, ten unit tests, build, and three browser smoke tests",
-        "Resource caps · 86 calls · 204,155 triangles · 32 textures · 38 geometries",
-        "S03-S05 hero scale, actor and blade safety, and central S04 contact gates pass",
-        "Three clean deterministic camera replays · ticks 29, 34, 41, and 60 · byte-identical",
+        "Node 24 clean install, typecheck, lint, fourteen unit tests, build, and three browser smoke tests",
+        "Resource caps · 87 calls · 203,175 triangles · 32 textures · 41 geometries",
+        "S03 absent · S04 peak · S05 dissipated · 9.648 px contact error",
+        "Three clean deterministic FX replays · ticks 29, 34, and 41 · byte-identical",
         "Wall and clear boom obstruction gates pass",
-        "30.126-second timing, WebGL loss and restore, and resource stability pass",
-        "Round006 106-entry frozen scope · three authorized production differences · zero unexpected"
+        "30.241-second timing, WebGL loss and restore, and resource stability pass",
+        "27 tracked production source files · two authorized differences · zero unexpected"
       ],
       "limitations": [
-        "Focused blind gate · 0/3 · hard fail",
-        "Overall blind gate · 0/6 · hard fail",
-        "Quality score · 34/100 · hard fail",
-        "Category floor · 0/10 at 9/10 · hard fail",
-        "Combat FX language · screen-sized fan, grid trail, block sparks, and detached feedback",
+        "Focused blind gate · pending fresh independent critic",
+        "Overall blind gate · pending fresh independent critic",
+        "Quality score and category floor · pending fresh independent critic",
+        "Builder selection score is not a reference-benchmark acceptance",
+        "The frozen S04 still shows a visually busy blade lattice; quality acceptance is not claimed",
         "Repository-wide LFS integrity · eight historical raw PNG blobs"
       ]
     },
-    "nextGate": "Round008 must replace only the FX surfaces with a narrow deterministic blade-edge ribbon and contact-local directional S04 burst within 24 px; remain absent at S03 and dissipated by S05; add no texture slot; preserve all technical gates; and then win S03–S05 3/3, win at least 5/6 overall, score at least 95/100, and put every category at least 9/10."
+    "nextGate": "The fresh critic must recapture the actual frozen game, seal anonymous mapping and scores before reveal, win S03–S05 3/3, win at least 5/6 overall, score at least 95/100, put every category at least 9/10, and retain every hard gate. If it rejects, exactly one largest visual gap becomes the next isolated builder assignment."
   },
   "canonicalCapture": {
     "shotId": "S04",
-    "name": "Round 007 active hit · rejected candidate",
-    "purpose": "P30 Round 007 fresh critic candidate evidence",
+    "name": "Round 008 active hit · selected candidate · verdict pending",
+    "purpose": "P30 Round 008 frozen critic-target evidence",
     "camera": "Adaptive 50-degree duel composer",
     "heroHeight": "360–540 px target",
-    "measuredHeroHeight": "388.327 px · technical pass · visual reject",
-    "sceneRead": "The camera now frames the duel effectively, but the screen-sized translucent fan, grid trail, block sparks, and detached impact geometry flatten contact and read as debug overlays. Round007 remains rejected candidate evidence.",
-    "benchmarkId": "Anonymous six-pair gate",
-    "benchmarkPolicy": "Aggregate 0/6 result and public seal hashes only; comparison identities and source imagery are never published",
-    "capturePath": "/captures/P30/round-007/S04.png",
-    "manifestPath": "/data/P30-round-007.json",
+    "measuredHeroHeight": "388.327 px · technical pass · visual verdict pending",
+    "sceneRead": "The selected FX replacement binds a cyan contour to the authored blade and concentrates a warm directional burst at contact. Root reproduced the frame byte-for-byte and passed every technical gate; an independent blind quality verdict is still pending.",
+    "benchmarkId": "Fresh anonymous focused and six-pair gates",
+    "benchmarkPolicy": "The critic seals randomized mapping and anonymous scores before reveal; no acceptance is shown until all thresholds pass",
+    "capturePath": "/captures/P30/round-008/S04.png",
+    "manifestPath": "/data/P30-round-008.json",
     "latestManifestPath": "/data/capture-manifest-latest.json",
     "captureAvailable": true,
     "manifestAvailable": true
@@ -806,6 +809,39 @@
         "preference": "Candidate won 0/3 focused and 0/6 aggregate blind comparisons",
         "primaryGap": "combat FX language: the screen-sized translucent sweep fan, grid-like trail, block-shaped sparks, and detached hit feedback read as debug overlays rather than blade-bound energy and contact-local force."
       }
+    },
+    {
+      "round": 8,
+      "label": "P30 · Round 008",
+      "pieceId": "P30",
+      "phase": "Selected candidate frozen · fresh independent critic running",
+      "status": "review-ready",
+      "date": "2026-08-02",
+      "engineRun": true,
+      "actualGameCapturePerformed": true,
+      "targetMatchedGameCapturePerformed": false,
+      "gateQualifyingCapture": false,
+      "builderBrief": "Replace only the weapon-trail surface in CharacterViews.ts and the contact implementation in CombatFx.ts with deterministic blade-bound energy and a contact-local directional burst; freeze all camera, simulation, input, character, material, world, lighting, HUD, post, manifest, and non-FX source.",
+      "evidence": "Two fresh isolated builders completed the same assignment from exact baseline 2cb09a9b8f496d24f93a05dd351051cd89351329. A fresh read-only selector chose Builder B. Root integrated it, reproduced all six headed Chrome 150 RGB frames byte-for-byte, passed all 16 technical gates, and froze exact critic target 5359f91bad13fe83e70169231e519911a8fbebc4. The fresh critic is running the actual game and sealed blind benchmark gate now; no quality score, blind win, category floor, verdict, or acceptance is claimed.",
+      "evidenceLinks": [
+        "/captures/P30/round-008/S03.png",
+        "/captures/P30/round-008/S04.png",
+        "/captures/P30/round-008/S05.png",
+        "/data/P30-round-008.json"
+      ],
+      "critic": {
+        "status": "PENDING · FRESH INDEPENDENT CRITIC RUNNING",
+        "score": null,
+        "focusedCandidatePreferredCount": null,
+        "focusedComparisonCount": 3,
+        "candidatePreferredCount": null,
+        "comparisonCount": 6,
+        "categoriesAtLeastNine": null,
+        "categoryCount": 10,
+        "scoreLabel": null,
+        "preference": null,
+        "primaryGap": null
+      }
     }
   ],
   "pieces": [
@@ -1090,8 +1126,8 @@
       "id": "P30",
       "name": "Three.js playable nucleus",
       "group": "Vertical slice",
-      "status": "building",
-      "outcome": "Round007 is rejected at 34/100 with 0/3 focused and 0/6 overall wins despite every camera and runtime gate passing. Round008 is building two isolated combat-FX replacements limited to the trail surface and contact burst while camera, simulation, characters, world, lighting, HUD, post, manifest, and every non-FX line remain frozen.",
+      "status": "review-ready",
+      "outcome": "Round007 is rejected at 34/100. Round008 selected Builder B's bounded blade contour and contact burst after two fresh isolated builds, reproduced all six actual-game frames byte-for-byte, passed all 16 root technical gates, and froze commit 5359f91bad13fe83e70169231e519911a8fbebc4. A fresh independent blind critic is running; quality remains pending and unaccepted.",
       "requiredEvidence": [
         "S01–S06 fresh browser captures",
         "Exact Tape A, Tape B, and Tape C replays",

@@ -1,0 +1,162 @@
+{
+  "schema": "cow.public-browser-candidate.v1",
+  "piece": "P30",
+  "round": 8,
+  "date": "2026-08-02",
+  "status": "selected-candidate-under-independent-review",
+  "acceptanceScope": "Two fresh isolated combat-FX builders completed the same frozen assignment. Root selected Builder B, reproduced every selected frame byte-for-byte, passed all 16 technical gates, and froze commit 5359f91bad13fe83e70169231e519911a8fbebc4 for a fresh independent blind critic. No quality acceptance or critic verdict is claimed.",
+  "frozenCommit": "5359f91bad13fe83e70169231e519911a8fbebc4",
+  "selection": {
+    "selectedBuilder": "B",
+    "selectedBuilderCommit": "74fdf9e4dc4de2384ea5e73289ef3ac8b7ae9ffc",
+    "alternateBuilderCommit": "cdc61b43e15d4daf8232f4708583089f85c96b17",
+    "integratedProductionCommit": "7e88906a168489938ae500ed5cb317b71a312970",
+    "selectionReceiptSha256": "29841800c6273d44ad77fb7cc0be4c7851200f3141107d09535195e9b004ed5e",
+    "rootValidationSha256": "38aa8a5367da822f3ed2b02a7f845bfc062fc2591ffae60521ef0da74bf14427",
+    "method": "A fresh read-only selector inspected anonymized actual-game S04 pixels after both isolated builders passed their technical gates. Root then independently rebuilt and recaptured the selected candidate.",
+    "reason": "The selected frame makes contact more immediately readable through a localized warm directional burst and blade-bound cyan contour. The alternate suppressed artifacts more strongly but read nearly static at full frame.",
+    "acceptanceClaimed": false
+  },
+  "captureContract": {
+    "browser": "Google Chrome 150",
+    "headed": true,
+    "hardwareAccelerated": true,
+    "renderer": "WebGL2 · ANGLE Metal Renderer: Apple M2",
+    "viewport": {
+      "width": 1600,
+      "height": 900,
+      "deviceScaleFactor": 1
+    },
+    "pngColorType": "RGB",
+    "httpStatus": 200,
+    "runtimeFailures": 0
+  },
+  "fxLifecycle": {
+    "focusedTicks": [
+      29,
+      34,
+      41
+    ],
+    "focusedPhases": [
+      "absent",
+      "peak",
+      "dissipated"
+    ],
+    "contactProjectionErrorPixels": 9.648063943565091,
+    "contactProjectionLimitPixels": 24,
+    "playerFxCoveragePercent": 0.12182899011543512,
+    "targetFxCoveragePercent": 11.426734900739202,
+    "bladeFxCoveragePercent": 9.603326685177219,
+    "darkenedPixels": 0,
+    "newTextureSlots": 0,
+    "replayRuns": 3,
+    "replayByteIdentical": true
+  },
+  "runtime": {
+    "node": "24.14.0",
+    "coldReadyLaunchesMilliseconds": [
+      2305.097,
+      2638.463,
+      2183.829
+    ],
+    "coldReadyLimitMilliseconds": 4109,
+    "coldReadyPassed": true,
+    "authoredAssetsLoaded": 18,
+    "authoredAssetsExpected": 18,
+    "proceduralFallbackActive": false,
+    "stabilityDurationMilliseconds": 30241.1,
+    "meanFps": 59.537,
+    "p95RafMilliseconds": 18.6,
+    "resourceGrowth": false,
+    "resourceMaximum": {
+      "drawCalls": 87,
+      "triangles": 203175,
+      "textures": 32,
+      "geometries": 41
+    },
+    "resourceLimits": {
+      "drawCalls": 100,
+      "triangles": 250000,
+      "textures": 32,
+      "geometries": 64
+    },
+    "resourceCapsPassed": true,
+    "webglLossRestorePassed": true
+  },
+  "rootValidation": {
+    "cleanInstallPassed": true,
+    "vulnerabilities": 0,
+    "lintPassed": true,
+    "typecheckPassed": true,
+    "simulationTestsPassed": 5,
+    "cameraTestsPassed": 5,
+    "focusedFxTestsPassed": 4,
+    "productionBuildPassed": true,
+    "browserSmokeTestsPassed": 3,
+    "technicalGatesPassed": 16,
+    "technicalGateCount": 16,
+    "allSixCapturesByteExactToSelectedBuilderEvidence": true
+  },
+  "freezeAudit": {
+    "baselineCommit": "2cb09a9b8f496d24f93a05dd351051cd89351329",
+    "trackedProductionSourceFiles": 27,
+    "authorizedProductionDifferences": [
+      "web-game/src/render/objects/CharacterViews.ts",
+      "web-game/src/render/objects/CombatFx.ts"
+    ],
+    "unchangedTrackedProductionSourceFiles": 25,
+    "unexpectedProductionDifferences": 0,
+    "allCameraSimulationInputCharactersMaterialsWorldLightingHudPostAndManifestSourceExact": true
+  },
+  "captures": [
+    {
+      "id": "S03",
+      "phase": "startup · FX absent",
+      "tick": 29,
+      "path": "/captures/P30/round-008/S03.png",
+      "bytes": 2127016,
+      "sha256": "5c8398ae257f73e779d60c26d0e3c07399b9f82e77067f4bf4cd111544c598e1"
+    },
+    {
+      "id": "S04",
+      "phase": "active · FX peak",
+      "tick": 34,
+      "path": "/captures/P30/round-008/S04.png",
+      "bytes": 2139804,
+      "sha256": "c8c2ba2df5296bf92e9b64a173e4f9c364c6e432bfec8250de05b5f2b8296ce5"
+    },
+    {
+      "id": "S05",
+      "phase": "recovery · FX dissipated",
+      "tick": 41,
+      "path": "/captures/P30/round-008/S05.png",
+      "bytes": 2136130,
+      "sha256": "6bae9a8d3d7337c1a9292fd1edcd4c0db6598400f81166086b521a0dc042ea3b"
+    }
+  ],
+  "critic": {
+    "status": "RUNNING",
+    "accepted": null,
+    "qualityScore": null,
+    "scoreOutOf": 100,
+    "focusedCandidateWins": null,
+    "focusedComparisonCount": 3,
+    "overallCandidateWins": null,
+    "overallComparisonCount": 6,
+    "categoriesAtLeastNine": null,
+    "categoryCount": 10,
+    "mappingSealedBeforeScoring": null,
+    "scoresSealedBeforeReveal": null,
+    "candidateRuntimeTechnicalStatus": "PASS",
+    "acceptanceClaimed": false
+  },
+  "reviewGate": {
+    "focusedRequirement": "Candidate wins S03, S04, and S05: 3/3",
+    "overallRequirement": "Candidate wins at least 5/6 matched comparisons",
+    "scoreRequirement": "At least 95/100",
+    "categoryRequirement": "Every category at least 9/10",
+    "hardGateRequirement": "All candidate runtime and capture gates pass"
+  },
+  "qualityStatus": "pending-fresh-independent-blind-critic",
+  "largestKnownResidualWeakness": "Pending critic judgment. Builder selection explicitly did not claim benchmark-level quality."
+}
