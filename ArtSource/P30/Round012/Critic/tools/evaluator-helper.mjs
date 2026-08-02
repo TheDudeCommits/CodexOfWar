@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 
 import { createHash } from 'node:crypto';
-import { readFile } from 'node:fs/promises';
+import { lstat, readFile, realpath } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { isAbsolute, relative, resolve, sep } from 'node:path';
+import { inflateRawSync } from 'node:zlib';
 
 import {
   Round012TreeError,
@@ -13,6 +14,7 @@ import {
   fileSha256,
   parseJsonStrict,
   readCanonicalFile,
+  registerCaseFoldedPath,
   sha256Hex,
   u32be,
   u64be,
@@ -40,6 +42,8 @@ export const REFERENCE_COMMIT_DOMAIN = 'P30R012A/reference-selection/v1';
 export const PRESENTATION_ORDER_DOMAIN = 'P30R012A/presentation-order/v1';
 export const HIT_OFFSET_DOMAIN = 'P30R012A/hit-offset/v1';
 export const MISS_OFFSET_PAD_DOMAIN = 'P30R012A/miss-offset-pad/v1';
+export const PACKAGE_MAP_COMMIT_DOMAIN = 'P30R012A/package-map/v1';
+export const ALIAS_SCORE_COMMIT_DOMAIN = 'P30R012A/alias-score/v1';
 
 export const EPS = 0.000001;
 export const R_BLADE = 0.020000;
@@ -48,10 +52,17 @@ export const VIEWPORT_WIDTH = 1600;
 export const VIEWPORT_HEIGHT = 900;
 export const HEAVY_RISING_EDGE_ABSOLUTE_TICK = 24;
 export const FOCUSED_CAPTURE_TICKS = Object.freeze([44, 46, 58]);
+export const ACTION_CROP_EXPANSION = 0.15;
+export const CONTACT_ROI_SIZE = 320;
+export const REFERENCE_SCALE_ALGORITHM = 'lanczos3-uniform-fit-no-upscale-v1';
+export const PACKAGE_MAP_SCHEMA = 'p30.r012a.package-map.v1';
+export const ALIAS_SCORE_SCHEMA = 'p30.r012a.alias-score.v1';
 
 const HEX64 = /^[0-9a-f]{64}$/u;
 const ALIAS = /^candidate-[0-9a-f]{16}$/u;
 const PHASE_IDS = Object.freeze(['R1_ANTICIPATION', 'R2_CONTACT', 'R3_FOLLOW_THROUGH']);
+const REFERENCE_BALLOT_IDS = Object.freeze(['R1', 'R2', 'R3']);
+const PAIRWISE_BALLOT_IDS = Object.freeze(['P1', 'P2', 'P3']);
 const CAPSULE_SPECS = Object.freeze([
   ['head', 'neck', 'head', 0.080],
   ['torso', 'pelvis', 'neck', 0.115],
@@ -176,9 +187,7 @@ export function deriveTwoSideOrder(seed, itemID, sideTokens) {
   if (!Array.isArray(sideTokens) || sideTokens.length !== 2 || sideTokens[0] === sideTokens[1]) {
     evaluatorFail('EXACTLY_TWO_DISTINCT_SIDE_TOKENS_REQUIRED');
   }
-  for (const token of sideTokens) {
-    if (typeof token !== 'string' || !token || token.normalize('NFC') !== token) evaluatorFail('INVALID_SIDE_TOKEN');
-  }
+  validateBallotTokens(itemID, sideTokens);
   const lexical = [...sideTokens].sort(compareUtf8);
   const digest = orderDigest(seed, itemID);
   const flip = digest.at(-1) & 1;
@@ -188,6 +197,22 @@ export function deriveTwoSideOrder(seed, itemID, sideTokens) {
     right: lexical[1 - flip],
     orderDigest: digest.toString('hex')
   };
+}
+
+export function validateBallotTokens(itemID, sideTokens) {
+  if (!Array.isArray(sideTokens) || sideTokens.length !== 2 || sideTokens[0] === sideTokens[1]) {
+    evaluatorFail('EXACTLY_TWO_DISTINCT_SIDE_TOKENS_REQUIRED');
+  }
+  if (PAIRWISE_BALLOT_IDS.includes(itemID)) {
+    sideTokens.forEach(assertAlias);
+    return { kind: 'pairwise', ballotID: itemID };
+  }
+  const match = /^(R[123])\/(candidate-[0-9a-f]{16})$/u.exec(itemID);
+  if (!match) evaluatorFail('INVALID_BALLOT_ITEM_ID');
+  const [, ballotID, alias] = match;
+  const expected = new Set([alias, `reference/${ballotID}`]);
+  if (sideTokens.some((token) => !expected.has(token))) evaluatorFail('INVALID_REFERENCE_BALLOT_TOKEN');
+  return { kind: 'reference', ballotID, alias };
 }
 
 export function validateReferenceSelection(document) {
@@ -388,27 +413,195 @@ function jpegDimensions(bytes) {
     if (cursor >= bytes.length) break;
     const marker = bytes[cursor];
     cursor += 1;
-    if (marker === 0xd8 || marker === 0xd9 || (marker >= 0xd0 && marker <= 0xd7)) continue;
+    if (marker === 0x01 || marker === 0xd8 || marker === 0xd9 || (marker >= 0xd0 && marker <= 0xd7)) continue;
     if (cursor + 2 > bytes.length) break;
     const length = bytes.readUInt16BE(cursor);
     if (length < 2 || cursor + length > bytes.length) evaluatorFail('REFERENCE_IMAGE_INVALID');
     if ([0xc0, 0xc1, 0xc2, 0xc3, 0xc5, 0xc6, 0xc7, 0xc9, 0xca, 0xcb, 0xcd, 0xce, 0xcf].includes(marker)) {
       if (length < 7) evaluatorFail('REFERENCE_IMAGE_INVALID');
-      return { height: bytes.readUInt16BE(cursor + 3), width: bytes.readUInt16BE(cursor + 5) };
+      const dimensions = { height: bytes.readUInt16BE(cursor + 3), width: bytes.readUInt16BE(cursor + 5) };
+      if (dimensions.width <= 0 || dimensions.height <= 0) evaluatorFail('REFERENCE_IMAGE_INVALID');
+      return dimensions;
     }
     cursor += length;
   }
   evaluatorFail('REFERENCE_IMAGE_DIMENSIONS_MISSING');
 }
 
-export async function verifyReferenceSelectionFiles(selectionDocument, extractedArchiveRoot) {
+function webpDimensions(bytes) {
+  if (
+    bytes.length < 30 || bytes.toString('ascii', 0, 4) !== 'RIFF' ||
+    bytes.toString('ascii', 8, 12) !== 'WEBP'
+  ) evaluatorFail('REFERENCE_IMAGE_FORMAT_UNSUPPORTED');
+  const riffSize = bytes.readUInt32LE(4) + 8;
+  if (riffSize > bytes.length || riffSize < 20) evaluatorFail('REFERENCE_IMAGE_INVALID');
+  let cursor = 12;
+  while (cursor + 8 <= riffSize) {
+    const type = bytes.toString('ascii', cursor, cursor + 4);
+    const size = bytes.readUInt32LE(cursor + 4);
+    const data = cursor + 8;
+    if (data + size > riffSize) evaluatorFail('REFERENCE_IMAGE_INVALID');
+    if (type === 'VP8X') {
+      if (size < 10) evaluatorFail('REFERENCE_IMAGE_INVALID');
+      const width = 1 + bytes[data + 4] + (bytes[data + 5] << 8) + (bytes[data + 6] << 16);
+      const height = 1 + bytes[data + 7] + (bytes[data + 8] << 8) + (bytes[data + 9] << 16);
+      return { width, height };
+    }
+    if (type === 'VP8L') {
+      if (size < 5 || bytes[data] !== 0x2f) evaluatorFail('REFERENCE_IMAGE_INVALID');
+      const bits = bytes.readUInt32LE(data + 1);
+      return { width: 1 + (bits & 0x3fff), height: 1 + ((bits >>> 14) & 0x3fff) };
+    }
+    if (type === 'VP8 ') {
+      if (size < 10 || bytes[data + 3] !== 0x9d || bytes[data + 4] !== 0x01 || bytes[data + 5] !== 0x2a) {
+        evaluatorFail('REFERENCE_IMAGE_INVALID');
+      }
+      return {
+        width: bytes.readUInt16LE(data + 6) & 0x3fff,
+        height: bytes.readUInt16LE(data + 8) & 0x3fff
+      };
+    }
+    cursor = data + size + (size & 1);
+  }
+  evaluatorFail('REFERENCE_IMAGE_DIMENSIONS_MISSING');
+}
+
+export function referenceImageDimensions(bytes) {
+  if (!Buffer.isBuffer(bytes)) evaluatorFail('REFERENCE_IMAGE_INVALID');
+  if (bytes.length >= 2 && bytes[0] === 0xff && bytes[1] === 0xd8) return jpegDimensions(bytes);
+  if (bytes.length >= 12 && bytes.toString('ascii', 0, 4) === 'RIFF') return webpDimensions(bytes);
+  evaluatorFail('REFERENCE_IMAGE_FORMAT_UNSUPPORTED');
+}
+
+let crcTable;
+function crc32(bytes) {
+  if (!crcTable) {
+    crcTable = Uint32Array.from({ length: 256 }, (_, value) => {
+      let crc = value;
+      for (let bit = 0; bit < 8; bit += 1) crc = (crc & 1) ? (0xedb88320 ^ (crc >>> 1)) : (crc >>> 1);
+      return crc >>> 0;
+    });
+  }
+  let crc = 0xffffffff;
+  for (const byte of bytes) crc = crcTable[(crc ^ byte) & 0xff] ^ (crc >>> 8);
+  return (crc ^ 0xffffffff) >>> 0;
+}
+
+function decodeZipName(bytes, flags) {
+  if ((flags & 0x0800) === 0 && bytes.some((byte) => byte > 0x7f)) evaluatorFail('REFERENCE_ZIP_NAME_ENCODING_UNSUPPORTED');
+  const name = bytes.toString('utf8');
+  if (Buffer.compare(Buffer.from(name, 'utf8'), bytes) !== 0 || name.normalize('NFC') !== name || name.includes('\0')) {
+    evaluatorFail('REFERENCE_ZIP_ENTRY_PATH_INVALID');
+  }
+  return name;
+}
+
+export function parseReferenceZip(archiveBytes) {
+  if (!Buffer.isBuffer(archiveBytes) || archiveBytes.length < 22) evaluatorFail('REFERENCE_ZIP_INVALID');
+  let eocd = -1;
+  const minimum = Math.max(0, archiveBytes.length - 65_557);
+  for (let cursor = archiveBytes.length - 22; cursor >= minimum; cursor -= 1) {
+    if (archiveBytes.readUInt32LE(cursor) === 0x06054b50) { eocd = cursor; break; }
+  }
+  if (eocd < 0 || eocd + 22 + archiveBytes.readUInt16LE(eocd + 20) !== archiveBytes.length) {
+    evaluatorFail('REFERENCE_ZIP_EOCD_INVALID');
+  }
+  if (
+    archiveBytes.readUInt16LE(eocd + 4) !== 0 || archiveBytes.readUInt16LE(eocd + 6) !== 0 ||
+    archiveBytes.readUInt16LE(eocd + 8) !== archiveBytes.readUInt16LE(eocd + 10)
+  ) evaluatorFail('REFERENCE_ZIP_MULTIDISK_UNSUPPORTED');
+  const entryCount = archiveBytes.readUInt16LE(eocd + 10);
+  const centralSize = archiveBytes.readUInt32LE(eocd + 12);
+  const centralOffset = archiveBytes.readUInt32LE(eocd + 16);
+  if (centralOffset + centralSize !== eocd || entryCount === 0 || entryCount > 10_000) evaluatorFail('REFERENCE_ZIP_CENTRAL_DIRECTORY_INVALID');
+  const entries = new Map();
+  const caseFold = new Set();
+  let cursor = centralOffset;
+  for (let index = 0; index < entryCount; index += 1) {
+    if (cursor + 46 > eocd || archiveBytes.readUInt32LE(cursor) !== 0x02014b50) evaluatorFail('REFERENCE_ZIP_CENTRAL_DIRECTORY_INVALID');
+    const madeBy = archiveBytes.readUInt16LE(cursor + 4);
+    const flags = archiveBytes.readUInt16LE(cursor + 8);
+    const method = archiveBytes.readUInt16LE(cursor + 10);
+    const expectedCrc32 = archiveBytes.readUInt32LE(cursor + 16);
+    const compressedSize = archiveBytes.readUInt32LE(cursor + 20);
+    const uncompressedSize = archiveBytes.readUInt32LE(cursor + 24);
+    const nameLength = archiveBytes.readUInt16LE(cursor + 28);
+    const extraLength = archiveBytes.readUInt16LE(cursor + 30);
+    const commentLength = archiveBytes.readUInt16LE(cursor + 32);
+    const externalAttributes = archiveBytes.readUInt32LE(cursor + 38);
+    const localOffset = archiveBytes.readUInt32LE(cursor + 42);
+    const end = cursor + 46 + nameLength + extraLength + commentLength;
+    if (end > eocd || (flags & 1) !== 0 || ![0, 8].includes(method)) evaluatorFail('REFERENCE_ZIP_ENTRY_UNSUPPORTED');
+    const name = decodeZipName(archiveBytes.subarray(cursor + 46, cursor + 46 + nameLength), flags);
+    const directory = name.endsWith('/');
+    const canonicalName = directory ? name.slice(0, -1) : name;
+    try { validateRelativePath(canonicalName); } catch { evaluatorFail('REFERENCE_ZIP_ENTRY_PATH_INVALID'); }
+    const unixMode = (madeBy >>> 8) === 3 ? (externalAttributes >>> 16) & 0xffff : 0;
+    if ((unixMode & 0o170000) === 0o120000) evaluatorFail('REFERENCE_ZIP_SYMLINK_FORBIDDEN');
+    if (!directory && unixMode && (unixMode & 0o170000) !== 0o100000) evaluatorFail('REFERENCE_ZIP_SPECIAL_ENTRY_FORBIDDEN');
+    if (entries.has(name) || caseFold.has(name.toLocaleLowerCase('en-US'))) evaluatorFail('REFERENCE_ZIP_ENTRY_COLLISION');
+    caseFold.add(name.toLocaleLowerCase('en-US'));
+    if (uncompressedSize > 64 * 1024 * 1024 || compressedSize > archiveBytes.length) evaluatorFail('REFERENCE_ZIP_ENTRY_TOO_LARGE');
+    if (localOffset + 30 > centralOffset || archiveBytes.readUInt32LE(localOffset) !== 0x04034b50) evaluatorFail('REFERENCE_ZIP_LOCAL_HEADER_INVALID');
+    const localFlags = archiveBytes.readUInt16LE(localOffset + 6);
+    const localMethod = archiveBytes.readUInt16LE(localOffset + 8);
+    const localNameLength = archiveBytes.readUInt16LE(localOffset + 26);
+    const localExtraLength = archiveBytes.readUInt16LE(localOffset + 28);
+    const localName = decodeZipName(archiveBytes.subarray(localOffset + 30, localOffset + 30 + localNameLength), localFlags);
+    if (localFlags !== flags || localMethod !== method || localName !== name) evaluatorFail('REFERENCE_ZIP_LOCAL_HEADER_MISMATCH');
+    const dataStart = localOffset + 30 + localNameLength + localExtraLength;
+    const dataEnd = dataStart + compressedSize;
+    if (dataEnd > centralOffset) evaluatorFail('REFERENCE_ZIP_ENTRY_TRUNCATED');
+    let bytes = Buffer.alloc(0);
+    if (!directory) {
+      const compressed = archiveBytes.subarray(dataStart, dataEnd);
+      try { bytes = method === 0 ? Buffer.from(compressed) : inflateRawSync(compressed); } catch { evaluatorFail('REFERENCE_ZIP_DEFLATE_INVALID'); }
+      if (bytes.length !== uncompressedSize || crc32(bytes) !== expectedCrc32) evaluatorFail('REFERENCE_ZIP_ENTRY_INTEGRITY_MISMATCH');
+    }
+    entries.set(name, { name, bytes, sha256: sha256Hex(bytes), directory, method, unixMode });
+    cursor = end;
+  }
+  if (cursor !== eocd) evaluatorFail('REFERENCE_ZIP_CENTRAL_DIRECTORY_INVALID');
+  return entries;
+}
+
+async function assertExtractedRegularFile(root, relativePath) {
+  const rootAbsolute = resolve(root);
+  const rootStatus = await lstat(rootAbsolute);
+  if (rootStatus.isSymbolicLink() || !rootStatus.isDirectory()) evaluatorFail('REFERENCE_EXTRACTED_ROOT_INVALID');
+  const rootReal = await realpath(rootAbsolute);
+  let current = rootAbsolute;
+  for (const component of relativePath.split('/')) {
+    current = resolve(current, component);
+    const status = await lstat(current);
+    if (status.isSymbolicLink()) evaluatorFail('REFERENCE_EXTRACTED_SYMLINK_FORBIDDEN');
+  }
+  const status = await lstat(current);
+  if (!status.isFile()) evaluatorFail('REFERENCE_EXTRACTED_NOT_REGULAR_FILE');
+  const actualReal = await realpath(current);
+  let rel = relative(rootReal, actualReal);
+  if (sep !== '/') rel = rel.split(sep).join('/');
+  if (!rel || rel === '..' || rel.startsWith('../') || isAbsolute(rel)) evaluatorFail('REFERENCE_EXTRACTED_PATH_ESCAPE');
+  return current;
+}
+
+export async function verifyReferenceSelectionFiles(selectionDocument, extractedArchiveRoot, referenceArchivePath) {
   validateReferenceSelection(selectionDocument);
+  if (typeof referenceArchivePath !== 'string' || !referenceArchivePath) evaluatorFail('REFERENCE_ARCHIVE_PATH_REQUIRED');
+  const archiveEntries = parseReferenceZip(await readFile(referenceArchivePath));
   const root = resolve(extractedArchiveRoot);
   for (const selection of selectionDocument.selections) {
-    const absolute = inside(root, selection.sourceArchiveEntry);
+    const archiveEntry = archiveEntries.get(selection.sourceArchiveEntry);
+    if (!archiveEntry || archiveEntry.directory) evaluatorFail('REFERENCE_ARCHIVE_ENTRY_MISSING');
+    if (archiveEntry.sha256 !== selection.sourceFileSha256) evaluatorFail('REFERENCE_ARCHIVE_ORIGIN_HASH_MISMATCH');
+    const absolute = await assertExtractedRegularFile(root, selection.sourceArchiveEntry);
     const bytes = await readFile(absolute);
+    if (await assertExtractedRegularFile(root, selection.sourceArchiveEntry) !== absolute) {
+      evaluatorFail('REFERENCE_EXTRACTED_PATH_MUTATED');
+    }
     if (sha256Hex(bytes) !== selection.sourceFileSha256) evaluatorFail('REFERENCE_FILE_HASH_MISMATCH');
-    const dimensions = jpegDimensions(bytes);
+    if (!bytes.equals(archiveEntry.bytes)) evaluatorFail('REFERENCE_EXTRACTED_BYTES_NOT_FROM_ARCHIVE');
+    const dimensions = referenceImageDimensions(bytes);
     if (
       dimensions.width !== selection.originalDimensions.width ||
       dimensions.height !== selection.originalDimensions.height
@@ -442,7 +635,7 @@ export async function verifyPrivateCustody({
   }
   const archive = await fileSha256(referenceArchivePath);
   if (archive.sha256 !== commitment.referenceArchiveSha256) evaluatorFail('REFERENCE_ARCHIVE_HASH_MISMATCH');
-  await verifyReferenceSelectionFiles(selectionDocument, extractedArchiveRoot);
+  await verifyReferenceSelectionFiles(selectionDocument, extractedArchiveRoot, referenceArchivePath);
   return {
     schema: 'p30.r012a.private-custody-verification.v1',
     presentationCommitVerified: true,
@@ -861,7 +1054,27 @@ function normalizedGroups(geometry) {
   });
 }
 
-function collectMeshTriangles(mesh, camera, selectedGroupIndices = null) {
+function triangleSurvivesProductionCulling(world, side, viewProjectionMatrix) {
+  const clip = world.map((vertex) => multiplyMatrix4Vector4(
+    viewProjectionMatrix,
+    [vertex[0], vertex[1], vertex[2], 1]
+  ));
+  const polygon = clipTriangleToFrustum(clip);
+  for (let index = 1; index + 1 < polygon.length; index += 1) {
+    const fan = [polygon[0], polygon[index], polygon[index + 1]].map((vertex) => [
+      vertex[0] / vertex[3], vertex[1] / vertex[3]
+    ]);
+    const area =
+      (fan[1][0] - fan[0][0]) * (fan[2][1] - fan[0][1]) -
+      (fan[1][1] - fan[0][1]) * (fan[2][0] - fan[0][0]);
+    if (Math.abs(area) <= 1e-18) continue;
+    const frontFacing = area > 0;
+    if (side === 'double' || (side === 'front' && frontFacing) || (side === 'back' && !frontFacing)) return true;
+  }
+  return false;
+}
+
+function collectMeshTriangles(mesh, camera, selectedGroupIndices = null, excludeCulledTriangles = false) {
   if (!mesh?.isMesh || !mesh.geometry) evaluatorFail('RENDERED_MESH_REFERENCE_INVALID');
   if (mesh.isInstancedMesh) evaluatorFail('INSTANCED_GEOMETRY_UNSUPPORTED');
   if (!objectVisibleToCamera(mesh, camera)) evaluatorFail('RENDERED_MESH_NOT_VISIBLE_TO_CAMERA');
@@ -888,6 +1101,7 @@ function collectMeshTriangles(mesh, camera, selectedGroupIndices = null) {
   const triangleKeys = new Set();
   const meshID = typeof mesh.uuid === 'string' && mesh.uuid ? mesh.uuid : null;
   if (!meshID) evaluatorFail('RENDERED_MESH_UUID_INVALID');
+  const viewProjectionMatrix = cameraViewProjection(camera);
   for (const groupIndex of groupIndices) {
     const group = groups[groupIndex];
     const { side } = materialFor(mesh, group.materialIndex);
@@ -907,20 +1121,137 @@ function collectMeshTriangles(mesh, camera, selectedGroupIndices = null) {
       triangleKeys.add(triangleKey);
       const world = indices.map((index) => {
         const key = `${meshID}/${index}`;
-        if (!uniqueVertices.has(key)) uniqueVertices.set(key, deformedWorldVertex(mesh, index));
-        return uniqueVertices.get(key);
+        return uniqueVertices.get(key) ?? deformedWorldVertex(mesh, index);
       });
+      if (excludeCulledTriangles && !triangleSurvivesProductionCulling(world, side, viewProjectionMatrix)) continue;
+      indices.forEach((vertexIndex, corner) => uniqueVertices.set(`${meshID}/${vertexIndex}`, world[corner]));
       triangles.push({ a: world[0], b: world[1], c: world[2], side });
     }
   }
   if (triangles.length === 0 || uniqueVertices.size < 3) evaluatorFail('RENDERED_GROUP_SELECTION_EMPTY');
-  return { meshID, triangles, vertices: [...uniqueVertices.values()], vertexEntries: [...uniqueVertices.entries()] };
+  return {
+    meshID,
+    triangles,
+    vertices: [...uniqueVertices.values()],
+    vertexEntries: [...uniqueVertices.entries()],
+    vertexIndices: [...uniqueVertices.keys()].map((key) => Number(key.slice(key.lastIndexOf('/') + 1)))
+  };
 }
 
 function boneWorldOrigin(bone) {
-  if (!bone?.matrixWorld?.elements || bone.matrixWorld.elements.length !== 16) evaluatorFail('RENDER_DRIVING_BONE_INVALID');
+  if (!bone?.isBone || !bone.matrixWorld?.elements || bone.matrixWorld.elements.length !== 16) {
+    evaluatorFail('RENDER_DRIVING_BONE_INVALID');
+  }
   const elements = bone.matrixWorld.elements;
   return vec3([elements[12], elements[13], elements[14]], 'RENDER_DRIVING_BONE_INVALID');
+}
+
+function isDescendantOrSelf(object, expectedAncestor) {
+  const seen = new Set();
+  let current = object;
+  while (current) {
+    if (current === expectedAncestor) return true;
+    if (seen.has(current)) evaluatorFail('RENDER_OBJECT_ANCESTRY_CYCLE');
+    seen.add(current);
+    current = current.parent;
+  }
+  return false;
+}
+
+function attributeComponent(attribute, vertexIndex, component, code) {
+  const getter = ['getX', 'getY', 'getZ', 'getW'][component];
+  if (!attribute || typeof attribute[getter] !== 'function' || vertexIndex >= attribute.count) evaluatorFail(code);
+  return attribute[getter](vertexIndex);
+}
+
+function renderedSkinInfluences(mesh, vertexIndices) {
+  const skinIndex = mesh.geometry?.attributes?.skinIndex;
+  const skinWeight = mesh.geometry?.attributes?.skinWeight;
+  if (
+    !skinIndex || !skinWeight || skinIndex.count !== skinWeight.count ||
+    !Number.isSafeInteger(skinIndex.itemSize) || !Number.isSafeInteger(skinWeight.itemSize) ||
+    skinIndex.itemSize < 1 || skinIndex.itemSize !== skinWeight.itemSize || skinIndex.itemSize > 4
+  ) evaluatorFail('TARGET_SKIN_ATTRIBUTES_INVALID');
+  const drivenBones = new Set();
+  for (const vertexIndex of vertexIndices) {
+    let totalWeight = 0;
+    for (let component = 0; component < skinIndex.itemSize; component += 1) {
+      const index = attributeComponent(skinIndex, vertexIndex, component, 'TARGET_SKIN_ATTRIBUTES_INVALID');
+      const weight = attributeComponent(skinWeight, vertexIndex, component, 'TARGET_SKIN_ATTRIBUTES_INVALID');
+      if (
+        !Number.isSafeInteger(index) || index < 0 || index >= mesh.skeleton.bones.length ||
+        !Number.isFinite(weight) || weight < 0
+      ) {
+        evaluatorFail('TARGET_SKIN_ATTRIBUTES_INVALID');
+      }
+      totalWeight += weight;
+      if (weight > 0) drivenBones.add(index);
+    }
+    if (!Number.isFinite(totalWeight) || totalWeight <= 0) evaluatorFail('TARGET_SKIN_VERTEX_HAS_NO_INFLUENCE');
+  }
+  return drivenBones;
+}
+
+function numberToFloat64Hex(value) {
+  const bytes = Buffer.allocUnsafe(8);
+  bytes.writeDoubleBE(assertFiniteNumber(value, 'TARGET_HEIGHT_INVALID'));
+  return bytes.toString('hex');
+}
+
+function float64HexToNumber(value) {
+  if (typeof value !== 'string' || !/^[0-9a-f]{16}$/u.test(value)) evaluatorFail('TARGET_HEIGHT_RECEIPT_INVALID');
+  const number = Buffer.from(value, 'hex').readDoubleBE();
+  return assertFiniteNumber(number, 'TARGET_HEIGHT_RECEIPT_INVALID');
+}
+
+function makeTargetHeightReceipt(height, minimumY, maximumY, targetMeshRecords) {
+  const targetMeshUUIDs = targetMeshRecords.map(({ collected }) => collected.meshID);
+  const body = {
+    schema: 'p30.r012a.target-height.v1',
+    absoluteTick: 0,
+    heightBinary64: numberToFloat64Hex(height),
+    minimumYBinary64: numberToFloat64Hex(minimumY),
+    maximumYBinary64: numberToFloat64Hex(maximumY),
+    targetMeshUUIDs: [...targetMeshUUIDs].sort(compareUtf8)
+  };
+  const receipt = { ...body, receiptSha256: sha256Hex(canonicalBytes(body)) };
+  Object.defineProperty(receipt, 'targetMeshReferences', {
+    value: targetMeshRecords.map(({ mesh }) => mesh),
+    enumerable: false,
+    writable: false,
+    configurable: false
+  });
+  return receipt;
+}
+
+function validateTargetHeightReceipt(receipt, targetMeshRecords) {
+  const targetMeshUUIDs = targetMeshRecords.map(({ collected }) => collected.meshID);
+  try {
+    assertExactKeys(receipt, [
+      'schema', 'absoluteTick', 'heightBinary64', 'minimumYBinary64', 'maximumYBinary64',
+      'targetMeshUUIDs', 'receiptSha256'
+    ], 'TARGET_HEIGHT_RECEIPT_INVALID');
+  } catch (error) {
+    if (error instanceof Round012TreeError) evaluatorFail(error.code);
+    throw error;
+  }
+  if (receipt.schema !== 'p30.r012a.target-height.v1' || receipt.absoluteTick !== 0) evaluatorFail('TARGET_HEIGHT_RECEIPT_INVALID');
+  assertHex64(receipt.receiptSha256, 'TARGET_HEIGHT_RECEIPT_INVALID');
+  const { receiptSha256, ...body } = receipt;
+  if (sha256Hex(canonicalBytes(body)) !== receiptSha256) evaluatorFail('TARGET_HEIGHT_RECEIPT_HASH_MISMATCH');
+  const expectedIDs = [...targetMeshUUIDs].sort(compareUtf8);
+  if (!Array.isArray(receipt.targetMeshUUIDs) || canonicalBytes(receipt.targetMeshUUIDs).compare(canonicalBytes(expectedIDs)) !== 0) {
+    evaluatorFail('TARGET_HEIGHT_MESH_SET_MUTATED');
+  }
+  if (
+    !Array.isArray(receipt.targetMeshReferences) || receipt.targetMeshReferences.length !== targetMeshRecords.length ||
+    receipt.targetMeshReferences.some((mesh, index) => mesh !== targetMeshRecords[index].mesh)
+  ) evaluatorFail('TARGET_HEIGHT_MESH_IDENTITY_MUTATED');
+  const minimumY = float64HexToNumber(receipt.minimumYBinary64);
+  const maximumY = float64HexToNumber(receipt.maximumYBinary64);
+  const height = float64HexToNumber(receipt.heightBinary64);
+  if (maximumY - minimumY !== height) evaluatorFail('TARGET_HEIGHT_RECEIPT_INVALID');
+  return height;
 }
 
 function cameraViewProjection(camera) {
@@ -940,7 +1271,10 @@ function cameraViewProjection(camera) {
  * the previously unspecified property names while permitting additional
  * read-only references needed for later O4/T10 audits.
  */
-export function collectGeometrySource(source) {
+export function collectGeometrySource(source, { absoluteTick, targetHeightReceipt = null } = {}) {
+  if (!Number.isSafeInteger(absoluteTick) || absoluteTick < -1 || absoluteTick > 80) {
+    evaluatorFail('GEOMETRY_ABSOLUTE_TICK_REQUIRED');
+  }
   const scene = requiredReference(source, 'scene');
   const camera = requiredReference(source, 'camera');
   const heroRoot = requiredReference(source, 'heroRoot');
@@ -956,12 +1290,17 @@ export function collectGeometrySource(source) {
   if (!objectVisibleToCamera(heroRoot, camera) || !objectVisibleToCamera(targetRoot, camera)) {
     evaluatorFail('RENDERED_ROOT_NOT_VISIBLE_TO_CAMERA');
   }
+  if (
+    leftHandBone === rightHandBone || !leftHandBone.isBone || !rightHandBone.isBone ||
+    !isDescendantOrSelf(leftHandBone, heroRoot) || !isDescendantOrSelf(rightHandBone, heroRoot)
+  ) evaluatorFail('RENDERED_HAND_BONE_INVALID');
   if (!Array.isArray(source.swordBladePrimitives) || source.swordBladePrimitives.length === 0) {
     evaluatorFail('BLADE_PRIMITIVES_MISSING');
   }
   const bladeVertices = [];
   const bladeTriangles = [];
   const bladeVertexKeys = new Set();
+  const selectedBladeGroups = new Map();
   for (const primitive of source.swordBladePrimitives) {
     try {
       assertExactKeys(primitive, ['mesh', 'materialGroupIndices'], 'BLADE_PRIMITIVE_SHAPE_MISMATCH');
@@ -969,7 +1308,14 @@ export function collectGeometrySource(source) {
       if (error instanceof Round012TreeError) evaluatorFail(error.code);
       throw error;
     }
-    const collected = collectMeshTriangles(primitive.mesh, camera, primitive.materialGroupIndices);
+    if (!isDescendantOrSelf(primitive.mesh, heroRoot)) evaluatorFail('BLADE_MESH_DETACHED_FROM_HERO');
+    const collected = collectMeshTriangles(primitive.mesh, camera, primitive.materialGroupIndices, true);
+    const priorGroups = selectedBladeGroups.get(primitive.mesh) ?? new Set();
+    if (primitive.materialGroupIndices.some((groupIndex) => priorGroups.has(groupIndex))) {
+      evaluatorFail('BLADE_PRIMITIVE_GROUP_DUPLICATE');
+    }
+    primitive.materialGroupIndices.forEach((groupIndex) => priorGroups.add(groupIndex));
+    selectedBladeGroups.set(primitive.mesh, priorGroups);
     bladeTriangles.push(...collected.triangles);
     collected.vertexEntries.forEach(([key, vertex]) => {
       if (!bladeVertexKeys.has(key)) {
@@ -983,11 +1329,26 @@ export function collectGeometrySource(source) {
   }
   const targetVertices = [];
   const targetTriangles = [];
+  const targetMeshRecords = [];
+  const targetMeshIdentities = new Set();
+  const targetMeshUUIDsSeen = new Set();
   for (const mesh of source.targetSkinnedMeshes) {
     if (!mesh?.isSkinnedMesh) evaluatorFail('TARGET_MESH_NOT_SKINNED');
+    if (targetMeshIdentities.has(mesh)) evaluatorFail('TARGET_MESH_DUPLICATE');
+    targetMeshIdentities.add(mesh);
+    if (!isDescendantOrSelf(mesh, targetRoot)) evaluatorFail('TARGET_MESH_DETACHED_FROM_ROOT');
+    if (!mesh.skeleton || !Array.isArray(mesh.skeleton.bones) || mesh.skeleton.bones.length === 0) {
+      evaluatorFail('TARGET_SKELETON_INVALID');
+    }
+    if (new Set(mesh.skeleton.bones).size !== mesh.skeleton.bones.length || mesh.skeleton.bones.some((bone) => !bone?.isBone)) {
+      evaluatorFail('TARGET_SKELETON_INVALID');
+    }
     const collected = collectMeshTriangles(mesh, camera);
+    if (targetMeshUUIDsSeen.has(collected.meshID)) evaluatorFail('TARGET_MESH_UUID_DUPLICATE');
+    targetMeshUUIDsSeen.add(collected.meshID);
     targetVertices.push(...collected.vertices);
     targetTriangles.push(...collected.triangles);
+    targetMeshRecords.push({ mesh, collected, drivenBoneIndices: renderedSkinInfluences(mesh, collected.vertexIndices) });
   }
   if (!source.targetLandmarkBones || typeof source.targetLandmarkBones !== 'object') {
     evaluatorFail('TARGET_LANDMARKS_MISSING');
@@ -998,9 +1359,40 @@ export function collectGeometrySource(source) {
     if (error instanceof Round012TreeError) evaluatorFail(error.code);
     throw error;
   }
-  const landmarks = Object.fromEntries(LANDMARK_KEYS.map((key) => [key, boneWorldOrigin(source.targetLandmarkBones[key])]));
+  const landmarkBones = LANDMARK_KEYS.map((key) => source.targetLandmarkBones[key]);
+  if (new Set(landmarkBones).size !== LANDMARK_KEYS.length) evaluatorFail('TARGET_LANDMARK_DUPLICATE');
+  const landmarks = {};
+  LANDMARK_KEYS.forEach((key) => {
+    const bone = source.targetLandmarkBones[key];
+    if (!bone?.isBone) evaluatorFail('RENDER_DRIVING_BONE_INVALID');
+    if (!isDescendantOrSelf(bone, targetRoot)) evaluatorFail('TARGET_LANDMARK_DETACHED');
+    let skeletonMember = false;
+    let renderDriving = false;
+    for (const { mesh, drivenBoneIndices } of targetMeshRecords) {
+      const boneIndex = mesh.skeleton.bones.indexOf(bone);
+      if (boneIndex < 0) continue;
+      skeletonMember = true;
+      if (drivenBoneIndices.has(boneIndex)) renderDriving = true;
+    }
+    if (!skeletonMember) evaluatorFail('TARGET_LANDMARK_NOT_IN_RENDERED_SKELETON');
+    if (!renderDriving) evaluatorFail('TARGET_LANDMARK_NON_RENDER_DRIVING');
+    landmarks[key] = boneWorldOrigin(bone);
+  });
   const yValues = targetVertices.map((vertex) => vertex[1]);
-  const targetHeight = Math.max(...yValues) - Math.min(...yValues);
+  const minimumY = Math.min(...yValues);
+  const maximumY = Math.max(...yValues);
+  const measuredTargetHeight = maximumY - minimumY;
+  let frozenHeightReceipt;
+  let targetHeight;
+  if (absoluteTick === 0) {
+    if (targetHeightReceipt !== null) evaluatorFail('TARGET_HEIGHT_RECEIPT_PREEXISTS_TICK_ZERO');
+    targetHeight = measuredTargetHeight;
+    frozenHeightReceipt = makeTargetHeightReceipt(targetHeight, minimumY, maximumY, targetMeshRecords);
+  } else {
+    if (targetHeightReceipt === null) evaluatorFail('TARGET_HEIGHT_TICK_ZERO_RECEIPT_REQUIRED');
+    targetHeight = validateTargetHeightReceipt(targetHeightReceipt, targetMeshRecords);
+    frozenHeightReceipt = targetHeightReceipt;
+  }
   const grip = scale(add(boneWorldOrigin(leftHandBone), boneWorldOrigin(rightHandBone)), 0.5);
   const blade = extractBladeCapsule(bladeVertices, grip);
   return {
@@ -1014,6 +1406,7 @@ export function collectGeometrySource(source) {
     bladeTriangles,
     targetTriangles,
     targetHeight,
+    targetHeightReceipt: frozenHeightReceipt,
     targetCapsules: buildTargetCapsules(targetHeight, landmarks),
     landmarks
   };
@@ -1033,16 +1426,42 @@ export function bladeEndpointSilhouetteChecks(blade, viewProjectionMatrix, blade
     evaluatorFail('BLADE_MASK_INVALID');
   }
   const boundary = boundaryMask(bladeMask, VIEWPORT_WIDTH, VIEWPORT_HEIGHT);
-  const distance = squaredEuclideanDistanceTransform(boundary, VIEWPORT_WIDTH, VIEWPORT_HEIGHT);
-  const evaluate = (point) => {
-    const pixel = projectWorldToPixel(point, viewProjectionMatrix);
-    const x = clamp(Math.round(pixel[0] - 0.5), 0, VIEWPORT_WIDTH - 1);
-    const y = clamp(Math.round(pixel[1] - 0.5), 0, VIEWPORT_HEIGHT - 1);
-    return Math.sqrt(distance[y * VIEWPORT_WIDTH + x]);
+  const guardPixel = projectWorldToPixel(blade.guard, viewProjectionMatrix);
+  const tipPixel = projectWorldToPixel(blade.tip, viewProjectionMatrix);
+  const axisDelta = [tipPixel[0] - guardPixel[0], tipPixel[1] - guardPixel[1]];
+  const axisLength = Math.hypot(axisDelta[0], axisDelta[1]);
+  if (axisLength < 4) evaluatorFail('BLADE_PROJECTED_AXIS_DEGENERATE');
+  const axis = [axisDelta[0] / axisLength, axisDelta[1] / axisLength];
+  const points = [];
+  let minimumProjection = Infinity;
+  let maximumProjection = -Infinity;
+  for (let y = 0; y < VIEWPORT_HEIGHT; y += 1) {
+    for (let x = 0; x < VIEWPORT_WIDTH; x += 1) {
+      if (!boundary[y * VIEWPORT_WIDTH + x]) continue;
+      const point = [x + 0.5, y + 0.5];
+      const projection = point[0] * axis[0] + point[1] * axis[1];
+      minimumProjection = Math.min(minimumProjection, projection);
+      maximumProjection = Math.max(maximumProjection, projection);
+      points.push({ point, projection });
+    }
+  }
+  if (points.length === 0) evaluatorFail('BLADE_MASK_EMPTY');
+  const extremeDistance = (expectedPoint, useMinimum) => {
+    const extreme = useMinimum ? minimumProjection : maximumProjection;
+    let result = Infinity;
+    for (const entry of points) {
+      if ((useMinimum ? entry.projection - extreme : extreme - entry.projection) > 0.75) continue;
+      result = Math.min(result, Math.hypot(entry.point[0] - expectedPoint[0], entry.point[1] - expectedPoint[1]));
+    }
+    return result;
   };
-  const guardDistancePixels = evaluate(blade.guard);
-  const tipDistancePixels = evaluate(blade.tip);
+  const guardDistancePixels = extremeDistance(guardPixel, true);
+  const tipDistancePixels = extremeDistance(tipPixel, false);
   return {
+    guardPixel,
+    tipPixel,
+    silhouetteMinimumAxialProjection: minimumProjection,
+    silhouetteMaximumAxialProjection: maximumProjection,
     guardDistancePixels,
     tipDistancePixels,
     pass: guardDistancePixels <= 2 && tipDistancePixels <= 2
@@ -1086,6 +1505,7 @@ export function evaluateSweptContact(stateSeries, terminalTick = 80) {
       const tau = substep / SUBSTEPS;
       const guard = lerp(previous.blade.guard, current.blade.guard, tau);
       const tip = lerp(previous.blade.tip, current.blade.tip, tau);
+      const contactsAtSubstep = [];
       for (let capsuleIndex = 0; capsuleIndex < current.targetCapsules.length; capsuleIndex += 1) {
         const beforeCapsule = previous.targetCapsules[capsuleIndex];
         const afterCapsule = current.targetCapsules[capsuleIndex];
@@ -1100,18 +1520,22 @@ export function evaluateSweptContact(stateSeries, terminalTick = 80) {
         intervalMinimumSeparation = Math.min(intervalMinimumSeparation, separation);
         maximumPenetration = Math.min(maximumPenetration, separation);
         if (substep === SUBSTEPS) stateSeparation = Math.min(stateSeparation, separation);
-        if (separation <= EPS && firstSample === null) {
+        if (separation <= EPS) {
           intervalContact = true;
-          firstSample = {
+          contactsAtSubstep.push({
             absoluteTick: tick,
             substep,
             capsuleID: afterCapsule.id,
             separation,
             closestBladePoint: closest.point1,
             closestTargetPoint: closest.point2
-          };
-          if (firstContact === null) firstContact = firstSample;
+          });
         }
+      }
+      if (firstSample === null && contactsAtSubstep.length > 0) {
+        contactsAtSubstep.sort((left, right) => compareUtf8(left.capsuleID, right.capsuleID));
+        [firstSample] = contactsAtSubstep;
+        if (firstContact === null) firstContact = firstSample;
       }
     }
     if (intervalContact && !priorIntervalContact) risingContactTicks.push(tick);
@@ -1149,6 +1573,155 @@ export function canonicalContactChecks(result) {
     noSecondRisingContact: result.risingContactTicks.length === 1 && result.risingContactTicks[0] === 46
   };
   return { checks, pass: Object.values(checks).every(Boolean) };
+}
+
+export function canonicalContactFrame(result, basis) {
+  const canonical = validateBasis(basis);
+  if (!canonicalContactChecks(result).pass || !result.firstContact) evaluatorFail('CANONICAL_CONTACT_RESULT_FAILED');
+  const first = result.firstContact;
+  const normal = normalize(
+    subtract(vec3(first.closestBladePoint), vec3(first.closestTargetPoint)),
+    'CONTACT_NORMAL_DEGENERATE'
+  );
+  const tangent = horizontalTangent(normal, canonical.right);
+  const body = {
+    schema: 'p30.r012a.canonical-contact-frame.v1',
+    absoluteTick: first.absoluteTick,
+    substep: first.substep,
+    capsuleID: first.capsuleID,
+    closestBladePointMicrometres: quantizeMicrometres(first.closestBladePoint),
+    closestTargetPointMicrometres: quantizeMicrometres(first.closestTargetPoint),
+    normalMicrounits: normal.map((component) => roundHalfAwayFromZero(component * 1_000_000_000_000)),
+    tangentMicrounits: tangent.map((component) => roundHalfAwayFromZero(component * 1_000_000_000_000))
+  };
+  return { ...body, normal, tangent, receiptSha256: sha256Hex(canonicalBytes(body)) };
+}
+
+export function computeMissOffsetExtrema(stateSeries, basis, terminalTick = 80) {
+  const canonical = validateBasis(basis);
+  if (!Array.isArray(stateSeries) || stateSeries.length !== terminalTick + 2) evaluatorFail('SWEEP_TICK_SERIES_INVALID');
+  const states = stateSeries.map((state, index) => validateSweepState(state, index - 1));
+  const extrema = { Bmin: Infinity, Bmax: -Infinity, Tmin: Infinity, Tmax: -Infinity };
+  const includeBlade = (point) => {
+    const projection = dot(point, canonical.right);
+    extrema.Bmin = Math.min(extrema.Bmin, projection - R_BLADE);
+    extrema.Bmax = Math.max(extrema.Bmax, projection + R_BLADE);
+  };
+  const includeTarget = (point, radius) => {
+    const projection = dot(point, canonical.right);
+    extrema.Tmin = Math.min(extrema.Tmin, projection - radius);
+    extrema.Tmax = Math.max(extrema.Tmax, projection + radius);
+  };
+  for (let tick = 0; tick <= terminalTick; tick += 1) {
+    const previous = states[tick];
+    const current = states[tick + 1];
+    for (let substep = 1; substep <= SUBSTEPS; substep += 1) {
+      const tau = substep / SUBSTEPS;
+      includeBlade(lerp(previous.blade.guard, current.blade.guard, tau));
+      includeBlade(lerp(previous.blade.tip, current.blade.tip, tau));
+      for (let capsuleIndex = 0; capsuleIndex < current.targetCapsules.length; capsuleIndex += 1) {
+        const beforeCapsule = previous.targetCapsules[capsuleIndex];
+        const afterCapsule = current.targetCapsules[capsuleIndex];
+        if (beforeCapsule.id !== afterCapsule.id || Math.abs(beforeCapsule.radius - afterCapsule.radius) > EPS) {
+          evaluatorFail('SWEEP_TARGET_CAPSULE_MUTATED');
+        }
+        includeTarget(lerp(beforeCapsule.a, afterCapsule.a, tau), afterCapsule.radius);
+        includeTarget(lerp(beforeCapsule.b, afterCapsule.b, tau), afterCapsule.radius);
+      }
+    }
+  }
+  if (Object.values(extrema).some((value) => !Number.isFinite(value))) evaluatorFail('MISS_EXTREMA_INVALID');
+  return {
+    ...extrema,
+    receiptMicrometres: Object.fromEntries(Object.entries(extrema).map(([key, value]) => [key, quantizeMicrometres(value)])),
+    sampledIntervals: terminalTick + 1,
+    substepsPerInterval: SUBSTEPS,
+    sampleCount: (terminalTick + 1) * SUBSTEPS
+  };
+}
+
+function validateHealthSeries(healthByTick, hit) {
+  if (!Array.isArray(healthByTick) || healthByTick.length !== 82) evaluatorFail('COUNTERFACTUAL_HEALTH_SERIES_INVALID');
+  for (let index = 0; index < healthByTick.length; index += 1) {
+    const entry = healthByTick[index];
+    try { assertExactKeys(entry, ['absoluteTick', 'health'], 'COUNTERFACTUAL_HEALTH_SERIES_INVALID'); }
+    catch (error) { if (error instanceof Round012TreeError) evaluatorFail(error.code); throw error; }
+    const tick = index - 1;
+    const expectedHealth = hit && tick >= 46 ? 75 : 100;
+    if (entry.absoluteTick !== tick || entry.health !== expectedHealth) evaluatorFail('COUNTERFACTUAL_HEALTH_SERIES_INVALID');
+  }
+}
+
+function sameIntegerVector(left, right) {
+  return Array.isArray(left) && Array.isArray(right) && left.length === 3 &&
+    left.every((value, index) => Number.isSafeInteger(value) && value === right[index]);
+}
+
+export function validateCounterfactualRuns({ hitOffsets, missOffsets, hitRuns, missRuns }) {
+  if (!Array.isArray(hitOffsets) || hitOffsets.length !== 3 || !Array.isArray(hitRuns) || hitRuns.length !== 3) {
+    evaluatorFail('COUNTERFACTUAL_HIT_RUN_COUNT_INVALID');
+  }
+  if (!Array.isArray(missOffsets) || missOffsets.length !== 2 || !Array.isArray(missRuns) || missRuns.length !== 2) {
+    evaluatorFail('COUNTERFACTUAL_MISS_RUN_COUNT_INVALID');
+  }
+  hitRuns.forEach((run, index) => {
+    try {
+      assertExactKeys(run, [
+        'index', 'offsetCanonicalMicrometres', 'evaluatorResult', 'healthByTick',
+        'damageMutations', 'events', 'visibleTopology'
+      ], 'COUNTERFACTUAL_HIT_RUN_SHAPE_INVALID');
+    } catch (error) { if (error instanceof Round012TreeError) evaluatorFail(error.code); throw error; }
+    if (run.index !== index || !sameIntegerVector(run.offsetCanonicalMicrometres, hitOffsets[index]?.canonicalMicrometres)) {
+      evaluatorFail('COUNTERFACTUAL_HIT_OFFSET_MISMATCH');
+    }
+    if (
+      run.evaluatorResult?.firstContactTick !== 46 ||
+      !Array.isArray(run.evaluatorResult.risingContactTicks) ||
+      run.evaluatorResult.risingContactTicks.length !== 1 || run.evaluatorResult.risingContactTicks[0] !== 46 ||
+      !Number.isFinite(run.evaluatorResult.maximumPenetration) || run.evaluatorResult.maximumPenetration < -0.012000
+    ) evaluatorFail('COUNTERFACTUAL_HIT_GEOMETRY_FAILED');
+    validateHealthSeries(run.healthByTick, true);
+    if (!Array.isArray(run.damageMutations) || run.damageMutations.length !== 1) evaluatorFail('COUNTERFACTUAL_HIT_DAMAGE_INVALID');
+    const mutation = run.damageMutations[0];
+    try { assertExactKeys(mutation, ['absoluteTick', 'before', 'after', 'amount'], 'COUNTERFACTUAL_HIT_DAMAGE_INVALID'); }
+    catch (error) { if (error instanceof Round012TreeError) evaluatorFail(error.code); throw error; }
+    if (mutation.absoluteTick !== 46 || mutation.before !== 100 || mutation.after !== 75 || mutation.amount !== 25) {
+      evaluatorFail('COUNTERFACTUAL_HIT_DAMAGE_INVALID');
+    }
+    if (
+      !Array.isArray(run.events) ||
+      run.events.filter((event) => event?.type === 'damage' && event.absoluteTick === 46).length !== 1
+    ) {
+      evaluatorFail('COUNTERFACTUAL_HIT_EVENT_INVALID');
+    }
+    if (run.events.some((event) => !['contact', 'hit', 'damage'].includes(event?.type) || event.absoluteTick !== 46)) {
+      evaluatorFail('COUNTERFACTUAL_HIT_EVENT_INVALID');
+    }
+    if (run.visibleTopology?.pass !== true) evaluatorFail('COUNTERFACTUAL_HIT_TOPOLOGY_FAILED');
+  });
+  missRuns.forEach((run, index) => {
+    try {
+      assertExactKeys(run, [
+        'index', 'offsetCanonicalMicrometres', 'evaluatorResult', 'healthByTick',
+        'events', 'reactionOrRecoil', 'maximumTargetDriftMetres'
+      ], 'COUNTERFACTUAL_MISS_RUN_SHAPE_INVALID');
+    } catch (error) { if (error instanceof Round012TreeError) evaluatorFail(error.code); throw error; }
+    if (run.index !== index || !sameIntegerVector(run.offsetCanonicalMicrometres, missOffsets[index]?.canonicalMicrometres)) {
+      evaluatorFail('COUNTERFACTUAL_MISS_OFFSET_MISMATCH');
+    }
+    if (
+      run.evaluatorResult?.firstContactTick !== null ||
+      !Array.isArray(run.evaluatorResult.risingContactTicks) || run.evaluatorResult.risingContactTicks.length !== 0 ||
+      !Number.isFinite(run.evaluatorResult.maximumPenetration) || run.evaluatorResult.maximumPenetration < 0.250000
+    ) evaluatorFail('COUNTERFACTUAL_MISS_CLEARANCE_FAILED');
+    validateHealthSeries(run.healthByTick, false);
+    if (!Array.isArray(run.events) || run.events.length !== 0) evaluatorFail('COUNTERFACTUAL_MISS_EVENT_INVALID');
+    if (run.reactionOrRecoil !== false) evaluatorFail('COUNTERFACTUAL_MISS_REACTION_INVALID');
+    if (!Number.isFinite(run.maximumTargetDriftMetres) || run.maximumTargetDriftMetres < 0 || run.maximumTargetDriftMetres > 0.010000) {
+      evaluatorFail('COUNTERFACTUAL_MISS_DRIFT_FAILED');
+    }
+  });
+  return { hitRunsVerified: 3, missRunsVerified: 2, pass: true };
 }
 
 function multiplyMatrix4Vector4(matrix, vector) {
@@ -1440,6 +2013,1081 @@ export function visibleTopologyChecks(tick45, tick46) {
     tick46OverlapDepth: tick46.maximumOverlapInsidePixels <= 3
   };
   return { checks, pass: Object.values(checks).every(Boolean) };
+}
+
+function maskCentroid(mask) {
+  let count = 0;
+  let xSum = 0;
+  let ySum = 0;
+  for (let y = 0; y < VIEWPORT_HEIGHT; y += 1) {
+    for (let x = 0; x < VIEWPORT_WIDTH; x += 1) {
+      if (!mask[y * VIEWPORT_WIDTH + x]) continue;
+      count += 1;
+      xSum += x + 0.5;
+      ySum += y + 0.5;
+    }
+  }
+  if (count === 0) evaluatorFail('TOPOLOGY_MASK_EMPTY');
+  return { x: xSum / count, y: ySum / count, pixels: count };
+}
+
+export function topologyContinuityChecks(frames) {
+  if (!Array.isArray(frames) || frames.length !== 5) evaluatorFail('TOPOLOGY_CONTINUITY_FRAME_COUNT_INVALID');
+  const prepared = frames.map((frame, index) => {
+    try {
+      assertExactKeys(frame, [
+        'absoluteTick', 'bladeMask', 'targetMask', 'viewProjectionMatrix', 'cameraDigest',
+        'blade', 'landmarks', 'productionFrameSha256', 'productionFrameUnannotated',
+        'baselineEffectsObscureTopology'
+      ], 'TOPOLOGY_CONTINUITY_FRAME_SHAPE_INVALID');
+    } catch (error) { if (error instanceof Round012TreeError) evaluatorFail(error.code); throw error; }
+    if (frame.absoluteTick !== 44 + index) evaluatorFail('TOPOLOGY_CONTINUITY_TICK_ORDER_INVALID');
+    if (!(frame.bladeMask instanceof Uint8Array) || frame.bladeMask.length !== VIEWPORT_WIDTH * VIEWPORT_HEIGHT) {
+      evaluatorFail('TOPOLOGY_MASK_INVALID');
+    }
+    if (!(frame.targetMask instanceof Uint8Array) || frame.targetMask.length !== VIEWPORT_WIDTH * VIEWPORT_HEIGHT) {
+      evaluatorFail('TOPOLOGY_MASK_INVALID');
+    }
+    assertHex64(frame.cameraDigest, 'TOPOLOGY_CAMERA_DIGEST_INVALID');
+    assertHex64(frame.productionFrameSha256, 'TOPOLOGY_PRODUCTION_FRAME_HASH_INVALID');
+    if (frame.productionFrameUnannotated !== true || frame.baselineEffectsObscureTopology !== false) {
+      evaluatorFail('TOPOLOGY_PRODUCTION_FRAME_INVALID');
+    }
+    const guard = vec3(frame.blade?.guard, 'TOPOLOGY_BLADE_INVALID');
+    const tip = vec3(frame.blade?.tip, 'TOPOLOGY_BLADE_INVALID');
+    const viewProjectionMatrix = [...frame.viewProjectionMatrix];
+    multiplyMatrix4Vector4(viewProjectionMatrix, [0, 0, 0, 1]);
+    try { assertExactKeys(frame.landmarks, LANDMARK_KEYS, 'TOPOLOGY_LANDMARK_SHAPE_INVALID'); }
+    catch (error) { if (error instanceof Round012TreeError) evaluatorFail(error.code); throw error; }
+    const landmarks = Object.fromEntries(LANDMARK_KEYS.map((key) => [key, vec3(frame.landmarks[key])]));
+    return {
+      ...frame,
+      blade: { guard, tip },
+      landmarks,
+      viewProjectionMatrix,
+      bladeCentroid: maskCentroid(frame.bladeMask),
+      targetCentroid: maskCentroid(frame.targetMask),
+      topology: analyzeMaskTopology(frame.bladeMask, frame.targetMask)
+    };
+  });
+  const checks = {
+    cameraContinuous: prepared.every((frame) =>
+      frame.cameraDigest === prepared[0].cameraDigest &&
+      frame.viewProjectionMatrix.every((value, index) => Object.is(value, prepared[0].viewProjectionMatrix[index]))
+    ),
+    distinctProductionFrames: new Set(prepared.map((frame) => frame.productionFrameSha256)).size === 5,
+    weaponVisibleEveryTick: prepared.every((frame) => frame.bladeCentroid.pixels > 0),
+    targetVisibleEveryTick: prepared.every((frame) => frame.targetCentroid.pixels > 0),
+    endpointContinuity: true,
+    silhouetteContinuity: true,
+    landmarkContinuity: true,
+    tick45And46Topology: visibleTopologyChecks(prepared[1].topology, prepared[2].topology).pass
+  };
+  for (let index = 1; index < prepared.length; index += 1) {
+    const before = prepared[index - 1];
+    const after = prepared[index];
+    if (
+      length(subtract(after.blade.guard, before.blade.guard)) > 0.500000 ||
+      length(subtract(after.blade.tip, before.blade.tip)) > 0.500000 ||
+      Math.abs(length(subtract(after.blade.tip, after.blade.guard)) - length(subtract(before.blade.tip, before.blade.guard))) > 0.050000
+    ) checks.endpointContinuity = false;
+    if (
+      Math.hypot(after.bladeCentroid.x - before.bladeCentroid.x, after.bladeCentroid.y - before.bladeCentroid.y) > 400 ||
+      Math.hypot(after.targetCentroid.x - before.targetCentroid.x, after.targetCentroid.y - before.targetCentroid.y) > 200
+    ) checks.silhouetteContinuity = false;
+    if (LANDMARK_KEYS.some((key) => length(subtract(after.landmarks[key], before.landmarks[key])) > 0.300000)) {
+      checks.landmarkContinuity = false;
+    }
+  }
+  return { checks, perTick: prepared.map((frame) => ({ absoluteTick: frame.absoluteTick, topology: frame.topology })), pass: Object.values(checks).every(Boolean) };
+}
+
+function validatedPixelRect(rectangle, code = 'PIXEL_RECTANGLE_INVALID') {
+  try { assertExactKeys(rectangle, ['x', 'y', 'width', 'height'], code); }
+  catch (error) { if (error instanceof Round012TreeError) evaluatorFail(error.code); throw error; }
+  for (const key of ['x', 'y', 'width', 'height']) assertFiniteNumber(rectangle[key], code);
+  if (rectangle.width <= 0 || rectangle.height <= 0) evaluatorFail(code);
+  return rectangle;
+}
+
+function unionRectangles(rectangles) {
+  return {
+    x: Math.min(...rectangles.map((rect) => rect.x)),
+    y: Math.min(...rectangles.map((rect) => rect.y)),
+    width: Math.max(...rectangles.map((rect) => rect.x + rect.width)) - Math.min(...rectangles.map((rect) => rect.x)),
+    height: Math.max(...rectangles.map((rect) => rect.y + rect.height)) - Math.min(...rectangles.map((rect) => rect.y))
+  };
+}
+
+export function deriveActionCrop({ heroBounds, weaponBounds, targetBounds, hudBounds }) {
+  const actorBounds = [heroBounds, weaponBounds, targetBounds].map((rect) => validatedPixelRect(rect, 'ACTION_CROP_ACTOR_BOUNDS_INVALID'));
+  if (!Array.isArray(hudBounds) || hudBounds.length === 0) evaluatorFail('ACTION_CROP_HUD_BOUNDS_REQUIRED');
+  const hud = hudBounds.map((rect) => validatedPixelRect(rect, 'ACTION_CROP_HUD_BOUNDS_INVALID'));
+  for (const rectangle of [...actorBounds, ...hud]) {
+    if (
+      rectangle.x < 0 || rectangle.y < 0 ||
+      rectangle.x + rectangle.width > VIEWPORT_WIDTH || rectangle.y + rectangle.height > VIEWPORT_HEIGHT
+    ) evaluatorFail('ACTION_CROP_BOUNDS_OUTSIDE_FRAME');
+  }
+  const actors = unionRectangles(actorBounds);
+  const expanded = {
+    x: Math.max(0, actors.x - actors.width * ACTION_CROP_EXPANSION),
+    y: Math.max(0, actors.y - actors.height * ACTION_CROP_EXPANSION),
+    width: 0,
+    height: 0
+  };
+  const expandedMaximumX = Math.min(VIEWPORT_WIDTH, actors.x + actors.width * (1 + ACTION_CROP_EXPANSION));
+  const expandedMaximumY = Math.min(VIEWPORT_HEIGHT, actors.y + actors.height * (1 + ACTION_CROP_EXPANSION));
+  expanded.width = expandedMaximumX - expanded.x;
+  expanded.height = expandedMaximumY - expanded.y;
+  const required = unionRectangles([expanded, ...hud]);
+  const widthNeeded = Math.ceil(required.width);
+  const heightNeeded = Math.ceil(required.height);
+  const aspectUnit = Math.max(Math.ceil(widthNeeded / 16), Math.ceil(heightNeeded / 9));
+  if (aspectUnit > 100) return { x: 0, y: 0, width: VIEWPORT_WIDTH, height: VIEWPORT_HEIGHT };
+  const width = aspectUnit * 16;
+  const height = aspectUnit * 9;
+  const centreX = required.x + required.width / 2;
+  const centreY = required.y + required.height / 2;
+  let x = clamp(Math.floor(centreX - width / 2), 0, VIEWPORT_WIDTH - width);
+  let y = clamp(Math.floor(centreY - height / 2), 0, VIEWPORT_HEIGHT - height);
+  if (x > required.x) x = Math.max(0, Math.floor(required.x));
+  if (x + width < required.x + required.width) x = Math.min(VIEWPORT_WIDTH - width, Math.ceil(required.x + required.width - width));
+  if (y > required.y) y = Math.max(0, Math.floor(required.y));
+  if (y + height < required.y + required.height) y = Math.min(VIEWPORT_HEIGHT - height, Math.ceil(required.y + required.height - height));
+  if (
+    x > required.x + EPS || y > required.y + EPS ||
+    x + width + EPS < required.x + required.width || y + height + EPS < required.y + required.height
+  ) evaluatorFail('ACTION_CROP_CONTAINMENT_FAILED');
+  return { x, y, width, height };
+}
+
+export function deriveContactRoi({ closestBladePoint, closestTargetPoint, viewProjectionMatrix }) {
+  const centreWorld = scale(add(vec3(closestBladePoint), vec3(closestTargetPoint)), 0.5);
+  const centrePixel = projectWorldToPixel(centreWorld, viewProjectionMatrix);
+  const x = clamp(Math.floor(centrePixel[0] - CONTACT_ROI_SIZE / 2), 0, VIEWPORT_WIDTH - CONTACT_ROI_SIZE);
+  const y = clamp(Math.floor(centrePixel[1] - CONTACT_ROI_SIZE / 2), 0, VIEWPORT_HEIGHT - CONTACT_ROI_SIZE);
+  return {
+    x,
+    y,
+    width: CONTACT_ROI_SIZE,
+    height: CONTACT_ROI_SIZE,
+    centrePixel,
+    interpolation: 'none',
+    resampled: false
+  };
+}
+
+function assertRgbaImage(image, code = 'RGBA_IMAGE_INVALID') {
+  try { assertExactKeys(image, ['width', 'height', 'rgba'], code); }
+  catch (error) { if (error instanceof Round012TreeError) evaluatorFail(error.code); throw error; }
+  if (
+    !Number.isSafeInteger(image.width) || image.width <= 0 ||
+    !Number.isSafeInteger(image.height) || image.height <= 0 ||
+    !(image.rgba instanceof Uint8Array) || image.rgba.length !== image.width * image.height * 4
+  ) evaluatorFail(code);
+  return image;
+}
+
+function lanczos3(value) {
+  const x = Math.abs(value);
+  if (x < 1e-15) return 1;
+  if (x >= 3) return 0;
+  return (Math.sin(Math.PI * x) / (Math.PI * x)) * (Math.sin(Math.PI * x / 3) / (Math.PI * x / 3));
+}
+
+function resamplingContributions(inputStart, inputLength, outputLength) {
+  const scaleFactor = outputLength / inputLength;
+  const supportScale = Math.min(1, scaleFactor);
+  const radius = 3 / supportScale;
+  return Array.from({ length: outputLength }, (_, outputIndex) => {
+    const centre = inputStart + (outputIndex + 0.5) / scaleFactor - 0.5;
+    const first = Math.ceil(centre - radius);
+    const last = Math.floor(centre + radius);
+    const byInput = new Map();
+    let total = 0;
+    for (let inputIndex = first; inputIndex <= last; inputIndex += 1) {
+      const clamped = clamp(inputIndex, inputStart, inputStart + inputLength - 1);
+      const weight = lanczos3((centre - inputIndex) * supportScale) * supportScale;
+      byInput.set(clamped, (byInput.get(clamped) ?? 0) + weight);
+      total += weight;
+    }
+    if (!Number.isFinite(total) || Math.abs(total) < 1e-15) evaluatorFail('REFERENCE_RESAMPLE_NUMERIC_FAILURE');
+    return [...byInput].map(([inputIndex, weight]) => [inputIndex, weight / total]);
+  });
+}
+
+export function cropScaleRgbaLanczos3(imageValue, cropValue, maximumWidth, maximumHeight) {
+  const image = assertRgbaImage(imageValue);
+  const crop = validatedPixelRect(cropValue, 'REFERENCE_PIXEL_CROP_INVALID');
+  if (
+    !Number.isSafeInteger(crop.x) || !Number.isSafeInteger(crop.y) ||
+    !Number.isSafeInteger(crop.width) || !Number.isSafeInteger(crop.height) ||
+    crop.x < 0 || crop.y < 0 || crop.x + crop.width > image.width || crop.y + crop.height > image.height
+  ) evaluatorFail('REFERENCE_PIXEL_CROP_INVALID');
+  if (!Number.isSafeInteger(maximumWidth) || maximumWidth <= 0 || !Number.isSafeInteger(maximumHeight) || maximumHeight <= 0) {
+    evaluatorFail('REFERENCE_DESTINATION_INVALID');
+  }
+  const scaleFactor = Math.min(1, maximumWidth / crop.width, maximumHeight / crop.height);
+  const width = Math.max(1, Math.floor(crop.width * scaleFactor + 1e-12));
+  const height = Math.max(1, Math.floor(crop.height * scaleFactor + 1e-12));
+  if (width === crop.width && height === crop.height) {
+    const rgba = new Uint8Array(width * height * 4);
+    for (let y = 0; y < height; y += 1) {
+      const sourceStart = ((crop.y + y) * image.width + crop.x) * 4;
+      rgba.set(image.rgba.subarray(sourceStart, sourceStart + width * 4), y * width * 4);
+    }
+    return { width, height, rgba, scaleFactorBinary64: numberToFloat64Hex(scaleFactor), algorithm: REFERENCE_SCALE_ALGORITHM };
+  }
+  const horizontal = resamplingContributions(crop.x, crop.width, width);
+  const vertical = resamplingContributions(crop.y, crop.height, height);
+  const rgba = new Uint8Array(width * height * 4);
+  for (let outputY = 0; outputY < height; outputY += 1) {
+    for (let outputX = 0; outputX < width; outputX += 1) {
+      for (let channel = 0; channel < 4; channel += 1) {
+        let value = 0;
+        for (const [sourceY, yWeight] of vertical[outputY]) {
+          for (const [sourceX, xWeight] of horizontal[outputX]) {
+            value += image.rgba[(sourceY * image.width + sourceX) * 4 + channel] * xWeight * yWeight;
+          }
+        }
+        rgba[(outputY * width + outputX) * 4 + channel] = clamp(roundHalfAwayFromZero(value), 0, 255);
+      }
+    }
+  }
+  return { width, height, rgba, scaleFactorBinary64: numberToFloat64Hex(scaleFactor), algorithm: REFERENCE_SCALE_ALGORITHM };
+}
+
+export async function decodeReferenceImagePixels(encodedBytes) {
+  if (!Buffer.isBuffer(encodedBytes)) evaluatorFail('REFERENCE_IMAGE_INVALID');
+  const dimensions = referenceImageDimensions(encodedBytes);
+  if (
+    typeof globalThis.Blob !== 'function' || typeof globalThis.createImageBitmap !== 'function' ||
+    typeof globalThis.OffscreenCanvas !== 'function'
+  ) evaluatorFail('REFERENCE_BROWSER_DECODER_UNAVAILABLE');
+  const mimeType = encodedBytes[0] === 0xff ? 'image/jpeg' : 'image/webp';
+  let bitmap;
+  try {
+    bitmap = await globalThis.createImageBitmap(
+      new globalThis.Blob([encodedBytes], { type: mimeType }),
+      { colorSpaceConversion: 'none', imageOrientation: 'none', premultiplyAlpha: 'none' }
+    );
+  } catch {
+    evaluatorFail('REFERENCE_BROWSER_DECODE_FAILED');
+  }
+  try {
+    if (bitmap.width !== dimensions.width || bitmap.height !== dimensions.height) {
+      evaluatorFail('REFERENCE_BROWSER_DECODE_DIMENSION_MISMATCH');
+    }
+    const canvas = new globalThis.OffscreenCanvas(dimensions.width, dimensions.height);
+    const context = canvas.getContext('2d', {
+      alpha: true,
+      colorSpace: 'srgb',
+      desynchronized: false,
+      willReadFrequently: true
+    });
+    if (!context) evaluatorFail('REFERENCE_BROWSER_CANVAS_UNAVAILABLE');
+    context.globalCompositeOperation = 'copy';
+    context.imageSmoothingEnabled = false;
+    context.clearRect(0, 0, dimensions.width, dimensions.height);
+    context.drawImage(bitmap, 0, 0);
+    const pixels = context.getImageData(0, 0, dimensions.width, dimensions.height, { colorSpace: 'srgb' }).data;
+    const rgba = Uint8Array.from(pixels);
+    if (rgba.length !== dimensions.width * dimensions.height * 4) evaluatorFail('REFERENCE_BROWSER_DECODE_PIXELS_INVALID');
+    return {
+      width: dimensions.width,
+      height: dimensions.height,
+      rgba,
+      encodedSha256: sha256Hex(encodedBytes),
+      decodedRgbaSha256: sha256Hex(rgba),
+      decoder: 'browser-createImageBitmap-offscreenCanvas-srgb-rgba8-v1'
+    };
+  } finally {
+    if (typeof bitmap?.close === 'function') bitmap.close();
+  }
+}
+
+export async function transformCommittedReferencePixels({ encodedBytes, selection, maximumWidth, maximumHeight }) {
+  if (!Buffer.isBuffer(encodedBytes)) evaluatorFail('REFERENCE_IMAGE_INVALID');
+  const dimensions = referenceImageDimensions(encodedBytes);
+  if (
+    sha256Hex(encodedBytes) !== selection?.sourceFileSha256 ||
+    dimensions.width !== selection?.originalDimensions?.width || dimensions.height !== selection?.originalDimensions?.height ||
+    selection.uniformScaleAlgorithm !== REFERENCE_SCALE_ALGORITHM
+  ) evaluatorFail('REFERENCE_PIXEL_SOURCE_BINDING_FAILED');
+  const decoded = await decodeReferenceImagePixels(encodedBytes);
+  const image = { width: decoded.width, height: decoded.height, rgba: decoded.rgba };
+  return cropScaleRgbaLanczos3(image, selection.cropRectangle, maximumWidth, maximumHeight);
+}
+
+const GLYPHS_5X7 = Object.freeze({
+  L: ['10000', '10000', '10000', '10000', '10000', '10000', '11111'],
+  E: ['11111', '10000', '10000', '11110', '10000', '10000', '11111'],
+  F: ['11111', '10000', '10000', '11110', '10000', '10000', '10000'],
+  T: ['11111', '00100', '00100', '00100', '00100', '00100', '00100'],
+  R: ['11110', '10001', '10001', '11110', '10100', '10010', '10001'],
+  I: ['11111', '00100', '00100', '00100', '00100', '00100', '11111'],
+  G: ['01110', '10001', '10000', '10111', '10001', '10001', '01110'],
+  H: ['10001', '10001', '10001', '11111', '10001', '10001', '10001']
+});
+
+function drawLabel(board, textValue, centreX, topY) {
+  const pixelScale = 3;
+  const glyphWidth = 5 * pixelScale;
+  const gap = 2 * pixelScale;
+  const textWidth = textValue.length * glyphWidth + (textValue.length - 1) * gap;
+  const startX = Math.floor(centreX - textWidth / 2);
+  [...textValue].forEach((letter, letterIndex) => {
+    const glyph = GLYPHS_5X7[letter];
+    if (!glyph) evaluatorFail('BOARD_LABEL_GLYPH_MISSING');
+    glyph.forEach((row, y) => [...row].forEach((bit, x) => {
+      if (bit !== '1') return;
+      for (let dy = 0; dy < pixelScale; dy += 1) for (let dx = 0; dx < pixelScale; dx += 1) {
+        const pixelX = startX + letterIndex * (glyphWidth + gap) + x * pixelScale + dx;
+        const pixelY = topY + y * pixelScale + dy;
+        const offset = (pixelY * VIEWPORT_WIDTH + pixelX) * 4;
+        board.set([238, 238, 238, 255], offset);
+      }
+    }));
+  });
+}
+
+function placeRgba(board, image, x, y) {
+  for (let row = 0; row < image.height; row += 1) {
+    const sourceStart = row * image.width * 4;
+    const destinationStart = ((y + row) * VIEWPORT_WIDTH + x) * 4;
+    board.set(image.rgba.subarray(sourceStart, sourceStart + image.width * 4), destinationStart);
+  }
+}
+
+export function composeAnonymousEqualBoard({
+  presentationSeed,
+  expectedPresentationCommit,
+  itemID,
+  order,
+  leftImage,
+  rightImage,
+  leftPixelSha256,
+  rightPixelSha256
+}) {
+  assertRaw32(presentationSeed, 'PRESENTATION_SEED_NOT_32_BYTES');
+  if (presentationCommit(presentationSeed) !== expectedPresentationCommit) evaluatorFail('BOARD_PRESENTATION_COMMIT_MISMATCH');
+  validateBallotTokens(itemID, [order?.left, order?.right]);
+  const expectedOrder = deriveTwoSideOrder(presentationSeed, itemID, [order.left, order.right]);
+  if (
+    order.itemID !== itemID || order.left !== expectedOrder.left || order.right !== expectedOrder.right ||
+    order.orderDigest !== expectedOrder.orderDigest
+  ) evaluatorFail('BOARD_ORDER_BINDING_INVALID');
+  const left = assertRgbaImage(leftImage, 'BOARD_SIDE_IMAGE_INVALID');
+  const right = assertRgbaImage(rightImage, 'BOARD_SIDE_IMAGE_INVALID');
+  if (sha256Hex(left.rgba) !== leftPixelSha256 || sha256Hex(right.rgba) !== rightPixelSha256) {
+    evaluatorFail('BOARD_SOURCE_PIXEL_HASH_MISMATCH');
+  }
+  const board = new Uint8Array(VIEWPORT_WIDTH * VIEWPORT_HEIGHT * 4);
+  for (let offset = 0; offset < board.length; offset += 4) board.set([24, 24, 24, 255], offset);
+  const cellWidth = 744;
+  const cellHeight = 788;
+  const cellY = 72;
+  const cellX = [40, 816];
+  const sides = [
+    cropScaleRgbaLanczos3(left, { x: 0, y: 0, width: left.width, height: left.height }, cellWidth, cellHeight),
+    cropScaleRgbaLanczos3(right, { x: 0, y: 0, width: right.width, height: right.height }, cellWidth, cellHeight)
+  ];
+  drawLabel(board, 'LEFT', cellX[0] + cellWidth / 2, 22);
+  drawLabel(board, 'RIGHT', cellX[1] + cellWidth / 2, 22);
+  sides.forEach((side, index) => placeRgba(
+    board,
+    side,
+    cellX[index] + Math.floor((cellWidth - side.width) / 2),
+    cellY + Math.floor((cellHeight - side.height) / 2)
+  ));
+  return {
+    width: VIEWPORT_WIDTH,
+    height: VIEWPORT_HEIGHT,
+    rgba: board,
+    boardSha256: sha256Hex(board),
+    publicLabels: ['LEFT', 'RIGHT'],
+    backgroundRgba: [24, 24, 24, 255],
+    cells: [{ x: cellX[0], y: cellY, width: cellWidth, height: cellHeight }, { x: cellX[1], y: cellY, width: cellWidth, height: cellHeight }],
+    scaleAlgorithm: REFERENCE_SCALE_ALGORITHM,
+    sourcePixelSha256s: [leftPixelSha256, rightPixelSha256]
+  };
+}
+
+function assertNfcNonempty(value, code) {
+  if (typeof value !== 'string' || !value || value.normalize('NFC') !== value || value.includes('\0')) evaluatorFail(code);
+  return value;
+}
+
+function assertPositiveSafeInteger(value, code) {
+  if (!Number.isSafeInteger(value) || value <= 0) evaluatorFail(code);
+  return value;
+}
+
+export const PACKAGE_MAP_KEYS = Object.freeze(['schema', 'protocolID', 'packages']);
+export const PACKAGE_MAP_ENTRY_KEYS = Object.freeze([
+  'alias', 'builderIdentity', 'worktree', 'branch', 'sourceCommit', 'gitTree',
+  'sourceArchiveSha256', 'sourceArchiveBytes', 'materializedSourceTreeSha256',
+  'packageArchiveSha256', 'packageArchiveBytes', 'materializedPackageTreeSha256',
+  'productionOutputTreeSha256', 'lockfilePath', 'lockfileSha256', 'buildCommand'
+]);
+
+export function validatePackageMap(document) {
+  try { assertExactKeys(document, PACKAGE_MAP_KEYS, 'PACKAGE_MAP_SHAPE_MISMATCH'); }
+  catch (error) { if (error instanceof Round012TreeError) evaluatorFail(error.code); throw error; }
+  if (document.schema !== PACKAGE_MAP_SCHEMA || document.protocolID !== PROTOCOL_ID) evaluatorFail('PACKAGE_MAP_CONSTANT_MISMATCH');
+  if (!Array.isArray(document.packages) || document.packages.length !== 2) evaluatorFail('PACKAGE_MAP_EXACTLY_TWO_PACKAGES_REQUIRED');
+  const aliases = [];
+  document.packages.forEach((entry) => {
+    try { assertExactKeys(entry, PACKAGE_MAP_ENTRY_KEYS, 'PACKAGE_MAP_ENTRY_SHAPE_MISMATCH'); }
+    catch (error) { if (error instanceof Round012TreeError) evaluatorFail(error.code); throw error; }
+    assertAlias(entry.alias);
+    aliases.push(entry.alias);
+    for (const key of ['builderIdentity', 'worktree', 'branch']) assertNfcNonempty(entry[key], 'PACKAGE_MAP_IDENTITY_FIELD_INVALID');
+    for (const key of ['sourceCommit', 'gitTree']) {
+      if (typeof entry[key] !== 'string' || !/^[0-9a-f]{40}$/u.test(entry[key])) evaluatorFail('PACKAGE_MAP_GIT_ID_INVALID');
+    }
+    for (const key of [
+      'sourceArchiveSha256', 'materializedSourceTreeSha256', 'packageArchiveSha256',
+      'materializedPackageTreeSha256', 'productionOutputTreeSha256', 'lockfileSha256'
+    ]) assertHex64(entry[key], 'PACKAGE_MAP_SHA256_INVALID');
+    assertPositiveSafeInteger(entry.sourceArchiveBytes, 'PACKAGE_MAP_ARCHIVE_BYTES_INVALID');
+    assertPositiveSafeInteger(entry.packageArchiveBytes, 'PACKAGE_MAP_ARCHIVE_BYTES_INVALID');
+    try { validateRelativePath(entry.lockfilePath); } catch { evaluatorFail('PACKAGE_MAP_LOCKFILE_PATH_INVALID'); }
+    if (entry.lockfilePath !== 'package-lock.json') evaluatorFail('PACKAGE_MAP_LOCKFILE_PATH_INVALID');
+    if (
+      !Array.isArray(entry.buildCommand) || entry.buildCommand.length !== 3 ||
+      entry.buildCommand.some((part) => typeof part !== 'string' || part.normalize('NFC') !== part) ||
+      entry.buildCommand[0] !== 'npm' || entry.buildCommand[1] !== 'run' || entry.buildCommand[2] !== 'build:critic'
+    ) evaluatorFail('PACKAGE_MAP_BUILD_COMMAND_INVALID');
+  });
+  const sorted = [...aliases].sort(compareUtf8);
+  if (aliases[0] !== sorted[0] || aliases[1] !== sorted[1] || aliases[0] === aliases[1]) {
+    evaluatorFail('PACKAGE_MAP_ALIAS_ORDER_INVALID');
+  }
+  canonicalBytes(document);
+  return document;
+}
+
+export function packageMapCommit(document, salt) {
+  validatePackageMap(document);
+  return saltedDocumentCommit(PACKAGE_MAP_COMMIT_DOMAIN, document, salt);
+}
+
+const PUBLIC_PACKAGE_RECEIPT_KEYS = Object.freeze(['schema', 'protocolID', 'packages']);
+const PUBLIC_PACKAGE_ENTRY_KEYS = Object.freeze([
+  'alias', 'packageArchiveSha256', 'packageArchiveBytes', 'materializedPackageTreeSha256',
+  'productionOutputTreeSha256', 'criticInterfaceSha256'
+]);
+
+export function validatePublicPackageReceipt(document) {
+  try { assertExactKeys(document, PUBLIC_PACKAGE_RECEIPT_KEYS, 'PUBLIC_PACKAGE_RECEIPT_SHAPE_MISMATCH'); }
+  catch (error) { if (error instanceof Round012TreeError) evaluatorFail(error.code); throw error; }
+  if (document.schema !== 'p30.r012a.public-package-receipt.v1' || document.protocolID !== PROTOCOL_ID) {
+    evaluatorFail('PUBLIC_PACKAGE_RECEIPT_CONSTANT_MISMATCH');
+  }
+  if (!Array.isArray(document.packages) || document.packages.length !== 2) {
+    evaluatorFail('PUBLIC_PACKAGE_RECEIPT_EXACTLY_TWO_REQUIRED');
+  }
+  const aliases = [];
+  document.packages.forEach((entry) => {
+    try { assertExactKeys(entry, PUBLIC_PACKAGE_ENTRY_KEYS, 'PUBLIC_PACKAGE_RECEIPT_ENTRY_SHAPE_MISMATCH'); }
+    catch (error) { if (error instanceof Round012TreeError) evaluatorFail(error.code); throw error; }
+    assertAlias(entry.alias);
+    aliases.push(entry.alias);
+    assertPositiveSafeInteger(entry.packageArchiveBytes, 'PUBLIC_PACKAGE_RECEIPT_BYTES_INVALID');
+    for (const key of [
+      'packageArchiveSha256', 'materializedPackageTreeSha256',
+      'productionOutputTreeSha256', 'criticInterfaceSha256'
+    ]) assertHex64(entry[key], 'PUBLIC_PACKAGE_RECEIPT_SHA256_INVALID');
+  });
+  const sorted = [...aliases].sort(compareUtf8);
+  if (aliases[0] !== sorted[0] || aliases[1] !== sorted[1] || aliases[0] === aliases[1]) {
+    evaluatorFail('PUBLIC_PACKAGE_RECEIPT_ALIAS_ORDER_INVALID');
+  }
+  canonicalBytes(document);
+  return document;
+}
+
+export function verifyPackageMapReveal({ mapDocument, mapSalt, expectedMapCommit, publicPackageReceipt }) {
+  validatePackageMap(mapDocument);
+  validatePublicPackageReceipt(publicPackageReceipt);
+  assertHex64(expectedMapCommit, 'PACKAGE_MAP_EXPECTED_COMMIT_INVALID');
+  if (packageMapCommit(mapDocument, mapSalt) !== expectedMapCommit) evaluatorFail('PACKAGE_MAP_COMMIT_MISMATCH');
+  mapDocument.packages.forEach((privateEntry, index) => {
+    const publicEntry = publicPackageReceipt.packages[index];
+    if (
+      privateEntry.alias !== publicEntry.alias ||
+      privateEntry.packageArchiveSha256 !== publicEntry.packageArchiveSha256 ||
+      privateEntry.packageArchiveBytes !== publicEntry.packageArchiveBytes ||
+      privateEntry.materializedPackageTreeSha256 !== publicEntry.materializedPackageTreeSha256 ||
+      privateEntry.productionOutputTreeSha256 !== publicEntry.productionOutputTreeSha256
+    ) evaluatorFail('PACKAGE_MAP_PUBLIC_RECEIPT_MISMATCH');
+  });
+  return { packageMapCommitVerified: true, publicPackageBindingsVerified: 2 };
+}
+
+const ALIAS_SCORE_KEYS = Object.freeze([
+  'schema', 'protocolID', 'protocolPayloadSha256', 'baselineReceiptSha256',
+  'roundCommitmentSha256', 'referenceCommit', 'packageMapCommit', 'identityRevealReceived',
+  'runtime', 'executionOrder', 'candidates', 'pairwiseBallots', 'strongerAlias',
+  'provisionalOutcome', 'evidenceManifestSha256', 'blindOrderManifestSha256', 'disqualifiers'
+]);
+const RUNTIME_KEYS = Object.freeze([
+  'nodeExecutable', 'nodeVersion', 'npmVersion', 'browserExecutable', 'browserVersion',
+  'launchArguments', 'gpuRenderer', 'viewportWidth', 'viewportHeight', 'deviceScaleFactor',
+  'devicePixelRatio', 'zoomPercent', 'normalRoute', 'evaluatorHelperSha256'
+]);
+const CANDIDATE_SCORE_KEYS = Object.freeze([
+  'alias', 'packageArchiveSha256', 'packageTreeSha256', 'productionOutputTreeSha256',
+  'runProfiles', 'inputMeasurements', 'contactMeasurements', 'healthMeasurements',
+  'counterfactualMeasurements', 'distinctnessMeasurements', 'recoveryMeasurements',
+  'baselineComparisons', 'gates', 'referenceBallots', 'referenceWinCount',
+  'visualScores', 'visualTotal', 'visualMinimum', 'disqualifiers', 'acceptanceChecks',
+  'provisionallyAccepted', 'biggestRemainingGap'
+]);
+const GATE_IDS = Object.freeze([
+  'O1', 'O2', 'O3', 'O4', 'O5',
+  'T1', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'T8', 'T9', 'T10'
+]);
+const CATEGORY_IDS = Object.freeze(['C1', 'C2', 'C3', 'C4', 'C5', 'C6', 'C7', 'C8', 'C9', 'C10']);
+const MEASUREMENT_SECTION_KEYS = Object.freeze(['schema', 'receiptSha256', 'evidenceSha256s', 'measurements']);
+const ACCEPTANCE_CHECK_KEYS = Object.freeze([
+  'noDisqualifier', 'objectiveGates', 'technicalGatesCurrentlyDecidable', 'pendingRevealOnly',
+  'referenceWins', 'visualTotal', 'visualMinimum'
+]);
+
+function validateRuntime(runtime) {
+  try { assertExactKeys(runtime, RUNTIME_KEYS, 'ALIAS_SCORE_RUNTIME_SHAPE_MISMATCH'); }
+  catch (error) { if (error instanceof Round012TreeError) evaluatorFail(error.code); throw error; }
+  for (const key of [
+    'nodeExecutable', 'nodeVersion', 'npmVersion', 'browserExecutable', 'browserVersion',
+    'gpuRenderer', 'normalRoute'
+  ]) assertNfcNonempty(runtime[key], 'ALIAS_SCORE_RUNTIME_VALUE_INVALID');
+  if (!runtime.nodeVersion.startsWith('v24.')) evaluatorFail('ALIAS_SCORE_NODE_VERSION_INVALID');
+  if (!Array.isArray(runtime.launchArguments) || runtime.launchArguments.some((arg) => typeof arg !== 'string' || arg.normalize('NFC') !== arg)) {
+    evaluatorFail('ALIAS_SCORE_LAUNCH_ARGUMENTS_INVALID');
+  }
+  if (
+    runtime.viewportWidth !== VIEWPORT_WIDTH || runtime.viewportHeight !== VIEWPORT_HEIGHT ||
+    runtime.deviceScaleFactor !== 1 || runtime.devicePixelRatio !== 1 || runtime.zoomPercent !== 100
+  ) evaluatorFail('ALIAS_SCORE_RUNTIME_VIEWPORT_INVALID');
+  assertHex64(runtime.evaluatorHelperSha256, 'ALIAS_SCORE_RUNTIME_HELPER_HASH_INVALID');
+}
+
+function validateMeasurementSection(section, expectedSchema) {
+  try { assertExactKeys(section, MEASUREMENT_SECTION_KEYS, 'ALIAS_SCORE_MEASUREMENT_SECTION_SHAPE_MISMATCH'); }
+  catch (error) { if (error instanceof Round012TreeError) evaluatorFail(error.code); throw error; }
+  if (section.schema !== expectedSchema) evaluatorFail('ALIAS_SCORE_MEASUREMENT_SCHEMA_MISMATCH');
+  assertHex64(section.receiptSha256, 'ALIAS_SCORE_MEASUREMENT_HASH_INVALID');
+  if (!Array.isArray(section.evidenceSha256s) || section.evidenceSha256s.length === 0) evaluatorFail('ALIAS_SCORE_MEASUREMENT_EVIDENCE_INVALID');
+  section.evidenceSha256s.forEach((digest) => assertHex64(digest, 'ALIAS_SCORE_MEASUREMENT_EVIDENCE_INVALID'));
+  if (
+    !section.measurements || Object.getPrototypeOf(section.measurements) !== Object.prototype ||
+    Object.keys(section.measurements).length === 0
+  ) evaluatorFail('ALIAS_SCORE_MEASUREMENTS_INVALID');
+}
+
+function validateGateSet(gates) {
+  try { assertExactKeys(gates, GATE_IDS, 'ALIAS_SCORE_GATE_SET_SHAPE_MISMATCH'); }
+  catch (error) { if (error instanceof Round012TreeError) evaluatorFail(error.code); throw error; }
+  GATE_IDS.forEach((gateID) => {
+    const gate = gates[gateID];
+    try { assertExactKeys(gate, ['pass', 'evidenceSha256s', 'reason'], 'ALIAS_SCORE_GATE_SHAPE_MISMATCH'); }
+    catch (error) { if (error instanceof Round012TreeError) evaluatorFail(error.code); throw error; }
+    const pendingAllowed = gateID === 'T1' || gateID === 'T10';
+    if (typeof gate.pass !== 'boolean' && !(pendingAllowed && gate.pass === 'pending-reveal')) evaluatorFail('ALIAS_SCORE_GATE_PASS_INVALID');
+    if (!Array.isArray(gate.evidenceSha256s) || gate.evidenceSha256s.length === 0) evaluatorFail('ALIAS_SCORE_GATE_EVIDENCE_INVALID');
+    gate.evidenceSha256s.forEach((digest) => assertHex64(digest, 'ALIAS_SCORE_GATE_EVIDENCE_INVALID'));
+    assertNfcNonempty(gate.reason, 'ALIAS_SCORE_GATE_REASON_INVALID');
+  });
+}
+
+function validateBallotRecord(ballot, expectedItemID, candidateAlias = null) {
+  try {
+    assertExactKeys(ballot, [
+      'ballotID', 'itemID', 'orderDigest', 'leftToken', 'rightToken',
+      'winner', 'castCount', 'boardSha256'
+    ], 'ALIAS_SCORE_BALLOT_SHAPE_MISMATCH');
+  } catch (error) { if (error instanceof Round012TreeError) evaluatorFail(error.code); throw error; }
+  if (ballot.itemID !== expectedItemID || ballot.ballotID !== expectedItemID.split('/')[0]) evaluatorFail('ALIAS_SCORE_BALLOT_ID_MISMATCH');
+  validateBallotTokens(ballot.itemID, [ballot.leftToken, ballot.rightToken]);
+  assertHex64(ballot.orderDigest, 'ALIAS_SCORE_BALLOT_ORDER_HASH_INVALID');
+  assertHex64(ballot.boardSha256, 'ALIAS_SCORE_BALLOT_BOARD_HASH_INVALID');
+  if (![null, 'LEFT', 'RIGHT'].includes(ballot.winner) || ballot.castCount !== 1) evaluatorFail('ALIAS_SCORE_BALLOT_OUTCOME_INVALID');
+  if (candidateAlias === null) return null;
+  const winnerToken = ballot.winner === 'LEFT' ? ballot.leftToken : ballot.winner === 'RIGHT' ? ballot.rightToken : null;
+  return winnerToken === candidateAlias;
+}
+
+function validateVisualScores(candidate) {
+  try { assertExactKeys(candidate.visualScores, CATEGORY_IDS, 'ALIAS_SCORE_VISUAL_CATEGORY_SET_MISMATCH'); }
+  catch (error) { if (error instanceof Round012TreeError) evaluatorFail(error.code); throw error; }
+  const scores = CATEGORY_IDS.map((categoryID) => {
+    const category = candidate.visualScores[categoryID];
+    try { assertExactKeys(category, ['score', 'reason'], 'ALIAS_SCORE_VISUAL_CATEGORY_SHAPE_MISMATCH'); }
+    catch (error) { if (error instanceof Round012TreeError) evaluatorFail(error.code); throw error; }
+    if (!Number.isSafeInteger(category.score) || category.score < 0 || category.score > 10) evaluatorFail('ALIAS_SCORE_VISUAL_VALUE_INVALID');
+    assertNfcNonempty(category.reason, 'ALIAS_SCORE_VISUAL_REASON_INVALID');
+    return category.score;
+  });
+  const total = scores.reduce((sum, value) => sum + value, 0);
+  const minimum = Math.min(...scores);
+  if (candidate.visualTotal !== total || candidate.visualMinimum !== minimum) evaluatorFail('ALIAS_SCORE_VISUAL_AGGREGATE_MISMATCH');
+  return { total, minimum };
+}
+
+function validateCandidateScore(candidate) {
+  try { assertExactKeys(candidate, CANDIDATE_SCORE_KEYS, 'ALIAS_SCORE_CANDIDATE_SHAPE_MISMATCH'); }
+  catch (error) { if (error instanceof Round012TreeError) evaluatorFail(error.code); throw error; }
+  assertAlias(candidate.alias);
+  for (const key of ['packageArchiveSha256', 'packageTreeSha256', 'productionOutputTreeSha256']) {
+    assertHex64(candidate[key], 'ALIAS_SCORE_CANDIDATE_PACKAGE_HASH_INVALID');
+  }
+  const sections = [
+    ['runProfiles', 'p30.r012a.run-profiles.v1'],
+    ['inputMeasurements', 'p30.r012a.input-measurements.v1'],
+    ['contactMeasurements', 'p30.r012a.contact-measurements.v1'],
+    ['healthMeasurements', 'p30.r012a.health-measurements.v1'],
+    ['counterfactualMeasurements', 'p30.r012a.counterfactual-measurements.v1'],
+    ['distinctnessMeasurements', 'p30.r012a.distinctness-measurements.v1'],
+    ['recoveryMeasurements', 'p30.r012a.recovery-measurements.v1'],
+    ['baselineComparisons', 'p30.r012a.baseline-comparisons.v1']
+  ];
+  sections.forEach(([key, schema]) => validateMeasurementSection(candidate[key], schema));
+  validateGateSet(candidate.gates);
+  if (!Array.isArray(candidate.referenceBallots) || candidate.referenceBallots.length !== 3) {
+    evaluatorFail('ALIAS_SCORE_REFERENCE_BALLOT_COUNT_INVALID');
+  }
+  const wins = candidate.referenceBallots.reduce((count, ballot, index) =>
+    count + (validateBallotRecord(ballot, `R${index + 1}/${candidate.alias}`, candidate.alias) ? 1 : 0), 0);
+  if (candidate.referenceWinCount !== wins) evaluatorFail('ALIAS_SCORE_REFERENCE_WIN_COUNT_MISMATCH');
+  const visual = validateVisualScores(candidate);
+  if (!Array.isArray(candidate.disqualifiers) || candidate.disqualifiers.some((value) => typeof value !== 'string' || !value)) {
+    evaluatorFail('ALIAS_SCORE_CANDIDATE_DISQUALIFIERS_INVALID');
+  }
+  try { assertExactKeys(candidate.acceptanceChecks, ACCEPTANCE_CHECK_KEYS, 'ALIAS_SCORE_ACCEPTANCE_CHECK_SHAPE_MISMATCH'); }
+  catch (error) { if (error instanceof Round012TreeError) evaluatorFail(error.code); throw error; }
+  if (Object.values(candidate.acceptanceChecks).some((value) => typeof value !== 'boolean')) evaluatorFail('ALIAS_SCORE_ACCEPTANCE_CHECK_VALUE_INVALID');
+  const objectives = ['O1', 'O2', 'O3', 'O4', 'O5'].every((id) => candidate.gates[id].pass === true);
+  const technical = ['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'T8', 'T9'].every((id) => candidate.gates[id].pass === true);
+  const pendingOnly = candidate.gates.T1.pass === 'pending-reveal' && candidate.gates.T10.pass === 'pending-reveal';
+  const expectedChecks = {
+    noDisqualifier: candidate.disqualifiers.length === 0,
+    objectiveGates: objectives,
+    technicalGatesCurrentlyDecidable: technical,
+    pendingRevealOnly: pendingOnly,
+    referenceWins: wins === 3,
+    visualTotal: visual.total >= 95,
+    visualMinimum: visual.minimum >= 9
+  };
+  if (Object.entries(expectedChecks).some(([key, value]) => candidate.acceptanceChecks[key] !== value)) {
+    evaluatorFail('ALIAS_SCORE_ACCEPTANCE_CHECK_MISMATCH');
+  }
+  const expectedProvisional = Object.values(expectedChecks).every(Boolean);
+  if (candidate.provisionallyAccepted !== expectedProvisional) evaluatorFail('ALIAS_SCORE_PROVISIONAL_ACCEPTANCE_MISMATCH');
+  if (expectedProvisional) {
+    if (candidate.biggestRemainingGap !== null) evaluatorFail('ALIAS_SCORE_ACCEPTED_GAP_MUST_BE_NULL');
+  } else if (
+    typeof candidate.biggestRemainingGap !== 'string' ||
+    !/^Biggest remaining gap: [^;\n]+ at [^;\n]+, which [^;\n]+\.$/u.test(candidate.biggestRemainingGap)
+  ) evaluatorFail('ALIAS_SCORE_BIGGEST_GAP_INVALID');
+  return candidate;
+}
+
+export function validateAliasOnlyScore(document, blindOrderManifest, expectedPresentationCommit, custodyBindings) {
+  try { assertExactKeys(document, ALIAS_SCORE_KEYS, 'ALIAS_SCORE_SHAPE_MISMATCH'); }
+  catch (error) { if (error instanceof Round012TreeError) evaluatorFail(error.code); throw error; }
+  if (
+    document.schema !== ALIAS_SCORE_SCHEMA || document.protocolID !== PROTOCOL_ID ||
+    document.protocolPayloadSha256 !== PROTOCOL_PAYLOAD_SHA256 || document.baselineReceiptSha256 !== BASELINE_RECEIPT_SHA256 ||
+    document.identityRevealReceived !== false
+  ) evaluatorFail('ALIAS_SCORE_CONSTANT_MISMATCH');
+  try {
+    assertExactKeys(custodyBindings, [
+      'roundCommitmentSha256', 'referenceCommit', 'packageMapCommit', 'evidenceManifestSha256',
+      'blindOrderManifestSha256', 'evaluatorHelperSha256', 'publicPackageReceipt'
+    ], 'ALIAS_SCORE_CUSTODY_BINDINGS_SHAPE_MISMATCH');
+  } catch (error) { if (error instanceof Round012TreeError) evaluatorFail(error.code); throw error; }
+  validatePublicPackageReceipt(custodyBindings.publicPackageReceipt);
+  for (const key of [
+    'roundCommitmentSha256', 'referenceCommit', 'packageMapCommit', 'evidenceManifestSha256',
+    'blindOrderManifestSha256', 'evaluatorHelperSha256'
+  ]) assertHex64(custodyBindings[key], 'ALIAS_SCORE_CUSTODY_BINDING_HASH_INVALID');
+  for (const key of [
+    'roundCommitmentSha256', 'referenceCommit', 'packageMapCommit',
+    'evidenceManifestSha256', 'blindOrderManifestSha256'
+  ]) assertHex64(document[key], 'ALIAS_SCORE_SHA256_INVALID');
+  validateRuntime(document.runtime);
+  const directBindings = [
+    ['roundCommitmentSha256', 'roundCommitmentSha256'],
+    ['referenceCommit', 'referenceCommit'],
+    ['packageMapCommit', 'packageMapCommit'],
+    ['evidenceManifestSha256', 'evidenceManifestSha256'],
+    ['blindOrderManifestSha256', 'blindOrderManifestSha256']
+  ];
+  if (
+    directBindings.some(([documentKey, bindingKey]) => document[documentKey] !== custodyBindings[bindingKey]) ||
+    document.runtime.evaluatorHelperSha256 !== custodyBindings.evaluatorHelperSha256
+  ) evaluatorFail('ALIAS_SCORE_CUSTODY_BINDING_MISMATCH');
+  if (!Array.isArray(document.candidates) || document.candidates.length !== 2) evaluatorFail('ALIAS_SCORE_EXACTLY_TWO_CANDIDATES_REQUIRED');
+  document.candidates.forEach(validateCandidateScore);
+  const aliases = document.candidates.map((candidate) => candidate.alias);
+  const sorted = [...aliases].sort(compareUtf8);
+  if (aliases[0] !== sorted[0] || aliases[1] !== sorted[1] || aliases[0] === aliases[1]) evaluatorFail('ALIAS_SCORE_CANDIDATE_ORDER_INVALID');
+  document.candidates.forEach((candidate, index) => {
+    const receipt = custodyBindings.publicPackageReceipt.packages[index];
+    if (
+      candidate.alias !== receipt.alias ||
+      candidate.packageArchiveSha256 !== receipt.packageArchiveSha256 ||
+      candidate.packageTreeSha256 !== receipt.materializedPackageTreeSha256 ||
+      candidate.productionOutputTreeSha256 !== receipt.productionOutputTreeSha256
+    ) evaluatorFail('ALIAS_SCORE_PUBLIC_PACKAGE_BINDING_MISMATCH');
+  });
+  if (!Array.isArray(document.executionOrder) || document.executionOrder.length !== 2) evaluatorFail('ALIAS_SCORE_EXECUTION_ORDER_INVALID');
+  const executionAliases = new Set();
+  document.executionOrder.forEach((entry) => {
+    try { assertExactKeys(entry, ['alias', 'orderDigest'], 'ALIAS_SCORE_EXECUTION_ORDER_SHAPE_MISMATCH'); }
+    catch (error) { if (error instanceof Round012TreeError) evaluatorFail(error.code); throw error; }
+    assertAlias(entry.alias);
+    assertHex64(entry.orderDigest, 'ALIAS_SCORE_EXECUTION_ORDER_HASH_INVALID');
+    executionAliases.add(entry.alias);
+  });
+  if (executionAliases.size !== 2 || aliases.some((alias) => !executionAliases.has(alias))) evaluatorFail('ALIAS_SCORE_EXECUTION_ORDER_INVALID');
+  if (!Array.isArray(document.pairwiseBallots) || document.pairwiseBallots.length !== 3) evaluatorFail('ALIAS_SCORE_PAIRWISE_BALLOT_COUNT_INVALID');
+  document.pairwiseBallots.forEach((ballot, index) => validateBallotRecord(ballot, `P${index + 1}`));
+  if (!aliases.includes(document.strongerAlias)) evaluatorFail('ALIAS_SCORE_STRONGER_ALIAS_INVALID');
+  const anyAccepted = document.candidates.some((candidate) => candidate.provisionallyAccepted);
+  const expectedOutcome = anyAccepted ? 'PROVISIONAL_ACCEPTED_CANDIDATE_EXISTS' : 'NO_ACCEPTED_CANDIDATE';
+  if (document.provisionalOutcome !== expectedOutcome) evaluatorFail('ALIAS_SCORE_OUTCOME_MISMATCH');
+  if (!Array.isArray(document.disqualifiers) || document.disqualifiers.some((value) => typeof value !== 'string' || !value)) {
+    evaluatorFail('ALIAS_SCORE_DISQUALIFIERS_INVALID');
+  }
+  if (document.disqualifiers.length > 0 && anyAccepted) evaluatorFail('ALIAS_SCORE_DISQUALIFIER_ACCEPTANCE_CONFLICT');
+  if (!blindOrderManifest) evaluatorFail('ALIAS_SCORE_BLIND_ORDER_MANIFEST_REQUIRED');
+  if (typeof expectedPresentationCommit !== 'string') evaluatorFail('ALIAS_SCORE_PRESENTATION_COMMIT_REQUIRED');
+  validateBlindOrderManifest(blindOrderManifest, expectedPresentationCommit);
+  if (blindOrderManifest.manifestSha256 !== document.blindOrderManifestSha256) {
+    evaluatorFail('ALIAS_SCORE_BLIND_ORDER_MANIFEST_HASH_MISMATCH');
+  }
+  if (canonicalBytes(document.executionOrder).compare(canonicalBytes(blindOrderManifest.executionOrder)) !== 0) {
+    evaluatorFail('ALIAS_SCORE_EXECUTION_ORDER_BINDING_MISMATCH');
+  }
+  const scoreOrders = [
+    ...document.candidates.flatMap((candidate) => candidate.referenceBallots.map((ballot) => ({
+      itemID: ballot.itemID,
+      left: ballot.leftToken,
+      right: ballot.rightToken,
+      orderDigest: ballot.orderDigest
+    }))),
+    ...document.pairwiseBallots.map((ballot) => ({
+      itemID: ballot.itemID,
+      left: ballot.leftToken,
+      right: ballot.rightToken,
+      orderDigest: ballot.orderDigest
+    }))
+  ];
+  if (canonicalBytes(scoreOrders).compare(canonicalBytes(blindOrderManifest.ballots)) !== 0) {
+    evaluatorFail('ALIAS_SCORE_BALLOT_ORDER_BINDING_MISMATCH');
+  }
+  canonicalBytes(document);
+  return document;
+}
+
+export function aliasScoreCommit(document, salt, blindOrderManifest, expectedPresentationCommit, custodyBindings) {
+  validateAliasOnlyScore(document, blindOrderManifest, expectedPresentationCommit, custodyBindings);
+  return saltedDocumentCommit(ALIAS_SCORE_COMMIT_DOMAIN, document, salt);
+}
+
+const REQUIRED_TRACE_IDS = Object.freeze([
+  'MOUSE2_TAP_COLD_1', 'MOUSE2_TAP_COLD_2', 'MOUSE2_TAP_RESET', 'KEYK_TAP',
+  'MOUSE2_HELD', 'NO_HEAVY', 'LIGHT_BASELINE', 'SHIFT_PLUS_7', 'CAPTURE_UNARMED',
+  'HIT_OFFSET_0', 'HIT_OFFSET_1', 'HIT_OFFSET_2', 'MISS_OFFSET_POSITIVE', 'MISS_OFFSET_NEGATIVE'
+]);
+const CANONICAL_CAPTURE_TRACES = new Set(['MOUSE2_TAP_COLD_1', 'MOUSE2_TAP_COLD_2', 'MOUSE2_TAP_RESET']);
+const EVIDENCE_ARTIFACT_KEYS = Object.freeze([
+  'path', 'kind', 'byteCount', 'sha256', 'alias', 'packageArchiveSha256',
+  'productionOutputTreeSha256', 'route', 'runProfileID', 'absoluteTicks',
+  'heavyRelativeTicks', 'stateDigest', 'cameraDigest', 'inputTraceDigest',
+  'evaluatorHelperDigest', 'browser', 'gpu', 'captureTimestamp',
+  'sourceArtifactSha256s', 'derivation', 'custody'
+]);
+const EVIDENCE_KINDS = new Set([
+  'production-frame', 'focused-frame', 'full-frame-strip', 'contact-roi', 'action-crop',
+  'lossless-frame-sequence', 'lossless-video', 'state-log', 'event-log', 'geometry-log',
+  'frame-evidence', 'run-receipt', 'diagnostic-mask', 'blind-board'
+]);
+const REQUIRED_PER_RUN_KINDS = Object.freeze(['state-log', 'event-log', 'geometry-log', 'frame-evidence', 'run-receipt']);
+
+function sameIntegerArray(actual, expected) {
+  return Array.isArray(actual) && actual.length === expected.length && actual.every((value, index) => value === expected[index]);
+}
+
+export function validateEvidenceManifest(
+  document,
+  artifactBytesByPath = null,
+  blindOrderManifest = null,
+  expectedPresentationCommit = null,
+  publicPackageReceipt = null
+) {
+  try {
+    assertExactKeys(document, [
+      'schema', 'protocolID', 'aliases', 'evaluatorHelperSha256', 'blindOrderManifestSha256',
+      'captureRuns', 'artifacts', 'privateBoardHashes'
+    ], 'EVIDENCE_MANIFEST_SHAPE_MISMATCH');
+  } catch (error) { if (error instanceof Round012TreeError) evaluatorFail(error.code); throw error; }
+  if (document.schema !== 'p30.r012a.evidence-manifest.v1' || document.protocolID !== PROTOCOL_ID) {
+    evaluatorFail('EVIDENCE_MANIFEST_CONSTANT_MISMATCH');
+  }
+  assertHex64(document.evaluatorHelperSha256, 'EVIDENCE_MANIFEST_HELPER_HASH_INVALID');
+  assertHex64(document.blindOrderManifestSha256, 'EVIDENCE_BLIND_ORDER_HASH_INVALID');
+  if (!Array.isArray(document.aliases) || document.aliases.length !== 2) evaluatorFail('EVIDENCE_MANIFEST_EXACTLY_TWO_ALIASES_REQUIRED');
+  if (!publicPackageReceipt) evaluatorFail('EVIDENCE_PUBLIC_PACKAGE_RECEIPT_REQUIRED');
+  validatePublicPackageReceipt(publicPackageReceipt);
+  document.aliases.forEach(assertAlias);
+  const sortedAliases = [...document.aliases].sort(compareUtf8);
+  if (!sameIntegerArray(document.aliases, sortedAliases) || document.aliases[0] === document.aliases[1]) {
+    evaluatorFail('EVIDENCE_MANIFEST_ALIAS_ORDER_INVALID');
+  }
+  if (!Array.isArray(document.captureRuns) || document.captureRuns.length !== 2 * REQUIRED_TRACE_IDS.length) {
+    evaluatorFail('EVIDENCE_MANIFEST_RUN_COUNT_INVALID');
+  }
+  const runByID = new Map();
+  document.captureRuns.forEach((run) => {
+    try {
+      assertExactKeys(run, [
+        'alias', 'runProfileID', 'traceID', 'inputTraceDigest', 'terminalTick'
+      ], 'EVIDENCE_MANIFEST_RUN_SHAPE_MISMATCH');
+    } catch (error) { if (error instanceof Round012TreeError) evaluatorFail(error.code); throw error; }
+    if (!document.aliases.includes(run.alias)) evaluatorFail('EVIDENCE_MANIFEST_RUN_ALIAS_INVALID');
+    assertNfcNonempty(run.runProfileID, 'EVIDENCE_MANIFEST_RUN_PROFILE_INVALID');
+    if (!REQUIRED_TRACE_IDS.includes(run.traceID)) evaluatorFail('EVIDENCE_MANIFEST_TRACE_ID_INVALID');
+    assertHex64(run.inputTraceDigest, 'EVIDENCE_MANIFEST_INPUT_HASH_INVALID');
+    const expectedTerminal = run.traceID === 'SHIFT_PLUS_7' ? 87 : 80;
+    if (run.terminalTick !== expectedTerminal) evaluatorFail('EVIDENCE_MANIFEST_TERMINAL_TICK_INVALID');
+    const key = `${run.alias}\0${run.runProfileID}`;
+    if (runByID.has(key)) evaluatorFail('EVIDENCE_MANIFEST_RUN_DUPLICATE');
+    runByID.set(key, run);
+  });
+  for (const alias of document.aliases) {
+    const traceIDs = document.captureRuns.filter((run) => run.alias === alias).map((run) => run.traceID).sort(compareUtf8);
+    if (canonicalBytes(traceIDs).compare(canonicalBytes([...REQUIRED_TRACE_IDS].sort(compareUtf8))) !== 0) {
+      evaluatorFail('EVIDENCE_MANIFEST_TRACE_COVERAGE_INVALID');
+    }
+  }
+  if (!Array.isArray(document.artifacts) || document.artifacts.length === 0) evaluatorFail('EVIDENCE_MANIFEST_ARTIFACTS_EMPTY');
+  const pathRegistry = new Map();
+  const artifactsByRun = new Map();
+  document.artifacts.forEach((artifact) => {
+    try { assertExactKeys(artifact, EVIDENCE_ARTIFACT_KEYS, 'EVIDENCE_ARTIFACT_SHAPE_MISMATCH'); }
+    catch (error) { if (error instanceof Round012TreeError) evaluatorFail(error.code); throw error; }
+    try { validateRelativePath(artifact.path); } catch { evaluatorFail('EVIDENCE_ARTIFACT_PATH_INVALID'); }
+    try { registerCaseFoldedPath(pathRegistry, artifact.path); } catch (error) {
+      if (error instanceof Round012TreeError) evaluatorFail('EVIDENCE_ARTIFACT_PATH_COLLISION');
+      throw error;
+    }
+    if (!EVIDENCE_KINDS.has(artifact.kind)) evaluatorFail('EVIDENCE_ARTIFACT_KIND_INVALID');
+    assertPositiveSafeInteger(artifact.byteCount, 'EVIDENCE_ARTIFACT_BYTE_COUNT_INVALID');
+    assertHex64(artifact.sha256, 'EVIDENCE_ARTIFACT_SHA256_INVALID');
+    if (!document.aliases.includes(artifact.alias)) evaluatorFail('EVIDENCE_ARTIFACT_ALIAS_INVALID');
+    for (const key of [
+      'packageArchiveSha256', 'productionOutputTreeSha256', 'stateDigest', 'cameraDigest',
+      'inputTraceDigest', 'evaluatorHelperDigest'
+    ]) assertHex64(artifact[key], 'EVIDENCE_ARTIFACT_PROVENANCE_HASH_INVALID');
+    if (artifact.evaluatorHelperDigest !== document.evaluatorHelperSha256) evaluatorFail('EVIDENCE_ARTIFACT_HELPER_HASH_MISMATCH');
+    assertNfcNonempty(artifact.route, 'EVIDENCE_ARTIFACT_ROUTE_INVALID');
+    if (!artifact.route.startsWith('/')) evaluatorFail('EVIDENCE_ARTIFACT_ROUTE_INVALID');
+    assertNfcNonempty(artifact.runProfileID, 'EVIDENCE_ARTIFACT_RUN_PROFILE_INVALID');
+    const run = runByID.get(`${artifact.alias}\0${artifact.runProfileID}`);
+    if (!run || run.inputTraceDigest !== artifact.inputTraceDigest) evaluatorFail('EVIDENCE_ARTIFACT_RUN_BINDING_INVALID');
+    const packageEntry = publicPackageReceipt.packages.find((entry) => entry.alias === artifact.alias);
+    if (
+      !packageEntry || artifact.packageArchiveSha256 !== packageEntry.packageArchiveSha256 ||
+      artifact.productionOutputTreeSha256 !== packageEntry.productionOutputTreeSha256
+    ) evaluatorFail('EVIDENCE_ARTIFACT_PUBLIC_PACKAGE_BINDING_MISMATCH');
+    if (
+      !Array.isArray(artifact.absoluteTicks) || artifact.absoluteTicks.length === 0 ||
+      artifact.absoluteTicks.some((tick, index) => !Number.isSafeInteger(tick) || tick < 0 || tick > run.terminalTick || (index && tick <= artifact.absoluteTicks[index - 1]))
+    ) evaluatorFail('EVIDENCE_ARTIFACT_TICKS_INVALID');
+    if (!Array.isArray(artifact.heavyRelativeTicks) || artifact.heavyRelativeTicks.length !== artifact.absoluteTicks.length) {
+      evaluatorFail('EVIDENCE_ARTIFACT_HEAVY_TICKS_INVALID');
+    }
+    const heavyEdge = run.traceID === 'SHIFT_PLUS_7' ? 31 : ['NO_HEAVY', 'LIGHT_BASELINE'].includes(run.traceID) ? null : 24;
+    artifact.absoluteTicks.forEach((tick, index) => {
+      const expected = heavyEdge === null || tick < heavyEdge ? null : tick - heavyEdge;
+      if (artifact.heavyRelativeTicks[index] !== expected) evaluatorFail('EVIDENCE_ARTIFACT_HEAVY_TICKS_INVALID');
+    });
+    for (const key of ['browser', 'gpu', 'derivation']) assertNfcNonempty(artifact[key], 'EVIDENCE_ARTIFACT_TEXT_PROVENANCE_INVALID');
+    if (!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/u.test(artifact.captureTimestamp)) {
+      evaluatorFail('EVIDENCE_ARTIFACT_TIMESTAMP_INVALID');
+    }
+    if (!Array.isArray(artifact.sourceArtifactSha256s)) evaluatorFail('EVIDENCE_ARTIFACT_SOURCE_HASHES_INVALID');
+    artifact.sourceArtifactSha256s.forEach((digest) => assertHex64(digest, 'EVIDENCE_ARTIFACT_SOURCE_HASHES_INVALID'));
+    if (!['public', 'critic-private'].includes(artifact.custody)) evaluatorFail('EVIDENCE_ARTIFACT_CUSTODY_INVALID');
+    if (artifact.kind === 'blind-board' && artifact.custody !== 'critic-private') evaluatorFail('EVIDENCE_BOARD_MUST_REMAIN_PRIVATE');
+    const collection = artifactsByRun.get(`${artifact.alias}\0${artifact.runProfileID}`) ?? [];
+    collection.push(artifact);
+    artifactsByRun.set(`${artifact.alias}\0${artifact.runProfileID}`, collection);
+    if (artifactBytesByPath !== null) {
+      if (!(artifactBytesByPath instanceof Map) || !artifactBytesByPath.has(artifact.path)) evaluatorFail('EVIDENCE_ARTIFACT_BYTES_MISSING');
+      const bytes = artifactBytesByPath.get(artifact.path);
+      if (!(bytes instanceof Uint8Array) || bytes.byteLength !== artifact.byteCount || sha256Hex(bytes) !== artifact.sha256) {
+        evaluatorFail('EVIDENCE_ARTIFACT_BYTES_MISMATCH');
+      }
+    }
+  });
+  for (const run of document.captureRuns) {
+    const artifacts = artifactsByRun.get(`${run.alias}\0${run.runProfileID}`) ?? [];
+    for (const kind of REQUIRED_PER_RUN_KINDS) if (!artifacts.some((artifact) => artifact.kind === kind)) {
+      evaluatorFail('EVIDENCE_RUN_CORE_ARTIFACT_MISSING');
+    }
+    if (CANONICAL_CAPTURE_TRACES.has(run.traceID)) {
+      const frames = artifacts.filter((artifact) => artifact.kind === 'production-frame' && artifact.absoluteTicks.length === 1)
+        .map((artifact) => artifact.absoluteTicks[0]);
+      for (let tick = 20; tick <= 80; tick += 1) if (!frames.includes(tick)) evaluatorFail('EVIDENCE_CANONICAL_FRAME_MISSING');
+      for (const tick of FOCUSED_CAPTURE_TICKS) if (!artifacts.some((artifact) => artifact.kind === 'focused-frame' && sameIntegerArray(artifact.absoluteTicks, [tick]))) {
+        evaluatorFail('EVIDENCE_FOCUSED_FRAME_MISSING');
+      }
+      const requiredStrips = [[40, 46], [44, 48], [46, 76]].map(([first, last]) => Array.from({ length: last - first + 1 }, (_, index) => first + index));
+      for (const ticks of requiredStrips) if (!artifacts.some((artifact) => artifact.kind === 'full-frame-strip' && sameIntegerArray(artifact.absoluteTicks, ticks))) {
+        evaluatorFail('EVIDENCE_FRAME_STRIP_MISSING');
+      }
+      if (!artifacts.some((artifact) => artifact.kind === 'contact-roi' && sameIntegerArray(artifact.absoluteTicks, [46]))) {
+        evaluatorFail('EVIDENCE_CONTACT_ROI_MISSING');
+      }
+      for (const tick of FOCUSED_CAPTURE_TICKS) if (!artifacts.some((artifact) => artifact.kind === 'action-crop' && sameIntegerArray(artifact.absoluteTicks, [tick]))) {
+        evaluatorFail('EVIDENCE_ACTION_CROP_MISSING');
+      }
+      const fullTicks = Array.from({ length: 81 }, (_, tick) => tick);
+      if (!artifacts.some((artifact) => ['lossless-frame-sequence', 'lossless-video'].includes(artifact.kind) && sameIntegerArray(artifact.absoluteTicks, fullTicks))) {
+        evaluatorFail('EVIDENCE_LOSSLESS_SEQUENCE_MISSING');
+      }
+    }
+  }
+  if (!Array.isArray(document.privateBoardHashes) || document.privateBoardHashes.length !== 9) {
+    evaluatorFail('EVIDENCE_PRIVATE_BOARD_COUNT_INVALID');
+  }
+  const expectedBoardIDs = [
+    ...document.aliases.flatMap((alias) => REFERENCE_BALLOT_IDS.map((id) => `${id}/${alias}`)),
+    ...PAIRWISE_BALLOT_IDS
+  ].sort(compareUtf8);
+  const boardIDs = [];
+  document.privateBoardHashes.forEach((board) => {
+    try {
+      assertExactKeys(board, [
+        'boardID', 'byteCount', 'sha256', 'orderDigest', 'leftSourceSha256',
+        'rightSourceSha256', 'compositorHelperSha256'
+      ], 'EVIDENCE_PRIVATE_BOARD_SHAPE_MISMATCH');
+    }
+    catch (error) { if (error instanceof Round012TreeError) evaluatorFail(error.code); throw error; }
+    validateBallotTokens(board.boardID, board.boardID.startsWith('P') ? document.aliases : [board.boardID.slice(3), `reference/${board.boardID.slice(0, 2)}`]);
+    assertPositiveSafeInteger(board.byteCount, 'EVIDENCE_PRIVATE_BOARD_BYTES_INVALID');
+    assertHex64(board.sha256, 'EVIDENCE_PRIVATE_BOARD_HASH_INVALID');
+    assertHex64(board.orderDigest, 'EVIDENCE_PRIVATE_BOARD_HASH_INVALID');
+    assertHex64(board.leftSourceSha256, 'EVIDENCE_PRIVATE_BOARD_SOURCE_HASH_INVALID');
+    assertHex64(board.rightSourceSha256, 'EVIDENCE_PRIVATE_BOARD_SOURCE_HASH_INVALID');
+    if (board.compositorHelperSha256 !== document.evaluatorHelperSha256) evaluatorFail('EVIDENCE_PRIVATE_BOARD_HELPER_HASH_MISMATCH');
+    boardIDs.push(board.boardID);
+  });
+  if (canonicalBytes(boardIDs.sort(compareUtf8)).compare(canonicalBytes(expectedBoardIDs)) !== 0) {
+    evaluatorFail('EVIDENCE_PRIVATE_BOARD_IDS_INVALID');
+  }
+  if (!blindOrderManifest) evaluatorFail('EVIDENCE_BLIND_ORDER_MANIFEST_REQUIRED');
+  if (typeof expectedPresentationCommit !== 'string') evaluatorFail('EVIDENCE_PRESENTATION_COMMIT_REQUIRED');
+  validateBlindOrderManifest(blindOrderManifest, expectedPresentationCommit);
+  if (blindOrderManifest.manifestSha256 !== document.blindOrderManifestSha256) {
+    evaluatorFail('EVIDENCE_BLIND_ORDER_MANIFEST_HASH_MISMATCH');
+  }
+  for (const board of document.privateBoardHashes) {
+    const order = blindOrderManifest.ballots.find((entry) => entry.itemID === board.boardID);
+    if (!order || order.orderDigest !== board.orderDigest) evaluatorFail('EVIDENCE_PRIVATE_BOARD_ORDER_MISMATCH');
+  }
+  canonicalBytes(document);
+  return document;
+}
+
+export async function verifyEvidenceManifestFiles(
+  document,
+  evidenceRoot,
+  blindOrderManifest,
+  expectedPresentationCommit,
+  publicPackageReceipt
+) {
+  validateEvidenceManifest(document, null, blindOrderManifest, expectedPresentationCommit, publicPackageReceipt);
+  const bytesByPath = new Map();
+  for (const artifact of document.artifacts) {
+    const absolute = await assertExtractedRegularFile(evidenceRoot, artifact.path);
+    bytesByPath.set(artifact.path, await readFile(absolute));
+  }
+  validateEvidenceManifest(document, bytesByPath, blindOrderManifest, expectedPresentationCommit, publicPackageReceipt);
+  return { evidenceFilesVerified: document.artifacts.length, privateBoardHashesVerified: 9 };
+}
+
+export function buildBlindOrderManifest(presentationSeed, aliasesValue) {
+  assertRaw32(presentationSeed, 'PRESENTATION_SEED_NOT_32_BYTES');
+  if (!Array.isArray(aliasesValue) || aliasesValue.length !== 2) evaluatorFail('EXACTLY_TWO_DISTINCT_ALIASES_REQUIRED');
+  const aliases = [...aliasesValue].sort(compareUtf8);
+  aliases.forEach(assertAlias);
+  if (aliases[0] === aliases[1]) evaluatorFail('EXACTLY_TWO_DISTINCT_ALIASES_REQUIRED');
+  const ballots = [
+    ...aliases.flatMap((alias) => REFERENCE_BALLOT_IDS.map((id) =>
+      deriveTwoSideOrder(presentationSeed, `${id}/${alias}`, [alias, `reference/${id}`])
+    )),
+    ...PAIRWISE_BALLOT_IDS.map((id) => deriveTwoSideOrder(presentationSeed, id, aliases))
+  ];
+  const body = {
+    schema: 'p30.r012a.blind-order-manifest.v1',
+    protocolID: PROTOCOL_ID,
+    presentationCommit: presentationCommit(presentationSeed),
+    executionOrder: deriveExecutionOrder(presentationSeed, aliases),
+    ballots
+  };
+  return { ...body, manifestSha256: sha256Hex(canonicalBytes(body)) };
+}
+
+export function validateBlindOrderManifest(document, expectedPresentationCommit = null, presentationSeed = null) {
+  try {
+    assertExactKeys(document, [
+      'schema', 'protocolID', 'presentationCommit', 'executionOrder', 'ballots', 'manifestSha256'
+    ], 'BLIND_ORDER_MANIFEST_SHAPE_MISMATCH');
+  } catch (error) { if (error instanceof Round012TreeError) evaluatorFail(error.code); throw error; }
+  if (document.schema !== 'p30.r012a.blind-order-manifest.v1' || document.protocolID !== PROTOCOL_ID) {
+    evaluatorFail('BLIND_ORDER_MANIFEST_CONSTANT_MISMATCH');
+  }
+  assertHex64(document.presentationCommit, 'BLIND_ORDER_MANIFEST_HASH_INVALID');
+  if (expectedPresentationCommit !== null && document.presentationCommit !== expectedPresentationCommit) {
+    evaluatorFail('BLIND_ORDER_PRESENTATION_COMMIT_MISMATCH');
+  }
+  assertHex64(document.manifestSha256, 'BLIND_ORDER_MANIFEST_HASH_INVALID');
+  const { manifestSha256, ...body } = document;
+  if (sha256Hex(canonicalBytes(body)) !== manifestSha256) evaluatorFail('BLIND_ORDER_MANIFEST_HASH_MISMATCH');
+  if (!Array.isArray(document.executionOrder) || document.executionOrder.length !== 2) evaluatorFail('BLIND_ORDER_EXECUTION_COUNT_INVALID');
+  const aliases = document.executionOrder.map((entry) => {
+    try { assertExactKeys(entry, ['alias', 'orderDigest'], 'BLIND_ORDER_EXECUTION_SHAPE_MISMATCH'); }
+    catch (error) { if (error instanceof Round012TreeError) evaluatorFail(error.code); throw error; }
+    assertAlias(entry.alias);
+    assertHex64(entry.orderDigest, 'BLIND_ORDER_EXECUTION_HASH_INVALID');
+    return entry.alias;
+  });
+  if (new Set(aliases).size !== 2) evaluatorFail('BLIND_ORDER_EXECUTION_ALIASES_INVALID');
+  if (!Array.isArray(document.ballots) || document.ballots.length !== 9) evaluatorFail('BLIND_ORDER_BALLOT_COUNT_INVALID');
+  const expectedIDs = [
+    ...[...aliases].sort(compareUtf8).flatMap((alias) => REFERENCE_BALLOT_IDS.map((id) => `${id}/${alias}`)),
+    ...PAIRWISE_BALLOT_IDS
+  ];
+  document.ballots.forEach((order, index) => {
+    try { assertExactKeys(order, ['itemID', 'left', 'right', 'orderDigest'], 'BLIND_ORDER_BALLOT_SHAPE_MISMATCH'); }
+    catch (error) { if (error instanceof Round012TreeError) evaluatorFail(error.code); throw error; }
+    if (order.itemID !== expectedIDs[index]) evaluatorFail('BLIND_ORDER_BALLOT_ORDER_INVALID');
+    validateBallotTokens(order.itemID, [order.left, order.right]);
+    assertHex64(order.orderDigest, 'BLIND_ORDER_BALLOT_HASH_INVALID');
+  });
+  if (presentationSeed !== null) {
+    assertRaw32(presentationSeed, 'PRESENTATION_SEED_NOT_32_BYTES');
+    const expected = buildBlindOrderManifest(presentationSeed, aliases);
+    if (canonicalBytes(expected).compare(canonicalBytes(document)) !== 0) evaluatorFail('BLIND_ORDER_SEED_DERIVATION_MISMATCH');
+  }
+  return document;
 }
 
 function usage() {

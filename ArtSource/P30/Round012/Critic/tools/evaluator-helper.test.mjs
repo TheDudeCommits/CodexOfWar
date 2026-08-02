@@ -1,12 +1,18 @@
 import assert from 'node:assert/strict';
+import { createHash } from 'node:crypto';
+import { mkdir, mkdtemp, rm, symlink, writeFile } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 import test from 'node:test';
 
 import {
   BASELINE_RECEIPT_PATH,
   BASELINE_RECEIPT_SHA256,
+  ALIAS_SCORE_COMMIT_DOMAIN,
   COUNTERFACTUAL_COMMIT_DOMAIN,
   EVALUATOR_HELPER_PATH,
   PRESENTATION_COMMIT_DOMAIN,
+  PACKAGE_MAP_COMMIT_DOMAIN,
   PROTOCOL_AMENDMENT_PATH,
   PROTOCOL_AMENDMENT_SHA256,
   PROTOCOL_ID,
@@ -19,11 +25,21 @@ import {
   TREE_DOMAIN,
   TREE_HELPER_PATH,
   analyzeMaskTopology,
+  aliasScoreCommit,
+  buildBlindOrderManifest,
   buildTargetCapsules,
+  bladeEndpointSilhouetteChecks,
   canonicalContactChecks,
+  canonicalContactFrame,
   closestSegmentSegment,
   collectGeometrySource,
+  composeAnonymousEqualBoard,
+  computeMissOffsetExtrema,
   counterfactualCommit,
+  cropScaleRgbaLanczos3,
+  decodeReferenceImagePixels,
+  deriveActionCrop,
+  deriveContactRoi,
   deriveExecutionOrder,
   deriveHitOffsetPairs,
   deriveHitOffsets,
@@ -31,12 +47,26 @@ import {
   deriveTwoSideOrder,
   evaluateSweptContact,
   extractBladeCapsule,
+  packageMapCommit,
+  parseReferenceZip,
   presentationCommit,
   rasterizeObjectMask,
   referenceCommit,
+  referenceImageDimensions,
   roundHalfAwayFromZero,
+  validateAliasOnlyScore,
+  validateBallotTokens,
+  validateBlindOrderManifest,
+  validateCounterfactualRuns,
+  validateEvidenceManifest,
+  validatePackageMap,
+  validatePublicPackageReceipt,
   validateReferenceSelection,
   validateRoundCommitment,
+  verifyReferenceSelectionFiles,
+  verifyPackageMapReveal,
+  topologyContinuityChecks,
+  transformCommittedReferencePixels,
   visibleTopologyChecks
 } from './evaluator-helper.mjs';
 
@@ -233,7 +263,7 @@ test('target capsules use the frozen ID order and height ratios', () => {
   assert.equal(capsules[1].radius, 0.23);
 });
 
-test('live geometry-source collector uses rendered groups, deformed vertices, bones, and production camera refs', () => {
+function geometryFixture() {
   class Vector3 {
     constructor(x = 0, y = 0, z = 0) { this.set(x, y, z); }
     set(x, y, z) { this.x = x; this.y = y; this.z = z; return this; }
@@ -265,7 +295,15 @@ test('live geometry-source collector uses rendered groups, deformed vertices, bo
   };
   const heroRoot = { visible: true, parent: scene };
   const targetRoot = { visible: true, parent: scene };
-  const makeMesh = (uuid, vertices, parent, skinned = false) => ({
+  const attribute = (values, itemSize) => ({
+    count: values.length,
+    itemSize,
+    getX: (index) => values[index][0],
+    getY: (index) => values[index][1] ?? 0,
+    getZ: (index) => values[index][2] ?? 0,
+    getW: (index) => values[index][3] ?? 0
+  });
+  const makeMesh = (uuid, vertices, parent, { skinned = false, side = 0, skeleton = null } = {}) => ({
     isMesh: true,
     isSkinnedMesh: skinned,
     isInstancedMesh: false,
@@ -275,7 +313,8 @@ test('live geometry-source collector uses rendered groups, deformed vertices, bo
     layers: {},
     position: new Vector3(),
     matrixWorld: new Matrix4(),
-    material: { visible: true, opacity: 1, side: 0 },
+    material: { visible: true, opacity: 1, side },
+    skeleton,
     geometry: {
       attributes: { position: { count: vertices.length } },
       groups: [],
@@ -283,7 +322,7 @@ test('live geometry-source collector uses rendered groups, deformed vertices, bo
     },
     getVertexPosition(index, target) { target.set(...vertices[index]); }
   });
-  const bone = (translation) => ({ matrixWorld: new Matrix4(translation) });
+  const bone = (translation, parent) => ({ isBone: true, parent, matrixWorld: new Matrix4(translation) });
   const targetBoneNames = [
     'pelvis', 'neck', 'head',
     'leftShoulder', 'leftElbow', 'leftWrist',
@@ -291,28 +330,83 @@ test('live geometry-source collector uses rendered groups, deformed vertices, bo
     'leftHip', 'leftKnee', 'leftAnkle',
     'rightHip', 'rightKnee', 'rightAnkle'
   ];
-  const targetLandmarkBones = Object.fromEntries(targetBoneNames.map((name, index) => [name, bone([2, -0.8 + index * 0.1, 0])]));
-  const result = collectGeometrySource({
+  const targetLandmarkBones = Object.fromEntries(targetBoneNames.map((name, index) => [name, bone([0.2, -0.8 + index * 0.1, 0], targetRoot)]));
+  const targetBones = Object.values(targetLandmarkBones);
+  const targetVertices = Array.from({ length: 18 }, (_, index) => [
+    0.2 + (index % 3) * 0.01,
+    index === 0 ? -0.9 : index === 17 ? 0.9 : -0.7 + (index % 15) * 0.1,
+    0
+  ]);
+  const targetMesh = makeMesh('target', targetVertices, targetRoot, { skinned: true, skeleton: { bones: targetBones } });
+  targetMesh.geometry.attributes.skinIndex = attribute(targetVertices.map((_, index) => [index % 15]), 1);
+  targetMesh.geometry.attributes.skinWeight = attribute(targetVertices.map(() => [1]), 1);
+  const bladeMesh = makeMesh('blade', [
+    [0, 0, 0], [1, -0.01, 0], [1, 0.01, 0],
+    [0, 0, 0], [1.8, 0.01, 0], [1.8, -0.01, 0]
+  ], heroRoot);
+  const source = {
     scene,
     camera,
     heroRoot,
-    leftHandBone: bone([-0.1, 0, 0]),
-    rightHandBone: bone([-0.1, 0, 0]),
+    leftHandBone: bone([-0.1, -0.01, 0], heroRoot),
+    rightHandBone: bone([-0.1, 0.01, 0], heroRoot),
     swordBladePrimitives: [{
-      mesh: makeMesh('blade', [[0, 0, 0], [1, 0.01, 0], [1, -0.01, 0]], heroRoot),
+      mesh: bladeMesh,
       materialGroupIndices: [0]
     }],
     targetRoot,
-    targetSkinnedMeshes: [makeMesh('target', [[2, -0.9, 0], [2, 0.9, 0], [2, 0.9, 0.1]], targetRoot, true)],
+    targetSkinnedMeshes: [targetMesh],
     targetLandmarkBones,
     healthStore: {}
-  });
-  assert.equal(result.scene, scene);
-  assert.equal(result.camera, camera);
+  };
+  return { source, scene, camera, targetRoot, targetMesh, targetLandmarkBones };
+}
+
+test('live geometry collector proves render-driving landmarks, culls hidden blade triangles, and freezes tick-0 height', () => {
+  const fixture = geometryFixture();
+  const result = collectGeometrySource(fixture.source, { absoluteTick: 0 });
+  assert.equal(result.scene, fixture.scene);
+  assert.equal(result.camera, fixture.camera);
   assert.ok(Math.abs(result.targetHeight - 1.8) < 1e-12);
   assert.equal(result.bladeTriangles.length, 1);
-  assert.equal(result.targetTriangles.length, 1);
+  assert.ok(Math.abs(result.blade.lengthMetres - 1) < 1e-12);
+  assert.equal(result.targetTriangles.length, 6);
   assert.equal(result.targetCapsules.length, 10);
+  fixture.targetMesh.getVertexPosition = (index, target) => target.set(0.2, index === 0 ? -0.1 : 0.1, 0);
+  const later = collectGeometrySource(fixture.source, { absoluteTick: 44, targetHeightReceipt: result.targetHeightReceipt });
+  assert.equal(later.targetHeight, result.targetHeight);
+  assert.throws(
+    () => collectGeometrySource(fixture.source, { absoluteTick: 44 }),
+    (error) => evaluatorCode(error, 'TARGET_HEIGHT_TICK_ZERO_RECEIPT_REQUIRED')
+  );
+  fixture.source.targetSkinnedMeshes = [{ ...fixture.targetMesh }];
+  assert.throws(
+    () => collectGeometrySource(fixture.source, { absoluteTick: 45, targetHeightReceipt: result.targetHeightReceipt }),
+    (error) => evaluatorCode(error, 'TARGET_HEIGHT_MESH_IDENTITY_MUTATED')
+  );
+});
+
+test('geometry collector rejects duplicate, detached, and zero-weight landmark identities', () => {
+  const duplicate = geometryFixture();
+  duplicate.source.targetLandmarkBones.head = duplicate.source.targetLandmarkBones.neck;
+  assert.throws(
+    () => collectGeometrySource(duplicate.source, { absoluteTick: 0 }),
+    (error) => evaluatorCode(error, 'TARGET_LANDMARK_DUPLICATE')
+  );
+  const detached = geometryFixture();
+  detached.source.targetLandmarkBones.head.parent = detached.source.scene;
+  assert.throws(
+    () => collectGeometrySource(detached.source, { absoluteTick: 0 }),
+    (error) => evaluatorCode(error, 'TARGET_LANDMARK_DETACHED')
+  );
+  const nonDriving = geometryFixture();
+  const skinIndex = nonDriving.targetMesh.geometry.attributes.skinIndex;
+  const originalGetX = skinIndex.getX;
+  skinIndex.getX = (index) => originalGetX(index) === 2 ? 0 : originalGetX(index);
+  assert.throws(
+    () => collectGeometrySource(nonDriving.source, { absoluteTick: 0 }),
+    (error) => evaluatorCode(error, 'TARGET_LANDMARK_NON_RENDER_DRIVING')
+  );
 });
 
 test('4096-substep sweep resolves exact tick-46 first contact without endpoint retries', () => {
@@ -339,6 +433,32 @@ test('4096-substep sweep resolves exact tick-46 first contact without endpoint r
   assert.equal(result.risingContactTicks.length, 1);
   assert.equal(result.risingContactTicks[0], 46);
   assert.equal(canonicalContactChecks(result).pass, true);
+  const frame = canonicalContactFrame(result, { right: [1, 0, 0], up: [0, 1, 0], forward: [0, 0, 1] });
+  assert.deepEqual(frame.normal, [1, 0, 0]);
+  assert.match(frame.receiptSha256, /^[0-9a-f]{64}$/u);
+});
+
+test('miss extrema include every 4096 substep and both expanded endpoint sets', () => {
+  const capsuleIDs = [
+    'head', 'torso', 'left-upper-arm', 'left-forearm', 'right-upper-arm', 'right-forearm',
+    'left-thigh', 'left-shin', 'right-thigh', 'right-shin'
+  ];
+  const states = [-1, 0].map((absoluteTick) => ({
+    absoluteTick,
+    blade: { guard: [-1, 0, 0], tip: [1, 0, 0] },
+    targetCapsules: capsuleIDs.map((id, index) => ({
+      id,
+      a: [index === 0 ? -2 : 10 + index, 0, 0],
+      b: [index === 0 ? 2 : 10 + index, 1, 0],
+      radius: index === 0 ? 0.5 : 0.1
+    }))
+  }));
+  const extrema = computeMissOffsetExtrema(states, { right: [1, 0, 0], up: [0, 1, 0], forward: [0, 0, 1] }, 0);
+  assert.equal(extrema.Bmin, -1.02);
+  assert.equal(extrema.Bmax, 1.02);
+  assert.equal(extrema.Tmin, -2.5);
+  assert.equal(extrema.Tmax, 19.1);
+  assert.equal(extrema.sampleCount, 4096);
 });
 
 test('native mask topology uses exact Euclidean distances and locked thresholds', () => {
@@ -360,6 +480,49 @@ test('native mask topology uses exact Euclidean distances and locked thresholds'
   ).pass, true);
 });
 
+test('blade endpoints must match their corresponding axial silhouette extrema', () => {
+  const mask = new Uint8Array(1600 * 900);
+  for (let x = 400; x < 1200; x += 1) mask[449 * 1600 + x] = 1;
+  const blade = { guard: [-0.5, 0, 0], tip: [0.5, 0, 0] };
+  const identity = [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1];
+  assert.equal(bladeEndpointSilhouetteChecks(blade, identity, mask).pass, true);
+  for (let x = 1000; x < 1200; x += 1) mask[449 * 1600 + x] = 0;
+  const shortened = bladeEndpointSilhouetteChecks(blade, identity, mask);
+  assert.equal(shortened.pass, false);
+  assert.ok(shortened.tipDistancePixels > 100);
+});
+
+test('ticks 44-48 topology continuity binds camera, production frames, masks, endpoints, and landmarks', () => {
+  const landmarkKeys = [
+    'pelvis', 'neck', 'head', 'leftShoulder', 'leftElbow', 'leftWrist',
+    'rightShoulder', 'rightElbow', 'rightWrist', 'leftHip', 'leftKnee', 'leftAnkle',
+    'rightHip', 'rightKnee', 'rightAnkle'
+  ];
+  const targetMask = new Uint8Array(1600 * 900);
+  for (let y = 400; y < 500; y += 1) for (let x = 800; x < 900; x += 1) targetMask[y * 1600 + x] = 1;
+  const frames = Array.from({ length: 5 }, (_, index) => {
+    const bladeMask = new Uint8Array(1600 * 900);
+    const bladeX = index === 1 ? 797 : index === 2 ? 798 : 796 + index;
+    bladeMask[450 * 1600 + bladeX] = 1;
+    return {
+      absoluteTick: 44 + index,
+      bladeMask,
+      targetMask,
+      viewProjectionMatrix: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1],
+      cameraDigest: 'c'.repeat(64),
+      blade: { guard: [index * 0.01, 0, 0], tip: [1 + index * 0.01, 0, 0] },
+      landmarks: Object.fromEntries(landmarkKeys.map((key, landmarkIndex) => [key, [0, landmarkIndex * 0.01, 0]])),
+      productionFrameSha256: String(index + 1).repeat(64),
+      productionFrameUnannotated: true,
+      baselineEffectsObscureTopology: false
+    };
+  });
+  const continuity = topologyContinuityChecks(frames);
+  assert.equal(continuity.pass, true);
+  frames[3].cameraDigest = 'd'.repeat(64);
+  assert.equal(topologyContinuityChecks(frames).pass, false);
+});
+
 test('software rasterizer clips and fills a current world triangle at native DPR1', () => {
   const identity = [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1];
   const result = rasterizeObjectMask({
@@ -370,4 +533,601 @@ test('software rasterizer clips and fills a current world triangle at native DPR
   assert.equal(result.height, 900);
   assert.ok(result.mask.some((value) => value === 1));
   assert.equal(result.mask[450 * 1600 + 800], 1);
+});
+
+test('ballot token domains and blind order manifest forbid aliases or references in the wrong ballot class', () => {
+  const seed = Buffer.alloc(32, 0x11);
+  const aliases = ['candidate-1111111111111111', 'candidate-eeeeeeeeeeeeeeee'];
+  const manifest = buildBlindOrderManifest(seed, aliases);
+  assert.equal(manifest.ballots.length, 9);
+  assert.doesNotThrow(() => validateBlindOrderManifest(manifest, presentationCommit(seed), seed));
+  assert.deepEqual(validateBallotTokens('R1/candidate-1111111111111111', [
+    'candidate-1111111111111111', 'reference/R1'
+  ]), { kind: 'reference', ballotID: 'R1', alias: 'candidate-1111111111111111' });
+  assert.throws(
+    () => validateBallotTokens('P1', [aliases[0], 'reference/R1']),
+    (error) => evaluatorCode(error, 'INVALID_OPAQUE_ALIAS')
+  );
+  const tampered = structuredClone(manifest);
+  tampered.ballots[0].right = aliases[1];
+  assert.throws(
+    () => validateBlindOrderManifest(tampered),
+    (error) => evaluatorCode(error, 'BLIND_ORDER_MANIFEST_HASH_MISMATCH')
+  );
+});
+
+test('action crop contains actors and HUD at exact 16:9, while contact ROI is unscaled and centered', () => {
+  const crop = deriveActionCrop({
+    heroBounds: { x: 500, y: 180, width: 250, height: 650 },
+    weaponBounds: { x: 700, y: 240, width: 400, height: 300 },
+    targetBounds: { x: 1020, y: 180, width: 260, height: 650 },
+    hudBounds: [{ x: 32, y: 24, width: 300, height: 80 }]
+  });
+  assert.equal(crop.width / crop.height, 16 / 9);
+  assert.ok(crop.x <= 32 && crop.y <= 24);
+  assert.ok(crop.x + crop.width >= 1280 && crop.y + crop.height >= 830);
+  const roi = deriveContactRoi({
+    closestBladePoint: [0, 0, 0],
+    closestTargetPoint: [0, 0, 0],
+    viewProjectionMatrix: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]
+  });
+  assert.deepEqual({ x: roi.x, y: roi.y, width: roi.width, height: roi.height }, { x: 640, y: 290, width: 320, height: 320 });
+  assert.equal(roi.resampled, false);
+});
+
+test('JPEG and WebP dimensions plus Lanczos crop/scale and equal anonymous board pixels are deterministic', () => {
+  const jpeg = Buffer.from('ffd8ffc00011080020004003011100021100031100ffd9', 'hex');
+  assert.deepEqual(referenceImageDimensions(jpeg), { width: 64, height: 32 });
+  const webp = Buffer.alloc(30);
+  webp.write('RIFF', 0, 'ascii');
+  webp.writeUInt32LE(22, 4);
+  webp.write('WEBP', 8, 'ascii');
+  webp.write('VP8X', 12, 'ascii');
+  webp.writeUInt32LE(10, 16);
+  webp[24] = 63;
+  webp[27] = 31;
+  assert.deepEqual(referenceImageDimensions(webp), { width: 64, height: 32 });
+  const image = {
+    width: 2,
+    height: 2,
+    rgba: Uint8Array.from([
+      255, 0, 0, 255, 0, 255, 0, 255,
+      0, 0, 255, 255, 255, 255, 255, 255
+    ])
+  };
+  const exact = cropScaleRgbaLanczos3(image, { x: 0, y: 0, width: 2, height: 2 }, 10, 10);
+  assert.deepEqual(exact.rgba, image.rgba);
+  const reduced = cropScaleRgbaLanczos3(image, { x: 0, y: 0, width: 2, height: 2 }, 1, 1);
+  assert.equal(reduced.width, 1);
+  assert.equal(reduced.height, 1);
+  const seed = Buffer.alloc(32, 0x11);
+  const aliases = ['candidate-1111111111111111', 'candidate-eeeeeeeeeeeeeeee'];
+  const order = deriveTwoSideOrder(seed, 'P1', aliases);
+  const pixelSha256 = createHash('sha256').update(image.rgba).digest('hex');
+  const boardA = composeAnonymousEqualBoard({
+    presentationSeed: seed, expectedPresentationCommit: presentationCommit(seed), itemID: 'P1', order,
+    leftImage: image, rightImage: image, leftPixelSha256: pixelSha256, rightPixelSha256: pixelSha256
+  });
+  const boardB = composeAnonymousEqualBoard({
+    presentationSeed: seed, expectedPresentationCommit: presentationCommit(seed), itemID: 'P1', order,
+    leftImage: image, rightImage: image, leftPixelSha256: pixelSha256, rightPixelSha256: pixelSha256
+  });
+  assert.equal(boardA.boardSha256, boardB.boardSha256);
+  assert.deepEqual(boardA.publicLabels, ['LEFT', 'RIGHT']);
+  assert.equal(boardA.cells[0].width, boardA.cells[1].width);
+  assert.equal(Buffer.from(boardA.rgba).includes(Buffer.from('candidate-')), false);
+});
+
+test('committed reference transform obtains RGBA from the locked browser decoder path, never caller-supplied pixels', async (context) => {
+  const originalCreateImageBitmap = globalThis.createImageBitmap;
+  const originalOffscreenCanvas = globalThis.OffscreenCanvas;
+  context.after(() => {
+    if (originalCreateImageBitmap === undefined) delete globalThis.createImageBitmap;
+    else globalThis.createImageBitmap = originalCreateImageBitmap;
+    if (originalOffscreenCanvas === undefined) delete globalThis.OffscreenCanvas;
+    else globalThis.OffscreenCanvas = originalOffscreenCanvas;
+  });
+  let closed = false;
+  globalThis.createImageBitmap = async () => ({ width: 64, height: 32, close() { closed = true; } });
+  globalThis.OffscreenCanvas = class {
+    constructor(width, height) { this.width = width; this.height = height; }
+    getContext() {
+      return {
+        globalCompositeOperation: 'source-over',
+        imageSmoothingEnabled: true,
+        clearRect() {},
+        drawImage() {},
+        getImageData: () => ({ data: new Uint8ClampedArray(this.width * this.height * 4).fill(127) })
+      };
+    }
+  };
+  const jpeg = Buffer.from('ffd8ffc00011080020004003011100021100031100ffd9', 'hex');
+  const decoded = await decodeReferenceImagePixels(jpeg);
+  assert.equal(decoded.decoder, 'browser-createImageBitmap-offscreenCanvas-srgb-rgba8-v1');
+  assert.equal(decoded.rgba.length, 64 * 32 * 4);
+  const transformed = await transformCommittedReferencePixels({
+    encodedBytes: jpeg,
+    selection: {
+      sourceFileSha256: createHash('sha256').update(jpeg).digest('hex'),
+      originalDimensions: { width: 64, height: 32 },
+      cropRectangle: { x: 0, y: 0, width: 64, height: 32 },
+      uniformScaleAlgorithm: 'lanczos3-uniform-fit-no-upscale-v1'
+    },
+    maximumWidth: 32,
+    maximumHeight: 16
+  });
+  assert.equal(transformed.width, 32);
+  assert.equal(transformed.height, 16);
+  assert.equal(closed, true);
+});
+
+function fixtureCrc32(bytes) {
+  let crc = 0xffffffff;
+  for (const byte of bytes) {
+    crc ^= byte;
+    for (let bit = 0; bit < 8; bit += 1) crc = (crc & 1) ? (0xedb88320 ^ (crc >>> 1)) : (crc >>> 1);
+  }
+  return (crc ^ 0xffffffff) >>> 0;
+}
+
+function storedZip(entries) {
+  const locals = [];
+  const centrals = [];
+  let offset = 0;
+  for (const entry of entries) {
+    const name = Buffer.from(entry.name, 'utf8');
+    const bytes = Buffer.from(entry.bytes);
+    const crc = fixtureCrc32(bytes);
+    const local = Buffer.alloc(30 + name.length + bytes.length);
+    local.writeUInt32LE(0x04034b50, 0);
+    local.writeUInt16LE(20, 4);
+    local.writeUInt16LE(0x0800, 6);
+    local.writeUInt16LE(0, 8);
+    local.writeUInt32LE(crc, 14);
+    local.writeUInt32LE(bytes.length, 18);
+    local.writeUInt32LE(bytes.length, 22);
+    local.writeUInt16LE(name.length, 26);
+    name.copy(local, 30);
+    bytes.copy(local, 30 + name.length);
+    locals.push(local);
+    const central = Buffer.alloc(46 + name.length);
+    central.writeUInt32LE(0x02014b50, 0);
+    central.writeUInt16LE((3 << 8) | 20, 4);
+    central.writeUInt16LE(20, 6);
+    central.writeUInt16LE(0x0800, 8);
+    central.writeUInt16LE(0, 10);
+    central.writeUInt32LE(crc, 16);
+    central.writeUInt32LE(bytes.length, 20);
+    central.writeUInt32LE(bytes.length, 24);
+    central.writeUInt16LE(name.length, 28);
+    central.writeUInt32LE(((entry.mode ?? 0o100644) << 16) >>> 0, 38);
+    central.writeUInt32LE(offset, 42);
+    name.copy(central, 46);
+    centrals.push(central);
+    offset += local.length;
+  }
+  const centralBytes = Buffer.concat(centrals);
+  const eocd = Buffer.alloc(22);
+  eocd.writeUInt32LE(0x06054b50, 0);
+  eocd.writeUInt16LE(entries.length, 8);
+  eocd.writeUInt16LE(entries.length, 10);
+  eocd.writeUInt32LE(centralBytes.length, 12);
+  eocd.writeUInt32LE(offset, 16);
+  return Buffer.concat([...locals, centralBytes, eocd]);
+}
+
+test('reference custody proves selected bytes originate in the ZIP and rejects ZIP or extracted symlinks', async (context) => {
+  const root = await mkdtemp(join(tmpdir(), 'p30-r012-reference-test-'));
+  context.after(() => rm(root, { recursive: true, force: true }));
+  const jpeg = Buffer.from('ffd8ffc00011080020004003011100021100031100ffd9', 'hex');
+  const entries = [0, 1, 2].map((index) => ({ name: `Reference/f${index}.jpeg`, bytes: jpeg }));
+  const archive = storedZip(entries);
+  const archivePath = join(root, 'Reference.zip');
+  const extracted = join(root, 'extracted');
+  await mkdir(join(extracted, 'Reference'), { recursive: true });
+  await writeFile(archivePath, archive);
+  for (const entry of entries) await writeFile(join(extracted, entry.name), jpeg);
+  const fileHash = createHash('sha256').update(jpeg).digest('hex');
+  const selection = selectionFixture();
+  selection.selections.forEach((entry) => {
+    entry.sourceFileSha256 = fileHash;
+    entry.originalDimensions = { width: 64, height: 32 };
+    entry.cropRectangle = { x: 0, y: 0, width: 64, height: 32 };
+  });
+  assert.equal(parseReferenceZip(archive).size, 3);
+  await assert.doesNotReject(() => verifyReferenceSelectionFiles(selection, extracted, archivePath));
+  const outside = join(root, 'outside.jpeg');
+  await writeFile(outside, jpeg);
+  await rm(join(extracted, 'Reference/f0.jpeg'));
+  await symlink(outside, join(extracted, 'Reference/f0.jpeg'));
+  await assert.rejects(
+    () => verifyReferenceSelectionFiles(selection, extracted, archivePath),
+    (error) => evaluatorCode(error, 'REFERENCE_EXTRACTED_SYMLINK_FORBIDDEN')
+  );
+  const symlinkZip = storedZip([{ name: 'Reference/link.jpeg', bytes: Buffer.from('target'), mode: 0o120777 }]);
+  assert.throws(
+    () => parseReferenceZip(symlinkZip),
+    (error) => evaluatorCode(error, 'REFERENCE_ZIP_SYMLINK_FORBIDDEN')
+  );
+});
+
+test('counterfactual validation binds all three hit offsets and both miss results without regeneration', () => {
+  const hitOffsets = [0, 1, 2].map((index) => ({ canonicalMicrometres: [index + 1, 0, 0] }));
+  const missOffsets = [{ canonicalMicrometres: [300000, 0, 0] }, { canonicalMicrometres: [-300000, 0, 0] }];
+  const health = (hit) => Array.from({ length: 82 }, (_, index) => ({
+    absoluteTick: index - 1,
+    health: hit && index - 1 >= 46 ? 75 : 100
+  }));
+  const hitRuns = hitOffsets.map((offset, index) => ({
+    index,
+    offsetCanonicalMicrometres: offset.canonicalMicrometres,
+    evaluatorResult: { firstContactTick: 46, risingContactTicks: [46], maximumPenetration: -0.011 },
+    healthByTick: health(true),
+    damageMutations: [{ absoluteTick: 46, before: 100, after: 75, amount: 25 }],
+    events: [{ type: 'damage', absoluteTick: 46 }],
+    visibleTopology: { pass: true }
+  }));
+  const missRuns = missOffsets.map((offset, index) => ({
+    index,
+    offsetCanonicalMicrometres: offset.canonicalMicrometres,
+    evaluatorResult: { firstContactTick: null, risingContactTicks: [], maximumPenetration: 0.25 },
+    healthByTick: health(false),
+    events: [],
+    reactionOrRecoil: false,
+    maximumTargetDriftMetres: 0.01
+  }));
+  assert.deepEqual(validateCounterfactualRuns({ hitOffsets, missOffsets, hitRuns, missRuns }), {
+    hitRunsVerified: 3, missRunsVerified: 2, pass: true
+  });
+  hitRuns[2].offsetCanonicalMicrometres = [99, 0, 0];
+  assert.throws(
+    () => validateCounterfactualRuns({ hitOffsets, missOffsets, hitRuns, missRuns }),
+    (error) => evaluatorCode(error, 'COUNTERFACTUAL_HIT_OFFSET_MISMATCH')
+  );
+});
+
+function packageMapFixture() {
+  return {
+    schema: 'p30.r012a.package-map.v1',
+    protocolID: PROTOCOL_ID,
+    packages: ['candidate-1111111111111111', 'candidate-eeeeeeeeeeeeeeee'].map((alias, index) => ({
+      alias,
+      builderIdentity: `builder-${index + 1}`,
+      worktree: `/private/custody/worktree-${index + 1}`,
+      branch: `codex/private-${index + 1}`,
+      sourceCommit: String(index + 1).repeat(40),
+      gitTree: String(index + 3).repeat(40),
+      sourceArchiveSha256: String(index + 1).repeat(64),
+      sourceArchiveBytes: 1000 + index,
+      materializedSourceTreeSha256: String(index + 2).repeat(64),
+      packageArchiveSha256: String(index + 3).repeat(64),
+      packageArchiveBytes: 2000 + index,
+      materializedPackageTreeSha256: String(index + 4).repeat(64),
+      productionOutputTreeSha256: String(index + 5).repeat(64),
+      lockfilePath: 'package-lock.json',
+      lockfileSha256: String(index + 6).repeat(64),
+      buildCommand: ['npm', 'run', 'build:critic']
+    }))
+  };
+}
+
+function publicPackageReceiptFixture(map = packageMapFixture()) {
+  return {
+    schema: 'p30.r012a.public-package-receipt.v1',
+    protocolID: PROTOCOL_ID,
+    packages: map.packages.map((entry) => ({
+      alias: entry.alias,
+      packageArchiveSha256: entry.packageArchiveSha256,
+      packageArchiveBytes: entry.packageArchiveBytes,
+      materializedPackageTreeSha256: entry.materializedPackageTreeSha256,
+      productionOutputTreeSha256: entry.productionOutputTreeSha256,
+      criticInterfaceSha256: 'f'.repeat(64)
+    }))
+  };
+}
+
+test('package-map domain binds exactly two fully specified custody entries', () => {
+  const fixture = packageMapFixture();
+  assert.doesNotThrow(() => validatePackageMap(fixture));
+  const publicReceipt = publicPackageReceiptFixture(fixture);
+  assert.doesNotThrow(() => validatePublicPackageReceipt(publicReceipt));
+  assert.equal(PACKAGE_MAP_COMMIT_DOMAIN, 'P30R012A/package-map/v1');
+  const salt = Buffer.alloc(32, 0x55);
+  const commit = packageMapCommit(fixture, salt);
+  assert.match(commit, /^[0-9a-f]{64}$/u);
+  assert.deepEqual(verifyPackageMapReveal({
+    mapDocument: fixture, mapSalt: salt, expectedMapCommit: commit, publicPackageReceipt: publicReceipt
+  }), { packageMapCommitVerified: true, publicPackageBindingsVerified: 2 });
+  assert.throws(
+    () => validatePackageMap({ ...fixture, packages: fixture.packages.slice(0, 1) }),
+    (error) => evaluatorCode(error, 'PACKAGE_MAP_EXACTLY_TWO_PACKAGES_REQUIRED')
+  );
+  const unknown = structuredClone(fixture);
+  unknown.packages[0].builderNote = 'forbidden';
+  assert.throws(
+    () => validatePackageMap(unknown),
+    (error) => evaluatorCode(error, 'PACKAGE_MAP_ENTRY_SHAPE_MISMATCH')
+  );
+});
+
+function aliasScoreFixture() {
+  const seed = Buffer.alloc(32, 0x11);
+  const aliases = ['candidate-1111111111111111', 'candidate-eeeeeeeeeeeeeeee'];
+  const order = buildBlindOrderManifest(seed, aliases);
+  const digest = 'a'.repeat(64);
+  const section = (name) => ({
+    schema: `p30.r012a.${name}.v1`,
+    receiptSha256: digest,
+    evidenceSha256s: [digest],
+    measurements: { complete: true }
+  });
+  const gates = Object.fromEntries([
+    'O1', 'O2', 'O3', 'O4', 'O5', 'T1', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'T8', 'T9', 'T10'
+  ].map((id) => [id, {
+    pass: ['T1', 'T10'].includes(id) ? 'pending-reveal' : true,
+    evidenceSha256s: [digest],
+    reason: `${id} has complete alias-only evidence.`
+  }]));
+  const candidates = aliases.map((alias) => {
+    const referenceBallots = order.ballots.filter((ballot) => ballot.itemID.endsWith(`/${alias}`)).map((ballot) => ({
+      ballotID: ballot.itemID.slice(0, 2),
+      itemID: ballot.itemID,
+      orderDigest: ballot.orderDigest,
+      leftToken: ballot.left,
+      rightToken: ballot.right,
+      winner: ballot.left === alias ? 'LEFT' : 'RIGHT',
+      castCount: 1,
+      boardSha256: digest
+    }));
+    return {
+      alias,
+      packageArchiveSha256: digest,
+      packageTreeSha256: digest,
+      productionOutputTreeSha256: digest,
+      runProfiles: section('run-profiles'),
+      inputMeasurements: section('input-measurements'),
+      contactMeasurements: section('contact-measurements'),
+      healthMeasurements: section('health-measurements'),
+      counterfactualMeasurements: section('counterfactual-measurements'),
+      distinctnessMeasurements: section('distinctness-measurements'),
+      recoveryMeasurements: section('recovery-measurements'),
+      baselineComparisons: section('baseline-comparisons'),
+      gates: structuredClone(gates),
+      referenceBallots,
+      referenceWinCount: 3,
+      visualScores: Object.fromEntries(Array.from({ length: 10 }, (_, index) => [`C${index + 1}`, {
+        score: 10,
+        reason: `C${index + 1} meets the frozen reference-level criterion.`
+      }])),
+      visualTotal: 100,
+      visualMinimum: 10,
+      disqualifiers: [],
+      acceptanceChecks: {
+        noDisqualifier: true,
+        objectiveGates: true,
+        technicalGatesCurrentlyDecidable: true,
+        pendingRevealOnly: true,
+        referenceWins: true,
+        visualTotal: true,
+        visualMinimum: true
+      },
+      provisionallyAccepted: true,
+      biggestRemainingGap: null
+    };
+  });
+  const document = {
+    schema: 'p30.r012a.alias-score.v1',
+    protocolID: PROTOCOL_ID,
+    protocolPayloadSha256: PROTOCOL_PAYLOAD_SHA256,
+    baselineReceiptSha256: BASELINE_RECEIPT_SHA256,
+    roundCommitmentSha256: digest,
+    referenceCommit: digest,
+    packageMapCommit: digest,
+    identityRevealReceived: false,
+    runtime: {
+      nodeExecutable: '/opt/homebrew/opt/node@24/bin/node',
+      nodeVersion: 'v24.1.0',
+      npmVersion: '11.0.0',
+      browserExecutable: '/Applications/Chromium.app/Contents/MacOS/Chromium',
+      browserVersion: 'Chromium 140.0.0.0',
+      launchArguments: ['--headless=false'],
+      gpuRenderer: 'Apple M-series',
+      viewportWidth: 1600,
+      viewportHeight: 900,
+      deviceScaleFactor: 1,
+      devicePixelRatio: 1,
+      zoomPercent: 100,
+      normalRoute: '/game',
+      evaluatorHelperSha256: digest
+    },
+    executionOrder: order.executionOrder,
+    candidates,
+    pairwiseBallots: order.ballots.filter((ballot) => ballot.itemID.startsWith('P')).map((ballot) => ({
+      ballotID: ballot.itemID,
+      itemID: ballot.itemID,
+      orderDigest: ballot.orderDigest,
+      leftToken: ballot.left,
+      rightToken: ballot.right,
+      winner: null,
+      castCount: 1,
+      boardSha256: digest
+    })),
+    strongerAlias: aliases[0],
+    provisionalOutcome: 'PROVISIONAL_ACCEPTED_CANDIDATE_EXISTS',
+    evidenceManifestSha256: digest,
+    blindOrderManifestSha256: order.manifestSha256,
+    disqualifiers: []
+  };
+  const custodyBindings = {
+    roundCommitmentSha256: digest,
+    referenceCommit: digest,
+    packageMapCommit: digest,
+    evidenceManifestSha256: digest,
+    blindOrderManifestSha256: order.manifestSha256,
+    evaluatorHelperSha256: digest,
+    publicPackageReceipt: {
+      schema: 'p30.r012a.public-package-receipt.v1',
+      protocolID: PROTOCOL_ID,
+      packages: aliases.map((alias) => ({
+        alias,
+        packageArchiveSha256: digest,
+        packageArchiveBytes: 1,
+        materializedPackageTreeSha256: digest,
+        productionOutputTreeSha256: digest,
+        criticInterfaceSha256: digest
+      }))
+    }
+  };
+  Object.defineProperty(document, 'blindOrderManifest', { value: order, enumerable: false });
+  Object.defineProperty(document, 'custodyBindings', { value: custodyBindings, enumerable: false });
+  return document;
+}
+
+test('alias-only score is exact, two-candidate, alias-only, one-cast, and domain committed', () => {
+  const fixture = aliasScoreFixture();
+  assert.doesNotThrow(() => validateAliasOnlyScore(
+    fixture, fixture.blindOrderManifest, fixture.blindOrderManifest.presentationCommit, fixture.custodyBindings
+  ));
+  assert.equal(ALIAS_SCORE_COMMIT_DOMAIN, 'P30R012A/alias-score/v1');
+  assert.match(aliasScoreCommit(
+    fixture, Buffer.alloc(32, 0x66), fixture.blindOrderManifest,
+    fixture.blindOrderManifest.presentationCommit, fixture.custodyBindings
+  ), /^[0-9a-f]{64}$/u);
+  const hidden = structuredClone(fixture);
+  hidden.candidates[0].identity = 'forbidden';
+  assert.throws(
+    () => validateAliasOnlyScore(
+      hidden, fixture.blindOrderManifest, fixture.blindOrderManifest.presentationCommit, fixture.custodyBindings
+    ),
+    (error) => evaluatorCode(error, 'ALIAS_SCORE_CANDIDATE_SHAPE_MISMATCH')
+  );
+  const wrongToken = structuredClone(fixture);
+  wrongToken.candidates[0].referenceBallots[0].rightToken = fixture.candidates[1].alias;
+  assert.throws(
+    () => validateAliasOnlyScore(
+      wrongToken, fixture.blindOrderManifest, fixture.blindOrderManifest.presentationCommit, fixture.custodyBindings
+    ),
+    (error) => evaluatorCode(error, 'INVALID_REFERENCE_BALLOT_TOKEN')
+  );
+});
+
+function evidenceManifestFixture() {
+  const aliases = ['candidate-1111111111111111', 'candidate-eeeeeeeeeeeeeeee'];
+  const traceIDs = [
+    'MOUSE2_TAP_COLD_1', 'MOUSE2_TAP_COLD_2', 'MOUSE2_TAP_RESET', 'KEYK_TAP',
+    'MOUSE2_HELD', 'NO_HEAVY', 'LIGHT_BASELINE', 'SHIFT_PLUS_7', 'CAPTURE_UNARMED',
+    'HIT_OFFSET_0', 'HIT_OFFSET_1', 'HIT_OFFSET_2', 'MISS_OFFSET_POSITIVE', 'MISS_OFFSET_NEGATIVE'
+  ];
+  const digest = 'b'.repeat(64);
+  const captureRuns = aliases.flatMap((alias) => traceIDs.map((traceID) => ({
+    alias,
+    runProfileID: `${alias}-${traceID}`,
+    traceID,
+    inputTraceDigest: digest,
+    terminalTick: traceID === 'SHIFT_PLUS_7' ? 87 : 80
+  })));
+  const artifacts = [];
+  let serial = 0;
+  const add = (run, kind, ticks) => {
+    const heavyEdge = run.traceID === 'SHIFT_PLUS_7' ? 31 : ['NO_HEAVY', 'LIGHT_BASELINE'].includes(run.traceID) ? null : 24;
+    artifacts.push({
+      path: `${run.alias}/${run.traceID}/${String(serial += 1).padStart(4, '0')}-${kind}.bin`,
+      kind,
+      byteCount: 1,
+      sha256: digest,
+      alias: run.alias,
+      packageArchiveSha256: digest,
+      productionOutputTreeSha256: digest,
+      route: '/game',
+      runProfileID: run.runProfileID,
+      absoluteTicks: ticks,
+      heavyRelativeTicks: ticks.map((tick) => heavyEdge === null || tick < heavyEdge ? null : tick - heavyEdge),
+      stateDigest: digest,
+      cameraDigest: digest,
+      inputTraceDigest: digest,
+      evaluatorHelperDigest: digest,
+      browser: 'Chromium 140',
+      gpu: 'Apple M-series',
+      captureTimestamp: '2026-08-03T00:00:00.000Z',
+      sourceArtifactSha256s: [],
+      derivation: 'Evaluator-owned exact production evidence.',
+      custody: 'public'
+    });
+  };
+  for (const run of captureRuns) {
+    for (const kind of ['state-log', 'event-log', 'geometry-log', 'frame-evidence', 'run-receipt']) add(run, kind, [0]);
+    if (['MOUSE2_TAP_COLD_1', 'MOUSE2_TAP_COLD_2', 'MOUSE2_TAP_RESET'].includes(run.traceID)) {
+      for (let tick = 20; tick <= 80; tick += 1) add(run, 'production-frame', [tick]);
+      for (const tick of [44, 46, 58]) add(run, 'focused-frame', [tick]);
+      for (const [first, last] of [[40, 46], [44, 48], [46, 76]]) {
+        add(run, 'full-frame-strip', Array.from({ length: last - first + 1 }, (_, index) => first + index));
+      }
+      add(run, 'contact-roi', [46]);
+      for (const tick of [44, 46, 58]) add(run, 'action-crop', [tick]);
+      add(run, 'lossless-frame-sequence', Array.from({ length: 81 }, (_, tick) => tick));
+    }
+  }
+  const order = buildBlindOrderManifest(Buffer.alloc(32, 0x11), aliases);
+  const document = {
+    schema: 'p30.r012a.evidence-manifest.v1',
+    protocolID: PROTOCOL_ID,
+    aliases,
+    evaluatorHelperSha256: digest,
+    blindOrderManifestSha256: order.manifestSha256,
+    captureRuns,
+    artifacts,
+    privateBoardHashes: order.ballots.map((ballot) => ({
+      boardID: ballot.itemID,
+      byteCount: 1600 * 900 * 4,
+      sha256: digest,
+      orderDigest: ballot.orderDigest,
+      leftSourceSha256: digest,
+      rightSourceSha256: digest,
+      compositorHelperSha256: digest
+    }))
+  };
+  Object.defineProperty(document, 'blindOrderManifest', { value: order, enumerable: false });
+  Object.defineProperty(document, 'publicPackageReceipt', {
+    value: {
+      schema: 'p30.r012a.public-package-receipt.v1',
+      protocolID: PROTOCOL_ID,
+      packages: aliases.map((alias) => ({
+        alias,
+        packageArchiveSha256: digest,
+        packageArchiveBytes: 1,
+        materializedPackageTreeSha256: digest,
+        productionOutputTreeSha256: digest,
+        criticInterfaceSha256: digest
+      }))
+    },
+    enumerable: false
+  });
+  return document;
+}
+
+test('evidence custody requires every trace, canonical tick 20-80 frames, strips, crops, ROI, sequence, and nine private board hashes', () => {
+  const fixture = evidenceManifestFixture();
+  assert.doesNotThrow(() => validateEvidenceManifest(
+    fixture, null, fixture.blindOrderManifest, fixture.blindOrderManifest.presentationCommit,
+    fixture.publicPackageReceipt
+  ));
+  const missing = structuredClone(fixture);
+  const index = missing.artifacts.findIndex((artifact) => artifact.kind === 'contact-roi');
+  missing.artifacts.splice(index, 1);
+  assert.throws(
+    () => validateEvidenceManifest(
+      missing, null, fixture.blindOrderManifest, fixture.blindOrderManifest.presentationCommit,
+      fixture.publicPackageReceipt
+    ),
+    (error) => evaluatorCode(error, 'EVIDENCE_CONTACT_ROI_MISSING')
+  );
+  const publicBoard = structuredClone(fixture);
+  publicBoard.artifacts.push({ ...publicBoard.artifacts[0], path: 'public/board.bin', kind: 'blind-board' });
+  assert.throws(
+    () => validateEvidenceManifest(
+      publicBoard, null, fixture.blindOrderManifest, fixture.blindOrderManifest.presentationCommit,
+      fixture.publicPackageReceipt
+    ),
+    (error) => evaluatorCode(error, 'EVIDENCE_BOARD_MUST_REMAIN_PRIVATE')
+  );
 });
