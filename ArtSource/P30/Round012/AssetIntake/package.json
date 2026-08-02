@@ -1,8 +1,11 @@
 {
   "name": "p30-r012-zombie-asset-intake",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": true,
   "type": "module",
+  "engines": {
+    "node": "24.x"
+  },
   "scripts": {
     "gate": "node tools/inspect-glb.mjs",
     "test": "node --test tools/*.test.mjs",

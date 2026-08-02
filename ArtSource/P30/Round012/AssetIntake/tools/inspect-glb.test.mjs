@@ -1,9 +1,11 @@
 import assert from "node:assert/strict";
-import { mkdtemp, writeFile } from "node:fs/promises";
+import { spawnSync } from "node:child_process";
+import { mkdtemp, readFile, writeFile } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import test from "node:test";
 
+import { sha256Hex } from "./artifact-authorization.mjs";
 import { inspectArtifact, measureGlb, parseGlb } from "./inspect-glb.mjs";
 
 function pad4(buffer, byte = 0) {
@@ -11,7 +13,7 @@ function pad4(buffer, byte = 0) {
   return padding ? Buffer.concat([buffer, Buffer.alloc(padding, byte)]) : buffer;
 }
 
-function fixtureGlb() {
+function fixtureGlb(generator = "Round012 deterministic fixture") {
   const positions = Buffer.alloc(36);
   [0, 0, 0, 1, 0, 0, 0, 1, 0].forEach((value, index) => positions.writeFloatLE(value, index * 4));
   const texcoords = Buffer.alloc(24);
@@ -22,7 +24,7 @@ function fixtureGlb() {
   const png = Buffer.from("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=", "base64");
   const bin = pad4(Buffer.concat([geometry, png]));
   const document = {
-    asset: { version: "2.0", generator: "Round012 deterministic fixture" },
+    asset: { version: "2.0", generator },
     scene: 0,
     scenes: [{ nodes: [0] }],
     nodes: [{ mesh: 0 }],
@@ -58,30 +60,21 @@ function fixtureGlb() {
   return Buffer.concat([header, jsonHeader, json, binHeader, bin]);
 }
 
-test("measures GLB triangles, materials, textures, animation, rig, and size", () => {
-  const bytes = fixtureGlb();
-  const metrics = measureGlb(bytes);
-  assert.equal(metrics.triangles, 1);
-  assert.equal(metrics.materials, 1);
-  assert.equal(metrics.textures, 1);
-  assert.deepEqual(metrics.images.map(({ width, height }) => [width, height]), [[1, 1]]);
-  assert.equal(metrics.animations.count, 0);
-  assert.equal(metrics.rig.skins, 0);
-  assert.equal(metrics.rig.uniqueJoints, 0);
-  assert.equal(metrics.fileSizeBytes, bytes.length);
-  assert.match(metrics.sha256, /^[0-9a-f]{64}$/u);
-});
-
-test("rejects malformed GLB bytes before measuring", () => {
-  assert.throws(() => parseGlb(Buffer.alloc(20)), /magic/u);
-});
-
-test("runs official glTF validation and glTF Transform deterministically", async () => {
-  const directory = await mkdtemp(path.join(os.tmpdir(), "p30-r012-glb-"));
-  const assetPath = path.join(directory, "fixture.glb");
-  await writeFile(assetPath, fixtureGlb());
-  const policy = {
+function fixturePolicy() {
+  return {
+    candidateUid: "31ca8d86b4074312a51170d8e7dbe07c",
     format: "glb",
+    authorization: {
+      required: true,
+      bindingPath: "AUTHORIZED_ARTIFACT.json",
+      bindingSha256: null,
+      bindingSchema: "p30.r012.authorized-artifact-binding.v1",
+      acquisitionReceiptSchema: "p30.r012.acquisition-receipt.v1",
+      licenseId: "CC-BY-4.0",
+      licenseRecordUrl: "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+      sourceEndpoint: "https://api.sketchfab.com/v3/models/31ca8d86b4074312a51170d8e7dbe07c/download",
+      allowedAuthorizationMethods: ["sketchfab-authenticated-download-api"]
+    },
     maxFileSizeBytes: 1048576,
     triangles: { min: 1, max: 1 },
     materials: { min: 1, max: 1 },
@@ -108,9 +101,158 @@ test("runs official glTF validation and glTF Transform deterministically", async
       gltfTransformVersion: "4.4.2"
     }
   };
-  const report = await inspectArtifact(assetPath, policy);
+}
+
+function jsonBytes(value) {
+  return Buffer.from(`${JSON.stringify(value, null, 2)}\n`, "utf8");
+}
+
+async function writeAuthorizationChain(directory, artifactBytes, policy) {
+  const sourceRecordBytes = jsonBytes({
+    schema: "synthetic.first-party-download-record.v1",
+    candidateUid: policy.candidateUid,
+    endpoint: policy.authorization.sourceEndpoint
+  });
+  const sourceRecordSha256 = sha256Hex(sourceRecordBytes);
+  const artifactSha256 = sha256Hex(artifactBytes);
+  const receiptBytes = jsonBytes({
+    schema: policy.authorization.acquisitionReceiptSchema,
+    authorizationGranted: true,
+    candidateUid: policy.candidateUid,
+    artifact: {
+      sha256: artifactSha256,
+      byteLength: artifactBytes.length
+    },
+    licenseId: policy.authorization.licenseId,
+    source: {
+      endpoint: policy.authorization.sourceEndpoint,
+      recordSha256: sourceRecordSha256
+    },
+    authorizationMethod: "sketchfab-authenticated-download-api"
+  });
+  const bindingBytes = jsonBytes({
+    schema: policy.authorization.bindingSchema,
+    candidateUid: policy.candidateUid,
+    artifact: {
+      format: "glb",
+      sha256: artifactSha256,
+      byteLength: artifactBytes.length
+    },
+    license: {
+      id: policy.authorization.licenseId,
+      recordUrl: policy.authorization.licenseRecordUrl
+    },
+    source: {
+      endpoint: policy.authorization.sourceEndpoint,
+      recordPath: "source-record.json",
+      recordSha256: sourceRecordSha256
+    },
+    acquisition: {
+      authorizationMethod: "sketchfab-authenticated-download-api",
+      receiptPath: "acquisition-receipt.json",
+      receiptSha256: sha256Hex(receiptBytes)
+    }
+  });
+  await Promise.all([
+    writeFile(path.join(directory, "source-record.json"), sourceRecordBytes),
+    writeFile(path.join(directory, "acquisition-receipt.json"), receiptBytes),
+    writeFile(path.join(directory, "AUTHORIZED_ARTIFACT.json"), bindingBytes)
+  ]);
+  policy.authorization.bindingSha256 = sha256Hex(bindingBytes);
+}
+
+test("measures GLB triangles, materials, textures, animation, rig, and size", () => {
+  const bytes = fixtureGlb();
+  const metrics = measureGlb(bytes);
+  assert.equal(metrics.triangles, 1);
+  assert.equal(metrics.materials, 1);
+  assert.equal(metrics.textures, 1);
+  assert.deepEqual(metrics.images.map(({ width, height }) => [width, height]), [[1, 1]]);
+  assert.equal(metrics.animations.count, 0);
+  assert.equal(metrics.rig.skins, 0);
+  assert.equal(metrics.rig.uniqueJoints, 0);
+  assert.equal(metrics.fileSizeBytes, bytes.length);
+  assert.match(metrics.sha256, /^[0-9a-f]{64}$/u);
+});
+
+test("rejects malformed GLB bytes before measuring", () => {
+  assert.throws(() => parseGlb(Buffer.alloc(20)), /magic/u);
+});
+
+test("unrelated technically valid GLB rejects before technical evaluation without a pinned binding", async () => {
+  const directory = await mkdtemp(path.join(os.tmpdir(), "p30-r012-glb-"));
+  const assetPath = path.join(directory, "fixture.glb");
+  await writeFile(assetPath, fixtureGlb());
+  const report = await inspectArtifact(assetPath, fixturePolicy(), { policyDirectory: directory });
+  assert.equal(report.decision, "reject");
+  assert.equal(report.stage, "authorization");
+  assert.equal(report.authorization.code, "AUTHORIZATION_BINDING_UNSET");
+  assert.equal(report.evaluation.status, "not-run");
+  assert.equal(report.metrics, null);
+});
+
+test("missing binding rejects even when policy pins an expected binding hash", async () => {
+  const directory = await mkdtemp(path.join(os.tmpdir(), "p30-r012-glb-"));
+  const assetPath = path.join(directory, "fixture.glb");
+  await writeFile(assetPath, fixtureGlb());
+  const policy = fixturePolicy();
+  policy.authorization.bindingSha256 = "a".repeat(64);
+  const report = await inspectArtifact(assetPath, policy, { policyDirectory: directory });
+  assert.equal(report.decision, "reject");
+  assert.equal(report.authorization.code, "AUTHORIZATION_BINDING_MISSING");
+  assert.equal(report.evaluation.status, "not-run");
+});
+
+test("artifact hash mismatch rejects a different technically valid GLB", async () => {
+  const directory = await mkdtemp(path.join(os.tmpdir(), "p30-r012-glb-"));
+  const authorizedBytes = fixtureGlb("Round012 authorized fixture");
+  const unrelatedBytes = fixtureGlb("Round012 unrelated fixture");
+  const unrelatedPath = path.join(directory, "unrelated.glb");
+  await writeFile(unrelatedPath, unrelatedBytes);
+  const policy = fixturePolicy();
+  await writeAuthorizationChain(directory, authorizedBytes, policy);
+  const report = await inspectArtifact(unrelatedPath, policy, { policyDirectory: directory });
+  assert.equal(report.decision, "reject");
+  assert.equal(report.authorization.code, "ARTIFACT_HASH_MISMATCH");
+  assert.equal(report.evaluation.status, "not-run");
+});
+
+test("correctly bound synthetic fixture reaches technical evaluation", async () => {
+  const directory = await mkdtemp(path.join(os.tmpdir(), "p30-r012-glb-"));
+  const bytes = fixtureGlb("Round012 authorized fixture");
+  const assetPath = path.join(directory, "authorized.glb");
+  await writeFile(assetPath, bytes);
+  const policy = fixturePolicy();
+  await writeAuthorizationChain(directory, bytes, policy);
+  const report = await inspectArtifact(assetPath, policy, { policyDirectory: directory });
+  assert.equal(report.authorization.code, "AUTHORIZED_ARTIFACT_BOUND");
+  assert.equal(report.stage, "technical");
+  assert.equal(report.evaluation.status, "evaluated");
   assert.equal(report.validation.errors, 0, JSON.stringify(report.validation.messages));
   assert.equal(report.gltfTransform.validateExitCode, 0);
   assert.equal(report.gltfTransform.inspectExitCode, 0);
   assert.equal(report.decision, "admit");
+});
+
+test("checked-in rejected candidate remains unbound", async () => {
+  const directory = path.resolve(import.meta.dirname, "..");
+  const policy = JSON.parse(await readFile(path.join(directory, "INTAKE_POLICY.json"), "utf8"));
+  assert.equal(policy.authorization.required, true);
+  assert.equal(policy.authorization.bindingSha256, null);
+  const artifactDirectory = await mkdtemp(path.join(os.tmpdir(), "p30-r012-glb-"));
+  const assetPath = path.join(artifactDirectory, "fixture.glb");
+  await writeFile(assetPath, fixtureGlb());
+  const report = await inspectArtifact(assetPath, policy, { policyDirectory: directory });
+  assert.equal(report.decision, "reject");
+  assert.equal(report.authorization.code, "AUTHORIZATION_BINDING_UNSET");
+  assert.equal(report.evaluation.status, "not-run");
+
+  const cli = spawnSync(process.execPath, [path.join(directory, "tools/inspect-glb.mjs"), assetPath], {
+    cwd: directory,
+    encoding: "utf8"
+  });
+  assert.equal(cli.status, 2, cli.stderr);
+  const cliReport = JSON.parse(cli.stdout);
+  assert.equal(cliReport.authorization.code, "AUTHORIZATION_BINDING_UNSET");
+  assert.equal(cliReport.evaluation.status, "not-run");
 });

@@ -2,11 +2,14 @@
 
 import { createHash } from "node:crypto";
 import { spawnSync } from "node:child_process";
-import { readFile } from "node:fs/promises";
+import { mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { createRequire } from "node:module";
+import os from "node:os";
 import path from "node:path";
 import process from "node:process";
 import { fileURLToPath } from "node:url";
+
+import { verifyArtifactAuthorization } from "./artifact-authorization.mjs";
 
 const require = createRequire(import.meta.url);
 const gltfValidator = require("gltf-validator");
@@ -272,25 +275,61 @@ export function evaluatePolicy(metrics, validation, transform, policy) {
   return { checks, passed: checks.every((check) => check.passed) };
 }
 
-function runGltfTransform(assetPath) {
+async function runGltfTransform(bytes) {
   const directory = path.dirname(fileURLToPath(import.meta.url));
   const executable = path.resolve(directory, "../node_modules/.bin/gltf-transform");
-  const version = spawnSync(executable, ["--version"], { encoding: "utf8" });
-  const validate = spawnSync(executable, ["validate", assetPath, "--format", "csv"], { encoding: "utf8" });
-  const inspect = spawnSync(executable, ["inspect", assetPath, "--format", "md"], { encoding: "utf8" });
-  return {
-    version: version.status === 0 ? version.stdout.trim() : null,
-    validateExitCode: validate.status,
-    validateOutputSha256: sha256(Buffer.from(validate.stdout ?? "")),
-    validateStderr: (validate.stderr ?? "").trim() || null,
-    inspectExitCode: inspect.status,
-    inspectOutputSha256: sha256(Buffer.from(inspect.stdout ?? "")),
-    inspectStderr: (inspect.stderr ?? "").trim() || null
-  };
+  const snapshotDirectory = await mkdtemp(path.join(os.tmpdir(), "p30-r012-gltf-transform-"));
+  const snapshotPath = path.join(snapshotDirectory, "authorized-artifact.glb");
+  await writeFile(snapshotPath, bytes, { flag: "wx" });
+  const normalize = (value) => (value ?? "").replaceAll(snapshotPath, "authorized-artifact.glb").replaceAll(snapshotDirectory, "<temporary-directory>");
+  try {
+    const version = spawnSync(executable, ["--version"], { encoding: "utf8" });
+    const validate = spawnSync(executable, ["validate", snapshotPath, "--format", "csv"], { encoding: "utf8" });
+    const inspect = spawnSync(executable, ["inspect", snapshotPath, "--format", "md"], { encoding: "utf8" });
+    const validateStdout = normalize(validate.stdout);
+    const inspectStdout = normalize(inspect.stdout);
+    return {
+      version: version.status === 0 ? version.stdout.trim() : null,
+      validateExitCode: validate.status,
+      validateOutputSha256: sha256(Buffer.from(validateStdout)),
+      validateStderr: normalize(validate.stderr).trim() || null,
+      inspectExitCode: inspect.status,
+      inspectOutputSha256: sha256(Buffer.from(inspectStdout)),
+      inspectStderr: normalize(inspect.stderr).trim() || null
+    };
+  } finally {
+    await rm(snapshotDirectory, { recursive: true, force: true });
+  }
 }
 
-export async function inspectArtifact(assetPath, policy) {
+export async function inspectArtifact(assetPath, policy, options = {}) {
   const bytes = await readFile(assetPath);
+  const directory = path.dirname(fileURLToPath(import.meta.url));
+  const policyDirectory = options.policyDirectory ?? path.resolve(directory, "..");
+  const authorization = await verifyArtifactAuthorization({
+    artifactBytes: bytes,
+    policy,
+    policyDirectory
+  });
+  if (!authorization.passed) {
+    return {
+      schema: "p30.r012.glb-intake-report.v2",
+      fileName: path.basename(assetPath),
+      decision: "reject",
+      stage: "authorization",
+      authorization,
+      metrics: null,
+      validation: null,
+      gltfTransform: null,
+      evaluation: {
+        status: "not-run",
+        reason: "Technical evaluation is forbidden until exact authorized artifact bytes are bound.",
+        passed: false,
+        checks: []
+      }
+    };
+  }
+
   const metrics = measureGlb(bytes);
   const report = await gltfValidator.validateBytes(new Uint8Array(bytes), {
     uri: path.basename(assetPath),
@@ -306,11 +345,14 @@ export async function inspectArtifact(assetPath, policy) {
     hints: report.issues.numHints,
     messages: report.issues.messages
   };
-  const transform = runGltfTransform(assetPath);
-  const evaluation = evaluatePolicy(metrics, validation, transform, policy);
+  const transform = await runGltfTransform(bytes);
+  const technicalEvaluation = evaluatePolicy(metrics, validation, transform, policy);
+  const evaluation = { status: "evaluated", ...technicalEvaluation };
   return {
-    schema: "p30.r012.glb-intake-report.v1",
+    schema: "p30.r012.glb-intake-report.v2",
     fileName: path.basename(assetPath),
+    stage: "technical",
+    authorization,
     decision: evaluation.passed ? "admit" : "reject",
     metrics,
     validation,
@@ -328,7 +370,9 @@ async function main() {
   }
   const directory = path.dirname(fileURLToPath(import.meta.url));
   const policy = JSON.parse(await readFile(path.resolve(directory, "../INTAKE_POLICY.json"), "utf8"));
-  const report = await inspectArtifact(path.resolve(assetPath), policy);
+  const report = await inspectArtifact(path.resolve(assetPath), policy, {
+    policyDirectory: path.resolve(directory, "..")
+  });
   process.stdout.write(`${JSON.stringify(report, null, 2)}\n`);
   process.exitCode = report.decision === "admit" ? 0 : 2;
 }

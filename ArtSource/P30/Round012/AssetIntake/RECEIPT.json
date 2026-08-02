@@ -16,16 +16,36 @@
     "sourceAcquired": false,
     "generatedGlbAcquired": false
   },
+  "authorizationBoundary": {
+    "required": true,
+    "bindingPath": "AUTHORIZED_ARTIFACT.json",
+    "bindingSchema": "p30.r012.authorized-artifact-binding.v1",
+    "acquisitionReceiptSchema": "p30.r012.acquisition-receipt.v1",
+    "policyBindingSha256": null,
+    "bindingPresent": false,
+    "candidateUid": "31ca8d86b4074312a51170d8e7dbe07c",
+    "licenseId": "CC-BY-4.0",
+    "sourceEndpoint": "https://api.sketchfab.com/v3/models/31ca8d86b4074312a51170d8e7dbe07c/download",
+    "allowedAuthorizationMethods": [
+      "sketchfab-authenticated-download-api"
+    ],
+    "exactArtifactSha256": null,
+    "exactArtifactByteLength": null,
+    "sourceRecordSha256": null,
+    "acquisitionReceiptSha256": null,
+    "technicalEvaluationReachable": false
+  },
   "rejectionCodes": [
+    "AUTHORIZED_ARTIFACT_BINDING_ABSENT",
     "AUTHORITATIVE_SOURCE_NOT_RIGGED",
     "AUTHORITATIVE_SOURCE_NOT_ORIGINAL_GLB",
     "AUTHORITATIVE_SOURCE_PBR_CLAIMS_UNSUBSTANTIATED",
     "AUTHORIZED_DOWNLOAD_UNAVAILABLE"
   ],
-  "rejectionSummary": "License passes, but first-party artifact metadata proves the uploaded source is a static OBJ/MTL plus one 2K PNG, while official download requires authentication. No artifact bytes were admitted.",
+  "rejectionSummary": "License passes, but first-party artifact metadata proves the uploaded source is a static OBJ/MTL plus one 2K PNG, official download requires authentication, and no authorized-artifact binding exists. No artifact bytes were admitted and technical evaluation is unreachable.",
   "targetArtifactValidation": {
     "status": "not-run",
-    "reason": "No source artifact was available through an authorized download path; validating viewer payloads or substitute bytes would break provenance.",
+    "reason": "No source artifact or policy-pinned authorized-artifact binding was available; arbitrary, viewer-derived, or substitute bytes are rejected before technical evaluation.",
     "gltfValidator": {
       "version": "2.0.0-dev.3.10",
       "errors": null,
@@ -64,19 +84,25 @@
     "morphTargets": 0
   },
   "acquisitionReady": {
-    "command": "npm run gate -- /absolute/path/to/official-zombie-3d.glb",
+    "command": "env PATH=/opt/homebrew/opt/node@24/bin:$PATH npm run gate -- /absolute/path/to/official-zombie-3d.glb",
     "policy": "INTAKE_POLICY.json",
-    "note": "Any creator-supplied rigged FBX/GLB is a new artifact and requires new license-to-bytes provenance."
+    "binding": "AUTHORIZED_ARTIFACT.json (currently absent; exact file SHA-256 must be pinned in policy after review)",
+    "note": "An authenticated acquisition must supply a hashed source record and acquisition receipt cross-bound to the exact artifact bytes. Any creator-supplied rigged FBX/GLB is a new artifact and requires new license-to-bytes provenance."
   },
   "deterministicEvidence": {
     "files": {
       "ATTRIBUTION.md": "bedbbabcf7ac69505c7466d07fe990e1ea220a566dc2c71f291a88c6a4ea96db",
-      "INTAKE_POLICY.json": "08404970a43485eac30d74120ddb5073b0a0f4f164739617cca6aca2fa4020ad",
+      "INTAKE_POLICY.json": "7dd03dc1a6dc457ed839ea5f5d8c62689676829f3886c6e29bdde217236b1a65",
       "LICENSE.md": "9113469618d055d813ec2f07eb838f1d13c7f4bc25970c92b1c55e20789003f6",
       "PROVENANCE.json": "e50fa69d494a8e68606dfa6403a2744e78732ba0267225ec1b45c6d73d9c1c8b",
-      "tools/inspect-glb.mjs": "82aa9f0e93cbebf7046882a15a1d2ced5b9a531df89091ca70e4b54135ff531f"
+      "README.md": "47186c6594c89539667596a756b29e21feedf528a280a2c2dddbabeb5361e9db",
+      "package-lock.json": "4cc45253a021f72daf180489028738da849c36834b709e43f3cec604013c3916",
+      "tools/artifact-authorization.mjs": "59a1f9c2edc011fceb19fa9a37f6debb4536e8456bbef84ff0a3ac307d4181e2",
+      "tools/inspect-glb.mjs": "cb12b2295ffbd5deb1114d7d800e5c7ce06b5228e7228a8f51ac8c6cc920afb5",
+      "tools/inspect-glb.test.mjs": "fd2cd7fd5f0100a862d14da8d1211cc015b64259ba775292bade02941d26d66b",
+      "tools/verify-receipt.mjs": "1290c01fcaadfbad4059b0c551f3bfa064165c0187dd245eaeed1a3dbb43741e"
     },
-    "verificationCommand": "npm ci && npm run verify"
+    "verificationCommand": "env PATH=/opt/homebrew/opt/node@24/bin:$PATH npm ci && env PATH=/opt/homebrew/opt/node@24/bin:$PATH npm run verify"
   },
   "biggestRemainingAssetGap": "A source-verifiable, redistributable, high-detail zombie GLB with a production humanoid rig and real PBR texture set remains missing."
 }
