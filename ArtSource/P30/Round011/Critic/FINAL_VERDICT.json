@@ -1,0 +1,33 @@
+{
+  "schema": "p30.r011.final-verdict.v1",
+  "protocolID": "P30-R011-BLIND-v1",
+  "identityRevealReceived": true,
+  "roundVerdict": "NO ACCEPTED CANDIDATE",
+  "roundVoid": false,
+  "reason": "Both aliases fail the sealed visual/objective/technical conjunction; final T1 and T8 also fail closed because the immutable score record mislabels non-package evidence-tree hashes as package-tree hashes.",
+  "candidates": [
+    {
+      "alias": "candidate-8202fa2c3374062a",
+      "builderIdentity": "BuilderA",
+      "branch": "codex/p30-r011-contact-builder",
+      "commit": "855da599f2308ebf920312f743da9164a7778b4a",
+      "finalT1": false,
+      "finalAcceptance": false
+    },
+    {
+      "alias": "candidate-9442539eea8abc4c",
+      "builderIdentity": "BuilderB",
+      "branch": "codex/p30-r011-contact-calibration",
+      "commit": "ed207126794c9d637cbffe101816561deaeda57f",
+      "finalT1": false,
+      "finalAcceptance": false
+    }
+  ],
+  "selectedStrongerRejectedCheckpoint": {
+    "alias": "candidate-9442539eea8abc4c",
+    "builderIdentity": "BuilderB",
+    "branch": "codex/p30-r011-contact-calibration",
+    "commit": "ed207126794c9d637cbffe101816561deaeda57f",
+    "basis": "sealed focused wins 3 versus 0, overall wins 1 versus 0, and total 41 versus 34"
+  }
+}
