@@ -1,0 +1,173 @@
+{
+  "schema": "p30.round007.independent-blind-critic-result.v1",
+  "completedAtUtc": "2026-08-02T03:08:09Z",
+  "reviewRole": "fresh_independent_brutally_comparative_critic",
+  "candidate": {
+    "commit": "6b953f563c68a81f4635aaa081bfeb664f3aee57",
+    "verdict": "REJECT",
+    "accepted": false,
+    "acceptanceClaimed": false,
+    "qualityScore": 34,
+    "scoreOutOf": 100,
+    "scoreBasis": "Mean candidate-side total across six sealed anonymous comparisons. The candidate was the losing side in all six."
+  },
+  "blindProtocol": {
+    "pairCount": 6,
+    "randomizedAnonymousAB": true,
+    "balancedCandidateSides": true,
+    "candidateSideCounts": { "A": 3, "B": 3 },
+    "mappingSealedBeforeScoring": true,
+    "scoresSealedBeforeReveal": true,
+    "mappingLockSha256": "1d97a0a72da6672e43e822eba8433339cfff58300ebd00ea7a000f9a3ee2b4d1",
+    "mappingSealCommit": "9121d6ddc37cd323b0ca7801e62078cdb29ab077",
+    "anonymousScoreLockSha256": "15a37e8e07bc72a98e2083132bc8b7c9a692540699f426550fd890e8d22272b4",
+    "scoreSealCommit": "e07a4e61b62d82c4c7b91ed595e740852ae384da",
+    "revealAttestationSha256": "c3a7b7fcef7ddba73448d3108601d62817d8027855bb3970dd474b077b1d1670",
+    "mappingPreimageRecomputedAtReveal": true,
+    "anonymousAggregate": {
+      "winnerCounts": { "A": 3, "B": 3 },
+      "meanTotalA": 62.5,
+      "meanTotalB": 55,
+      "meanWinningTotal": 83.5,
+      "meanLosingTotal": 34
+    },
+    "privateScorePreimageRecomputedBeforeDeletion": true,
+    "privateMaterialPersisted": false,
+    "sideMappingPublished": false
+  },
+  "blindResult": {
+    "overall": {
+      "candidateWins": 0,
+      "candidateLosses": 6,
+      "result": "0/6",
+      "required": ">=5/6",
+      "passed": false
+    },
+    "focusedS03ToS05": {
+      "candidateWins": 0,
+      "candidateLosses": 3,
+      "result": "0/3",
+      "required": "3/3",
+      "passed": false
+    },
+    "scenarioTotals": [
+      { "scenario": "S01", "candidate": 34, "matchedReference": 75, "candidateWon": false },
+      { "scenario": "S02", "candidate": 36, "matchedReference": 75, "candidateWon": false },
+      { "scenario": "S03", "candidate": 36, "matchedReference": 89, "candidateWon": false },
+      { "scenario": "S04", "candidate": 37, "matchedReference": 83, "candidateWon": false },
+      { "scenario": "S05", "candidate": 38, "matchedReference": 90, "candidateWon": false },
+      { "scenario": "S06", "candidate": 23, "matchedReference": 89, "candidateWon": false }
+    ],
+    "candidateMean": 34,
+    "matchedReferenceMean": 83.5,
+    "categoryMeans": {
+      "scorePrecision": "rounded to two decimal places after averaging six whole-point scores",
+      "camera_and_composition": 4.5,
+      "character_scale_and_silhouette": 5.33,
+      "anatomy_and_pose_credibility": 3,
+      "materials_and_surface_detail": 3,
+      "lighting_and_tonal_separation": 3.83,
+      "environment_depth_and_world_density": 3.83,
+      "combat_contact_and_impact": 2.83,
+      "motion_fx_and_readability": 2,
+      "cinematic_cohesion_and_atmosphere": 2.83,
+      "overall_finish_and_artifact_control": 2.83
+    },
+    "categoriesAtLeastNine": 0,
+    "categoryCount": 10,
+    "eachCategoryRequired": ">=9/10",
+    "categoryGatePassed": false
+  },
+  "hardVisualGates": {
+    "focusedCandidateWins3Of3": false,
+    "overallCandidateWinsAtLeast5Of6": false,
+    "qualityScoreAtLeast95": false,
+    "everyCategoryAtLeast9": false,
+    "allPassed": false
+  },
+  "captureContract": {
+    "status": "PASS",
+    "freshCandidateCaptures": true,
+    "headedHardwareBrowser": true,
+    "browser": "Google Chrome 150.0.7871.187",
+    "webgl": "WebGL 2.0",
+    "gpu": "ANGLE Metal Renderer: Apple M2",
+    "viewportCss": [1600, 900],
+    "canvasCss": [1600, 900],
+    "canvasBacking": [1600, 900],
+    "devicePixelRatio": 1,
+    "pngContract": "All six are 1600x900 8-bit RGB non-interlaced PNGs without text or EXIF chunks.",
+    "captures": [
+      { "scenario": "S01", "tick": 120, "file": "S01.png", "sha256": "fb6ac5c71e6e3d54ef32e27ee300afc59cdb96621fb5fa26993cea8ec261a11f" },
+      { "scenario": "S02", "tick": 23, "file": "S02.png", "sha256": "3e2144458d0e0b72674a925f54a4b67a162a0df9e3fa82e29866b2b53db34b2d" },
+      { "scenario": "S03", "tick": 29, "file": "S03.png", "sha256": "5c8398ae257f73e779d60c26d0e3c07399b9f82e77067f4bf4cd111544c598e1" },
+      { "scenario": "S04", "tick": 34, "file": "S04.png", "sha256": "abfcd5e7986a9703bfd17f91246f5b200fb9e54a52dc8f38749575df7d5260fd" },
+      { "scenario": "S05", "tick": 41, "file": "S05.png", "sha256": "fbbaffd91498e4f01a12386dabe99dee6e27122426dbcec40692af74edcc7f60" },
+      { "scenario": "S06", "tick": 37, "file": "S06.png", "sha256": "eea4452b4e26fb885954ad5f303a70602945e28bae3b195eeb0c29886877b7db" }
+    ]
+  },
+  "technicalSummary": {
+    "candidateRuntimeTechnicalStatus": "PASS",
+    "repositoryWideLfsHistoryStatus": "FAIL",
+    "exactCommit": "PASS",
+    "runtimeAssets18Of18RealBytesNoFallback": "PASS",
+    "round006Freeze106EntriesOnlyThreeAuthorizedChanges": "PASS",
+    "node24CleanInstallTypecheckLintSimulationCameraBuild": "PASS",
+    "browserSmoke3Of3": "PASS",
+    "headedCaptureSurfaceWebgl2Metal": "PASS",
+    "coldReadyMaximum2599Point002Ms": "PASS",
+    "resourceCaps": "PASS",
+    "thirtySecondRuntimeStability": "PASS",
+    "webglLossRestore": "PASS",
+    "cameraReplayThreeRunsFourTicksByteIdentical": "PASS",
+    "focusedFraming": "PASS",
+    "cameraWallAndClearBoom": "PASS",
+    "repositoryGitLfsFsckHead": "FAIL: eight historical direct PNG blobs violate current pointer policy; runtime asset bytes and LFS oids pass; history was not rewritten"
+  },
+  "singleBiggestRemainingVisibleGap": {
+    "name": "combat FX language",
+    "evidence": "The motion-FX category is the lowest at 2/10. The screen-sized translucent sweep fan, grid-like blade trail, block-shaped sparks, and detached hit feedback read as debug overlays rather than blade-bound energy and contact-local force."
+  },
+  "round008Prescription": {
+    "name": "isolated deterministic combat-FX replacement",
+    "scope": [
+      "Replace only the weapon-trail FX surface inside web-game/src/render/objects/CharacterViews.ts.",
+      "Replace only web-game/src/render/objects/CombatFx.ts and add focused deterministic FX tests/telemetry."
+    ],
+    "requiredBehavior": [
+      "Use a narrow blade-edge ribbon derived from deterministic blade poses; remove the screen-sized translucent fan and grid.",
+      "At S04, emit one contact-local flash and directional spark/ember burst centered within 24 pixels of the contact marker; remove block-shaped debris.",
+      "The contact burst must be absent at S03, peak at S04, and dissipate by S05 without obscuring either actor or the full blade.",
+      "Add no texture slot because the current capture already reaches the 32-texture cap; keep FX procedural and within existing geometry/call caps.",
+      "Three clean FX-telemetry replays must be byte-identical at ticks 29, 34, and 41."
+    ],
+    "frozenOutsideScope": "Camera, simulation, timing, input, character meshes and clips, weapon mesh, materials, environment, lighting, HUD, post-processing, asset manifest, and all non-FX code remain byte-exact.",
+    "acceptance": "Repeat the same sealed six-pair protocol. S03-S05 must win 3/3, overall must win at least 5/6, total must be at least 95/100, every category must be at least 9/10, and all current technical caps must still pass."
+  },
+  "privacy": {
+    "status": "PASS",
+    "sourcePixelsPublished": false,
+    "sourceFilenamesOrIdentitiesPublished": false,
+    "sourceHashesPublished": false,
+    "sourceCropsPublished": false,
+    "pairPixelsPublished": false,
+    "pairHashesPublished": false,
+    "sideMappingPublished": false,
+    "mappingOrScorePreimagesPublished": false,
+    "randomizationMaterialPublished": false,
+    "privatePathsPublished": false,
+    "privateExtractionDeleted": true,
+    "privatePairsDeleted": true,
+    "privateMappingDeleted": true,
+    "privateScorePreimageDeleted": true,
+    "temporaryServersStopped": true
+  },
+  "evidenceHashes": {
+    "mapping-seal.json": "ccb81194fb15ba6b1d731e53080082fdf4a5d42b556a8ca0a3db51b30bad56e4",
+    "score-seal.json": "82d1fea23978df3dfbf99343ed267f0c58c4586c18ed16f030660ad13f0dbf48",
+    "verification.json": "84e4e6e765c4064b047580db79ad8733c9fab2e7095fc377d9921730d1126b19",
+    "technical-receipt.json": "089d80bdca4b586354edec3b33500fb2ce62c57d00c550296d781fcb0463d2b9",
+    "obstruction-evidence.json": "7cbc0891cfa1e2b34bfd245bbbcfa24af7405ee08cc3d79bb8ba4d168ec0b30d",
+    "capture-script": "679b3df75e4ec6b3b952c44c5e9829aee92d8e09e63d40fed552221d1e927601"
+  }
+}
