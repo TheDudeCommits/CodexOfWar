@@ -1,0 +1,97 @@
+{
+  "schema": "p30.round007.camera-selection.v1",
+  "date": "2026-08-02",
+  "candidateOnly": true,
+  "acceptanceClaimed": false,
+  "visualAcceptanceClaimed": false,
+  "exactBuilderBaseline": "d95a0904151de6217838fcf6b69d3aba81e125ca",
+  "selected": {
+    "builder": "B",
+    "branch": "codex/r007-camera-builder-b",
+    "commit": "2bfd0a4c86f57378f41107ea205c3ef014a17e22",
+    "camera": "Deterministic adaptive 50-degree duel composer",
+    "captureSha256": {
+      "S03": "5c8398ae257f73e779d60c26d0e3c07399b9f82e77067f4bf4cd111544c598e1",
+      "S04": "abfcd5e7986a9703bfd17f91246f5b200fb9e54a52dc8f38749575df7d5260fd",
+      "S05": "56a4efecbe0a57e192d8026bdc2f589191ba7c3022f3073f6e3f79a9c1af28f7"
+    },
+    "evidenceSha256": {
+      "capture": "48bf2cfc68262bffd65f3fb576266985cf85d1b4d572ff96708d72430cd50dc8",
+      "obstruction": "7cbc0891cfa1e2b34bfd245bbbcfa24af7405ee08cc3d79bb8ba4d168ec0b30d",
+      "receipt": "1c3bcb471bbe69a50151a0e06a1c2e977b055ad4c5c30ca18488190be869fdd1"
+    },
+    "framing": {
+      "nyraHeightPixels": {
+        "S03": 406.892,
+        "S04": 388.327,
+        "S05": 397.305
+      },
+      "minimumActorOrBladeMarginPixels": {
+        "S03": 127.692,
+        "S04": 102.771,
+        "S05": 80.098
+      },
+      "s04ContactPixels": {
+        "x": 957.916,
+        "y": 513.34
+      },
+      "allRequiredGatesPassed": true
+    },
+    "replay": {
+      "cleanRuns": 3,
+      "sampleTicks": [29, 34, 41, 60],
+      "byteIdentical": true
+    },
+    "obstruction": {
+      "clearDesiredMeters": 5.26,
+      "clearResolvedMeters": 5.26,
+      "wallResolvedMeters": 2.443428040081452,
+      "wallClearanceMeters": 0.4500000000000002,
+      "collisionApplied": true,
+      "passed": true
+    }
+  },
+  "alternate": {
+    "builder": "A",
+    "branch": "codex/p30-r007-camera-a",
+    "commit": "d7d5e4e1a9aea759967dc47e55258c058b8291e2",
+    "camera": "Deterministic authored 54-degree shoulder rig",
+    "captureSha256": {
+      "S03": "4e1b79c2b360c43d365eec51e3d19f61d460e8068aeea467d874567b30648b57",
+      "S04": "f7f5f0b317213cd3e2f0779d47b80838e1ba1dca05cdd3b2ea8f2506fe17c6c0",
+      "S05": "bb3fcf85f16b4b85f815217268f522ba53bd8cac4fbfe4d282b1ef987f3838d1"
+    },
+    "receiptSha256": "e033c9ffd67208f210af5d56967a686a0599c2afcde8daab71f619a7ab73628b",
+    "allRequiredGatesPassed": true
+  },
+  "decision": {
+    "method": "Root visual inspection of actual RGB 1600x900 headed captures plus evidence-gate comparison; this is an unblinded builder selection, not the independent critic gate.",
+    "selectedReason": "Builder B gives Nyra and the strike exchange greater frame occupancy, removes more dead floor, and produces the stronger S03-S05 action read while preserving the complete blade, both actors, and central S04 contact.",
+    "alternateStrength": "Builder A retains larger worst-case safety margins and a simpler fixed authored rig.",
+    "largestVisibleResidual": "Even with the stronger camera, frozen anatomy, poses, effects, materials, and arena art remain visibly prototype-like and far below the target visual bar."
+  },
+  "scopeAudit": {
+    "round006FreezeManifest": "ArtSource/P30/Round006/freeze-after.sha256",
+    "entriesChecked": 106,
+    "authorizedProductionDifferences": [
+      "web-game/src/diagnostics/CowReviewHarness.ts",
+      "web-game/src/render/app/GameApp.ts",
+      "web-game/src/render/app/ThirdPersonCamera.ts"
+    ],
+    "unexpectedProductionDifferences": [],
+    "frozenSimulationTimingAssetsCharactersCombatEnvironmentHudLightingFxPostAndManifestExact": true
+  },
+  "rootValidation": {
+    "node": "v24.14.0",
+    "npmCleanInstall": true,
+    "lint": "PASS",
+    "simulationTests": "5/5 PASS",
+    "cameraTests": "5/5 PASS",
+    "typecheck": "PASS",
+    "productionBuild": "PASS",
+    "browserSmoke": "3/3 PASS",
+    "softwareHeadlessSmokeTimeoutSeconds": 60,
+    "headedColdReadyLimitMilliseconds": 4109
+  },
+  "nextGate": "Freeze the integrated commit, then run a fresh independent headed six-shot blind critic with focused S03-S05 scoring before reveal."
+}

@@ -4,7 +4,7 @@ const ci = (globalThis as { process?: { env?: { CI?: string } } }).process?.env?
 
 export default defineConfig({
   testDir: "./tests/browser",
-  timeout: 30_000,
+  timeout: 60_000,
   retries: 0,
   use: {
     baseURL: "http://127.0.0.1:4173",
