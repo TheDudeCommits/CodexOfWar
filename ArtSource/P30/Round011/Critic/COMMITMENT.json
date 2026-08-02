@@ -1,0 +1,90 @@
+{
+  "schema": "p30.r011.protocol-commitment.v1",
+  "protocolID": "P30-R011-BLIND-v1",
+  "createdAtUtc": "2026-08-02T14:12:30Z",
+  "baselineCommit": "acfe2f63f59ca4e87d3ca20db9dff225008c3817",
+  "candidatePackageAccessed": false,
+  "candidateSourceAccessed": false,
+  "candidateIdentityReceived": false,
+  "builderStateAccessed": false,
+  "protocolPayload": {
+    "hashSchema": "p30.r011.bytewise-tree-digest.v1",
+    "hashDomain": "P30R011/package-tree/v1",
+    "fileCount": 7,
+    "totalBytes": 62164,
+    "treeSha256": "73039f0e07247db6546e157821daadbec61a1acae1a3a04d964c45ea353af38b",
+    "files": [
+      {
+        "path": ".gitignore",
+        "mode": "644",
+        "bytes": 56,
+        "sha256": "13b53cfb5d84e9c5e8656ce7d9c9cc40c0e329564c02032019dac35edec4d243"
+      },
+      {
+        "path": "LOCKED_PROTOCOL.md",
+        "mode": "644",
+        "bytes": 32321,
+        "sha256": "24dd4b6b44354e30afa10d968b1668143e086820793588b6b27d9fd2d3b76615"
+      },
+      {
+        "path": "PACKAGE_INTERFACE.md",
+        "mode": "644",
+        "bytes": 11661,
+        "sha256": "e0ace8a089256f4c8323ff7b2b06c4fc2b8fa725d238647d546cd94545610b0e"
+      },
+      {
+        "path": "REFERENCE_RECEIPT.json",
+        "mode": "644",
+        "bytes": 1284,
+        "sha256": "cd2489525077a07e1c3aa032a71014f84790f6977b1767be2e740d0c9e06bfa6"
+      },
+      {
+        "path": "RUNTIME_VERSIONS.json",
+        "mode": "644",
+        "bytes": 1472,
+        "sha256": "54a57a462722c20275a5157fcc62cb5467f6413e97c067c13a3d59285bb92419"
+      },
+      {
+        "path": "tools/protocol-tools.mjs",
+        "mode": "644",
+        "bytes": 12698,
+        "sha256": "9a5356a606c41a3fc4dd0292fad3660f4ee392fc683438c1c1f9c94bec1ae782"
+      },
+      {
+        "path": "tools/protocol-tools.test.mjs",
+        "mode": "644",
+        "bytes": 2672,
+        "sha256": "f10c779fb2149666552974dc4e2c0249d3d5525f6a68888a3c2e6a7a16190b96"
+      }
+    ]
+  },
+  "presentation": {
+    "domain": "P30R011/presentation-seed/v1",
+    "formula": "SHA256(UTF8(domain) || 0x00 || raw_seed_32_bytes)",
+    "seedBytes": 32,
+    "seedDisclosure": "withheld-until-alias-score-seal",
+    "commit": "5df2ec1607da073c492d94d7f1c47c23606d51b9fdbc267a3ada8d76e853b05f"
+  },
+  "futurePackageMap": {
+    "domain": "P30R011/package-map/v1",
+    "saltBytes": 32,
+    "saltDisclosure": "withheld-until-alias-score-seal",
+    "status": "must-be-supplied-and-verified-before-candidate-access"
+  },
+  "futureAliasScore": {
+    "domain": "P30R011/alias-score/v1",
+    "saltBytes": 32,
+    "saltGeneration": "fresh-after-all-alias-only-judgments",
+    "status": "must-be-committed-before-identity-reveal"
+  },
+  "referenceArchiveSha256": "4653a7a92d6f6bde910f39d3190df0adb112677851815443144505b8b420a6dd",
+  "helperVerification": {
+    "node": "v24.18.0",
+    "command": "/opt/homebrew/opt/node@24/bin/node --test ArtSource/P30/Round011/Critic/tools/protocol-tools.test.mjs",
+    "tests": 5,
+    "passed": 5,
+    "failed": 0
+  },
+  "lockRule": "Any substantive edit to a protocol payload file after this commitment requires a new numbered round before candidate access."
+}
+
