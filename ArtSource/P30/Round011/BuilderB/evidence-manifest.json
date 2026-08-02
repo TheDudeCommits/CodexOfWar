@@ -1,0 +1,40 @@
+{
+  "schema": "p30.r011.builder-evidence.v1",
+  "protocolID": "P30-R011-BLIND-v1",
+  "protocolPayloadSha256": "bc1e9db54ad38408d6ff369df96ed163d15cf2dfa3fd5403d7a56e374ee85d7b",
+  "runtime": {
+    "node": "24.18.0",
+    "npm": "11.7.0",
+    "fixedDelta": "1/60",
+    "captureTickSpace": "absolute-scenario",
+    "attackRisingEdgeAbsoluteTick": 24
+  },
+  "validation": {
+    "testCritic": { "passed": 25, "failed": 0 },
+    "browserSerialProduction": { "passed": 7, "failed": 0 },
+    "typecheck": "pass",
+    "lint": "pass",
+    "productionBuild": "pass",
+    "productionReadyResponse": "pass",
+    "productionSourceMaps": 0
+  },
+  "focusedCapture": {
+    "absoluteTicks": [29, 34, 41],
+    "attackRelativeTicks": [5, 10, 17],
+    "tick34ExteriorContactPoints": 1,
+    "tick34SeparationMeters": 0,
+    "tick34PenetrationMeters": 0,
+    "tick34DamageEvents": 1,
+    "tick34HealthBefore": 100,
+    "tick34HealthAfter": 90
+  },
+  "hardwareContextRestore": {
+    "renderer": "ANGLE Metal / Apple M2",
+    "webgl": "WebGL2",
+    "internalRebuildMilliseconds": 391.3,
+    "controlsResponsiveMilliseconds": 584,
+    "luminanceRecoveredMilliseconds": 604,
+    "relativeLuminanceDelta": 0.0016112153,
+    "runtimeErrors": 0
+  }
+}

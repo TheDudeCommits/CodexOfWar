@@ -1,4 +1,5 @@
 import * as THREE from "three";
+import { isP30CriticScenarioRoute } from "../../diagnostics/P30CriticProtocol";
 
 const STREAK_COUNT = 22;
 const CONTACT_TANGENT_OFFSET = 0.82;
@@ -205,7 +206,9 @@ export class CombatFx {
     }
     this.streaks.instanceMatrix.needsUpdate = true;
     if (this.streaks.instanceColor) this.streaks.instanceColor.needsUpdate = true;
-    if (typeof window !== "undefined") window.__COW_COMBAT_FX__ = this.combatFxAuditApi;
+    if (typeof window !== "undefined" && !isP30CriticScenarioRoute()) {
+      window.__COW_COMBAT_FX__ = this.combatFxAuditApi;
+    }
   }
 
   burst(

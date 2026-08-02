@@ -86,6 +86,35 @@ export class RenderBridge {
     };
   }
 
+  restoreGpuResources(): void {
+    for (const root of [
+      this.arena.root,
+      this.hero.root,
+      this.zombie.root,
+      this.combatFx.root,
+    ]) {
+      root.traverse((node) => {
+        if (!(node as THREE.Mesh).isMesh) return;
+        const mesh = node as THREE.Mesh;
+        if (mesh.geometry.index) mesh.geometry.index.needsUpdate = true;
+        for (const attribute of Object.values(
+          mesh.geometry.attributes,
+        ) as THREE.BufferAttribute[]) {
+          attribute.needsUpdate = true;
+        }
+        const materials = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
+        for (const material of materials) {
+          material.needsUpdate = true;
+          for (const value of Object.values(material as unknown as Record<string, unknown>)) {
+            if ((value as THREE.Texture)?.isTexture) {
+              (value as THREE.Texture).needsUpdate = true;
+            }
+          }
+        }
+      });
+    }
+  }
+
   dispose(): void {
     this.arena.dispose();
     this.hero.dispose();

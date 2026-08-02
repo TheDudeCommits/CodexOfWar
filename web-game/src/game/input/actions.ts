@@ -19,6 +19,7 @@ export interface InputSnapshot {
   sprint: boolean;
   dodgePressed: boolean;
   attackPressed: boolean;
+  attackSource: "mouse-left" | "keyboard" | null;
   lockPressed: boolean;
   diagnosticsPressed: boolean;
   postPressed: boolean;

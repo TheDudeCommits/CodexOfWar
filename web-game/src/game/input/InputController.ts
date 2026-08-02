@@ -36,12 +36,22 @@ export class InputController {
       Number(anyDown(this.down, ACTION_BINDINGS.moveLeft));
     const moveZ = Number(anyDown(this.down, ACTION_BINDINGS.moveForward)) -
       Number(anyDown(this.down, ACTION_BINDINGS.moveBackward));
+    const mouseAttackPressed = this.pressed.has("Mouse0");
+    const keyboardAttackPressed = ACTION_BINDINGS.attack
+      .filter((binding) => binding !== "Mouse0")
+      .some((binding) => this.pressed.has(binding));
+    const attackPressed = this.consumePressed(ACTION_BINDINGS.attack);
     const snapshot: InputSnapshot = {
       moveX,
       moveZ,
       sprint: anyDown(this.down, ACTION_BINDINGS.sprint),
       dodgePressed: this.consumePressed(ACTION_BINDINGS.dodge),
-      attackPressed: this.consumePressed(ACTION_BINDINGS.attack),
+      attackPressed,
+      attackSource: mouseAttackPressed
+        ? "mouse-left"
+        : keyboardAttackPressed
+          ? "keyboard"
+          : null,
       lockPressed: this.consumePressed(ACTION_BINDINGS.lockOn),
       diagnosticsPressed: this.consumePressed(ACTION_BINDINGS.diagnostics),
       postPressed: this.consumePressed(ACTION_BINDINGS.postProcessing),
@@ -85,9 +95,35 @@ export class InputController {
   private readonly onPointerDown = (event: PointerEvent): void => {
     if (event.button === 0) {
       this.pressed.add("Mouse0");
-      if (document.pointerLockElement !== this.canvas) void this.canvas?.requestPointerLock();
+      this.requestPointerLockSafely();
     }
   };
+
+  private requestPointerLockSafely(): void {
+    const canvas = this.canvas;
+    if (
+      !canvas ||
+      !canvas.isConnected ||
+      canvas.ownerDocument !== document ||
+      document.pointerLockElement === canvas
+    ) {
+      return;
+    }
+
+    try {
+      const request = canvas.requestPointerLock();
+      if (request instanceof Promise) {
+        // Pointer lock may be rejected when Chromium invalidates a document
+        // between the physical click and the async browser request. This is a
+        // normal input hand-off, not a runtime failure, and must never become
+        // an unhandled WrongDocumentError rejection.
+        void request.catch(() => undefined);
+      }
+    } catch {
+      // Older implementations can throw synchronously for the same document
+      // lifecycle race. The next connected click can request lock again.
+    }
+  }
 
   private readonly onContextMenu = (event: MouseEvent): void => {
     event.preventDefault();

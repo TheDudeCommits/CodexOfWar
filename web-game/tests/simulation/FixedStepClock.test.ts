@@ -26,4 +26,15 @@ describe("FixedStepClock", () => {
     });
     expect(ticks).toBeLessThanOrEqual(6);
   });
+
+  it("stops with zero interpolation when a capture update requests a pause", () => {
+    const clock = new FixedStepClock();
+    let ticks = 0;
+    const alpha = clock.consume(FIXED_TIMESTEP * 4, () => {
+      ticks += 1;
+      return false;
+    });
+    expect(ticks).toBe(1);
+    expect(alpha).toBe(0);
+  });
 });
