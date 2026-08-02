@@ -1,0 +1,35 @@
+{
+  "schema": "p30.r011.protocol-runtime-versions.v1",
+  "capturedAtUtc": "2026-08-02T14:12:30Z",
+  "capturedAtAsiaBangkok": "2026-08-02T21:12:30+07:00",
+  "baselineCommit": "acfe2f63f59ca4e87d3ca20db9dff225008c3817",
+  "worktreeBranch": "codex/p30-r011-blind-critic",
+  "platform": {
+    "product": "macOS",
+    "version": "26.5.1",
+    "build": "25F80",
+    "kernel": "Darwin 25.5.0",
+    "architecture": "arm64",
+    "locale": "C.UTF-8",
+    "timezone": "Asia/Bangkok"
+  },
+  "requiredEvaluationRuntime": {
+    "nodeExecutable": "/opt/homebrew/opt/node@24/bin/node",
+    "node": "v24.18.0",
+    "npm": "11.16.0",
+    "chromeExecutable": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+    "chrome": "Google Chrome 150.0.7871.187",
+    "headed": true,
+    "hardwareAccelerationRequired": true,
+    "webgl": "WebGL2 only",
+    "viewportCssPixels": [1600, 900],
+    "deviceScaleFactor": 1
+  },
+  "supportingToolsAtProtocolLock": {
+    "git": "git version 2.50.1 (Apple Git-155)",
+    "openssl": "OpenSSL 3.6.3 9 Jun 2026 (Library: OpenSSL 3.6.3 9 Jun 2026)",
+    "ffmpeg": "ffmpeg version 8.1.2"
+  },
+  "runReceiptRule": "Every candidate run must record the versions actually used, including Node, npm, Chrome executable and version, browser automation library and CDP protocol, OS, GPU vendor/renderer, WebGL and GLSL strings, ffmpeg, and the SHA-256 of the evaluator helper scripts. A lock-time version does not substitute for an actual-run receipt."
+}
+

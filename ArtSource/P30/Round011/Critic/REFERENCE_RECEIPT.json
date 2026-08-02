@@ -1,0 +1,19 @@
+{
+  "schema": "p30.r011.private-reference-receipt.v1",
+  "protocolID": "P30-R011-BLIND-v1",
+  "archivePathAtLock": "/Users/amir/Downloads/Reference.zip",
+  "archiveSha256": "4653a7a92d6f6bde910f39d3190df0adb112677851815443144505b8b420a6dd",
+  "archiveBytes": 1336123,
+  "meaningfulImageEntries": 21,
+  "macOSMetadataEntriesIgnored": 21,
+  "imageDimensionsRange": {
+    "minimumWidth": 596,
+    "minimumHeight": 335,
+    "maximumWidth": 1948,
+    "maximumHeight": 1080
+  },
+  "privateInspectionCompleted": true,
+  "referenceDescription": "Real God of War Ragnarok gameplay screenshots used as the uncompromised production-quality bar for combat readability, camera, lighting, materials, environment density, silhouette, effects hierarchy, HUD integration, and authored finish.",
+  "privacyRule": "No supplied reference pixel, crop, thumbnail, contact sheet, derived board, or encoded copy may enter Git, a blind ballot artifact, a user-visible report, or a shared package. Only this archive receipt, textual observations, and hashes of ephemeral private boards may be recorded.",
+  "candidateEvidenceRule": "Candidate full frames and clips remain evaluator-created evidence. Reference-matched boards are private evaluator aids only and cannot replace unmodified candidate evidence."
+}
