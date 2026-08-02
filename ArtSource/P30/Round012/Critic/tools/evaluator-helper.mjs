@@ -12,6 +12,7 @@ import {
   canonicalBytes,
   compareUtf8,
   fileSha256,
+  hashTree,
   parseJsonStrict,
   readCanonicalFile,
   registerCaseFoldedPath,
@@ -2815,21 +2816,142 @@ const EVIDENCE_ARTIFACT_KEYS = Object.freeze([
 const EVIDENCE_KINDS = new Set([
   'production-frame', 'focused-frame', 'full-frame-strip', 'contact-roi', 'action-crop',
   'lossless-frame-sequence', 'lossless-video', 'state-log', 'event-log', 'geometry-log',
-  'frame-evidence', 'run-receipt', 'diagnostic-mask', 'blind-board'
+  'frame-evidence', 'run-receipt', 'diagnostic-mask'
 ]);
 const REQUIRED_PER_RUN_KINDS = Object.freeze(['state-log', 'event-log', 'geometry-log', 'frame-evidence', 'run-receipt']);
+const EVIDENCE_FILE_PROOFS = new WeakSet();
+const TYPED_ARRAY_BYTE_LENGTH = Object.getOwnPropertyDescriptor(
+  Object.getPrototypeOf(Uint8Array.prototype),
+  'byteLength'
+).get;
 
 function sameIntegerArray(actual, expected) {
   return Array.isArray(actual) && actual.length === expected.length && actual.every((value, index) => value === expected[index]);
 }
 
+function assertPathComponent(value, code) {
+  if (typeof value !== 'string' || !/^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$/u.test(value)) evaluatorFail(code);
+  return value;
+}
+
+export function evidenceArtifactClaimPath(artifact, traceID) {
+  assertAlias(artifact?.alias);
+  assertPathComponent(artifact?.runProfileID, 'EVIDENCE_ARTIFACT_RUN_PROFILE_INVALID');
+  if (!REQUIRED_TRACE_IDS.includes(traceID)) evaluatorFail('EVIDENCE_MANIFEST_TRACE_ID_INVALID');
+  if (!EVIDENCE_KINDS.has(artifact?.kind)) evaluatorFail('EVIDENCE_ARTIFACT_KIND_INVALID');
+  if (artifact?.custody !== 'public') evaluatorFail('EVIDENCE_ARTIFACT_CUSTODY_INVALID');
+  const claim = {
+    alias: artifact.alias,
+    runProfileID: artifact.runProfileID,
+    traceID,
+    kind: artifact.kind,
+    absoluteTicks: artifact.absoluteTicks,
+    heavyRelativeTicks: artifact.heavyRelativeTicks,
+    byteCount: artifact.byteCount,
+    sha256: artifact.sha256,
+    packageArchiveSha256: artifact.packageArchiveSha256,
+    productionOutputTreeSha256: artifact.productionOutputTreeSha256,
+    route: artifact.route,
+    stateDigest: artifact.stateDigest,
+    cameraDigest: artifact.cameraDigest,
+    inputTraceDigest: artifact.inputTraceDigest,
+    evaluatorHelperDigest: artifact.evaluatorHelperDigest,
+    browser: artifact.browser,
+    gpu: artifact.gpu,
+    captureTimestamp: artifact.captureTimestamp,
+    sourceArtifactSha256s: artifact.sourceArtifactSha256s,
+    derivation: artifact.derivation,
+    custody: artifact.custody
+  };
+  const claimDigest = sha256Hex(canonicalBytes(claim));
+  return `evidence/public/${artifact.alias}/${artifact.runProfileID}/${traceID}/${artifact.kind}/${claimDigest}-${artifact.sha256}.bin`;
+}
+
+function boardPathSlug(boardID) {
+  if (PAIRWISE_BALLOT_IDS.includes(boardID)) return boardID;
+  const match = /^(R[123])\/(candidate-[0-9a-f]{16})$/u.exec(boardID);
+  if (!match) evaluatorFail('EVIDENCE_PRIVATE_BOARD_ID_INVALID');
+  return `${match[1]}--${match[2]}`;
+}
+
+export function privateBoardClaimPath(board) {
+  const claim = {
+    boardID: board?.boardID,
+    orderDigest: board?.orderDigest,
+    leftToken: board?.leftToken,
+    rightToken: board?.rightToken,
+    byteCount: board?.byteCount,
+    sha256: board?.sha256,
+    leftSourceSha256: board?.leftSourceSha256,
+    rightSourceSha256: board?.rightSourceSha256,
+    compositorHelperSha256: board?.compositorHelperSha256
+  };
+  const claimDigest = sha256Hex(canonicalBytes(claim));
+  return `evidence/private/boards/${boardPathSlug(board?.boardID)}/${claimDigest}-${board?.sha256}.rgba`;
+}
+
+function validateCustodyBytes(custodyBytesByPath, claimsByPath) {
+  if (!(custodyBytesByPath instanceof Map)) evaluatorFail('EVIDENCE_CUSTODY_BYTES_REQUIRED');
+  const providedCaseRegistry = new Map();
+  for (const [path, bytes] of Map.prototype.entries.call(custodyBytesByPath)) {
+    try { validateRelativePath(path); } catch { evaluatorFail('EVIDENCE_CUSTODY_PATH_INVALID'); }
+    try { registerCaseFoldedPath(providedCaseRegistry, path); } catch (error) {
+      if (error instanceof Round012TreeError) evaluatorFail('EVIDENCE_CUSTODY_PATH_COLLISION');
+      throw error;
+    }
+    if (!claimsByPath.has(path)) evaluatorFail('EVIDENCE_UNDECLARED_BYTES');
+    if (!(bytes instanceof Uint8Array) && (!bytes || typeof bytes !== 'object' || !EVIDENCE_FILE_PROOFS.has(bytes))) {
+      evaluatorFail('EVIDENCE_CUSTODY_BYTES_INVALID');
+    }
+  }
+  for (const [path, claim] of claimsByPath) {
+    if (!Map.prototype.has.call(custodyBytesByPath, path)) {
+      evaluatorFail(claim.type === 'private-board' ? 'EVIDENCE_PRIVATE_BOARD_BYTES_MISSING' : 'EVIDENCE_ARTIFACT_BYTES_MISSING');
+    }
+    const bytes = Map.prototype.get.call(custodyBytesByPath, path);
+    let byteCount;
+    let digest;
+    if (bytes instanceof Uint8Array) {
+      try {
+        byteCount = TYPED_ARRAY_BYTE_LENGTH.call(bytes);
+        digest = sha256Hex(bytes);
+      } catch {
+        evaluatorFail('EVIDENCE_CUSTODY_BYTES_INVALID');
+      }
+    } else {
+      byteCount = bytes.byteCount;
+      digest = bytes.sha256;
+    }
+    if (byteCount !== claim.byteCount || digest !== claim.sha256) {
+      evaluatorFail(claim.type === 'private-board' ? 'EVIDENCE_PRIVATE_BOARD_BYTES_MISMATCH' : 'EVIDENCE_ARTIFACT_BYTES_MISMATCH');
+    }
+  }
+  const suppliedCount = Object.getOwnPropertyDescriptor(Map.prototype, 'size').get.call(custodyBytesByPath);
+  if (suppliedCount !== claimsByPath.size) evaluatorFail('EVIDENCE_CUSTODY_FILE_SET_MISMATCH');
+}
+
+function evidenceCanonicalSnapshot(value, code) {
+  try {
+    return parseJsonStrict(canonicalBytes(value).toString('utf8'));
+  } catch {
+    evaluatorFail(code);
+  }
+}
+
 export function validateEvidenceManifest(
   document,
-  artifactBytesByPath = null,
+  custodyBytesByPath = null,
   blindOrderManifest = null,
   expectedPresentationCommit = null,
   publicPackageReceipt = null
 ) {
+  document = evidenceCanonicalSnapshot(document, 'EVIDENCE_MANIFEST_SNAPSHOT_INVALID');
+  if (blindOrderManifest !== null) {
+    blindOrderManifest = evidenceCanonicalSnapshot(blindOrderManifest, 'EVIDENCE_BLIND_ORDER_SNAPSHOT_INVALID');
+  }
+  if (publicPackageReceipt !== null) {
+    publicPackageReceipt = evidenceCanonicalSnapshot(publicPackageReceipt, 'EVIDENCE_PUBLIC_RECEIPT_SNAPSHOT_INVALID');
+  }
   try {
     assertExactKeys(document, [
       'schema', 'protocolID', 'aliases', 'evaluatorHelperSha256', 'blindOrderManifestSha256',
@@ -2860,7 +2982,7 @@ export function validateEvidenceManifest(
       ], 'EVIDENCE_MANIFEST_RUN_SHAPE_MISMATCH');
     } catch (error) { if (error instanceof Round012TreeError) evaluatorFail(error.code); throw error; }
     if (!document.aliases.includes(run.alias)) evaluatorFail('EVIDENCE_MANIFEST_RUN_ALIAS_INVALID');
-    assertNfcNonempty(run.runProfileID, 'EVIDENCE_MANIFEST_RUN_PROFILE_INVALID');
+    assertPathComponent(run.runProfileID, 'EVIDENCE_MANIFEST_RUN_PROFILE_INVALID');
     if (!REQUIRED_TRACE_IDS.includes(run.traceID)) evaluatorFail('EVIDENCE_MANIFEST_TRACE_ID_INVALID');
     assertHex64(run.inputTraceDigest, 'EVIDENCE_MANIFEST_INPUT_HASH_INVALID');
     const expectedTerminal = run.traceID === 'SHIFT_PLUS_7' ? 87 : 80;
@@ -2877,15 +2999,22 @@ export function validateEvidenceManifest(
   }
   if (!Array.isArray(document.artifacts) || document.artifacts.length === 0) evaluatorFail('EVIDENCE_MANIFEST_ARTIFACTS_EMPTY');
   const pathRegistry = new Map();
+  const exactPaths = new Set();
+  const claimsByPath = new Map();
+  const semanticClaims = new Set();
   const artifactsByRun = new Map();
-  document.artifacts.forEach((artifact) => {
-    try { assertExactKeys(artifact, EVIDENCE_ARTIFACT_KEYS, 'EVIDENCE_ARTIFACT_SHAPE_MISMATCH'); }
-    catch (error) { if (error instanceof Round012TreeError) evaluatorFail(error.code); throw error; }
-    try { validateRelativePath(artifact.path); } catch { evaluatorFail('EVIDENCE_ARTIFACT_PATH_INVALID'); }
+  for (const artifact of document.artifacts) {
+    try { validateRelativePath(artifact?.path); } catch { evaluatorFail('EVIDENCE_ARTIFACT_PATH_INVALID'); }
+    if (exactPaths.has(artifact.path)) evaluatorFail('EVIDENCE_ARTIFACT_PATH_DUPLICATE');
+    exactPaths.add(artifact.path);
     try { registerCaseFoldedPath(pathRegistry, artifact.path); } catch (error) {
       if (error instanceof Round012TreeError) evaluatorFail('EVIDENCE_ARTIFACT_PATH_COLLISION');
       throw error;
     }
+  }
+  document.artifacts.forEach((artifact) => {
+    try { assertExactKeys(artifact, EVIDENCE_ARTIFACT_KEYS, 'EVIDENCE_ARTIFACT_SHAPE_MISMATCH'); }
+    catch (error) { if (error instanceof Round012TreeError) evaluatorFail(error.code); throw error; }
     if (!EVIDENCE_KINDS.has(artifact.kind)) evaluatorFail('EVIDENCE_ARTIFACT_KIND_INVALID');
     assertPositiveSafeInteger(artifact.byteCount, 'EVIDENCE_ARTIFACT_BYTE_COUNT_INVALID');
     assertHex64(artifact.sha256, 'EVIDENCE_ARTIFACT_SHA256_INVALID');
@@ -2897,9 +3026,22 @@ export function validateEvidenceManifest(
     if (artifact.evaluatorHelperDigest !== document.evaluatorHelperSha256) evaluatorFail('EVIDENCE_ARTIFACT_HELPER_HASH_MISMATCH');
     assertNfcNonempty(artifact.route, 'EVIDENCE_ARTIFACT_ROUTE_INVALID');
     if (!artifact.route.startsWith('/')) evaluatorFail('EVIDENCE_ARTIFACT_ROUTE_INVALID');
-    assertNfcNonempty(artifact.runProfileID, 'EVIDENCE_ARTIFACT_RUN_PROFILE_INVALID');
+    assertPathComponent(artifact.runProfileID, 'EVIDENCE_ARTIFACT_RUN_PROFILE_INVALID');
     const run = runByID.get(`${artifact.alias}\0${artifact.runProfileID}`);
     if (!run || run.inputTraceDigest !== artifact.inputTraceDigest) evaluatorFail('EVIDENCE_ARTIFACT_RUN_BINDING_INVALID');
+    const semanticClaim = sha256Hex(canonicalBytes({
+      alias: artifact.alias,
+      runProfileID: artifact.runProfileID,
+      traceID: run.traceID,
+      kind: artifact.kind,
+      absoluteTicks: artifact.absoluteTicks,
+      heavyRelativeTicks: artifact.heavyRelativeTicks
+    }));
+    if (semanticClaims.has(semanticClaim)) evaluatorFail('EVIDENCE_ARTIFACT_CLAIM_DUPLICATE');
+    semanticClaims.add(semanticClaim);
+    if (artifact.path !== evidenceArtifactClaimPath(artifact, run.traceID)) {
+      evaluatorFail('EVIDENCE_ARTIFACT_PATH_METADATA_MISMATCH');
+    }
     const packageEntry = publicPackageReceipt.packages.find((entry) => entry.alias === artifact.alias);
     if (
       !packageEntry || artifact.packageArchiveSha256 !== packageEntry.packageArchiveSha256 ||
@@ -2923,43 +3065,40 @@ export function validateEvidenceManifest(
     }
     if (!Array.isArray(artifact.sourceArtifactSha256s)) evaluatorFail('EVIDENCE_ARTIFACT_SOURCE_HASHES_INVALID');
     artifact.sourceArtifactSha256s.forEach((digest) => assertHex64(digest, 'EVIDENCE_ARTIFACT_SOURCE_HASHES_INVALID'));
-    if (!['public', 'critic-private'].includes(artifact.custody)) evaluatorFail('EVIDENCE_ARTIFACT_CUSTODY_INVALID');
-    if (artifact.kind === 'blind-board' && artifact.custody !== 'critic-private') evaluatorFail('EVIDENCE_BOARD_MUST_REMAIN_PRIVATE');
+    if (artifact.custody !== 'public') evaluatorFail('EVIDENCE_ARTIFACT_CUSTODY_INVALID');
     const collection = artifactsByRun.get(`${artifact.alias}\0${artifact.runProfileID}`) ?? [];
     collection.push(artifact);
     artifactsByRun.set(`${artifact.alias}\0${artifact.runProfileID}`, collection);
-    if (artifactBytesByPath !== null) {
-      if (!(artifactBytesByPath instanceof Map) || !artifactBytesByPath.has(artifact.path)) evaluatorFail('EVIDENCE_ARTIFACT_BYTES_MISSING');
-      const bytes = artifactBytesByPath.get(artifact.path);
-      if (!(bytes instanceof Uint8Array) || bytes.byteLength !== artifact.byteCount || sha256Hex(bytes) !== artifact.sha256) {
-        evaluatorFail('EVIDENCE_ARTIFACT_BYTES_MISMATCH');
-      }
-    }
+    claimsByPath.set(artifact.path, {
+      type: 'artifact',
+      byteCount: artifact.byteCount,
+      sha256: artifact.sha256
+    });
   });
   for (const run of document.captureRuns) {
     const artifacts = artifactsByRun.get(`${run.alias}\0${run.runProfileID}`) ?? [];
-    for (const kind of REQUIRED_PER_RUN_KINDS) if (!artifacts.some((artifact) => artifact.kind === kind)) {
+    for (const kind of REQUIRED_PER_RUN_KINDS) if (artifacts.filter((artifact) => artifact.kind === kind).length !== 1) {
       evaluatorFail('EVIDENCE_RUN_CORE_ARTIFACT_MISSING');
     }
     if (CANONICAL_CAPTURE_TRACES.has(run.traceID)) {
       const frames = artifacts.filter((artifact) => artifact.kind === 'production-frame' && artifact.absoluteTicks.length === 1)
         .map((artifact) => artifact.absoluteTicks[0]);
-      for (let tick = 20; tick <= 80; tick += 1) if (!frames.includes(tick)) evaluatorFail('EVIDENCE_CANONICAL_FRAME_MISSING');
-      for (const tick of FOCUSED_CAPTURE_TICKS) if (!artifacts.some((artifact) => artifact.kind === 'focused-frame' && sameIntegerArray(artifact.absoluteTicks, [tick]))) {
+      for (let tick = 20; tick <= 80; tick += 1) if (frames.filter((value) => value === tick).length !== 1) evaluatorFail('EVIDENCE_CANONICAL_FRAME_MISSING');
+      for (const tick of FOCUSED_CAPTURE_TICKS) if (artifacts.filter((artifact) => artifact.kind === 'focused-frame' && sameIntegerArray(artifact.absoluteTicks, [tick])).length !== 1) {
         evaluatorFail('EVIDENCE_FOCUSED_FRAME_MISSING');
       }
       const requiredStrips = [[40, 46], [44, 48], [46, 76]].map(([first, last]) => Array.from({ length: last - first + 1 }, (_, index) => first + index));
-      for (const ticks of requiredStrips) if (!artifacts.some((artifact) => artifact.kind === 'full-frame-strip' && sameIntegerArray(artifact.absoluteTicks, ticks))) {
+      for (const ticks of requiredStrips) if (artifacts.filter((artifact) => artifact.kind === 'full-frame-strip' && sameIntegerArray(artifact.absoluteTicks, ticks)).length !== 1) {
         evaluatorFail('EVIDENCE_FRAME_STRIP_MISSING');
       }
-      if (!artifacts.some((artifact) => artifact.kind === 'contact-roi' && sameIntegerArray(artifact.absoluteTicks, [46]))) {
+      if (artifacts.filter((artifact) => artifact.kind === 'contact-roi' && sameIntegerArray(artifact.absoluteTicks, [46])).length !== 1) {
         evaluatorFail('EVIDENCE_CONTACT_ROI_MISSING');
       }
-      for (const tick of FOCUSED_CAPTURE_TICKS) if (!artifacts.some((artifact) => artifact.kind === 'action-crop' && sameIntegerArray(artifact.absoluteTicks, [tick]))) {
+      for (const tick of FOCUSED_CAPTURE_TICKS) if (artifacts.filter((artifact) => artifact.kind === 'action-crop' && sameIntegerArray(artifact.absoluteTicks, [tick])).length !== 1) {
         evaluatorFail('EVIDENCE_ACTION_CROP_MISSING');
       }
       const fullTicks = Array.from({ length: 81 }, (_, tick) => tick);
-      if (!artifacts.some((artifact) => ['lossless-frame-sequence', 'lossless-video'].includes(artifact.kind) && sameIntegerArray(artifact.absoluteTicks, fullTicks))) {
+      if (artifacts.filter((artifact) => ['lossless-frame-sequence', 'lossless-video'].includes(artifact.kind) && sameIntegerArray(artifact.absoluteTicks, fullTicks)).length !== 1) {
         evaluatorFail('EVIDENCE_LOSSLESS_SEQUENCE_MISSING');
       }
     }
@@ -2972,21 +3111,37 @@ export function validateEvidenceManifest(
     ...PAIRWISE_BALLOT_IDS
   ].sort(compareUtf8);
   const boardIDs = [];
+  for (const board of document.privateBoardHashes) {
+    try { validateRelativePath(board?.path); } catch { evaluatorFail('EVIDENCE_PRIVATE_BOARD_PATH_INVALID'); }
+    if (exactPaths.has(board.path)) evaluatorFail('EVIDENCE_PRIVATE_BOARD_PATH_DUPLICATE');
+    exactPaths.add(board.path);
+    try { registerCaseFoldedPath(pathRegistry, board.path); } catch (error) {
+      if (error instanceof Round012TreeError) evaluatorFail('EVIDENCE_PRIVATE_BOARD_PATH_COLLISION');
+      throw error;
+    }
+  }
   document.privateBoardHashes.forEach((board) => {
     try {
       assertExactKeys(board, [
-        'boardID', 'byteCount', 'sha256', 'orderDigest', 'leftSourceSha256',
-        'rightSourceSha256', 'compositorHelperSha256'
+        'boardID', 'path', 'byteCount', 'sha256', 'orderDigest', 'leftToken', 'rightToken',
+        'leftSourceSha256', 'rightSourceSha256', 'compositorHelperSha256'
       ], 'EVIDENCE_PRIVATE_BOARD_SHAPE_MISMATCH');
     }
     catch (error) { if (error instanceof Round012TreeError) evaluatorFail(error.code); throw error; }
-    validateBallotTokens(board.boardID, board.boardID.startsWith('P') ? document.aliases : [board.boardID.slice(3), `reference/${board.boardID.slice(0, 2)}`]);
+    validateBallotTokens(board.boardID, [board.leftToken, board.rightToken]);
     assertPositiveSafeInteger(board.byteCount, 'EVIDENCE_PRIVATE_BOARD_BYTES_INVALID');
+    if (board.byteCount !== VIEWPORT_WIDTH * VIEWPORT_HEIGHT * 4) evaluatorFail('EVIDENCE_PRIVATE_BOARD_BYTES_INVALID');
     assertHex64(board.sha256, 'EVIDENCE_PRIVATE_BOARD_HASH_INVALID');
     assertHex64(board.orderDigest, 'EVIDENCE_PRIVATE_BOARD_HASH_INVALID');
     assertHex64(board.leftSourceSha256, 'EVIDENCE_PRIVATE_BOARD_SOURCE_HASH_INVALID');
     assertHex64(board.rightSourceSha256, 'EVIDENCE_PRIVATE_BOARD_SOURCE_HASH_INVALID');
     if (board.compositorHelperSha256 !== document.evaluatorHelperSha256) evaluatorFail('EVIDENCE_PRIVATE_BOARD_HELPER_HASH_MISMATCH');
+    if (board.path !== privateBoardClaimPath(board)) evaluatorFail('EVIDENCE_PRIVATE_BOARD_PATH_METADATA_MISMATCH');
+    claimsByPath.set(board.path, {
+      type: 'private-board',
+      byteCount: board.byteCount,
+      sha256: board.sha256
+    });
     boardIDs.push(board.boardID);
   });
   if (canonicalBytes(boardIDs.sort(compareUtf8)).compare(canonicalBytes(expectedBoardIDs)) !== 0) {
@@ -2998,10 +3153,14 @@ export function validateEvidenceManifest(
   if (blindOrderManifest.manifestSha256 !== document.blindOrderManifestSha256) {
     evaluatorFail('EVIDENCE_BLIND_ORDER_MANIFEST_HASH_MISMATCH');
   }
-  for (const board of document.privateBoardHashes) {
-    const order = blindOrderManifest.ballots.find((entry) => entry.itemID === board.boardID);
-    if (!order || order.orderDigest !== board.orderDigest) evaluatorFail('EVIDENCE_PRIVATE_BOARD_ORDER_MISMATCH');
-  }
+  document.privateBoardHashes.forEach((board, index) => {
+    const order = blindOrderManifest.ballots[index];
+    if (
+      !order || order.itemID !== board.boardID || order.orderDigest !== board.orderDigest ||
+      order.left !== board.leftToken || order.right !== board.rightToken
+    ) evaluatorFail('EVIDENCE_PRIVATE_BOARD_ORDER_MISMATCH');
+  });
+  validateCustodyBytes(custodyBytesByPath, claimsByPath);
   canonicalBytes(document);
   return document;
 }
@@ -3013,14 +3172,30 @@ export async function verifyEvidenceManifestFiles(
   expectedPresentationCommit,
   publicPackageReceipt
 ) {
-  validateEvidenceManifest(document, null, blindOrderManifest, expectedPresentationCommit, publicPackageReceipt);
-  const bytesByPath = new Map();
-  for (const artifact of document.artifacts) {
-    const absolute = await assertExtractedRegularFile(evidenceRoot, artifact.path);
-    bytesByPath.set(artifact.path, await readFile(absolute));
+  const tree = await hashTree(resolve(evidenceRoot));
+  const proofsByPath = new Map();
+  for (const entry of tree.entries) {
+    const byteCount = Number(entry.bytes);
+    if (!Number.isSafeInteger(byteCount)) evaluatorFail('EVIDENCE_FILE_BYTES_UNSAFE');
+    const proof = {
+      byteCount,
+      sha256: entry.sha256
+    };
+    EVIDENCE_FILE_PROOFS.add(proof);
+    proofsByPath.set(entry.path, proof);
   }
-  validateEvidenceManifest(document, bytesByPath, blindOrderManifest, expectedPresentationCommit, publicPackageReceipt);
-  return { evidenceFilesVerified: document.artifacts.length, privateBoardHashesVerified: 9 };
+  validateEvidenceManifest(
+    document,
+    proofsByPath,
+    blindOrderManifest,
+    expectedPresentationCommit,
+    publicPackageReceipt
+  );
+  return {
+    evidenceFilesVerified: tree.fileCount,
+    evidenceTreeSha256: tree.treeSha256,
+    privateBoardFilesVerified: 9
+  };
 }
 
 export function buildBlindOrderManifest(presentationSeed, aliasesValue) {

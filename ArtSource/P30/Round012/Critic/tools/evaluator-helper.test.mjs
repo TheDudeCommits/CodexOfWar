@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { mkdir, mkdtemp, rm, symlink, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
-import { join } from 'node:path';
+import { dirname, join } from 'node:path';
 import test from 'node:test';
 
 import {
@@ -46,10 +46,12 @@ import {
   deriveMissOffsets,
   deriveTwoSideOrder,
   evaluateSweptContact,
+  evidenceArtifactClaimPath,
   extractBladeCapsule,
   packageMapCommit,
   parseReferenceZip,
   presentationCommit,
+  privateBoardClaimPath,
   rasterizeObjectMask,
   referenceCommit,
   referenceImageDimensions,
@@ -63,6 +65,7 @@ import {
   validatePublicPackageReceipt,
   validateReferenceSelection,
   validateRoundCommitment,
+  verifyEvidenceManifestFiles,
   verifyReferenceSelectionFiles,
   verifyPackageMapReveal,
   topologyContinuityChecks,
@@ -1027,14 +1030,16 @@ function evidenceManifestFixture() {
     terminalTick: traceID === 'SHIFT_PLUS_7' ? 87 : 80
   })));
   const artifacts = [];
+  const custodyBytesByPath = new Map();
   let serial = 0;
   const add = (run, kind, ticks) => {
     const heavyEdge = run.traceID === 'SHIFT_PLUS_7' ? 31 : ['NO_HEAVY', 'LIGHT_BASELINE'].includes(run.traceID) ? null : 24;
-    artifacts.push({
-      path: `${run.alias}/${run.traceID}/${String(serial += 1).padStart(4, '0')}-${kind}.bin`,
+    serial += 1;
+    const bytes = Uint8Array.of(serial & 0xff);
+    const artifact = {
       kind,
-      byteCount: 1,
-      sha256: digest,
+      byteCount: bytes.byteLength,
+      sha256: createHash('sha256').update(bytes).digest('hex'),
       alias: run.alias,
       packageArchiveSha256: digest,
       productionOutputTreeSha256: digest,
@@ -1052,7 +1057,10 @@ function evidenceManifestFixture() {
       sourceArtifactSha256s: [],
       derivation: 'Evaluator-owned exact production evidence.',
       custody: 'public'
-    });
+    };
+    artifact.path = evidenceArtifactClaimPath(artifact, run.traceID);
+    artifacts.push(artifact);
+    custodyBytesByPath.set(artifact.path, bytes);
   };
   for (const run of captureRuns) {
     for (const kind of ['state-log', 'event-log', 'geometry-log', 'frame-evidence', 'run-receipt']) add(run, kind, [0]);
@@ -1068,6 +1076,24 @@ function evidenceManifestFixture() {
     }
   }
   const order = buildBlindOrderManifest(Buffer.alloc(32, 0x11), aliases);
+  const boardBytes = new Uint8Array(1600 * 900 * 4).fill(0x42);
+  const boardSha256 = createHash('sha256').update(boardBytes).digest('hex');
+  const privateBoardHashes = order.ballots.map((ballot) => {
+    const board = {
+      boardID: ballot.itemID,
+      byteCount: boardBytes.byteLength,
+      sha256: boardSha256,
+      orderDigest: ballot.orderDigest,
+      leftToken: ballot.left,
+      rightToken: ballot.right,
+      leftSourceSha256: digest,
+      rightSourceSha256: digest,
+      compositorHelperSha256: digest
+    };
+    board.path = privateBoardClaimPath(board);
+    custodyBytesByPath.set(board.path, boardBytes);
+    return board;
+  });
   const document = {
     schema: 'p30.r012a.evidence-manifest.v1',
     protocolID: PROTOCOL_ID,
@@ -1076,15 +1102,7 @@ function evidenceManifestFixture() {
     blindOrderManifestSha256: order.manifestSha256,
     captureRuns,
     artifacts,
-    privateBoardHashes: order.ballots.map((ballot) => ({
-      boardID: ballot.itemID,
-      byteCount: 1600 * 900 * 4,
-      sha256: digest,
-      orderDigest: ballot.orderDigest,
-      leftSourceSha256: digest,
-      rightSourceSha256: digest,
-      compositorHelperSha256: digest
-    }))
+    privateBoardHashes
   };
   Object.defineProperty(document, 'blindOrderManifest', { value: order, enumerable: false });
   Object.defineProperty(document, 'publicPackageReceipt', {
@@ -1102,13 +1120,14 @@ function evidenceManifestFixture() {
     },
     enumerable: false
   });
+  Object.defineProperty(document, 'custodyBytesByPath', { value: custodyBytesByPath, enumerable: false });
   return document;
 }
 
 test('evidence custody requires every trace, canonical tick 20-80 frames, strips, crops, ROI, sequence, and nine private board hashes', () => {
   const fixture = evidenceManifestFixture();
   assert.doesNotThrow(() => validateEvidenceManifest(
-    fixture, null, fixture.blindOrderManifest, fixture.blindOrderManifest.presentationCommit,
+    fixture, fixture.custodyBytesByPath, fixture.blindOrderManifest, fixture.blindOrderManifest.presentationCommit,
     fixture.publicPackageReceipt
   ));
   const missing = structuredClone(fixture);
@@ -1116,7 +1135,7 @@ test('evidence custody requires every trace, canonical tick 20-80 frames, strips
   missing.artifacts.splice(index, 1);
   assert.throws(
     () => validateEvidenceManifest(
-      missing, null, fixture.blindOrderManifest, fixture.blindOrderManifest.presentationCommit,
+      missing, fixture.custodyBytesByPath, fixture.blindOrderManifest, fixture.blindOrderManifest.presentationCommit,
       fixture.publicPackageReceipt
     ),
     (error) => evaluatorCode(error, 'EVIDENCE_CONTACT_ROI_MISSING')
@@ -1125,9 +1144,345 @@ test('evidence custody requires every trace, canonical tick 20-80 frames, strips
   publicBoard.artifacts.push({ ...publicBoard.artifacts[0], path: 'public/board.bin', kind: 'blind-board' });
   assert.throws(
     () => validateEvidenceManifest(
-      publicBoard, null, fixture.blindOrderManifest, fixture.blindOrderManifest.presentationCommit,
+      publicBoard, fixture.custodyBytesByPath, fixture.blindOrderManifest, fixture.blindOrderManifest.presentationCommit,
       fixture.publicPackageReceipt
     ),
-    (error) => evaluatorCode(error, 'EVIDENCE_BOARD_MUST_REMAIN_PRIVATE')
+    (error) => evaluatorCode(error, 'EVIDENCE_ARTIFACT_KIND_INVALID')
+  );
+});
+
+function validateEvidenceFixture(document, custodyBytesByPath, fixture) {
+  return validateEvidenceManifest(
+    document,
+    custodyBytesByPath,
+    fixture.blindOrderManifest,
+    fixture.blindOrderManifest.presentationCommit,
+    fixture.publicPackageReceipt
+  );
+}
+
+function assertEvidenceRejects(document, custodyBytesByPath, fixture, code) {
+  assert.throws(
+    () => validateEvidenceFixture(document, custodyBytesByPath, fixture),
+    (error) => evaluatorCode(error, code)
+  );
+}
+
+test('evidence custody rejects the one-byte-for-everything critic reproducer', () => {
+  const fixture = evidenceManifestFixture();
+  assert.equal(fixture.artifacts.length, 572);
+  const shared = structuredClone(fixture);
+  const sharedBytes = Uint8Array.of(0x41);
+  const sharedSha256 = createHash('sha256').update(sharedBytes).digest('hex');
+  for (const artifact of shared.artifacts) {
+    artifact.path = 'one-byte-for-everything.bin';
+    artifact.byteCount = sharedBytes.byteLength;
+    artifact.sha256 = sharedSha256;
+  }
+  shared.privateBoardHashes = [];
+  assertEvidenceRejects(
+    shared,
+    new Map([['one-byte-for-everything.bin', sharedBytes]]),
+    fixture,
+    'EVIDENCE_ARTIFACT_PATH_DUPLICATE'
+  );
+});
+
+test('evidence custody requires unique normalized paths while allowing equal bytes in separately declared files', () => {
+  const fixture = evidenceManifestFixture();
+  const artifactPaths = fixture.artifacts.map((artifact) => artifact.path);
+  const artifactHashes = fixture.artifacts.map((artifact) => artifact.sha256);
+  assert.equal(new Set(artifactPaths).size, 572);
+  assert.ok(new Set(artifactHashes).size < artifactHashes.length);
+  assert.equal(fixture.custodyBytesByPath.size, 581);
+  assert.doesNotThrow(() => validateEvidenceFixture(fixture, fixture.custodyBytesByPath, fixture));
+
+  const claimCaseCollision = structuredClone(fixture);
+  claimCaseCollision.artifacts[1].path = claimCaseCollision.artifacts[0].path.toUpperCase();
+  assertEvidenceRejects(
+    claimCaseCollision,
+    fixture.custodyBytesByPath,
+    fixture,
+    'EVIDENCE_ARTIFACT_PATH_COLLISION'
+  );
+
+  const suppliedCaseCollision = new Map(fixture.custodyBytesByPath);
+  const [firstPath, firstBytes] = suppliedCaseCollision.entries().next().value;
+  suppliedCaseCollision.set(firstPath.toUpperCase(), firstBytes);
+  assertEvidenceRejects(
+    fixture,
+    suppliedCaseCollision,
+    fixture,
+    'EVIDENCE_CUSTODY_PATH_COLLISION'
+  );
+});
+
+test('evidence custody snapshots stateful path accessors before validation', () => {
+  const fixture = evidenceManifestFixture();
+  const stateful = structuredClone(fixture);
+  stateful.artifacts.forEach((artifact) => {
+    const declaredPath = artifact.path;
+    let reads = 0;
+    Object.defineProperty(artifact, 'path', {
+      enumerable: true,
+      configurable: true,
+      get() {
+        reads += 1;
+        return reads <= 5 ? declaredPath : 'collapsed.bin';
+      }
+    });
+  });
+  const collapsedBytes = new Map([[
+    'collapsed.bin',
+    fixture.custodyBytesByPath.get(fixture.artifacts.at(-1).path)
+  ]]);
+  for (const board of fixture.privateBoardHashes) {
+    collapsedBytes.set(board.path, fixture.custodyBytesByPath.get(board.path));
+  }
+  assertEvidenceRejects(
+    stateful,
+    collapsedBytes,
+    fixture,
+    'EVIDENCE_UNDECLARED_BYTES'
+  );
+});
+
+test('evidence custody rejects missing and undeclared artifact or private-board bytes', () => {
+  const fixture = evidenceManifestFixture();
+
+  const noCustody = null;
+  assertEvidenceRejects(fixture, noCustody, fixture, 'EVIDENCE_CUSTODY_BYTES_REQUIRED');
+
+  const missingArtifact = new Map(fixture.custodyBytesByPath);
+  missingArtifact.delete(fixture.artifacts[0].path);
+  assertEvidenceRejects(fixture, missingArtifact, fixture, 'EVIDENCE_ARTIFACT_BYTES_MISSING');
+
+  const missingBoard = new Map(fixture.custodyBytesByPath);
+  missingBoard.delete(fixture.privateBoardHashes[0].path);
+  assertEvidenceRejects(fixture, missingBoard, fixture, 'EVIDENCE_PRIVATE_BOARD_BYTES_MISSING');
+
+  const undeclared = new Map(fixture.custodyBytesByPath);
+  undeclared.set('evidence/private/boards/UNDECLARED/payload.rgba', Uint8Array.of(0x7f));
+  assertEvidenceRejects(fixture, undeclared, fixture, 'EVIDENCE_UNDECLARED_BYTES');
+
+  const forgedProof = new Map(fixture.custodyBytesByPath);
+  forgedProof.set(fixture.artifacts[0].path, new Proxy({}, {
+    get: (_target, key) => typeof key === 'symbol' ? true :
+      key === 'byteCount' ? fixture.artifacts[0].byteCount :
+      key === 'sha256' ? fixture.artifacts[0].sha256 : undefined
+  }));
+  assertEvidenceRejects(fixture, forgedProof, fixture, 'EVIDENCE_CUSTODY_BYTES_INVALID');
+
+  const missingBoardRecord = structuredClone(fixture);
+  missingBoardRecord.privateBoardHashes.pop();
+  assertEvidenceRejects(
+    missingBoardRecord,
+    fixture.custodyBytesByPath,
+    fixture,
+    'EVIDENCE_PRIVATE_BOARD_COUNT_INVALID'
+  );
+
+  const extraBoardRecord = structuredClone(fixture);
+  extraBoardRecord.privateBoardHashes.push(structuredClone(extraBoardRecord.privateBoardHashes[0]));
+  assertEvidenceRejects(
+    extraBoardRecord,
+    fixture.custodyBytesByPath,
+    fixture,
+    'EVIDENCE_PRIVATE_BOARD_COUNT_INVALID'
+  );
+});
+
+test('evidence custody binds every private board ID, path, hash, token order, and exact bytes', () => {
+  const fixture = evidenceManifestFixture();
+
+  const swappedPaths = structuredClone(fixture);
+  [swappedPaths.privateBoardHashes[0].path, swappedPaths.privateBoardHashes[1].path] =
+    [swappedPaths.privateBoardHashes[1].path, swappedPaths.privateBoardHashes[0].path];
+  assertEvidenceRejects(
+    swappedPaths,
+    fixture.custodyBytesByPath,
+    fixture,
+    'EVIDENCE_PRIVATE_BOARD_PATH_METADATA_MISMATCH'
+  );
+
+  const pairwiseIDSwap = structuredClone(fixture);
+  const firstPairwise = pairwiseIDSwap.privateBoardHashes.findIndex((board) => board.boardID === 'P1');
+  const secondPairwise = pairwiseIDSwap.privateBoardHashes.findIndex((board) => board.boardID === 'P2');
+  [pairwiseIDSwap.privateBoardHashes[firstPairwise].boardID, pairwiseIDSwap.privateBoardHashes[secondPairwise].boardID] =
+    [pairwiseIDSwap.privateBoardHashes[secondPairwise].boardID, pairwiseIDSwap.privateBoardHashes[firstPairwise].boardID];
+  assertEvidenceRejects(
+    pairwiseIDSwap,
+    fixture.custodyBytesByPath,
+    fixture,
+    'EVIDENCE_PRIVATE_BOARD_PATH_METADATA_MISMATCH'
+  );
+
+  const changedHash = structuredClone(fixture);
+  changedHash.privateBoardHashes[0].sha256 = 'a'.repeat(64);
+  assertEvidenceRejects(
+    changedHash,
+    fixture.custodyBytesByPath,
+    fixture,
+    'EVIDENCE_PRIVATE_BOARD_PATH_METADATA_MISMATCH'
+  );
+
+  const changedSource = structuredClone(fixture);
+  changedSource.privateBoardHashes[0].leftSourceSha256 = 'c'.repeat(64);
+  assertEvidenceRejects(
+    changedSource,
+    fixture.custodyBytesByPath,
+    fixture,
+    'EVIDENCE_PRIVATE_BOARD_PATH_METADATA_MISMATCH'
+  );
+
+  const swappedOrder = structuredClone(fixture);
+  [swappedOrder.privateBoardHashes[0], swappedOrder.privateBoardHashes[1]] =
+    [swappedOrder.privateBoardHashes[1], swappedOrder.privateBoardHashes[0]];
+  assertEvidenceRejects(
+    swappedOrder,
+    fixture.custodyBytesByPath,
+    fixture,
+    'EVIDENCE_PRIVATE_BOARD_ORDER_MISMATCH'
+  );
+
+  const wrongBoardBytes = new Map(fixture.custodyBytesByPath);
+  wrongBoardBytes.set(fixture.privateBoardHashes[0].path, new Uint8Array(1600 * 900 * 4).fill(0x43));
+  assertEvidenceRejects(
+    fixture,
+    wrongBoardBytes,
+    fixture,
+    'EVIDENCE_PRIVATE_BOARD_BYTES_MISMATCH'
+  );
+
+  class LyingByteLength extends Uint8Array {
+    get byteLength() { return 1600 * 900 * 4; }
+  }
+  const zeroByteBoard = structuredClone(fixture);
+  const zeroByteCustody = new Map(fixture.custodyBytesByPath);
+  const zeroBoard = zeroByteBoard.privateBoardHashes[0];
+  const oldPath = zeroBoard.path;
+  const emptyBytes = new LyingByteLength(0);
+  zeroBoard.sha256 = createHash('sha256').update(emptyBytes).digest('hex');
+  zeroBoard.path = privateBoardClaimPath(zeroBoard);
+  zeroByteCustody.delete(oldPath);
+  zeroByteCustody.set(zeroBoard.path, emptyBytes);
+  assertEvidenceRejects(
+    zeroByteBoard,
+    zeroByteCustody,
+    fixture,
+    'EVIDENCE_PRIVATE_BOARD_BYTES_MISMATCH'
+  );
+});
+
+test('evidence custody binds alias, run, trace, tick, and kind metadata to each artifact path', () => {
+  const fixture = evidenceManifestFixture();
+  const sourceIndex = 0;
+  const source = fixture.artifacts[sourceIndex];
+  const sourceRun = fixture.captureRuns.find((run) =>
+    run.alias === source.alias && run.runProfileID === source.runProfileID
+  );
+  const otherAlias = fixture.aliases.find((alias) => alias !== source.alias);
+  const otherAliasRun = fixture.captureRuns.find((run) =>
+    run.alias === otherAlias && run.traceID === sourceRun.traceID
+  );
+
+  const aliasCrossing = structuredClone(fixture);
+  const counterpartIndex = aliasCrossing.artifacts.findIndex((artifact) =>
+    artifact.alias === otherAlias && artifact.runProfileID === otherAliasRun.runProfileID &&
+    artifact.kind === source.kind && artifact.absoluteTicks.length === 1 && artifact.absoluteTicks[0] === 0
+  );
+  aliasCrossing.artifacts.splice(counterpartIndex, 1);
+  aliasCrossing.artifacts[sourceIndex].alias = otherAlias;
+  aliasCrossing.artifacts[sourceIndex].runProfileID = otherAliasRun.runProfileID;
+  assertEvidenceRejects(
+    aliasCrossing,
+    fixture.custodyBytesByPath,
+    fixture,
+    'EVIDENCE_ARTIFACT_PATH_METADATA_MISMATCH'
+  );
+
+  const otherRun = fixture.captureRuns.find((run) =>
+    run.alias === source.alias && run.traceID !== sourceRun.traceID
+  );
+  const runCrossing = structuredClone(fixture);
+  const otherRunCounterpart = runCrossing.artifacts.findIndex((artifact) =>
+    artifact.alias === source.alias && artifact.runProfileID === otherRun.runProfileID &&
+    artifact.kind === source.kind && artifact.absoluteTicks.length === 1 && artifact.absoluteTicks[0] === 0
+  );
+  runCrossing.artifacts.splice(otherRunCounterpart, 1);
+  runCrossing.artifacts[sourceIndex].runProfileID = otherRun.runProfileID;
+  assertEvidenceRejects(
+    runCrossing,
+    fixture.custodyBytesByPath,
+    fixture,
+    'EVIDENCE_ARTIFACT_PATH_METADATA_MISMATCH'
+  );
+
+  const tickCrossing = structuredClone(fixture);
+  tickCrossing.artifacts[sourceIndex].absoluteTicks = [1];
+  tickCrossing.artifacts[sourceIndex].heavyRelativeTicks = [null];
+  assertEvidenceRejects(
+    tickCrossing,
+    fixture.custodyBytesByPath,
+    fixture,
+    'EVIDENCE_ARTIFACT_PATH_METADATA_MISMATCH'
+  );
+
+  const kindCrossing = structuredClone(fixture);
+  kindCrossing.artifacts[sourceIndex].kind = 'diagnostic-mask';
+  assertEvidenceRejects(
+    kindCrossing,
+    fixture.custodyBytesByPath,
+    fixture,
+    'EVIDENCE_ARTIFACT_PATH_METADATA_MISMATCH'
+  );
+
+  const duplicateClaim = structuredClone(fixture);
+  const duplicate = structuredClone(duplicateClaim.artifacts[sourceIndex]);
+  const duplicateBytes = Uint8Array.of(0x99, 0x98);
+  duplicate.byteCount = duplicateBytes.byteLength;
+  duplicate.sha256 = createHash('sha256').update(duplicateBytes).digest('hex');
+  duplicate.path = evidenceArtifactClaimPath(duplicate, sourceRun.traceID);
+  duplicateClaim.artifacts.push(duplicate);
+  const duplicateClaimBytes = new Map(fixture.custodyBytesByPath);
+  duplicateClaimBytes.set(duplicate.path, duplicateBytes);
+  assertEvidenceRejects(
+    duplicateClaim,
+    duplicateClaimBytes,
+    fixture,
+    'EVIDENCE_ARTIFACT_CLAIM_DUPLICATE'
+  );
+});
+
+test('filesystem evidence verification requires the exact declared file set', async (context) => {
+  const fixture = evidenceManifestFixture();
+  const evidenceRoot = await mkdtemp(join(tmpdir(), 'p30-r012-evidence-'));
+  context.after(() => rm(evidenceRoot, { recursive: true, force: true }));
+  for (const [path, bytes] of fixture.custodyBytesByPath) {
+    const absolute = join(evidenceRoot, path);
+    await mkdir(dirname(absolute), { recursive: true });
+    await writeFile(absolute, bytes);
+  }
+  const verified = await verifyEvidenceManifestFiles(
+    fixture,
+    evidenceRoot,
+    fixture.blindOrderManifest,
+    fixture.blindOrderManifest.presentationCommit,
+    fixture.publicPackageReceipt
+  );
+  assert.equal(verified.evidenceFilesVerified, 581);
+  assert.equal(verified.privateBoardFilesVerified, 9);
+  assert.match(verified.evidenceTreeSha256, /^[0-9a-f]{64}$/u);
+
+  await writeFile(join(evidenceRoot, 'undeclared.bin'), Uint8Array.of(0x01));
+  await assert.rejects(
+    () => verifyEvidenceManifestFiles(
+      fixture,
+      evidenceRoot,
+      fixture.blindOrderManifest,
+      fixture.blindOrderManifest.presentationCommit,
+      fixture.publicPackageReceipt
+    ),
+    (error) => evaluatorCode(error, 'EVIDENCE_UNDECLARED_BYTES')
   );
 });
