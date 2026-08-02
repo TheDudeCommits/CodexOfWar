@@ -1,10 +1,10 @@
 {
-  "schema": "cow.public-browser-builder.v1",
+  "schema": "cow.public-browser-critic.v1",
   "piece": "P30",
   "round": 7,
   "date": "2026-08-02",
-  "status": "selected-frozen-review-candidate",
-  "acceptanceScope": "Two isolated camera builders passed the technical gate. The stronger adaptive candidate is frozen and a fresh independent critic is running; no visual verdict or acceptance claim is made.",
+  "status": "rejected-candidate-evidence",
+  "acceptanceScope": "Two isolated camera builders and every candidate-runtime technical gate passed, but the fresh independent critic rejected the frozen adaptive candidate at 34/100 with 0/3 focused and 0/6 overall wins. This is rejected evidence, not acceptance.",
   "frozenCommit": "6b953f563c68a81f4635aaa081bfeb664f3aee57",
   "selection": {
     "selectedBuilder": "B",
@@ -145,14 +145,76 @@
       "phase": "recovery",
       "tick": 41,
       "path": "/captures/P30/round-007/S05.png",
-      "bytes": 2138449,
-      "sha256": "56a4efecbe0a57e192d8026bdc2f589191ba7c3022f3073f6e3f79a9c1af28f7"
+      "bytes": 2138915,
+      "sha256": "fbbaffd91498e4f01a12386dabe99dee6e27122426dbcec40692af74edcc7f60"
     }
   ],
-  "activeGap": {
-    "id": "combat-camera-presentation",
-    "status": "pending-independent-verdict",
-    "summary": "The selected camera passes every builder and root technical gate. Its visual result remains unaccepted until the fresh independent critic completes the frozen review."
+  "critic": {
+    "status": "REJECT",
+    "accepted": false,
+    "qualityScore": 34,
+    "scoreOutOf": 100,
+    "focusedCandidateWins": 0,
+    "focusedComparisonCount": 3,
+    "overallCandidateWins": 0,
+    "overallComparisonCount": 6,
+    "categoriesAtLeastNine": 0,
+    "categoryCount": 10,
+    "mappingSealedBeforeScoring": true,
+    "scoresSealedBeforeReveal": true,
+    "candidateRuntimeTechnicalStatus": "PASS",
+    "publicHashes": {
+      "mappingLockSha256": "1d97a0a72da6672e43e822eba8433339cfff58300ebd00ea7a000f9a3ee2b4d1",
+      "anonymousScoreLockSha256": "15a37e8e07bc72a98e2083132bc8b7c9a692540699f426550fd890e8d22272b4",
+      "revealAttestationSha256": "c3a7b7fcef7ddba73448d3108601d62817d8027855bb3970dd474b077b1d1670",
+      "bundleManifestSha256": "d1710fcc956f4918c7e14fa9a7b3dd92a755d87da33cdf5bf4555ffdfbb5cb1a",
+      "resultSha256": "5c10bffc3a3d8b2fcaaccf66024cb43b93b6487ac4f601d810eef020fd82ecdb",
+      "reportSha256": "8b3455416de0fb75e9a06eb39f28847264048951f8bbf34680a428c684366d95",
+      "privacyProofSha256": "9697820366b7b5e1612e03c09cfcb4afc7d79258a1721eff4c883ae11813f5ef"
+    },
+    "categoryMeans": {
+      "cameraAndComposition": 4.5,
+      "characterScaleAndSilhouette": 5.33,
+      "anatomyAndPoseCredibility": 3,
+      "materialsAndSurfaceDetail": 3,
+      "lightingAndTonalSeparation": 3.83,
+      "environmentDepthAndWorldDensity": 3.83,
+      "combatContactAndImpact": 2.83,
+      "motionFxAndReadability": 2,
+      "cinematicCohesionAndAtmosphere": 2.83,
+      "overallFinishAndArtifactControl": 2.83
+    },
+    "technicalPasses": [
+      "Node 24 clean install, typecheck, lint, five simulation tests, five camera tests, production build, and three browser smoke tests",
+      "Six fresh headed Chrome 150 RGB 1600x900 DPR1 WebGL2 Metal captures",
+      "18/18 authored runtime assets with no fallback",
+      "Three cold launches with 2599.002 millisecond maximum",
+      "86 calls, 204155 triangles, 32 textures, and 38 geometries within caps",
+      "59.468 fps mean and 18.6 millisecond p95 over 30.126 seconds with no resource growth",
+      "WebGL context loss and restore",
+      "Three byte-identical camera replays, focused framing, and wall plus clear boom obstruction",
+      "106-entry freeze audit with only three authorized camera and diagnostic changes"
+    ],
+    "technicalFailures": [
+      "Repository-wide LFS pointer policy still fails on eight historical direct PNG blobs; all runtime asset bytes and LFS OIDs pass"
+    ]
   },
-  "largestKnownResidualWeakness": "Frozen anatomy, poses, effects, materials, and arena art remain visibly prototype-like even though the duel now fills the frame more effectively."
+  "activeGap": {
+    "id": "combat-fx-language",
+    "status": "round008-building",
+    "summary": "Motion FX scored 2/10. The translucent sweep fan, grid-like trail, block-shaped sparks, and detached hit feedback read as debug overlays rather than blade-bound energy and contact-local force."
+  },
+  "largestKnownResidualWeakness": "Combat FX language: debug-like trail and impact geometry actively flatten the otherwise improved S03-S05 framing.",
+  "round008Gate": {
+    "scope": "Replace only the weapon-trail FX surface inside CharacterViews.ts and the combat FX implementation in CombatFx.ts, plus focused deterministic FX tests and telemetry.",
+    "requiredBehavior": [
+      "Narrow deterministic blade-edge ribbon with no screen-sized fan or grid",
+      "S04 contact-local flash and directional fine spark or ember burst centered within 24 pixels of the contact marker",
+      "FX absent at S03, peak at S04, and dissipated by S05 without obscuring either actor or the full blade",
+      "No new texture slot and no resource-cap regression",
+      "Three clean FX telemetry replays byte-identical at ticks 29, 34, and 41"
+    ],
+    "frozenOutsideScope": "Camera, simulation, timing, input, characters, clips, weapon, materials, environment, lighting, HUD, post, manifest, and all non-FX code remain byte-exact.",
+    "visualAcceptance": "Focused 3/3, overall at least 5/6, total at least 95/100, and every category at least 9/10"
+  }
 }
