@@ -1,0 +1,68 @@
+{
+  "schema": "p30.round009.preintegration-blind-selector.v1",
+  "recordedAtUtc": "2026-08-02T06:18:22Z",
+  "acceptanceCritic": false,
+  "acceptanceClaimed": false,
+  "baselineCommit": "afc1063812473087a645271e2c33adcd0534225a",
+  "candidates": {
+    "cinder": {
+      "sourceCommit": "ede933054c327d2b10c6a683cad99f22a799632f",
+      "builder": "B",
+      "captureSha256": {
+        "tick29": "614df9d41ea7e745f51364066e6db6bf6960f07fe70eaf96e917c1a39e484465",
+        "tick34": "4ab7b21ba4bf4b9b94c6046b5c3ccfa0d25248b4de92ecc0e8b09b5382f5e480",
+        "tick41": "c6a2d87903b29e6fef9113b984b7f5f4a10317fd834dc605a5499fd0209a7a85"
+      },
+      "score": {
+        "anticipation": 14,
+        "impact": 15,
+        "recovery": 11,
+        "causality": 12,
+        "silhouetteAndPolish": 5,
+        "total": 57
+      }
+    },
+    "quartz": {
+      "sourceCommit": "f95fd2942fc0f60dc803ec433a3d10f7a581fc41",
+      "builder": "A",
+      "captureSha256": {
+        "tick29": "9e6a67f29c1b8ba6c2646a507a0df9b9a30a90ad913f9cf77cbd4081fd5a6f92",
+        "tick34": "8d82517632f7a70258c363447e37b49a8c3cfe485bc6daeaa50db6e5a9be1d14",
+        "tick41": "48e9a6341de1226f3da80df329b2992aad6734389eeba9a41a9bac8d8d953d18"
+      },
+      "score": {
+        "anticipation": 13,
+        "impact": 14,
+        "recovery": 12,
+        "causality": 12,
+        "silhouetteAndPolish": 5,
+        "total": 56
+      }
+    }
+  },
+  "selectorContract": {
+    "anonymousVisualsOnly": true,
+    "sourceAndReceiptAccessDenied": true,
+    "aaaTotalFloor": 90,
+    "sectionFloors": {
+      "anticipation": 16,
+      "impact": 24,
+      "recovery": 16,
+      "causality": 17
+    }
+  },
+  "verdict": {
+    "strongerAnonymousCandidate": "cinder",
+    "selectedBuilder": "B",
+    "selectedSourceCommit": "ede933054c327d2b10c6a683cad99f22a799632f",
+    "margin": 1,
+    "confidence": "very-high-neither-aaa; moderate-cinder-over-quartz",
+    "aaaFloorCleared": false,
+    "bothDisqualified": true,
+    "disqualifiers": [
+      "Tick 34 reads as a broad FX and weapon volume penetrating the target instead of clean exterior contact.",
+      "Tick 41 reads as a reversed overhead re-windup instead of same-direction recovery."
+    ],
+    "singleBiggestRemainingGap": "Replace tick 41's overhead re-cock with unmistakable same-direction overshoot and grounded braking so the strike carries through contact instead of visually starting another attack."
+  }
+}
