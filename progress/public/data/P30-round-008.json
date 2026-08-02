@@ -1,10 +1,10 @@
 {
-  "schema": "cow.public-browser-candidate.v1",
+  "schema": "cow.public-browser-critic.v1",
   "piece": "P30",
   "round": 8,
   "date": "2026-08-02",
-  "status": "selected-candidate-under-independent-review",
-  "acceptanceScope": "Two fresh isolated combat-FX builders completed the same frozen assignment. Root selected Builder B, reproduced every selected frame byte-for-byte, passed all 16 technical gates, and froze commit 5359f91bad13fe83e70169231e519911a8fbebc4 for a fresh independent blind critic. No quality acceptance or critic verdict is claimed.",
+  "status": "rejected-candidate-evidence",
+  "acceptanceScope": "Two fresh isolated combat-FX builders completed the same frozen assignment. Root selected Builder B, reproduced every selected frame byte-for-byte, passed all 16 technical gates, and froze commit 5359f91bad13fe83e70169231e519911a8fbebc4. A fresh independent critic then recaptured the actual game, sealed mapping and scores before reveal, and rejected it at 39.3/100 with 0/3 focused and 0/6 overall wins. This is rejected evidence, not acceptance.",
   "frozenCommit": "5359f91bad13fe83e70169231e519911a8fbebc4",
   "selection": {
     "selectedBuilder": "B",
@@ -114,40 +114,80 @@
       "phase": "startup · FX absent",
       "tick": 29,
       "path": "/captures/P30/round-008/S03.png",
-      "bytes": 2127016,
-      "sha256": "5c8398ae257f73e779d60c26d0e3c07399b9f82e77067f4bf4cd111544c598e1"
+      "bytes": 2127763,
+      "sha256": "2d2e6e7b34499ee5d5873b3f2bbca14e81b42eac7d5cd0fa85aeeba3883ad177"
     },
     {
       "id": "S04",
       "phase": "active · FX peak",
       "tick": 34,
       "path": "/captures/P30/round-008/S04.png",
-      "bytes": 2139804,
-      "sha256": "c8c2ba2df5296bf92e9b64a173e4f9c364c6e432bfec8250de05b5f2b8296ce5"
+      "bytes": 2140313,
+      "sha256": "a1f5cdd92d7f15a6810b1d565d238577f9eef6469b662ab016d5a122c3bb4296"
     },
     {
       "id": "S05",
       "phase": "recovery · FX dissipated",
       "tick": 41,
       "path": "/captures/P30/round-008/S05.png",
-      "bytes": 2136130,
-      "sha256": "6bae9a8d3d7337c1a9292fd1edcd4c0db6598400f81166086b521a0dc042ea3b"
+      "bytes": 2136439,
+      "sha256": "57a5127dfb0fd6bd8f4c75cdff8e38b8fa904098153c08bc5462b0e0b5abd5bc"
     }
   ],
   "critic": {
-    "status": "RUNNING",
-    "accepted": null,
-    "qualityScore": null,
+    "status": "REJECT",
+    "accepted": false,
+    "qualityScore": 39.3,
     "scoreOutOf": 100,
-    "focusedCandidateWins": null,
+    "focusedCandidateWins": 0,
     "focusedComparisonCount": 3,
-    "overallCandidateWins": null,
+    "overallCandidateWins": 0,
     "overallComparisonCount": 6,
-    "categoriesAtLeastNine": null,
+    "categoriesAtLeastNine": 0,
     "categoryCount": 10,
-    "mappingSealedBeforeScoring": null,
-    "scoresSealedBeforeReveal": null,
+    "mappingSealedBeforeScoring": true,
+    "scoresSealedBeforeReveal": true,
     "candidateRuntimeTechnicalStatus": "PASS",
+    "categoryScores": {
+      "characterFidelity": 3.2,
+      "environmentMaterialFidelity": 3.8,
+      "lightingColor": 3.4,
+      "cameraComposition": 5,
+      "combatPoseReadability": 5.5,
+      "motionFxReadability": 3.6,
+      "uiPolishCohesion": 4,
+      "depthAtmosphere": 3.2,
+      "animationPhysicalCredibility": 4.5,
+      "overallAaaFinish": 3.1
+    },
+    "publicHashes": {
+      "mappingSealSha256": "defdae170bc6b0bfbea004d8f433526eda99b8d7c785d48d97c62eb2ed95a171",
+      "scoreSealSha256": "9b5f6e70a36681bc5ff5d597d7b8741a1c364b3b890a7fba66ed3eea0b000c3a",
+      "mappingRevealSha256": "3d919d872cd2c6ec2a6e730100d86a50fdd5ecdad9fd248bd7ffbcfdb994e2b6",
+      "verdictSha256": "52baf142ed540f7177264753b3de1851bdb33f2d3c98854db0de5dd40860f0a5",
+      "captureRuntimeReceiptSha256": "3d8e969359e5859b5accc06d94f601933d84e6c8b89cc0866db8e6cf2c3aa02b"
+    },
+    "captureRuntimeHardGates": {
+      "exactCommit": true,
+      "isolatedWorktree": true,
+      "cleanNode24Install": true,
+      "typecheckLintTestsBuild": true,
+      "productionServer": true,
+      "headedChromeWebgl2": true,
+      "viewport1600x900Dpr1": true,
+      "productionAssetsNoFallback": true,
+      "noRuntimeOrConsoleErrors": true,
+      "focusedCaptureByteDeterminism": true,
+      "contextLossRestore": true,
+      "combatLifecycleEvents": true,
+      "allPassed": true
+    },
+    "supplementalVisualFramingTelemetry": {
+      "allPassed": false,
+      "initialBladeInsideSafeFrame": false,
+      "dodgePlayerHeightGate": false,
+      "classification": "Visual composition evidence, not capture or runtime validity"
+    },
     "acceptanceClaimed": false
   },
   "reviewGate": {
@@ -157,6 +197,21 @@
     "categoryRequirement": "Every category at least 9/10",
     "hardGateRequirement": "All candidate runtime and capture gates pass"
   },
-  "qualityStatus": "pending-fresh-independent-blind-critic",
-  "largestKnownResidualWeakness": "Pending critic judgment. Builder selection explicitly did not claim benchmark-level quality."
+  "activeGap": {
+    "id": "physically-coherent-three-beat-sword-contact",
+    "status": "round009-building",
+    "summary": "The candidate reads as three posed animation samples rather than one force chain: startup lacks stored body torque, impact lacks concentrated opposing force, and recovery lacks weighted recoil and settle."
+  },
+  "round009Gate": {
+    "scope": "Rebuild only the deterministic animation and presentation transforms for frozen ticks 29, 34, and 41 while camera, character meshes and materials, arena, HUD, simulation mechanics and event timing, and Round008 FX remain exact.",
+    "requiredBehavior": [
+      "Tick 29 reads as stored whole-body anticipation with a clear blade silhouette and planted weight",
+      "Tick 34 concentrates contact into one readable line of action with opposing force and synchronized target reaction",
+      "Tick 41 resolves into weighted hero follow-through plus target recoil and settle rather than a disconnected pose",
+      "All three focused frames remain deterministic and preserve every capture and runtime hard gate"
+    ],
+    "visualAcceptance": "Focused 3/3, overall at least 5/6, total at least 95/100, and every category at least 9/10"
+  },
+  "qualityStatus": "rejected-by-fresh-independent-blind-critic",
+  "largestKnownResidualWeakness": "Rebuild frozen ticks 29, 34, and 41 as one physically coherent AAA sword-contact beat with readable anticipation, concentrated impact at tick 34, and weighted recoil and recovery, without changing the camera, character assets, arena, or HUD."
 }

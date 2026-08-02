@@ -19,11 +19,11 @@
   ],
   "activeBuild": {
     "pieceId": "P30",
-    "round": 8,
-    "roundLabel": "P30 · Round 008",
-    "status": "review-ready",
-    "builder": "Selected Combat-FX Candidate · Independent Critic Running",
-    "brief": "Builder B's blade-bound cyan contour and contact-local warm directional burst are frozen at exact commit 5359f91bad13fe83e70169231e519911a8fbebc4. A fresh isolated critic is recapturing the actual Three.js game and running the sealed blind reference gate. This is pending candidate evidence, not acceptance.",
+    "round": 9,
+    "roundLabel": "P30 · Round 009",
+    "status": "building",
+    "builder": "Isolated Deterministic Combat-Beat Reconstruction",
+    "brief": "Rebuild only frozen ticks 29, 34, and 41 as one physically coherent sword-contact beat: stored anticipation, concentrated opposing force at impact, then weighted follow-through and recoil. Two fresh isolated Three.js builders are working from exact baseline afc1063812473087a645271e2c33adcd0534225a while camera, character assets and materials, arena, HUD, simulation timing, and Round008 FX remain frozen.",
     "facts": [
       "P00 is accepted as infrastructure; its blind visual baseline remains an explicit 28.33–76.67 loss.",
       "P10 remains paused after rejected Round 017 and the unfiled Unity Round 018 stop; it is not the active browser-work lane.",
@@ -32,21 +32,21 @@
       "A fresh read-only selector chose Builder B because its localized impact burst and directional slash contour made S04 contact more immediately readable; it explicitly did not claim benchmark quality.",
       "Root integrated Builder B at production commit 7e88906a168489938ae500ed5cb317b71a312970 and froze critic target 5359f91bad13fe83e70169231e519911a8fbebc4.",
       "Only CharacterViews.ts and CombatFx.ts differ from the Round007 baseline; the other 25 tracked production source files are byte-exact.",
-      "Root recaptured all six selected frames from the integrated production build and reproduced every PNG byte-for-byte.",
-      "S03 is FX-absent, S04 is peak, and S05 is dissipated; three clean telemetry replays at ticks 29, 34, and 41 are byte-identical.",
-      "The S04 contact projection error is 9.648 px against a 24 px limit; target FX coverage is 11.427%, blade coverage is 9.603%, and zero pixels are darkened.",
-      "All 18 authored assets load with no fallback, no texture slot was added, and all 16 technical gates pass.",
-      "Clean install, typecheck, lint, 5 simulation tests, 5 camera tests, 4 focused FX tests, production build, and 3 browser smoke tests pass.",
-      "Three root cold launches completed in 2.305 s, 2.638 s, and 2.184 s against the 4.109 s ceiling.",
-      "The 30.241-second headed interval averaged 59.537 fps with an 18.6 ms p95 and no resource growth.",
-      "Maximum selected-candidate cost is 87 calls, 203,175 triangles, 32 textures, and 41 geometries.",
-      "A fresh independent critic is now recapturing exact commit 5359f91bad13fe83e70169231e519911a8fbebc4 and must seal anonymous mapping and scores before reveal.",
-      "Round008 has no critic verdict, blind wins, quality score, category floor, or acceptance yet.",
+      "Root reproduced all six selected Round008 frames byte-for-byte and passed every one of 16 technical gates before critic handoff.",
+      "A fresh independent critic checked out exact commit 5359f91bad13fe83e70169231e519911a8fbebc4 in isolation and recaptured six headed Chrome 150 RGB frames from the actual production game.",
+      "The critic sealed randomized mapping first, sealed anonymous scores before reveal, and then rejected Round008 at 39.3/100.",
+      "Round008 won 0/3 focused combat comparisons and 0/6 overall comparisons; no category reached the required 9/10 floor.",
+      "Category scores are character 3.2, environment/material 3.8, lighting/color 3.4, camera/composition 5.0, combat pose/readability 5.5, motion FX/readability 3.6, UI 4.0, depth/atmosphere 3.2, animation/physical credibility 4.5, and overall AAA finish 3.1.",
+      "Every capture and runtime validity gate passes: exact commit, Node 24 clean install, tests and build, production serve, headed WebGL2, 1600×900 DPR 1, 18/18 assets, no fallback, no errors, focused determinism, lifecycle, and context restore.",
+      "Supplemental visual telemetry still fails the C01 blade safe frame and C06 player-height gate; those are visual composition failures, not capture invalidity.",
+      "The critic named exactly one gap: ticks 29, 34, and 41 read as disconnected pose samples instead of one physically coherent sword-contact force chain.",
+      "Round009 fans that single gap to two fresh isolated builders: physically grounded weight transfer and forceful anime-cinematic physicality.",
+      "Round009 may change only deterministic animation and presentation transforms plus focused tests and telemetry; camera, meshes, materials, arena, HUD, mechanics, event timing, and Round008 FX stay exact.",
       "Repository-wide LFS integrity also fails on eight historical PNG blobs, although all 18 runtime assets are real bytes.",
       "The global latest capture manifest remains intentionally pinned to accepted P00."
     ],
     "evidenceFingerprint": {
-      "auditContext": "Root-selected Round008 candidate frozen · independent critic running",
+      "auditContext": "Fresh independent Round008 critic complete",
       "browser": "Google Chrome 150",
       "graphics": "WebGL2 · ANGLE Metal Renderer: Apple M2",
       "headed": true,
@@ -55,79 +55,81 @@
       "deviceScaleFactor": 1
     },
     "evidenceBundle": {
-      "roundLabel": "P30 · Round 008 frozen candidate",
-      "status": "INDEPENDENT CRITIC RUNNING · NOT ACCEPTED",
+      "roundLabel": "P30 · Round 008 critic gate",
+      "status": "REJECT · 39.3/100 · FOCUSED 0/3 · OVERALL 0/6",
       "manifestPath": "/data/P30-round-008.json",
       "s01": {
-        "label": "S03 startup · selected candidate · FX absent",
+        "label": "S03 startup · rejected Round008 critic capture",
         "path": "/captures/P30/round-008/S03.png",
-        "sha256": "5c8398ae257f73e779d60c26d0e3c07399b9f82e77067f4bf4cd111544c598e1"
+        "sha256": "2d2e6e7b34499ee5d5873b3f2bbca14e81b42eac7d5cd0fa85aeeba3883ad177"
       },
       "diagnostic": {
-        "label": "S04 active hit · selected candidate · verdict pending",
+        "label": "S04 impact · rejected Round008 critic capture",
         "path": "/captures/P30/round-008/S04.png",
-        "sha256": "c8c2ba2df5296bf92e9b64a173e4f9c364c6e432bfec8250de05b5f2b8296ce5"
+        "sha256": "a1f5cdd92d7f15a6810b1d565d238577f9eef6469b662ab016d5a122c3bb4296"
       },
       "metrics": [
         {
           "label": "Verdict",
-          "value": "PENDING · CRITIC RUNNING"
+          "value": "REJECT · 39.3/100"
         },
         {
           "label": "Focused / overall",
-          "value": "PENDING · PENDING"
+          "value": "0/3 · 0/6"
         },
         {
           "label": "Category floor",
-          "value": "PENDING · REQUIRED 9/10"
+          "value": "0/10 at 9/10 · AAA 3.1/10"
         },
         {
-          "label": "FX contact",
-          "value": "9.648 px · LIMIT 24 px"
+          "label": "Critic hard gates",
+          "value": "ALL CAPTURE / RUNTIME PASS"
         },
         {
           "label": "Resource maximum",
           "value": "87 calls · 203,175 triangles · 32 textures · 41 geometries"
         },
         {
-          "label": "Root technical gate",
-          "value": "16/16 PASS · QUALITY PENDING"
+          "label": "Next isolated gap",
+          "value": "THREE-BEAT PHYSICAL CONTACT"
         }
       ],
       "checks": [
         "Headed Chrome 150 · Metal M2 · WebGL2 · 1600×900 · DPR 1",
         "Frozen critic commit · 5359f91bad13fe83e70169231e519911a8fbebc4",
-        "Two fresh isolated builders · fresh read-only selector · exact root recapture",
+        "Fresh independent critic · isolated worktree · six fresh production captures",
+        "Anonymous mapping sealed · scores sealed before reveal · public hashes filed",
         "18/18 authored assets · no fallback · production-authored runtime",
         "Node 24 clean install, typecheck, lint, fourteen unit tests, build, and three browser smoke tests",
         "Resource caps · 87 calls · 203,175 triangles · 32 textures · 41 geometries",
         "S03 absent · S04 peak · S05 dissipated · 9.648 px contact error",
-        "Three clean deterministic FX replays · ticks 29, 34, and 41 · byte-identical",
+        "Fresh focused critic captures · ticks 29, 34, and 41 · cold-reload byte-identical",
         "Wall and clear boom obstruction gates pass",
         "30.241-second timing, WebGL loss and restore, and resource stability pass",
         "27 tracked production source files · two authorized differences · zero unexpected"
       ],
       "limitations": [
-        "Focused blind gate · pending fresh independent critic",
-        "Overall blind gate · pending fresh independent critic",
-        "Quality score and category floor · pending fresh independent critic",
-        "Builder selection score is not a reference-benchmark acceptance",
-        "The frozen S04 still shows a visually busy blade lattice; quality acceptance is not claimed",
+        "Focused blind gate · 0/3 · hard fail",
+        "Overall blind gate · 0/6 · hard fail",
+        "Quality score · 39.3/100 · hard fail",
+        "Category floor · 0/10 at 9/10 · hard fail",
+        "Physical force chain · disconnected startup, impact, and recovery pose samples",
+        "Supplemental framing · C01 blade and C06 player-height visual failures",
         "Repository-wide LFS integrity · eight historical raw PNG blobs"
       ]
     },
-    "nextGate": "The fresh critic must recapture the actual frozen game, seal anonymous mapping and scores before reveal, win S03–S05 3/3, win at least 5/6 overall, score at least 95/100, put every category at least 9/10, and retain every hard gate. If it rejects, exactly one largest visual gap becomes the next isolated builder assignment."
+    "nextGate": "Round009 must preserve exact simulation timing and every frozen system while making tick 29 read as stored whole-body anticipation, tick 34 as concentrated opposing contact, and tick 41 as weighted follow-through and recoil. The selected candidate must then pass every hard gate, win focused 3/3 and overall at least 5/6, score at least 95/100, and put every category at least 9/10."
   },
   "canonicalCapture": {
     "shotId": "S04",
-    "name": "Round 008 active hit · selected candidate · verdict pending",
-    "purpose": "P30 Round 008 frozen critic-target evidence",
+    "name": "Round 008 impact · rejected critic capture",
+    "purpose": "P30 Round 008 fresh critic candidate evidence",
     "camera": "Adaptive 50-degree duel composer",
     "heroHeight": "360–540 px target",
-    "measuredHeroHeight": "388.327 px · technical pass · visual verdict pending",
-    "sceneRead": "The selected FX replacement binds a cyan contour to the authored blade and concentrates a warm directional burst at contact. Root reproduced the frame byte-for-byte and passed every technical gate; an independent blind quality verdict is still pending.",
+    "measuredHeroHeight": "388.327 px · technical pass · visual reject",
+    "sceneRead": "The localized blade contour and warm burst improve contact legibility, but startup, impact, and recovery still read as disconnected animation samples. The critic found no convincing stored torque, opposing force, or weighted recoil and rejected the full beat at 39.3/100.",
     "benchmarkId": "Fresh anonymous focused and six-pair gates",
-    "benchmarkPolicy": "The critic seals randomized mapping and anonymous scores before reveal; no acceptance is shown until all thresholds pass",
+    "benchmarkPolicy": "Aggregate 0/3 focused and 0/6 overall result plus public seal hashes; benchmark originals and private comparison metadata are not hosted",
     "capturePath": "/captures/P30/round-008/S04.png",
     "manifestPath": "/data/P30-round-008.json",
     "latestManifestPath": "/data/capture-manifest-latest.json",
@@ -814,15 +816,15 @@
       "round": 8,
       "label": "P30 · Round 008",
       "pieceId": "P30",
-      "phase": "Selected candidate frozen · fresh independent critic running",
-      "status": "review-ready",
+      "phase": "Fresh independent critic complete",
+      "status": "criticized",
       "date": "2026-08-02",
       "engineRun": true,
       "actualGameCapturePerformed": true,
-      "targetMatchedGameCapturePerformed": false,
+      "targetMatchedGameCapturePerformed": true,
       "gateQualifyingCapture": false,
       "builderBrief": "Replace only the weapon-trail surface in CharacterViews.ts and the contact implementation in CombatFx.ts with deterministic blade-bound energy and a contact-local directional burst; freeze all camera, simulation, input, character, material, world, lighting, HUD, post, manifest, and non-FX source.",
-      "evidence": "Two fresh isolated builders completed the same assignment from exact baseline 2cb09a9b8f496d24f93a05dd351051cd89351329. A fresh read-only selector chose Builder B. Root integrated it, reproduced all six headed Chrome 150 RGB frames byte-for-byte, passed all 16 technical gates, and froze exact critic target 5359f91bad13fe83e70169231e519911a8fbebc4. The fresh critic is running the actual game and sealed blind benchmark gate now; no quality score, blind win, category floor, verdict, or acceptance is claimed.",
+      "evidence": "Two fresh isolated builders completed the same assignment from exact baseline 2cb09a9b8f496d24f93a05dd351051cd89351329. A fresh read-only selector chose Builder B. Root integrated it, reproduced all six headed Chrome 150 RGB frames byte-for-byte, passed all 16 technical gates, and froze exact critic target 5359f91bad13fe83e70169231e519911a8fbebc4. A fresh independent critic then recaptured six actual-game frames, sealed mapping and scores before reveal, and rejected the candidate at 39.3/100 with 0/3 focused, 0/6 overall, and 0/10 categories at the required floor. Every capture and runtime hard gate passes.",
       "evidenceLinks": [
         "/captures/P30/round-008/S03.png",
         "/captures/P30/round-008/S04.png",
@@ -830,7 +832,40 @@
         "/data/P30-round-008.json"
       ],
       "critic": {
-        "status": "PENDING · FRESH INDEPENDENT CRITIC RUNNING",
+        "status": "REJECT · FRESH INDEPENDENT CRITIC COMPLETE",
+        "score": 39.3,
+        "focusedCandidatePreferredCount": 0,
+        "focusedComparisonCount": 3,
+        "candidatePreferredCount": 0,
+        "comparisonCount": 6,
+        "categoriesAtLeastNine": 0,
+        "categoryCount": 10,
+        "scoreLabel": "Fresh independent headed browser gate 39.3/100 · focused 0/3 · overall 0/6",
+        "preference": "Candidate won 0/3 focused and 0/6 aggregate blind comparisons",
+        "primaryGap": "physically coherent three-beat sword contact: rebuild frozen ticks 29, 34, and 41 as readable anticipation, concentrated opposing impact, and weighted follow-through plus recoil while all frozen systems remain exact."
+      }
+    },
+    {
+      "round": 9,
+      "label": "P30 · Round 009",
+      "pieceId": "P30",
+      "phase": "Two fresh isolated combat-beat builders running",
+      "status": "building",
+      "date": "2026-08-02",
+      "engineRun": false,
+      "actualGameCapturePerformed": false,
+      "targetMatchedGameCapturePerformed": false,
+      "gateQualifyingCapture": false,
+      "builderBrief": "Rebuild only deterministic animation and presentation transforms for frozen ticks 29, 34, and 41 as one physically coherent sword-contact force chain; freeze camera, character assets and materials, arena, HUD, simulation mechanics and timing, and Round008 FX.",
+      "evidence": "Round009 started from exact integrated evidence baseline afc1063812473087a645271e2c33adcd0534225a. Builder A is pursuing physically grounded whole-body weight transfer; Builder B is pursuing forceful anime-cinematic physicality without cheating contact. Neither has filed a candidate, capture, score, verdict, or acceptance yet.",
+      "evidenceLinks": [
+        "/captures/P30/round-008/S03.png",
+        "/captures/P30/round-008/S04.png",
+        "/captures/P30/round-008/S05.png",
+        "/data/P30-round-008.json"
+      ],
+      "critic": {
+        "status": "NOT STARTED · BUILDERS RUNNING",
         "score": null,
         "focusedCandidatePreferredCount": null,
         "focusedComparisonCount": 3,
@@ -1126,8 +1161,8 @@
       "id": "P30",
       "name": "Three.js playable nucleus",
       "group": "Vertical slice",
-      "status": "review-ready",
-      "outcome": "Round007 is rejected at 34/100. Round008 selected Builder B's bounded blade contour and contact burst after two fresh isolated builds, reproduced all six actual-game frames byte-for-byte, passed all 16 root technical gates, and froze commit 5359f91bad13fe83e70169231e519911a8fbebc4. A fresh independent blind critic is running; quality remains pending and unaccepted.",
+      "status": "building",
+      "outcome": "Round008 passed every capture and runtime hard gate but the fresh blind critic rejected it at 39.3/100 with 0/3 focused and 0/6 overall wins. Round009 is building two isolated animation-only reconstructions of ticks 29, 34, and 41 as one physically coherent sword-contact beat while every frozen camera, asset, arena, HUD, mechanics, timing, and FX surface remains exact.",
       "requiredEvidence": [
         "S01–S06 fresh browser captures",
         "Exact Tape A, Tape B, and Tape C replays",
