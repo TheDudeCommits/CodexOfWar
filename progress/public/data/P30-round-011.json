@@ -1,0 +1,146 @@
+{
+  "schema": "cow.public-browser-round.v1",
+  "piece": "P30",
+  "round": 11,
+  "date": "2026-08-03",
+  "status": "critic-rejected-checkpoint-deployed",
+  "acceptanceScope": "Two fresh isolated builders repaired precise light-strike contact and lifecycle behavior from exact Round010 baseline acfe2f63f59ca4e87d3ca20db9dff225008c3817. A source- and identity-blind critic ran two opaque production packages at 1600x900 DPR1, cast ballots before reveal, sealed immutable scores, and rejected both. Builder B swept all three focused ballots and is deployed only as the stronger rejected checkpoint; no AAA acceptance is claimed.",
+  "playtestUrl": "https://web-game-teal-one.vercel.app/",
+  "deployment": {
+    "provider": "Vercel",
+    "deploymentId": "dpl_2553BS5NjMqctBf5HwRwPsfJR5oL",
+    "deploymentUrl": "https://web-game-re7eij6qx-amirs-projects-d9680079.vercel.app",
+    "target": "production",
+    "stableAlias": "https://web-game-teal-one.vercel.app/",
+    "ready": true
+  },
+  "selection": {
+    "verdict": "NO ACCEPTED CANDIDATE",
+    "strongerBuilder": "BuilderB",
+    "strongerBuilderCommit": "ed207126794c9d637cbffe101816561deaeda57f",
+    "alternateBuilder": "BuilderA",
+    "alternateBuilderCommit": "855da599f2308ebf920312f743da9164a7778b4a",
+    "strongerScore": 41,
+    "alternateScore": 34,
+    "strongerFocusedWins": 3,
+    "focusedComparisonCount": 3,
+    "strongerOverallWins": 1,
+    "overallComparisonCount": 6,
+    "minimumCategoryScore": 2,
+    "requiredScore": 95,
+    "requiredMinimumCategoryScore": 9,
+    "acceptanceClaimed": false
+  },
+  "blindIntegrity": {
+    "protocolCommit": "41efb38",
+    "protocolAmendmentCommit": "8d06bc0",
+    "scoreSealCommit": "f07fadbe6afb945d55def5306f86f0351508242b",
+    "revealVerdictCommit": "f3f5f70b2175707a8d7de74dd3f153cfdbe95175",
+    "mapCommitVerified": true,
+    "presentationCommitVerified": true,
+    "scoreCommitVerified": true,
+    "aliasScoreRemainedImmutableAfterReveal": true,
+    "scoreRecordIntegrityGap": "The immutable alias-only score mislabeled evaluator evidence-tree hashes as package-tree hashes; final T1 and T8 fail closed for both aliases."
+  },
+  "captureContract": {
+    "browser": "Google Chrome 150.0.7871.187",
+    "headed": true,
+    "hardwareAccelerated": true,
+    "renderer": "WebGL2 on Apple M2",
+    "viewport": {
+      "width": 1600,
+      "height": 900,
+      "deviceScaleFactor": 1
+    },
+    "fixedDeltaSeconds": 0.016666666666666666,
+    "focusedTicks": [29, 34, 41],
+    "productionRoute": true,
+    "proceduralFallbackActive": false
+  },
+  "rootValidation": {
+    "node": "24.18.0",
+    "cleanInstallPackages": 191,
+    "typecheckPassed": true,
+    "lintPassed": true,
+    "criticTestsPassed": 25,
+    "productionBuildPassed": true,
+    "browserTestsPassedSerially": 7,
+    "browserSuiteSeconds": 204
+  },
+  "gates": {
+    "objective": {
+      "O29": true,
+      "O34": false,
+      "O41": true
+    },
+    "technical": {
+      "T1": false,
+      "T2": true,
+      "T3": false,
+      "T4": false,
+      "T5": false,
+      "T6": false,
+      "T7": false,
+      "T8": false
+    },
+    "technicalSummary": "Only two complete counted profiles existed for the selected alias; required later evidence was unavailable, and the immutable score record's mislabeled tree hashes force final T1/T8 failure."
+  },
+  "captures": [
+    {
+      "id": "S03",
+      "phase": "startup · planted anticipation",
+      "tick": 29,
+      "path": "/captures/P30/round-011/S03.png",
+      "bytes": 2137089,
+      "sha256": "a4d8eb0c8e2ef6f9c2b56a8b29f7cb9837ea6360a921e24c3b4ca98df0d998cf"
+    },
+    {
+      "id": "S04",
+      "phase": "active · bloom-obscured contact",
+      "tick": 34,
+      "path": "/captures/P30/round-011/S04.png",
+      "bytes": 2122670,
+      "sha256": "bbd5b230016768d6bd2c3514711e2b201aa3341fd1ed507a7f3c6d938a7090ad"
+    },
+    {
+      "id": "S05",
+      "phase": "recovery · grounded arrest",
+      "tick": 41,
+      "path": "/captures/P30/round-011/S05.png",
+      "bytes": 2132336,
+      "sha256": "c60e855f79a3db202733ae5a2bd0e1c75a753425c560ab813e597e541ce5a4e9"
+    }
+  ],
+  "critic": {
+    "status": "REJECT · FRESH BLIND CRITIC COMPLETE",
+    "accepted": false,
+    "qualityScore": 41,
+    "focusedCandidateWins": 3,
+    "focusedComparisonCount": 3,
+    "overallCandidateWins": 1,
+    "overallComparisonCount": 6,
+    "categoriesAtLeastNine": 0,
+    "categoryCount": 10,
+    "categoryScores": {
+      "anticipation": 6,
+      "contactTopology": 4,
+      "causalTargetResponse": 5,
+      "followThroughAndBraking": 6,
+      "continuityAndWeight": 5,
+      "poseCraftAnatomySilhouette": 4,
+      "cameraStagingDepth": 3,
+      "fxMaterialLightingHierarchy": 3,
+      "referenceLevelArtFinishCohesion": 2,
+      "gameWideProductionPresentation": 3
+    },
+    "singleBiggestGap": "Opaque blade bloom at absolute tick 34 obscures exterior contact topology, preventing the reference-level force-transfer read.",
+    "acceptanceClaimed": false
+  },
+  "nextRound": {
+    "round": 12,
+    "status": "protocol-locked",
+    "target": "Round012-A adds one distinct Mouse2/KeyK heavy branch, evaluator-owned first visible contact at absolute tick 46, and exactly one authoritative 100-to-75 health transition on that tick.",
+    "followingPiece": "Round012-B adds three-tick hit-stop, authored heavy reaction, 0.55m recoil, and weighted recovery; high-fidelity licensed hero, zombie, motion, and environment assets enter through a separate measured intake gate."
+  },
+  "qualityStatus": "deployed-rejected-progress-checkpoint"
+}
