@@ -986,6 +986,82 @@ function aliasScoreFixture() {
   return document;
 }
 
+function validateAliasScoreFixture(document, fixture) {
+  return validateAliasOnlyScore(
+    document,
+    fixture.blindOrderManifest,
+    fixture.blindOrderManifest.presentationCommit,
+    fixture.custodyBindings
+  );
+}
+
+function resummarizeAliasCandidate(candidate) {
+  const winnerToken = (ballot) => ballot.winner === 'LEFT' ? ballot.leftToken :
+    ballot.winner === 'RIGHT' ? ballot.rightToken : null;
+  const referenceWins = candidate.referenceBallots.filter((ballot) => winnerToken(ballot) === candidate.alias).length;
+  const scores = Object.values(candidate.visualScores).map((category) => category.score);
+  candidate.referenceWinCount = referenceWins;
+  candidate.visualTotal = scores.reduce((sum, score) => sum + score, 0);
+  candidate.visualMinimum = Math.min(...scores);
+  candidate.acceptanceChecks = {
+    noDisqualifier: candidate.disqualifiers.length === 0,
+    objectiveGates: ['O1', 'O2', 'O3', 'O4', 'O5'].every((id) => candidate.gates[id].pass === true),
+    technicalGatesCurrentlyDecidable: ['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'T8', 'T9']
+      .every((id) => candidate.gates[id].pass === true),
+    pendingRevealOnly: candidate.gates.T1.pass === 'pending-reveal' && candidate.gates.T10.pass === 'pending-reveal',
+    referenceWins: referenceWins === 3,
+    visualTotal: candidate.visualTotal >= 95,
+    visualMinimum: candidate.visualMinimum >= 9
+  };
+  candidate.provisionallyAccepted = Object.values(candidate.acceptanceChecks).every(Boolean);
+  candidate.biggestRemainingGap = candidate.provisionallyAccepted ? null :
+    'Biggest remaining gap: frozen criterion shortfall at the controlling transition, which misses the reference-level bar.';
+}
+
+function resummarizeAliasScore(document) {
+  document.candidates.forEach(resummarizeAliasCandidate);
+  document.provisionalOutcome = document.candidates.some((candidate) => candidate.provisionallyAccepted) ?
+    'PROVISIONAL_ACCEPTED_CANDIDATE_EXISTS' : 'NO_ACCEPTED_CANDIDATE';
+}
+
+function setAliasVisualScores(candidate, scores) {
+  assert.equal(scores.length, 10);
+  scores.forEach((score, index) => { candidate.visualScores[`C${index + 1}`].score = score; });
+}
+
+function setAliasReferenceWins(candidate, winCount) {
+  candidate.referenceBallots.forEach((ballot, index) => {
+    ballot.winner = index >= winCount ? null : ballot.leftToken === candidate.alias ? 'LEFT' : 'RIGHT';
+  });
+}
+
+function setPairwiseWinners(document, winnerAliases) {
+  document.pairwiseBallots.forEach((ballot, index) => {
+    const alias = winnerAliases[index] ?? null;
+    if (alias === null) {
+      ballot.winner = null;
+    } else if (ballot.leftToken === alias) {
+      ballot.winner = 'LEFT';
+    } else if (ballot.rightToken === alias) {
+      ballot.winner = 'RIGHT';
+    } else {
+      assert.fail('Pairwise winner alias is not on the ballot.');
+    }
+  });
+}
+
+function assertStrengthScenario(document, fixture, expectedAlias) {
+  resummarizeAliasScore(document);
+  document.strongerAlias = expectedAlias;
+  assert.doesNotThrow(() => validateAliasScoreFixture(document, fixture));
+  const wrong = structuredClone(document);
+  wrong.strongerAlias = document.candidates.find((candidate) => candidate.alias !== expectedAlias).alias;
+  assert.throws(
+    () => validateAliasScoreFixture(wrong, fixture),
+    (error) => evaluatorCode(error, 'ALIAS_SCORE_STRONGER_ALIAS_MISMATCH')
+  );
+}
+
 test('alias-only score is exact, two-candidate, alias-only, one-cast, and domain committed', () => {
   const fixture = aliasScoreFixture();
   assert.doesNotThrow(() => validateAliasOnlyScore(
@@ -1012,6 +1088,147 @@ test('alias-only score is exact, two-candidate, alias-only, one-cast, and domain
     ),
     (error) => evaluatorCode(error, 'INVALID_REFERENCE_BALLOT_TOKEN')
   );
+});
+
+test('section-11 exact tie selects the raw UTF-8 lower alias and rejects the critic reproducer', () => {
+  const fixture = aliasScoreFixture();
+  const tiedTamper = structuredClone(fixture);
+  tiedTamper.strongerAlias = tiedTamper.candidates[1].alias;
+  assert.throws(
+    () => validateAliasScoreFixture(tiedTamper, fixture),
+    (error) => evaluatorCode(error, 'ALIAS_SCORE_STRONGER_ALIAS_MISMATCH')
+  );
+
+  const allRejectedTie = structuredClone(fixture);
+  allRejectedTie.candidates.forEach((candidate) => setAliasReferenceWins(candidate, 2));
+  assertStrengthScenario(allRejectedTie, fixture, allRejectedTie.candidates[0].alias);
+
+  const stateful = structuredClone(fixture);
+  let reads = 0;
+  Object.defineProperty(stateful, 'strongerAlias', {
+    enumerable: true,
+    configurable: true,
+    get() {
+      reads += 1;
+      return reads === 1 ? stateful.candidates[0].alias : stateful.candidates[1].alias;
+    }
+  });
+  const salt = Buffer.alloc(32, 0x67);
+  assert.equal(
+    aliasScoreCommit(
+      stateful, salt, fixture.blindOrderManifest,
+      fixture.blindOrderManifest.presentationCommit, fixture.custodyBindings
+    ),
+    aliasScoreCommit(
+      fixture, salt, fixture.blindOrderManifest,
+      fixture.blindOrderManifest.presentationCommit, fixture.custodyBindings
+    )
+  );
+});
+
+test('section-11 stronger checkpoint follows every immutable precedence tier', () => {
+  const fixture = aliasScoreFixture();
+
+  const accepted = structuredClone(fixture);
+  const [acceptedLower, acceptedHigher] = accepted.candidates;
+  acceptedLower.disqualifiers = ['Observable disqualifying failure.'];
+  setAliasVisualScores(acceptedHigher, [10, 10, 10, 10, 10, 9, 9, 9, 9, 9]);
+  setPairwiseWinners(accepted, [acceptedLower.alias, acceptedLower.alias, acceptedLower.alias]);
+  assertStrengthScenario(accepted, fixture, acceptedHigher.alias);
+
+  const gates = structuredClone(fixture);
+  const [gatesLower, gatesHigher] = gates.candidates;
+  gatesLower.gates.T8.pass = false;
+  gatesLower.gates.T9.pass = false;
+  gatesHigher.gates.T9.pass = false;
+  setAliasReferenceWins(gatesHigher, 0);
+  setAliasVisualScores(gatesHigher, Array(10).fill(0));
+  setPairwiseWinners(gates, [gatesLower.alias, gatesLower.alias, gatesLower.alias]);
+  assertStrengthScenario(gates, fixture, gatesHigher.alias);
+
+  const reference = structuredClone(fixture);
+  const [referenceLower, referenceHigher] = reference.candidates;
+  setAliasReferenceWins(referenceLower, 1);
+  setAliasReferenceWins(referenceHigher, 2);
+  setAliasVisualScores(referenceHigher, Array(10).fill(0));
+  setPairwiseWinners(reference, [referenceLower.alias, referenceLower.alias, referenceLower.alias]);
+  assertStrengthScenario(reference, fixture, referenceHigher.alias);
+
+  const visualTotal = structuredClone(fixture);
+  const [totalLower, totalHigher] = visualTotal.candidates;
+  setAliasVisualScores(totalLower, [10, 10, 10, 9, 9, 9, 9, 9, 9, 9]);
+  setAliasVisualScores(totalHigher, [8, 10, 10, 10, 10, 10, 9, 9, 9, 9]);
+  setPairwiseWinners(visualTotal, [totalLower.alias, totalLower.alias, totalLower.alias]);
+  assertStrengthScenario(visualTotal, fixture, totalHigher.alias);
+
+  const visualMinimum = structuredClone(fixture);
+  const [minimumLower, minimumHigher] = visualMinimum.candidates;
+  setAliasVisualScores(minimumLower, [8, 10, 10, 10, 10, 10, 9, 9, 9, 9]);
+  setAliasVisualScores(minimumHigher, [10, 10, 10, 10, 9, 9, 9, 9, 9, 9]);
+  setPairwiseWinners(visualMinimum, [minimumLower.alias, minimumLower.alias, minimumLower.alias]);
+  assertStrengthScenario(visualMinimum, fixture, minimumHigher.alias);
+
+  const pairwise = structuredClone(fixture);
+  const [pairwiseLower, pairwiseHigher] = pairwise.candidates;
+  pairwise.candidates.forEach((candidate) => setAliasReferenceWins(candidate, 2));
+  setPairwiseWinners(pairwise, [pairwiseHigher.alias, pairwiseHigher.alias, pairwiseLower.alias]);
+  assertStrengthScenario(pairwise, fixture, pairwiseHigher.alias);
+
+  const bothAccepted = structuredClone(fixture);
+  const [bothAcceptedLower, bothAcceptedHigher] = bothAccepted.candidates;
+  setAliasVisualScores(bothAcceptedLower, [10, 10, 10, 10, 10, 9, 9, 9, 9, 9]);
+  setPairwiseWinners(bothAccepted, [bothAcceptedLower.alias, bothAcceptedLower.alias, bothAcceptedLower.alias]);
+  assertStrengthScenario(bothAccepted, fixture, bothAcceptedHigher.alias);
+});
+
+test('alias score rejects self-asserted summaries, invalid pending states, and ballot ambiguity', () => {
+  const fixture = aliasScoreFixture();
+  const rejects = (mutate, code) => {
+    const document = structuredClone(fixture);
+    mutate(document);
+    assert.throws(
+      () => validateAliasScoreFixture(document, fixture),
+      (error) => evaluatorCode(error, code)
+    );
+  };
+
+  rejects((document) => { document.candidates.reverse(); }, 'ALIAS_SCORE_CANDIDATE_ORDER_INVALID');
+  rejects((document) => { document.pairwiseBallots.pop(); }, 'ALIAS_SCORE_PAIRWISE_BALLOT_COUNT_INVALID');
+  rejects((document) => { document.pairwiseBallots[0].winner = 'TIE'; }, 'ALIAS_SCORE_BALLOT_OUTCOME_INVALID');
+  rejects((document) => { document.pairwiseBallots[0].castCount = 2; }, 'ALIAS_SCORE_BALLOT_OUTCOME_INVALID');
+  rejects((document) => {
+    document.pairwiseBallots[1] = structuredClone(document.pairwiseBallots[0]);
+  }, 'ALIAS_SCORE_BALLOT_ID_MISMATCH');
+  rejects((document) => {
+    document.candidates[0].referenceBallots[0].winner = null;
+  }, 'ALIAS_SCORE_REFERENCE_WIN_COUNT_MISMATCH');
+  rejects((document) => { document.candidates[0].referenceWinCount = 2; }, 'ALIAS_SCORE_REFERENCE_WIN_COUNT_MISMATCH');
+  rejects((document) => { document.candidates[0].visualTotal = 99; }, 'ALIAS_SCORE_VISUAL_AGGREGATE_MISMATCH');
+  rejects((document) => {
+    document.candidates[0].acceptanceChecks.objectiveGates = false;
+  }, 'ALIAS_SCORE_ACCEPTANCE_CHECK_MISMATCH');
+  rejects((document) => { document.candidates[0].provisionallyAccepted = false; }, 'ALIAS_SCORE_PROVISIONAL_ACCEPTANCE_MISMATCH');
+  rejects((document) => { document.provisionalOutcome = 'NO_ACCEPTED_CANDIDATE'; }, 'ALIAS_SCORE_OUTCOME_MISMATCH');
+  rejects((document) => {
+    document.candidates[0].gates.T1.pass = true;
+  }, 'ALIAS_SCORE_PENDING_REVEAL_STATE_INVALID');
+  rejects((document) => {
+    document.candidates[0].gates.T10.pass = false;
+  }, 'ALIAS_SCORE_PENDING_REVEAL_STATE_INVALID');
+  rejects((document) => {
+    document.candidates[0].gates.T11 = structuredClone(document.candidates[0].gates.T9);
+  }, 'ALIAS_SCORE_GATE_SET_SHAPE_MISMATCH');
+  rejects((document) => {
+    document.pairwiseBallots[0].leftToken = 'candidate-2222222222222222';
+    document.pairwiseBallots[0].winner = 'LEFT';
+  }, 'ALIAS_SCORE_PAIRWISE_WINNER_ALIAS_INVALID');
+  rejects((document) => {
+    document.candidates[0].disqualifiers = ['Repeated failure.', 'Repeated failure.'];
+    resummarizeAliasScore(document);
+  }, 'ALIAS_SCORE_CANDIDATE_DISQUALIFIERS_DUPLICATE');
+  rejects((document) => {
+    document.disqualifiers = ['Repeated round failure.', 'Repeated round failure.'];
+  }, 'ALIAS_SCORE_DISQUALIFIERS_DUPLICATE');
 });
 
 function evidenceManifestFixture() {

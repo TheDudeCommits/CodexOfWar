@@ -2547,9 +2547,14 @@ const CANDIDATE_SCORE_KEYS = Object.freeze([
   'visualScores', 'visualTotal', 'visualMinimum', 'disqualifiers', 'acceptanceChecks',
   'provisionallyAccepted', 'biggestRemainingGap'
 ]);
+const OBJECTIVE_GATE_IDS = Object.freeze(['O1', 'O2', 'O3', 'O4', 'O5']);
+const DECIDABLE_TECHNICAL_GATE_IDS = Object.freeze(['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'T8', 'T9']);
+const PENDING_REVEAL_GATE_IDS = Object.freeze(['T1', 'T10']);
 const GATE_IDS = Object.freeze([
-  'O1', 'O2', 'O3', 'O4', 'O5',
-  'T1', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'T8', 'T9', 'T10'
+  ...OBJECTIVE_GATE_IDS,
+  'T1',
+  ...DECIDABLE_TECHNICAL_GATE_IDS,
+  'T10'
 ]);
 const CATEGORY_IDS = Object.freeze(['C1', 'C2', 'C3', 'C4', 'C5', 'C6', 'C7', 'C8', 'C9', 'C10']);
 const MEASUREMENT_SECTION_KEYS = Object.freeze(['schema', 'receiptSha256', 'evidenceSha256s', 'measurements']);
@@ -2596,8 +2601,9 @@ function validateGateSet(gates) {
     const gate = gates[gateID];
     try { assertExactKeys(gate, ['pass', 'evidenceSha256s', 'reason'], 'ALIAS_SCORE_GATE_SHAPE_MISMATCH'); }
     catch (error) { if (error instanceof Round012TreeError) evaluatorFail(error.code); throw error; }
-    const pendingAllowed = gateID === 'T1' || gateID === 'T10';
-    if (typeof gate.pass !== 'boolean' && !(pendingAllowed && gate.pass === 'pending-reveal')) evaluatorFail('ALIAS_SCORE_GATE_PASS_INVALID');
+    if (PENDING_REVEAL_GATE_IDS.includes(gateID)) {
+      if (gate.pass !== 'pending-reveal') evaluatorFail('ALIAS_SCORE_PENDING_REVEAL_STATE_INVALID');
+    } else if (typeof gate.pass !== 'boolean') evaluatorFail('ALIAS_SCORE_GATE_PASS_INVALID');
     if (!Array.isArray(gate.evidenceSha256s) || gate.evidenceSha256s.length === 0) evaluatorFail('ALIAS_SCORE_GATE_EVIDENCE_INVALID');
     gate.evidenceSha256s.forEach((digest) => assertHex64(digest, 'ALIAS_SCORE_GATE_EVIDENCE_INVALID'));
     assertNfcNonempty(gate.reason, 'ALIAS_SCORE_GATE_REASON_INVALID');
@@ -2667,12 +2673,15 @@ function validateCandidateScore(candidate) {
   if (!Array.isArray(candidate.disqualifiers) || candidate.disqualifiers.some((value) => typeof value !== 'string' || !value)) {
     evaluatorFail('ALIAS_SCORE_CANDIDATE_DISQUALIFIERS_INVALID');
   }
+  if (new Set(candidate.disqualifiers).size !== candidate.disqualifiers.length) {
+    evaluatorFail('ALIAS_SCORE_CANDIDATE_DISQUALIFIERS_DUPLICATE');
+  }
   try { assertExactKeys(candidate.acceptanceChecks, ACCEPTANCE_CHECK_KEYS, 'ALIAS_SCORE_ACCEPTANCE_CHECK_SHAPE_MISMATCH'); }
   catch (error) { if (error instanceof Round012TreeError) evaluatorFail(error.code); throw error; }
   if (Object.values(candidate.acceptanceChecks).some((value) => typeof value !== 'boolean')) evaluatorFail('ALIAS_SCORE_ACCEPTANCE_CHECK_VALUE_INVALID');
-  const objectives = ['O1', 'O2', 'O3', 'O4', 'O5'].every((id) => candidate.gates[id].pass === true);
-  const technical = ['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'T8', 'T9'].every((id) => candidate.gates[id].pass === true);
-  const pendingOnly = candidate.gates.T1.pass === 'pending-reveal' && candidate.gates.T10.pass === 'pending-reveal';
+  const objectives = OBJECTIVE_GATE_IDS.every((id) => candidate.gates[id].pass === true);
+  const technical = DECIDABLE_TECHNICAL_GATE_IDS.every((id) => candidate.gates[id].pass === true);
+  const pendingOnly = PENDING_REVEAL_GATE_IDS.every((id) => candidate.gates[id].pass === 'pending-reveal');
   const expectedChecks = {
     noDisqualifier: candidate.disqualifiers.length === 0,
     objectiveGates: objectives,
@@ -2693,10 +2702,52 @@ function validateCandidateScore(candidate) {
     typeof candidate.biggestRemainingGap !== 'string' ||
     !/^Biggest remaining gap: [^;\n]+ at [^;\n]+, which [^;\n]+\.$/u.test(candidate.biggestRemainingGap)
   ) evaluatorFail('ALIAS_SCORE_BIGGEST_GAP_INVALID');
-  return candidate;
+  return {
+    alias: candidate.alias,
+    provisionallyAccepted: expectedProvisional,
+    passedGateCount: [...OBJECTIVE_GATE_IDS, ...DECIDABLE_TECHNICAL_GATE_IDS]
+      .filter((id) => candidate.gates[id].pass === true).length,
+    referenceWins: wins,
+    visualTotal: visual.total,
+    visualMinimum: visual.minimum
+  };
+}
+
+function derivePairwiseWinCounts(pairwiseBallots, aliases) {
+  const counts = new Map(aliases.map((alias) => [alias, 0]));
+  pairwiseBallots.forEach((ballot, index) => {
+    validateBallotRecord(ballot, `P${index + 1}`);
+    const winnerToken = ballot.winner === 'LEFT' ? ballot.leftToken : ballot.winner === 'RIGHT' ? ballot.rightToken : null;
+    if (winnerToken === null) return;
+    if (!counts.has(winnerToken)) evaluatorFail('ALIAS_SCORE_PAIRWISE_WINNER_ALIAS_INVALID');
+    counts.set(winnerToken, counts.get(winnerToken) + 1);
+  });
+  return counts;
+}
+
+function deriveStrongerAlias(normalizedCandidates, pairwiseWinCounts) {
+  const ranked = normalizedCandidates.map((candidate) => ({
+    ...candidate,
+    pairwiseWins: pairwiseWinCounts.get(candidate.alias) ?? 0
+  }));
+  ranked.sort((left, right) => {
+    for (const key of [
+      'provisionallyAccepted', 'passedGateCount', 'referenceWins',
+      'visualTotal', 'visualMinimum', 'pairwiseWins'
+    ]) {
+      const leftValue = Number(left[key]);
+      const rightValue = Number(right[key]);
+      if (leftValue !== rightValue) return rightValue - leftValue;
+    }
+    return compareUtf8(left.alias, right.alias);
+  });
+  return ranked[0].alias;
 }
 
 export function validateAliasOnlyScore(document, blindOrderManifest, expectedPresentationCommit, custodyBindings) {
+  document = canonicalValidationSnapshot(document, 'ALIAS_SCORE_SNAPSHOT_INVALID');
+  blindOrderManifest = canonicalValidationSnapshot(blindOrderManifest, 'ALIAS_SCORE_BLIND_ORDER_SNAPSHOT_INVALID');
+  custodyBindings = canonicalValidationSnapshot(custodyBindings, 'ALIAS_SCORE_CUSTODY_SNAPSHOT_INVALID');
   try { assertExactKeys(document, ALIAS_SCORE_KEYS, 'ALIAS_SCORE_SHAPE_MISMATCH'); }
   catch (error) { if (error instanceof Round012TreeError) evaluatorFail(error.code); throw error; }
   if (
@@ -2732,7 +2783,7 @@ export function validateAliasOnlyScore(document, blindOrderManifest, expectedPre
     document.runtime.evaluatorHelperSha256 !== custodyBindings.evaluatorHelperSha256
   ) evaluatorFail('ALIAS_SCORE_CUSTODY_BINDING_MISMATCH');
   if (!Array.isArray(document.candidates) || document.candidates.length !== 2) evaluatorFail('ALIAS_SCORE_EXACTLY_TWO_CANDIDATES_REQUIRED');
-  document.candidates.forEach(validateCandidateScore);
+  const normalizedCandidates = document.candidates.map(validateCandidateScore);
   const aliases = document.candidates.map((candidate) => candidate.alias);
   const sorted = [...aliases].sort(compareUtf8);
   if (aliases[0] !== sorted[0] || aliases[1] !== sorted[1] || aliases[0] === aliases[1]) evaluatorFail('ALIAS_SCORE_CANDIDATE_ORDER_INVALID');
@@ -2756,13 +2807,17 @@ export function validateAliasOnlyScore(document, blindOrderManifest, expectedPre
   });
   if (executionAliases.size !== 2 || aliases.some((alias) => !executionAliases.has(alias))) evaluatorFail('ALIAS_SCORE_EXECUTION_ORDER_INVALID');
   if (!Array.isArray(document.pairwiseBallots) || document.pairwiseBallots.length !== 3) evaluatorFail('ALIAS_SCORE_PAIRWISE_BALLOT_COUNT_INVALID');
-  document.pairwiseBallots.forEach((ballot, index) => validateBallotRecord(ballot, `P${index + 1}`));
-  if (!aliases.includes(document.strongerAlias)) evaluatorFail('ALIAS_SCORE_STRONGER_ALIAS_INVALID');
-  const anyAccepted = document.candidates.some((candidate) => candidate.provisionallyAccepted);
+  const pairwiseWinCounts = derivePairwiseWinCounts(document.pairwiseBallots, aliases);
+  const expectedStrongerAlias = deriveStrongerAlias(normalizedCandidates, pairwiseWinCounts);
+  if (document.strongerAlias !== expectedStrongerAlias) evaluatorFail('ALIAS_SCORE_STRONGER_ALIAS_MISMATCH');
+  const anyAccepted = normalizedCandidates.some((candidate) => candidate.provisionallyAccepted);
   const expectedOutcome = anyAccepted ? 'PROVISIONAL_ACCEPTED_CANDIDATE_EXISTS' : 'NO_ACCEPTED_CANDIDATE';
   if (document.provisionalOutcome !== expectedOutcome) evaluatorFail('ALIAS_SCORE_OUTCOME_MISMATCH');
   if (!Array.isArray(document.disqualifiers) || document.disqualifiers.some((value) => typeof value !== 'string' || !value)) {
     evaluatorFail('ALIAS_SCORE_DISQUALIFIERS_INVALID');
+  }
+  if (new Set(document.disqualifiers).size !== document.disqualifiers.length) {
+    evaluatorFail('ALIAS_SCORE_DISQUALIFIERS_DUPLICATE');
   }
   if (document.disqualifiers.length > 0 && anyAccepted) evaluatorFail('ALIAS_SCORE_DISQUALIFIER_ACCEPTANCE_CONFLICT');
   if (!blindOrderManifest) evaluatorFail('ALIAS_SCORE_BLIND_ORDER_MANIFEST_REQUIRED');
@@ -2796,8 +2851,8 @@ export function validateAliasOnlyScore(document, blindOrderManifest, expectedPre
 }
 
 export function aliasScoreCommit(document, salt, blindOrderManifest, expectedPresentationCommit, custodyBindings) {
-  validateAliasOnlyScore(document, blindOrderManifest, expectedPresentationCommit, custodyBindings);
-  return saltedDocumentCommit(ALIAS_SCORE_COMMIT_DOMAIN, document, salt);
+  const validated = validateAliasOnlyScore(document, blindOrderManifest, expectedPresentationCommit, custodyBindings);
+  return saltedDocumentCommit(ALIAS_SCORE_COMMIT_DOMAIN, validated, salt);
 }
 
 const REQUIRED_TRACE_IDS = Object.freeze([
@@ -3011,7 +3066,7 @@ function validateCustodyBytes(custodyBytesByPath, claimsByPath) {
   if (suppliedCount !== claimsByPath.size) evaluatorFail('EVIDENCE_CUSTODY_FILE_SET_MISMATCH');
 }
 
-function evidenceCanonicalSnapshot(value, code) {
+function canonicalValidationSnapshot(value, code) {
   try {
     return parseJsonStrict(canonicalBytes(value).toString('utf8'));
   } catch {
@@ -3026,12 +3081,12 @@ export function validateEvidenceManifest(
   expectedPresentationCommit = null,
   publicPackageReceipt = null
 ) {
-  document = evidenceCanonicalSnapshot(document, 'EVIDENCE_MANIFEST_SNAPSHOT_INVALID');
+  document = canonicalValidationSnapshot(document, 'EVIDENCE_MANIFEST_SNAPSHOT_INVALID');
   if (blindOrderManifest !== null) {
-    blindOrderManifest = evidenceCanonicalSnapshot(blindOrderManifest, 'EVIDENCE_BLIND_ORDER_SNAPSHOT_INVALID');
+    blindOrderManifest = canonicalValidationSnapshot(blindOrderManifest, 'EVIDENCE_BLIND_ORDER_SNAPSHOT_INVALID');
   }
   if (publicPackageReceipt !== null) {
-    publicPackageReceipt = evidenceCanonicalSnapshot(publicPackageReceipt, 'EVIDENCE_PUBLIC_RECEIPT_SNAPSHOT_INVALID');
+    publicPackageReceipt = canonicalValidationSnapshot(publicPackageReceipt, 'EVIDENCE_PUBLIC_RECEIPT_SNAPSHOT_INVALID');
   }
   try {
     assertExactKeys(document, [
