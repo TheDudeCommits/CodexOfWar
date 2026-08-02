@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 
-test("Round009 pose beat binds to the authored rigs and remains render-idempotent", async ({
+test("Round010 contact stays exterior and recovery preserves grounded swing momentum", async ({
   page,
 }) => {
   await page.setViewportSize({ width: 1600, height: 900 });
@@ -28,7 +28,13 @@ test("Round009 pose beat binds to the authored rigs and remains render-idempoten
       const before = JSON.stringify(window.__COW_COMBAT_POSE__?.telemetry());
       review.renderOnce();
       const after = JSON.stringify(window.__COW_COMBAT_POSE__?.telemetry());
-      samples.push({ ticks, pose: JSON.parse(after), renderIdempotent: before === after });
+      samples.push({
+        ticks,
+        pose: JSON.parse(after),
+        fx: window.__COW_COMBAT_FX__?.telemetry() ?? null,
+        framing: review.telemetry().framing,
+        renderIdempotent: before === after,
+      });
     }
     return samples;
   });
@@ -52,5 +58,41 @@ test("Round009 pose beat binds to the authored rigs and remains render-idempoten
     expect(pose.hero.weaponParent).toBe("weapon_socket");
     expect(pose.hero.supportHandToSecondaryGripMeters).toBeLessThanOrEqual(0.00001);
   }
-  expect(result[1]!.pose.contact.bladeToTargetMeters).toBeLessThanOrEqual(0.3);
+  const startup = result[0]!;
+  const impact = result[1]!;
+  const recovery = result[2]!;
+  const impactBlade = impact.pose.hero.anchors.bladeContactWorld;
+  const impactTip = impact.pose.hero.anchors.bladeTipWorld;
+  const recoveryBlade = recovery.pose.hero.anchors.bladeContactWorld;
+  const impactTarget = impact.pose.target.anchors.impactWorld;
+  const recoveryTarget = recovery.pose.target.anchors.impactWorld;
+  const impactFx = impact.fx!.contactWorld;
+
+  expect(impact.pose.hero.weaponAxialRollRadians).toBeGreaterThan(3.3);
+  expect(Math.hypot(
+    impactBlade[0] - impactFx[0],
+    impactBlade[1] - impactFx[1],
+    impactBlade[2] - impactFx[2],
+  )).toBeLessThan(0.27);
+  expect(impactTarget[0] - impactTip[0]).toBeGreaterThan(0.45);
+  expect(impact.pose.target.sample.model.position[0]).toBeLessThanOrEqual(-0.8);
+
+  expect(impactBlade[0] - startup.pose.hero.anchors.bladeContactWorld[0]).toBeGreaterThan(2.4);
+  expect(recoveryBlade[0] - impactBlade[0]).toBeGreaterThan(0.4);
+  expect(recoveryBlade[1]).toBeLessThan(1.2);
+  expect(recovery.pose.hero.authoredTiming).toMatchObject({
+    mode: "contact-to-settle-blend",
+    blend01: 0.291212,
+  });
+  expect(recoveryTarget[0] - impactTarget[0]).toBeGreaterThan(0.4);
+
+  const leadFoot = recovery.pose.hero.anchors.leadFootWorld;
+  const supportFoot = recovery.pose.hero.anchors.supportFootWorld;
+  expect(Math.abs(leadFoot[0] - supportFoot[0])).toBeGreaterThan(0.8);
+  expect(leadFoot[1]).toBeLessThan(0.11);
+  expect(supportFoot[1]).toBeLessThan(0.06);
+  const recoveryFraming = recovery.framing;
+  expect(recoveryFraming).not.toBeNull();
+  expect(recoveryFraming?.player?.insideSafeFrame).toBe(true);
+  expect(recoveryFraming?.blade?.insideSafeFrame).toBe(true);
 });

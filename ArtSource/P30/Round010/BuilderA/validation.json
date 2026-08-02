@@ -1,0 +1,115 @@
+{
+  "schema": "p30.round010.builder-a.validation.v1",
+  "baseCommit": "ed9cc22717cac6c7c1933e85fa01d1808a38137d",
+  "branch": "codex/p30-r010-grounded-builder",
+  "candidateOnly": true,
+  "acceptanceClaimed": false,
+  "gates": {
+    "exactFrozenMechanics": true,
+    "exteriorContact": true,
+    "edgePresentedAtContact": true,
+    "sameDirectionLowOvershoot": true,
+    "authoredOverheadGuardBypassed": true,
+    "groundedFootBrake": true,
+    "targetRecoilContinuesFromContact": true,
+    "twoHandConstraint": true,
+    "focusedSafeFraming": true,
+    "round008FxLifecyclePreserved": true,
+    "coldReplayByteIdentical": true,
+    "repeatedRenderByteIdentical": true,
+    "focusedWorldPoseCameraIdentical": true,
+    "actualHeadedCaptures1600x900Dpr1": true,
+    "thirtySecondStable": true,
+    "contextLossRestore": true,
+    "authoredAssetsNoFallback": true,
+    "runtimeErrorsZero": true,
+    "resourceCaps": true
+  },
+  "passed": true,
+  "stability": {
+    "durationMs": 30064.7,
+    "frameCount": 1793,
+    "meanFps": 59.7,
+    "p95RafMs": 17.5,
+    "p99RafMs": 17.7,
+    "maxRafMs": 83.4,
+    "framesOver25Ms": 4,
+    "longTaskCount": 4,
+    "longTaskMaxMs": 751,
+    "rendererBefore": {
+      "calls": 80,
+      "triangles": 203051,
+      "points": 64,
+      "lines": 0,
+      "textures": 32,
+      "geometries": 41,
+      "pixelRatio": 1,
+      "size": {
+        "width": 1600,
+        "height": 900
+      },
+      "errors": [],
+      "context": {
+        "lost": false,
+        "losses": 0,
+        "restores": 0
+      }
+    },
+    "rendererAfter": {
+      "calls": 80,
+      "triangles": 203051,
+      "points": 64,
+      "lines": 0,
+      "textures": 32,
+      "geometries": 41,
+      "pixelRatio": 1,
+      "size": {
+        "width": 1600,
+        "height": 900
+      },
+      "errors": [],
+      "context": {
+        "lost": false,
+        "losses": 0,
+        "restores": 0
+      }
+    },
+    "resourceGrowth": false,
+    "webglError": 0
+  },
+  "contextLossRestore": {
+    "supported": true,
+    "restoreRequested": true,
+    "passed": true,
+    "renderer": {
+      "calls": 80,
+      "triangles": 203051,
+      "points": 64,
+      "lines": 0,
+      "textures": 30,
+      "geometries": 34,
+      "pixelRatio": 1,
+      "size": {
+        "width": 1600,
+        "height": 900
+      },
+      "errors": [],
+      "context": {
+        "lost": false,
+        "losses": 1,
+        "restores": 1
+      }
+    }
+  },
+  "captureHashes": {
+    "S01": "75850897049c4d8afe0605f40622faa3b9bca656cd9e16f77936d0c784cc9ed9",
+    "S02": "bd6db7807b250ac909350de8fde3760025e2cde540b4926dcf2d3c66932108fe",
+    "S03": "bb5e08dbe1c4b0f23d7b6acf7cef136488a1639da6b35f81c130254e67767243",
+    "S04": "5a1d7143564e11d4527ff7917ec0c5be6ca1c4322a920249b1c06c9034a179d4",
+    "S05": "84c0dcf568bbbc867c79ebc48d16df8e4627a443e3ab409c9a7b450ec1b17811",
+    "S06": "3f04995d82eeecfb71be985931c52c9b62c79facdbb857ee0d6ebb507731546f",
+    "F29-startup": "bb5e08dbe1c4b0f23d7b6acf7cef136488a1639da6b35f81c130254e67767243",
+    "F34-impact": "5a1d7143564e11d4527ff7917ec0c5be6ca1c4322a920249b1c06c9034a179d4",
+    "F41-recovery": "84c0dcf568bbbc867c79ebc48d16df8e4627a443e3ab409c9a7b450ec1b17811"
+  }
+}
