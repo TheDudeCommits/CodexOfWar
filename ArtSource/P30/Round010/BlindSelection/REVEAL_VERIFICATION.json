@@ -1,0 +1,62 @@
+{
+  "schema": "p30.r010.reveal-verification.v1",
+  "protocolID": "P30-R010-BLIND-v1",
+  "sealedEvidenceCommit": "82f2a6f3bbf72d900ac71df56328fc00db5bf846",
+  "identityMap": {
+    "map": {
+      "protocolId": "P30-R010-blind-v1",
+      "amendment": 1,
+      "supersedesMapCommit": "05e35ae720209fceb8a2f9926828f40530dc31f0ad4987ae96fc40ac01268106",
+      "hashAlgorithm": "UTF-8 bytewise-sorted relative paths; relPath + NUL + lowercase SHA256(file bytes) + NUL",
+      "deliverySet": [
+        "candidate-b42289432d4cc3cb",
+        "candidate-ff5ef7c562581ce6"
+      ],
+      "candidates": {
+        "candidate-ff5ef7c562581ce6": {
+          "canonicalIdentity": "BuilderA",
+          "commit": "37ae9f0800fb6851e72b0b83b7cea8e9f0ec6a21",
+          "packageSha256": "58274c34b0bede5f3686b6d281e486fbfee34a6cec55491b357d80374243f3aa"
+        },
+        "candidate-b42289432d4cc3cb": {
+          "canonicalIdentity": "BuilderB",
+          "commit": "a4c977c88ec495e136f3698e7d79620f586fd5c8",
+          "packageSha256": "c438c9f113bb4e3adfcbb166df5f8cce40bb5bf7f944b45bb79dc59ca5d9d1f6"
+        }
+      }
+    },
+    "saltHex": "b17b96dbd93d6f2f420b5c36883302784594416b39deb9824cb838531a512f7f",
+    "formula": "SHA256(P30R010-map-v1\\0 || JCS(map) || \\0 || raw_32_byte_salt)",
+    "mapJcsSha256": "95a83fc77b0ee00fe0bedf475e31b29cf02acc76eeb29b7d63e9a0bde81672a4",
+    "computedCommit": "58905a28b8b95b9568e52d3ae38b7fa12db0500fd1d64eb3998f3433e3390cc4",
+    "expectedCommit": "58905a28b8b95b9568e52d3ae38b7fa12db0500fd1d64eb3998f3433e3390cc4",
+    "verified": true
+  },
+  "presentationReveal": {
+    "seedHex": "8c360531086755ecbd3b373e61e4ac3d592172d770d1720c2db7866ee428ba34",
+    "formula": "SHA256(P30R010-presentation-v1\\0 || lowercase_hex(seed32))",
+    "computedCommit": "5ea0ad1d52d8dc8f44042af157c8a9a0e6450a3c2e3d033dcb34367eb123b0eb",
+    "expectedCommit": "5ea0ad1d52d8dc8f44042af157c8a9a0e6450a3c2e3d033dcb34367eb123b0eb",
+    "verified": true,
+    "firstPresentedAliasByBallot": {
+      "B1": "candidate-b42289432d4cc3cb",
+      "B2": "candidate-b42289432d4cc3cb",
+      "B3": "candidate-ff5ef7c562581ce6",
+      "B4": "candidate-b42289432d4cc3cb",
+      "B5": "candidate-b42289432d4cc3cb",
+      "B6": "candidate-b42289432d4cc3cb"
+    }
+  },
+  "scoreReveal": {
+    "scoreSaltHex": "6e234fd5be8005b0ab20e38f4d376a2eaa335486e4be4ebb21119dfcaf2ec77a",
+    "formula": "SHA256(P30R010-score-v1\\0 || JCS(scoreDoc) || \\0 || lowercase_hex(scoreSalt))",
+    "scoreDocument": "ALIAS_ONLY_SCORE.json",
+    "scoreDocumentFileSha256": "ae8df258212e7ad7eb28b95d465f526e68c06aed389d5fbb6df5b5f8204f98d5",
+    "scoreDocumentJcsSha256": "d34fb5f5f7bebe7f4a14547003508a3b22aaa558b86c1909c64316205ae9b88f",
+    "computedCommit": "28a39349d6fd4cad30ecec18d2b4cecf65c75391db0ffed9146f2dc4731d5aca",
+    "expectedCommit": "28a39349d6fd4cad30ecec18d2b4cecf65c75391db0ffed9146f2dc4731d5aca",
+    "verified": true
+  },
+  "sealedAliasScoresUnchanged": true,
+  "allCommitmentsVerified": true
+}

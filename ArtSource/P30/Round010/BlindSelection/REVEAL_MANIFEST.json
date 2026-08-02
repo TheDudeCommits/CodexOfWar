@@ -1,0 +1,19 @@
+{
+  "schema": "p30.r010.reveal-manifest.v1",
+  "sealedEvidenceCommit": "82f2a6f3bbf72d900ac71df56328fc00db5bf846",
+  "files": [
+    {
+      "path": "REVEAL_VERIFICATION.json",
+      "sha256": "a10519c4022550aeb286b199b95d555758677e6bf0477aaf80909567a789826a"
+    },
+    {
+      "path": "IDENTITY_AWARE_VERDICT.md",
+      "sha256": "b7b343a957bebbd8be73c157e5b5afe90af809b9b07bbdf97c056ce1032dd08f"
+    }
+  ],
+  "sealedScoreDocument": {
+    "path": "ALIAS_ONLY_SCORE.json",
+    "sha256": "ae8df258212e7ad7eb28b95d465f526e68c06aed389d5fbb6df5b5f8204f98d5",
+    "unchanged": true
+  }
+}
