@@ -10,11 +10,17 @@ production claim is tied to a deterministic gameplay tape, a machine-readable
 asset and renderer receipt, fixed 1600×900 capture framings, and a separate
 builder/critic round.
 
-The current active loop is P30 Round 005. Round 004 loaded all 18 authored
-assets with no fallback and passed its runtime gates, but the fresh blind critic
-still rejected it at `34/100`, `0/3` focused combat-shot wins, and `0/6`
-overall wins. Its single prescribed gap is the hero/Hollow/weapon contact
-package. No AAA-quality or visual-win claim is made.
+The current active loop is P30 Round 010. Round 009 froze a technically valid
+combat-beat candidate, but the anonymous selector scored it only `57/100` and
+disqualified it for broad impact penetration and an overhead recovery
+re-windup. Two fresh isolated builders are repairing exactly those defects
+before another blind critic pass. No AAA-quality or visual-win claim is made.
+
+## Play the current Three.js checkpoint
+
+The stable browser build is deployed at
+[web-game-teal-one.vercel.app](https://web-game-teal-one.vercel.app/). This URL
+is refreshed after major judged checkpoints so testers can keep one bookmark.
 
 ## Run the Three.js game
 

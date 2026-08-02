@@ -7,7 +7,8 @@
     "engine": "Three.js + Rapier",
     "simulation": "60 Hz fixed step",
     "captureResolution": "1600×900",
-    "tagline": "Build what the camera can judge."
+    "tagline": "Build what the camera can judge.",
+    "playtestUrl": "https://web-game-teal-one.vercel.app/"
   },
   "stateModel": [
     "queued",

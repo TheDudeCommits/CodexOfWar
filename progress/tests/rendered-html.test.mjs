@@ -47,6 +47,11 @@ test("server-renders the production evidence ledger", async () => {
   assert.match(html, /Build what the camera can judge\./);
   assert.match(html, /live production surface/i);
   assert.doesNotMatch(html, /public production surface/i);
+  assert.match(
+    html,
+    /href="https:\/\/web-game-teal-one\.vercel\.app\/"[^>]*target="_blank"/i,
+  );
+  assert.match(html, /Play current build/);
 
   assert.match(
     html,
@@ -438,6 +443,10 @@ test("checked-in data preserves P00–P25 and adds the honest P30/P31 browser la
     (piece) => !["P00", "P10", "P30", "P31"].includes(piece.id),
   );
   assert.equal(p00.status, "accepted");
+  assert.equal(
+    dashboard.project.playtestUrl,
+    "https://web-game-teal-one.vercel.app/",
+  );
   assert.equal(p10.status, "paused");
   assert.match(p10.outcome, /no longer the active implementation lane/i);
   assert.equal(p30.status, "review-ready");

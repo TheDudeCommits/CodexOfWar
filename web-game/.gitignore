@@ -9,3 +9,4 @@ test-results/
 .vite/
 vite.config.*.timestamp-*
 .DS_Store
+.vercel

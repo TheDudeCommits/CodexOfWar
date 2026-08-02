@@ -34,6 +34,7 @@ type Dashboard = {
     simulation: string;
     captureResolution: string;
     tagline: string;
+    playtestUrl: string;
   };
   stateModel: PieceStatus[];
   activeBuild: {
@@ -273,12 +274,20 @@ export default function Home() {
             </p>
 
             <div className="hero-actions">
-              <a className="primary-action" href="#active-build">
+              <a
+                className="primary-action"
+                href={dashboard.project.playtestUrl}
+                rel="noreferrer"
+                target="_blank"
+              >
+                Play current build
+                <span aria-hidden="true">↗</span>
+              </a>
+              <a className="text-action" href="#active-build">
                 Inspect {dashboard.activeBuild.pieceId}
-                <span aria-hidden="true">↘</span>
               </a>
               <a className="text-action" href="#pieces">
-                View all {totalPieces} pieces
+                All {totalPieces} pieces
               </a>
             </div>
 

@@ -2,6 +2,11 @@
 
 This directory is an isolated, judgeable browser-game foundation. It does not depend on or modify the existing Unity project.
 
+## Play the current checkpoint
+
+Open [web-game-teal-one.vercel.app](https://web-game-teal-one.vercel.app/).
+The stable URL is refreshed after major judged checkpoints.
+
 ## Run
 
 ```bash
