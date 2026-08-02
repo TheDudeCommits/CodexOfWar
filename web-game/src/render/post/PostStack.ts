@@ -7,21 +7,17 @@ import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPa
 export class PostStack {
   enabled: boolean;
   lastRenderMilliseconds = 0;
-  private readonly composer: EffectComposer;
+  private composer: EffectComposer;
 
   constructor(
     private readonly renderer: THREE.WebGLRenderer,
-    scene: THREE.Scene,
-    camera: THREE.Camera,
+    private readonly scene: THREE.Scene,
+    private readonly camera: THREE.Camera,
     enabled: boolean,
     private readonly pixelRatio: number,
   ) {
     this.enabled = enabled;
-    this.composer = new EffectComposer(renderer);
-    this.composer.addPass(new RenderPass(scene, camera));
-    const bloom = new UnrealBloomPass(new THREE.Vector2(1, 1), 0.32, 0.52, 0.82);
-    this.composer.addPass(bloom);
-    this.composer.addPass(new OutputPass());
+    this.composer = this.createComposer();
   }
 
   render(scene: THREE.Scene, camera: THREE.Camera): void {
@@ -41,7 +37,28 @@ export class PostStack {
     return this.enabled;
   }
 
+  restoreGpuResources(width: number, height: number): void {
+    this.disposeComposer();
+    this.composer = this.createComposer();
+    this.setSize(width, height);
+  }
+
   dispose(): void {
+    this.disposeComposer();
+  }
+
+  private createComposer(): EffectComposer {
+    const composer = new EffectComposer(this.renderer);
+    composer.addPass(new RenderPass(this.scene, this.camera));
+    composer.addPass(
+      new UnrealBloomPass(new THREE.Vector2(1, 1), 0.32, 0.52, 0.82),
+    );
+    composer.addPass(new OutputPass());
+    return composer;
+  }
+
+  private disposeComposer(): void {
+    for (const pass of this.composer.passes) pass.dispose();
     this.composer.dispose();
   }
 }

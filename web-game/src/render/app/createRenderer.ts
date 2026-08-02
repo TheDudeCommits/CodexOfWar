@@ -11,6 +11,15 @@ export interface RendererOptions {
   fixedSize?: { width: number; height: number };
 }
 
+export function restoreRendererState(renderer: THREE.WebGLRenderer): void {
+  renderer.outputColorSpace = THREE.SRGBColorSpace;
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.02;
+  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  renderer.shadowMap.needsUpdate = true;
+}
+
 export function createRenderer(
   host: HTMLElement,
   lifecycle: RendererLifecycle,
@@ -29,11 +38,7 @@ export function createRenderer(
     options.fixedSize?.height ?? host.clientHeight,
     false,
   );
-  renderer.outputColorSpace = THREE.SRGBColorSpace;
-  renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.02;
-  renderer.shadowMap.enabled = true;
-  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  restoreRendererState(renderer);
   renderer.domElement.id = "game-canvas";
   renderer.domElement.setAttribute("aria-label", "Ashwake combat arena");
   renderer.domElement.tabIndex = 0;

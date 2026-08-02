@@ -32,6 +32,7 @@ export interface CameraBoomTelemetry {
 export interface CameraTelemetry {
   position: [number, number, number];
   quaternion: [number, number, number, number];
+  viewMatrix: number[];
   projectionMatrix: number[];
   yaw: number;
   pitch: number;
@@ -294,6 +295,7 @@ export class ThirdPersonCamera {
         this.camera.quaternion.z,
         this.camera.quaternion.w,
       ],
+      viewMatrix: this.camera.matrixWorldInverse.toArray(),
       projectionMatrix: this.camera.projectionMatrix.toArray(),
       yaw: this.yaw,
       pitch: this.pitch,

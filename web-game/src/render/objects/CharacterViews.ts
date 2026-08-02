@@ -1,4 +1,5 @@
 import * as THREE from "three";
+import { isP30CriticScenarioRoute } from "../../diagnostics/P30CriticProtocol";
 import {
   ATTACK_DURATION,
   PLAYER_DODGE_DURATION,
@@ -6,6 +7,10 @@ import {
 import { clamp } from "../../game/simulation/math";
 import type { EnemyState, PlayerState } from "../../game/simulation/types";
 import type { AssetRegistry } from "../loaders/AssetRegistry";
+import {
+  measureBladeEdgeToCapsule,
+  type BladeCapsuleContactMeasurement,
+} from "./CombatContactGeometry";
 import {
   sampleHeroAuthoredPoseTiming,
   sampleHeroCombatPose,
@@ -27,6 +32,10 @@ const HERO_REQUIRED_CLIPS = [
 const ROUND005_VISUAL_LANE_OFFSET = 0.62;
 const ROUND005_TOE_IN_YAW = 0.5;
 const ROUND005_WEAPON_AXIAL_ROLL = 0.6;
+// The capsule follows the Hollow's scaled outer shoulder/shroud contour at
+// the authored impact socket, rather than the much narrower rib-cage core.
+const TARGET_CONTACT_PROXY_RADIUS_METERS = 0.47792;
+const TARGET_CONTACT_PROXY_HALF_HEIGHT_METERS = 0.32;
 
 const BLADE_FX_LOCAL_ENVELOPE = Object.freeze({
   minX: -0.31,
@@ -77,11 +86,15 @@ export interface BladeTrailFxAuditApi {
 
 interface PoseAnchorTelemetry {
   pelvisWorld: PoseVector | null;
+  torsoWorld: PoseVector | null;
+  headWorld: PoseVector | null;
   leadHandWorld: PoseVector | null;
   supportHandWorld: PoseVector | null;
   secondaryGripWorld: PoseVector | null;
+  weaponRootWorld: PoseVector | null;
   bladeContactWorld: PoseVector | null;
   bladeTipWorld: PoseVector | null;
+  bladeAxisWorld: PoseVector | null;
   bladeWidthAxisWorld: PoseVector | null;
   bladeDepthAxisWorld: PoseVector | null;
   leadFootWorld: PoseVector | null;
@@ -90,8 +103,13 @@ interface PoseAnchorTelemetry {
 
 interface TargetAnchorTelemetry {
   hipsWorld: PoseVector | null;
+  torsoWorld: PoseVector | null;
+  contactShoulderWorld: PoseVector | null;
   impactWorld: PoseVector | null;
   headWorld: PoseVector | null;
+  proxyAxisStartWorld: PoseVector | null;
+  proxyAxisEndWorld: PoseVector | null;
+  proxyRadiusMeters: number;
 }
 
 export interface CombatPoseBeatTelemetry {
@@ -102,6 +120,7 @@ export interface CombatPoseBeatTelemetry {
     authoredTiming: HeroAuthoredPoseTiming;
     weaponAxialRollRadians: number;
     rigBindings: Record<"pelvis" | "spine01" | "spine02" | "spine03" | "neck", boolean>;
+    gripBindings: Record<"supportLowerArm" | "supportHand", boolean>;
     weaponParent: string | null;
     anchors: PoseAnchorTelemetry;
     supportHandToSecondaryGripMeters: number | null;
@@ -109,10 +128,15 @@ export interface CombatPoseBeatTelemetry {
   target: {
     sample: TargetCombatPoseSample;
     rigBindings: Record<"hips" | "abdomen" | "torso" | "neck", boolean>;
+    limbBindings: Record<
+      "shoulderL" | "upperArmL" | "lowerArmL" | "shoulderR" | "upperArmR" | "lowerArmR",
+      boolean
+    >;
     anchors: TargetAnchorTelemetry;
   };
   contact: {
     bladeToTargetMeters: number | null;
+    measurement: BladeCapsuleContactMeasurement | null;
   };
 }
 
@@ -125,6 +149,7 @@ interface HeroPoseAuditState {
   authoredTiming: HeroAuthoredPoseTiming;
   weaponAxialRollRadians: number;
   rigBindings: CombatPoseBeatTelemetry["hero"]["rigBindings"];
+  gripBindings: CombatPoseBeatTelemetry["hero"]["gripBindings"];
   weaponParent: string | null;
   anchors: PoseAnchorTelemetry;
   supportHandToSecondaryGripMeters: number | null;
@@ -133,6 +158,7 @@ interface HeroPoseAuditState {
 interface TargetPoseAuditState {
   sample: TargetCombatPoseSample;
   rigBindings: CombatPoseBeatTelemetry["target"]["rigBindings"];
+  limbBindings: CombatPoseBeatTelemetry["target"]["limbBindings"];
   anchors: TargetAnchorTelemetry;
 }
 
@@ -150,14 +176,19 @@ const poseAuditState: {
     },
     weaponAxialRollRadians: ROUND005_WEAPON_AXIAL_ROLL,
     rigBindings: { pelvis: false, spine01: false, spine02: false, spine03: false, neck: false },
+    gripBindings: { supportLowerArm: false, supportHand: false },
     weaponParent: null,
     anchors: {
       pelvisWorld: null,
+      torsoWorld: null,
+      headWorld: null,
       leadHandWorld: null,
       supportHandWorld: null,
       secondaryGripWorld: null,
+      weaponRootWorld: null,
       bladeContactWorld: null,
       bladeTipWorld: null,
+      bladeAxisWorld: null,
       bladeWidthAxisWorld: null,
       bladeDepthAxisWorld: null,
       leadFootWorld: null,
@@ -168,14 +199,43 @@ const poseAuditState: {
   target: {
     sample: sampleTargetCombatPose("idle", 0),
     rigBindings: { hips: false, abdomen: false, torso: false, neck: false },
-    anchors: { hipsWorld: null, impactWorld: null, headWorld: null },
+    limbBindings: {
+      shoulderL: false,
+      upperArmL: false,
+      lowerArmL: false,
+      shoulderR: false,
+      upperArmR: false,
+      lowerArmR: false,
+    },
+    anchors: {
+      hipsWorld: null,
+      torsoWorld: null,
+      contactShoulderWorld: null,
+      impactWorld: null,
+      headWorld: null,
+      proxyAxisStartWorld: null,
+      proxyAxisEndWorld: null,
+      proxyRadiusMeters: TARGET_CONTACT_PROXY_RADIUS_METERS,
+    },
   },
 };
 
 const combatPoseAuditApi: CombatPoseBeatAuditApi = {
   telemetry: () => {
     const blade = poseAuditState.hero.anchors.bladeContactWorld;
+    const bladeTip = poseAuditState.hero.anchors.bladeTipWorld;
     const impact = poseAuditState.target.anchors.impactWorld;
+    const proxyStart = poseAuditState.target.anchors.proxyAxisStartWorld;
+    const proxyEnd = poseAuditState.target.anchors.proxyAxisEndWorld;
+    const measurement = blade && bladeTip && proxyStart && proxyEnd
+      ? measureBladeEdgeToCapsule(
+          { start: blade, end: bladeTip },
+          {
+            axis: { start: proxyStart, end: proxyEnd },
+            radiusMeters: poseAuditState.target.anchors.proxyRadiusMeters,
+          },
+        )
+      : null;
     return {
       schema: "cow.combat-pose-beat.v1",
       additivePresentationOnly: true,
@@ -190,10 +250,15 @@ const combatPoseAuditApi: CombatPoseBeatAuditApi = {
                 blade[2] - impact[2],
               ))
             : null,
+        measurement,
       },
     };
   },
 };
+
+export function getCombatPoseBeatTelemetry(): CombatPoseBeatTelemetry {
+  return combatPoseAuditApi.telemetry();
+}
 
 declare global {
   interface Window {
@@ -225,6 +290,30 @@ function worldDirection(
 function pointDistance(from: PoseVector | null, to: PoseVector | null): number | null {
   if (!from || !to) return null;
   return roundFx(Math.hypot(from[0] - to[0], from[1] - to[1], from[2] - to[2]));
+}
+
+function closerPoint(
+  origin: PoseVector | null,
+  first: PoseVector | null,
+  second: PoseVector | null,
+): PoseVector | null {
+  if (!origin) return first ?? second;
+  if (!first) return second;
+  if (!second) return first;
+  return pointDistance(origin, first)! <= pointDistance(origin, second)! ? first : second;
+}
+
+function offsetPoint(
+  point: PoseVector | null,
+  direction: PoseVector | null,
+  distance: number,
+): PoseVector | null {
+  if (!point || !direction) return null;
+  return [
+    roundFx(point[0] + direction[0] * distance),
+    roundFx(point[1] + direction[1] * distance),
+    roundFx(point[2] + direction[2] * distance),
+  ];
 }
 
 function setTransform(target: THREE.Object3D, transform: { position: PoseVector; rotation: PoseVector }): void {
@@ -466,6 +555,10 @@ export class HeroView {
     "pelvis" | "spine01" | "spine02" | "spine03" | "neck",
     THREE.Quaternion | null
   > = { pelvis: null, spine01: null, spine02: null, spine03: null, neck: null };
+  private readonly gripBones: Record<"supportLowerArm" | "supportHand", THREE.Object3D | null> = {
+    supportLowerArm: null,
+    supportHand: null,
+  };
   private readonly poseAnchors: Record<
     | "leadHand"
     | "supportHand"
@@ -558,6 +651,8 @@ export class HeroView {
       this.poseBones.spine02 = hero.scene.getObjectByName("spine_02") ?? null;
       this.poseBones.spine03 = hero.scene.getObjectByName("spine_03") ?? null;
       this.poseBones.neck = hero.scene.getObjectByName("neck_01") ?? null;
+      this.gripBones.supportLowerArm = hero.scene.getObjectByName("lowerarm_l") ?? null;
+      this.gripBones.supportHand = hero.scene.getObjectByName("hand_l") ?? null;
       this.poseAnchors.leadHand = hero.scene.getObjectByName("hand_r") ?? null;
       this.poseAnchors.supportHand = hero.scene.getObjectByName("hand_l") ?? null;
       this.poseAnchors.secondaryGrip = weapon.scene.getObjectByName("GripSecondary") ?? null;
@@ -675,7 +770,7 @@ export class HeroView {
         ? "fallback-weapon-local"
         : "hero-local";
     weaponFxParent.add(this.weaponTrail);
-    if (typeof window !== "undefined") {
+    if (typeof window !== "undefined" && !isP30CriticScenarioRoute()) {
       window.__COW_BLADE_FX__ = this.bladeFxAuditApi;
       window.__COW_COMBAT_POSE__ = combatPoseAuditApi;
     }
@@ -751,9 +846,11 @@ export class HeroView {
     this.shadow.position.set(sample.model.position[0], 0.014, sample.model.position[2]);
     if (this.authoredWeapon) {
       this.authoredWeapon.rotation.set(
-        0,
-        ROUND005_WEAPON_AXIAL_ROLL + sample.weaponAxialRollOffset,
-        0,
+        sample.grip.weaponMountRotation[0],
+        ROUND005_WEAPON_AXIAL_ROLL +
+          sample.weaponAxialRollOffset +
+          sample.grip.weaponMountRotation[1],
+        sample.grip.weaponMountRotation[2],
       );
     }
     addLocalRotation(this.poseBones.pelvis, sample.bones.pelvis);
@@ -761,6 +858,20 @@ export class HeroView {
     addLocalRotation(this.poseBones.spine02, sample.bones.spine02);
     addLocalRotation(this.poseBones.spine03, sample.bones.spine03);
     addLocalRotation(this.poseBones.neck, sample.bones.neck);
+    addLocalRotation(
+      this.gripBones.supportLowerArm,
+      sample.grip.supportLowerArmRotation,
+    );
+    this.closeSupportHandToGrip();
+  }
+
+  private closeSupportHandToGrip(): void {
+    const hand = this.gripBones.supportHand;
+    const grip = this.poseAnchors.secondaryGrip;
+    const parent = hand?.parent ?? null;
+    if (!hand || !grip || !parent) return;
+    const gripWorld = grip.getWorldPosition(new THREE.Vector3());
+    hand.position.copy(parent.worldToLocal(gripWorld));
   }
 
   private restoreAuthoredPose(): void {
@@ -797,14 +908,22 @@ export class HeroView {
         spine03: this.poseBones.spine03 !== null,
         neck: this.poseBones.neck !== null,
       },
+      gripBindings: {
+        supportLowerArm: this.gripBones.supportLowerArm !== null,
+        supportHand: this.gripBones.supportHand !== null,
+      },
       weaponParent: this.root.getObjectByName("stormcage-two-hand-socket")?.parent?.name ?? null,
       anchors: {
         pelvisWorld: worldPoint(this.poseBones.pelvis),
+        torsoWorld: worldPoint(this.poseBones.spine02),
+        headWorld: worldPoint(this.poseBones.neck),
         leadHandWorld: worldPoint(this.poseAnchors.leadHand),
         supportHandWorld,
         secondaryGripWorld,
+        weaponRootWorld: worldPoint(this.authoredWeapon ?? this.fallbackWeapon),
         bladeContactWorld: worldPoint(this.poseAnchors.bladeContact),
         bladeTipWorld: worldPoint(this.poseAnchors.bladeTip),
+        bladeAxisWorld: worldDirection(this.authoredWeapon, new THREE.Vector3(0, 1, 0)),
         bladeWidthAxisWorld: worldDirection(this.authoredWeapon, new THREE.Vector3(1, 0, 0)),
         bladeDepthAxisWorld: worldDirection(this.authoredWeapon, new THREE.Vector3(0, 0, 1)),
         leadFootWorld: worldPoint(this.poseAnchors.leadFoot),
@@ -924,16 +1043,33 @@ export class ZombieView {
   private animator: DeterministicAnimator | null = null;
   private deathStartedAt: number | null = null;
   private latestPose = sampleTargetCombatPose("idle", 0);
-  private readonly poseBones: Record<"hips" | "abdomen" | "torso" | "neck", THREE.Object3D | null> = {
+  private readonly poseBones: Record<keyof TargetCombatPoseSample["bones"], THREE.Object3D | null> = {
     hips: null,
     abdomen: null,
     torso: null,
     neck: null,
+    shoulderL: null,
+    upperArmL: null,
+    lowerArmL: null,
+    shoulderR: null,
+    upperArmR: null,
+    lowerArmR: null,
   };
   private readonly poseBaseRotations: Record<
-    "hips" | "abdomen" | "torso" | "neck",
+    keyof TargetCombatPoseSample["bones"],
     THREE.Quaternion | null
-  > = { hips: null, abdomen: null, torso: null, neck: null };
+  > = {
+    hips: null,
+    abdomen: null,
+    torso: null,
+    neck: null,
+    shoulderL: null,
+    upperArmL: null,
+    lowerArmL: null,
+    shoulderR: null,
+    upperArmR: null,
+    lowerArmR: null,
+  };
   private readonly poseAnchors: Record<"impact" | "head", THREE.Object3D | null> = {
     impact: null,
     head: null,
@@ -991,10 +1127,18 @@ export class ZombieView {
       this.poseBones.abdomen = zombie.scene.getObjectByName("Abdomen") ?? null;
       this.poseBones.torso = zombie.scene.getObjectByName("Torso") ?? null;
       this.poseBones.neck = zombie.scene.getObjectByName("Neck") ?? null;
+      this.poseBones.shoulderL = zombie.scene.getObjectByName("ShoulderL") ?? null;
+      this.poseBones.upperArmL = zombie.scene.getObjectByName("UpperArmL") ?? null;
+      this.poseBones.lowerArmL = zombie.scene.getObjectByName("LowerArmL") ?? null;
+      this.poseBones.shoulderR = zombie.scene.getObjectByName("ShoulderR") ?? null;
+      this.poseBones.upperArmR = zombie.scene.getObjectByName("UpperArmR") ?? null;
+      this.poseBones.lowerArmR = zombie.scene.getObjectByName("LowerArmR") ?? null;
       this.poseAnchors.impact = zombie.scene.getObjectByName("impact_socket") ?? null;
       this.poseAnchors.head = zombie.scene.getObjectByName("Head") ?? null;
     }
-    if (typeof window !== "undefined") window.__COW_COMBAT_POSE__ = combatPoseAuditApi;
+    if (typeof window !== "undefined" && !isP30CriticScenarioRoute()) {
+      window.__COW_COMBAT_POSE__ = combatPoseAuditApi;
+    }
   }
 
   update(state: EnemyState, elapsed: number): void {
@@ -1080,6 +1224,12 @@ export class ZombieView {
     addLocalRotation(this.poseBones.abdomen, sample.bones.abdomen);
     addLocalRotation(this.poseBones.torso, sample.bones.torso);
     addLocalRotation(this.poseBones.neck, sample.bones.neck);
+    addLocalRotation(this.poseBones.shoulderL, sample.bones.shoulderL);
+    addLocalRotation(this.poseBones.upperArmL, sample.bones.upperArmL);
+    addLocalRotation(this.poseBones.lowerArmL, sample.bones.lowerArmL);
+    addLocalRotation(this.poseBones.shoulderR, sample.bones.shoulderR);
+    addLocalRotation(this.poseBones.upperArmR, sample.bones.upperArmR);
+    addLocalRotation(this.poseBones.lowerArmR, sample.bones.lowerArmR);
   }
 
   private syncShadow(transform: TargetCombatPoseSample["model"]): void {
@@ -1105,6 +1255,10 @@ export class ZombieView {
   }
 
   private updatePoseAudit(): void {
+    const impactWorld = worldPoint(this.poseAnchors.impact);
+    const torsoAxisWorld = worldDirection(this.poseBones.torso, new THREE.Vector3(0, 1, 0));
+    const shoulderLWorld = worldPoint(this.poseBones.shoulderL);
+    const shoulderRWorld = worldPoint(this.poseBones.shoulderR);
     poseAuditState.target = {
       sample: this.latestPose,
       rigBindings: {
@@ -1113,10 +1267,31 @@ export class ZombieView {
         torso: this.poseBones.torso !== null,
         neck: this.poseBones.neck !== null,
       },
+      limbBindings: {
+        shoulderL: this.poseBones.shoulderL !== null,
+        upperArmL: this.poseBones.upperArmL !== null,
+        lowerArmL: this.poseBones.lowerArmL !== null,
+        shoulderR: this.poseBones.shoulderR !== null,
+        upperArmR: this.poseBones.upperArmR !== null,
+        lowerArmR: this.poseBones.lowerArmR !== null,
+      },
       anchors: {
         hipsWorld: worldPoint(this.poseBones.hips),
-        impactWorld: worldPoint(this.poseAnchors.impact),
+        torsoWorld: worldPoint(this.poseBones.torso),
+        contactShoulderWorld: closerPoint(impactWorld, shoulderLWorld, shoulderRWorld),
+        impactWorld,
         headWorld: worldPoint(this.poseAnchors.head),
+        proxyAxisStartWorld: offsetPoint(
+          impactWorld,
+          torsoAxisWorld,
+          -TARGET_CONTACT_PROXY_HALF_HEIGHT_METERS,
+        ),
+        proxyAxisEndWorld: offsetPoint(
+          impactWorld,
+          torsoAxisWorld,
+          TARGET_CONTACT_PROXY_HALF_HEIGHT_METERS,
+        ),
+        proxyRadiusMeters: TARGET_CONTACT_PROXY_RADIUS_METERS,
       },
     };
   }

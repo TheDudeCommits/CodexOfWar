@@ -59,6 +59,13 @@ export class LightingRig {
     this.rim.intensity = 1.2 + air * 0.045;
   }
 
+  restoreGpuResources(): void {
+    this.key.shadow.map?.dispose();
+    this.key.shadow.map = null;
+    this.key.shadow.needsUpdate = true;
+    this.lights.updateMatrixWorld(true);
+  }
+
   dispose(): void {
     this.scene.remove(this.lights);
     this.key.shadow.map?.dispose();

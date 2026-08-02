@@ -56,7 +56,7 @@ export class AssetRegistry {
   private readonly loadedGlbs = new Map<string, LoadedGlb>();
   private readonly loadedTextures = new Map<string, THREE.Texture>();
   private readonly loadedHdrs = new Map<string, THREE.DataTexture>();
-  private readonly environmentTargets: THREE.WebGLRenderTarget[] = [];
+  private readonly environmentTargets = new Map<string, THREE.WebGLRenderTarget>();
   private readonly dracoLoaders: DRACOLoader[] = [];
   private readonly loadingManager = new THREE.LoadingManager();
   private readonly failures: string[] = [];
@@ -108,12 +108,36 @@ export class AssetRegistry {
   createEnvironmentMap(key: string, renderer: THREE.WebGLRenderer): THREE.Texture | null {
     const source = this.loadedHdrs.get(key);
     if (!source) return null;
+    this.environmentTargets.get(key)?.dispose();
     const generator = new THREE.PMREMGenerator(renderer);
     generator.compileEquirectangularShader();
     const target = generator.fromEquirectangular(source);
     generator.dispose();
-    this.environmentTargets.push(target);
+    this.environmentTargets.set(key, target);
     return target.texture;
+  }
+
+  restoreGpuResources(): void {
+    for (const texture of this.loadedTextures.values()) texture.needsUpdate = true;
+    for (const texture of this.loadedHdrs.values()) texture.needsUpdate = true;
+    for (const source of this.loadedGlbs.values()) {
+      source.scene.traverse((node) => {
+        if (!(node instanceof THREE.Mesh)) return;
+        if (node.geometry.index) node.geometry.index.needsUpdate = true;
+        for (const attribute of Object.values(
+          node.geometry.attributes,
+        ) as THREE.BufferAttribute[]) {
+          attribute.needsUpdate = true;
+        }
+        const materials = Array.isArray(node.material) ? node.material : [node.material];
+        for (const material of materials) {
+          material.needsUpdate = true;
+          for (const value of Object.values(material as unknown as Record<string, unknown>)) {
+            if (value instanceof THREE.Texture) value.needsUpdate = true;
+          }
+        }
+      });
+    }
   }
 
   get loadReceipt(): RegistryLoadReceipt {
@@ -165,12 +189,12 @@ export class AssetRegistry {
     for (const texture of textures) texture.dispose();
     for (const texture of this.loadedTextures.values()) texture.dispose();
     for (const texture of this.loadedHdrs.values()) texture.dispose();
-    for (const target of this.environmentTargets) target.dispose();
+    for (const target of this.environmentTargets.values()) target.dispose();
     for (const loader of this.dracoLoaders) loader.dispose();
     this.loadedGlbs.clear();
     this.loadedTextures.clear();
     this.loadedHdrs.clear();
-    this.environmentTargets.length = 0;
+    this.environmentTargets.clear();
     this.dracoLoaders.length = 0;
   }
 

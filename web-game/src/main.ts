@@ -4,9 +4,12 @@ import {
   installCowReviewHarness,
   installCowReviewReadyGate,
 } from "./diagnostics/CowReviewHarness";
+import { installP30CriticHarness } from "./diagnostics/P30CriticHarness";
+import { isP30CriticScenarioRoute } from "./diagnostics/P30CriticProtocol";
 import { GameApp } from "./render/app/GameApp";
 
-const reviewReadyGate = installCowReviewReadyGate();
+const p30CriticScenario = isP30CriticScenarioRoute();
+const reviewReadyGate = p30CriticScenario ? null : installCowReviewReadyGate();
 
 async function boot(): Promise<void> {
   const root = document.querySelector<HTMLElement>("#game-root");
@@ -15,16 +18,23 @@ async function boot(): Promise<void> {
   const params = new URLSearchParams(window.location.search);
   const reviewMode = params.get("review") === "1";
   const captureScenario = params.get("capture");
-  if (captureScenario) app.runCaptureScenario(captureScenario);
-  else if (!reviewMode) app.start();
-  installCaptureHooks(app);
-  const review = installCowReviewHarness(app, reviewMode);
-  reviewReadyGate.resolve(await review.ready);
+  if (p30CriticScenario) {
+    app.prepareP30LightStrikeScenario();
+    installP30CriticHarness(app);
+    document.documentElement.dataset.gameReady = "true";
+    app.start();
+  } else {
+    if (captureScenario) app.runCaptureScenario(captureScenario);
+    else if (!reviewMode) app.start();
+    installCaptureHooks(app);
+    const review = installCowReviewHarness(app, reviewMode);
+    reviewReadyGate?.resolve(await review.ready);
+  }
   window.addEventListener("beforeunload", () => app.dispose(), { once: true });
 }
 
 void boot().catch((error: unknown) => {
-  reviewReadyGate.reject(error);
+  reviewReadyGate?.reject(error);
   console.error(error);
   document.documentElement.dataset.gameReady = "error";
   const root = document.querySelector<HTMLElement>("#game-root");

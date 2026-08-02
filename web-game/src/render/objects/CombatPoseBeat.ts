@@ -12,6 +12,10 @@ export interface HeroCombatPoseSample {
   phase: "neutral" | "anticipation" | "contact" | "recoil" | "recovery";
   attackFrame: number;
   weaponAxialRollOffset: number;
+  grip: {
+    weaponMountRotation: PoseVector;
+    supportLowerArmRotation: PoseVector;
+  };
   model: PoseTransform;
   bones: {
     pelvis: PoseVector;
@@ -33,6 +37,12 @@ export interface TargetCombatPoseSample {
     abdomen: PoseVector;
     torso: PoseVector;
     neck: PoseVector;
+    shoulderL: PoseVector;
+    upperArmL: PoseVector;
+    lowerArmL: PoseVector;
+    shoulderR: PoseVector;
+    upperArmR: PoseVector;
+    lowerArmR: PoseVector;
   };
 }
 
@@ -46,6 +56,7 @@ export interface HeroAuthoredPoseTiming {
 interface HeroPoseKey {
   frame: number;
   weaponAxialRollOffset: number;
+  grip: HeroCombatPoseSample["grip"];
   model: PoseTransform;
   bones: HeroCombatPoseSample["bones"];
 }
@@ -58,6 +69,22 @@ interface TargetPoseKey {
 
 const ZERO: PoseVector = [0, 0, 0];
 const NEUTRAL_TRANSFORM: PoseTransform = { position: ZERO, rotation: ZERO };
+const NEUTRAL_GRIP: HeroCombatPoseSample["grip"] = {
+  weaponMountRotation: ZERO,
+  supportLowerArmRotation: ZERO,
+};
+const NEUTRAL_TARGET_BONES: TargetCombatPoseSample["bones"] = {
+  hips: ZERO,
+  abdomen: ZERO,
+  torso: ZERO,
+  neck: ZERO,
+  shoulderL: ZERO,
+  upperArmL: ZERO,
+  lowerArmL: ZERO,
+  shoulderR: ZERO,
+  upperArmR: ZERO,
+  lowerArmR: ZERO,
+};
 
 // These are deliberately additive presentation offsets. The authored clip
 // continues to own the hands, feet, weapon socket, and timing; the keys add a
@@ -66,12 +93,14 @@ const HERO_KEYS: readonly HeroPoseKey[] = [
   {
     frame: -1,
     weaponAxialRollOffset: 0,
+    grip: NEUTRAL_GRIP,
     model: NEUTRAL_TRANSFORM,
     bones: { pelvis: ZERO, spine01: ZERO, spine02: ZERO, spine03: ZERO, neck: ZERO },
   },
   {
     frame: 0,
     weaponAxialRollOffset: 0,
+    grip: NEUTRAL_GRIP,
     model: { position: [0, -0.008, 0.006], rotation: [0.008, 0.018, -0.008] },
     bones: {
       pelvis: [0.008, -0.025, 0.012],
@@ -84,6 +113,7 @@ const HERO_KEYS: readonly HeroPoseKey[] = [
   {
     frame: 5,
     weaponAxialRollOffset: 0,
+    grip: NEUTRAL_GRIP,
     model: { position: [-0.026, -0.052, 0.026], rotation: [0.02, 0.07, -0.036] },
     bones: {
       pelvis: [0.032, -0.095, 0.058],
@@ -96,6 +126,10 @@ const HERO_KEYS: readonly HeroPoseKey[] = [
   {
     frame: 10,
     weaponAxialRollOffset: 2.8,
+    grip: {
+      weaponMountRotation: [0, 0, -0.012],
+      supportLowerArmRotation: [0.0045, -0.003, -0.0075],
+    },
     model: { position: [-0.2, -0.014, 0.16], rotation: [0.012, -0.025, 0.02] },
     bones: {
       pelvis: [0.018, -0.04, 0.035],
@@ -108,6 +142,7 @@ const HERO_KEYS: readonly HeroPoseKey[] = [
   {
     frame: 12,
     weaponAxialRollOffset: 2.8,
+    grip: NEUTRAL_GRIP,
     model: { position: [-0.14, -0.02, 0.18], rotation: [0.022, -0.025, 0.032] },
     bones: {
       pelvis: [0.026, -0.055, 0.042],
@@ -120,6 +155,7 @@ const HERO_KEYS: readonly HeroPoseKey[] = [
   {
     frame: 17,
     weaponAxialRollOffset: 2.8,
+    grip: NEUTRAL_GRIP,
     model: { position: [-0.04, -0.02, 0.205], rotation: [0.048, -0.12, 0.075] },
     bones: {
       pelvis: [0.052, -0.105, 0.08],
@@ -132,6 +168,7 @@ const HERO_KEYS: readonly HeroPoseKey[] = [
   {
     frame: 22,
     weaponAxialRollOffset: 1.2,
+    grip: NEUTRAL_GRIP,
     model: { position: [-0.015, -0.015, 0.13], rotation: [0.026, -0.055, 0.038] },
     bones: {
       pelvis: [0.03, -0.05, 0.04],
@@ -144,6 +181,7 @@ const HERO_KEYS: readonly HeroPoseKey[] = [
   {
     frame: 25,
     weaponAxialRollOffset: 0,
+    grip: NEUTRAL_GRIP,
     model: NEUTRAL_TRANSFORM,
     bones: { pelvis: ZERO, spine01: ZERO, spine02: ZERO, spine03: ZERO, neck: ZERO },
   },
@@ -152,12 +190,34 @@ const HERO_KEYS: readonly HeroPoseKey[] = [
 const TARGET_KEYS: readonly TargetPoseKey[] = [
   {
     reaction01: 0,
-    model: { position: [-0.8, -0.018, -0.12], rotation: [-0.028, 0.035, 0.07] },
+    model: { position: [-0.72, -0.024, -0.12], rotation: [-0.05, 0.055, 0.11] },
     bones: {
-      hips: [-0.018, -0.025, -0.025],
-      abdomen: [-0.04, -0.055, -0.045],
-      torso: [-0.065, -0.075, -0.065],
-      neck: [0.028, 0.035, 0.03],
+      hips: [-0.024, -0.035, -0.034],
+      abdomen: [-0.062, -0.08, -0.07],
+      torso: [-0.105, -0.125, -0.11],
+      neck: [0.042, 0.055, 0.046],
+      shoulderL: [0.08, -0.04, 0.14],
+      upperArmL: [0.14, -0.08, 0.18],
+      lowerArmL: [-0.12, 0.06, 0.08],
+      shoulderR: [-0.16, 0.08, -0.22],
+      upperArmR: [-0.18, 0.1, -0.25],
+      lowerArmR: [0.18, -0.08, -0.1],
+    },
+  },
+  {
+    reaction01: 1 / 12,
+    model: { position: [-0.76, -0.03, -0.04], rotation: [-0.06, 0.065, 0.125] },
+    bones: {
+      hips: [-0.028, -0.01, -0.012],
+      abdomen: [-0.075, -0.025, -0.02],
+      torso: [-0.12, -0.035, -0.028],
+      neck: [0.052, 0.018, 0.014],
+      shoulderL: [0.07, -0.03, 0.12],
+      upperArmL: [0.12, -0.065, 0.15],
+      lowerArmL: [-0.1, 0.05, 0.07],
+      shoulderR: [-0.145, 0.07, -0.2],
+      upperArmR: [-0.16, 0.085, -0.22],
+      lowerArmR: [0.16, -0.07, -0.09],
     },
   },
   {
@@ -168,6 +228,12 @@ const TARGET_KEYS: readonly TargetPoseKey[] = [
       abdomen: [-0.095, 0.105, 0.1],
       torso: [-0.14, 0.145, 0.13],
       neck: [0.065, -0.08, -0.07],
+      shoulderL: [0.04, -0.02, 0.08],
+      upperArmL: [0.07, -0.04, 0.1],
+      lowerArmL: [-0.055, 0.03, 0.04],
+      shoulderR: [-0.08, 0.04, -0.12],
+      upperArmR: [-0.09, 0.05, -0.13],
+      lowerArmR: [0.085, -0.04, -0.05],
     },
   },
   {
@@ -178,12 +244,18 @@ const TARGET_KEYS: readonly TargetPoseKey[] = [
       abdomen: [-0.05, 0.055, 0.052],
       torso: [-0.072, 0.075, 0.07],
       neck: [0.032, -0.04, -0.035],
+      shoulderL: [0.018, -0.008, 0.036],
+      upperArmL: [0.03, -0.018, 0.045],
+      lowerArmL: [-0.024, 0.014, 0.018],
+      shoulderR: [-0.036, 0.018, -0.054],
+      upperArmR: [-0.04, 0.022, -0.058],
+      lowerArmR: [0.038, -0.018, -0.022],
     },
   },
   {
     reaction01: 1,
     model: NEUTRAL_TRANSFORM,
-    bones: { hips: ZERO, abdomen: ZERO, torso: ZERO, neck: ZERO },
+    bones: NEUTRAL_TARGET_BONES,
   },
 ];
 
@@ -288,6 +360,25 @@ function mixHeroBones(
   };
 }
 
+function mixHeroGrip(
+  from: HeroCombatPoseSample["grip"],
+  to: HeroCombatPoseSample["grip"],
+  amount: number,
+): HeroCombatPoseSample["grip"] {
+  return {
+    weaponMountRotation: mixVector(
+      from.weaponMountRotation,
+      to.weaponMountRotation,
+      amount,
+    ),
+    supportLowerArmRotation: mixVector(
+      from.supportLowerArmRotation,
+      to.supportLowerArmRotation,
+      amount,
+    ),
+  };
+}
+
 function mixTargetBones(
   from: TargetCombatPoseSample["bones"],
   to: TargetCombatPoseSample["bones"],
@@ -298,6 +389,12 @@ function mixTargetBones(
     abdomen: mixVector(from.abdomen, to.abdomen, amount),
     torso: mixVector(from.torso, to.torso, amount),
     neck: mixVector(from.neck, to.neck, amount),
+    shoulderL: mixVector(from.shoulderL, to.shoulderL, amount),
+    upperArmL: mixVector(from.upperArmL, to.upperArmL, amount),
+    lowerArmL: mixVector(from.lowerArmL, to.lowerArmL, amount),
+    shoulderR: mixVector(from.shoulderR, to.shoulderR, amount),
+    upperArmR: mixVector(from.upperArmR, to.upperArmR, amount),
+    lowerArmR: mixVector(from.lowerArmR, to.lowerArmR, amount),
   };
 }
 
@@ -311,6 +408,7 @@ export function sampleHeroCombatPose(
       phase: "neutral",
       attackFrame: -1,
       weaponAxialRollOffset: 0,
+      grip: NEUTRAL_GRIP,
       model: NEUTRAL_TRANSFORM,
       bones: { pelvis: ZERO, spine01: ZERO, spine02: ZERO, spine03: ZERO, neck: ZERO },
     };
@@ -333,6 +431,7 @@ export function sampleHeroCombatPose(
       from.weaponAxialRollOffset +
         (to.weaponAxialRollOffset - from.weaponAxialRollOffset) * amount,
     ),
+    grip: mixHeroGrip(from.grip, to.grip, amount),
     model: mixTransform(from.model, to.model, amount),
     bones: mixHeroBones(from.bones, to.bones, amount),
   };
@@ -349,7 +448,7 @@ export function sampleTargetCombatPose(
       reaction01: 1,
       animationLeadSeconds: 0,
       model: NEUTRAL_TRANSFORM,
-      bones: { hips: ZERO, abdomen: ZERO, torso: ZERO, neck: ZERO },
+      bones: NEUTRAL_TARGET_BONES,
     };
   }
 

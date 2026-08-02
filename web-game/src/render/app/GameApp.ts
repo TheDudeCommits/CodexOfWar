@@ -1,5 +1,6 @@
 import * as THREE from "three";
 import { PerfDiagnostics, type RuntimeMetrics } from "../../diagnostics/PerfDiagnostics";
+import { getCombatPoseBeatTelemetry } from "../objects/CharacterViews";
 import { InputController } from "../../game/input/InputController";
 import type { InputSnapshot } from "../../game/input/actions";
 import { FIXED_TIMESTEP } from "../../game/simulation/constants";
@@ -13,7 +14,7 @@ import { Hud } from "../../ui/Hud";
 import { RenderBridge, type PresentationAssetReceipt } from "../adapters/RenderBridge";
 import { AssetRegistry, type RegistryLoadReceipt } from "../loaders/AssetRegistry";
 import { PostStack } from "../post/PostStack";
-import { createRenderer } from "./createRenderer";
+import { createRenderer, restoreRendererState } from "./createRenderer";
 import { createScene, type SceneLighting } from "./createScene";
 import {
   ThirdPersonCamera,
@@ -24,7 +25,27 @@ import { ViewportController } from "./ViewportController";
 
 interface PendingEdges {
   attack: boolean;
+  attackSource: InputSnapshot["attackSource"];
   dodge: boolean;
+}
+
+export interface ProductionFixedUpdateReceipt {
+  input: InputFrame;
+  lightStrikeSource: InputSnapshot["attackSource"];
+  state: WorldState;
+  events: GameEvent[];
+  healthBefore: number;
+  healthAfter: number;
+}
+
+export interface ProductionRenderReceipt {
+  heartbeat: number;
+  absoluteSimulationTick: number;
+}
+
+export interface ProductionRuntimeObserver {
+  afterFixedUpdate: (receipt: ProductionFixedUpdateReceipt) => boolean | void;
+  afterRender?: (receipt: ProductionRenderReceipt) => void;
 }
 
 export class GameApp {
@@ -51,6 +72,7 @@ export class GameApp {
     sprint: false,
     dodgePressed: false,
     attackPressed: false,
+    attackSource: null,
     lockPressed: false,
     diagnosticsPressed: false,
     postPressed: false,
@@ -59,13 +81,36 @@ export class GameApp {
     lookX: 0,
     lookY: 0,
   };
-  private readonly pendingEdges: PendingEdges = { attack: false, dodge: false };
+  private readonly pendingEdges: PendingEdges = {
+    attack: false,
+    attackSource: null,
+    dodge: false,
+  };
   private manifestVersion: number | null = null;
   private readonly reviewMode: boolean;
   private simulationPaused = false;
+  private p30AwaitingInput = false;
+  private p30ScenarioActive = false;
+  private runtimeCapturePaused = false;
+  private haltAfterLiveTick = false;
+  private renderHeartbeat = 0;
+  private lastP30RenderTimestamp = 0;
+  private runtimeObserver: ProductionRuntimeObserver | null = null;
   private readonly runtimeErrors: string[] = [];
-  private readonly contextLifecycle = { lost: false, losses: 0, restores: 0 };
-  private readonly environmentInstalled: boolean;
+  private readonly contextLifecycle: {
+    lost: boolean;
+    losses: number;
+    restores: number;
+    recovering: boolean;
+    lastRestoreMilliseconds: number | null;
+  } = {
+    lost: false,
+    losses: 0,
+    restores: 0,
+    recovering: false,
+    lastRestoreMilliseconds: null,
+  };
+  private environmentInstalled: boolean;
 
   private constructor(
     host: HTMLElement,
@@ -167,7 +212,11 @@ export class GameApp {
     this.clock.reset();
     this.cameraController.reset();
     this.lockedOn = false;
+    this.p30AwaitingInput = false;
+    this.p30ScenarioActive = false;
+    this.runtimeCapturePaused = false;
     this.pendingEdges.attack = false;
+    this.pendingEdges.attackSource = null;
     this.pendingEdges.dodge = false;
     this.renderOnce(true);
   }
@@ -185,10 +234,58 @@ export class GameApp {
     this.clock.reset();
     this.cameraController.reset();
     this.lockedOn = false;
+    this.p30AwaitingInput = false;
+    this.p30ScenarioActive = false;
+    this.runtimeCapturePaused = false;
     this.simulationPaused = false;
     this.pendingEdges.attack = false;
+    this.pendingEdges.attackSource = null;
     this.pendingEdges.dodge = false;
     this.renderOnce(true);
+  }
+
+  /** Selects the normal deterministic P30 scenario before gameplay begins. */
+  prepareP30LightStrikeScenario(): void {
+    const initial = createInitialWorld({
+      playerPosition: { x: 0, z: 2.6 },
+      enemyPosition: { x: 0, z: 0 },
+    });
+    this.simulation.reset(initial, P30_REVIEW_TUNING);
+    this.physics.reset(initial.player.position, initial.enemy.position);
+    this.clock.reset();
+    this.cameraController.reset();
+    this.lockedOn = false;
+    this.pendingEdges.attack = false;
+    this.pendingEdges.attackSource = null;
+    this.pendingEdges.dodge = false;
+    this.runtimeCapturePaused = false;
+    this.p30ScenarioActive = true;
+    // Tick 0 remains visible and stable until the first real player input.
+    // The evaluator then drives the shared W/idle/mouse tape through the
+    // production input controller; no scenario action is injected here.
+    this.p30AwaitingInput = true;
+    this.simulationPaused = true;
+    this.renderOnce(true);
+  }
+
+  setProductionRuntimeObserver(observer: ProductionRuntimeObserver | null): void {
+    this.runtimeObserver = observer;
+  }
+
+  resumeRuntimeCapture(): void {
+    if (!this.runtimeCapturePaused) return;
+    this.runtimeCapturePaused = false;
+    this.simulationPaused = false;
+    this.clock.reset();
+    this.lastTimestamp = performance.now();
+  }
+
+  get isRuntimeCapturePaused(): boolean {
+    return this.runtimeCapturePaused;
+  }
+
+  get currentRenderHeartbeat(): number {
+    return this.renderHeartbeat;
   }
 
   stepReviewFrame(input: InputFrame): GameEvent[] {
@@ -259,6 +356,7 @@ export class GameApp {
     this.renderBridge.update(state, FIXED_TIMESTEP);
     this.hud.update(state, this.cameraController.camera, this.lockedOn);
     this.post.render(this.lighting.scene, this.cameraController.camera);
+    this.recordProductionRender();
   }
 
   capturePng(): string {
@@ -309,6 +407,43 @@ export class GameApp {
     );
   }
 
+  getCombatPoseTelemetry(): ReturnType<typeof getCombatPoseBeatTelemetry> {
+    return getCombatPoseBeatTelemetry();
+  }
+
+  getActorWorldHeights(): { attacker: number; target: number } {
+    this.lighting.scene.updateMatrixWorld(true);
+    const attacker =
+      this.renderBridge.hero.root.getObjectByName("nyra-visible-model") ??
+      this.renderBridge.hero.root;
+    const target =
+      this.renderBridge.zombie.root.getObjectByName("hollow-visible-model") ??
+      this.renderBridge.zombie.root;
+    return {
+      attacker: new THREE.Box3().setFromObject(attacker).getSize(new THREE.Vector3()).y,
+      target: new THREE.Box3().setFromObject(target).getSize(new THREE.Vector3()).y,
+    };
+  }
+
+  getProductionModeTelemetry(): {
+    rendererMode: "webgl2" | "webgl1";
+    assetTier: "production-authored" | "fallback";
+    fallbackActive: boolean;
+  } {
+    const fallbackActive = this.renderBridge.assetReceipt.proceduralFallbackActive ||
+      !this.environmentInstalled;
+    const context = this.renderer.getContext();
+    return {
+      rendererMode:
+        typeof WebGL2RenderingContext !== "undefined" &&
+        context instanceof WebGL2RenderingContext
+          ? "webgl2"
+          : "webgl1",
+      assetTier: fallbackActive ? "fallback" : "production-authored",
+      fallbackActive,
+    };
+  }
+
   getRendererTelemetry(): {
     calls: number;
     triangles: number;
@@ -319,7 +454,13 @@ export class GameApp {
     pixelRatio: number;
     size: { width: number; height: number };
     errors: string[];
-    context: { lost: boolean; losses: number; restores: number };
+    context: {
+      lost: boolean;
+      losses: number;
+      restores: number;
+      recovering: boolean;
+      lastRestoreMilliseconds: number | null;
+    };
   } {
     const size = this.renderer.getSize(new THREE.Vector2());
     return {
@@ -402,7 +543,20 @@ export class GameApp {
     this.processPresentationActions(this.latestInput);
 
     this.pendingEdges.attack ||= this.latestInput.attackPressed;
+    if (this.latestInput.attackPressed) {
+      this.pendingEdges.attackSource = this.latestInput.attackSource;
+    }
     this.pendingEdges.dodge ||= this.latestInput.dodgePressed;
+    if (
+      this.p30AwaitingInput &&
+      (Math.abs(this.latestInput.moveX) + Math.abs(this.latestInput.moveZ) > 0 ||
+        this.latestInput.attackPressed ||
+        this.latestInput.dodgePressed)
+    ) {
+      this.p30AwaitingInput = false;
+      this.simulationPaused = false;
+      this.clock.reset();
+    }
     const simulationInput = this.mapSimulationInput(this.latestInput);
     let appliedEdges = false;
     let fixedSteps = 0;
@@ -413,22 +567,37 @@ export class GameApp {
         attackPressed: !appliedEdges && this.pendingEdges.attack,
         dodgePressed: !appliedEdges && this.pendingEdges.dodge,
       };
-      this.fixedTick(fixedInput, dt);
+      this.haltAfterLiveTick = false;
+      this.fixedTick(fixedInput, dt, true, this.pendingEdges.attackSource);
       appliedEdges = true;
       fixedSteps += 1;
+      return !this.haltAfterLiveTick;
     });
     if (appliedEdges) {
       this.pendingEdges.attack = false;
+      this.pendingEdges.attackSource = null;
       this.pendingEdges.dodge = false;
     }
 
     const state = this.simulation.state;
     if (state.enemy.health <= 0) this.lockedOn = false;
-    this.updateCamera(delta, this.latestInput.lookX, this.latestInput.lookY);
-    this.renderBridge.update(state, delta);
-    this.lighting.rig.update(state.elapsed);
-    this.hud.update(state, this.cameraController.camera, this.lockedOn);
-    this.post.render(this.lighting.scene, this.cameraController.camera);
+    const shouldPresent =
+      !this.p30ScenarioActive ||
+      !this.simulationPaused ||
+      fixedSteps > 0 ||
+      timestamp - this.lastP30RenderTimestamp >= 250;
+    if (shouldPresent) {
+      const presentationDelta = this.p30ScenarioActive
+        ? fixedSteps * FIXED_TIMESTEP
+        : delta;
+      this.updateCamera(presentationDelta, this.latestInput.lookX, this.latestInput.lookY);
+      this.renderBridge.update(state, presentationDelta);
+      this.lighting.rig.update(state.elapsed);
+      this.hud.update(state, this.cameraController.camera, this.lockedOn);
+      this.post.render(this.lighting.scene, this.cameraController.camera);
+      this.lastP30RenderTimestamp = performance.now();
+      this.recordProductionRender();
+    }
 
     const metrics = this.diagnostics.sample(
       delta,
@@ -476,8 +645,14 @@ export class GameApp {
     );
   }
 
-  private fixedTick(input: InputFrame, dt: number): GameEvent[] {
+  private fixedTick(
+    input: InputFrame,
+    dt: number,
+    notifyRuntimeObserver = false,
+    lightStrikeSource: InputSnapshot["attackSource"] = null,
+  ): GameEvent[] {
     const previous = { ...this.simulation.state.player.position };
+    const healthBefore = this.simulation.state.enemy.health;
     this.simulation.step(input, dt);
     const desired = { ...this.simulation.state.player.position };
     const resolved = this.physics.resolvePlayerMovement(
@@ -494,7 +669,30 @@ export class GameApp {
     if (events.some((event) => event.type === "enemy-defeated")) {
       this.hud.toast("TRIAL COMPLETE");
     }
+    if (notifyRuntimeObserver && this.runtimeObserver) {
+      const shouldContinue = this.runtimeObserver.afterFixedUpdate({
+        input: { ...input },
+        lightStrikeSource: input.attackPressed ? lightStrikeSource : null,
+        state: structuredClone(this.simulation.state),
+        events: events.map((event) => ({ ...event })),
+        healthBefore,
+        healthAfter: this.simulation.state.enemy.health,
+      });
+      if (shouldContinue === false) {
+        this.runtimeCapturePaused = true;
+        this.simulationPaused = true;
+        this.haltAfterLiveTick = true;
+      }
+    }
     return events;
+  }
+
+  private recordProductionRender(): void {
+    this.renderHeartbeat += 1;
+    this.runtimeObserver?.afterRender?.({
+      heartbeat: this.renderHeartbeat,
+      absoluteSimulationTick: this.simulation.state.tick,
+    });
   }
 
   private processPresentationActions(input: InputSnapshot): void {
@@ -529,18 +727,55 @@ export class GameApp {
   private readonly onContextLost = (): void => {
     this.contextLost = true;
     this.contextLifecycle.lost = true;
+    this.contextLifecycle.recovering = false;
     this.contextLifecycle.losses += 1;
     this.hud.showContextLost(true);
   };
 
   private readonly onContextRestored = (): void => {
+    const startedAt = performance.now();
     this.contextLost = false;
     this.contextLifecycle.lost = false;
     this.contextLifecycle.restores += 1;
+    this.contextLifecycle.recovering = true;
     this.lastTimestamp = performance.now();
     this.hud.showContextLost(false);
-    this.hud.toast("Veil restored");
-    this.renderOnce();
+    try {
+      this.renderer.resetState();
+      restoreRendererState(this.renderer);
+      this.assetRegistry.restoreGpuResources();
+      this.renderBridge.restoreGpuResources();
+      this.lighting.rig.restoreGpuResources();
+
+      const restoredEnvironment = this.assetRegistry.createEnvironmentMap(
+        "environment.snowy-forest",
+        this.renderer,
+      );
+      this.environmentInstalled = restoredEnvironment !== null;
+      this.lighting.scene.environment = restoredEnvironment;
+
+      const size = this.renderer.getSize(new THREE.Vector2());
+      this.post.restoreGpuResources(size.x, size.y);
+      this.renderOnce(false, false);
+      this.contextLifecycle.lastRestoreMilliseconds =
+        Math.round((performance.now() - startedAt) * 1000) / 1000;
+      this.contextLifecycle.recovering = false;
+      this.hud.toast("Veil restored");
+
+      void this.renderer
+        .compileAsync(this.lighting.scene, this.cameraController.camera)
+        .then(() => this.renderOnce(false, false))
+        .catch((error: unknown) => {
+          this.runtimeErrors.push(
+            `context recompile: ${error instanceof Error ? error.message : String(error)}`,
+          );
+        });
+    } catch (error) {
+      this.contextLifecycle.recovering = false;
+      this.runtimeErrors.push(
+        `context restore: ${error instanceof Error ? error.message : String(error)}`,
+      );
+    }
   };
 
   private async prepareRenderer(): Promise<void> {
