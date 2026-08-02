@@ -1,0 +1,68 @@
+{
+  "schema": "p30.round008.blind-critic.verdict.v1",
+  "candidateCommit": "5359f91bad13fe83e70169231e519911a8fbebc4",
+  "verdict": "REJECT",
+  "pass": false,
+  "audit": {
+    "mappingSealSha256": "defdae170bc6b0bfbea004d8f433526eda99b8d7c785d48d97c62eb2ed95a171",
+    "scoreSealSha256": "9b5f6e70a36681bc5ff5d597d7b8741a1c364b3b890a7fba66ed3eea0b000c3a",
+    "scoreSealedBeforeMappingReveal": true
+  },
+  "focusedCombatLifecycle": {
+    "candidateWins": 0,
+    "pairCount": 3,
+    "requiredWins": 3,
+    "pass": false,
+    "referenceWins": 3
+  },
+  "overallSixShot": {
+    "candidateWins": 0,
+    "pairCount": 6,
+    "requiredWins": 5,
+    "pass": false,
+    "referenceWins": 6
+  },
+  "categoryScores": {
+    "characterFidelity": 3.2,
+    "environmentMaterialFidelity": 3.8,
+    "lightingColor": 3.4,
+    "cameraComposition": 5.0,
+    "combatPoseReadability": 5.5,
+    "motionFxReadability": 3.6,
+    "uiPolishCohesion": 4.0,
+    "depthAtmosphere": 3.2,
+    "animationPhysicalCredibility": 4.5,
+    "overallAaaFinish": 3.1
+  },
+  "totalScore": 39.3,
+  "minimumTotal": 95,
+  "everyCategoryAtLeastNine": false,
+  "captureRuntimeHardGates": {
+    "pass": true,
+    "exactCommit": true,
+    "isolatedWorktree": true,
+    "cleanNode24Install": true,
+    "productionBuildAndServe": true,
+    "headedChromeWebgl2": true,
+    "viewport1600x900Dpr1": true,
+    "productionAssetsNoFallback": true,
+    "noRuntimeOrConsoleErrors": true,
+    "focusedCaptureByteDeterminism": true,
+    "contextLossRestore": true,
+    "combatLifecycleEvents": true
+  },
+  "supplementalVisualFramingTelemetry": {
+    "pass": false,
+    "initialBladeInsideSafeFrame": false,
+    "dodgePlayerHeightGate": false
+  },
+  "acceptance": {
+    "focusedCandidateWinsThreeOfThree": false,
+    "overallCandidateWinsAtLeastFiveOfSix": false,
+    "totalAtLeastNinetyFive": false,
+    "everyCategoryAtLeastNine": false,
+    "allCaptureRuntimeHardGatesPass": true,
+    "allRequiredConditionsPass": false
+  },
+  "largestRemainingVisualGap": "Builder assignment: rebuild frozen ticks 29, 34, and 41 as one physically coherent AAA sword-contact beat with readable anticipation, concentrated impact at tick 34, and weighted recoil/recovery, without changing the camera, characters, arena, or HUD."
+}

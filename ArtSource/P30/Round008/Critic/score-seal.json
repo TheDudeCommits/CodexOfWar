@@ -1,0 +1,104 @@
+{
+  "schema": "p30.round008.blind-critic.score-seal.v1",
+  "candidateCommit": "5359f91bad13fe83e70169231e519911a8fbebc4",
+  "sealedAtUtc": "2026-08-02T04:48:59Z",
+  "nonce": "fe4d55bac0748475c1e1f285f309b44d9c804c1818d25813b80d72d2b183002b",
+  "mappingSealFileSha256": "defdae170bc6b0bfbea004d8f433526eda99b8d7c785d48d97c62eb2ed95a171",
+  "mappingWasUnopenedAtSealTime": true,
+  "categoryOrder": [
+    "characterFidelity",
+    "environmentMaterialFidelity",
+    "lightingColor",
+    "cameraComposition",
+    "combatPoseReadability",
+    "motionFxReadability",
+    "uiPolishCohesion",
+    "depthAtmosphere",
+    "animationPhysicalCredibility",
+    "overallAaaFinish"
+  ],
+  "scoringScale": "0-10 per category per anonymous side; no web-game allowance",
+  "focusedGate": [
+    {
+      "comparisonId": "C03-P15",
+      "candidateTickLabelHiddenDuringScoring": "tick-29",
+      "winnerAnonymous": "B",
+      "boardSha256": "939b18439d6ced84d6ce8f439102fd6d5da52ff0d92e76137ca3cc4aa41d87fd"
+    },
+    {
+      "comparisonId": "C04-P05",
+      "candidateTickLabelHiddenDuringScoring": "tick-34",
+      "winnerAnonymous": "B",
+      "boardSha256": "9722bb48e84a681ac8e7b3ee5cc2205816f93d8f6bbad525c226b484157ef6c0"
+    },
+    {
+      "comparisonId": "C05-P06",
+      "candidateTickLabelHiddenDuringScoring": "tick-41",
+      "winnerAnonymous": "B",
+      "boardSha256": "9347af9bdc5e56342efa60503e770afbfc1a0a62aa2b22510501c101aca1d9b2"
+    }
+  ],
+  "overallGate": [
+    {
+      "comparisonId": "C01-P11",
+      "winnerAnonymous": "A",
+      "boardSha256": "82c44ec941ff4d61efbe9e3fb7f4295dcb9b912a5b6802aeefc2dad1d79da61e",
+      "sideAScores": [9.2, 9.4, 9.2, 9.2, 8.5, 8.0, 8.8, 9.4, 9.0, 9.2],
+      "sideBScores": [3.2, 3.8, 3.4, 4.2, 4.0, 2.5, 4.0, 3.0, 3.5, 2.8],
+      "reasonAnonymous": "A has materially richer authored geometry, material response, atmosphere, depth, and integrated third-person staging."
+    },
+    {
+      "comparisonId": "C02-P10",
+      "winnerAnonymous": "B",
+      "boardSha256": "a446239f3d03eaa2abb6b2fe113e41ff3e6c308f75b3d6ab9ed53d7adc38a6f1",
+      "sideAScores": [3.2, 3.8, 3.4, 4.8, 4.8, 3.5, 4.0, 3.2, 4.0, 3.0],
+      "sideBScores": [8.5, 8.6, 8.4, 8.7, 8.8, 8.0, 8.4, 8.5, 8.8, 8.6],
+      "reasonAnonymous": "B preserves stronger silhouette weight, grounded anatomy, natural material variation, and cinematic depth despite source compression."
+    },
+    {
+      "comparisonId": "C03-P15",
+      "winnerAnonymous": "B",
+      "boardSha256": "939b18439d6ced84d6ce8f439102fd6d5da52ff0d92e76137ca3cc4aa41d87fd",
+      "sideAScores": [3.2, 3.8, 3.4, 5.0, 6.0, 3.5, 4.0, 3.2, 5.2, 3.2],
+      "sideBScores": [9.2, 8.8, 9.0, 9.2, 9.5, 9.5, 8.5, 9.0, 9.3, 9.2],
+      "reasonAnonymous": "B communicates startup force through body torque, weapon arc, emissive energy, enemy staging, and scene-scale consequence."
+    },
+    {
+      "comparisonId": "C04-P05",
+      "winnerAnonymous": "B",
+      "boardSha256": "9722bb48e84a681ac8e7b3ee5cc2205816f93d8f6bbad525c226b484157ef6c0",
+      "sideAScores": [3.2, 3.8, 3.4, 5.5, 6.8, 5.2, 4.0, 3.2, 5.2, 3.4],
+      "sideBScores": [9.5, 9.2, 9.2, 9.2, 9.5, 8.6, 8.5, 9.2, 9.5, 9.4],
+      "reasonAnonymous": "B makes impact physically credible through anatomical compression, contact hierarchy, reactive posing, surface detail, and controlled framing."
+    },
+    {
+      "comparisonId": "C05-P06",
+      "winnerAnonymous": "B",
+      "boardSha256": "9347af9bdc5e56342efa60503e770afbfc1a0a62aa2b22510501c101aca1d9b2",
+      "sideAScores": [3.2, 3.8, 3.4, 5.0, 5.8, 3.2, 4.0, 3.2, 5.0, 3.2],
+      "sideBScores": [9.5, 9.2, 9.0, 9.2, 9.3, 8.6, 8.5, 9.2, 9.3, 9.3],
+      "reasonAnonymous": "B reads as a weighted recovery in a reactive world; A reads as a posed animation sample in a largely inert stage."
+    },
+    {
+      "comparisonId": "C06-P21",
+      "winnerAnonymous": "A",
+      "boardSha256": "786607063cf2d0b8509351b2b210ee0f12cab5a0fc8f0aade3db94d8a47087f4",
+      "sideAScores": [9.2, 9.0, 9.5, 9.2, 9.2, 9.5, 8.6, 9.3, 9.2, 9.3],
+      "sideBScores": [3.2, 3.8, 3.4, 5.2, 5.5, 3.5, 4.0, 3.2, 4.2, 3.0],
+      "reasonAnonymous": "A integrates motion, light, particles, reaction targets, and environmental stakes; B has an energetic silhouette but weak physical grounding and consequence."
+    }
+  ],
+  "revealRollupProtocol": {
+    "pairWins": "Resolve candidate side from mapping-seal.json and count only exact anonymous winners.",
+    "categories": "For each category, average the candidate-side score across the six overall comparisons and round to one decimal.",
+    "total": "Sum the ten rounded candidate category scores.",
+    "acceptance": {
+      "focusedCandidateWinsRequired": 3,
+      "focusedPairCount": 3,
+      "overallCandidateWinsRequired": 5,
+      "overallPairCount": 6,
+      "minimumTotal": 95,
+      "minimumEveryCategory": 9
+    }
+  }
+}

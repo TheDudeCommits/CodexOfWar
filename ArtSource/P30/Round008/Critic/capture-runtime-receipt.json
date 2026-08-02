@@ -1,0 +1,209 @@
+{
+  "schema": "p30.round008.blind-critic.capture-runtime-receipt.v1",
+  "candidateCommit": "5359f91bad13fe83e70169231e519911a8fbebc4",
+  "branchParentBeforeCriticBundle": "5359f91bad13fe83e70169231e519911a8fbebc4",
+  "criticBranch": "codex/p30-r008-blind-critic",
+  "handoffCorrectionAppliedBeforeCandidateInspection": true,
+  "isolation": {
+    "temporaryGitWorktree": true,
+    "privatePathRedacted": true,
+    "parentWorktreeModified": false,
+    "candidateHeadVerifiedWithGitRevParse": true
+  },
+  "referenceArchive": {
+    "source": "/Users/amir/Downloads/Reference.zip",
+    "sha256": "4653a7a92d6f6bde910f39d3190df0adb112677851815443144505b8b420a6dd",
+    "privatelyExtracted": true,
+    "privateExtractionPathOmitted": true
+  },
+  "runtime": {
+    "nodeBinary": "/Users/amir/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node",
+    "nodeVersion": "v24.14.0",
+    "npmVersion": "11.7.0",
+    "playwrightVersion": "1.62.1",
+    "viteVersion": "8.2.0",
+    "threeVersion": "0.185.1"
+  },
+  "commands": [
+    "git rev-parse 5359f91bad13fe83e70169231e519911a8fbebc4^{commit}",
+    "git worktree add -b codex/p30-r008-blind-critic $CRITIC_WORKTREE 5359f91bad13fe83e70169231e519911a8fbebc4",
+    "git lfs pull --include='web-game/public/**' --exclude=''",
+    "PATH='/Users/amir/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin' npm ci",
+    "PATH='/Users/amir/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin' npm run typecheck",
+    "PATH='/Users/amir/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin' npm run lint",
+    "PATH='/Users/amir/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin' npm test",
+    "PATH='/Users/amir/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin' npx vitest run tests/fx tests/camera",
+    "PATH='/Users/amir/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin' npm run build",
+    "PATH='/Users/amir/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin' npm run preview -- --host 127.0.0.1 --port 4318",
+    "/Users/amir/.codex/skills/playwright/scripts/playwright_cli.sh -s=r008blind open about:blank --browser chrome --headed",
+    "/Users/amir/.codex/skills/playwright/scripts/playwright_cli.sh -s=r008blind resize 1600 900",
+    "/Users/amir/.codex/skills/playwright/scripts/playwright_cli.sh -s=r008blind goto 'http://127.0.0.1:4318/?review=1&post=0&framing=1'",
+    "/Users/amir/.codex/skills/playwright/scripts/playwright_cli.sh -s=r008blind snapshot",
+    "/Users/amir/.codex/skills/playwright/scripts/playwright_cli.sh -s=r008blind run-code --filename output/playwright/r008-blind/capture-clean-cli.js"
+  ],
+  "verification": {
+    "npmCi": "pass; 191 packages installed, 0 vulnerabilities",
+    "typecheck": "pass",
+    "lint": "pass",
+    "simulationTests": "pass; 5/5",
+    "cameraAndFxTests": "pass; 9/9",
+    "productionBuild": "pass",
+    "productionHttpStatus": 200
+  },
+  "browser": {
+    "channel": "chrome",
+    "headed": true,
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+    "viewport": {
+      "width": 1600,
+      "height": 900,
+      "devicePixelRatio": 1
+    },
+    "canvas": {
+      "width": 1600,
+      "height": 900
+    },
+    "webgl2": true,
+    "webglVersion": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+    "shadingLanguageVersion": "WebGL GLSL ES 3.00 (OpenGL ES GLSL ES 3.0 Chromium)",
+    "unmaskedVendor": "Google Inc. (Apple)",
+    "unmaskedRenderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M2, Unspecified Version)",
+    "contextAttributes": {
+      "alpha": true,
+      "antialias": true,
+      "depth": true,
+      "desynchronized": false,
+      "failIfMajorPerformanceCaveat": false,
+      "powerPreference": "high-performance",
+      "premultipliedAlpha": true,
+      "preserveDrawingBuffer": true,
+      "stencil": false,
+      "xrCompatible": false
+    }
+  },
+  "actualGameProof": {
+    "pageTitle": "Gauntlet Loop — Ashwake",
+    "productionUrl": "http://127.0.0.1:4318/?review=1&post=0&framing=1",
+    "reviewSchema": "cow.review.v1",
+    "rendererSize": {
+      "width": 1600,
+      "height": 900
+    },
+    "rendererPixelRatio": 1,
+    "rendererErrors": [],
+    "consoleErrors": 0,
+    "consoleWarnings": 3,
+    "assetRegistryEnabled": 18,
+    "assetRegistryLoaded": 18,
+    "assetRegistryFailures": [],
+    "assetRegistryComplete": true,
+    "productionAuthored": true,
+    "proceduralFallbackActive": false,
+    "pmremInstalled": true,
+    "cameraObstructionStatus": "clear",
+    "contextLossRestoreSupported": true,
+    "contextLosses": 2,
+    "contextRestores": 2,
+    "contextLostAtEnd": false,
+    "combatLifecycle": {
+      "tick29": {
+        "phase": "startup",
+        "attackFrame": 5,
+        "targetHealth": 100,
+        "rendererCalls": 80,
+        "triangles": 203051
+      },
+      "tick34": {
+        "phase": "active",
+        "attackFrame": 10,
+        "targetHealth": 90,
+        "event": "enemy_hit at processed tick 33 for 10 damage",
+        "rendererCalls": 87,
+        "triangles": 203175
+      },
+      "tick41": {
+        "phase": "recovery",
+        "attackFrame": 17,
+        "targetHealth": 90,
+        "rendererCalls": 81,
+        "triangles": 203095
+      },
+      "tick55": {
+        "motion": "dodge",
+        "event": "dodge_started at processed tick 52"
+      }
+    }
+  },
+  "freshCandidateCaptures": [
+    {
+      "path": "candidate/C01_initial_tick00.png",
+      "sha256": "3571f3571f6adf1aa9b321303e8f0213ffb7c328772b2214a4ea96e3853075ff",
+      "width": 1600,
+      "height": 900
+    },
+    {
+      "path": "candidate/C02_approach_tick20.png",
+      "sha256": "ea7e9a7c2dd1cdbc51db0e6a2ed96bcd787bca9ed632d8af52d4c1859f4baede",
+      "width": 1600,
+      "height": 900
+    },
+    {
+      "path": "candidate/C03_startup_tick29.png",
+      "sha256": "2d2e6e7b34499ee5d5873b3f2bbca14e81b42eac7d5cd0fa85aeeba3883ad177",
+      "width": 1600,
+      "height": 900
+    },
+    {
+      "path": "candidate/C04_impact_tick34.png",
+      "sha256": "a1f5cdd92d7f15a6810b1d565d238577f9eef6469b662ab016d5a122c3bb4296",
+      "width": 1600,
+      "height": 900
+    },
+    {
+      "path": "candidate/C05_recovery_tick41.png",
+      "sha256": "57a5127dfb0fd6bd8f4c75cdff8e38b8fa904098153c08bc5462b0e0b5abd5bc",
+      "width": 1600,
+      "height": 900
+    },
+    {
+      "path": "candidate/C06_dodge_tick55.png",
+      "sha256": "76058d92d002287cfb46f9922012889e88f933340e4c1073ac23bcc0dfc72e4b",
+      "width": 1600,
+      "height": 900
+    }
+  ],
+  "determinism": {
+    "coldReloadBeforeEveryCapture": true,
+    "tick29ByteIdentical": true,
+    "tick34ByteIdentical": true,
+    "tick41ByteIdentical": true,
+    "repeatPaths": [
+      "candidate/determinism/C03_startup_tick29_repeat.png",
+      "candidate/determinism/C04_impact_tick34_repeat.png",
+      "candidate/determinism/C05_recovery_tick41_repeat.png"
+    ]
+  },
+  "hardGates": {
+    "exactCommit": "pass",
+    "isolatedWorktree": "pass",
+    "cleanInstall": "pass",
+    "typecheckLintTestsBuild": "pass",
+    "productionServer": "pass",
+    "headedChrome": "pass",
+    "webgl2": "pass",
+    "viewport1600x900Dpr1": "pass",
+    "freshCaptureHashes": "pass",
+    "focusedDeterminism": "pass",
+    "productionAssetsNoFallback": "pass",
+    "rendererAndRuntimeErrors": "pass",
+    "contextLossRestore": "pass",
+    "combatLifecycle": "pass",
+    "allCaptureRuntimeHardGatesPass": true,
+    "supplementalFramingTelemetry": {
+      "allPass": false,
+      "C01": "actorsAndBladeInside80=false",
+      "C06": "playerHeight360To540=false",
+      "classification": "visual composition evidence, not capture/runtime validity"
+    }
+  }
+}

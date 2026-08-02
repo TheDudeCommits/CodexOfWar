@@ -1,0 +1,99 @@
+{
+  "schema": "p30.round008.blind-critic.mapping-reveal.v1",
+  "candidateCommit": "5359f91bad13fe83e70169231e519911a8fbebc4",
+  "revealedAtUtc": "2026-08-02T04:53:59Z",
+  "mappingSealFileSha256": "defdae170bc6b0bfbea004d8f433526eda99b8d7c785d48d97c62eb2ed95a171",
+  "scoreSealFileSha256BeforeReveal": "9b5f6e70a36681bc5ff5d597d7b8741a1c364b3b890a7fba66ed3eea0b000c3a",
+  "selectedComparisons": [
+    {
+      "comparisonId": "C01-P11",
+      "candidateSide": "B",
+      "referenceSide": "A",
+      "winnerAnonymous": "A",
+      "candidateWon": false,
+      "candidate": {
+        "path": "candidate/C01_initial_tick00.png",
+        "sha256": "3571f3571f6adf1aa9b321303e8f0213ffb7c328772b2214a4ea96e3853075ff"
+      },
+      "reference": {
+        "path": "reference/11-images (15).jpeg",
+        "sha256": "0293135a1aa7dae0a92f73e018d5f046cd8aa45b9b0e1727e8538ae951276869"
+      }
+    },
+    {
+      "comparisonId": "C02-P10",
+      "candidateSide": "A",
+      "referenceSide": "B",
+      "winnerAnonymous": "B",
+      "candidateWon": false,
+      "candidate": {
+        "path": "candidate/C02_approach_tick20.png",
+        "sha256": "ea7e9a7c2dd1cdbc51db0e6a2ed96bcd787bca9ed632d8af52d4c1859f4baede"
+      },
+      "reference": {
+        "path": "reference/10-images (14).jpeg",
+        "sha256": "3c5ced3dea47f3197adbcd323e4f7fb1f6b46f56ef79c5575ede85b72f32eb7e"
+      }
+    },
+    {
+      "comparisonId": "C03-P15",
+      "candidateSide": "A",
+      "referenceSide": "B",
+      "winnerAnonymous": "B",
+      "candidateWon": false,
+      "candidate": {
+        "path": "candidate/C03_startup_tick29.png",
+        "sha256": "2d2e6e7b34499ee5d5873b3f2bbca14e81b42eac7d5cd0fa85aeeba3883ad177"
+      },
+      "reference": {
+        "path": "reference/15-images (5).jpeg",
+        "sha256": "21858656b7887cc37f92c2bab4ed56f6cb273f45fd75193c0cb1c1b37456bc33"
+      }
+    },
+    {
+      "comparisonId": "C04-P05",
+      "candidateSide": "A",
+      "referenceSide": "B",
+      "winnerAnonymous": "B",
+      "candidateWon": false,
+      "candidate": {
+        "path": "candidate/C04_impact_tick34.png",
+        "sha256": "a1f5cdd92d7f15a6810b1d565d238577f9eef6469b662ab016d5a122c3bb4296"
+      },
+      "reference": {
+        "path": "reference/05-images (1).jpeg",
+        "sha256": "1e99a94f8efbbdd9d4811e2706f84616ea9cc379909caee873d212ecfb9a68b0"
+      }
+    },
+    {
+      "comparisonId": "C05-P06",
+      "candidateSide": "A",
+      "referenceSide": "B",
+      "winnerAnonymous": "B",
+      "candidateWon": false,
+      "candidate": {
+        "path": "candidate/C05_recovery_tick41.png",
+        "sha256": "57a5127dfb0fd6bd8f4c75cdff8e38b8fa904098153c08bc5462b0e0b5abd5bc"
+      },
+      "reference": {
+        "path": "reference/06-images (10).jpeg",
+        "sha256": "1af9ad3cd30a4f90dd97d8fcdced94eee8afcc2828aff1013bf24f90721112b7"
+      }
+    },
+    {
+      "comparisonId": "C06-P21",
+      "candidateSide": "B",
+      "referenceSide": "A",
+      "winnerAnonymous": "A",
+      "candidateWon": false,
+      "candidate": {
+        "path": "candidate/C06_dodge_tick55.png",
+        "sha256": "76058d92d002287cfb46f9922012889e88f933340e4c1073ac23bcc0dfc72e4b"
+      },
+      "reference": {
+        "path": "reference/21-the-god-of-war-universe-is-on-the-right-track-v0-0ua2tv5snadh1.jpg",
+        "sha256": "e894db229df4c7bc0be9e01e16a668158a4ae900e1b3749d42f9e47662bb7a62"
+      }
+    }
+  ]
+}
