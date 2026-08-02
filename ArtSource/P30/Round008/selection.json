@@ -1,0 +1,110 @@
+{
+  "schema": "p30.round008.root-selection.v1",
+  "generatedAtUtc": "2026-08-02T04:21:04Z",
+  "piece": "P30",
+  "round": 8,
+  "baselineCommit": "2cb09a9b8f496d24f93a05dd351051cd89351329",
+  "selectedBuilder": "B",
+  "selectedBuilderCommit": "74fdf9e4dc4de2384ea5e73289ef3ac8b7ae9ffc",
+  "integratedCandidateCommit": "7e88906a168489938ae500ed5cb317b71a312970",
+  "alternateBuilder": "A",
+  "alternateBuilderCommit": "cdc61b43e15d4daf8232f4708583089f85c96b17",
+  "selectionPolicy": {
+    "actualGamePixelsInspected": true,
+    "captureFormat": "headed Chrome 150 RGB PNG, 1600x900, DPR 1, WebGL2 Metal",
+    "controlledComparison": "S03 and S05 are byte-identical between candidates; only the differing S04 active-hit frame was used for visual selection.",
+    "freshReadOnlyBlindSelectorUsed": true,
+    "acceptanceClaimed": false
+  },
+  "captureHashes": {
+    "sharedS03Sha256": "5c8398ae257f73e779d60c26d0e3c07399b9f82e77067f4bf4cd111544c598e1",
+    "builderAS04Sha256": "67d5f4c7d108ca15d4732479e216ea5e9ae830312a9f335146e375d0fffbe0ab",
+    "builderBS04Sha256": "c8c2ba2df5296bf92e9b64a173e4f9c364c6e432bfec8250de05b5f2b8296ce5",
+    "sharedS05Sha256": "6bae9a8d3d7337c1a9292fd1edcd4c0db6598400f81166086b521a0dc042ea3b"
+  },
+  "technicalComparison": {
+    "builderA": {
+      "contactMarkerErrorPixels": 0.000068,
+      "playerFxCoveragePercent": 1.4342,
+      "targetFxCoveragePercent": 2.0485,
+      "bladeFxCoveragePercent": 2.2936,
+      "maximumDrawCalls": 86,
+      "maximumTriangles": 203095,
+      "maximumTextures": 32,
+      "maximumGeometries": 37,
+      "coldReadyMaximumMilliseconds": 3107.187,
+      "meanFps": 59.834,
+      "focusedFxTestsPassed": 5,
+      "allTechnicalGatesPassed": true
+    },
+    "builderB": {
+      "contactMarkerErrorPixels": 9.648064,
+      "playerFxCoveragePercent": 0.1218,
+      "targetFxCoveragePercent": 11.4267,
+      "bladeFxCoveragePercent": 9.6033,
+      "darkenedPixels": 0,
+      "maximumDrawCalls": 87,
+      "maximumTriangles": 203175,
+      "maximumTextures": 32,
+      "maximumGeometries": 41,
+      "coldReadyMaximumMilliseconds": 2727.154,
+      "meanFps": 58.734,
+      "focusedFxTestsPassed": 4,
+      "allTechnicalGatesPassed": true
+    },
+    "both": {
+      "authoredAssetsLoaded": 18,
+      "fallbacks": 0,
+      "replayRuns": 3,
+      "replayTicks": [
+        29,
+        34,
+        41
+      ],
+      "replayByteIdentical": true,
+      "thirtySecondResourceStable": true,
+      "webglLossRestorePassed": true,
+      "simulationTestsPassed": 5,
+      "cameraTestsPassed": 5,
+      "browserSmokeTestsPassed": 3,
+      "texturesAdded": 0
+    }
+  },
+  "blindSelectorScoresOutOf10": {
+    "builderA": {
+      "contactLocality": 3.1,
+      "directionalForce": 2.8,
+      "bladeBoundTrail": 3.2,
+      "artifactSuppression": 4,
+      "actorBladeOcclusion": 4.5,
+      "cohesion": 3.1,
+      "aaaCombatReadability": 2.7
+    },
+    "builderB": {
+      "contactLocality": 5.2,
+      "directionalForce": 4.8,
+      "bladeBoundTrail": 4.1,
+      "artifactSuppression": 2.7,
+      "actorBladeOcclusion": 3.4,
+      "cohesion": 3.8,
+      "aaaCombatReadability": 4.1
+    }
+  },
+  "selectionRationale": "Builder B makes the S04 hit immediately readable through a localized warm directional burst and blade-bound cyan contour. Builder A suppresses artifacts more strongly but reads nearly static at full 1600x900 scale. Builder B therefore wins the controlled candidate selection while remaining far below the benchmark.",
+  "evidenceHashes": {
+    "builderATechnicalReceiptSha256": "5d538360f156d5d764596eabc0ec22fbef768f8430be3f90816f199703b9f793",
+    "builderAFreezeAuditSha256": "f8bc400f7a39feaf4ca117643cfa32b0b83330d5d1d1b012f7dc19ddfb8c4dc9",
+    "builderBReceiptSha256": "e0414a08d3d27434f45fb475d39c67f5f0378a520089b574f682b401fd51dcf5",
+    "builderBFreezeAuditSha256": "5f155f2652497704a6697352d8de95e3f2037c8e0c48db6bc5c28017f5dc1c93",
+    "builderBHeadedAuditSha256": "06ecc0ab82d957f34dd8cd01bcca31183709234d53edfbef6935ae29db93aed7"
+  },
+  "productionFreeze": {
+    "authorizedChangedFiles": [
+      "web-game/src/render/objects/CharacterViews.ts",
+      "web-game/src/render/objects/CombatFx.ts"
+    ],
+    "allOtherTrackedProductionSourceFilesByteExactToBaseline": true
+  },
+  "nextAction": "Root-validate and freeze the integrated candidate, then launch a fresh independent critic to recapture the actual game and run the sealed blind benchmark gate.",
+  "acceptanceClaimed": false
+}
