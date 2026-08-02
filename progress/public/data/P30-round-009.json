@@ -1,0 +1,141 @@
+{
+  "schema": "cow.public-browser-candidate-under-critic.v1",
+  "piece": "P30",
+  "round": 9,
+  "date": "2026-08-02",
+  "status": "selected-candidate-under-fresh-critic",
+  "acceptanceScope": "Two fresh isolated animation builders completed the same frozen three-beat sword-contact assignment from exact baseline afc1063812473087a645271e2c33adcd0534225a. An anonymous visual selector chose Builder B by 57 to 56, while explicitly disqualifying both candidates from AAA selection. Root integrated Builder B, passed the full technical gate, froze commit fc74f4e4c74c3dcac422461546854cdc3b7da3b0, and started a fresh independent critic. No critic verdict or acceptance is claimed.",
+  "frozenCommit": "fc74f4e4c74c3dcac422461546854cdc3b7da3b0",
+  "selection": {
+    "selectedBuilder": "B",
+    "selectedBuilderCommit": "ede933054c327d2b10c6a683cad99f22a799632f",
+    "alternateBuilderCommit": "f95fd2942fc0f60dc803ec433a3d10f7a581fc41",
+    "anonymousSelectedLabel": "cinder",
+    "anonymousAlternateLabel": "quartz",
+    "selectedScore": 57,
+    "alternateScore": 56,
+    "aaaSelectorFloor": 90,
+    "aaaFloorCleared": false,
+    "method": "A fresh selector received only anonymous tick 29, 34, and 41 production-game images plus the matched benchmark frames. It had no access to builder identity, source, branches, or receipts before scoring.",
+    "reason": "Cinder had marginally stronger anticipation and defender displacement at impact, but both candidates failed exterior-contact and same-direction-recovery readability.",
+    "acceptanceClaimed": false
+  },
+  "captureContract": {
+    "browser": "Google Chrome 150.0.7871.187",
+    "headed": true,
+    "hardwareAccelerated": true,
+    "renderer": "WebGL2 · ANGLE Metal Renderer: Apple M2",
+    "viewport": {
+      "width": 1600,
+      "height": 900,
+      "deviceScaleFactor": 1
+    },
+    "pngColorType": "RGB",
+    "httpStatus": 200,
+    "runtimeFailures": 0
+  },
+  "runtime": {
+    "node": "24.18.0",
+    "cleanInstallPackages": 191,
+    "vulnerabilities": 0,
+    "authoredAssetsLoaded": 18,
+    "authoredAssetsExpected": 18,
+    "proceduralFallbackActive": false,
+    "stabilityDurationMilliseconds": 30051.7,
+    "meanFps": 57.598,
+    "p95RafMilliseconds": 18.6,
+    "p99RafMilliseconds": 18.7,
+    "resourceGrowth": false,
+    "resourceMaximum": {
+      "drawCalls": 87,
+      "triangles": 203175,
+      "textures": 32,
+      "geometries": 41
+    },
+    "resourceLimits": {
+      "drawCalls": 100,
+      "triangles": 250000,
+      "textures": 32,
+      "geometries": 64
+    },
+    "resourceCapsPassed": true,
+    "webglLossRestorePassed": true
+  },
+  "rootValidation": {
+    "cleanInstallPassed": true,
+    "lintPassed": true,
+    "typecheckPassed": true,
+    "simulationTestsPassed": 5,
+    "cameraTestsPassed": 5,
+    "focusedFxTestsPassed": 4,
+    "focusedPoseTestsPassed": 4,
+    "productionBuildPassed": true,
+    "browserTestsPassedSerially": 4,
+    "builderCaptureTechnicalGatesPassed": 18,
+    "builderCaptureTechnicalGateCount": 18
+  },
+  "freezeAudit": {
+    "baselineCommit": "afc1063812473087a645271e2c33adcd0534225a",
+    "authorizedProductionDifferences": [
+      "web-game/src/render/objects/CharacterViews.ts",
+      "web-game/src/render/objects/CombatPoseBeat.ts"
+    ],
+    "unchangedUnauthorizedProductionSourceFiles": 67,
+    "unexpectedProductionDifferences": 0,
+    "unauthorizedProductionAggregateSha256": "5d73c671d03692ea8468c95d6a80658e760d29e8aab50285e992b74a4b734c31"
+  },
+  "captures": [
+    {
+      "id": "S03",
+      "phase": "startup · anticipation",
+      "tick": 29,
+      "path": "/captures/P30/round-009/S03.png",
+      "bytes": 2127220,
+      "sha256": "614df9d41ea7e745f51364066e6db6bf6960f07fe70eaf96e917c1a39e484465"
+    },
+    {
+      "id": "S04",
+      "phase": "active · impact",
+      "tick": 34,
+      "path": "/captures/P30/round-009/S04.png",
+      "bytes": 2136728,
+      "sha256": "4ab7b21ba4bf4b9b94c6046b5c3ccfa0d25248b4de92ecc0e8b09b5382f5e480"
+    },
+    {
+      "id": "S05",
+      "phase": "recovery · recoil",
+      "tick": 41,
+      "path": "/captures/P30/round-009/S05.png",
+      "bytes": 2137110,
+      "sha256": "c6a2d87903b29e6fef9113b984b7f5f4a10317fd834dc605a5499fd0209a7a85"
+    }
+  ],
+  "critic": {
+    "status": "RUNNING",
+    "accepted": null,
+    "qualityScore": null,
+    "focusedCandidateWins": null,
+    "focusedComparisonCount": 3,
+    "overallCandidateWins": null,
+    "overallComparisonCount": 6,
+    "categoriesAtLeastNine": null,
+    "categoryCount": 10,
+    "mappingSealedBeforeScoring": null,
+    "scoresSealedBeforeReveal": null,
+    "acceptanceClaimed": false
+  },
+  "reviewGate": {
+    "focusedRequirement": "Candidate wins S03, S04, and S05: 3/3",
+    "overallRequirement": "Candidate wins at least 5/6 matched comparisons",
+    "scoreRequirement": "At least 95/100",
+    "categoryRequirement": "Every category at least 9/10",
+    "hardGateRequirement": "All candidate runtime and capture gates pass"
+  },
+  "activeGap": {
+    "id": "same-direction-contact-recovery",
+    "status": "round009-critic-running",
+    "selectorWarning": "The pre-integration selector disqualified both builds because tick 34 reads as broad blade/FX penetration and tick 41 reads as an overhead re-windup.",
+    "singleBiggestSelectorGap": "Replace tick 41's overhead re-cock with unmistakable same-direction overshoot and grounded braking."
+  },
+  "qualityStatus": "selected-candidate-under-fresh-independent-blind-critic"
+}
