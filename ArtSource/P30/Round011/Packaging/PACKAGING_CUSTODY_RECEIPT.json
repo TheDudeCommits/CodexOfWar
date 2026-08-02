@@ -1,0 +1,74 @@
+{
+  "schema": "p30.r011.packaging-custody-receipt.v1",
+  "protocolID": "P30-R011-BLIND-v1",
+  "protocolPayloadSha256": "bc1e9db54ad38408d6ff369df96ed163d15cf2dfa3fd5403d7a56e374ee85d7b",
+  "presentationCommit": "5df2ec1607da073c492d94d7f1c47c23606d51b9fdbc267a3ada8d76e853b05f",
+  "recordedAtUtc": "2026-08-02T15:52:34Z",
+  "status": "pass",
+  "packageCount": 2,
+  "identityRevealStatus": "withheld-until-alias-score-seal",
+  "criticContacted": false,
+  "finalRun": {
+    "freshRandomMapSaltBytes": 32,
+    "priorOutputReuse": false,
+    "publicCommitmentWrittenLast": true,
+    "privateOutputsExcludedFromGit": true
+  },
+  "publicCommitment": {
+    "path": "ArtSource/P30/Round011/Packaging/PACKAGE_MAP_COMMITMENT.json",
+    "bytes": 900,
+    "sha256": "7a9893a52c679d6960f9b3c4b515a06f66ac8ba3c88744caab70b0471da5dc0f",
+    "mapCommit": "450bb0e2feac2d63c1e9598a3a8c7c1c1d33fc60ad74838efd93fabad67a3721"
+  },
+  "packages": [
+    {
+      "alias": "candidate-8202fa2c3374062a",
+      "archiveName": "candidate-8202fa2c3374062a.tar",
+      "archiveBytes": 27400192,
+      "archiveSha256": "f04cb4459a0efd9cffdff840555e3ffab35ae4ab14b670471e5aa7a24d9250fc",
+      "treeSha256": "9eaa5a01d9124df0f2896e7f07dbd88b60215721f7921211bcc049b5e6cc9828"
+    },
+    {
+      "alias": "candidate-9442539eea8abc4c",
+      "archiveName": "candidate-9442539eea8abc4c.tar",
+      "archiveBytes": 27430400,
+      "archiveSha256": "01257b4eb73c3b654ccbf068bc5bf605d56c27809406ee8368d14a3a149343ba",
+      "treeSha256": "bd1d8723893e89d486de15813ab5e7e61d1294434d45d9c2fb61e06e614cc6ef"
+    }
+  ],
+  "gates": [
+    { "name": "protocol-payload-and-node-runtime", "scope": "run", "status": "pass" },
+    { "name": "exact-source-binding-and-clean-state", "scope": "all-packages", "status": "pass" },
+    { "name": "detached-checkout-and-lfs-object-integrity", "scope": "all-packages", "status": "pass" },
+    { "name": "package-tree-interface-and-identity-policy", "scope": "all-packages", "status": "pass" },
+    { "name": "cross-package-common-interface-scripts-and-readiness", "scope": "run", "status": "pass" },
+    { "name": "deterministic-archive-create-extract-and-byte-replay", "scope": "all-packages", "status": "pass" },
+    { "name": "clean-npm-install-and-lockfile-immutability", "scope": "all-packages", "status": "pass" },
+    { "name": "critic-test-command-with-nonzero-passes-and-zero-fail-skip-todo", "scope": "all-packages", "status": "pass" },
+    { "name": "critic-production-build", "scope": "all-packages", "status": "pass" },
+    { "name": "production-output-policy-and-tree-digest", "scope": "all-packages", "status": "pass" },
+    { "name": "production-serve-readiness-route-repeatability-and-clean-shutdown", "scope": "all-packages", "status": "pass" },
+    { "name": "delivered-source-tree-command-immutability", "scope": "all-packages", "status": "pass" },
+    { "name": "fresh-salted-private-map-public-commitment", "scope": "run", "status": "pass" },
+    { "name": "independent-public-archive-verification", "scope": "run", "status": "pass" },
+    { "name": "independent-private-map-salt-binding-verification", "scope": "run", "status": "pass" },
+    { "name": "packaging-tool-regression-suite", "scope": "run", "status": "pass", "tests": 16, "failed": 0, "skipped": 0, "todo": 0 }
+  ],
+  "priorBlockedAttempts": [
+    { "code": "SOURCE_WORKTREE_DIRTY", "publicOutputsEmitted": false },
+    { "code": "SOURCE_REPOSITORY_MISMATCH", "publicOutputsEmitted": false },
+    { "code": "BUILDER_EVIDENCE_PATH_FORBIDDEN", "publicOutputsEmitted": false },
+    { "code": "FIXED_SCRIPT_COMMON_MISMATCH", "publicOutputsEmitted": false },
+    { "code": "PRIVATE_IDENTITY_CLUE_FOUND", "publicOutputsEmitted": false }
+  ],
+  "toolchain": {
+    "packagingAuthorityGitCommit": "14e0758de25236f75dd004cb108c06f7a437eef3",
+    "node": "v24.18.0",
+    "npm": "11.16.0",
+    "git": "2.50.1 (Apple Git-155)",
+    "gitLfs": "3.7.1",
+    "packagingCoreSha256": "77bbfa0e4efed32b53411fe02964e21cf3b13d63a1cd96d2b017f0b6d5f15fe8",
+    "packageCandidatesSha256": "20d5da9ef28f94b7d6cc2d3dd431ef86bb13441522d30b6af7a34f53916c87fa",
+    "packagingTestsSha256": "b0015bc58e59657e29c0ea8d2b39f49751a6f13926d399589bc1cbd5e4007a9b"
+  }
+}
