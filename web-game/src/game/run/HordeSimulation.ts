@@ -10,6 +10,7 @@ import {
   HORDE_DODGE_SPEED,
   HORDE_ENEMIES,
   HORDE_FIXED_TIMESTEP,
+  HORDE_FORT_FRONT_Z,
   HORDE_MAX_WAVES,
   HORDE_PLAYER_HIT_STUN_TICKS,
   HORDE_PLAYER_RADIUS,
@@ -135,6 +136,14 @@ function nextRandom(state: HordeRunState): number {
   return random01FromUint(state.rngState);
 }
 
+function constrainPositionToFortFront(position: HordeVec2, radius: number): void {
+  position.z = Math.max(position.z, HORDE_FORT_FRONT_Z + radius);
+}
+
+function constrainEnemyPosition(enemy: HordeEnemyState): void {
+  constrainPositionToFortFront(enemy.position, enemy.radius);
+}
+
 function populateWave(state: HordeRunState): void {
   const composition = HORDE_WAVES[state.wave - 1];
   if (!composition) throw new Error(`No Horde Run wave definition for wave ${state.wave}.`);
@@ -152,15 +161,15 @@ function populateWave(state: HordeRunState): void {
       z: state.player.position.z + Math.sin(angle) * spawnRadius,
     };
     clampToRadius(position, state.arenaRadius - HORDE_ENEMIES[archetype].radius);
-    enemies.push(
-      createHordeEnemyState(
-        state.nextEnemyId,
-        archetype,
-        position,
-        state.wave,
-        state.player.position,
-      ),
+    const enemy = createHordeEnemyState(
+      state.nextEnemyId,
+      archetype,
+      position,
+      state.wave,
+      state.player.position,
     );
+    constrainEnemyPosition(enemy);
+    enemies.push(enemy);
     state.nextEnemyId += 1;
   }
   state.enemies = enemies;
@@ -168,8 +177,10 @@ function populateWave(state: HordeRunState): void {
 
 export function createInitialHordeState(options: HordeSimulationOptions = {}): HordeRunState {
   const seed = sanitizeSeed(options.seed ?? 0xc0de_0f42);
-  const initialPlayerPosition = options.playerPosition ?? DEFAULT_PLAYER_POSITION;
   const arenaRadius = Math.max(6, options.arenaRadius ?? HORDE_DEFAULT_ARENA_RADIUS);
+  const initialPlayerPosition = { ...(options.playerPosition ?? DEFAULT_PLAYER_POSITION) };
+  clampToRadius(initialPlayerPosition, arenaRadius - HORDE_PLAYER_RADIUS);
+  constrainPositionToFortFront(initialPlayerPosition, HORDE_PLAYER_RADIUS);
   const state: HordeRunState = {
     schemaVersion: 1,
     seed,
@@ -361,6 +372,7 @@ export class HordeSimulation {
     this.updateRequestedLock(input.lockTargetId);
     this.tryWeaponSwitch(input);
     this.updatePlayer(input);
+    constrainPositionToFortFront(this.state.player.position, HORDE_PLAYER_RADIUS);
 
     if (this.state.phase === "combat") {
       for (const enemy of this.state.enemies) {
@@ -711,6 +723,7 @@ export class HordeSimulation {
     enemy.position.x += away.x * strike.knockback;
     enemy.position.z += away.z * strike.knockback;
     clampToRadius(enemy.position, this.state.arenaRadius - enemy.radius);
+    constrainEnemyPosition(enemy);
 
     if (enemy.health <= 0) {
       enemy.phase = "dead";
@@ -841,6 +854,7 @@ export class HordeSimulation {
     player.position.x += direction.x * speed * HORDE_FIXED_TIMESTEP;
     player.position.z += direction.z * speed * HORDE_FIXED_TIMESTEP;
     clampToRadius(player.position, this.state.arenaRadius - HORDE_PLAYER_RADIUS);
+    constrainPositionToFortFront(player.position, HORDE_PLAYER_RADIUS);
   }
 
   private updateEnemy(enemy: HordeEnemyState): void {
@@ -881,7 +895,11 @@ export class HordeSimulation {
     enemy.phaseProgress01 = 0;
     enemy.yaw = approachAngle(enemy.yaw, directionToYaw(toPlayer), 0.16);
     if (playerDistance <= definition.engageRange) {
-      this.enterEnemyWindup(enemy, definition);
+      if (this.canEnterEnemyWindup(enemy)) {
+        this.enterEnemyWindup(enemy, definition);
+      } else {
+        this.orbitWhileWaiting(enemy, definition, toPlayer, playerDistance);
+      }
       return;
     }
     this.moveEnemy(enemy, normalized(toPlayer), definition.speed);
@@ -901,10 +919,61 @@ export class HordeSimulation {
     enemy.phaseProgress01 = 0;
     enemy.yaw = approachAngle(enemy.yaw, directionToYaw(toPlayer), 0.28);
     if (playerDistance <= definition.engageRange) {
-      this.enterEnemyWindup(enemy, definition);
+      if (this.canEnterEnemyWindup(enemy)) {
+        this.enterEnemyWindup(enemy, definition);
+      } else {
+        this.orbitWhileWaiting(enemy, definition, toPlayer, playerDistance);
+      }
       return;
     }
     this.moveEnemy(enemy, desired, definition.speed);
+  }
+
+  private canEnterEnemyWindup(enemy: HordeEnemyState): boolean {
+    const attackLimit = this.state.wave <= 3 ? 1 : 2;
+    const activeAttackers = this.state.enemies.filter(
+      (candidate) =>
+        candidate.health > 0 &&
+        candidate.phase !== "dead" &&
+        (candidate.phase === "windup" || candidate.phase === "attack"),
+    ).length;
+    const availableSlots = attackLimit - activeAttackers;
+    if (availableSlots <= 0) return false;
+
+    const selectedAttackers = this.state.enemies
+      .filter((candidate) => {
+        if (candidate.health <= 0 || candidate.phase === "dead") return false;
+        if (candidate.phase !== "pursue" && candidate.phase !== "flank") return false;
+        const engageRange = HORDE_ENEMIES[candidate.archetype].engageRange;
+        return length(this.toPlayer(candidate)) <= engageRange;
+      })
+      .sort(
+        (left, right) => left.attackSerial - right.attackSerial || left.id - right.id,
+      )
+      .slice(0, availableSlots);
+
+    return selectedAttackers.some((candidate) => candidate.id === enemy.id);
+  }
+
+  private orbitWhileWaiting(
+    enemy: HordeEnemyState,
+    definition: HordeEnemyDefinition,
+    toPlayer: HordeVec2,
+    playerDistance: number,
+  ): void {
+    const radialInward = normalized(toPlayer);
+    const tangent = perpendicular(radialInward, enemy.orbitSign);
+    const outward = { x: -radialInward.x, z: -radialInward.z };
+    const holdDistance = Math.max(
+      definition.engageRange * 0.82,
+      enemy.radius + HORDE_PLAYER_RADIUS + 0.38,
+    );
+    const outwardWeight = playerDistance < holdDistance ? 0.9 : 0.24;
+    const orbitDirection = normalized({
+      x: tangent.x + outward.x * outwardWeight,
+      z: tangent.z + outward.z * outwardWeight,
+    });
+    this.moveEnemy(enemy, orbitDirection, definition.speed * 0.58);
   }
 
   private enterEnemyWindup(enemy: HordeEnemyState, definition: HordeEnemyDefinition): void {
@@ -1054,6 +1123,7 @@ export class HordeSimulation {
     enemy.position.x += enemy.velocity.x * HORDE_FIXED_TIMESTEP;
     enemy.position.z += enemy.velocity.z * HORDE_FIXED_TIMESTEP;
     clampToRadius(enemy.position, this.state.arenaRadius - enemy.radius);
+    constrainEnemyPosition(enemy);
   }
 
   private separateEnemies(): void {
@@ -1084,10 +1154,13 @@ export class HordeSimulation {
         right.position.z += direction.z * correction;
         clampToRadius(left.position, this.state.arenaRadius - left.radius);
         clampToRadius(right.position, this.state.arenaRadius - right.radius);
+        constrainEnemyPosition(left);
+        constrainEnemyPosition(right);
       }
     }
 
     for (const enemy of liveEnemies) {
+      constrainEnemyPosition(enemy);
       const awayFromPlayer = {
         x: enemy.position.x - this.state.player.position.x,
         z: enemy.position.z - this.state.player.position.z,
@@ -1102,6 +1175,7 @@ export class HordeSimulation {
       enemy.position.x = this.state.player.position.x + direction.x * minimumDistance;
       enemy.position.z = this.state.player.position.z + direction.z * minimumDistance;
       clampToRadius(enemy.position, this.state.arenaRadius - enemy.radius);
+      constrainEnemyPosition(enemy);
     }
   }
 
@@ -1180,6 +1254,10 @@ export class HordeSimulation {
     );
     this.state.player.stamina = this.state.player.maxStamina;
     this.state.player.motion = "idle";
+    this.state.player.position = { ...this.state.initialPlayerPosition };
+    this.state.player.velocity = { x: 0, z: 0 };
+    this.state.player.yaw = 0;
+    this.state.player.lockedTargetId = null;
     populateWave(this.state);
     this.emit({
       type: "wave-started",

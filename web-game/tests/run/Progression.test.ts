@@ -149,6 +149,25 @@ describe("Horde Run wave and upgrade progression", () => {
     );
   });
 
+  it("recenters the player before the next wave begins", () => {
+    const simulation = freshSimulation(8823);
+    const initialPosition = { ...simulation.state.initialPlayerPosition };
+    clearCurrentWave(simulation);
+    simulation.state.player.position = { x: 3.4, z: 2.7 };
+    simulation.state.player.velocity = { x: 4, z: -2 };
+    simulation.state.player.yaw = 1.4;
+    simulation.state.player.lockedTargetId = 99;
+
+    simulation.step(frame({ upgradeChoice: 0 }));
+
+    expect(simulation.state.player).toMatchObject({
+      position: initialPosition,
+      velocity: { x: 0, z: 0 },
+      yaw: 0,
+      lockedTargetId: null,
+    });
+  });
+
   const upgradeCases: readonly {
     upgrade: HordeUpgradeId;
     read: (simulation: HordeSimulation) => number;

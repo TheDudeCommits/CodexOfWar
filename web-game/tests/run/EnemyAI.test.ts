@@ -2,6 +2,8 @@ import { describe, expect, it } from "vitest";
 import {
   createHordeEnemyState,
   HORDE_ENEMIES,
+  HORDE_FORT_FRONT_Z,
+  HORDE_PLAYER_RADIUS,
   type HordeEnemyArchetype,
   type HordeEnemyState,
   type HordeGameEvent,
@@ -156,8 +158,8 @@ describe("Horde Run enemy archetype AI", () => {
   it("separates coincident enemies deterministically without changing their roster", () => {
     const makeSimulation = () => {
       const simulation = freshSimulation(9191);
-      const left = singleEnemy("shambler", -5);
-      const right = createHordeEnemyState(2, "brute", { x: 0, z: -5 });
+      const left = singleEnemy("shambler", 0);
+      const right = createHordeEnemyState(2, "brute", { x: 0, z: 0 });
       left.phase = "recover";
       right.phase = "recover";
       left.phaseDurationTicks = 1000;
@@ -181,6 +183,91 @@ describe("Horde Run enemy archetype AI", () => {
       ),
     ).toBeGreaterThanOrEqual((firstLeft?.radius ?? 0) + (firstRight?.radius ?? 0) + 0.079);
     expect(first.exportState()).toEqual(second.exportState());
+  });
+
+  it("admits only one early-wave telegraph at a time and rotates the next turn fairly", () => {
+    const simulation = freshSimulation(6401);
+    const first = createHordeEnemyState(1, "shambler", { x: -0.18, z: -1.38 });
+    const second = createHordeEnemyState(2, "shambler", { x: 0.18, z: -1.38 });
+    simulation.state.wave = 3;
+    simulation.state.player.invulnerableTicksRemaining = 2_000;
+    // Reverse storage order to prove selection is driven by attack history and id,
+    // rather than whichever enemy happens to update first.
+    simulation.state.enemies = [second, first];
+
+    simulation.step(frame());
+    const firstEvents = simulation.consumeEvents();
+    expect(
+      firstEvents.filter((event) => event.type === "enemy-telegraph"),
+    ).toEqual([expect.objectContaining({ enemyId: 1, attackSerial: 1 })]);
+    expect(
+      simulation.state.enemies.filter(
+        (enemy) => enemy.phase === "windup" || enemy.phase === "attack",
+      ),
+    ).toHaveLength(1);
+    expect(simulation.state.enemies.find((enemy) => enemy.id === 2)?.phase).toBe("pursue");
+    expect(
+      Math.abs(simulation.state.enemies.find((enemy) => enemy.id === 2)?.velocity.x ?? 0),
+    ).toBeGreaterThan(0);
+
+    const telegraphOrder = [1];
+    for (let tick = 0; tick < 360 && telegraphOrder.length < 2; tick += 1) {
+      simulation.step(frame());
+      const activeAttackers = simulation.state.enemies.filter(
+        (enemy) => enemy.phase === "windup" || enemy.phase === "attack",
+      );
+      expect(activeAttackers.length).toBeLessThanOrEqual(1);
+      for (const event of simulation.consumeEvents()) {
+        if (event.type === "enemy-telegraph") telegraphOrder.push(event.enemyId);
+      }
+    }
+
+    expect(telegraphOrder.slice(0, 2)).toEqual([1, 2]);
+  });
+
+  it("allows two coordinated attackers in late waves while holding the rest", () => {
+    const simulation = freshSimulation(6402);
+    simulation.state.wave = 4;
+    simulation.state.enemies = [
+      createHordeEnemyState(3, "shambler", { x: 0.3, z: -1.35 }),
+      createHordeEnemyState(2, "shambler", { x: 0, z: -1.35 }),
+      createHordeEnemyState(1, "shambler", { x: -0.3, z: -1.35 }),
+    ];
+
+    simulation.step(frame());
+    const telegraphs = simulation
+      .consumeEvents()
+      .filter((event) => event.type === "enemy-telegraph");
+
+    expect(telegraphs).toEqual([
+      expect.objectContaining({ enemyId: 2 }),
+      expect.objectContaining({ enemyId: 1 }),
+    ]);
+    expect(
+      simulation.state.enemies.filter(
+        (enemy) => enemy.phase === "windup" || enemy.phase === "attack",
+      ),
+    ).toHaveLength(2);
+    expect(simulation.state.enemies.find((enemy) => enemy.id === 3)?.phase).toBe("pursue");
+  });
+
+  it("keeps the player and every enemy in front of the fort boundary", () => {
+    const simulation = freshSimulation(6403);
+    simulation.state.player.position = { x: 0, z: -100 };
+    simulation.state.enemies = [
+      createHordeEnemyState(1, "shambler", { x: 0, z: -100 }),
+      createHordeEnemyState(2, "stalker", { x: 1, z: -100 }),
+      createHordeEnemyState(3, "brute", { x: -1, z: -100 }),
+    ];
+
+    simulation.step(frame({ moveZ: -1 }));
+
+    expect(simulation.state.player.position.z).toBeGreaterThanOrEqual(
+      HORDE_FORT_FRONT_Z + HORDE_PLAYER_RADIUS,
+    );
+    for (const enemy of simulation.state.enemies) {
+      expect(enemy.position.z).toBeGreaterThanOrEqual(HORDE_FORT_FRONT_Z + enemy.radius);
+    }
   });
 
   it("enters defeat, cancels player action, and emits terminal causality", () => {

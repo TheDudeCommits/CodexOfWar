@@ -9,6 +9,7 @@ import type {
 export const HORDE_FIXED_TIMESTEP = 1 / 60;
 export const HORDE_MAX_WAVES = 5;
 export const HORDE_DEFAULT_ARENA_RADIUS = 13.5;
+export const HORDE_FORT_FRONT_Z = -4.86;
 export const HORDE_PLAYER_RADIUS = 0.48;
 export const HORDE_PLAYER_WALK_SPEED = 4.4;
 export const HORDE_PLAYER_SPRINT_SPEED = 6.7;
