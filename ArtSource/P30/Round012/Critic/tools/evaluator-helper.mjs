@@ -1653,9 +1653,13 @@ export function evaluateSweptContact(stateSeries, terminalTick = CANONICAL_TERMI
   };
 }
 
-function translatedContactChecks(result, tickShift) {
+function translatedContactChecks(result, tickShift, exactTerminalTick = null) {
   if (!result || !Array.isArray(result.intervals)) evaluatorFail('SWEEP_RESULT_INVALID');
   if (!Number.isSafeInteger(tickShift) || tickShift < 0) evaluatorFail('CONTACT_TICK_SHIFT_INVALID');
+  if (
+    exactTerminalTick !== null &&
+    (!Number.isSafeInteger(exactTerminalTick) || exactTerminalTick < 0)
+  ) evaluatorFail('CONTACT_TERMINAL_TICK_INVALID');
   const tick44 = 44 + tickShift;
   const tick45 = 45 + tickShift;
   const tick46 = 46 + tickShift;
@@ -1667,6 +1671,11 @@ function translatedContactChecks(result, tickShift) {
   const canonicalRise = Array.isArray(result.risingContacts) && result.risingContacts.length === 1 ?
     result.risingContacts[0] : null;
   const checks = {
+    ...(exactTerminalTick === null ? {} : {
+      completeTerminalDomain:
+        result.intervals.length === exactTerminalTick + 1 &&
+        result.intervals.every((entry, index) => entry?.absoluteTick === index)
+    }),
     noContactThrough45: noContactBeforeExpected,
     tick44Clearance: byTick.get(tick44)?.stateSeparation >= 0.080000,
     tick45Clearance: byTick.get(tick45)?.stateSeparation >= 0.030000,
@@ -1691,7 +1700,11 @@ export function canonicalContactChecks(result) {
 }
 
 export function shiftedContactChecks(result) {
-  return translatedContactChecks(result, SHIFTED_HEAVY_RISING_EDGE_ABSOLUTE_TICK - HEAVY_RISING_EDGE_ABSOLUTE_TICK);
+  return translatedContactChecks(
+    result,
+    SHIFTED_HEAVY_RISING_EDGE_ABSOLUTE_TICK - HEAVY_RISING_EDGE_ABSOLUTE_TICK,
+    SHIFTED_TERMINAL_ABSOLUTE_TICK
+  );
 }
 
 export function canonicalContactFrame(result, basis) {

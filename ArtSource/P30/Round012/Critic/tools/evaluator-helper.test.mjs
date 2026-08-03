@@ -571,8 +571,55 @@ test('SHIFT_PLUS_7 is an exact edge-31/contact-53 translation through terminal 8
   assert.equal(result.intervals.length, 88);
   assert.equal(result.firstContactTick, 53);
   assert.deepEqual(risingContactCoordinates(result), [[53, 4096, 'head']]);
-  assert.equal(shiftedContactChecks(result).pass, true);
+  const shifted = shiftedContactChecks(result);
+  assert.equal(shifted.checks.completeTerminalDomain, true);
+  assert.equal(shifted.pass, true);
   assert.equal(canonicalContactChecks(result).pass, false);
+});
+
+test('SHIFT_PLUS_7 rejects the critic regression truncated at departure tick 55 and terminal 86', () => {
+  for (const terminalTick of [55, 86]) {
+    const states = sweepTestSeries(terminalTick, (absoluteTick) => {
+      const bladeX = absoluteTick === 53 ? 0.12 : 0.3;
+      return sweepTestState(absoluteTick, {
+        bladeGuard: [bladeX, -0.5, 0],
+        bladeTip: [bladeX, 0.5, 0],
+        activeCapsules: { head: { a: [0, 0, 0], b: [0, 0, 0], radius: 0.1 } }
+      });
+    });
+    const result = evaluateSweptContact(states, terminalTick);
+    assert.equal(result.intervals.at(-1).absoluteTick, terminalTick);
+    assert.deepEqual(risingContactCoordinates(result), [[53, 4096, 'head']]);
+    const shifted = shiftedContactChecks(result);
+    assert.equal(shifted.checks.completeTerminalDomain, false);
+    assert.equal(shifted.pass, false);
+    assert.equal(
+      Object.entries(shifted.checks)
+        .filter(([key]) => key !== 'completeTerminalDomain')
+        .every(([, value]) => value),
+      true
+    );
+  }
+});
+
+test('SHIFT_PLUS_7 rejects a second rising contact at its exact terminal tick 87', () => {
+  const states = sweepTestSeries(SHIFTED_TERMINAL_ABSOLUTE_TICK, (absoluteTick) => {
+    const bladeX = absoluteTick === 53 || absoluteTick === SHIFTED_TERMINAL_ABSOLUTE_TICK ? 0.12 : 0.3;
+    return sweepTestState(absoluteTick, {
+      bladeGuard: [bladeX, -0.5, 0],
+      bladeTip: [bladeX, 0.5, 0],
+      activeCapsules: { head: { a: [0, 0, 0], b: [0, 0, 0], radius: 0.1 } }
+    });
+  });
+  const result = evaluateSweptContact(states, SHIFTED_TERMINAL_ABSOLUTE_TICK);
+  assert.deepEqual(risingContactCoordinates(result), [
+    [53, 4096, 'head'],
+    [87, 4096, 'head']
+  ]);
+  const shifted = shiftedContactChecks(result);
+  assert.equal(shifted.checks.completeTerminalDomain, true);
+  assert.equal(shifted.checks.noSecondRisingContact, false);
+  assert.equal(shifted.pass, false);
 });
 
 test('all geometry terminal APIs fail closed at out-of-domain tick 88', () => {
