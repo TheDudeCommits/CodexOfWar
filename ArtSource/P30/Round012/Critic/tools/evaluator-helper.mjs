@@ -33,15 +33,24 @@ const PRISTINE_OBJECT_DEFINE_PROPERTY = Object.defineProperty;
 const PRISTINE_BUFFER_TO_STRING = Buffer.prototype.toString;
 
 export const PROTOCOL_ID = 'P30-R012A-BLIND-v1';
-export const ROUND_COMMITMENT_SCHEMA = 'p30.r012a.round-commitment.v1';
+export const ROUND_COMMITMENT_SCHEMA = 'p30.r012a.round-commitment.v2';
 export const PROTOCOL_PAYLOAD_SHA256 = '204678dff34363c4f408a750b662fc1ebf429b28ca13946283edde5180cc1577';
 export const PROTOCOL_AMENDMENT_SHA256 = '140bfd83349860adc627b0359877e0c7d90d2823e35c414121dec0ab84221cf6';
+export const PROTOCOL_AMENDMENT_02_SHA256 = '170851efeb5d68314547be9b7e109dff9992707f4c9675eaf4d256829a315020';
 export const BASELINE_RECEIPT_SHA256 = '9d3a1e3d6809ff18d445d0c6b69e16342e6f72d0e39c3ebb025c9d34535f7259';
+export const PROTOCOL_RECOMMITMENT_RECEIPT_SHA256 = 'b23a42e22f5b0a06fb96d21b0fbc9fb40efe06932e99eebb8e8c09e834df71ff';
+export const PROTOCOL_RECOMMITMENT_HELPER_SHA256 = 'ecaad4fa91b44bdc4c818503f9d36adf65050a62de095c362b111c1a6fcd41b3';
+export const PRIOR_ROUND_COMMITMENT_SHA256 = 'aa3da43f393e90551e52659dbf59fe07f62fca689f4c8e68df859aefa49a1973';
+export const SEALED_PUBLIC_ROOT_COMMIT = 'e5f36b53b2d7cc297a4b360923f6d8ca8211cdcd';
 export const REFERENCE_ARCHIVE_SHA256 = '4653a7a92d6f6bde910f39d3190df0adb112677851815443144505b8b420a6dd';
+export const FROZEN_BASELINE_BLADE_ASSET_SHA256 = '29565b76739e2d0f5491c55c5c382c7e172c7bc99d04a2382044f782170b7c1d';
 
 export const PROTOCOL_PATH = 'ArtSource/P30/Round012/LOCKED_PROTOCOL.md';
 export const PROTOCOL_AMENDMENT_PATH = 'ArtSource/P30/Round012/PROTOCOL_AMENDMENT_01.md';
+export const PROTOCOL_AMENDMENT_02_PATH = 'ArtSource/P30/Round012/PROTOCOL_AMENDMENT_02.md';
 export const BASELINE_RECEIPT_PATH = 'ArtSource/P30/Round012/BASELINE_RECEIPT.json';
+export const PROTOCOL_RECOMMITMENT_RECEIPT_PATH = 'ArtSource/P30/Round012/Critic/PROTOCOL_RECOMMITMENT_RECEIPT.json';
+export const PROTOCOL_RECOMMITMENT_HELPER_PATH = 'ArtSource/P30/Round012/Critic/tools/protocol-recommit-helper.mjs';
 export const TREE_HELPER_PATH = 'ArtSource/P30/Round012/Critic/tools/tree-helper.mjs';
 export const EVALUATOR_HELPER_PATH = 'ArtSource/P30/Round012/Critic/tools/evaluator-helper.mjs';
 
@@ -61,6 +70,13 @@ export const SUBSTEPS = 4096;
 export const VIEWPORT_WIDTH = 1600;
 export const VIEWPORT_HEIGHT = 900;
 export const HEAVY_RISING_EDGE_ABSOLUTE_TICK = 24;
+export const SHIFTED_HEAVY_RISING_EDGE_ABSOLUTE_TICK = 31;
+export const CANONICAL_TERMINAL_ABSOLUTE_TICK = 80;
+export const SHIFTED_TERMINAL_ABSOLUTE_TICK = 87;
+export const MAX_GEOMETRY_ABSOLUTE_TICK = SHIFTED_TERMINAL_ABSOLUTE_TICK;
+export const BLADE_LENGTH_MIN_METRES = 0.650000;
+export const BLADE_LENGTH_MAX_METRES = 1.873000;
+export const BLADE_RADIAL_MAX_METRES = 0.185000;
 export const FOCUSED_CAPTURE_TICKS = Object.freeze([44, 46, 58]);
 export const ACTION_CROP_EXPANSION = 0.15;
 export const CONTACT_ROI_SIZE = 320;
@@ -100,6 +116,14 @@ export const ROUND_COMMITMENT_KEYS = Object.freeze([
   'protocolPayloadSha256',
   'protocolAmendmentPath',
   'protocolAmendmentSha256',
+  'protocolAmendment02Path',
+  'protocolAmendment02Sha256',
+  'protocolRecommitmentReceiptPath',
+  'protocolRecommitmentReceiptSha256',
+  'protocolRecommitmentHelperPath',
+  'protocolRecommitmentHelperSha256',
+  'priorRoundCommitmentSha256',
+  'sealedPublicRootCommit',
   'baselineReceiptPath',
   'baselineReceiptSha256',
   'presentationCommitDomain',
@@ -335,6 +359,14 @@ export function validateRoundCommitment(value, source = null) {
     protocolPayloadSha256: PROTOCOL_PAYLOAD_SHA256,
     protocolAmendmentPath: PROTOCOL_AMENDMENT_PATH,
     protocolAmendmentSha256: PROTOCOL_AMENDMENT_SHA256,
+    protocolAmendment02Path: PROTOCOL_AMENDMENT_02_PATH,
+    protocolAmendment02Sha256: PROTOCOL_AMENDMENT_02_SHA256,
+    protocolRecommitmentReceiptPath: PROTOCOL_RECOMMITMENT_RECEIPT_PATH,
+    protocolRecommitmentReceiptSha256: PROTOCOL_RECOMMITMENT_RECEIPT_SHA256,
+    protocolRecommitmentHelperPath: PROTOCOL_RECOMMITMENT_HELPER_PATH,
+    protocolRecommitmentHelperSha256: PROTOCOL_RECOMMITMENT_HELPER_SHA256,
+    priorRoundCommitmentSha256: PRIOR_ROUND_COMMITMENT_SHA256,
+    sealedPublicRootCommit: SEALED_PUBLIC_ROOT_COMMIT,
     baselineReceiptPath: BASELINE_RECEIPT_PATH,
     baselineReceiptSha256: BASELINE_RECEIPT_SHA256,
     presentationCommitDomain: PRESENTATION_COMMIT_DOMAIN,
@@ -379,6 +411,9 @@ export async function verifyRoundCommitmentFiles(repositoryRoot, commitmentPath)
   const bindings = [
     [commitment.protocolPath, commitment.protocolPayloadSha256, 'PROTOCOL_FILE_HASH_MISMATCH'],
     [commitment.protocolAmendmentPath, commitment.protocolAmendmentSha256, 'AMENDMENT_FILE_HASH_MISMATCH'],
+    [commitment.protocolAmendment02Path, commitment.protocolAmendment02Sha256, 'AMENDMENT_02_FILE_HASH_MISMATCH'],
+    [commitment.protocolRecommitmentReceiptPath, commitment.protocolRecommitmentReceiptSha256, 'RECOMMITMENT_RECEIPT_HASH_MISMATCH'],
+    [commitment.protocolRecommitmentHelperPath, commitment.protocolRecommitmentHelperSha256, 'RECOMMITMENT_HELPER_HASH_MISMATCH'],
     [commitment.baselineReceiptPath, commitment.baselineReceiptSha256, 'BASELINE_RECEIPT_HASH_MISMATCH'],
     [commitment.treeHelperPath, commitment.treeHelperSha256, 'TREE_HELPER_HASH_MISMATCH'],
     [commitment.evaluatorHelperPath, commitment.evaluatorHelperSha256, 'EVALUATOR_HELPER_HASH_MISMATCH']
@@ -397,12 +432,32 @@ export async function verifyRoundCommitmentFiles(repositoryRoot, commitmentPath)
   ) {
     evaluatorFail('BASELINE_PROTOCOL_BINDING_MISMATCH');
   }
+  const recommitment = (await readCanonicalFile(inside(root, commitment.protocolRecommitmentReceiptPath))).value;
+  if (
+    recommitment.schema !== 'p30.r012a.protocol-recommitment-receipt.v1' ||
+    recommitment.protocolID !== PROTOCOL_ID ||
+    recommitment.authority?.sealedPublicRootCommit !== commitment.sealedPublicRootCommit ||
+    recommitment.authority?.priorRoundCommitmentSha256 !== commitment.priorRoundCommitmentSha256 ||
+    recommitment.authority?.amendment02Sha256 !== commitment.protocolAmendment02Sha256 ||
+    recommitment.accessState?.criticCandidateAccess !== false ||
+    recommitment.accessState?.candidatePackagesAccessed !== false ||
+    recommitment.accessState?.candidateSourcesAccessed !== false ||
+    recommitment.accessState?.privateCustodyAccessed !== false ||
+    recommitment.accessState?.referenceArchiveAccessed !== false ||
+    recommitment.baselineBlade?.assetSha256 !== FROZEN_BASELINE_BLADE_ASSET_SHA256 ||
+    recommitment.baselineBlade?.measurementVerifierPath !== commitment.protocolRecommitmentHelperPath ||
+    recommitment.baselineBlade?.measurementVerifierSha256 !== commitment.protocolRecommitmentHelperSha256 ||
+    recommitment.baselineBlade?.recommittedBounds?.maximumLengthMetres !== BLADE_LENGTH_MAX_METRES.toFixed(6) ||
+    recommitment.baselineBlade?.recommittedBounds?.maximumRadialDistanceMetres !== BLADE_RADIAL_MAX_METRES.toFixed(6)
+  ) evaluatorFail('RECOMMITMENT_RECEIPT_SEMANTICS_MISMATCH');
   return {
     schema: 'p30.r012a.round-commitment-verification.v1',
     protocolID: PROTOCOL_ID,
     roundCommitmentSha256: sha256Hex(record.bytes),
     protocolVerified: true,
     amendmentVerified: true,
+    amendment02Verified: true,
+    recommitmentReceiptVerified: true,
     baselineReceiptVerified: true,
     helperBytesVerified: true,
     criticCandidateAccess: false
@@ -955,8 +1010,10 @@ export function extractBladeCapsule(verticesValue, gripValue) {
   const endpointA = add(centroid, scale(eigen.axis, minimumProjection));
   const endpointB = add(centroid, scale(eigen.axis, maximumProjection));
   const lengthMetres = length(subtract(endpointB, endpointA));
-  if (lengthMetres < 0.65 || lengthMetres > 1.80) evaluatorFail('BLADE_LENGTH_OUT_OF_BOUNDS');
-  if (maximumRadialDistance > 0.14) evaluatorFail('BLADE_RADIAL_BOUND_EXCEEDED');
+  if (lengthMetres < BLADE_LENGTH_MIN_METRES || lengthMetres > BLADE_LENGTH_MAX_METRES) {
+    evaluatorFail('BLADE_LENGTH_OUT_OF_BOUNDS');
+  }
+  if (maximumRadialDistance > BLADE_RADIAL_MAX_METRES) evaluatorFail('BLADE_RADIAL_BOUND_EXCEEDED');
   const distanceA = length(subtract(endpointA, grip));
   const distanceB = length(subtract(endpointB, grip));
   if (Math.abs(distanceA - distanceB) <= EPS) evaluatorFail('BLADE_GUARD_TIP_GRIP_TIE');
@@ -1282,7 +1339,7 @@ function cameraViewProjection(camera) {
  * read-only references needed for later O4/T10 audits.
  */
 export function collectGeometrySource(source, { absoluteTick, targetHeightReceipt = null } = {}) {
-  if (!Number.isSafeInteger(absoluteTick) || absoluteTick < -1 || absoluteTick > 80) {
+  if (!Number.isSafeInteger(absoluteTick) || absoluteTick < -1 || absoluteTick > MAX_GEOMETRY_ABSOLUTE_TICK) {
     evaluatorFail('GEOMETRY_ABSOLUTE_TICK_REQUIRED');
   }
   const scene = requiredReference(source, 'scene');
@@ -1506,8 +1563,61 @@ function sweepStateHasContact(state) {
   return false;
 }
 
-export function evaluateSweptContact(stateSeries, terminalTick = 80) {
-  if (!Number.isSafeInteger(terminalTick) || terminalTick < 0) evaluatorFail('SWEEP_TERMINAL_TICK_INVALID');
+const SWEEP_RESULT_PROOFS = new WeakSet();
+const SWEEP_RESULT_RECORDS = new WeakMap();
+
+function freezeSweepContact(contact) {
+  if (contact === null) return null;
+  PRISTINE_OBJECT_FREEZE(contact.closestBladePoint);
+  PRISTINE_OBJECT_FREEZE(contact.closestTargetPoint);
+  return PRISTINE_OBJECT_FREEZE(contact);
+}
+
+function mintSweepResult(result) {
+  for (const interval of result.intervals) {
+    freezeSweepContact(interval.firstSample);
+    PRISTINE_OBJECT_FREEZE(interval);
+  }
+  PRISTINE_OBJECT_FREEZE(result.intervals);
+  freezeSweepContact(result.firstContact);
+  for (const rising of result.risingContacts) PRISTINE_OBJECT_FREEZE(rising);
+  PRISTINE_OBJECT_FREEZE(result.risingContacts);
+  PRISTINE_OBJECT_FREEZE(result.risingContactTicks);
+  PRISTINE_OBJECT_FREEZE(result);
+  const record = PRISTINE_OBJECT_FREEZE({
+    result,
+    intervals: result.intervals,
+    firstContact: result.firstContact,
+    firstContactTick: result.firstContactTick,
+    risingContacts: result.risingContacts,
+    risingContactTicks: result.risingContactTicks,
+    maximumPenetration: result.maximumPenetration
+  });
+  PRISTINE_REFLECT_APPLY(PRISTINE_WEAK_SET_ADD, SWEEP_RESULT_PROOFS, [result]);
+  PRISTINE_REFLECT_APPLY(PRISTINE_WEAK_MAP_SET, SWEEP_RESULT_RECORDS, [result, record]);
+  return result;
+}
+
+function requireSweepResult(result) {
+  if (
+    result === null || typeof result !== 'object' ||
+    !PRISTINE_REFLECT_APPLY(PRISTINE_WEAK_SET_HAS, SWEEP_RESULT_PROOFS, [result])
+  ) evaluatorFail('SWEEP_RESULT_CUSTODY_INVALID');
+  const record = PRISTINE_REFLECT_APPLY(PRISTINE_WEAK_MAP_GET, SWEEP_RESULT_RECORDS, [result]);
+  if (
+    record?.result !== result || record.intervals !== result.intervals ||
+    record.firstContact !== result.firstContact || record.firstContactTick !== result.firstContactTick ||
+    record.risingContacts !== result.risingContacts || record.risingContactTicks !== result.risingContactTicks ||
+    record.maximumPenetration !== result.maximumPenetration
+  ) evaluatorFail('SWEEP_RESULT_CUSTODY_INVALID');
+  return result;
+}
+
+export function evaluateSweptContact(stateSeries, terminalTick = CANONICAL_TERMINAL_ABSOLUTE_TICK) {
+  if (
+    !Number.isSafeInteger(terminalTick) || terminalTick < 0 ||
+    terminalTick > MAX_GEOMETRY_ABSOLUTE_TICK
+  ) evaluatorFail('SWEEP_TERMINAL_TICK_INVALID');
   if (!Array.isArray(stateSeries) || stateSeries.length !== terminalTick + 2) evaluatorFail('SWEEP_TICK_SERIES_INVALID');
   const states = stateSeries.map((state, index) => validateSweepState(state, index - 1));
   const intervals = [];
@@ -1583,43 +1693,72 @@ export function evaluateSweptContact(stateSeries, terminalTick = 80) {
       minimumSeparation: intervalMinimumSeparation
     });
   }
-  return {
+  return mintSweepResult({
     firstContact,
     firstContactTick: firstContact?.absoluteTick ?? null,
     risingContacts,
     risingContactTicks,
     maximumPenetration,
     intervals
-  };
+  });
 }
 
-export function canonicalContactChecks(result) {
-  if (!result || !Array.isArray(result.intervals)) evaluatorFail('SWEEP_RESULT_INVALID');
+function translatedContactChecks(result, tickShift, exactTerminalTick = null) {
+  result = requireSweepResult(result);
+  if (!Number.isSafeInteger(tickShift) || tickShift < 0) evaluatorFail('CONTACT_TICK_SHIFT_INVALID');
+  if (
+    exactTerminalTick !== null &&
+    (!Number.isSafeInteger(exactTerminalTick) || exactTerminalTick < 0)
+  ) evaluatorFail('CONTACT_TERMINAL_TICK_INVALID');
+  const tick44 = 44 + tickShift;
+  const tick45 = 45 + tickShift;
+  const tick46 = 46 + tickShift;
+  const tick48 = 48 + tickShift;
   const byTick = new Map(result.intervals.map((entry) => [entry.absoluteTick, entry]));
-  const noContactThrough45 = result.intervals.filter((entry) => entry.absoluteTick <= 45).every((entry) => !entry.contact);
+  const noContactBeforeExpected = result.intervals
+    .filter((entry) => entry.absoluteTick < tick46)
+    .every((entry) => !entry.contact);
   const canonicalRise = Array.isArray(result.risingContacts) && result.risingContacts.length === 1 ?
     result.risingContacts[0] : null;
   const checks = {
-    noContactThrough45,
-    tick44Clearance: byTick.get(44)?.stateSeparation >= 0.080000,
-    tick45Clearance: byTick.get(45)?.stateSeparation >= 0.030000,
-    firstContactTick46: result.firstContactTick === 46,
+    ...(exactTerminalTick === null ? {} : {
+      completeTerminalDomain:
+        result.intervals.length === exactTerminalTick + 1 &&
+        result.intervals.every((entry, index) => entry?.absoluteTick === index)
+    }),
+    noContactThrough45: noContactBeforeExpected,
+    tick44Clearance: byTick.get(tick44)?.stateSeparation >= 0.080000,
+    tick45Clearance: byTick.get(tick45)?.stateSeparation >= 0.030000,
+    firstContactTick46: result.firstContactTick === tick46,
     tick46StateTopology:
-      byTick.get(46)?.stateSeparation >= -0.005000 && byTick.get(46)?.stateSeparation <= EPS,
+      byTick.get(tick46)?.stateSeparation >= -0.005000 && byTick.get(tick46)?.stateSeparation <= EPS,
     penetrationBound: result.maximumPenetration >= -0.010000,
-    tick48Departure: byTick.get(48)?.stateSeparation >= 0.030000,
+    tick48Departure: byTick.get(tick48)?.stateSeparation >= 0.030000,
     noSecondRisingContact:
-      canonicalRise?.absoluteTick === 46 && Number.isSafeInteger(canonicalRise.substep) &&
+      canonicalRise?.absoluteTick === tick46 && Number.isSafeInteger(canonicalRise.substep) &&
       canonicalRise.substep >= 1 && canonicalRise.substep <= SUBSTEPS &&
       canonicalRise.capsuleID === result.firstContact?.capsuleID &&
       canonicalRise.substep === result.firstContact?.substep &&
       Array.isArray(result.risingContactTicks) && result.risingContactTicks.length === 1 &&
-      result.risingContactTicks[0] === 46
+      result.risingContactTicks[0] === tick46
   };
   return { checks, pass: Object.values(checks).every(Boolean) };
 }
 
+export function canonicalContactChecks(result) {
+  return translatedContactChecks(result, 0);
+}
+
+export function shiftedContactChecks(result) {
+  return translatedContactChecks(
+    result,
+    SHIFTED_HEAVY_RISING_EDGE_ABSOLUTE_TICK - HEAVY_RISING_EDGE_ABSOLUTE_TICK,
+    SHIFTED_TERMINAL_ABSOLUTE_TICK
+  );
+}
+
 export function canonicalContactFrame(result, basis) {
+  result = requireSweepResult(result);
   const canonical = validateBasis(basis);
   if (!canonicalContactChecks(result).pass || !result.firstContact) evaluatorFail('CANONICAL_CONTACT_RESULT_FAILED');
   const first = result.firstContact;
@@ -1641,8 +1780,12 @@ export function canonicalContactFrame(result, basis) {
   return { ...body, normal, tangent, receiptSha256: sha256Hex(canonicalBytes(body)) };
 }
 
-export function computeMissOffsetExtrema(stateSeries, basis, terminalTick = 80) {
+export function computeMissOffsetExtrema(stateSeries, basis, terminalTick = CANONICAL_TERMINAL_ABSOLUTE_TICK) {
   const canonical = validateBasis(basis);
+  if (
+    !Number.isSafeInteger(terminalTick) || terminalTick < 0 ||
+    terminalTick > MAX_GEOMETRY_ABSOLUTE_TICK
+  ) evaluatorFail('SWEEP_TERMINAL_TICK_INVALID');
   if (!Array.isArray(stateSeries) || stateSeries.length !== terminalTick + 2) evaluatorFail('SWEEP_TICK_SERIES_INVALID');
   const states = stateSeries.map((state, index) => validateSweepState(state, index - 1));
   const extrema = { Bmin: Infinity, Bmax: -Infinity, Tmin: Infinity, Tmax: -Infinity };
@@ -1739,10 +1882,11 @@ export function validateCounterfactualRuns({ hitOffsets, missOffsets, hitRuns, m
     if (run.index !== index || !sameIntegerVector(run.offsetCanonicalMicrometres, hitOffsets[index]?.canonicalMicrometres)) {
       evaluatorFail('COUNTERFACTUAL_HIT_OFFSET_MISMATCH');
     }
+    const evaluatorResult = requireSweepResult(run.evaluatorResult);
     if (
-      run.evaluatorResult?.firstContactTick !== 46 ||
-      !hasExpectedRisingContacts(run.evaluatorResult, 46) ||
-      !Number.isFinite(run.evaluatorResult.maximumPenetration) || run.evaluatorResult.maximumPenetration < -0.012000
+      evaluatorResult.firstContactTick !== 46 ||
+      !hasExpectedRisingContacts(evaluatorResult, 46) ||
+      !Number.isFinite(evaluatorResult.maximumPenetration) || evaluatorResult.maximumPenetration < -0.012000
     ) evaluatorFail('COUNTERFACTUAL_HIT_GEOMETRY_FAILED');
     validateHealthSeries(run.healthByTick, true);
     if (!Array.isArray(run.damageMutations) || run.damageMutations.length !== 1) evaluatorFail('COUNTERFACTUAL_HIT_DAMAGE_INVALID');
@@ -1773,10 +1917,11 @@ export function validateCounterfactualRuns({ hitOffsets, missOffsets, hitRuns, m
     if (run.index !== index || !sameIntegerVector(run.offsetCanonicalMicrometres, missOffsets[index]?.canonicalMicrometres)) {
       evaluatorFail('COUNTERFACTUAL_MISS_OFFSET_MISMATCH');
     }
+    const evaluatorResult = requireSweepResult(run.evaluatorResult);
     if (
-      run.evaluatorResult?.firstContactTick !== null ||
-      !hasExpectedRisingContacts(run.evaluatorResult, null) ||
-      !Number.isFinite(run.evaluatorResult.maximumPenetration) || run.evaluatorResult.maximumPenetration < 0.250000
+      evaluatorResult.firstContactTick !== null ||
+      !hasExpectedRisingContacts(evaluatorResult, null) ||
+      !Number.isFinite(evaluatorResult.maximumPenetration) || evaluatorResult.maximumPenetration < 0.250000
     ) evaluatorFail('COUNTERFACTUAL_MISS_CLEARANCE_FAILED');
     validateHealthSeries(run.healthByTick, false);
     if (!Array.isArray(run.events) || run.events.length !== 0) evaluatorFail('COUNTERFACTUAL_MISS_EVENT_INVALID');
