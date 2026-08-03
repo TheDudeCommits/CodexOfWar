@@ -1,8 +1,17 @@
 import * as THREE from "three";
 import { PerfDiagnostics, type RuntimeMetrics } from "../../diagnostics/PerfDiagnostics";
+import { isP30CriticScenarioRoute } from "../../diagnostics/P30CriticProtocol";
 import { getCombatPoseBeatTelemetry } from "../objects/CharacterViews";
 import { InputController } from "../../game/input/InputController";
 import type { InputSnapshot } from "../../game/input/actions";
+import { RunRecordStore } from "../../game/persistence/RunRecordStore";
+import {
+  EMPTY_HORDE_INPUT,
+  HordeSimulation,
+  type HordeGameEvent,
+  type HordeInputFrame,
+  type HordeRunState,
+} from "../../game/run";
 import { FIXED_TIMESTEP } from "../../game/simulation/constants";
 import { P30_REVIEW_TUNING } from "../../game/simulation/constants";
 import { FixedStepClock } from "../../game/simulation/FixedStepClock";
@@ -11,7 +20,16 @@ import { directionToYaw, normalized } from "../../game/simulation/math";
 import type { GameEvent, InputFrame, WorldState } from "../../game/simulation/types";
 import { PhysicsBridge } from "../../physics/PhysicsBridge";
 import { Hud } from "../../ui/Hud";
+import { RunHud, type RunHudEvent } from "../../ui/RunHud";
+import type { EnemyFieldSnapshot } from "../objects/EnemyFieldView";
 import { RenderBridge, type PresentationAssetReceipt } from "../adapters/RenderBridge";
+import {
+  hordeEventToHudEvent,
+  toEnemyFieldEntity,
+  toLegacyPlayerState,
+  toRunHudModel,
+  toWeaponLoadoutPresentation,
+} from "../adapters/HordePresentation";
 import { AssetRegistry, type RegistryLoadReceipt } from "../loaders/AssetRegistry";
 import { PostStack } from "../post/PostStack";
 import { createRenderer, restoreRendererState } from "./createRenderer";
@@ -27,6 +45,16 @@ interface PendingEdges {
   attack: boolean;
   attackSource: InputSnapshot["attackSource"];
   dodge: boolean;
+}
+
+interface PendingHordeEdges {
+  attack: boolean;
+  special: boolean;
+  dodge: boolean;
+  weaponSlot: 1 | 2 | 3 | null;
+  upgradeChoice: 0 | 1 | 2 | undefined;
+  restart: boolean;
+  lockToggle: boolean;
 }
 
 export interface ProductionFixedUpdateReceipt {
@@ -50,6 +78,11 @@ export interface ProductionRuntimeObserver {
 
 export class GameApp {
   private readonly simulation = new GameSimulation();
+  private readonly hordeSimulation = new HordeSimulation({
+    playerPosition: { x: 0, z: 4.5 },
+    arenaRadius: 11,
+  });
+  private readonly runRecordStore = new RunRecordStore();
   private readonly clock = new FixedStepClock();
   private readonly input = new InputController();
   private readonly cameraController = new ThirdPersonCamera();
@@ -62,6 +95,7 @@ export class GameApp {
   private readonly viewport: ViewportController;
   private readonly renderBridge: RenderBridge;
   private readonly hud: Hud;
+  private readonly runHud: RunHud | null;
   private lastTimestamp = 0;
   private running = false;
   private contextLost = false;
@@ -89,8 +123,22 @@ export class GameApp {
     attackSource: null,
     dodge: false,
   };
+  private readonly pendingHordeEdges: PendingHordeEdges = {
+    attack: false,
+    special: false,
+    dodge: false,
+    weaponSlot: null,
+    upgradeChoice: undefined,
+    restart: false,
+    lockToggle: false,
+  };
   private manifestVersion: number | null = null;
   private readonly reviewMode: boolean;
+  private readonly hordeMode: boolean;
+  private hordePaused = false;
+  private hordeAwaitingEngagement = true;
+  private hordeRunRecorded = false;
+  private hordeHudEvents: RunHudEvent[] = [];
   private simulationPaused = false;
   private p30AwaitingInput = false;
   private p30ScenarioActive = false;
@@ -126,7 +174,13 @@ export class GameApp {
     this.lighting = createScene();
     const params = new URLSearchParams(window.location.search);
     this.reviewMode = params.get("review") === "1";
+    this.hordeMode =
+      !this.reviewMode &&
+      !isP30CriticScenarioRoute() &&
+      !params.has("capture") &&
+      params.get("mode") !== "legacy";
     if (this.reviewMode) host.classList.add("is-review-mode");
+    if (this.hordeMode) host.classList.add("is-horde-mode");
     const fixedReviewViewport = this.reviewMode
       ? { width: 1600, height: 900, pixelRatio: 1 }
       : undefined;
@@ -172,6 +226,39 @@ export class GameApp {
     );
     this.cameraController.setObstructionObjects([this.renderBridge.arena.root]);
     this.input.attach(this.renderer.domElement);
+    if (this.hordeMode) {
+      this.physics.enableHordeFortCollider();
+      this.renderBridge.arena.extendGroundForHorde();
+      this.renderBridge.setEnemyFieldEnabled(true);
+      this.renderBridge.enemyField.reserve(18);
+      this.physics.reset(
+        this.hordeSimulation.state.player.position,
+        this.toHordePhysicsEnemies(),
+      );
+      this.runHud = new RunHud(
+        host,
+        {
+          onUpgradeSelected: (_choice, index) => {
+            this.pendingHordeEdges.upgradeChoice = index as 0 | 1 | 2;
+          },
+          onQuickSlotSelected: (_slot, index) => {
+            this.pendingHordeEdges.weaponSlot = (index + 1) as 1 | 2 | 3;
+          },
+          onPauseRequested: () => this.setHordePaused(true),
+          onResumeRequested: () => this.setHordePaused(false),
+          onRestartRequested: () => {
+            this.pendingHordeEdges.restart = true;
+          },
+          onInputGateChange: (gated) => {
+            if (gated) this.clearPendingHordeEdges();
+          },
+        },
+        { listenForKeyboard: false },
+      );
+      this.consumeHordeEvents(this.hordeSimulation.consumeEvents());
+    } else {
+      this.runHud = null;
+    }
     this.manifestVersion = assetRegistry.manifestVersion;
     if (assetFailures.length > 0) {
       console.warn("Enabled authored assets failed; fallbacks remain active.", assetFailures);
@@ -210,6 +297,10 @@ export class GameApp {
   }
 
   reset(): void {
+    if (this.hordeMode) {
+      this.resetHordeRun();
+      return;
+    }
     this.simulation.reset();
     this.physics.reset(this.simulation.state.player.position, this.simulation.state.enemy.position);
     this.clock.reset();
@@ -353,6 +444,10 @@ export class GameApp {
   }
 
   renderOnce(snapCamera = false, advanceCamera = true): void {
+    if (this.hordeMode) {
+      this.renderHordeOnce(snapCamera, advanceCamera);
+      return;
+    }
     const state = this.simulation.state;
     if (advanceCamera) this.updateCamera(FIXED_TIMESTEP, 0, 0, snapCamera);
     this.lighting.rig.update(state.elapsed);
@@ -370,7 +465,9 @@ export class GameApp {
   downloadCapture(): void {
     const anchor = document.createElement("a");
     anchor.href = this.capturePng();
-    anchor.download = `gauntlet-loop-${this.simulation.state.tick}.png`;
+    anchor.download = this.hordeMode
+      ? `codex-of-war-horde-${this.hordeSimulation.state.tick}.png`
+      : `gauntlet-loop-${this.simulation.state.tick}.png`;
     anchor.click();
     this.hud.toast("Capture sealed");
   }
@@ -382,6 +479,18 @@ export class GameApp {
 
   getSnapshot(): WorldState {
     return structuredClone(this.simulation.state);
+  }
+
+  getHordeSnapshot(): HordeRunState {
+    return this.hordeSimulation.exportState();
+  }
+
+  getEnemyFieldSnapshot(): EnemyFieldSnapshot {
+    return this.renderBridge.enemyField.snapshot;
+  }
+
+  get isHordeRunMode(): boolean {
+    return this.hordeMode;
   }
 
   getMetrics(): RuntimeMetrics {
@@ -534,6 +643,7 @@ export class GameApp {
     this.assetRegistry.dispose();
     this.physics.dispose();
     this.renderer.dispose();
+    this.runHud?.dispose();
     this.hud.dispose();
   }
 
@@ -543,6 +653,10 @@ export class GameApp {
     const delta = Math.min((timestamp - this.lastTimestamp) / 1000, 0.1);
     this.lastTimestamp = timestamp;
     this.latestInput = this.input.sample();
+    if (this.hordeMode) {
+      this.frameHorde(timestamp, delta, frameStartedAt, this.latestInput);
+      return;
+    }
     this.processPresentationActions(this.latestInput);
 
     this.pendingEdges.attack ||= this.latestInput.attackPressed;
@@ -611,6 +725,356 @@ export class GameApp {
     );
     this.hud.updateDiagnostics(metrics);
   };
+
+  private frameHorde(
+    _timestamp: number,
+    delta: number,
+    frameStartedAt: number,
+    input: InputSnapshot,
+  ): void {
+    this.processHordePresentationActions(input);
+
+    if (this.hordePaused) {
+      this.clearPendingHordeEdges();
+      this.clock.reset();
+      this.presentHorde(0, 0, 0);
+      this.updateHordeDiagnostics(delta, 0, frameStartedAt);
+      return;
+    }
+
+    this.queueHordeEdges(input);
+    if (this.hordeAwaitingEngagement) {
+      if (this.isHordeEngagementInput(input)) {
+        this.hordeAwaitingEngagement = false;
+        this.clock.reset();
+        this.hud.markEngaged();
+      } else {
+        this.clock.reset();
+        this.presentHorde(0, input.lookX, input.lookY);
+        this.updateHordeDiagnostics(delta, 0, frameStartedAt);
+        return;
+      }
+    }
+
+    let fixedSteps = 0;
+    const state = this.hordeSimulation.state;
+    if (state.phase !== "combat") {
+      this.clock.reset();
+      if (this.hasPendingHordeModalAction()) {
+        const events = this.fixedHordeTick(this.createHordeFixedInput(input, true));
+        fixedSteps = 1;
+        this.clearPendingHordeEdges();
+        if (events.some((event) => event.type === "run-restarted")) this.clock.reset();
+      }
+    } else {
+      let appliedEdges = false;
+      this.clock.consume(delta, () => {
+        if (!appliedEdges && this.pendingHordeEdges.lockToggle) {
+          this.applyPendingHordeLockToggle();
+        }
+        const events = this.fixedHordeTick({
+          ...this.mapHordeInput(input),
+          attackPressed: !appliedEdges && this.pendingHordeEdges.attack,
+          specialPressed: !appliedEdges && this.pendingHordeEdges.special,
+          dodgePressed: !appliedEdges && this.pendingHordeEdges.dodge,
+          weaponSlot1Pressed: !appliedEdges && this.pendingHordeEdges.weaponSlot === 1,
+          weaponSlot2Pressed: !appliedEdges && this.pendingHordeEdges.weaponSlot === 2,
+          weaponSlot3Pressed: !appliedEdges && this.pendingHordeEdges.weaponSlot === 3,
+          restartPressed: !appliedEdges && this.pendingHordeEdges.restart,
+        });
+        appliedEdges = true;
+        fixedSteps += 1;
+        return !events.some((event) => event.type === "run-restarted");
+      });
+      if (appliedEdges) this.clearPendingHordeEdges();
+    }
+
+    const presentationDelta = fixedSteps * FIXED_TIMESTEP;
+    this.presentHorde(presentationDelta, input.lookX, input.lookY);
+    this.updateHordeDiagnostics(delta, fixedSteps, frameStartedAt);
+  }
+
+  private updateHordeDiagnostics(delta: number, fixedSteps: number, frameStartedAt: number): void {
+    const metrics = this.diagnostics.sample(
+      delta,
+      fixedSteps,
+      performance.now() - frameStartedAt,
+      this.renderer,
+      this.post,
+    );
+    this.hud.updateDiagnostics(metrics);
+  }
+
+  private queueHordeEdges(input: InputSnapshot): void {
+    const phase = this.hordeSimulation.state.phase;
+    if (phase === "combat") {
+      this.pendingHordeEdges.attack ||= input.attackPressed;
+      this.pendingHordeEdges.special ||= input.specialAttackPressed;
+      this.pendingHordeEdges.dodge ||= input.dodgePressed;
+      this.pendingHordeEdges.lockToggle ||= input.lockPressed;
+      if (input.weaponSlotPressed !== null) {
+        this.pendingHordeEdges.weaponSlot = input.weaponSlotPressed;
+      }
+      return;
+    }
+    if (phase === "upgrade" && input.weaponSlotPressed !== null) {
+      this.pendingHordeEdges.upgradeChoice = (input.weaponSlotPressed - 1) as 0 | 1 | 2;
+    }
+    if ((phase === "defeat" || phase === "victory") && input.restartPressed) {
+      this.pendingHordeEdges.restart = true;
+    }
+  }
+
+  private hasPendingHordeModalAction(): boolean {
+    const phase = this.hordeSimulation.state.phase;
+    return phase === "upgrade"
+      ? this.pendingHordeEdges.upgradeChoice !== undefined
+      : (phase === "defeat" || phase === "victory") && this.pendingHordeEdges.restart;
+  }
+
+  private createHordeFixedInput(input: InputSnapshot, includeEdges: boolean): HordeInputFrame {
+    return {
+      ...this.mapHordeInput(input),
+      attackPressed: includeEdges && this.pendingHordeEdges.attack,
+      specialPressed: includeEdges && this.pendingHordeEdges.special,
+      dodgePressed: includeEdges && this.pendingHordeEdges.dodge,
+      weaponSlot1Pressed: includeEdges && this.pendingHordeEdges.weaponSlot === 1,
+      weaponSlot2Pressed: includeEdges && this.pendingHordeEdges.weaponSlot === 2,
+      weaponSlot3Pressed: includeEdges && this.pendingHordeEdges.weaponSlot === 3,
+      upgradeChoice: includeEdges ? this.pendingHordeEdges.upgradeChoice : undefined,
+      restartPressed: includeEdges && this.pendingHordeEdges.restart,
+    };
+  }
+
+  private mapHordeInput(input: InputSnapshot): HordeInputFrame {
+    const basis = this.cameraController.getPlanarBasis();
+    const worldMove = {
+      x: basis.right.x * input.moveX + basis.forward.x * input.moveZ,
+      z: basis.right.z * input.moveX + basis.forward.z * input.moveZ,
+    };
+    const magnitude = Math.min(1, Math.hypot(input.moveX, input.moveZ));
+    const direction = normalized(worldMove, { x: 0, z: -1 });
+    const lockedId = this.hordeSimulation.state.player.lockedTargetId;
+    const locked = lockedId === null ? undefined : this.hordeSimulation.getEnemyById(lockedId);
+    const faceYaw = locked && locked.health > 0
+      ? directionToYaw({
+          x: locked.position.x - this.hordeSimulation.state.player.position.x,
+          z: locked.position.z - this.hordeSimulation.state.player.position.z,
+        })
+      : directionToYaw({ x: basis.forward.x, z: basis.forward.z });
+    return {
+      ...EMPTY_HORDE_INPUT,
+      moveX: direction.x * magnitude,
+      moveZ: direction.z * magnitude,
+      sprint: input.sprint,
+      faceYaw,
+      lockTargetId: lockedId,
+    };
+  }
+
+  private fixedHordeTick(input: HordeInputFrame): HordeGameEvent[] {
+    const previous = { ...this.hordeSimulation.state.player.position };
+    this.hordeSimulation.step(input);
+    const events = this.hordeSimulation.consumeEvents();
+    const state = this.hordeSimulation.state;
+    const resetPresentation = events.some(
+      (event) => event.type === "run-restarted" || (event.type === "wave-started" && event.wave > 1),
+    );
+    if (resetPresentation) {
+      this.physics.reset(state.player.position, this.toHordePhysicsEnemies());
+      this.cameraController.reset();
+    } else {
+      const desired = { ...state.player.position };
+      state.player.position = this.physics.resolvePlayerMovement(
+        previous,
+        desired,
+        this.toHordePhysicsEnemies(),
+        FIXED_TIMESTEP,
+      );
+    }
+    this.renderBridge.handleHordeEvents(events, state);
+    this.consumeHordeEvents(events);
+    return events;
+  }
+
+  private toHordePhysicsEnemies(): Array<{
+    id: number;
+    position: { x: number; z: number };
+    radius: number;
+    halfHeight: number;
+  }> {
+    return this.hordeSimulation.state.enemies
+      .filter((enemy) => enemy.phase !== "dead" && enemy.health > 0)
+      .map((enemy) => ({
+        id: enemy.id,
+        position: enemy.position,
+        radius: enemy.radius,
+        halfHeight: enemy.archetype === "brute" ? 0.82 : enemy.archetype === "stalker" ? 0.62 : 0.58,
+      }));
+  }
+
+  private consumeHordeEvents(events: readonly HordeGameEvent[]): void {
+    if (events.some((event) => event.type === "run-restarted")) {
+      this.hordeHudEvents = [];
+      this.hordeRunRecorded = false;
+      this.hordeAwaitingEngagement = true;
+      this.hordePaused = false;
+      this.clearPendingHordeEdges();
+      this.clock.reset();
+    }
+    for (const event of events) {
+      const hudEvent = hordeEventToHudEvent(event);
+      if (hudEvent) this.hordeHudEvents.push(hudEvent);
+    }
+    this.hordeHudEvents = this.hordeHudEvents.slice(-12);
+
+    const terminal = this.hordeSimulation.state.phase === "defeat" ||
+      this.hordeSimulation.state.phase === "victory";
+    if (terminal && !this.hordeRunRecorded) {
+      const state = this.hordeSimulation.state;
+      const records = this.runRecordStore.record({
+        score: state.score,
+        wave: state.wave,
+        kills: state.kills,
+        victory: state.phase === "victory",
+      });
+      this.hordeRunRecorded = true;
+      this.hordeHudEvents.push({
+        id: `record-${state.tick}`,
+        text: `Best score · ${records.bestScore.toLocaleString("en-US")}`,
+        tone: "reward",
+      });
+      this.hordeHudEvents = this.hordeHudEvents.slice(-12);
+    }
+  }
+
+  private processHordePresentationActions(input: InputSnapshot): void {
+    if (input.diagnosticsPressed) {
+      const visible = this.hud.toggleDiagnostics();
+      this.hud.toast(visible ? "Diagnostics open" : "Diagnostics closed");
+    }
+    if (input.postPressed) {
+      const enabled = this.post.toggle();
+      this.hud.toast(`Post FX ${enabled ? "on" : "off"}`);
+    }
+    if (input.capturePressed) this.downloadCapture();
+    if (input.pausePressed && this.hordeSimulation.state.phase === "combat") {
+      this.setHordePaused(!this.hordePaused);
+    }
+  }
+
+  private applyPendingHordeLockToggle(): void {
+    const player = this.hordeSimulation.state.player;
+    if (player.lockedTargetId === null) {
+      const target = this.hordeSimulation.lockBestTarget();
+      this.hud.toast(target === null ? "No target in range" : "Target marked");
+    } else {
+      player.lockedTargetId = null;
+      this.hud.toast("Lock released");
+    }
+  }
+
+  private isHordeEngagementInput(input: InputSnapshot): boolean {
+    return (
+      Math.abs(input.moveX) + Math.abs(input.moveZ) > 0 ||
+      input.attackPressed ||
+      input.specialAttackPressed ||
+      input.dodgePressed ||
+      input.weaponSlotPressed !== null ||
+      input.lockPressed ||
+      this.pendingHordeEdges.weaponSlot !== null ||
+      this.pendingHordeEdges.attack ||
+      this.pendingHordeEdges.special ||
+      this.pendingHordeEdges.dodge ||
+      this.pendingHordeEdges.lockToggle
+    );
+  }
+
+  private setHordePaused(paused: boolean): void {
+    if (paused === this.hordePaused || this.hordeSimulation.state.phase !== "combat") return;
+    this.hordePaused = paused;
+    this.clearPendingHordeEdges();
+    this.clock.reset();
+    this.lastTimestamp = performance.now();
+    if (paused && document.pointerLockElement) void document.exitPointerLock();
+    this.hud.toast(paused ? "Horde Run paused" : "Horde Run resumed");
+  }
+
+  private clearPendingHordeEdges(): void {
+    this.pendingHordeEdges.attack = false;
+    this.pendingHordeEdges.special = false;
+    this.pendingHordeEdges.dodge = false;
+    this.pendingHordeEdges.weaponSlot = null;
+    this.pendingHordeEdges.upgradeChoice = undefined;
+    this.pendingHordeEdges.restart = false;
+    this.pendingHordeEdges.lockToggle = false;
+  }
+
+  private updateHordeCamera(dt: number, lookX: number, lookY: number, snap = false): void {
+    const state = this.hordeSimulation.state;
+    const locked = state.player.lockedTargetId === null
+      ? undefined
+      : state.enemies.find(
+          (enemy) => enemy.id === state.player.lockedTargetId && enemy.health > 0,
+        );
+    this.cameraController.update(
+      dt,
+      state.player.position,
+      locked?.position ?? null,
+      lookX,
+      lookY,
+      snap,
+    );
+  }
+
+  private presentHorde(dt: number, lookX: number, lookY: number, snap = false): void {
+    const state = this.hordeSimulation.state;
+    this.updateHordeCamera(dt, lookX, lookY, snap);
+    this.renderBridge.updateHorde(
+      toLegacyPlayerState(state),
+      state.enemies.map(toEnemyFieldEntity),
+      toWeaponLoadoutPresentation(state),
+      state.elapsedSeconds,
+      dt,
+    );
+    this.lighting.rig.update(state.elapsedSeconds);
+    this.runHud?.update(
+      toRunHudModel(state, this.hordePaused, this.hordeHudEvents, this.hordeAwaitingEngagement),
+    );
+    this.post.render(this.lighting.scene, this.cameraController.camera);
+    this.recordProductionRender();
+  }
+
+  private renderHordeOnce(snapCamera: boolean, advanceCamera: boolean): void {
+    if (advanceCamera) this.updateHordeCamera(FIXED_TIMESTEP, 0, 0, snapCamera);
+    const state = this.hordeSimulation.state;
+    this.renderBridge.updateHorde(
+      toLegacyPlayerState(state),
+      state.enemies.map(toEnemyFieldEntity),
+      toWeaponLoadoutPresentation(state),
+      state.elapsedSeconds,
+      advanceCamera ? FIXED_TIMESTEP : 0,
+    );
+    this.lighting.rig.update(state.elapsedSeconds);
+    this.runHud?.update(
+      toRunHudModel(state, this.hordePaused, this.hordeHudEvents, this.hordeAwaitingEngagement),
+    );
+    this.post.render(this.lighting.scene, this.cameraController.camera);
+    this.recordProductionRender();
+  }
+
+  private resetHordeRun(): void {
+    this.hordeSimulation.restart();
+    const events = this.hordeSimulation.consumeEvents();
+    this.consumeHordeEvents(events);
+    this.physics.reset(
+      this.hordeSimulation.state.player.position,
+      this.toHordePhysicsEnemies(),
+    );
+    this.cameraController.reset();
+    this.clearPendingHordeEdges();
+    this.renderOnce(true);
+  }
 
   private mapSimulationInput(input: InputSnapshot): InputFrame {
     const basis = this.cameraController.getPlanarBasis();
@@ -694,7 +1158,9 @@ export class GameApp {
     this.renderHeartbeat += 1;
     this.runtimeObserver?.afterRender?.({
       heartbeat: this.renderHeartbeat,
-      absoluteSimulationTick: this.simulation.state.tick,
+      absoluteSimulationTick: this.hordeMode
+        ? this.hordeSimulation.state.tick
+        : this.simulation.state.tick,
     });
   }
 

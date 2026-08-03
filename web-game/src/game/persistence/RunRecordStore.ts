@@ -16,6 +16,18 @@ export interface RunRecords {
 }
 
 const STORAGE_KEY = "codex-of-war.run-records.v1";
+const BLOCKED_STORAGE_FALLBACK: Pick<Storage, "getItem" | "setItem"> = {
+  getItem: () => null,
+  setItem: () => undefined,
+};
+
+function resolveDefaultStorage(): Pick<Storage, "getItem" | "setItem"> {
+  try {
+    return globalThis.localStorage ?? BLOCKED_STORAGE_FALLBACK;
+  } catch {
+    return BLOCKED_STORAGE_FALLBACK;
+  }
+}
 
 export const EMPTY_RUN_RECORDS: RunRecords = Object.freeze({
   schema: "codex-of-war.run-records.v1",
@@ -87,10 +99,18 @@ export function applyRunResult(records: RunRecords, result: RunResult): RunRecor
 }
 
 export class RunRecordStore {
-  constructor(private readonly storage: Pick<Storage, "getItem" | "setItem"> = localStorage) {}
+  private readonly storage: Pick<Storage, "getItem" | "setItem">;
+
+  constructor(storage?: Pick<Storage, "getItem" | "setItem">) {
+    this.storage = storage ?? resolveDefaultStorage();
+  }
 
   load(): RunRecords {
-    return parseRunRecords(this.storage.getItem(STORAGE_KEY));
+    try {
+      return parseRunRecords(this.storage.getItem(STORAGE_KEY));
+    } catch {
+      return { ...EMPTY_RUN_RECORDS };
+    }
   }
 
   record(result: RunResult): RunRecords {

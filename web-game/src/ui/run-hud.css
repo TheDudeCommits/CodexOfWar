@@ -327,7 +327,7 @@
   position: absolute;
   right: max(28px, env(safe-area-inset-right));
   bottom: max(24px, env(safe-area-inset-bottom));
-  width: min(334px, 36vw);
+  width: min(390px, 42vw);
   min-height: 82px;
   padding: 11px 13px 10px 19px;
   background:
@@ -384,7 +384,7 @@
   grid-template-columns: 22px minmax(0, 1fr) auto;
   align-items: center;
   gap: 6px;
-  min-width: 132px;
+  min-width: 155px;
 }
 
 .run-hud__signature-dial {

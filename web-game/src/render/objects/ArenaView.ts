@@ -159,6 +159,8 @@ export class ArenaView {
   private readonly ownedMaterials: THREE.Material[] = [];
   private readonly embers: THREE.Points;
   private readonly materials: AshwakeMaterials | null;
+  private ground: THREE.Mesh | null = null;
+  private hordeGroundExtended = false;
 
   constructor(assets: AssetRegistry, maxAnisotropy = 1) {
     const missingGeometry = SECTOR_KEYS.filter((key) => assets.instantiate(key) === null);
@@ -183,6 +185,28 @@ export class ArenaView {
     }
   }
 
+  extendGroundForHorde(): void {
+    if (this.hordeGroundExtended || !this.ground) return;
+    this.hordeGroundExtended = true;
+    const authored = this.materials !== null;
+    this.ground.geometry = this.trackGeometry(
+      new THREE.PlaneGeometry(authored ? 120 : 100, authored ? 120 : 100),
+    );
+    if (!this.materials) return;
+    const repeat = 11 * (120 / 64);
+    const textures = new Set([
+      this.materials.ground.map,
+      this.materials.ground.normalMap,
+      this.materials.ground.roughnessMap,
+      this.materials.ground.metalnessMap,
+    ]);
+    for (const texture of textures) {
+      if (!texture) continue;
+      texture.repeat.setScalar(repeat);
+      texture.needsUpdate = true;
+    }
+  }
+
   dispose(): void {
     this.materials?.dispose();
     for (const geometry of this.ownedGeometries) geometry.dispose();
@@ -203,6 +227,7 @@ export class ArenaView {
     ground.rotation.x = -Math.PI / 2;
     ground.position.set(0, -0.035, -5);
     ground.receiveShadow = true;
+    this.ground = ground;
     this.root.add(ground);
 
     const doorwayShape = new THREE.Shape();
@@ -275,6 +300,7 @@ export class ArenaView {
     ground.rotation.x = -Math.PI / 2;
     ground.position.y = -0.035;
     ground.receiveShadow = true;
+    this.ground = ground;
     this.root.add(ground);
 
     const fallbackPieces: readonly (readonly [number, number, number, number, number])[] = [

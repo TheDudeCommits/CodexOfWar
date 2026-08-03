@@ -59,4 +59,18 @@ describe("RunRecordStore", () => {
     expect(records.totalRuns).toBe(1);
     expect(records.bestScore).toBe(900);
   });
+
+  it("keeps gameplay alive when persistence reads are blocked", () => {
+    const storage = {
+      getItem: () => {
+        throw new Error("blocked");
+      },
+      setItem: () => undefined,
+    };
+    expect(new RunRecordStore(storage).load()).toEqual(EMPTY_RUN_RECORDS);
+  });
+
+  it("falls back safely when no browser storage global exists", () => {
+    expect(new RunRecordStore().load()).toEqual(EMPTY_RUN_RECORDS);
+  });
 });

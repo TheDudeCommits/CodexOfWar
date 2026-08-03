@@ -2,6 +2,9 @@ import RAPIER from "@dimforge/rapier3d-compat";
 import type { Vec2 } from "../game/simulation/types";
 
 const CHARACTER_CENTER_Y = 0.92;
+const FORT_CENTER_Z = -5.5;
+const FORT_HALF_WIDTH = 13.4;
+const FORT_HALF_DEPTH = 0.64;
 
 export interface PhysicsEnemy {
   readonly id: string | number;
@@ -24,6 +27,7 @@ export class PhysicsBridge {
   private readonly playerCollider: RAPIER.Collider;
   private readonly enemyBodies = new Map<string, EnemyBodyEntry>();
   private readonly characterController: RAPIER.KinematicCharacterController;
+  private fortCollider: RAPIER.Collider | null = null;
 
   private constructor() {
     this.world = new RAPIER.World({ x: 0, y: -9.81, z: 0 });
@@ -51,6 +55,15 @@ export class PhysicsBridge {
   static async create(): Promise<PhysicsBridge> {
     await RAPIER.init();
     return new PhysicsBridge();
+  }
+
+  enableHordeFortCollider(): void {
+    if (this.fortCollider) return;
+    this.fortCollider = this.world.createCollider(
+      RAPIER.ColliderDesc.cuboid(FORT_HALF_WIDTH, 2.8, FORT_HALF_DEPTH)
+        .setTranslation(0, 2.8, FORT_CENTER_Z)
+        .setFriction(0.9),
+    );
   }
 
   reset(player: Vec2, enemies: PhysicsEnemyInput): void {

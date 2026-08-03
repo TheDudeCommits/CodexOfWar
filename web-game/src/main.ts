@@ -9,7 +9,13 @@ import { isP30CriticScenarioRoute } from "./diagnostics/P30CriticProtocol";
 import { GameApp } from "./render/app/GameApp";
 
 const p30CriticScenario = isP30CriticScenarioRoute();
-const reviewReadyGate = p30CriticScenario ? null : installCowReviewReadyGate();
+const startupParams = new URLSearchParams(window.location.search);
+const hordeStartup =
+  !p30CriticScenario &&
+  startupParams.get("review") !== "1" &&
+  !startupParams.has("capture") &&
+  startupParams.get("mode") !== "legacy";
+const reviewReadyGate = p30CriticScenario || hordeStartup ? null : installCowReviewReadyGate();
 
 async function boot(): Promise<void> {
   const root = document.querySelector<HTMLElement>("#game-root");
@@ -23,6 +29,9 @@ async function boot(): Promise<void> {
     installP30CriticHarness(app);
     document.documentElement.dataset.gameReady = "true";
     app.start();
+  } else if (app.isHordeRunMode) {
+    app.start();
+    installCaptureHooks(app);
   } else {
     if (captureScenario) app.runCaptureScenario(captureScenario);
     else if (!reviewMode) app.start();

@@ -62,6 +62,19 @@ body {
   pointer-events: none;
 }
 
+#game-root.is-horde-mode > .hud {
+  z-index: 6;
+}
+
+#game-root.is-horde-mode > .hud > .vignette,
+#game-root.is-horde-mode > .hud > .objective-chip,
+#game-root.is-horde-mode > .hud > .enemy-status,
+#game-root.is-horde-mode > .hud > .player-status,
+#game-root.is-horde-mode > .hud > .lock-reticle,
+#game-root.is-horde-mode > .hud > .control-hint {
+  display: none;
+}
+
 .vignette {
   position: absolute;
   inset: 0;

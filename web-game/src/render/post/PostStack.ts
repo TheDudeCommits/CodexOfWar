@@ -22,8 +22,15 @@ export class PostStack {
 
   render(scene: THREE.Scene, camera: THREE.Camera): void {
     const startedAt = performance.now();
-    if (this.enabled) this.composer.render();
-    else this.renderer.render(scene, camera);
+    const previousAutoReset = this.renderer.info.autoReset;
+    this.renderer.info.autoReset = false;
+    this.renderer.info.reset();
+    try {
+      if (this.enabled) this.composer.render();
+      else this.renderer.render(scene, camera);
+    } finally {
+      this.renderer.info.autoReset = previousAutoReset;
+    }
     this.lastRenderMilliseconds = performance.now() - startedAt;
   }
 

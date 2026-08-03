@@ -1,4 +1,6 @@
 import type * as THREE from "three";
+import type { HordeGameEvent, HordeRunState } from "../../game/run";
+import type { PlayerState } from "../../game/simulation/types";
 import type { GameEvent, WorldState } from "../../game/simulation/types";
 import type { ThirdPersonCamera } from "../app/ThirdPersonCamera";
 import type { AssetRegistry } from "../loaders/AssetRegistry";
@@ -60,6 +62,20 @@ export class RenderBridge {
     this.combatFx.update(dt, state.elapsed);
   }
 
+  updateHorde(
+    player: PlayerState,
+    enemies: readonly EnemyFieldEntityState[],
+    weapon: WeaponLoadoutPresentation,
+    elapsed: number,
+    dt: number,
+  ): void {
+    this.arena.update(elapsed);
+    this.hero.update(player, elapsed);
+    this.enemyField.update(enemies, elapsed);
+    this.weaponLoadout.update(weapon);
+    this.combatFx.update(dt, elapsed);
+  }
+
   updateWeaponLoadout(state: WeaponLoadoutPresentation): void {
     this.weaponLoadout.update(state);
   }
@@ -91,6 +107,32 @@ export class RenderBridge {
         event.remainingHealth <= 0,
       );
       this.cameraController.kickShake(event.remainingHealth <= 0 ? 1.55 : 1);
+    }
+  }
+
+  handleHordeEvents(events: readonly HordeGameEvent[], state: HordeRunState): void {
+    for (const event of events) {
+      if (event.type === "enemy-hit") {
+        const enemy = state.enemies.find((candidate) => candidate.id === event.enemyId);
+        if (!enemy) continue;
+        const dx = enemy.position.x - state.player.position.x;
+        const dz = enemy.position.z - state.player.position.z;
+        const magnitude = Math.hypot(dx, dz);
+        this.combatFx.burst(
+          enemy.position.x,
+          enemy.archetype === "brute" ? 1.72 : 1.34,
+          enemy.position.z,
+          magnitude > 0.0001 ? dx / magnitude : 0,
+          magnitude > 0.0001 ? dz / magnitude : -1,
+          event.attackSerial,
+          event.remainingHealth <= 0,
+        );
+        this.cameraController.kickShake(event.remainingHealth <= 0 ? 1.55 : event.special ? 1.3 : 1);
+      } else if (event.type === "enemy-attack-hit") {
+        this.cameraController.kickShake(1.3);
+      } else if (event.type === "enemy-attack-evaded") {
+        this.cameraController.kickShake(0.35);
+      }
     }
   }
 
