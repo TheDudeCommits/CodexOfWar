@@ -6,6 +6,10 @@ import { ArenaView } from "../objects/ArenaView";
 import { CombatFx } from "../objects/CombatFx";
 import { HeroView, ZombieView } from "../objects/CharacterViews";
 import {
+  EnemyFieldView,
+  type EnemyFieldEntityState,
+} from "../objects/EnemyFieldView";
+import {
   WeaponLoadoutView,
   type WeaponLoadoutPresentation,
 } from "../objects/WeaponLoadoutView";
@@ -24,6 +28,7 @@ export class RenderBridge {
   readonly arena: ArenaView;
   readonly hero: HeroView;
   readonly zombie: ZombieView;
+  readonly enemyField: EnemyFieldView;
   readonly weaponLoadout: WeaponLoadoutView;
   readonly combatFx = new CombatFx();
 
@@ -36,8 +41,16 @@ export class RenderBridge {
     this.arena = new ArenaView(assets, maxAnisotropy);
     this.hero = new HeroView(assets);
     this.zombie = new ZombieView(assets);
+    this.enemyField = new EnemyFieldView(assets);
+    this.enemyField.root.visible = false;
     this.weaponLoadout = new WeaponLoadoutView(this.hero.root);
-    scene.add(this.arena.root, this.hero.root, this.zombie.root, this.combatFx.root);
+    scene.add(
+      this.arena.root,
+      this.hero.root,
+      this.zombie.root,
+      this.enemyField.root,
+      this.combatFx.root,
+    );
   }
 
   update(state: WorldState, dt: number): void {
@@ -49,6 +62,15 @@ export class RenderBridge {
 
   updateWeaponLoadout(state: WeaponLoadoutPresentation): void {
     this.weaponLoadout.update(state);
+  }
+
+  setEnemyFieldEnabled(enabled: boolean): void {
+    this.enemyField.root.visible = enabled;
+    this.zombie.root.visible = !enabled;
+  }
+
+  updateEnemyField(states: readonly EnemyFieldEntityState[], elapsed: number): void {
+    this.enemyField.update(states, elapsed);
   }
 
   handleEvents(events: readonly GameEvent[], state: WorldState): void {
@@ -124,6 +146,7 @@ export class RenderBridge {
       });
     }
     this.weaponLoadout.restoreGpuResources();
+    this.enemyField.restoreGpuResources();
   }
 
   dispose(): void {
@@ -131,6 +154,7 @@ export class RenderBridge {
     this.weaponLoadout.dispose();
     this.hero.dispose();
     this.zombie.dispose();
+    this.enemyField.dispose();
     this.combatFx.dispose();
   }
 }
