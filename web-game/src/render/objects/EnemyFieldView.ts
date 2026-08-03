@@ -1,7 +1,11 @@
 import * as THREE from "three";
 import type { EnemyState } from "../../game/simulation/types";
 import type { AssetRegistry } from "../loaders/AssetRegistry";
-import { ZombieView } from "./CharacterViews";
+import {
+  ZombieView,
+  type EnemyAuthoredAttackPhase,
+  type EnemyAuthoredAttackPresentation,
+} from "./CharacterViews";
 
 export type EnemyArchetype = "shambler" | "stalker" | "brute";
 export type EnemyFieldPhase = "spawning" | "active" | "dying";
@@ -28,6 +32,9 @@ export interface EnemyFieldEntityState {
   readonly telegraph01: number;
   readonly alive: boolean;
   readonly hitPulse01: number;
+  readonly attackPhase: EnemyAuthoredAttackPhase;
+  readonly attackProgress01: number;
+  readonly contactProgress01: number;
 }
 
 export interface EnemyArchetypeStyle {
@@ -82,7 +89,11 @@ export const ENEMY_ARCHETYPE_STYLES: Readonly<
 
 export interface EnemyAvatarView {
   readonly root: THREE.Group;
-  update(state: EnemyState, elapsed: number): void;
+  update(
+    state: EnemyState,
+    elapsed: number,
+    attack?: EnemyAuthoredAttackPresentation,
+  ): void;
   dispose(): void;
 }
 
@@ -169,6 +180,14 @@ const DEATH_SECONDS = 0.62;
 const RETIRE_SECONDS = 0.48;
 const GROUND_Y = 0.032;
 
+export interface EnemyAttackPoseSample {
+  readonly phase: EnemyAuthoredAttackPhase;
+  readonly contactWeight: number;
+  readonly bodyPosition: readonly [number, number, number];
+  readonly bodyRotation: readonly [number, number, number];
+  readonly bodyScale: readonly [number, number, number];
+}
+
 function clamp01(value: number): number {
   return Math.max(0, Math.min(1, Number.isFinite(value) ? value : 0));
 }
@@ -176,6 +195,52 @@ function clamp01(value: number): number {
 function smootherStep(value: number): number {
   const t = clamp01(value);
   return t * t * t * (t * (t * 6 - 15) + 10);
+}
+
+function contactEnvelope(progress: number, contact: number): number {
+  const width = 0.22;
+  return 1 - clamp01(Math.abs(progress - contact) / width);
+}
+
+/** Distinct full-avatar silhouettes layered over the compatible native clip. */
+export function sampleEnemyAttackPose(
+  archetype: EnemyArchetype,
+  phase: EnemyAuthoredAttackPhase,
+  progress01: number,
+  contactProgress01: number,
+): EnemyAttackPoseSample {
+  const progress = clamp01(progress01);
+  const contact = clamp01(contactProgress01);
+  const anticipation = phase === "anticipation" ? smootherStep(progress) : 0;
+  const committed = phase === "committed" ? contactEnvelope(progress, contact) : 0;
+  const recovery = phase === "recovery" ? 1 - smootherStep(progress) : 0;
+  const force = Math.max(committed, recovery * 0.7);
+
+  if (archetype === "stalker") {
+    return {
+      phase,
+      contactWeight: committed,
+      bodyPosition: [0, -0.28 * anticipation + 0.2 * committed, -0.92 * force],
+      bodyRotation: [-0.5 * anticipation + 0.82 * force, 0, 0.08 * force],
+      bodyScale: [1 + 0.08 * committed, 1 - 0.18 * anticipation + 0.08 * committed, 1.08],
+    };
+  }
+  if (archetype === "brute") {
+    return {
+      phase,
+      contactWeight: committed,
+      bodyPosition: [0, 0.12 * anticipation - 0.2 * committed, -0.34 * force],
+      bodyRotation: [0.24 * anticipation - 0.74 * force, 0, -0.04 * force],
+      bodyScale: [1 + 0.06 * anticipation, 1 + 0.08 * anticipation - 0.12 * committed, 1.05],
+    };
+  }
+  return {
+    phase,
+    contactWeight: committed,
+    bodyPosition: [0, -0.1 * anticipation, -0.48 * force],
+    bodyRotation: [0.28 * anticipation - 0.5 * force, 0, 0.11 * force],
+    bodyScale: [1, 1 - 0.08 * anticipation, 1 + 0.04 * committed],
+  };
 }
 
 function stablePhase(id: string): number {
@@ -525,6 +590,11 @@ export class EnemyFieldView {
       : state.motion === "hit" || hitPulse > 0.02
         ? "hit"
         : "idle";
+    const attackPresentation: EnemyAuthoredAttackPresentation = {
+      phase: state.attackPhase,
+      progress01: state.attackProgress01,
+      contactProgress01: state.contactProgress01,
+    };
     slot.avatar.update(
       {
         position: { x: 0, z: 0 },
@@ -536,23 +606,35 @@ export class EnemyFieldView {
         idlePhase: slot.phaseOffset,
       },
       elapsed,
+      attackPresentation,
     );
 
     const tempo = elapsed * style.tempo * Math.PI * 2 + slot.phaseOffset;
     const movement = state.motion === "move" ? 1 : state.motion === "attack" ? 0.72 : 0.3;
     const breathe = Math.sin(tempo) * 0.018 * movement;
-    const attackLean = state.motion === "attack" ? -0.14 * clamp01(state.telegraph01) : 0;
+    const attackPose = sampleEnemyAttackPose(
+      slot.archetype,
+      state.attackPhase,
+      state.attackProgress01,
+      state.contactProgress01,
+    );
     const spawnScale = 0.78 + spawn01 * 0.22;
     const deathScale = 1 - death01 * 0.08;
     slot.body.scale.set(
-      style.bodyScale[0] * spawnScale * deathScale,
-      style.bodyScale[1] * (0.9 + spawn01 * 0.1) * deathScale * (1 - hitPulse * 0.045),
-      style.bodyScale[2] * spawnScale * deathScale * (1 + hitPulse * 0.06),
+      style.bodyScale[0] * attackPose.bodyScale[0] * spawnScale * deathScale,
+      style.bodyScale[1] * attackPose.bodyScale[1] * (0.9 + spawn01 * 0.1) * deathScale * (1 - hitPulse * 0.045),
+      style.bodyScale[2] * attackPose.bodyScale[2] * spawnScale * deathScale * (1 + hitPulse * 0.06),
     );
-    slot.body.position.set(0, breathe - death01 * 0.13 - hitPulse * 0.07, hitPulse * 0.16);
-    slot.body.rotation.x = attackLean + hitPulse * 0.22;
+    slot.body.position.set(
+      attackPose.bodyPosition[0],
+      breathe - death01 * 0.13 - hitPulse * 0.07 + attackPose.bodyPosition[1],
+      hitPulse * 0.16 + attackPose.bodyPosition[2],
+    );
+    slot.body.rotation.x = attackPose.bodyRotation[0] + hitPulse * 0.22;
+    slot.body.rotation.y = attackPose.bodyRotation[1];
     slot.body.rotation.z =
       style.postureLean +
+      attackPose.bodyRotation[2] +
       Math.sin(tempo * 0.5) * 0.012 +
       Math.sign(Math.sin(slot.phaseOffset) || 1) * hitPulse * 0.12;
 

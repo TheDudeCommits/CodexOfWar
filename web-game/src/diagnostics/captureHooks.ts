@@ -15,6 +15,8 @@ export interface GauntletHarness {
   getSnapshot: () => WorldState | HordeRunState;
   getHordeSnapshot: () => HordeRunState;
   getEnemyFieldSnapshot: () => EnemyFieldSnapshot;
+  getCameraTelemetry: () => ReturnType<GameApp["getCameraTelemetry"]>;
+  getInputCaptureTelemetry: () => ReturnType<GameApp["getInputCaptureTelemetry"]>;
   getMetrics: () => RuntimeMetrics;
   stepFrames: (frames: number, input?: Partial<InputFrame>) => WorldState;
   runScenario: (name: "overview" | "combat" | "victory" | "judge") => WorldState;
@@ -47,6 +49,8 @@ export function installCaptureHooks(app: GameApp): GauntletHarness {
     getSnapshot: () => app.isHordeRunMode ? app.getHordeSnapshot() : app.getSnapshot(),
     getHordeSnapshot: () => app.getHordeSnapshot(),
     getEnemyFieldSnapshot: () => app.getEnemyFieldSnapshot(),
+    getCameraTelemetry: () => app.getCameraTelemetry(),
+    getInputCaptureTelemetry: () => app.getInputCaptureTelemetry(),
     getMetrics: () => app.getMetrics(),
     stepFrames: (frames, input = {}) => {
       requireLegacyCapture();

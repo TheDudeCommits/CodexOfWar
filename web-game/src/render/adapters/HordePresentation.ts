@@ -1,5 +1,6 @@
 import {
   HORDE_FIXED_TIMESTEP,
+  HORDE_ENEMIES,
   HORDE_UPGRADES,
   HORDE_WEAPON_BY_SLOT,
   HORDE_WEAPONS,
@@ -62,6 +63,15 @@ export function toLegacyPlayerState(state: HordeRunState): PlayerState {
 
 export function toEnemyFieldEntity(enemy: HordeEnemyState): EnemyFieldEntityState {
   const dead = enemy.phase === "dead" || enemy.health <= 0;
+  const attackPhase: EnemyFieldEntityState["attackPhase"] =
+    enemy.phase === "windup"
+      ? "anticipation"
+      : enemy.phase === "attack"
+        ? "committed"
+        : enemy.phase === "recover"
+          ? "recovery"
+          : "none";
+  const definition = HORDE_ENEMIES[enemy.archetype];
   const motion: EnemyFieldEntityState["motion"] = dead
     ? "dead"
     : enemy.phase === "hit"
@@ -86,6 +96,9 @@ export function toEnemyFieldEntity(enemy: HordeEnemyState): EnemyFieldEntityStat
       enemy.phase === "hit" && enemy.phaseDurationTicks > 0
         ? 1 - enemy.phaseProgress01
         : 0,
+    attackPhase,
+    attackProgress01: attackPhase === "none" ? 0 : enemy.phaseProgress01,
+    contactProgress01: definition.hitTick / definition.attackTicks,
   };
 }
 
@@ -185,7 +198,7 @@ export function toRunHudModel(
     : state.enemies.find((enemy) => enemy.id === player.lockedTargetId && enemy.health > 0);
   const objective = state.phase === "combat"
     ? awaitingEngagement
-      ? "Move, lock, or strike to begin the horde."
+      ? "Click the arena and move the mouse, or drag, to aim. WASD follows the camera."
       : "Purge the horde. Read the rings. Dodge on impact."
     : state.phase === "upgrade"
       ? "Choose one awakening for the next wave."
@@ -226,6 +239,7 @@ export function toRunHudModel(
       : {}),
     events,
     firstUseControls: [
+      { id: "camera", input: "MOUSE / DRAG", action: "AIM" },
       { id: "move", input: "WASD", action: "MOVE" },
       { id: "strike", input: "LMB / J", action: "STRIKE" },
       { id: "dodge", input: "SPACE", action: "DODGE" },

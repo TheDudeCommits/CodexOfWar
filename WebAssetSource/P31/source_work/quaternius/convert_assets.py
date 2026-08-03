@@ -25,6 +25,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--output", required=True)
     parser.add_argument("--keep-actions", default="")
     parser.add_argument("--strip-animation-preview-objects", action="store_true")
+    parser.add_argument(
+        "--animation-carrier",
+        action="store_true",
+        help="Strip meshes/materials/images and retain only the named rig actions.",
+    )
     parser.add_argument("--target-longest-dimension", type=float)
     return parser.parse_args(argv)
 
@@ -60,6 +65,19 @@ def strip_animation_preview_objects() -> None:
             if is_skinned:
                 continue
         bpy.data.objects.remove(obj, do_unlink=True)
+
+
+def strip_to_animation_carrier() -> None:
+    """Keep the armature hierarchy/actions without shipping preview geometry."""
+    for obj in list(bpy.data.objects):
+        if obj.type != "ARMATURE":
+            bpy.data.objects.remove(obj, do_unlink=True)
+    for datablock in list(bpy.data.meshes):
+        bpy.data.meshes.remove(datablock)
+    for datablock in list(bpy.data.materials):
+        bpy.data.materials.remove(datablock)
+    for datablock in list(bpy.data.images):
+        bpy.data.images.remove(datablock)
 
 
 def normalize_longest_dimension(target: float) -> None:
@@ -146,6 +164,8 @@ def main() -> None:
         filter_actions(keep)
     if args.strip_animation_preview_objects:
         strip_animation_preview_objects()
+    if args.animation_carrier:
+        strip_to_animation_carrier()
     if args.target_longest_dimension is not None:
         normalize_longest_dimension(args.target_longest_dimension)
 

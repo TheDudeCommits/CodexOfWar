@@ -11,6 +11,11 @@ const CAMERA_DAMPING = 13.5;
 const TARGET_YAW_DAMPING = 16;
 const TARGET_FOCUS_Y = 1.53;
 const SHAKE_FREQUENCY = 58;
+export const CAMERA_YAW_SENSITIVITY = 0.0023;
+export const CAMERA_PITCH_SENSITIVITY = 0.00175;
+export const CAMERA_MIN_PITCH = 0.08;
+export const CAMERA_MAX_PITCH = 0.52;
+const CAMERA_MAX_LOOK_DELTA_PIXELS = 180;
 
 export interface PlanarBasis {
   forward: Vec2;
@@ -188,10 +193,7 @@ export class ThirdPersonCamera {
       this.yaw = snap
         ? targetYaw
         : approachAngle(this.yaw, targetYaw, 1 - Math.exp(-frameDt * TARGET_YAW_DAMPING));
-    } else {
-      this.yaw -= lookX * 0.0023;
-      this.pitch = clamp(this.pitch - lookY * 0.00175, -0.08, 0.52);
-    }
+    } else this.applyLook(lookX, lookY);
 
     this.composition = this.composeDuel(targetSeparation);
     const forward = yawToForward(this.yaw);
@@ -212,10 +214,11 @@ export class ThirdPersonCamera {
     }
 
     const lateral = this.composition.shoulderOffset;
-    const lift = this.composition.verticalLift;
-    const back = Math.sqrt(
-      Math.max(0, this.composition.desiredDistance ** 2 - lateral ** 2 - lift ** 2),
+    const axialBoom = Math.sqrt(
+      Math.max(0, this.composition.desiredDistance ** 2 - lateral ** 2),
     );
+    const back = Math.cos(this.pitch) * axialBoom;
+    const lift = Math.sin(this.pitch) * axialBoom;
     this.composedPosition.set(
       this.targetFocus.x - forward.x * back + right.x * lateral,
       this.targetFocus.y + lift,
@@ -227,15 +230,28 @@ export class ThirdPersonCamera {
     this.desiredPosition.lerp(this.composedPosition, smoothing);
     this.resolveBoom();
 
-    const horizontalBoom = Math.hypot(
-      this.resolvedPosition.x - this.focus.x,
-      this.resolvedPosition.z - this.focus.z,
-    );
-    this.pitch = Math.atan2(this.resolvedPosition.y - this.focus.y, horizontalBoom);
     this.updateShake(frameDt);
     this.camera.position.copy(this.resolvedPosition).add(this.shakeOffset);
     this.camera.lookAt(this.focus);
     this.camera.updateMatrixWorld(true);
+  }
+
+  /**
+   * Applies raw browser movement before gameplay maps camera-relative movement
+   * and facing. Positive X turns toward world +X; positive Y pitches downward.
+   */
+  applyLook(lookX: number, lookY: number): void {
+    const boundedX = clamp(lookX, -CAMERA_MAX_LOOK_DELTA_PIXELS, CAMERA_MAX_LOOK_DELTA_PIXELS);
+    const boundedY = clamp(lookY, -CAMERA_MAX_LOOK_DELTA_PIXELS, CAMERA_MAX_LOOK_DELTA_PIXELS);
+    this.yaw = Math.atan2(
+      Math.sin(this.yaw + boundedX * CAMERA_YAW_SENSITIVITY),
+      Math.cos(this.yaw + boundedX * CAMERA_YAW_SENSITIVITY),
+    );
+    this.pitch = clamp(
+      this.pitch + boundedY * CAMERA_PITCH_SENSITIVITY,
+      CAMERA_MIN_PITCH,
+      CAMERA_MAX_PITCH,
+    );
   }
 
   getPlanarBasis(): PlanarBasis {

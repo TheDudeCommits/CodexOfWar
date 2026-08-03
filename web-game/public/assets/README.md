@@ -9,6 +9,9 @@ The playable build uses the enabled CC0 Round003 presentation set in `manifest.j
 - The six Ashwake environment GLBs are ordinary, texture-free, one-mesh/one-material files selected and validated with Blender 5.2.0 LTS; no Draco, Meshopt, or KTX2 extension is required.
 - The ground and fort-sector material triplets are ordinary 1024×1024 WebP. Diffuse is sRGB; normal and packed ORM are linear.
 - Keep animation carriers loaded with their `AnimationClip` arrays; clone visible skinned scenes through `SkeletonUtils`.
+- The P32 `enemy_attacks.glb` carrier is the meshless, one-clip Quaternius
+  `Idle_Attack` source for Hollow's exact 50-joint schema; its receipt is
+  `WebAssetSource/P31/source_work/p32_enemy_animation/receipt.json`.
 - Load the snowy-forest HDR through `RGBELoader` and PMREM. Diffuse maps are sRGB; normal and ARM maps are linear.
 
 The runtime payload is a selective copy from `WebAssetSource/P31/processed/`. Full publisher provenance and hashes remain in `WebAssetSource/P31/THIRD_PARTY_ASSETS.md` and `WebAssetSource/P31/ASSET_RECEIPT.json`; no raw archive or conversion cache is shipped here.

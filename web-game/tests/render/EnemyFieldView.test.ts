@@ -5,15 +5,24 @@ import type { AssetRegistry } from "../../src/render/loaders/AssetRegistry";
 import {
   ENEMY_ARCHETYPE_STYLES,
   EnemyFieldView,
+  sampleEnemyAttackPose,
   type EnemyAvatarView,
   type EnemyFieldEntityState,
 } from "../../src/render/objects/EnemyFieldView";
+import {
+  sampleEnemyAttackClipTime01,
+  type EnemyAuthoredAttackPresentation,
+} from "../../src/render/objects/CharacterViews";
 
 const EMPTY_ASSETS = {} as AssetRegistry;
 
 class FakeZombieView implements EnemyAvatarView {
   readonly root = new THREE.Group();
-  readonly updates: Array<{ state: EnemyState; elapsed: number }> = [];
+  readonly updates: Array<{
+    state: EnemyState;
+    elapsed: number;
+    attack?: EnemyAuthoredAttackPresentation;
+  }> = [];
   disposeCalls = 0;
 
   constructor(
@@ -25,8 +34,12 @@ class FakeZombieView implements EnemyAvatarView {
     this.root.add(mesh);
   }
 
-  update(state: EnemyState, elapsed: number): void {
-    this.updates.push({ state, elapsed });
+  update(
+    state: EnemyState,
+    elapsed: number,
+    attack?: EnemyAuthoredAttackPresentation,
+  ): void {
+    this.updates.push({ state, elapsed, attack });
   }
 
   dispose(): void {
@@ -87,6 +100,9 @@ function enemy(
     telegraph01: 0,
     alive: true,
     hitPulse01: 0,
+    attackPhase: "none",
+    attackProgress01: 0,
+    contactProgress01: 1 / 3,
     ...overrides,
   };
 }
@@ -104,6 +120,67 @@ function namedVisibility(root: THREE.Object3D, name: string): boolean {
 }
 
 describe("EnemyFieldView horde presentation", () => {
+  it("maps the native full-body clip monotonically through anticipation, contact, and recovery", () => {
+    expect(sampleEnemyAttackClipTime01({
+      phase: "anticipation",
+      progress01: 1,
+      contactProgress01: 1 / 3,
+    })).toBeCloseTo(0.28, 8);
+    expect(sampleEnemyAttackClipTime01({
+      phase: "committed",
+      progress01: 1 / 3,
+      contactProgress01: 1 / 3,
+    })).toBeCloseTo(0.58, 8);
+    expect(sampleEnemyAttackClipTime01({
+      phase: "recovery",
+      progress01: 0,
+      contactProgress01: 1 / 3,
+    })).toBeCloseTo(0.78, 8);
+  });
+
+  it("gives bite, pounce, and slam distinct contact silhouettes at the exact hit beat", () => {
+    const contacts = [
+      ["shambler", 3 / 9],
+      ["stalker", 6 / 13],
+      ["brute", 5 / 12],
+    ] as const;
+    const signatures = new Set<string>();
+    for (const [archetype, contact] of contacts) {
+      const anticipation = sampleEnemyAttackPose(archetype, "anticipation", 1, contact);
+      const strike = sampleEnemyAttackPose(archetype, "committed", contact, contact);
+      const recovery = sampleEnemyAttackPose(archetype, "recovery", 0.5, contact);
+      expect(strike.contactWeight).toBe(1);
+      expect(strike).not.toEqual(anticipation);
+      expect(recovery).not.toEqual(strike);
+      signatures.add(JSON.stringify(strike));
+    }
+    expect(signatures.size).toBe(3);
+  });
+
+  it("passes phase and exact contact timing to the avatar while retaining hit reaction", () => {
+    const fixture = createFixture();
+    fixture.field.update([enemy("attacker", {
+      archetype: "stalker",
+      motion: "attack",
+      attackPhase: "committed",
+      attackProgress01: 6 / 13,
+      contactProgress01: 6 / 13,
+    })], 0.5);
+    expect(fixture.avatars[0]!.updates.at(-1)!.attack).toEqual({
+      phase: "committed",
+      progress01: 6 / 13,
+      contactProgress01: 6 / 13,
+    });
+    fixture.field.update([enemy("attacker", {
+      archetype: "stalker",
+      motion: "hit",
+      hitPulse01: 1,
+    })], 0.6);
+    expect(fixture.avatars[0]!.updates.at(-1)!.state.motion).toBe("hit");
+    fixture.field.dispose();
+    fixture.disposeSources();
+  });
+
   it("keeps the three archetype silhouettes and combat cues measurably distinct", () => {
     expect(ENEMY_ARCHETYPE_STYLES.shambler.accessory).toBe("none");
     expect(ENEMY_ARCHETYPE_STYLES.stalker.accessory).toBe("vanes");

@@ -1,0 +1,68 @@
+{
+  "schema": "gauntlet.p32-enemy-animation.v1",
+  "status": "pass",
+  "publisher": "Quaternius",
+  "license": "CC0-1.0",
+  "official_page": "https://quaternius.com/packs/zombieapocalypsekit.html",
+  "acquisition": "Reused P31 publisher asset; no reacquisition in P32",
+  "source": {
+    "path": "WebAssetSource/P31/processed/quaternius/models/zombie_basic.glb",
+    "bytes": 582868,
+    "sha256": "f199c9bdea193312fae5e13e045d4677e6b68bced027178252e8de61c33d5ac4",
+    "publisher_clip": "Idle_Attack",
+    "publisher_clip_duration_seconds": 1.6666666666666667
+  },
+  "target_rig": {
+    "path": "web-game/public/assets/models/ashwake/hollow.glb",
+    "bytes": 1448388,
+    "sha256": "f53a481f118c48dff825b8f98427957e6201434848416ff265f22eb2b07e689d",
+    "ordered_joint_count": 50,
+    "ordered_joint_names_match_source": true,
+    "ordered_joint_json_sha256": "d08ded08271c25037468eced1f8694fa7196df0636d4ee447ae45dd3f88fe62c"
+  },
+  "output": {
+    "path": "WebAssetSource/P31/processed/quaternius/animations/enemy_attacks.glb",
+    "runtime_path": "web-game/public/assets/animations/quaternius/enemy_attacks.glb",
+    "runtime_copy_byte_identical": true,
+    "bytes": 77428,
+    "sha256": "e7efa1a952b1cac8a5b64b4eca5c40432256dffdc8b597afd4dd91654defdc90",
+    "glb_version": 2,
+    "animations": ["Idle_Attack"],
+    "animation_channels": 150,
+    "armatures": 1,
+    "joints": 50,
+    "source_meshes_retained": 0,
+    "materials": 0,
+    "images": 0,
+    "external_uris": [],
+    "extensions_used": []
+  },
+  "conversion": {
+    "tool": "Blender 5.2.0 LTS",
+    "script": "WebAssetSource/P31/source_work/quaternius/convert_assets.py",
+    "selection": "Idle_Attack only",
+    "transform": "Preserved source armature hierarchy; removed meshes, materials, images, cameras, and lights; ordinary self-contained GLB"
+  },
+  "runtime_curation": {
+    "shambler": "bite silhouette",
+    "stalker": "pounce silhouette",
+    "brute": "slam silhouette",
+    "authorship_claim": "The three identities are project-authored view-only curation over Quaternius Idle_Attack, not three publisher clip identities",
+    "contact_progress": {
+      "shambler": "3/9",
+      "stalker": "6/13",
+      "brute": "5/12"
+    },
+    "simulation_mechanics_changed": false
+  },
+  "validation": {
+    "direct_glb_header": "pass",
+    "self_contained": "pass",
+    "blender_clean_reimport": "pass",
+    "blender_reimport_actions": ["Idle_Attack"],
+    "blender_reimport_bones": 50,
+    "typecheck": "pass",
+    "focused_tests": "pass",
+    "production_build": "pass"
+  }
+}

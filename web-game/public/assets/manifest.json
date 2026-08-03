@@ -42,6 +42,13 @@
       "compression": "none",
       "scale": 1
     },
+    "animation.enemy-combat": {
+      "type": "glb",
+      "url": "/assets/animations/quaternius/enemy_attacks.glb",
+      "enabled": true,
+      "compression": "none",
+      "scale": 1
+    },
     "environment.ashwake-arena": {
       "type": "glb",
       "url": "/assets/environment/ashwake/geometry/fort_buttress.glb",

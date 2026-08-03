@@ -2,7 +2,42 @@ import * as THREE from "three";
 import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer.js";
 import { OutputPass } from "three/examples/jsm/postprocessing/OutputPass.js";
 import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass.js";
+import { ShaderPass } from "three/examples/jsm/postprocessing/ShaderPass.js";
 import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass.js";
+
+const ASHWAKE_GRADE = {
+  uniforms: {
+    tDiffuse: { value: null },
+    contrast: { value: 1.075 },
+    saturation: { value: 1.08 },
+    vignetteStrength: { value: 0.22 },
+  },
+  vertexShader: /* glsl */ `
+    varying vec2 vUv;
+    void main() {
+      vUv = uv;
+      gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+    }
+  `,
+  fragmentShader: /* glsl */ `
+    uniform sampler2D tDiffuse;
+    uniform float contrast;
+    uniform float saturation;
+    uniform float vignetteStrength;
+    varying vec2 vUv;
+
+    void main() {
+      vec4 source = texture2D(tDiffuse, vUv);
+      vec3 color = (source.rgb - 0.5) * contrast + 0.5;
+      float luminance = dot(color, vec3(0.2126, 0.7152, 0.0722));
+      color = mix(vec3(luminance), color, saturation);
+      color *= vec3(1.025, 1.0, 0.965);
+      float edge = smoothstep(0.32, 0.78, distance(vUv, vec2(0.5)));
+      color *= 1.0 - edge * vignetteStrength;
+      gl_FragColor = vec4(max(color, vec3(0.0)), source.a);
+    }
+  `,
+};
 
 export class PostStack {
   enabled: boolean;
@@ -58,8 +93,9 @@ export class PostStack {
     const composer = new EffectComposer(this.renderer);
     composer.addPass(new RenderPass(this.scene, this.camera));
     composer.addPass(
-      new UnrealBloomPass(new THREE.Vector2(1, 1), 0.32, 0.52, 0.82),
+      new UnrealBloomPass(new THREE.Vector2(1, 1), 0.28, 0.48, 0.86),
     );
+    composer.addPass(new ShaderPass(ASHWAKE_GRADE));
     composer.addPass(new OutputPass());
     return composer;
   }

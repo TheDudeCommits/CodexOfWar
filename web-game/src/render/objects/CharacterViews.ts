@@ -1145,6 +1145,43 @@ interface FlashMaterial {
   intensity: number;
 }
 
+export type EnemyAuthoredAttackPhase =
+  | "none"
+  | "anticipation"
+  | "committed"
+  | "recovery";
+
+/**
+ * View-only sampling data derived from the authoritative horde enemy phase.
+ * `contactProgress01` is the exact simulation hit tick within the committed
+ * phase, so the authored motion can visibly arrive on the damage beat.
+ */
+export interface EnemyAuthoredAttackPresentation {
+  readonly phase: EnemyAuthoredAttackPhase;
+  readonly progress01: number;
+  readonly contactProgress01: number;
+}
+
+export function sampleEnemyAttackClipTime01(
+  presentation: EnemyAuthoredAttackPresentation,
+): number {
+  const progress = clamp(presentation.progress01, 0, 1);
+  switch (presentation.phase) {
+    case "anticipation":
+      return 0.04 + progress * 0.24;
+    case "committed": {
+      const contact = clamp(presentation.contactProgress01, 0.05, 0.95);
+      return progress <= contact
+        ? 0.28 + (progress / contact) * 0.3
+        : 0.58 + ((progress - contact) / (1 - contact)) * 0.2;
+    }
+    case "recovery":
+      return 0.78 + progress * 0.215;
+    case "none":
+      return 0;
+  }
+}
+
 export class ZombieView {
   readonly root = new THREE.Group();
   readonly usingFallback: boolean;
@@ -1192,15 +1229,17 @@ export class ZombieView {
 
   constructor(assets: AssetRegistry) {
     const zombie = assets.instantiateWithAnimations("character.hollow");
-    const required = ["Idle", "HitReact", "Death"];
-    const available = new Set(zombie?.animations.map((clip) => clip.name) ?? []);
+    const attackClips = assets.getAnimations("animation.enemy-combat");
+    const clips = [...(zombie?.animations ?? []), ...attackClips];
+    const required = ["Idle", "Idle_Attack", "HitReact", "Death"];
+    const available = new Set(clips.map((clip) => clip.name));
     const missingClips = required.filter((name) => !available.has(name));
     const missing: string[] = [];
     if (!zombie) missing.push("character.hollow");
     if (missingClips.length > 0) missing.push(`clips:${missingClips.join("|")}`);
     this.usingFallback = missing.length > 0;
     this.fallbackReason = missing.length > 0 ? `missing ${missing.join(", ")}` : null;
-    this.animationNames = zombie?.animations.map((clip) => clip.name).sort() ?? [];
+    this.animationNames = clips.map((clip) => clip.name).sort();
 
     const blob = shadowBlob(0.76, 0.38);
     this.shadow = blob.mesh;
@@ -1237,7 +1276,7 @@ export class ZombieView {
         }
       });
       this.visual.add(zombie.scene);
-      this.animator = new DeterministicAnimator(zombie.scene, zombie.animations);
+      this.animator = new DeterministicAnimator(zombie.scene, clips);
       this.poseBones.hips = zombie.scene.getObjectByName("Hips") ?? null;
       this.poseBones.abdomen = zombie.scene.getObjectByName("Abdomen") ?? null;
       this.poseBones.torso = zombie.scene.getObjectByName("Torso") ?? null;
@@ -1256,7 +1295,11 @@ export class ZombieView {
     }
   }
 
-  update(state: EnemyState, elapsed: number): void {
+  update(
+    state: EnemyState,
+    elapsed: number,
+    attack?: EnemyAuthoredAttackPresentation,
+  ): void {
     this.root.position.set(state.position.x, 0, state.position.z);
     this.root.rotation.y = -state.yaw;
 
@@ -1295,6 +1338,27 @@ export class ZombieView {
       }
       this.applyCombatPose(this.latestPose);
       this.applyHitFlash(hit01);
+      this.updatePoseAudit();
+      return;
+    }
+
+    if (attack && attack.phase !== "none") {
+      setTransform(this.visual, this.latestPose.model);
+      this.syncShadow(this.latestPose.model);
+      if (this.animator) {
+        const duration = this.animator.getDuration("Idle_Attack");
+        this.animator.setTime(
+          "Idle_Attack",
+          sampleEnemyAttackClipTime01(attack) * duration,
+          false,
+        );
+        this.captureAuthoredPose();
+      } else {
+        const strike = Math.sin(sampleEnemyAttackClipTime01(attack) * Math.PI);
+        this.visual.rotation.x = -0.34 * strike;
+        this.visual.position.z = -0.28 * strike;
+      }
+      this.applyHitFlash(0);
       this.updatePoseAudit();
       return;
     }

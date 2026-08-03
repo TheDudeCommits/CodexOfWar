@@ -153,7 +153,7 @@ const INTEGER_FORMATTER = new Intl.NumberFormat("en-US", {
 });
 
 const MAX_VISIBLE_EVENTS = 4;
-const MAX_VISIBLE_CONTROLS = 5;
+const MAX_VISIBLE_CONTROLS = 6;
 
 export function deriveRunHudViewModel(model: RunHudModel): RunHudViewModel {
   assertThreeItems(model.quickSlots, "RunHudModel.quickSlots");

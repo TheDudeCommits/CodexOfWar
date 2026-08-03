@@ -1,8 +1,16 @@
 import * as THREE from "three";
+import { GameAudio } from "../../audio/GameAudio";
+import {
+  collectHordeAudioCues,
+  collectLegacyAudioCues,
+} from "../../audio/GameplayAudioCues";
 import { PerfDiagnostics, type RuntimeMetrics } from "../../diagnostics/PerfDiagnostics";
 import { isP30CriticScenarioRoute } from "../../diagnostics/P30CriticProtocol";
 import { getCombatPoseBeatTelemetry } from "../objects/CharacterViews";
-import { InputController } from "../../game/input/InputController";
+import {
+  InputController,
+  type LookCaptureTelemetry,
+} from "../../game/input/InputController";
 import type { InputSnapshot } from "../../game/input/actions";
 import { RunRecordStore } from "../../game/persistence/RunRecordStore";
 import {
@@ -20,6 +28,7 @@ import { directionToYaw, normalized } from "../../game/simulation/math";
 import type { GameEvent, InputFrame, WorldState } from "../../game/simulation/types";
 import { PhysicsBridge } from "../../physics/PhysicsBridge";
 import { Hud } from "../../ui/Hud";
+import { AudioSettings } from "../../ui/AudioSettings";
 import { RunHud, type RunHudEvent } from "../../ui/RunHud";
 import type { EnemyFieldSnapshot } from "../objects/EnemyFieldView";
 import { RenderBridge, type PresentationAssetReceipt } from "../adapters/RenderBridge";
@@ -87,6 +96,8 @@ export class GameApp {
   private readonly input = new InputController();
   private readonly cameraController = new ThirdPersonCamera();
   private readonly diagnostics = new PerfDiagnostics();
+  private readonly audio: GameAudio;
+  private readonly audioSettings: AudioSettings;
   private readonly assetRegistry: AssetRegistry;
   private readonly lighting: SceneLighting;
   private readonly renderer: THREE.WebGLRenderer;
@@ -198,6 +209,9 @@ export class GameApp {
       },
     );
     this.contextLossExtension = this.renderer.getContext().getExtension("WEBGL_lose_context");
+    this.audio = new GameAudio();
+    this.audio.attachGestureUnlock(window);
+    this.audioSettings = new AudioSettings(host, this.audio);
     const environment = assetRegistry.createEnvironmentMap(
       "environment.snowy-forest",
       this.renderer,
@@ -250,7 +264,10 @@ export class GameApp {
             this.pendingHordeEdges.restart = true;
           },
           onInputGateChange: (gated) => {
-            if (gated) this.clearPendingHordeEdges();
+            if (gated) {
+              this.clearPendingHordeEdges();
+              this.input.suspendLookCapture();
+            }
           },
         },
         { listenForKeyboard: false },
@@ -287,12 +304,14 @@ export class GameApp {
   start(): void {
     if (this.running) return;
     this.running = true;
+    this.audio.setPaused(this.hordeMode ? this.hordePaused : this.simulationPaused);
     this.lastTimestamp = performance.now();
     this.renderer.setAnimationLoop(this.frame);
   }
 
   pause(): void {
     this.running = false;
+    this.audio.setPaused(true);
     this.renderer.setAnimationLoop(null);
   }
 
@@ -309,6 +328,7 @@ export class GameApp {
     this.p30AwaitingInput = false;
     this.p30ScenarioActive = false;
     this.runtimeCapturePaused = false;
+    this.audio.setPaused(!this.running || this.simulationPaused);
     this.pendingEdges.attack = false;
     this.pendingEdges.attackSource = null;
     this.pendingEdges.dodge = false;
@@ -359,6 +379,7 @@ export class GameApp {
     // production input controller; no scenario action is injected here.
     this.p30AwaitingInput = true;
     this.simulationPaused = true;
+    this.audio.setPaused(true);
     this.renderOnce(true);
   }
 
@@ -370,6 +391,7 @@ export class GameApp {
     if (!this.runtimeCapturePaused) return;
     this.runtimeCapturePaused = false;
     this.simulationPaused = false;
+    this.audio.setPaused(false);
     this.clock.reset();
     this.lastTimestamp = performance.now();
   }
@@ -396,6 +418,7 @@ export class GameApp {
 
   setReviewPaused(paused: boolean): void {
     this.simulationPaused = paused;
+    this.audio.setPaused(paused);
     if (paused && document.pointerLockElement) void document.exitPointerLock();
   }
 
@@ -499,6 +522,10 @@ export class GameApp {
 
   getCameraTelemetry(): CameraTelemetry {
     return this.cameraController.getTelemetry();
+  }
+
+  getInputCaptureTelemetry(): LookCaptureTelemetry {
+    return this.input.getLookCaptureTelemetry();
   }
 
   getCameraFramingTelemetry(): CameraFramingTelemetry {
@@ -644,6 +671,8 @@ export class GameApp {
     this.physics.dispose();
     this.renderer.dispose();
     this.runHud?.dispose();
+    this.audioSettings.dispose();
+    this.audio.dispose();
     this.hud.dispose();
   }
 
@@ -672,6 +701,7 @@ export class GameApp {
     ) {
       this.p30AwaitingInput = false;
       this.simulationPaused = false;
+      this.audio.setPaused(false);
       this.clock.reset();
     }
     const simulationInput = this.mapSimulationInput(this.latestInput);
@@ -742,6 +772,15 @@ export class GameApp {
       return;
     }
 
+    if (
+      this.hordeSimulation.state.phase === "combat" &&
+      this.hordeSimulation.state.player.lockedTargetId === null
+    ) {
+      // Apply look before mapping camera-relative movement and attack facing so
+      // a mouse turn and an input edge in the same frame share one orientation.
+      this.cameraController.applyLook(input.lookX, input.lookY);
+    }
+
     this.queueHordeEdges(input);
     if (this.hordeAwaitingEngagement) {
       if (this.isHordeEngagementInput(input)) {
@@ -750,7 +789,7 @@ export class GameApp {
         this.hud.markEngaged();
       } else {
         this.clock.reset();
-        this.presentHorde(0, input.lookX, input.lookY);
+        this.presentHorde(0, 0, 0);
         this.updateHordeDiagnostics(delta, 0, frameStartedAt);
         return;
       }
@@ -790,7 +829,7 @@ export class GameApp {
     }
 
     const presentationDelta = fixedSteps * FIXED_TIMESTEP;
-    this.presentHorde(presentationDelta, input.lookX, input.lookY);
+    this.presentHorde(presentationDelta, 0, 0);
     this.updateHordeDiagnostics(delta, fixedSteps, frameStartedAt);
   }
 
@@ -914,12 +953,14 @@ export class GameApp {
   }
 
   private consumeHordeEvents(events: readonly HordeGameEvent[]): void {
+    this.audio.playCues(collectHordeAudioCues(events));
     if (events.some((event) => event.type === "run-restarted")) {
       this.hordeHudEvents = [];
       this.hordeRunRecorded = false;
       this.hordeAwaitingEngagement = true;
       this.hordePaused = false;
       this.clearPendingHordeEdges();
+      this.input.suspendLookCapture();
       this.clock.reset();
     }
     for (const event of events) {
@@ -993,10 +1034,11 @@ export class GameApp {
   private setHordePaused(paused: boolean): void {
     if (paused === this.hordePaused || this.hordeSimulation.state.phase !== "combat") return;
     this.hordePaused = paused;
+    this.audio.setPaused(paused);
     this.clearPendingHordeEdges();
+    this.input.suspendLookCapture();
     this.clock.reset();
     this.lastTimestamp = performance.now();
-    if (paused && document.pointerLockElement) void document.exitPointerLock();
     this.hud.toast(paused ? "Horde Run paused" : "Horde Run resumed");
   }
 
@@ -1130,6 +1172,7 @@ export class GameApp {
     );
     this.simulation.reconcilePlayerPosition(resolved);
     const events = this.simulation.consumeEvents();
+    this.audio.playCues(collectLegacyAudioCues(events));
     this.renderBridge.handleEvents(events, this.simulation.state);
     const hitEvent = events.find((event) => event.type === "enemy-hit");
     if (hitEvent?.type === "enemy-hit") this.hud.toast(`${hitEvent.damage} · REND`);
@@ -1148,6 +1191,7 @@ export class GameApp {
       if (shouldContinue === false) {
         this.runtimeCapturePaused = true;
         this.simulationPaused = true;
+        this.audio.setPaused(true);
         this.haltAfterLiveTick = true;
       }
     }
@@ -1180,6 +1224,7 @@ export class GameApp {
     if (input.capturePressed) this.downloadCapture();
     if (input.pausePressed) {
       this.simulationPaused = !this.simulationPaused;
+      this.audio.setPaused(this.simulationPaused);
       if (this.simulationPaused && document.pointerLockElement) void document.exitPointerLock();
       this.hud.toast(this.simulationPaused ? "Trial paused" : "Trial resumed");
     }

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { HordeSimulation } from "../../src/game/run";
+import { createHordeEnemyState, HordeSimulation } from "../../src/game/run";
 import {
   hordeEventToHudEvent,
   toEnemyFieldEntity,
@@ -9,6 +9,30 @@ import {
 } from "../../src/render/adapters/HordePresentation";
 
 describe("Horde presentation adapters", () => {
+  it("preserves authoritative enemy phases and hit ticks in the view model", () => {
+    const cases = [
+      ["shambler", 3 / 9],
+      ["stalker", 6 / 13],
+      ["brute", 5 / 12],
+    ] as const;
+    for (const [archetype, contactProgress01] of cases) {
+      const enemy = createHordeEnemyState(7, archetype, { x: 0, z: 0 });
+      enemy.phase = "attack";
+      enemy.phaseProgress01 = contactProgress01;
+      expect(toEnemyFieldEntity(enemy)).toMatchObject({
+        attackPhase: "committed",
+        attackProgress01: contactProgress01,
+        contactProgress01,
+      });
+      enemy.phase = "recover";
+      enemy.phaseProgress01 = 0.4;
+      expect(toEnemyFieldEntity(enemy)).toMatchObject({
+        attackPhase: "recovery",
+        attackProgress01: 0.4,
+      });
+    }
+  });
+
   it("derives renderer models without mutating simulation state", () => {
     const simulation = new HordeSimulation({ seed: 42, playerPosition: { x: 0, z: 4.5 } });
     simulation.consumeEvents();
@@ -28,7 +52,12 @@ describe("Horde presentation adapters", () => {
       "greatsword",
       "twin-blades",
     ]);
-    expect(hud.objective).toContain("begin the horde");
+    expect(hud.objective).toContain("WASD follows the camera");
+    expect(hud.firstUseControls?.[0]).toMatchObject({
+      id: "camera",
+      input: "MOUSE / DRAG",
+      action: "AIM",
+    });
     expect(simulation.serialize()).toBe(before);
   });
 

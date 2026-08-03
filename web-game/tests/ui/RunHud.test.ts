@@ -108,14 +108,14 @@ describe("RunHud view-model boundary", () => {
     expect(view.targetVisible).toBe(false);
   });
 
-  it("shows only the four newest feed events and five unused contextual controls", () => {
+  it("shows only the four newest feed events and six unused contextual controls", () => {
     const view = deriveRunHudViewModel({
       ...BASE_MODEL,
       events: Array.from({ length: 7 }, (_, index) => ({
         id: `event-${index}`,
         text: `Event ${index}`,
       })),
-      firstUseControls: Array.from({ length: 5 }, (_, index) => ({
+      firstUseControls: Array.from({ length: 8 }, (_, index) => ({
         id: `control-${index}`,
         input: `${index + 1}`,
         action: `Action ${index}`,
@@ -134,6 +134,7 @@ describe("RunHud view-model boundary", () => {
       "control-2",
       "control-3",
       "control-4",
+      "control-5",
     ]);
   });
 

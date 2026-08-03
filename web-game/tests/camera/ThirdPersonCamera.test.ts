@@ -1,6 +1,11 @@
 import { describe, expect, it } from "vitest";
 import * as THREE from "three";
-import { ThirdPersonCamera } from "../../src/render/app/ThirdPersonCamera";
+import {
+  CAMERA_MAX_PITCH,
+  CAMERA_MIN_PITCH,
+  CAMERA_YAW_SENSITIVITY,
+  ThirdPersonCamera,
+} from "../../src/render/app/ThirdPersonCamera";
 
 const DT = 1 / 60;
 const SAMPLE_TICKS = new Set([29, 34, 41, 60]);
@@ -18,6 +23,52 @@ function runReplay(camera: ThirdPersonCamera): string[] {
 }
 
 describe("ThirdPersonCamera", () => {
+  it("turns right with positive mouse X and keeps WASD basis coherent", () => {
+    const camera = new ThirdPersonCamera();
+    camera.applyLook(100, 0);
+    camera.update(DT, { x: 0, z: 0 }, null, 0, 0, true);
+
+    const telemetry = camera.getTelemetry();
+    const basis = camera.getPlanarBasis();
+    expect(telemetry.yaw).toBeCloseTo(100 * CAMERA_YAW_SENSITIVITY, 12);
+    expect(basis.forward.x).toBeGreaterThan(0);
+    expect(basis.forward.x).toBeCloseTo(Math.sin(telemetry.yaw), 12);
+    expect(basis.forward.z).toBeCloseTo(-Math.cos(telemetry.yaw), 12);
+  });
+
+  it("persists pitch, clamps extreme input, and does not drift without look input", () => {
+    const camera = new ThirdPersonCamera();
+    camera.applyLook(0, -10_000);
+    camera.update(DT, { x: 0, z: 0 }, null, 0, 0, true);
+    expect(camera.getTelemetry().pitch).toBe(CAMERA_MIN_PITCH);
+
+    camera.applyLook(0, 10_000);
+    expect(camera.getTelemetry().pitch).toBeLessThan(CAMERA_MAX_PITCH);
+    camera.applyLook(0, 10_000);
+    camera.update(DT, { x: 0, z: 0 }, null, 0, 0, true);
+    expect(camera.getTelemetry().pitch).toBe(CAMERA_MAX_PITCH);
+    const settled = camera.getTelemetry();
+
+    for (let frame = 0; frame < 120; frame += 1) {
+      camera.update(DT, { x: 0, z: 0 }, null, 0, 0);
+    }
+    expect(camera.getTelemetry().yaw).toBe(settled.yaw);
+    expect(camera.getTelemetry().pitch).toBe(settled.pitch);
+  });
+
+  it("lets target lock own yaw without mouse fighting or snapping past the target", () => {
+    const camera = new ThirdPersonCamera();
+    camera.applyLook(120, 80);
+    const pitchBeforeLock = camera.getTelemetry().pitch;
+    camera.update(DT, { x: 0, z: 0 }, { x: 4, z: 0 }, -10_000, 10_000, true);
+
+    expect(camera.getTelemetry().yaw).toBeCloseTo(Math.PI / 2, 12);
+    expect(camera.getTelemetry().pitch).toBe(pitchBeforeLock);
+    camera.update(DT, { x: 0, z: 0 }, { x: 4, z: 0 }, 10_000, -10_000);
+    expect(camera.getTelemetry().yaw).toBeCloseTo(Math.PI / 2, 12);
+    expect(camera.getTelemetry().pitch).toBe(pitchBeforeLock);
+  });
+
   it("produces byte-identical telemetry at ticks 29, 34, 41, and 60 across clean replays", () => {
     const camera = new ThirdPersonCamera();
     const first = runReplay(camera);

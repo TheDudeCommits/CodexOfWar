@@ -1,5 +1,13 @@
 import { ACTION_BINDINGS, type InputSnapshot } from "./actions";
 
+export type LookCaptureMode = "none" | "pointer-lock" | "drag";
+
+export interface LookCaptureTelemetry {
+  readonly mode: LookCaptureMode;
+  readonly pointerLocked: boolean;
+  readonly dragging: boolean;
+}
+
 function anyDown(keys: ReadonlySet<string>, bindings: readonly string[]): boolean {
   return bindings.some((binding) => keys.has(binding));
 }
@@ -10,6 +18,8 @@ export class InputController {
   private lookX = 0;
   private lookY = 0;
   private canvas: HTMLCanvasElement | null = null;
+  private dragLookActive = false;
+  private pointerLockPending = false;
 
   attach(canvas: HTMLCanvasElement): void {
     this.canvas = canvas;
@@ -17,6 +27,10 @@ export class InputController {
     window.addEventListener("keyup", this.onKeyUp);
     window.addEventListener("blur", this.onBlur);
     window.addEventListener("mousemove", this.onMouseMove);
+    window.addEventListener("pointerup", this.onPointerUp);
+    window.addEventListener("pointercancel", this.onPointerUp);
+    document.addEventListener("pointerlockchange", this.onPointerLockChange);
+    document.addEventListener("pointerlockerror", this.onPointerLockError);
     canvas.addEventListener("pointerdown", this.onPointerDown);
     canvas.addEventListener("contextmenu", this.onContextMenu);
   }
@@ -26,9 +40,32 @@ export class InputController {
     window.removeEventListener("keyup", this.onKeyUp);
     window.removeEventListener("blur", this.onBlur);
     window.removeEventListener("mousemove", this.onMouseMove);
+    window.removeEventListener("pointerup", this.onPointerUp);
+    window.removeEventListener("pointercancel", this.onPointerUp);
+    document.removeEventListener("pointerlockchange", this.onPointerLockChange);
+    document.removeEventListener("pointerlockerror", this.onPointerLockError);
     this.canvas?.removeEventListener("pointerdown", this.onPointerDown);
     this.canvas?.removeEventListener("contextmenu", this.onContextMenu);
+    this.suspendLookCapture();
     this.canvas = null;
+  }
+
+  getLookCaptureTelemetry(): LookCaptureTelemetry {
+    const pointerLocked = document.pointerLockElement === this.canvas;
+    return {
+      mode: pointerLocked ? "pointer-lock" : this.dragLookActive ? "drag" : "none",
+      pointerLocked,
+      dragging: this.dragLookActive,
+    };
+  }
+
+  /** Clears transient look state when gameplay input is gated by a modal or pause. */
+  suspendLookCapture(): void {
+    this.lookX = 0;
+    this.lookY = 0;
+    this.dragLookActive = false;
+    this.pointerLockPending = false;
+    if (document.pointerLockElement === this.canvas) void document.exitPointerLock();
   }
 
   sample(): InputSnapshot {
@@ -99,10 +136,11 @@ export class InputController {
   private readonly onBlur = (): void => {
     this.down.clear();
     this.pressed.clear();
+    this.suspendLookCapture();
   };
 
   private readonly onMouseMove = (event: MouseEvent): void => {
-    if (document.pointerLockElement !== this.canvas) return;
+    if (document.pointerLockElement !== this.canvas && !this.dragLookActive) return;
     this.lookX += event.movementX;
     this.lookY += event.movementY;
   };
@@ -110,11 +148,41 @@ export class InputController {
   private readonly onPointerDown = (event: PointerEvent): void => {
     if (event.button === 0) {
       this.pressed.add("Mouse0");
-      this.requestPointerLockSafely();
     } else if (event.button === 2) {
       this.pressed.add("Mouse2");
-      this.requestPointerLockSafely();
+    } else return;
+
+    // Pointer lock is preferred, but browsers and embedded review surfaces may
+    // reject it. Pointer capture keeps click-drag look fully usable in that case.
+    this.dragLookActive = true;
+    try {
+      this.canvas?.setPointerCapture(event.pointerId);
+    } catch {
+      // Pointer capture is an optional fallback; window-level pointerup still
+      // clears the drag if the browser declines it.
     }
+    this.requestPointerLockSafely();
+  };
+
+  private readonly onPointerUp = (event: PointerEvent): void => {
+    if (event.button !== 0 && event.button !== 2) return;
+    this.dragLookActive = false;
+    try {
+      if (this.canvas?.hasPointerCapture(event.pointerId)) {
+        this.canvas.releasePointerCapture(event.pointerId);
+      }
+    } catch {
+      // The pointer may already have been released by pointer-lock or a modal.
+    }
+  };
+
+  private readonly onPointerLockChange = (): void => {
+    this.pointerLockPending = false;
+    if (document.pointerLockElement === this.canvas) this.dragLookActive = false;
+  };
+
+  private readonly onPointerLockError = (): void => {
+    this.pointerLockPending = false;
   };
 
   private requestPointerLockSafely(): void {
@@ -123,23 +191,30 @@ export class InputController {
       !canvas ||
       !canvas.isConnected ||
       canvas.ownerDocument !== document ||
-      document.pointerLockElement === canvas
+      document.pointerLockElement === canvas ||
+      this.pointerLockPending
     ) {
       return;
     }
 
     try {
+      this.pointerLockPending = true;
       const request = canvas.requestPointerLock();
       if (request instanceof Promise) {
         // Pointer lock may be rejected when Chromium invalidates a document
         // between the physical click and the async browser request. This is a
         // normal input hand-off, not a runtime failure, and must never become
         // an unhandled WrongDocumentError rejection.
-        void request.catch(() => undefined);
+        void request.catch(() => undefined).finally(() => {
+          this.pointerLockPending = false;
+        });
+      } else {
+        this.pointerLockPending = false;
       }
     } catch {
       // Older implementations can throw synchronously for the same document
       // lifecycle race. The next connected click can request lock again.
+      this.pointerLockPending = false;
     }
   }
 
