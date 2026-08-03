@@ -182,4 +182,24 @@ describe("Round008 authored combat FX contract", () => {
     expect(fx.getTelemetry().materialContract.textures).toBe(0);
     fx.dispose();
   });
+
+  it("uses saturated weapon palettes without a white contact blowout", () => {
+    const fx = new CombatFx();
+    fx.burst(0, 1.34, 0, 0, -1, 3, false, {
+      weapon: "katana",
+      special: true,
+    });
+    const flash = fx.root.getObjectByName("fx.contact-local-flash") as THREE.Mesh;
+    const core = fx.root.getObjectByName("fx.contact-hot-core") as THREE.Mesh;
+    const flashMaterial = flash.material as THREE.MeshBasicMaterial;
+    const coreMaterial = core.material as THREE.MeshBasicMaterial;
+    expect(flashMaterial.color.getHex()).toBe(0x2385a8);
+    expect(coreMaterial.color.getHex()).toBe(0x8ce9ff);
+    expect(flashMaterial.color.getHex()).not.toBe(0xffffff);
+    expect(coreMaterial.opacity).toBeLessThan(0.8);
+    expect(flash.scale.x).toBeLessThan(0.2);
+    expect(flashMaterial.toneMapped).toBe(true);
+    expect(coreMaterial.toneMapped).toBe(true);
+    fx.dispose();
+  });
 });

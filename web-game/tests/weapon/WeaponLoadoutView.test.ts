@@ -1,6 +1,7 @@
 import * as THREE from "three";
 import { describe, expect, it } from "vitest";
 import {
+  WEAPON_PRESENTATION_SCALE,
   WEAPON_VISUAL_STYLE,
   WeaponLoadoutView,
 } from "../../src/render/objects/WeaponLoadoutView";
@@ -61,5 +62,107 @@ describe("WeaponLoadoutView", () => {
     expect(fixture.greatsword.visible).toBe(true);
     expect(fixture.leftHand.getObjectByName("weapon-loadout.twinblades.left")).toBeUndefined();
     expect(fixture.rightHand.getObjectByName("weapon-loadout.twinblades.right")).toBeUndefined();
+  });
+
+  it("keeps every weapon inside a restrained hand-rig scale", () => {
+    const fixture = rigFixture();
+    const loadout = new WeaponLoadoutView(fixture.root);
+
+    loadout.update({
+      activeWeapon: "katana",
+      specialCooldown01: 0,
+      specialActive01: 0,
+      elapsed: 0,
+    });
+    expect(loadout.getActiveAnchors()[0]!.scale.x).toBe(WEAPON_PRESENTATION_SCALE.katana);
+
+    loadout.update({
+      activeWeapon: "greatsword",
+      specialCooldown01: 0,
+      specialActive01: 0,
+      elapsed: 0,
+    });
+    expect(fixture.greatsword.scale.x).toBe(WEAPON_PRESENTATION_SCALE.greatsword);
+
+    loadout.update({
+      activeWeapon: "twin-blades",
+      specialCooldown01: 0,
+      specialActive01: 0,
+      elapsed: 0,
+    });
+    for (const anchor of loadout.getActiveAnchors()) {
+      expect(anchor.scale.x).toBe(WEAPON_PRESENTATION_SCALE["twin-blades"]);
+    }
+    expect(Math.max(...Object.values(WEAPON_PRESENTATION_SCALE))).toBeLessThan(0.8);
+    loadout.dispose();
+  });
+
+  it("gives each normal and special strike a materially different socket pose", () => {
+    const fixture = rigFixture();
+    const loadout = new WeaponLoadoutView(fixture.root);
+
+    for (const activeWeapon of ["katana", "greatsword", "twin-blades"] as const) {
+      loadout.update({
+        activeWeapon,
+        specialCooldown01: 0,
+        specialActive01: 0,
+        elapsed: 0.2,
+        actionKind: "normal",
+        actionProgress01: 0.5,
+      });
+      const normal = loadout.getActiveAnchors().map((anchor) => anchor.rotation.toArray());
+      loadout.update({
+        activeWeapon,
+        specialCooldown01: 0,
+        specialActive01: 1,
+        elapsed: 0.2,
+        actionKind: "special",
+        actionProgress01: 0.5,
+      });
+      const special = loadout.getActiveAnchors().map((anchor) => anchor.rotation.toArray());
+      expect(JSON.stringify(special)).not.toBe(JSON.stringify(normal));
+    }
+
+    const katana = fixture.root.getObjectByName("weapon-loadout.katana")!;
+    const blade = katana.getObjectByName("Moonveil_Blade") as THREE.Mesh;
+    const steel = blade.material as THREE.MeshStandardMaterial;
+    expect(steel.color.getHex()).not.toBe(0xffffff);
+    loadout.dispose();
+  });
+
+  it("restores the authored greatsword rotation after special, idle, switch, and dispose", () => {
+    const fixture = rigFixture();
+    fixture.greatsword.rotation.set(0.12, 0.6, -0.08);
+    const baseline = fixture.greatsword.rotation.clone();
+    const loadout = new WeaponLoadoutView(fixture.root);
+    loadout.update({
+      activeWeapon: "greatsword",
+      specialCooldown01: 0,
+      specialActive01: 1,
+      elapsed: 0.25,
+      actionKind: "special",
+      actionProgress01: 0.5,
+    });
+    expect(fixture.greatsword.rotation.toArray()).not.toEqual(baseline.toArray());
+
+    loadout.update({
+      activeWeapon: "greatsword",
+      specialCooldown01: 0.8,
+      specialActive01: 0,
+      elapsed: 1,
+      actionKind: "none",
+      actionProgress01: 0,
+    });
+    expect(fixture.greatsword.rotation.toArray()).toEqual(baseline.toArray());
+
+    loadout.update({
+      activeWeapon: "katana",
+      specialCooldown01: 0,
+      specialActive01: 0,
+      elapsed: 1.1,
+    });
+    expect(fixture.greatsword.rotation.toArray()).toEqual(baseline.toArray());
+    loadout.dispose();
+    expect(fixture.greatsword.rotation.toArray()).toEqual(baseline.toArray());
   });
 });

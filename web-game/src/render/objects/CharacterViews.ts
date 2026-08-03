@@ -20,6 +20,7 @@ import {
   type PoseVector,
   type TargetCombatPoseSample,
 } from "./CombatPoseBeat";
+import type { WeaponLoadoutPresentation } from "./WeaponLoadoutView";
 
 const HERO_REQUIRED_CLIPS = [
   "Idle_Loop",
@@ -44,6 +45,82 @@ const BLADE_FX_LOCAL_ENVELOPE = Object.freeze({
   maxY: 1.71,
   maxZ: 0.064,
 });
+
+export interface HordeWeaponPoseSample {
+  readonly modelPosition: PoseVector;
+  readonly modelRotation: PoseVector;
+  readonly spineRotation: PoseVector;
+  readonly supportLowerArmRotation: PoseVector;
+}
+
+const NEUTRAL_HORDE_WEAPON_POSE: HordeWeaponPoseSample = Object.freeze({
+  modelPosition: [0, 0, 0] as const,
+  modelRotation: [0, 0, 0] as const,
+  spineRotation: [0, 0, 0] as const,
+  supportLowerArmRotation: [0, 0, 0] as const,
+});
+
+/**
+ * A deterministic, additive style layer over the shared authored attack clip.
+ * The simulation still owns action duration and phase; this only shapes the
+ * silhouette so each loadout reads before its contact VFX arrives.
+ */
+export function sampleHordeWeaponPose(
+  presentation?: WeaponLoadoutPresentation,
+): HordeWeaponPoseSample {
+  if (!presentation || (presentation.actionKind ?? "none") === "none") {
+    return NEUTRAL_HORDE_WEAPON_POSE;
+  }
+  const progress = clamp(presentation.actionProgress01 ?? 0, 0, 1);
+  const arc = Math.sin(progress * Math.PI);
+  const direction = Math.sin(progress * Math.PI * 2);
+  const special = presentation.actionKind === "special";
+
+  switch (presentation.activeWeapon) {
+    case "katana":
+      return special
+        ? {
+            modelPosition: [0.2 * arc, -0.075 * arc, -0.75 * arc],
+            modelRotation: [0.13 * arc, -0.28 * direction, 0.18 * arc],
+            spineRotation: [-0.08 * arc, 0.22 * direction, -0.22 * arc],
+            supportLowerArmRotation: [-0.24 * arc, 0.1 * direction, 0.3 * arc],
+          }
+        : {
+            modelPosition: [0.15 * arc, -0.025 * arc, -0.65 * arc],
+            modelRotation: [0.04 * arc, -0.18 * direction, -0.08 * arc],
+            spineRotation: [0, 0.14 * direction, 0.11 * arc],
+            supportLowerArmRotation: [-0.12 * arc, 0.08 * direction, -0.22 * arc],
+          };
+    case "greatsword":
+      return special
+        ? {
+            modelPosition: [0.25 * arc, -0.11 * arc, -0.85 * arc],
+            modelRotation: [0.2 * arc, 0.2 * direction, -0.22 * arc],
+            spineRotation: [-0.18 * arc, -0.24 * direction, 0.26 * arc],
+            supportLowerArmRotation: [0.14 * arc, -0.08 * direction, 0.18 * arc],
+          }
+        : {
+            modelPosition: [0.2 * arc, -0.045 * arc, -0.72 * arc],
+            modelRotation: [0.08 * arc, 0.12 * direction, -0.12 * arc],
+            spineRotation: [-0.12 * arc, -0.16 * direction, 0.16 * arc],
+            supportLowerArmRotation: [0.08 * arc, -0.06 * direction, 0.1 * arc],
+          };
+    case "twin-blades":
+      return special
+        ? {
+            modelPosition: [0.18 * arc + 0.14 * direction, -0.08 * arc, -0.76 * arc],
+            modelRotation: [0.1 * arc, -0.45 * direction, 0.28 * arc],
+            spineRotation: [-0.06 * arc, 0.34 * direction, -0.3 * arc],
+            supportLowerArmRotation: [0.32 * arc, -0.2 * direction, -0.38 * arc],
+          }
+        : {
+            modelPosition: [0.16 * arc + 0.1 * direction, -0.025 * arc, -0.68 * arc],
+            modelRotation: [0.04 * arc, -0.25 * direction, 0.12 * direction],
+            spineRotation: [0.02 * arc, 0.22 * direction, -0.14 * direction],
+            supportLowerArmRotation: [0.18 * arc, -0.14 * direction, -0.2 * arc],
+          };
+  }
+}
 
 interface RibbonPoint {
   x: number;
@@ -776,7 +853,11 @@ export class HeroView {
     }
   }
 
-  update(state: PlayerState, elapsed: number): void {
+  update(
+    state: PlayerState,
+    elapsed: number,
+    hordeWeapon?: WeaponLoadoutPresentation,
+  ): void {
     this.root.position.set(state.position.x, 0, state.position.z);
     this.root.rotation.y = -state.yaw;
 
@@ -785,7 +866,7 @@ export class HeroView {
     else this.updateFallbackAnimation(state, elapsed);
     this.captureAuthoredPose();
     this.latestPose = sampleHeroCombatPose(state.attackPhase, state.attackFrame);
-    this.applyCombatPose(this.latestPose);
+    this.applyCombatPose(this.latestPose, hordeWeapon);
 
     this.trailSample = sampleBladeTrailFx(state.attackPhase, state.attackElapsed);
     this.applyTrailVisuals();
@@ -841,9 +922,11 @@ export class HeroView {
     }
   }
 
-  private applyCombatPose(sample: HeroCombatPoseSample): void {
+  private applyCombatPose(
+    sample: HeroCombatPoseSample,
+    hordeWeapon?: WeaponLoadoutPresentation,
+  ): void {
     setTransform(this.visual, sample.model);
-    this.shadow.position.set(sample.model.position[0], 0.014, sample.model.position[2]);
     if (this.authoredWeapon) {
       this.authoredWeapon.rotation.set(
         sample.grip.weaponMountRotation[0],
@@ -862,7 +945,23 @@ export class HeroView {
       this.gripBones.supportLowerArm,
       sample.grip.supportLowerArmRotation,
     );
-    this.closeSupportHandToGrip();
+    const stylePose = sampleHordeWeaponPose(hordeWeapon);
+    this.visual.position.x += stylePose.modelPosition[0];
+    this.visual.position.y += stylePose.modelPosition[1];
+    this.visual.position.z += stylePose.modelPosition[2];
+    this.visual.rotation.x += stylePose.modelRotation[0];
+    this.visual.rotation.y += stylePose.modelRotation[1];
+    this.visual.rotation.z += stylePose.modelRotation[2];
+    addLocalRotation(this.poseBones.spine02, stylePose.spineRotation);
+    addLocalRotation(this.poseBones.spine03, stylePose.spineRotation);
+    addLocalRotation(
+      this.gripBones.supportLowerArm,
+      stylePose.supportLowerArmRotation,
+    );
+    this.shadow.position.set(this.visual.position.x, 0.014, this.visual.position.z);
+    if (!hordeWeapon || hordeWeapon.activeWeapon === "greatsword") {
+      this.closeSupportHandToGrip();
+    }
   }
 
   private closeSupportHandToGrip(): void {

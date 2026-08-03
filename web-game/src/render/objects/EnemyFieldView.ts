@@ -109,6 +109,7 @@ export interface EnemyFieldInstanceSnapshot {
   readonly targetable: boolean;
   readonly telegraphVisible: boolean;
   readonly telegraphOpacity: number;
+  readonly telegraphForm: string;
   readonly presentationOpacity: number;
   readonly rootUuid: string;
 }
@@ -123,10 +124,12 @@ interface MaterialBaseline {
 }
 
 interface SharedGeometry {
-  readonly telegraphArc: THREE.RingGeometry;
+  readonly shamblerTelegraph: THREE.BufferGeometry;
+  readonly stalkerTelegraph: THREE.BufferGeometry;
+  readonly bruteTelegraph: THREE.BufferGeometry;
   readonly transitionRing: THREE.RingGeometry;
-  readonly shoulderGuard: THREE.DodecahedronGeometry;
-  readonly stalkerVane: THREE.BoxGeometry;
+  readonly shoulderGuard: THREE.BufferGeometry;
+  readonly stalkerVane: THREE.BufferGeometry;
   readonly eliteHalo: THREE.TorusGeometry;
 }
 
@@ -140,12 +143,13 @@ interface EnemySlot {
   readonly accessoryMaterial: THREE.MeshStandardMaterial;
   readonly telegraphMaterial: THREE.MeshBasicMaterial;
   readonly transitionMaterial: THREE.MeshBasicMaterial;
-  readonly telegraph: THREE.Mesh<THREE.RingGeometry, THREE.MeshBasicMaterial>;
+  readonly telegraph: THREE.Mesh<THREE.BufferGeometry, THREE.MeshBasicMaterial>;
+  readonly telegraphDetail: THREE.Mesh<THREE.BufferGeometry, THREE.MeshBasicMaterial>;
   readonly transitionRing: THREE.Mesh<THREE.RingGeometry, THREE.MeshBasicMaterial>;
-  readonly shoulderLeft: THREE.Mesh<THREE.DodecahedronGeometry, THREE.MeshStandardMaterial>;
-  readonly shoulderRight: THREE.Mesh<THREE.DodecahedronGeometry, THREE.MeshStandardMaterial>;
-  readonly stalkerVaneLeft: THREE.Mesh<THREE.BoxGeometry, THREE.MeshStandardMaterial>;
-  readonly stalkerVaneRight: THREE.Mesh<THREE.BoxGeometry, THREE.MeshStandardMaterial>;
+  readonly shoulderLeft: THREE.Mesh<THREE.BufferGeometry, THREE.MeshStandardMaterial>;
+  readonly shoulderRight: THREE.Mesh<THREE.BufferGeometry, THREE.MeshStandardMaterial>;
+  readonly stalkerVaneLeft: THREE.Mesh<THREE.BufferGeometry, THREE.MeshStandardMaterial>;
+  readonly stalkerVaneRight: THREE.Mesh<THREE.BufferGeometry, THREE.MeshStandardMaterial>;
   readonly eliteHalo: THREE.Mesh<THREE.TorusGeometry, THREE.MeshStandardMaterial>;
   readonly lockAnchor: THREE.Object3D;
   readonly tint: THREE.Color;
@@ -195,13 +199,36 @@ function cloneState(state: EnemyFieldEntityState): EnemyFieldEntityState {
 }
 
 function createSharedGeometry(): SharedGeometry {
-  const telegraphArc = new THREE.RingGeometry(0.89, 1, 56, 1, 0.2, Math.PI * 1.72);
+  const shamblerTelegraph = new THREE.RingGeometry(
+    0.8,
+    1,
+    40,
+    1,
+    0.34,
+    Math.PI * 0.68,
+  );
+  shamblerTelegraph.name = "telegraph.shambler-bite-arc";
+  const stalkerShape = new THREE.Shape();
+  stalkerShape.moveTo(0, 2.1);
+  stalkerShape.lineTo(0.42, 0.76);
+  stalkerShape.lineTo(0.16, 0.84);
+  stalkerShape.lineTo(0.12, 0.2);
+  stalkerShape.lineTo(-0.12, 0.2);
+  stalkerShape.lineTo(-0.16, 0.84);
+  stalkerShape.lineTo(-0.42, 0.76);
+  stalkerShape.closePath();
+  const stalkerTelegraph = new THREE.ShapeGeometry(stalkerShape);
+  stalkerTelegraph.name = "telegraph.stalker-pounce-lane";
+  const bruteTelegraph = new THREE.RingGeometry(0.76, 1, 24, 1, 0, Math.PI * 0.32);
+  bruteTelegraph.name = "telegraph.brute-slam-segment";
   const transitionRing = new THREE.RingGeometry(0.92, 1, 48);
-  const shoulderGuard = new THREE.DodecahedronGeometry(0.27, 0);
-  const stalkerVane = new THREE.BoxGeometry(0.075, 0.62, 0.18);
+  const shoulderGuard = new THREE.ConeGeometry(0.22, 0.42, 4, 1);
+  const stalkerVane = new THREE.ConeGeometry(0.085, 0.46, 3, 1);
   const eliteHalo = new THREE.TorusGeometry(0.5, 0.035, 6, 32);
   for (const geometry of [
-    telegraphArc,
+    shamblerTelegraph,
+    stalkerTelegraph,
+    bruteTelegraph,
     transitionRing,
     shoulderGuard,
     stalkerVane,
@@ -210,7 +237,15 @@ function createSharedGeometry(): SharedGeometry {
     geometry.computeBoundingBox();
     geometry.computeBoundingSphere();
   }
-  return { telegraphArc, transitionRing, shoulderGuard, stalkerVane, eliteHalo };
+  return {
+    shamblerTelegraph,
+    stalkerTelegraph,
+    bruteTelegraph,
+    transitionRing,
+    shoulderGuard,
+    stalkerVane,
+    eliteHalo,
+  };
 }
 
 function isolateAvatarMaterials(root: THREE.Object3D): MaterialBaseline[] {
@@ -358,6 +393,7 @@ export class EnemyFieldView {
       targetable: slot.targetable,
       telegraphVisible: slot.telegraph.visible,
       telegraphOpacity: slot.telegraphMaterial.opacity,
+      telegraphForm: slot.telegraph.geometry.name,
       presentationOpacity: slot.presentationOpacity,
       rootUuid: slot.root.uuid,
     };
@@ -510,12 +546,15 @@ export class EnemyFieldView {
     const deathScale = 1 - death01 * 0.08;
     slot.body.scale.set(
       style.bodyScale[0] * spawnScale * deathScale,
-      style.bodyScale[1] * (0.9 + spawn01 * 0.1) * deathScale,
-      style.bodyScale[2] * spawnScale * deathScale,
+      style.bodyScale[1] * (0.9 + spawn01 * 0.1) * deathScale * (1 - hitPulse * 0.045),
+      style.bodyScale[2] * spawnScale * deathScale * (1 + hitPulse * 0.06),
     );
-    slot.body.position.y = breathe - death01 * 0.13;
-    slot.body.rotation.x = attackLean;
-    slot.body.rotation.z = style.postureLean + Math.sin(tempo * 0.5) * 0.012;
+    slot.body.position.set(0, breathe - death01 * 0.13 - hitPulse * 0.07, hitPulse * 0.16);
+    slot.body.rotation.x = attackLean + hitPulse * 0.22;
+    slot.body.rotation.z =
+      style.postureLean +
+      Math.sin(tempo * 0.5) * 0.012 +
+      Math.sign(Math.sin(slot.phaseOffset) || 1) * hitPulse * 0.12;
 
     this.updateMaterials(slot, opacity, hitPulse, health01);
     this.updateGroundCues(slot, state, elapsed, opacity, spawn01, death01);
@@ -537,19 +576,19 @@ export class EnemyFieldView {
       baseline.material.visible = opacity > 0.002;
       if (baseline.styleable && baseline.color && styled.color) {
         styled.color.copy(baseline.color).multiply(slot.tint);
-        styled.color.lerp(slot.accent, hitPulse * 0.44);
+        styled.color.lerp(slot.accent, hitPulse * 0.12);
       }
       if (baseline.emissive && styled.emissive) {
-        const accentAmount = 0.035 + (1 - health01) * 0.045 + hitPulse * 0.7;
+        const accentAmount = 0.025 + (1 - health01) * 0.035 + hitPulse * 0.22;
         styled.emissive.copy(baseline.emissive).lerp(slot.accent, accentAmount);
       }
       if (baseline.emissiveIntensity !== null && styled.emissiveIntensity !== undefined) {
-        styled.emissiveIntensity = baseline.emissiveIntensity + hitPulse * 1.45;
+        styled.emissiveIntensity = baseline.emissiveIntensity + hitPulse * 0.38;
       }
     }
     slot.accessoryMaterial.opacity = opacity;
     slot.accessoryMaterial.visible = opacity > 0.002;
-    slot.accessoryMaterial.emissiveIntensity = 0.36 + hitPulse * 1.5;
+    slot.accessoryMaterial.emissiveIntensity = 0.22 + hitPulse * 0.42;
   }
 
   private updateGroundCues(
@@ -564,11 +603,28 @@ export class EnemyFieldView {
     const telegraph = clamp01(state.telegraph01);
     const pulse = 0.5 + Math.sin(elapsed * 11 + slot.phaseOffset) * 0.5;
     slot.telegraph.visible = opacity > 0.02 && state.alive && telegraph > 0.015;
+    slot.telegraphDetail.visible =
+      slot.telegraph.visible && slot.archetype !== "stalker";
     slot.telegraphMaterial.opacity =
-      slot.telegraph.visible ? opacity * (0.1 + telegraph * (0.45 + pulse * 0.13)) : 0;
-    const telegraphScale = style.telegraphRadius * (0.88 + telegraph * 0.16 + pulse * 0.018);
+      slot.telegraph.visible ? opacity * (0.07 + telegraph * (0.28 + pulse * 0.07)) : 0;
+    const authoredScale = slot.archetype === "stalker" ? 0.72 : 1;
+    const telegraphScale =
+      style.telegraphRadius * authoredScale * (0.9 + telegraph * 0.1 + pulse * 0.012);
     slot.telegraph.scale.setScalar(telegraphScale);
-    slot.telegraph.rotation.z = -Math.PI * 0.36;
+    slot.telegraphDetail.scale.setScalar(
+      telegraphScale * (slot.archetype === "brute" ? 0.92 : 0.76),
+    );
+    if (slot.archetype === "shambler") {
+      slot.telegraph.rotation.z = -Math.PI * 0.34;
+      slot.telegraphDetail.rotation.z = Math.PI * 0.66;
+    } else if (slot.archetype === "stalker") {
+      slot.telegraph.rotation.z = 0;
+    } else {
+      const settle = (1 - telegraph) * 0.16;
+      slot.telegraph.rotation.z = -Math.PI * 0.16 - settle;
+      slot.telegraphDetail.rotation.z = Math.PI * 0.84 + settle;
+    }
+    slot.accessoryMaterial.emissiveIntensity += telegraph * 0.3;
 
     const transitionStrength = Math.max(1 - spawn01, death01);
     slot.transitionRing.visible = transitionStrength > 0.015 && opacity > 0.002;
@@ -588,13 +644,22 @@ export class EnemyFieldView {
     slot.transitionMaterial.color.setHex(style.accent);
     slot.lockAnchor.position.set(0, style.lockHeight, 0);
 
+    const telegraphGeometry = archetype === "shambler"
+      ? this.geometry.shamblerTelegraph
+      : archetype === "stalker"
+        ? this.geometry.stalkerTelegraph
+        : this.geometry.bruteTelegraph;
+    slot.telegraph.geometry = telegraphGeometry;
+    slot.telegraphDetail.geometry = telegraphGeometry;
+
     const showVanes = style.accessory === "vanes";
     slot.stalkerVaneLeft.visible = showVanes;
     slot.stalkerVaneRight.visible = showVanes;
     const showArmor = style.accessory === "elite-armor";
     slot.shoulderLeft.visible = showArmor;
     slot.shoulderRight.visible = showArmor;
-    slot.eliteHalo.visible = showArmor;
+    // The former head-height torus read as a floating debug bar in profile.
+    slot.eliteHalo.visible = false;
   }
 
   private releaseSlot(slot: EnemySlot): void {
@@ -621,9 +686,9 @@ export class EnemyFieldView {
     const accessoryMaterial = new THREE.MeshStandardMaterial({
       color: 0x77928a,
       emissive: 0x173b39,
-      emissiveIntensity: 0.36,
-      roughness: 0.36,
-      metalness: 0.72,
+      emissiveIntensity: 0.22,
+      roughness: 0.48,
+      metalness: 0.62,
       transparent: true,
       opacity: 1,
       depthWrite: true,
@@ -632,19 +697,21 @@ export class EnemyFieldView {
     const shoulderRight = new THREE.Mesh(this.geometry.shoulderGuard, accessoryMaterial);
     shoulderLeft.name = "enemy-field.brute-shoulder-left";
     shoulderRight.name = "enemy-field.brute-shoulder-right";
-    shoulderLeft.position.set(-0.48, 1.56, 0);
-    shoulderRight.position.set(0.48, 1.56, 0);
-    shoulderLeft.scale.set(1.18, 0.66, 1.45);
+    shoulderLeft.position.set(-0.4, 1.38, 0.01);
+    shoulderRight.position.set(0.4, 1.38, 0.01);
+    shoulderLeft.rotation.z = -1.03;
+    shoulderRight.rotation.z = 1.03;
+    shoulderLeft.scale.set(0.88, 0.72, 1.02);
     shoulderRight.scale.copy(shoulderLeft.scale);
 
     const stalkerVaneLeft = new THREE.Mesh(this.geometry.stalkerVane, accessoryMaterial);
     const stalkerVaneRight = new THREE.Mesh(this.geometry.stalkerVane, accessoryMaterial);
     stalkerVaneLeft.name = "enemy-field.stalker-vane-left";
     stalkerVaneRight.name = "enemy-field.stalker-vane-right";
-    stalkerVaneLeft.position.set(-0.22, 1.47, 0.18);
-    stalkerVaneRight.position.set(0.22, 1.47, 0.18);
-    stalkerVaneLeft.rotation.z = -0.38;
-    stalkerVaneRight.rotation.z = 0.38;
+    stalkerVaneLeft.position.set(-0.2, 1.33, 0.16);
+    stalkerVaneRight.position.set(0.2, 1.33, 0.16);
+    stalkerVaneLeft.rotation.z = -0.52;
+    stalkerVaneRight.rotation.z = 0.52;
 
     const eliteHalo = new THREE.Mesh(this.geometry.eliteHalo, accessoryMaterial);
     eliteHalo.name = "enemy-field.brute-elite-halo";
@@ -663,16 +730,24 @@ export class EnemyFieldView {
       transparent: true,
       opacity: 0,
       depthWrite: false,
-      blending: THREE.AdditiveBlending,
+      blending: THREE.NormalBlending,
       side: THREE.DoubleSide,
-      toneMapped: false,
+      toneMapped: true,
     });
-    const telegraph = new THREE.Mesh(this.geometry.telegraphArc, telegraphMaterial);
+    const telegraph = new THREE.Mesh(this.geometry.shamblerTelegraph, telegraphMaterial);
     telegraph.name = "enemy-field.attack-telegraph";
     telegraph.position.y = GROUND_Y;
     telegraph.rotation.x = -Math.PI / 2;
     telegraph.renderOrder = 5;
-    root.add(telegraph);
+    const telegraphDetail = new THREE.Mesh(
+      this.geometry.shamblerTelegraph,
+      telegraphMaterial,
+    );
+    telegraphDetail.name = "enemy-field.attack-telegraph-detail";
+    telegraphDetail.position.y = GROUND_Y + 0.001;
+    telegraphDetail.rotation.x = -Math.PI / 2;
+    telegraphDetail.renderOrder = 5;
+    root.add(telegraph, telegraphDetail);
 
     const transitionMaterial = new THREE.MeshBasicMaterial({
       color: 0xb4c46d,
@@ -705,6 +780,7 @@ export class EnemyFieldView {
       telegraphMaterial,
       transitionMaterial,
       telegraph,
+      telegraphDetail,
       transitionRing,
       shoulderLeft,
       shoulderRight,

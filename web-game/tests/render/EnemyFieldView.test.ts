@@ -167,6 +167,11 @@ describe("EnemyFieldView horde presentation", () => {
     const { field } = fixture;
     const states = [
       enemy("plain", { telegraph01: 0 }),
+      enemy("bite", {
+        position: { x: 0, z: 2 },
+        motion: "attack",
+        telegraph01: 0.55,
+      }),
       enemy("quick", {
         archetype: "stalker",
         position: { x: 2, z: -1 },
@@ -193,11 +198,18 @@ describe("EnemyFieldView horde presentation", () => {
       archetype: "stalker",
       targetable: true,
       telegraphVisible: true,
+      telegraphForm: "telegraph.stalker-pounce-lane",
     });
     expect(field.inspect("elite")).toMatchObject({
       archetype: "brute",
       targetable: true,
       telegraphVisible: true,
+      telegraphForm: "telegraph.brute-slam-segment",
+    });
+    expect(field.inspect("bite")).toMatchObject({
+      archetype: "shambler",
+      telegraphVisible: true,
+      telegraphForm: "telegraph.shambler-bite-arc",
     });
     expect(field.inspect("elite")!.telegraphOpacity).toBeGreaterThan(
       field.inspect("quick")!.telegraphOpacity,
@@ -210,7 +222,7 @@ describe("EnemyFieldView horde presentation", () => {
     const elite = instanceRoot(field, "elite");
     expect(namedVisibility(elite, "enemy-field.brute-shoulder-left")).toBe(true);
     expect(namedVisibility(elite, "enemy-field.brute-shoulder-right")).toBe(true);
-    expect(namedVisibility(elite, "enemy-field.brute-elite-halo")).toBe(true);
+    expect(namedVisibility(elite, "enemy-field.brute-elite-halo")).toBe(false);
 
     const telegraph = elite.getObjectByName("enemy-field.attack-telegraph");
     expect(telegraph).toBeInstanceOf(THREE.Mesh);
@@ -218,7 +230,8 @@ describe("EnemyFieldView horde presentation", () => {
     expect(telegraphMaterial).toMatchObject({
       transparent: true,
       depthWrite: false,
-      blending: THREE.AdditiveBlending,
+      blending: THREE.NormalBlending,
+      toneMapped: true,
     });
 
     field.dispose();
@@ -326,6 +339,14 @@ describe("EnemyFieldView horde presentation", () => {
       maxHealth: 100,
     });
     expect(avatars[0]!.updates.at(-1)!.state.hitStunRemaining).toBeCloseTo(0.224, 8);
+    const hurtRoot = instanceRoot(field, "hurt");
+    const hurtBody = hurtRoot.children[0]!;
+    expect(hurtBody.position.z).toBeCloseTo(0.128, 8);
+    expect(hurtBody.rotation.x).toBeGreaterThan(0.15);
+    const hurtMesh = hurtRoot.getObjectByName("fake-zombie-mesh") as THREE.Mesh;
+    const hurtMaterial = hurtMesh.material as THREE.MeshStandardMaterial;
+    expect(hurtMaterial.emissiveIntensity).toBeLessThan(0.5);
+    expect(Math.max(hurtMaterial.color.r, hurtMaterial.color.g, hurtMaterial.color.b)).toBeLessThan(0.8);
 
     const dead = enemy("hurt", {
       phase: "dying",

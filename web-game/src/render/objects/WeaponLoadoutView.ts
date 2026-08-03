@@ -1,12 +1,16 @@
 import * as THREE from "three";
 
 export type WeaponVisualID = "katana" | "greatsword" | "twin-blades";
+export type WeaponActionKind = "none" | "normal" | "special";
 
 export interface WeaponLoadoutPresentation {
   activeWeapon: WeaponVisualID;
   specialCooldown01: number;
   specialActive01: number;
   elapsed: number;
+  /** Existing simulation action, consumed only as a deterministic pose driver. */
+  actionKind?: WeaponActionKind;
+  actionProgress01?: number;
 }
 
 export const WEAPON_VISUAL_STYLE: Readonly<Record<WeaponVisualID, {
@@ -18,6 +22,14 @@ export const WEAPON_VISUAL_STYLE: Readonly<Record<WeaponVisualID, {
   greatsword: { accent: 0xff9b52, glow: 0xff4d19, label: "STORMCAGE" },
   "twin-blades": { accent: 0xd7a0ff, glow: 0x8b3dff, label: "NIGHTFANG" },
 });
+
+/** Relative to Nyra's authored hand rig, not world units. */
+export const WEAPON_PRESENTATION_SCALE: Readonly<Record<WeaponVisualID, number>> =
+  Object.freeze({
+    katana: 0.64,
+    greatsword: 0.52,
+    "twin-blades": 0.62,
+  });
 
 interface ForgedWeapon {
   root: THREE.Group;
@@ -36,18 +48,18 @@ function createBladeMaterial(style: (typeof WEAPON_VISUAL_STYLE)[WeaponVisualID]
 } {
   return {
     steel: new THREE.MeshStandardMaterial({
-      color: 0xcbd5df,
+      color: 0x9aa8b4,
       metalness: 0.88,
-      roughness: 0.22,
-      envMapIntensity: 1.45,
+      roughness: 0.34,
+      envMapIntensity: 1.08,
     }),
     glow: new THREE.MeshStandardMaterial({
-      color: style.accent,
+      color: new THREE.Color(style.accent).multiplyScalar(0.68),
       emissive: style.glow,
-      emissiveIntensity: 1.35,
-      metalness: 0.2,
-      roughness: 0.3,
-      toneMapped: false,
+      emissiveIntensity: 0.72,
+      metalness: 0.34,
+      roughness: 0.38,
+      toneMapped: true,
     }),
   };
 }
@@ -86,8 +98,9 @@ function buildKatana(
   grip.position.y = 0;
   for (const mesh of [blade, edge, guard, grip]) configureWeaponMesh(mesh);
   root.add(blade, edge, guard, grip);
-  root.rotation.set(0, 0.48, 0.02);
-  root.position.set(0, -0.02, 0);
+  root.rotation.set(0, 0.34, 0.1);
+  root.position.set(0, -0.04, 0.02);
+  root.scale.setScalar(WEAPON_PRESENTATION_SCALE.katana);
   return { root, glowMaterials: [glow] };
 }
 
@@ -125,7 +138,8 @@ function buildTwinBlade(
   for (const mesh of [blade, fuller, guard, grip]) configureWeaponMesh(mesh);
   root.add(blade, fuller, guard, grip);
   root.rotation.set(side === "left" ? 0.08 : -0.08, side === "left" ? -0.2 : 0.2, Math.PI);
-  root.position.set(0, 0.02, 0);
+  root.position.set(side === "left" ? -0.015 : 0.015, 0.015, 0.02);
+  root.scale.setScalar(WEAPON_PRESENTATION_SCALE["twin-blades"]);
   return { root, glowMaterials: [glow] };
 }
 
@@ -141,10 +155,14 @@ export class WeaponLoadoutView {
   private readonly katana: ForgedWeapon | null;
   private readonly twinLeft: ForgedWeapon | null;
   private readonly twinRight: ForgedWeapon | null;
+  private readonly authoredGreatswordScale: THREE.Vector3 | null;
+  private readonly authoredGreatswordRotation: THREE.Euler | null;
   private activeWeapon: WeaponVisualID | null = null;
 
   constructor(heroRoot: THREE.Object3D) {
     this.authoredGreatsword = heroRoot.getObjectByName("stormcage-two-hand-socket") ?? null;
+    this.authoredGreatswordScale = this.authoredGreatsword?.scale.clone() ?? null;
+    this.authoredGreatswordRotation = this.authoredGreatsword?.rotation.clone() ?? null;
     const weaponSocket = heroRoot.getObjectByName("weapon_socket") ?? null;
     const leftHand = heroRoot.getObjectByName("hand_l") ?? null;
     const rightHand = heroRoot.getObjectByName("hand_r") ?? null;
@@ -160,11 +178,12 @@ export class WeaponLoadoutView {
 
   update(state: WeaponLoadoutPresentation): void {
     if (state.activeWeapon !== this.activeWeapon) this.setVisibility(state.activeWeapon);
+    this.applyPresentationPose(state);
     const specialPulse = state.specialActive01 > 0
-      ? 0.65 + Math.sin(state.elapsed * 32) * 0.25
+      ? 0.24 + Math.sin(state.elapsed * 24) * 0.08
       : 0;
     const readiness = 1 - THREE.MathUtils.clamp(state.specialCooldown01, 0, 1);
-    const intensity = 0.75 + readiness * 0.85 + specialPulse * 2.2;
+    const intensity = 0.42 + readiness * 0.46 + specialPulse;
     const visibleGlow = state.activeWeapon === "katana"
       ? this.katana?.glowMaterials ?? []
       : state.activeWeapon === "twin-blades"
@@ -201,7 +220,83 @@ export class WeaponLoadoutView {
     for (const material of this.materials) material.dispose();
     this.geometries.length = 0;
     this.materials.length = 0;
-    if (this.authoredGreatsword) this.authoredGreatsword.visible = true;
+    if (this.authoredGreatsword) {
+      this.authoredGreatsword.visible = true;
+      if (this.authoredGreatswordScale) {
+        this.authoredGreatsword.scale.copy(this.authoredGreatswordScale);
+      }
+      if (this.authoredGreatswordRotation) {
+        this.authoredGreatsword.rotation.copy(this.authoredGreatswordRotation);
+      }
+    }
+  }
+
+  private applyPresentationPose(state: WeaponLoadoutPresentation): void {
+    const actionKind = state.actionKind ?? "none";
+    const progress = THREE.MathUtils.clamp(state.actionProgress01 ?? 0, 0, 1);
+    const arc = actionKind === "none" ? 0 : Math.sin(progress * Math.PI);
+    const direction = actionKind === "none" ? 0 : Math.sin(progress * Math.PI * 2);
+
+    if (this.katana) {
+      this.katana.root.position.set(0, -0.04, 0.02);
+      this.katana.root.scale.setScalar(WEAPON_PRESENTATION_SCALE.katana);
+      if (actionKind === "special") {
+        this.katana.root.rotation.set(
+          -0.42 * arc,
+          0.34 + 0.55 * direction,
+          0.1 + 0.38 * arc,
+        );
+      } else {
+        this.katana.root.rotation.set(
+          -0.08 * arc,
+          0.34 + 0.24 * direction,
+          0.1 + 0.22 * arc,
+        );
+      }
+    }
+
+    if (this.twinLeft && this.twinRight) {
+      this.twinLeft.root.position.set(-0.015 - arc * 0.055, 0.015, 0.02);
+      this.twinRight.root.position.set(0.015 + arc * 0.055, 0.015, 0.02);
+      this.twinLeft.root.scale.setScalar(WEAPON_PRESENTATION_SCALE["twin-blades"]);
+      this.twinRight.root.scale.setScalar(WEAPON_PRESENTATION_SCALE["twin-blades"]);
+      const specialOpen = actionKind === "special" ? 0.34 : 0.18;
+      const specialTilt = actionKind === "special" ? 0.26 : 0.12;
+      this.twinLeft.root.rotation.set(
+        0.08 + specialTilt * direction,
+        -0.2 - specialOpen * arc,
+        Math.PI - specialOpen * arc,
+      );
+      this.twinRight.root.rotation.set(
+        -0.08 - specialTilt * direction,
+        0.2 + specialOpen * arc,
+        Math.PI + specialOpen * arc,
+      );
+    }
+
+    if (this.authoredGreatsword && this.authoredGreatswordScale) {
+      this.authoredGreatsword.scale
+        .copy(this.authoredGreatswordScale)
+        .multiplyScalar(WEAPON_PRESENTATION_SCALE.greatsword);
+      if (this.authoredGreatswordRotation) {
+        this.authoredGreatsword.rotation.copy(this.authoredGreatswordRotation);
+      }
+      if (state.activeWeapon === "greatsword" && actionKind !== "none") {
+        if (actionKind === "special") {
+          this.authoredGreatsword.rotation.set(
+            -0.28 * arc,
+            0.54 + 2.15 * arc,
+            -0.55 * direction,
+          );
+        } else {
+          this.authoredGreatsword.rotation.set(
+            0.08 * arc,
+            0.54 + 1.45 * direction,
+            -0.65 * arc,
+          );
+        }
+      }
+    }
   }
 
   private setVisibility(activeWeapon: WeaponVisualID): void {

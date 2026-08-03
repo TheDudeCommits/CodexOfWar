@@ -17,7 +17,11 @@ describe("Horde presentation adapters", () => {
 
     expect(toLegacyPlayerState(state).position).toEqual(state.player.position);
     expect(state.enemies.map(toEnemyFieldEntity)).toHaveLength(3);
-    expect(toWeaponLoadoutPresentation(state).activeWeapon).toBe("katana");
+    expect(toWeaponLoadoutPresentation(state)).toMatchObject({
+      activeWeapon: "katana",
+      actionKind: "none",
+      actionProgress01: 0,
+    });
     const hud = toRunHudModel(state, false, [], true);
     expect(hud.quickSlots.map((slot) => slot.id)).toEqual([
       "katana",

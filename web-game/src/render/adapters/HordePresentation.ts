@@ -98,6 +98,8 @@ export function toWeaponLoadoutPresentation(state: HordeRunState): WeaponLoadout
     specialActive01:
       state.player.action.kind === "special" ? 1 - state.player.action.progress01 : 0,
     elapsed: state.elapsedSeconds,
+    actionKind: state.player.action.kind,
+    actionProgress01: state.player.action.progress01,
   };
 }
 

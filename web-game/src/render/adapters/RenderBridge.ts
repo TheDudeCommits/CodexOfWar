@@ -70,7 +70,7 @@ export class RenderBridge {
     dt: number,
   ): void {
     this.arena.update(elapsed);
-    this.hero.update(player, elapsed);
+    this.hero.update(player, elapsed, weapon);
     this.enemyField.update(enemies, elapsed);
     this.weaponLoadout.update(weapon);
     this.combatFx.update(dt, elapsed);
@@ -126,6 +126,7 @@ export class RenderBridge {
           magnitude > 0.0001 ? dz / magnitude : -1,
           event.attackSerial,
           event.remainingHealth <= 0,
+          { weapon: event.weapon, special: event.special },
         );
         this.cameraController.kickShake(event.remainingHealth <= 0 ? 1.55 : event.special ? 1.3 : 1);
       } else if (event.type === "enemy-attack-hit") {
