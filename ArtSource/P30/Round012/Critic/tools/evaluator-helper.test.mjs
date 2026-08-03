@@ -9,6 +9,9 @@ import {
   BASELINE_RECEIPT_PATH,
   BASELINE_RECEIPT_SHA256,
   ALIAS_SCORE_COMMIT_DOMAIN,
+  BLADE_LENGTH_MAX_METRES,
+  BLADE_RADIAL_MAX_METRES,
+  CANONICAL_TERMINAL_ABSOLUTE_TICK,
   COUNTERFACTUAL_COMMIT_DOMAIN,
   EVALUATOR_HELPER_PATH,
   EPS,
@@ -16,13 +19,23 @@ import {
   PACKAGE_MAP_COMMIT_DOMAIN,
   PROTOCOL_AMENDMENT_PATH,
   PROTOCOL_AMENDMENT_SHA256,
+  PROTOCOL_AMENDMENT_02_PATH,
+  PROTOCOL_AMENDMENT_02_SHA256,
   PROTOCOL_ID,
   PROTOCOL_PATH,
   PROTOCOL_PAYLOAD_SHA256,
+  PROTOCOL_RECOMMITMENT_HELPER_PATH,
+  PROTOCOL_RECOMMITMENT_HELPER_SHA256,
+  PROTOCOL_RECOMMITMENT_RECEIPT_PATH,
+  PROTOCOL_RECOMMITMENT_RECEIPT_SHA256,
+  PRIOR_ROUND_COMMITMENT_SHA256,
   REFERENCE_ARCHIVE_SHA256,
   REFERENCE_COMMIT_DOMAIN,
   ROUND_COMMITMENT_SCHEMA,
   Round012EvaluatorError,
+  SEALED_PUBLIC_ROOT_COMMIT,
+  SHIFTED_HEAVY_RISING_EDGE_ABSOLUTE_TICK,
+  SHIFTED_TERMINAL_ABSOLUTE_TICK,
   TREE_DOMAIN,
   TREE_HELPER_PATH,
   analyzeMaskTopology,
@@ -58,6 +71,7 @@ import {
   referenceCommit,
   referenceImageDimensions,
   roundHalfAwayFromZero,
+  shiftedContactChecks,
   validateAliasOnlyScore,
   validateBallotTokens,
   validateBlindOrderManifest,
@@ -104,6 +118,14 @@ function commitmentFixture() {
     protocolPayloadSha256: PROTOCOL_PAYLOAD_SHA256,
     protocolAmendmentPath: PROTOCOL_AMENDMENT_PATH,
     protocolAmendmentSha256: PROTOCOL_AMENDMENT_SHA256,
+    protocolAmendment02Path: PROTOCOL_AMENDMENT_02_PATH,
+    protocolAmendment02Sha256: PROTOCOL_AMENDMENT_02_SHA256,
+    protocolRecommitmentReceiptPath: PROTOCOL_RECOMMITMENT_RECEIPT_PATH,
+    protocolRecommitmentReceiptSha256: PROTOCOL_RECOMMITMENT_RECEIPT_SHA256,
+    protocolRecommitmentHelperPath: PROTOCOL_RECOMMITMENT_HELPER_PATH,
+    protocolRecommitmentHelperSha256: PROTOCOL_RECOMMITMENT_HELPER_SHA256,
+    priorRoundCommitmentSha256: PRIOR_ROUND_COMMITMENT_SHA256,
+    sealedPublicRootCommit: SEALED_PUBLIC_ROOT_COMMIT,
     baselineReceiptPath: BASELINE_RECEIPT_PATH,
     baselineReceiptSha256: BASELINE_RECEIPT_SHA256,
     presentationCommitDomain: PRESENTATION_COMMIT_DOMAIN,
@@ -251,6 +273,26 @@ test('Jacobi blade extraction identifies guard/tip and rejects ambiguous geometr
   );
 });
 
+test('recommitted millimetre ceilings remain fail-closed for oversized and hilt-inclusive geometry', () => {
+  assert.equal(BLADE_LENGTH_MAX_METRES, 1.873000);
+  assert.equal(BLADE_RADIAL_MAX_METRES, 0.185000);
+  const prism = (length, radial) => {
+    const vertices = [];
+    for (const x of [0, length * 0.25, length * 0.5, length * 0.75, length]) {
+      for (const y of [-radial, radial]) for (const z of [-0.01, 0.01]) vertices.push([x, y, z]);
+    }
+    return vertices;
+  };
+  assert.throws(
+    () => extractBladeCapsule(prism(1.874, 0.01), [-0.1, 0, 0]),
+    (error) => evaluatorCode(error, 'BLADE_LENGTH_OUT_OF_BOUNDS')
+  );
+  assert.throws(
+    () => extractBladeCapsule(prism(1.80, 0.186), [-0.1, 0, 0]),
+    (error) => evaluatorCode(error, 'BLADE_RADIAL_BOUND_EXCEEDED')
+  );
+});
+
 test('target capsules use the frozen ID order and height ratios', () => {
   const landmarks = Object.fromEntries([
     'pelvis', 'neck', 'head',
@@ -391,6 +433,22 @@ test('live geometry collector proves render-driving landmarks, culls hidden blad
   );
 });
 
+test('live geometry collection reaches shifted terminal 87 and rejects out-of-domain tick 88', () => {
+  const fixture = geometryFixture();
+  const tickZero = collectGeometrySource(fixture.source, { absoluteTick: 0 });
+  assert.doesNotThrow(() => collectGeometrySource(fixture.source, {
+    absoluteTick: SHIFTED_TERMINAL_ABSOLUTE_TICK,
+    targetHeightReceipt: tickZero.targetHeightReceipt
+  }));
+  assert.throws(
+    () => collectGeometrySource(fixture.source, {
+      absoluteTick: SHIFTED_TERMINAL_ABSOLUTE_TICK + 1,
+      targetHeightReceipt: tickZero.targetHeightReceipt
+    }),
+    (error) => evaluatorCode(error, 'GEOMETRY_ABSOLUTE_TICK_REQUIRED')
+  );
+});
+
 test('geometry collector rejects duplicate, detached, and zero-weight landmark identities', () => {
   const duplicate = geometryFixture();
   duplicate.source.targetLandmarkBones.head = duplicate.source.targetLandmarkBones.neck;
@@ -495,6 +553,42 @@ test('4096-substep sweep resolves exact tick-46 first contact without endpoint r
   const frame = canonicalContactFrame(result, { right: [1, 0, 0], up: [0, 1, 0], forward: [0, 0, 1] });
   assert.deepEqual(frame.normal, [1, 0, 0]);
   assert.match(frame.receiptSha256, /^[0-9a-f]{64}$/u);
+});
+
+test('SHIFT_PLUS_7 is an exact edge-31/contact-53 translation through terminal 87', () => {
+  assert.equal(CANONICAL_TERMINAL_ABSOLUTE_TICK, 80);
+  assert.equal(SHIFTED_HEAVY_RISING_EDGE_ABSOLUTE_TICK, 31);
+  assert.equal(SHIFTED_TERMINAL_ABSOLUTE_TICK, 87);
+  const states = sweepTestSeries(SHIFTED_TERMINAL_ABSOLUTE_TICK, (absoluteTick) => {
+    const bladeX = absoluteTick === 53 ? 0.12 : 0.3;
+    return sweepTestState(absoluteTick, {
+      bladeGuard: [bladeX, -0.5, 0],
+      bladeTip: [bladeX, 0.5, 0],
+      activeCapsules: { head: { a: [0, 0, 0], b: [0, 0, 0], radius: 0.1 } }
+    });
+  });
+  const result = evaluateSweptContact(states, SHIFTED_TERMINAL_ABSOLUTE_TICK);
+  assert.equal(result.intervals.length, 88);
+  assert.equal(result.firstContactTick, 53);
+  assert.deepEqual(risingContactCoordinates(result), [[53, 4096, 'head']]);
+  assert.equal(shiftedContactChecks(result).pass, true);
+  assert.equal(canonicalContactChecks(result).pass, false);
+});
+
+test('all geometry terminal APIs fail closed at out-of-domain tick 88', () => {
+  const tick88 = SHIFTED_TERMINAL_ABSOLUTE_TICK + 1;
+  assert.throws(
+    () => evaluateSweptContact([], tick88),
+    (error) => evaluatorCode(error, 'SWEEP_TERMINAL_TICK_INVALID')
+  );
+  assert.throws(
+    () => computeMissOffsetExtrema(
+      [],
+      { right: [1, 0, 0], up: [0, 1, 0], forward: [0, 0, 1] },
+      tick88
+    ),
+    (error) => evaluatorCode(error, 'SWEEP_TERMINAL_TICK_INVALID')
+  );
 });
 
 test('sample-tape transitions reject endpoint-swap separation and recontact within interval 47', () => {

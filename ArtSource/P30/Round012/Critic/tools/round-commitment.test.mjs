@@ -5,11 +5,13 @@ import test from 'node:test';
 
 import {
   EVALUATOR_HELPER_PATH,
+  PROTOCOL_RECOMMITMENT_HELPER_PATH,
+  ROUND_COMMITMENT_SCHEMA,
   TREE_HELPER_PATH,
   validateRoundCommitment,
   verifyRoundCommitmentFiles
 } from './evaluator-helper.mjs';
-import { fileSha256, readCanonicalFile } from './tree-helper.mjs';
+import { canonicalBytes, fileSha256, readCanonicalFile, sha256Hex } from './tree-helper.mjs';
 
 const toolsDirectory = dirname(fileURLToPath(import.meta.url));
 const repositoryRoot = resolve(toolsDirectory, '../../../../..');
@@ -20,9 +22,11 @@ test('committed public artifact verifies exact protocol, amendment, baseline, an
   assert.deepEqual(verification, {
     schema: 'p30.r012a.round-commitment-verification.v1',
     protocolID: 'P30-R012A-BLIND-v1',
-    roundCommitmentSha256: 'aa3da43f393e90551e52659dbf59fe07f62fca689f4c8e68df859aefa49a1973',
+    roundCommitmentSha256: '86d8537b8b8fd097cc75f7452a4f31076c58f3b0cbb308df6851ee74a8136bc5',
     protocolVerified: true,
     amendmentVerified: true,
+    amendment02Verified: true,
+    recommitmentReceiptVerified: true,
     baselineReceiptVerified: true,
     helperBytesVerified: true,
     criticCandidateAccess: false
@@ -44,4 +48,26 @@ test('public helper identities are byte hashes, not mutable path assertions', as
   const commitment = (await readCanonicalFile(commitmentPath)).value;
   assert.equal((await fileSha256(resolve(repositoryRoot, TREE_HELPER_PATH))).sha256, commitment.treeHelperSha256);
   assert.equal((await fileSha256(resolve(repositoryRoot, EVALUATOR_HELPER_PATH))).sha256, commitment.evaluatorHelperSha256);
+  assert.equal(
+    (await fileSha256(resolve(repositoryRoot, PROTOCOL_RECOMMITMENT_HELPER_PATH))).sha256,
+    commitment.protocolRecommitmentHelperSha256
+  );
+});
+
+test('v2 recommitment preserves every sealed private commitment byte-for-byte', async () => {
+  const commitment = (await readCanonicalFile(commitmentPath)).value;
+  const frozenPrivateCommitments = {
+    counterfactualCommit: '36f451aa96391cb618cd220715a72722896ee8045e72f26b9abb216700443649',
+    presentationCommit: '19e959900edd7c41803201078f7d98dd68199b75dafcb75d1859cec0a396d1b8',
+    referenceArchiveSha256: '4653a7a92d6f6bde910f39d3190df0adb112677851815443144505b8b420a6dd',
+    referenceCommit: 'f2fb7ddeaaf32447f1cd2c1167cb058fd47524a86807c67e4f01d900a8a157fc'
+  };
+  assert.equal(commitment.schema, ROUND_COMMITMENT_SCHEMA);
+  for (const [key, expected] of Object.entries(frozenPrivateCommitments)) {
+    assert.equal(commitment[key], expected);
+  }
+  assert.equal(
+    sha256Hex(canonicalBytes(frozenPrivateCommitments)),
+    '81f0aa3c25ce99b737001a240a35518045259a441963f9d1cb7187815060b667'
+  );
 });
