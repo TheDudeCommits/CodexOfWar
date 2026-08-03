@@ -167,14 +167,14 @@ export class CombatFx {
   private readonly streakWidths = new Float32Array(STREAK_COUNT);
   private readonly streakGeometry = createTaperedStreakGeometry();
   private readonly streakMaterial = new THREE.MeshBasicMaterial({
-    color: 0xd7dce0,
+    color: 0xffffff,
     transparent: true,
     opacity: 0,
     blending: THREE.AdditiveBlending,
     depthTest: true,
     depthWrite: false,
     side: THREE.DoubleSide,
-    toneMapped: true,
+    toneMapped: false,
     vertexColors: false,
   });
   private readonly streaks = new THREE.InstancedMesh(
@@ -184,25 +184,25 @@ export class CombatFx {
   );
   private readonly flashGeometry = createImpactStarGeometry();
   private readonly flashMaterial = new THREE.MeshBasicMaterial({
-    color: 0xd85a2b,
-    transparent: true,
-    opacity: 0,
-    blending: THREE.AdditiveBlending,
-    depthTest: true,
-    depthWrite: false,
-    side: THREE.DoubleSide,
-    toneMapped: true,
-  });
-  private readonly flash = new THREE.Mesh(this.flashGeometry, this.flashMaterial);
-  private readonly coreGeometry = new THREE.OctahedronGeometry(1, 0);
-  private readonly coreMaterial = new THREE.MeshBasicMaterial({
     color: 0xffb35f,
     transparent: true,
     opacity: 0,
     blending: THREE.AdditiveBlending,
     depthTest: true,
     depthWrite: false,
-    toneMapped: true,
+    side: THREE.DoubleSide,
+    toneMapped: false,
+  });
+  private readonly flash = new THREE.Mesh(this.flashGeometry, this.flashMaterial);
+  private readonly coreGeometry = new THREE.OctahedronGeometry(1, 0);
+  private readonly coreMaterial = new THREE.MeshBasicMaterial({
+    color: 0xfff4d1,
+    transparent: true,
+    opacity: 0,
+    blending: THREE.AdditiveBlending,
+    depthTest: true,
+    depthWrite: false,
+    toneMapped: false,
   });
   private readonly core = new THREE.Mesh(this.coreGeometry, this.coreMaterial);
   private readonly flashLight = new THREE.PointLight(0xff8f49, 0, 0.72, 2);
@@ -225,11 +225,13 @@ export class CombatFx {
   private activeStreakCount = 0;
   private flashLife = 0;
   private flashDuration = FLASH_LIFE;
-  private flashPeakOpacity = 0.44;
-  private corePeakOpacity = 0.64;
-  private flashPeakLight = 0.42;
-  private flashBaseScale = 0.16;
-  private coreBaseScale = 0.044;
+  private flashPeakOpacity = 0.82;
+  private corePeakOpacity = 1;
+  private flashPeakLight = 1;
+  private flashBaseScale = 0.19;
+  private coreBaseScale = 0.058;
+  private streakPeakOpacity = 0.78;
+  private styledBurst = false;
   private lastBurstSerial = 0;
   private lastElapsed = 0;
   private auditVisible = true;
@@ -275,7 +277,7 @@ export class CombatFx {
     directionZ: number,
     serial: number,
     defeated: boolean,
-    style: CombatFxBurstStyle = {},
+    style?: CombatFxBurstStyle,
   ): void {
     const directionLength = Math.hypot(directionX, directionZ);
     const strikeX = directionLength > 0.0001 ? directionX / directionLength : 0;
@@ -292,26 +294,47 @@ export class CombatFx {
     );
     this.root.visible = this.auditVisible;
     this.lastBurstSerial = serial;
-    const palette = COMBAT_FX_PALETTES[style.weapon ?? "default"];
-    const emphasis = style.special ? 1.12 : 1;
+    this.styledBurst = style !== undefined;
+    const palette = COMBAT_FX_PALETTES[style?.weapon ?? "default"];
+    const emphasis = style?.special ? 1.12 : 1;
     this.flashDuration = defeated ? DEFEAT_FLASH_LIFE : FLASH_LIFE;
     this.flashLife = this.flashDuration;
-    this.flashMaterial.color.setHex(palette.flash);
-    this.flashPeakOpacity = (defeated ? 0.56 : 0.44) * emphasis;
+    this.streakMaterial.color.setHex(this.styledBurst ? 0xd7dce0 : 0xffffff);
+    this.flashMaterial.color.setHex(
+      this.styledBurst ? palette.flash : defeated ? 0xffd78c : 0xffa657,
+    );
+    this.flashPeakOpacity = this.styledBurst
+      ? (defeated ? 0.56 : 0.44) * emphasis
+      : 0.82;
     this.flashMaterial.opacity = this.flashPeakOpacity;
     this.flash.rotation.z = (hash(serial * 7.13) - 0.5) * 0.45;
-    this.flashBaseScale = (defeated ? 0.2 : 0.16) * emphasis;
+    this.flashBaseScale = this.styledBurst
+      ? (defeated ? 0.2 : 0.16) * emphasis
+      : defeated ? 0.23 : 0.19;
     this.flash.scale.setScalar(this.flashBaseScale);
     this.flash.visible = true;
-    this.coreMaterial.color.setHex(palette.core);
-    this.corePeakOpacity = defeated ? 0.78 : 0.64;
+    this.coreMaterial.color.setHex(
+      this.styledBurst ? palette.core : defeated ? 0xffffe6 : 0xfff0c2,
+    );
+    this.corePeakOpacity = this.styledBurst ? defeated ? 0.78 : 0.64 : 1;
     this.coreMaterial.opacity = this.corePeakOpacity;
-    this.coreBaseScale = (defeated ? 0.055 : 0.044) * emphasis;
+    this.coreBaseScale = this.styledBurst
+      ? (defeated ? 0.055 : 0.044) * emphasis
+      : defeated ? 0.072 : 0.058;
     this.core.scale.setScalar(this.coreBaseScale);
     this.core.visible = true;
-    this.flashLight.color.setHex(palette.light);
-    this.flashPeakLight = (defeated ? 0.72 : 0.42) * emphasis;
+    this.flashLight.color.setHex(
+      this.styledBurst ? palette.light : defeated ? 0xffb968 : 0xff8742,
+    );
+    this.flashPeakLight = this.styledBurst
+      ? (defeated ? 0.72 : 0.42) * emphasis
+      : defeated ? 2 : 1;
     this.flashLight.intensity = this.flashPeakLight;
+    for (const material of [this.streakMaterial, this.flashMaterial, this.coreMaterial]) {
+      if (material.toneMapped === this.styledBurst) continue;
+      material.toneMapped = this.styledBurst;
+      material.needsUpdate = true;
+    }
 
     for (let index = 0; index < STREAK_COUNT; index += 1) {
       const offset = index * 3;
@@ -345,16 +368,25 @@ export class CombatFx {
         ? 0.015 + hash(index * 13.17 + serial) * 0.01
         : 0.012 + hash(index * 14.23 + serial) * 0.007;
       this.color.setHex(
-        index < 15
-          ? index % 4 === 0
-            ? palette.sparkHot
-            : palette.sparkMid
-          : palette.sparkCool,
+        this.styledBurst
+          ? index < 15
+            ? index % 4 === 0
+              ? palette.sparkHot
+              : palette.sparkMid
+            : palette.sparkCool
+          : index < 15
+            ? index % 4 === 0
+              ? 0xffdf9a
+              : 0xff9443
+            : 0xff5932,
       );
       this.streaks.setColorAt(index, this.color);
     }
     this.activeStreakCount = STREAK_COUNT;
-    this.streakMaterial.opacity = (defeated ? 0.58 : 0.46) * emphasis;
+    this.streakPeakOpacity = this.styledBurst
+      ? (defeated ? 0.58 : 0.46) * emphasis
+      : 0.78;
+    this.streakMaterial.opacity = this.streakPeakOpacity;
     this.streaks.visible = true;
     if (this.streaks.instanceColor) this.streaks.instanceColor.needsUpdate = true;
     this.writeStreakMatrices();
@@ -452,10 +484,15 @@ export class CombatFx {
     if (this.flashLife <= 0) return;
     this.flashLife = Math.max(0, this.flashLife - dt);
     const life01 = this.flashDuration > 0 ? this.flashLife / this.flashDuration : 0;
-    this.flashMaterial.opacity = this.flashPeakOpacity * Math.pow(life01, 0.72);
-    this.coreMaterial.opacity = Math.min(this.corePeakOpacity, life01 * this.corePeakOpacity * 1.6);
+    this.flashMaterial.opacity = this.flashPeakOpacity * Math.pow(
+      life01,
+      this.styledBurst ? 0.72 : 0.68,
+    );
+    this.coreMaterial.opacity = this.styledBurst
+      ? Math.min(this.corePeakOpacity, life01 * this.corePeakOpacity * 1.6)
+      : Math.min(1, life01 * 1.65);
     this.flash.scale.setScalar(
-      this.flashBaseScale + (1 - life01) * 0.055,
+      this.flashBaseScale + (1 - life01) * (this.styledBurst ? 0.055 : 0.08),
     );
     this.core.scale.setScalar(
       this.coreBaseScale * (0.72 + life01 * 0.28),
@@ -510,7 +547,12 @@ export class CombatFx {
       this.streaks.setMatrixAt(index, this.matrix);
     }
     this.activeStreakCount = active;
-    this.streakMaterial.opacity = Math.min(0.52, strongestLife01 * 0.58);
+    this.streakMaterial.opacity = this.styledBurst
+      ? Math.min(
+          this.streakPeakOpacity,
+          strongestLife01 * this.streakPeakOpacity * (0.58 / 0.52),
+        )
+      : Math.min(0.78, strongestLife01 * 0.9);
     this.streaks.visible = active > 0;
     this.streaks.instanceMatrix.needsUpdate = true;
   }

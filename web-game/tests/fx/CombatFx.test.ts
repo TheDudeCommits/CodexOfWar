@@ -183,6 +183,87 @@ describe("Round008 authored combat FX contract", () => {
     fx.dispose();
   });
 
+  it("preserves the exact legacy contact stack when no Horde style is supplied", () => {
+    for (const defeated of [false, true]) {
+      const fx = new CombatFx();
+      fx.burst(0, 1.34, 0, 0, -1, 5, defeated);
+      const streaks = fx.root.getObjectByName(
+        "fx.directional-tapered-streaks",
+      ) as THREE.InstancedMesh;
+      const flash = fx.root.getObjectByName("fx.contact-local-flash") as THREE.Mesh;
+      const core = fx.root.getObjectByName("fx.contact-hot-core") as THREE.Mesh;
+      const light = fx.root.children.find(
+        (child): child is THREE.PointLight => child instanceof THREE.PointLight,
+      )!;
+      const streakMaterial = streaks.material as THREE.MeshBasicMaterial;
+      const flashMaterial = flash.material as THREE.MeshBasicMaterial;
+      const coreMaterial = core.material as THREE.MeshBasicMaterial;
+
+      expect(fx.getTelemetry()).toMatchObject({
+        flash: {
+          opacity: 0.82,
+          scale: defeated ? 0.23 : 0.19,
+        },
+        streaks: { opacity: 0.78 },
+      });
+      expect(streakMaterial.color.getHex()).toBe(0xffffff);
+      expect(flashMaterial.color.getHex()).toBe(defeated ? 0xffd78c : 0xffa657);
+      expect(coreMaterial.color.getHex()).toBe(defeated ? 0xffffe6 : 0xfff0c2);
+      expect(light.color.getHex()).toBe(defeated ? 0xffb968 : 0xff8742);
+      expect(coreMaterial.opacity).toBe(1);
+      expect(core.scale.x).toBe(defeated ? 0.072 : 0.058);
+      expect(light.intensity).toBe(defeated ? 2 : 1);
+      expect(streakMaterial.toneMapped).toBe(false);
+      expect(flashMaterial.toneMapped).toBe(false);
+      expect(coreMaterial.toneMapped).toBe(false);
+
+      const instanceColor = new THREE.Color();
+      streaks.getColorAt(0, instanceColor);
+      expect(instanceColor.getHex()).toBe(0xffdf9a);
+      streaks.getColorAt(1, instanceColor);
+      expect(instanceColor.getHex()).toBe(0xff9443);
+      streaks.getColorAt(15, instanceColor);
+      expect(instanceColor.getHex()).toBe(0xff5932);
+
+      const dt = 0.01;
+      fx.update(dt, dt);
+      const life01 = 1 - dt / (defeated ? 0.15 : 0.125);
+      expect(flashMaterial.opacity).toBeCloseTo(0.82 * Math.pow(life01, 0.68), 10);
+      expect(coreMaterial.opacity).toBeCloseTo(Math.min(1, life01 * 1.65), 10);
+      expect(flash.scale.x).toBeCloseTo(
+        (defeated ? 0.23 : 0.19) + (1 - life01) * 0.08,
+        10,
+      );
+      expect(core.scale.x).toBeCloseTo(
+        (defeated ? 0.072 : 0.058) * (0.72 + life01 * 0.28),
+        10,
+      );
+      expect(light.intensity).toBeCloseTo((defeated ? 2 : 1) * life01 * life01, 10);
+      fx.dispose();
+    }
+  });
+
+  it("retains each styled normal, special, and defeat streak peak", () => {
+    const cases = [
+      { defeated: false, special: false, expected: 0.46 },
+      { defeated: false, special: true, expected: 0.46 * 1.12 },
+      { defeated: true, special: false, expected: 0.58 },
+      { defeated: true, special: true, expected: 0.58 * 1.12 },
+    ] as const;
+
+    for (const sample of cases) {
+      const fx = new CombatFx();
+      fx.burst(0, 1.34, 0, 0, -1, 8, sample.defeated, {
+        weapon: "greatsword",
+        special: sample.special,
+      });
+      expect(fx.getTelemetry().streaks.opacity).toBeCloseTo(sample.expected, 6);
+      fx.update(0.001, 0.001);
+      expect(fx.getTelemetry().streaks.opacity).toBeCloseTo(sample.expected, 6);
+      fx.dispose();
+    }
+  });
+
   it("uses saturated weapon palettes without a white contact blowout", () => {
     const fx = new CombatFx();
     fx.burst(0, 1.34, 0, 0, -1, 3, false, {

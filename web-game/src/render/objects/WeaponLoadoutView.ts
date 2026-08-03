@@ -156,13 +156,11 @@ export class WeaponLoadoutView {
   private readonly twinLeft: ForgedWeapon | null;
   private readonly twinRight: ForgedWeapon | null;
   private readonly authoredGreatswordScale: THREE.Vector3 | null;
-  private readonly authoredGreatswordRotation: THREE.Euler | null;
   private activeWeapon: WeaponVisualID | null = null;
 
   constructor(heroRoot: THREE.Object3D) {
     this.authoredGreatsword = heroRoot.getObjectByName("stormcage-two-hand-socket") ?? null;
     this.authoredGreatswordScale = this.authoredGreatsword?.scale.clone() ?? null;
-    this.authoredGreatswordRotation = this.authoredGreatsword?.rotation.clone() ?? null;
     const weaponSocket = heroRoot.getObjectByName("weapon_socket") ?? null;
     const leftHand = heroRoot.getObjectByName("hand_l") ?? null;
     const rightHand = heroRoot.getObjectByName("hand_r") ?? null;
@@ -225,9 +223,6 @@ export class WeaponLoadoutView {
       if (this.authoredGreatswordScale) {
         this.authoredGreatsword.scale.copy(this.authoredGreatswordScale);
       }
-      if (this.authoredGreatswordRotation) {
-        this.authoredGreatsword.rotation.copy(this.authoredGreatswordRotation);
-      }
     }
   }
 
@@ -278,24 +273,6 @@ export class WeaponLoadoutView {
       this.authoredGreatsword.scale
         .copy(this.authoredGreatswordScale)
         .multiplyScalar(WEAPON_PRESENTATION_SCALE.greatsword);
-      if (this.authoredGreatswordRotation) {
-        this.authoredGreatsword.rotation.copy(this.authoredGreatswordRotation);
-      }
-      if (state.activeWeapon === "greatsword" && actionKind !== "none") {
-        if (actionKind === "special") {
-          this.authoredGreatsword.rotation.set(
-            -0.28 * arc,
-            0.54 + 2.15 * arc,
-            -0.55 * direction,
-          );
-        } else {
-          this.authoredGreatsword.rotation.set(
-            0.08 * arc,
-            0.54 + 1.45 * direction,
-            -0.65 * arc,
-          );
-        }
-      }
     }
   }
 

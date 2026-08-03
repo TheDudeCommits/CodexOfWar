@@ -97,11 +97,11 @@ describe("WeaponLoadoutView", () => {
     loadout.dispose();
   });
 
-  it("gives each normal and special strike a materially different socket pose", () => {
+  it("gives forged loadouts materially different normal and special socket poses", () => {
     const fixture = rigFixture();
     const loadout = new WeaponLoadoutView(fixture.root);
 
-    for (const activeWeapon of ["katana", "greatsword", "twin-blades"] as const) {
+    for (const activeWeapon of ["katana", "twin-blades"] as const) {
       loadout.update({
         activeWeapon,
         specialCooldown01: 0,
@@ -130,7 +130,7 @@ describe("WeaponLoadoutView", () => {
     loadout.dispose();
   });
 
-  it("restores the authored greatsword rotation after special, idle, switch, and dispose", () => {
+  it("leaves authored greatsword rotation under HeroView ownership", () => {
     const fixture = rigFixture();
     fixture.greatsword.rotation.set(0.12, 0.6, -0.08);
     const baseline = fixture.greatsword.rotation.clone();
@@ -143,7 +143,7 @@ describe("WeaponLoadoutView", () => {
       actionKind: "special",
       actionProgress01: 0.5,
     });
-    expect(fixture.greatsword.rotation.toArray()).not.toEqual(baseline.toArray());
+    expect(fixture.greatsword.rotation.toArray()).toEqual(baseline.toArray());
 
     loadout.update({
       activeWeapon: "greatsword",

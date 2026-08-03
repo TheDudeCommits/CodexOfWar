@@ -928,13 +928,29 @@ export class HeroView {
   ): void {
     setTransform(this.visual, sample.model);
     if (this.authoredWeapon) {
-      this.authoredWeapon.rotation.set(
-        sample.grip.weaponMountRotation[0],
-        ROUND005_WEAPON_AXIAL_ROLL +
-          sample.weaponAxialRollOffset +
-          sample.grip.weaponMountRotation[1],
-        sample.grip.weaponMountRotation[2],
-      );
+      const greatswordAction = hordeWeapon?.activeWeapon === "greatsword"
+        ? hordeWeapon.actionKind ?? "none"
+        : "none";
+      if (greatswordAction === "none") {
+        this.authoredWeapon.rotation.set(
+          sample.grip.weaponMountRotation[0],
+          ROUND005_WEAPON_AXIAL_ROLL +
+            sample.weaponAxialRollOffset +
+            sample.grip.weaponMountRotation[1],
+          sample.grip.weaponMountRotation[2],
+        );
+      } else {
+        const progress = clamp(hordeWeapon?.actionProgress01 ?? 0, 0, 1);
+        const arc = Math.sin(progress * Math.PI);
+        const direction = Math.sin(progress * Math.PI * 2);
+        this.authoredWeapon.rotation.set(
+          greatswordAction === "special" ? -0.28 * arc : 0.08 * arc,
+          greatswordAction === "special"
+            ? 0.54 + 2.15 * arc
+            : 0.54 + 1.45 * direction,
+          greatswordAction === "special" ? -0.55 * direction : -0.65 * arc,
+        );
+      }
     }
     addLocalRotation(this.poseBones.pelvis, sample.bones.pelvis);
     addLocalRotation(this.poseBones.spine01, sample.bones.spine01);

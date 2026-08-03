@@ -70,9 +70,12 @@ export class RenderBridge {
     dt: number,
   ): void {
     this.arena.update(elapsed);
+    // The loadout establishes visibility and authored-weapon scale first.
+    // HeroView then owns the final greatsword rotation and closes the support
+    // hand against that final transform.
+    this.weaponLoadout.update(weapon);
     this.hero.update(player, elapsed, weapon);
     this.enemyField.update(enemies, elapsed);
-    this.weaponLoadout.update(weapon);
     this.combatFx.update(dt, elapsed);
   }
 
