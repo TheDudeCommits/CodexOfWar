@@ -325,7 +325,9 @@ export class GameApp {
     ) {
       throw new Error("targetOffsetMicrometres must contain exactly three signed safe integers");
     }
-    this.pause();
+    // Keep the production animation loop alive while the simulation is
+    // paused. Capture resumes release fixed updates through that same loop;
+    // stopping it here would make the first strict reset impossible to run.
     const [rightMicrometres, upMicrometres, forwardMicrometres] =
       options.targetOffsetMicrometres;
     const initial = createInitialWorld({

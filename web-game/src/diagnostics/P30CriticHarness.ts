@@ -184,6 +184,13 @@ function eventTick(event: GameEvent, fallbackTick: number): number {
   return "tick" in event && Number.isSafeInteger(event.tick) ? event.tick : fallbackTick;
 }
 
+export function isValidP30ResetPauseState(
+  simulationPaused: boolean,
+  capturePaused: boolean,
+): boolean {
+  return simulationPaused && capturePaused;
+}
+
 class P30CriticController {
   private readonly armedTicks = new Set<number>();
   private readonly inputEdgeLog: InputEdgeReceipt[] = [];
@@ -243,8 +250,11 @@ class P30CriticController {
     if (state.tick !== -1) {
       this.errors.push(`resetAndPause ended at tick ${state.tick}; expected -1`);
     }
-    if (!this.app.isSimulationPaused || this.app.isRuntimeCapturePaused) {
-      this.errors.push("resetAndPause did not leave the pre-update scenario normally paused");
+    if (!isValidP30ResetPauseState(
+      this.app.isSimulationPaused,
+      this.app.isRuntimeCapturePaused,
+    )) {
+      this.errors.push("resetAndPause did not leave the pre-update scenario capture-paused");
     }
     this.recordStateDigest(state);
   }
@@ -308,12 +318,10 @@ class P30CriticController {
       return;
     }
     this.heavyEdgeAbsoluteTick = absoluteSimulationTick;
-    if (absoluteSimulationTick !== P30_HEAVY_RISING_EDGE_ABSOLUTE_TICK) {
-      this.errors.push(
-        `Heavy-strike rising edge sampled at absolute tick ${absoluteSimulationTick}; ` +
-          `expected ${P30_HEAVY_RISING_EDGE_ABSOLUTE_TICK}`,
-      );
-    }
+    // The canonical trace rises at 24, while the locked +7 causality trace
+    // intentionally rises at 31. Record the trusted edge and let the
+    // evaluator compare it to the selected tape instead of treating the
+    // shifted trace as a runtime error.
     const source = receipt.heavyStrikeSource;
     this.inputEdgeLog.push({
       eventID: `input-${String(this.inputEdgeLog.length + 1).padStart(4, "0")}`,

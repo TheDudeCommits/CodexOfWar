@@ -760,7 +760,7 @@ export class HeroView {
       weapon.scene.traverse((node) => {
         if (!(node as THREE.Mesh).isMesh) return;
         const mesh = node as THREE.Mesh;
-        if (mesh.name !== "Cylinder010" && mesh.name !== "Cylinder010_1") return;
+        if (mesh.name !== "Dawnbreak_Blade") return;
         this.bladePrimitives.push({ mesh, materialGroupIndices: [0] });
       });
     }
@@ -1372,10 +1372,22 @@ export class ZombieView {
       this.targetLandmarks.head = boneByAnyName(zombie.scene, "Head");
       this.targetLandmarks.leftShoulder = boneByAnyName(zombie.scene, "Shoulder.L", "ShoulderL");
       this.targetLandmarks.leftElbow = boneByAnyName(zombie.scene, "LowerArm.L", "LowerArmL");
-      this.targetLandmarks.leftWrist = boneByAnyName(zombie.scene, "Index1.L", "Hand.L", "HandL");
+      this.targetLandmarks.leftWrist = boneByAnyName(
+        zombie.scene,
+        "Index1.L",
+        "Index1L",
+        "Hand.L",
+        "HandL",
+      );
       this.targetLandmarks.rightShoulder = boneByAnyName(zombie.scene, "Shoulder.R", "ShoulderR");
       this.targetLandmarks.rightElbow = boneByAnyName(zombie.scene, "LowerArm.R", "LowerArmR");
-      this.targetLandmarks.rightWrist = boneByAnyName(zombie.scene, "Index1.R", "Hand.R", "HandR");
+      this.targetLandmarks.rightWrist = boneByAnyName(
+        zombie.scene,
+        "Index1.R",
+        "Index1R",
+        "Hand.R",
+        "HandR",
+      );
       this.targetLandmarks.leftHip = boneByAnyName(zombie.scene, "UpperLeg.L", "UpperLegL");
       this.targetLandmarks.leftKnee = boneByAnyName(zombie.scene, "LowerLeg.L", "LowerLegL");
       this.targetLandmarks.leftAnkle = boneByAnyName(zombie.scene, "Foot.L", "FootL");
