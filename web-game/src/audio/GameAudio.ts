@@ -214,6 +214,7 @@ export class GameAudio {
   private masterBus: GainNode | null = null;
   private sfxBus: GainNode | null = null;
   private ambienceBus: GainNode | null = null;
+  private outputLimiter: DynamicsCompressorNode | null = null;
   private noiseBuffer: AudioBuffer | null = null;
   private ambienceSources: AudioScheduledSourceNode[] = [];
   private ambienceNodes: AudioNode[] = [];
@@ -404,6 +405,7 @@ export class GameAudio {
     this.masterBus = null;
     this.sfxBus = null;
     this.ambienceBus = null;
+    this.outputLimiter = null;
     this.unlocked = false;
     if (context && context.state !== "closed") void context.close().catch(() => undefined);
   }
@@ -427,13 +429,19 @@ export class GameAudio {
   }
 
   private ensureAudioGraph(context: AudioContext): void {
-    if (this.masterBus && this.sfxBus && this.ambienceBus) return;
+    if (this.masterBus && this.sfxBus && this.ambienceBus && this.outputLimiter) return;
     this.masterBus = context.createGain();
     this.sfxBus = context.createGain();
     this.ambienceBus = context.createGain();
+    this.outputLimiter = context.createDynamicsCompressor();
+    this.outputLimiter.threshold.value = -12;
+    this.outputLimiter.knee.value = 4;
+    this.outputLimiter.ratio.value = 16;
+    this.outputLimiter.attack.value = 0.003;
+    this.outputLimiter.release.value = 0.12;
     this.sfxBus.connect(this.masterBus);
     this.ambienceBus.connect(this.masterBus);
-    this.masterBus.connect(context.destination);
+    this.masterBus.connect(this.outputLimiter).connect(context.destination);
     this.updateBusGains();
   }
 

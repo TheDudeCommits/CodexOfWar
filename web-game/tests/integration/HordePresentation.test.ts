@@ -70,4 +70,16 @@ describe("Horde presentation adapters", () => {
       tone: "danger",
     });
   });
+
+  it("preserves player hit and death states for authored reactions", () => {
+    const simulation = new HordeSimulation({ seed: 9 });
+    simulation.state.player.motion = "hit";
+    simulation.state.player.hitStunTicksRemaining = 7;
+    expect(toLegacyPlayerState(simulation.state)).toMatchObject({
+      motion: "hit",
+      hitStunRemaining: 7 / 60,
+    });
+    simulation.state.player.motion = "dead";
+    expect(toLegacyPlayerState(simulation.state).motion).toBe("dead");
+  });
 });

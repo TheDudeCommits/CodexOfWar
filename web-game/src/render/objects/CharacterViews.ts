@@ -867,6 +867,7 @@ export class HeroView {
     this.captureAuthoredPose();
     this.latestPose = sampleHeroCombatPose(state.attackPhase, state.attackFrame);
     this.applyCombatPose(this.latestPose, hordeWeapon);
+    this.applyDamageReaction(state);
 
     this.trailSample = sampleBladeTrailFx(state.attackPhase, state.attackElapsed);
     this.applyTrailVisuals();
@@ -919,6 +920,19 @@ export class HeroView {
       layer.material.opacity = visible
         ? roundFx(layer.peakOpacity * this.trailSample.intensity)
         : 0;
+    }
+  }
+
+  private applyDamageReaction(state: PlayerState): void {
+    if (state.motion === "hit") {
+      const remaining = clamp((state.hitStunRemaining ?? 0) / (14 / 60), 0, 1);
+      const recoil = Math.sin((1 - remaining) * Math.PI);
+      this.visual.position.z += 0.24 * recoil;
+      this.visual.rotation.x -= 0.18 * recoil;
+      this.visual.rotation.z += 0.24 * recoil;
+    } else if (state.motion === "dead") {
+      this.visual.position.y -= 0.18;
+      this.visual.rotation.z += 0.92;
     }
   }
 
@@ -1050,6 +1064,17 @@ export class HeroView {
 
   private updateAuthoredAnimation(state: PlayerState, elapsed: number): void {
     const animator = this.animator!;
+    if (state.motion === "dead") {
+      const duration = animator.getDuration("Death01");
+      animator.setTime("Death01", duration * 0.92, false);
+      return;
+    }
+    if (state.motion === "hit") {
+      const duration = animator.getDuration("Hit_Chest");
+      const progress = 1 - clamp((state.hitStunRemaining ?? 0) / (14 / 60), 0, 1);
+      animator.setTime("Hit_Chest", progress * duration, false);
+      return;
+    }
     if (state.motion === "attack") {
       const duration = animator.getDuration("Sword_Regular_A");
       this.latestAuthoredTiming = sampleHeroAuthoredPoseTiming(

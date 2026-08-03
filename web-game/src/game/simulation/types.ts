@@ -3,7 +3,7 @@ export interface Vec2 {
   z: number;
 }
 
-export type PlayerMotion = "idle" | "move" | "sprint" | "dodge" | "attack";
+export type PlayerMotion = "idle" | "move" | "sprint" | "dodge" | "attack" | "hit" | "dead";
 export type EnemyMotion = "idle" | "hit" | "dead";
 export type AttackPhase = "idle" | "startup" | "active" | "recovery";
 
@@ -24,6 +24,8 @@ export interface PlayerState {
   dodgeRemaining: number;
   dodgeDirection: Vec2;
   invulnerableRemaining: number;
+  /** Presentation-only duration remaining for an authored damage reaction. */
+  hitStunRemaining?: number;
 }
 
 export interface EnemyState {

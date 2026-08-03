@@ -39,7 +39,9 @@ export function toLegacyPlayerState(state: HordeRunState): PlayerState {
       ? player.motion
       : player.motion === "special"
         ? "attack"
-        : "idle";
+        : player.motion === "hit" || player.motion === "dead"
+          ? player.motion
+          : "idle";
 
   return {
     position: { ...player.position },
@@ -58,6 +60,7 @@ export function toLegacyPlayerState(state: HordeRunState): PlayerState {
     dodgeRemaining: player.dodgeTicksRemaining * HORDE_FIXED_TIMESTEP,
     dodgeDirection: { ...player.dodgeDirection },
     invulnerableRemaining: player.invulnerableTicksRemaining * HORDE_FIXED_TIMESTEP,
+    hitStunRemaining: player.hitStunTicksRemaining * HORDE_FIXED_TIMESTEP,
   };
 }
 

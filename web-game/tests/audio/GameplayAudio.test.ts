@@ -42,12 +42,21 @@ class FakeGainNode {
   disconnect(): void {}
 }
 
+class FakeDynamicsCompressorNode extends FakeGainNode {
+  readonly threshold = new FakeAudioParam();
+  readonly knee = new FakeAudioParam();
+  readonly ratio = new FakeAudioParam();
+  readonly attack = new FakeAudioParam();
+  readonly release = new FakeAudioParam();
+}
+
 class FakeAudioContext {
   state: AudioContextState = "suspended";
   currentTime = 0;
   sampleRate = 48_000;
   readonly destination = {} as AudioDestinationNode;
   readonly gains: FakeGainNode[] = [];
+  readonly compressors: FakeDynamicsCompressorNode[] = [];
   resumeCalls = 0;
   closeCalls = 0;
   rejectResume = false;
@@ -56,6 +65,12 @@ class FakeAudioContext {
     const gain = new FakeGainNode();
     this.gains.push(gain);
     return gain as unknown as GainNode;
+  }
+
+  createDynamicsCompressor(): DynamicsCompressorNode {
+    const compressor = new FakeDynamicsCompressorNode();
+    this.compressors.push(compressor);
+    return compressor as unknown as DynamicsCompressorNode;
   }
 
   async resume(): Promise<void> {
@@ -211,6 +226,9 @@ describe("GameAudio gesture and bus behavior", () => {
     expect(context.resumeCalls).toBe(1);
     expect(audio.getSnapshot().unlocked).toBe(true);
     expect(context.gains).toHaveLength(3);
+    expect(context.compressors).toHaveLength(1);
+    expect(context.compressors[0]!.threshold.value).toBe(-12);
+    expect(context.compressors[0]!.ratio.value).toBe(16);
     expect(context.gains[0]!.gain.value).toBe(0);
     expect(audio.playCue("player-dodge")).toBe(false);
 

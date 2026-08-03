@@ -133,7 +133,22 @@ export class RenderBridge {
         );
         this.cameraController.kickShake(event.remainingHealth <= 0 ? 1.55 : event.special ? 1.3 : 1);
       } else if (event.type === "enemy-attack-hit") {
-        this.cameraController.kickShake(1.3);
+        const attacker = state.enemies.find((candidate) => candidate.id === event.enemyId);
+        if (attacker) {
+          const dx = state.player.position.x - attacker.position.x;
+          const dz = state.player.position.z - attacker.position.z;
+          const magnitude = Math.hypot(dx, dz);
+          this.combatFx.burst(
+            state.player.position.x,
+            1.42,
+            state.player.position.z,
+            magnitude > 0.0001 ? dx / magnitude : 0,
+            magnitude > 0.0001 ? dz / magnitude : -1,
+            100_000 + event.attackSerial,
+            false,
+          );
+        }
+        this.cameraController.kickShake(1.65);
       } else if (event.type === "enemy-attack-evaded") {
         this.cameraController.kickShake(0.35);
       }
