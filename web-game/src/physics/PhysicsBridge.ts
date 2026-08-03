@@ -3,11 +3,26 @@ import type { Vec2 } from "../game/simulation/types";
 
 const CHARACTER_CENTER_Y = 0.92;
 
+export interface PhysicsEnemy {
+  readonly id: string | number;
+  readonly position: Vec2;
+  readonly radius?: number;
+  readonly halfHeight?: number;
+}
+
+interface EnemyBodyEntry {
+  readonly body: RAPIER.RigidBody;
+  readonly radius: number;
+  readonly halfHeight: number;
+}
+
+type PhysicsEnemyInput = Vec2 | readonly PhysicsEnemy[];
+
 export class PhysicsBridge {
   private readonly world: RAPIER.World;
   private readonly playerBody: RAPIER.RigidBody;
   private readonly playerCollider: RAPIER.Collider;
-  private readonly enemyBody: RAPIER.RigidBody;
+  private readonly enemyBodies = new Map<string, EnemyBodyEntry>();
   private readonly characterController: RAPIER.KinematicCharacterController;
 
   private constructor() {
@@ -27,14 +42,6 @@ export class PhysicsBridge {
       this.playerBody,
     );
 
-    this.enemyBody = this.world.createRigidBody(
-      RAPIER.RigidBodyDesc.fixed().setTranslation(0, 0.94, -0.15),
-    );
-    this.world.createCollider(
-      RAPIER.ColliderDesc.capsule(0.58, 0.42).setCollisionGroups(0x0002_ffff),
-      this.enemyBody,
-    );
-
     this.characterController = this.world.createCharacterController(0.02);
     this.characterController.setApplyImpulsesToDynamicBodies(false);
     this.characterController.enableAutostep(0.28, 0.12, true);
@@ -46,20 +53,25 @@ export class PhysicsBridge {
     return new PhysicsBridge();
   }
 
-  reset(player: Vec2, enemy: Vec2): void {
+  reset(player: Vec2, enemies: PhysicsEnemyInput): void {
     this.playerBody.setTranslation({ x: player.x, y: CHARACTER_CENTER_Y, z: player.z }, true);
     this.playerBody.setNextKinematicTranslation({
       x: player.x,
       y: CHARACTER_CENTER_Y,
       z: player.z,
     });
-    this.enemyBody.setTranslation({ x: enemy.x, y: 0.94, z: enemy.z }, true);
+    this.syncEnemies(enemies, true);
     this.world.step();
   }
 
-  resolvePlayerMovement(previous: Vec2, desired: Vec2, enemy: Vec2, dt: number): Vec2 {
+  resolvePlayerMovement(
+    previous: Vec2,
+    desired: Vec2,
+    enemies: PhysicsEnemyInput,
+    dt: number,
+  ): Vec2 {
     this.world.timestep = dt;
-    this.enemyBody.setTranslation({ x: enemy.x, y: 0.94, z: enemy.z }, false);
+    this.syncEnemies(enemies, false);
     const requested = {
       x: desired.x - previous.x,
       y: 0,
@@ -80,5 +92,50 @@ export class PhysicsBridge {
 
   dispose(): void {
     this.world.free();
+  }
+
+  private syncEnemies(input: PhysicsEnemyInput, wakeUp: boolean): void {
+    const enemies = Array.isArray(input)
+      ? input
+      : [{ id: "legacy-target", position: input as Vec2 }];
+    const retained = new Set<string>();
+    for (const enemy of enemies) {
+      const id = String(enemy.id);
+      if (retained.has(id)) throw new Error(`Duplicate physics enemy id: ${id}`);
+      retained.add(id);
+      const radius = Math.max(0.18, Math.min(1.2, enemy.radius ?? 0.42));
+      const halfHeight = Math.max(0.2, Math.min(1.4, enemy.halfHeight ?? 0.58));
+      let entry = this.enemyBodies.get(id);
+      if (entry && (Math.abs(entry.radius - radius) > 1e-6 || Math.abs(entry.halfHeight - halfHeight) > 1e-6)) {
+        this.world.removeRigidBody(entry.body);
+        this.enemyBodies.delete(id);
+        entry = undefined;
+      }
+      if (!entry) {
+        const body = this.world.createRigidBody(
+          RAPIER.RigidBodyDesc.fixed().setTranslation(
+            enemy.position.x,
+            radius + halfHeight,
+            enemy.position.z,
+          ),
+        );
+        this.world.createCollider(
+          RAPIER.ColliderDesc.capsule(halfHeight, radius).setCollisionGroups(0x0002_ffff),
+          body,
+        );
+        entry = { body, radius, halfHeight };
+        this.enemyBodies.set(id, entry);
+      }
+      entry.body.setTranslation({
+        x: enemy.position.x,
+        y: radius + halfHeight,
+        z: enemy.position.z,
+      }, wakeUp);
+    }
+    for (const [id, entry] of [...this.enemyBodies]) {
+      if (retained.has(id)) continue;
+      this.world.removeRigidBody(entry.body);
+      this.enemyBodies.delete(id);
+    }
   }
 }
