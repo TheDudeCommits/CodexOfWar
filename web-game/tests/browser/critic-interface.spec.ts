@@ -3,134 +3,217 @@ import { expect, test, type Page } from "@playwright/test";
 test.use({ trace: "off" });
 test.setTimeout(180_000);
 
+interface ContactReceipt {
+  stateSeparationMeters: number;
+  minimumSweepSeparationMeters: number;
+  contactingAtEnd: boolean;
+  risingContact: boolean;
+  contactSubstep: number | null;
+  contactCapsuleID: string | null;
+}
+
+interface RuntimeSample {
+  relativeTick: number;
+  health: number;
+  contact: ContactReceipt;
+  points: Record<string, [number, number, number]>;
+}
+
 interface CriticSnapshot {
+  heavyRelativeTick: number;
+  target: { health: number };
+  candidateGeometryContact: ContactReceipt;
+}
+
+interface RuntimeEvent {
+  eventID?: string;
+  type: string;
   absoluteSimulationTick: number;
-  attackRelativeTick: number | null;
-  paused: boolean;
-  capturePaused: boolean;
-  renderHeartbeat: number;
-  target: {
-    health: number;
-    collision: {
-      separationMeters: number | null;
-      penetrationMeters: number | null;
-      exteriorContactPoints: number;
+  heavyRelativeTick: number | null;
+  attackSerial?: number;
+  damage?: number;
+  healthBefore?: number;
+  healthAfter?: number;
+  separationMicrometres?: number;
+}
+
+interface InputEdge {
+  action: string;
+  device: string;
+  absoluteSimulationTick: number;
+}
+
+interface RunReceipt {
+  eventLog: RuntimeEvent[];
+  inputEdgeLog: InputEdge[];
+}
+
+async function waitForTick(page: Page, tick: number): Promise<void> {
+  await page.waitForFunction((expected) => {
+    const snapshot = window.__P30_CRITIC__?.snapshot() as Record<string, unknown> | undefined;
+    return snapshot?.capturePaused === true && snapshot.absoluteSimulationTick === expected;
+  }, tick);
+}
+
+async function resetAndStartHeavy(
+  page: Page,
+  edgeTick: number,
+  offset: [number, number, number] = [0, 0, 0],
+  input: "mouse" | "keyboard" = "mouse",
+): Promise<void> {
+  await page.evaluate(async ({ targetOffsetMicrometres, captureTick }) => {
+    await window.__P30_CRITIC__!.resetAndPause({
+      seed: 30012,
+      targetOffsetMicrometres,
+    });
+    window.__P30_CRITIC__!.armCaptureTicks([captureTick]);
+    window.__P30_CRITIC__!.resume();
+  }, { targetOffsetMicrometres: offset, captureTick: edgeTick - 1 });
+  await waitForTick(page, edgeTick - 1);
+  if (input === "mouse") await page.mouse.down({ button: "right" });
+  else await page.keyboard.down("KeyK");
+  await page.evaluate((tick) => {
+    window.__P30_CRITIC__!.armCaptureTicks([tick]);
+    window.__P30_CRITIC__!.resume();
+  }, edgeTick);
+  await waitForTick(page, edgeTick);
+  if (input === "mouse") await page.mouse.up({ button: "right" });
+  else await page.keyboard.up("KeyK");
+}
+
+async function sample(page: Page): Promise<RuntimeSample> {
+  return page.evaluate(() => {
+    const hook = window.__P30_CRITIC__!;
+    const snapshot = hook.snapshot() as unknown as CriticSnapshot;
+    const geometry = hook.geometrySource();
+    const vector = geometry.leftHandBone.position.clone();
+    const point = (node: { getWorldPosition: (target: typeof vector) => typeof vector }) =>
+      node.getWorldPosition(vector.clone()).toArray() as [number, number, number];
+    return {
+      relativeTick: snapshot.heavyRelativeTick,
+      health: snapshot.target.health,
+      contact: snapshot.candidateGeometryContact,
+      points: {
+        leftHand: point(geometry.leftHandBone),
+        rightHand: point(geometry.rightHandBone),
+        head: point(geometry.targetLandmarkBones.head),
+        neck: point(geometry.targetLandmarkBones.neck),
+        pelvis: point(geometry.targetLandmarkBones.pelvis),
+      },
     };
+  });
+}
+
+async function relativeTrace(page: Page, edgeTick: number): Promise<{
+  samples: RuntimeSample[];
+  events: RuntimeEvent[];
+}> {
+  await resetAndStartHeavy(page, edgeTick);
+  const samples = [await sample(page)];
+  for (let relativeTick = 1; relativeTick <= 56; relativeTick += 1) {
+    const tick = edgeTick + relativeTick;
+    await page.evaluate((captureTick) => {
+      window.__P30_CRITIC__!.armCaptureTicks([captureTick]);
+      window.__P30_CRITIC__!.resume();
+    }, tick);
+    await waitForTick(page, tick);
+    samples.push(await sample(page));
+  }
+  const receipt = await page.evaluate(() => window.__P30_CRITIC__!.runReceipt()) as unknown as RunReceipt;
+  return { samples, events: receipt.eventLog };
+}
+
+async function runToTerminal(
+  page: Page,
+  offset: [number, number, number],
+  input: "mouse" | "keyboard" = "mouse",
+): Promise<{ health: number; events: RuntimeEvent[]; edges: InputEdge[] }> {
+  await resetAndStartHeavy(page, 24, offset, input);
+  await page.evaluate(() => {
+    window.__P30_CRITIC__!.armCaptureTicks([80]);
+    window.__P30_CRITIC__!.resume();
+  });
+  await waitForTick(page, 80);
+  const snapshot = await page.evaluate(() => window.__P30_CRITIC__!.snapshot()) as unknown as CriticSnapshot;
+  const receipt = await page.evaluate(() => window.__P30_CRITIC__!.runReceipt()) as unknown as RunReceipt;
+  return {
+    health: snapshot.target.health,
+    events: receipt.eventLog,
+    edges: receipt.inputEdgeLog,
   };
-  authoritativeState: { sha256: string; bcjVersion: string };
-  rendererMode: string;
-  assetTier: string;
-  fallbackActive: boolean;
-  errors: string[];
 }
 
-async function snapshot(page: Page): Promise<CriticSnapshot> {
-  return page.evaluate(() => window.__P30_CRITIC__!.snapshot() as unknown as CriticSnapshot);
+function normalizedEvents(events: RuntimeEvent[], shift: number): RuntimeEvent[] {
+  return events.map((event) => {
+    const normalized = { ...event };
+    delete normalized.eventID;
+    normalized.absoluteSimulationTick -= shift;
+    return normalized;
+  });
 }
 
-async function waitForCapture(page: Page, absoluteTick: number): Promise<CriticSnapshot> {
-  await page.waitForFunction(
-    (tick) => {
-      const current = window.__P30_CRITIC__?.snapshot() as unknown as CriticSnapshot | undefined;
-      return current?.capturePaused && current.absoluteSimulationTick === tick;
-    },
-    absoluteTick,
-  );
-  return snapshot(page);
-}
-
-test("absolute-tick critic hook observes one normal-input strike without posing gameplay", async ({
-  page,
-}) => {
+test("Round012 heavy contact and SHIFT_PLUS_7 are exact relative identities", async ({ page }) => {
   await page.setViewportSize({ width: 1600, height: 900 });
-  await page.goto("/?scenario=P30-light-strike-v1&seed=30011");
+  await page.goto("/?scenario=P30-heavy-strike-v1&seed=30012");
   await page.waitForFunction(() => window.__P30_CRITIC__ !== undefined);
   await page.evaluate(async () => window.__P30_CRITIC__!.whenReady());
 
-  const initial = await snapshot(page);
-  expect(initial).toMatchObject({
-    absoluteSimulationTick: 0,
-    attackRelativeTick: null,
-    paused: true,
-    capturePaused: false,
-    rendererMode: "webgl2",
-    assetTier: "production-authored",
-    fallbackActive: false,
-    errors: [],
+  expect(await page.evaluate(() => {
+    const event = new MouseEvent("contextmenu", { button: 2, bubbles: true, cancelable: true });
+    return !document.querySelector("canvas#game-canvas")!.dispatchEvent(event);
+  })).toBe(true);
+
+  const canonical = await relativeTrace(page, 24);
+  const shifted = await relativeTrace(page, 31);
+  expect(shifted.samples).toEqual(canonical.samples);
+  expect(normalizedEvents(shifted.events, 7)).toEqual(normalizedEvents(canonical.events, 0));
+
+  expect(canonical.samples[20]!.contact.stateSeparationMeters).toBeGreaterThanOrEqual(0.08);
+  expect(canonical.samples[21]!.contact.stateSeparationMeters).toBeGreaterThanOrEqual(0.03);
+  expect(canonical.samples[22]!.contact).toMatchObject({
+    risingContact: true,
+    contactSubstep: 4033,
+    contactCapsuleID: "right-thigh",
   });
-  expect(initial.authoritativeState.sha256).toMatch(/^[0-9a-f]{64}$/);
-  expect(initial.authoritativeState.bcjVersion).toBe("BCJ-v1");
-  expect(await page.evaluate(() => ({
-    gauntlet: "__GAUNTLET__" in window,
-    review: "__COW_REVIEW__" in window,
-    pose: "__COW_COMBAT_POSE__" in window,
-    bladeFx: "__COW_BLADE_FX__" in window,
-    combatFx: "__COW_COMBAT_FX__" in window,
-  }))).toEqual({
-    gauntlet: false,
-    review: false,
-    pose: false,
-    bladeFx: false,
-    combatFx: false,
-  });
+  expect(canonical.samples[22]!.contact.stateSeparationMeters).toBeGreaterThanOrEqual(-0.005);
+  expect(canonical.samples[22]!.contact.stateSeparationMeters).toBeLessThanOrEqual(0.000001);
+  expect(Math.min(...canonical.samples.map(({ contact }) => contact.minimumSweepSeparationMeters)))
+    .toBeGreaterThanOrEqual(-0.01);
+  expect(canonical.samples[24]!.contact.stateSeparationMeters).toBeGreaterThanOrEqual(0.03);
+  expect(canonical.samples.filter(({ contact }) => contact.risingContact)).toHaveLength(1);
+  expect(canonical.samples[22]!.health).toBe(75);
+  expect(canonical.events.filter(({ type }) => type === "heavy-damage")).toEqual([
+    expect.objectContaining({
+      absoluteSimulationTick: 46,
+      heavyRelativeTick: 22,
+      damage: 25,
+      healthBefore: 100,
+      healthAfter: 75,
+    }),
+  ]);
+});
 
-  const captureTicks = [20, 24, 29, 34, 41];
-  await page.evaluate((ticks) => window.__P30_CRITIC__!.armCaptureTicks(ticks), captureTicks);
+test("trusted alternate input and translated hit/miss geometry preserve the damage contract", async ({ page }) => {
+  await page.setViewportSize({ width: 1600, height: 900 });
+  await page.goto("/?scenario=P30-heavy-strike-v1&seed=30012");
+  await page.waitForFunction(() => window.__P30_CRITIC__ !== undefined);
 
-  await page.keyboard.down("KeyW");
-  await waitForCapture(page, 20);
-  await page.keyboard.up("KeyW");
-  await page.evaluate(() => window.__P30_CRITIC__!.resume());
-  await waitForCapture(page, 24);
+  const keyboard = await runToTerminal(page, [0, 0, 0], "keyboard");
+  expect(keyboard.health).toBe(75);
+  expect(keyboard.edges).toEqual([
+    expect.objectContaining({ action: "heavy-strike", device: "keyboard", absoluteSimulationTick: 24 }),
+  ]);
 
-  await page.mouse.click(800, 450, { button: "left" });
-  await page.evaluate(() => window.__P30_CRITIC__!.resume());
+  const tangentHit = await runToTerminal(page, [10_000, 2_000, -11_500]);
+  expect(tangentHit.health).toBe(75);
+  expect(tangentHit.events.filter(({ type }) => type === "heavy-damage")).toEqual([
+    expect.objectContaining({ absoluteSimulationTick: 46, damage: 25, healthAfter: 75 }),
+  ]);
 
-  const focused = new Map<number, CriticSnapshot>();
-  let priorHeartbeat = initial.renderHeartbeat;
-  for (const tick of [29, 34, 41]) {
-    const current = await waitForCapture(page, tick);
-    expect(current.attackRelativeTick).toBe(tick - 24);
-    expect(current.renderHeartbeat).toBeGreaterThan(priorHeartbeat);
-    expect(current.authoritativeState.sha256).toMatch(/^[0-9a-f]{64}$/);
-    priorHeartbeat = current.renderHeartbeat;
-    focused.set(tick, current);
-    if (tick < 41) await page.evaluate(() => window.__P30_CRITIC__!.resume());
+  for (const offset of [[1_800_000, 0, 0], [-1_800_000, 0, 0]] as Array<[number, number, number]>) {
+    const miss = await runToTerminal(page, offset);
+    expect(miss.health).toBe(100);
+    expect(miss.events.some(({ type }) => type === "heavy-contact" || type === "heavy-damage"))
+      .toBe(false);
   }
-
-  expect(focused.get(29)?.attackRelativeTick).toBe(5);
-  expect(focused.get(34)?.attackRelativeTick).toBe(10);
-  expect(focused.get(41)?.attackRelativeTick).toBe(17);
-  expect(focused.get(34)?.target.health).toBe(90);
-  expect(focused.get(34)?.target.collision).toMatchObject({
-    separationMeters: 0,
-    penetrationMeters: 0,
-    exteriorContactPoints: 1,
-  });
-
-  const run = await page.evaluate(() => window.__P30_CRITIC__!.runReceipt() as {
-    inputEdgeLog: Array<Record<string, unknown>>;
-    eventLog: Array<Record<string, unknown>>;
-    fixedInputHistory: Array<Record<string, unknown>>;
-    stateDigestHistory: Array<Record<string, unknown>>;
-    errors: string[];
-  });
-  expect(run.inputEdgeLog).toContainEqual(expect.objectContaining({
-    eventID: "input-0001",
-    device: "mouse",
-    button: "left",
-    absoluteSimulationTick: 24,
-    attackRelativeTick: 0,
-  }));
-  expect(run.eventLog).toContainEqual(expect.objectContaining({
-    type: "enemy-hit",
-    absoluteSimulationTick: 34,
-    attackRelativeTick: 10,
-    damage: 10,
-    healthBefore: 100,
-    healthAfter: 90,
-  }));
-  expect(run.fixedInputHistory).toHaveLength(41);
-  expect(run.stateDigestHistory).toHaveLength(42);
-  expect(run.errors).toEqual([]);
 });

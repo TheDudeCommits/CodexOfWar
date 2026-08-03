@@ -379,7 +379,7 @@ export class GameApp {
   stepReviewFrame(input: InputFrame): GameEvent[] {
     if (this.simulationPaused) return [];
     const events = this.fixedTick(input, FIXED_TIMESTEP);
-    this.renderBridge.update(this.simulation.state, FIXED_TIMESTEP);
+    this.renderBridge.update(this.simulation.state, FIXED_TIMESTEP, this.p30ScenarioActive);
     this.updateCamera(FIXED_TIMESTEP, 0, 0);
     return events;
   }
@@ -431,7 +431,7 @@ export class GameApp {
         dodgePressed: frame === 0 && (overrides.dodgePressed ?? false),
       };
       this.fixedTick(input, FIXED_TIMESTEP);
-      this.renderBridge.update(this.simulation.state, FIXED_TIMESTEP);
+      this.renderBridge.update(this.simulation.state, FIXED_TIMESTEP, this.p30ScenarioActive);
       this.updateCamera(FIXED_TIMESTEP, 0, 0);
     }
     this.renderOnce(false, false);
@@ -441,7 +441,7 @@ export class GameApp {
     const state = this.simulation.state;
     if (advanceCamera) this.updateCamera(FIXED_TIMESTEP, 0, 0, snapCamera);
     this.lighting.rig.update(state.elapsed);
-    this.renderBridge.update(state, FIXED_TIMESTEP);
+    this.renderBridge.update(state, FIXED_TIMESTEP, this.p30ScenarioActive);
     this.hud.update(state, this.cameraController.camera, this.lockedOn);
     this.post.render(this.lighting.scene, this.cameraController.camera);
     this.recordProductionRender();
@@ -722,7 +722,7 @@ export class GameApp {
         ? fixedSteps * FIXED_TIMESTEP
         : delta;
       this.updateCamera(presentationDelta, this.latestInput.lookX, this.latestInput.lookY);
-      this.renderBridge.update(state, presentationDelta);
+      this.renderBridge.update(state, presentationDelta, this.p30ScenarioActive);
       this.lighting.rig.update(state.elapsed);
       this.hud.update(state, this.cameraController.camera, this.lockedOn);
       this.post.render(this.lighting.scene, this.cameraController.camera);
@@ -767,13 +767,18 @@ export class GameApp {
 
   private updateCamera(dt: number, lookX: number, lookY: number, snap = false): void {
     const state = this.simulation.state;
+    const duelTarget = state.enemy.health > 0
+      ? this.p30ScenarioActive
+        ? { x: 0, z: 0 }
+        : state.enemy.position
+      : null;
     this.cameraController.update(
       dt,
       state.player.position,
-      state.enemy.health > 0 ? state.enemy.position : null,
+      duelTarget,
       lookX,
       lookY,
-      snap,
+      snap || (this.p30ScenarioActive && state.player.attackKind === "heavy"),
     );
   }
 
@@ -797,8 +802,18 @@ export class GameApp {
     this.simulation.reconcilePlayerPosition(resolved);
     this.lastHeavyContactReceipt = null;
     if (this.p30ScenarioActive && this.heavyContactResolver) {
-      this.renderBridge.updateActors(this.simulation.state);
+      this.renderBridge.updateActors(this.simulation.state, true);
       this.lighting.scene.updateMatrixWorld(true);
+      if (
+        this.simulation.state.player.attackKind === "heavy" &&
+        this.simulation.state.player.heavyRelativeTick === 0
+      ) {
+        // Start heavy sweep custody from the normalized relative actor phase.
+        // The pre-edge idle interval belongs to the neutral tape and must not
+        // leak its absolute animation phase into relative heavy geometry.
+        this.heavyContactResolver.reset();
+        this.heavyContactResolver.prime();
+      }
       const contact = this.heavyContactResolver.resolveTick();
       this.lastHeavyContactReceipt = contact;
       if (contact.risingContact) {

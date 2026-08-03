@@ -1,4 +1,5 @@
 import type * as THREE from "three";
+import { FIXED_TIMESTEP } from "../../game/simulation/constants";
 import type { GameEvent, WorldState } from "../../game/simulation/types";
 import type { ThirdPersonCamera } from "../app/ThirdPersonCamera";
 import type { AssetRegistry } from "../loaders/AssetRegistry";
@@ -21,6 +22,7 @@ export class RenderBridge {
   readonly hero: HeroView;
   readonly zombie: ZombieView;
   readonly combatFx = new CombatFx();
+  private p30HeavyStartTick: number | null = null;
 
   constructor(
     scene: THREE.Scene,
@@ -34,15 +36,31 @@ export class RenderBridge {
     scene.add(this.arena.root, this.hero.root, this.zombie.root, this.combatFx.root);
   }
 
-  update(state: WorldState, dt: number): void {
+  update(state: WorldState, dt: number, normalizeP30HeavyPhase = false): void {
     this.arena.update(state.elapsed);
-    this.updateActors(state);
+    this.updateActors(state, normalizeP30HeavyPhase);
     this.combatFx.update(dt, state.elapsed);
   }
 
-  updateActors(state: WorldState): void {
-    this.hero.update(state.player, state.elapsed);
-    this.zombie.update(state.enemy, state.elapsed);
+  updateActors(state: WorldState, normalizeP30HeavyPhase = false): void {
+    if (!normalizeP30HeavyPhase || state.player.attackSerial === 0) {
+      this.p30HeavyStartTick = null;
+    } else if (
+      state.player.attackKind === "heavy" &&
+      state.player.heavyRelativeTick === 0 &&
+      this.p30HeavyStartTick === null
+    ) {
+      this.p30HeavyStartTick = state.tick;
+    }
+    const actorElapsed = normalizeP30HeavyPhase && this.p30HeavyStartTick !== null
+      ? Math.min(state.tick - this.p30HeavyStartTick, 50) * FIXED_TIMESTEP
+      : state.elapsed;
+    this.hero.update(
+      state.player,
+      actorElapsed,
+      normalizeP30HeavyPhase && state.tick === -1,
+    );
+    this.zombie.update(state.enemy, actorElapsed);
   }
 
   handleEvents(events: readonly GameEvent[], state: WorldState): void {

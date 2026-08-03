@@ -639,6 +639,11 @@ export class HeroView {
     thighR: null,
     calfR: null,
   };
+  private readonly heavyNeutralTransforms = new Map<HeavyJointName, {
+    position: THREE.Vector3;
+    quaternion: THREE.Quaternion;
+    scale: THREE.Vector3;
+  }>();
   private readonly poseAnchors: Record<
     | "leadHand"
     | "supportHand"
@@ -879,7 +884,7 @@ export class HeroView {
     }
   }
 
-  update(state: PlayerState, elapsed: number): void {
+  update(state: PlayerState, elapsed: number, refreshHeavyNeutral = false): void {
     this.root.position.set(state.position.x, 0, state.position.z);
     this.root.rotation.y = -state.yaw;
 
@@ -887,10 +892,12 @@ export class HeroView {
     this.restoreHeavyAuthoredPose();
     this.resetWeaponMount();
     if (state.attackKind === "heavy" && state.heavyRelativeTick >= 0) {
+      this.restoreHeavyNeutralPose();
       if (this.animator) this.animator.setTime("Idle_Loop", 0, true);
       else this.updateFallbackAnimation({ ...state, attackElapsed: 0 }, 0);
       this.captureAuthoredPose();
       this.captureHeavyAuthoredPose();
+      if (this.heavyNeutralTransforms.size === 0) this.captureHeavyNeutralPose();
       this.latestPose = sampleHeroCombatPose("idle", -1);
       this.latestHeavyPose = sampleAnalyticHeavyPose(state.heavyRelativeTick);
       this.applyHeavyPose(this.latestHeavyPose);
@@ -900,6 +907,7 @@ export class HeroView {
       else this.updateFallbackAnimation(state, elapsed);
       this.captureAuthoredPose();
       this.captureHeavyAuthoredPose();
+      if (refreshHeavyNeutral) this.captureHeavyNeutralPose();
       this.latestHeavyPose = null;
       this.latestPose = sampleHeroCombatPose(state.attackPhase, state.attackFrame);
       this.applyCombatPose(this.latestPose);
@@ -1086,6 +1094,33 @@ export class HeroView {
       const base = this.heavyBaseRotations[name] ?? new THREE.Quaternion();
       base.copy(bone.quaternion);
       this.heavyBaseRotations[name] = base;
+    }
+  }
+
+  private restoreHeavyNeutralPose(): void {
+    for (const name of Object.keys(this.heavyBones) as HeavyJointName[]) {
+      const bone = this.heavyBones[name];
+      const neutral = this.heavyNeutralTransforms.get(name);
+      if (!bone || !neutral) continue;
+      bone.position.copy(neutral.position);
+      bone.quaternion.copy(neutral.quaternion);
+      bone.scale.copy(neutral.scale);
+    }
+  }
+
+  private captureHeavyNeutralPose(): void {
+    for (const name of Object.keys(this.heavyBones) as HeavyJointName[]) {
+      const bone = this.heavyBones[name];
+      if (!bone) continue;
+      const neutral = this.heavyNeutralTransforms.get(name) ?? {
+        position: new THREE.Vector3(),
+        quaternion: new THREE.Quaternion(),
+        scale: new THREE.Vector3(),
+      };
+      neutral.position.copy(bone.position);
+      neutral.quaternion.copy(bone.quaternion);
+      neutral.scale.copy(bone.scale);
+      this.heavyNeutralTransforms.set(name, neutral);
     }
   }
 

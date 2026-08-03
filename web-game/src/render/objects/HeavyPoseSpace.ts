@@ -67,20 +67,12 @@ function joints(values: Partial<Record<HeavyJointName, HeavyPoseVector>>): Recor
 const KEYS: readonly HeavyPoseKey[] = [
   {
     tick: 0,
-    modelPosition: [0, -0.012, -0.015],
-    modelRotation: [0.015, 0.025, -0.012],
-    joints: joints({
-      pelvis: [0.04, -0.08, 0.05], spine01: [-0.05, 0.08, -0.06],
-      spine02: [-0.07, 0.13, -0.09], spine03: [-0.06, 0.16, -0.08],
-      clavicleL: [0.08, 0.08, 0.12], upperArmL: [-0.22, -0.18, 0.18],
-      lowerArmL: [-0.3, 0.1, 0.08], clavicleR: [-0.04, -0.1, -0.08],
-      upperArmR: [0.2, 0.28, -0.2], lowerArmR: [-0.22, -0.08, -0.12],
-      thighL: [-0.08, 0.04, 0.06], calfL: [0.12, 0, 0],
-      thighR: [0.06, -0.03, -0.04], calfR: [0.08, 0, 0],
-    }),
-    bladeGuardRootLocal: [-0.55, 1.28, -0.82],
-    bladeTipRootLocal: [-1.0, 2.2, -1.48],
-    bladeRollRadians: 0.35,
+    modelPosition: ZERO,
+    modelRotation: ZERO,
+    joints: joints({}),
+    bladeGuardRootLocal: [-0.711738, 1.204026, 0.831547],
+    bladeTipRootLocal: [-1.643631, 1.574979, 2.326193],
+    bladeRollRadians: 0.203578,
   },
   {
     tick: 10,
@@ -96,9 +88,9 @@ const KEYS: readonly HeavyPoseKey[] = [
       handR: [0.08, 0.06, -0.12], thighL: [-0.24, 0.08, 0.12],
       calfL: [0.38, 0, 0], thighR: [0.16, -0.08, -0.08], calfR: [0.18, 0, 0],
     }),
-    bladeGuardRootLocal: [-0.72, 1.42, -0.72],
-    bladeTipRootLocal: [-1.12, 2.34, -1.36],
-    bladeRollRadians: 0.48,
+    bladeGuardRootLocal: [-0.392684, 1.199746, -0.171788],
+    bladeTipRootLocal: [-1.597931, 1.199746, -0.567616],
+    bladeRollRadians: 0.574679,
   },
   {
     tick: 18,
@@ -114,9 +106,9 @@ const KEYS: readonly HeavyPoseKey[] = [
       handR: [0.12, 0.1, -0.16], thighL: [-0.31, 0.1, 0.16],
       calfL: [0.48, 0, 0], thighR: [0.22, -0.1, -0.1], calfR: [0.24, 0, 0],
     }),
-    bladeGuardRootLocal: [-0.58, 1.48, -0.88],
-    bladeTipRootLocal: [-0.82, 2.3, -1.77],
-    bladeRollRadians: 0.62,
+    bladeGuardRootLocal: [-0.137441, 1.196322, -0.974456],
+    bladeTipRootLocal: [-0.359976, 1.302182, -2.218872],
+    bladeRollRadians: 0.87156,
   },
   {
     tick: 20,
@@ -131,26 +123,27 @@ const KEYS: readonly HeavyPoseKey[] = [
       lowerArmR: [-0.52, -0.12, -0.22], thighL: [-0.27, 0.08, 0.14],
       calfL: [0.42, 0, 0], thighR: [0.18, -0.08, -0.08], calfR: [0.2, 0, 0],
     }),
-    bladeGuardRootLocal: [-0.4, 1.4, -1.02],
-    bladeTipRootLocal: [0.12, 1.76, -2.1],
-    bladeRollRadians: 0.72,
+    bladeGuardRootLocal: [-0.96714, 0.629286, -1.361944],
+    bladeTipRootLocal: [-0.070117, 0.629286, -2.258967],
+    bladeRollRadians: 0.4244,
   },
   {
     tick: 21,
-    modelPosition: [-0.025, -0.075, -0.08],
-    modelRotation: [0.045, 0.08, -0.035],
+    modelPosition: [-0.01, -0.0675, -0.1],
+    modelRotation: [0.0425, 0.04, -0.0175],
     joints: joints({
-      pelvis: [0.14, -0.22, 0.16], spine01: [-0.1, 0.12, -0.1],
-      spine02: [-0.13, 0.18, -0.14], spine03: [-0.1, 0.2, -0.12],
-      clavicleL: [0.12, 0.08, 0.2], upperArmL: [-0.34, -0.16, 0.34],
-      lowerArmL: [-0.5, 0.16, 0.13], clavicleR: [-0.06, -0.12, -0.1],
-      upperArmR: [0.3, 0.34, -0.32], lowerArmR: [-0.36, -0.07, -0.16],
-      thighL: [-0.2, 0.05, 0.1], calfL: [0.32, 0, 0],
-      thighR: [0.12, -0.05, -0.06], calfR: [0.14, 0, 0],
+      pelvis: [0.14, -0.11, 0.16], spine01: [-0.11, 0.04, -0.05],
+      spine02: [-0.15, 0.05, -0.055], spine03: [-0.4, 0.06, 0.09],
+      neck: [0.07, -0.015, 0.02], clavicleL: [0.11, 0, 0.19],
+      upperArmL: [-0.33, -0.09, 0.33],
+      lowerArmL: [-0.5, 0.16, 0.13], clavicleR: [-0.025, -0.04, -0.06],
+      upperArmR: [0.27, 0.2, -0.3], lowerArmR: [-0.35, -0.04, -0.15],
+      thighL: [-0.185, 0.05, 0.1], calfL: [0.32, 0, 0],
+      thighR: [0.12, -0.05, -0.06], calfR: [0.15, 0, 0],
     }),
-    bladeGuardRootLocal: [-0.22, 1.32, -1.2],
-    bladeTipRootLocal: [0.27, 1.55, -2.42],
-    bladeRollRadians: 0.84,
+    bladeGuardRootLocal: [-0.790363, 0.629286, -1.538721],
+    bladeTipRootLocal: [0.106659, 0.629286, -2.435743],
+    bladeRollRadians: 0.4244,
   },
   {
     tick: 22,
@@ -165,9 +158,9 @@ const KEYS: readonly HeavyPoseKey[] = [
       lowerArmR: [-0.18, 0.04, -0.08], thighL: [-0.1, 0.02, 0.06],
       calfL: [0.22, 0, 0], thighR: [0.06, -0.02, -0.04], calfR: [0.1, 0, 0],
     }),
-    bladeGuardRootLocal: [-0.08, 1.22, -1.4],
-    bladeTipRootLocal: [0.37, 1.34, -2.58],
-    bladeRollRadians: 1.02,
+    bladeGuardRootLocal: [-0.613587, 0.629286, -1.715497],
+    bladeTipRootLocal: [0.283436, 0.629286, -2.61252],
+    bladeRollRadians: 0.4244,
   },
   {
     tick: 24,
@@ -182,9 +175,9 @@ const KEYS: readonly HeavyPoseKey[] = [
       lowerArmR: [-0.08, 0.08, -0.02], thighL: [-0.06, 0.02, 0.04],
       calfL: [0.16, 0, 0], thighR: [0.03, -0.02, -0.02], calfR: [0.08, 0, 0],
     }),
-    bladeGuardRootLocal: [0.12, 1.12, -1.6],
-    bladeTipRootLocal: [0.92, 1.03, -2.55],
-    bladeRollRadians: 1.18,
+    bladeGuardRootLocal: [-0.910383, 0.668444, -1.696044],
+    bladeTipRootLocal: [-0.013361, 0.668444, -2.593067],
+    bladeRollRadians: 0.4244,
   },
   {
     tick: 34,
@@ -199,9 +192,9 @@ const KEYS: readonly HeavyPoseKey[] = [
       lowerArmR: [0.05, 0.1, 0.05], thighL: [-0.12, 0.04, 0.08],
       calfL: [0.26, 0, 0], thighR: [0.08, -0.04, -0.04], calfR: [0.12, 0, 0],
     }),
-    bladeGuardRootLocal: [0.42, 1.02, -1.58],
-    bladeTipRootLocal: [1.18, 0.72, -0.68],
-    bladeRollRadians: 1.34,
+    bladeGuardRootLocal: [-0.27232, 1.211366, -0.578937],
+    bladeTipRootLocal: [-0.742981, 2.140056, -1.357406],
+    bladeRollRadians: 0.812718,
   },
   {
     tick: 42,
@@ -216,28 +209,23 @@ const KEYS: readonly HeavyPoseKey[] = [
       lowerArmR: [0.02, 0.04, 0.02], thighL: [-0.06, 0.02, 0.04],
       calfL: [0.12, 0, 0], thighR: [0.04, -0.02, -0.02], calfR: [0.06, 0, 0],
     }),
-    bladeGuardRootLocal: [0.18, 1.1, -1.18],
-    bladeTipRootLocal: [0.52, 1.78, -0.22],
-    bladeRollRadians: 0.82,
+    bladeGuardRootLocal: [-0.486874, 1.235946, 0.135062],
+    bladeTipRootLocal: [-1.334816, 2.193774, 0.340797],
+    bladeRollRadians: 0.52183,
   },
   {
     tick: 50,
     modelPosition: ZERO,
     modelRotation: ZERO,
     joints: joints({}),
-    bladeGuardRootLocal: [-0.18, 1.08, -0.88],
-    bladeTipRootLocal: [-0.46, 2.02, -1.6],
-    bladeRollRadians: 0.6,
+    bladeGuardRootLocal: [-0.709604, 1.224219, 0.826696],
+    bladeTipRootLocal: [-1.630188, 1.657276, 2.311616],
+    bladeRollRadians: 0.188441,
   },
 ];
 
 function clamp01(value: number): number {
   return Math.max(0, Math.min(1, value));
-}
-
-function smooth(value: number): number {
-  const t = clamp01(value);
-  return t * t * t * (t * (t * 6 - 15) + 10);
 }
 
 function rounded(value: number): number {
@@ -250,6 +238,53 @@ function mixVector(from: HeavyPoseVector, to: HeavyPoseVector, amount: number): 
     rounded(from[0] + (to[0] - from[0]) * amount),
     rounded(from[1] + (to[1] - from[1]) * amount),
     rounded(from[2] + (to[2] - from[2]) * amount),
+  ];
+}
+
+function mixBladeTip(
+  guard: HeavyPoseVector,
+  fromGuard: HeavyPoseVector,
+  fromTip: HeavyPoseVector,
+  toGuard: HeavyPoseVector,
+  toTip: HeavyPoseVector,
+  amount: number,
+): HeavyPoseVector {
+  const fromAxis = [
+    fromTip[0] - fromGuard[0],
+    fromTip[1] - fromGuard[1],
+    fromTip[2] - fromGuard[2],
+  ] as const;
+  const toAxis = [
+    toTip[0] - toGuard[0],
+    toTip[1] - toGuard[1],
+    toTip[2] - toGuard[2],
+  ] as const;
+  const fromLength = Math.hypot(...fromAxis);
+  const toLength = Math.hypot(...toAxis);
+  const first = fromAxis.map((value) => value / fromLength) as [number, number, number];
+  let second = toAxis.map((value) => value / toLength) as [number, number, number];
+  let cosine = Math.max(-1, Math.min(1, first[0] * second[0] + first[1] * second[1] + first[2] * second[2]));
+  if (cosine < -0.999999) {
+    const fallback = Math.abs(first[1]) < 0.9
+      ? [-first[2], 0, first[0]] as const
+      : [0, first[2], -first[1]] as const;
+    const fallbackLength = Math.hypot(...fallback);
+    second = fallback.map((value) => value / fallbackLength) as [number, number, number];
+    cosine = 0;
+  }
+  const angle = Math.acos(cosine);
+  const sine = Math.sin(angle);
+  const direction = sine < 0.000001
+    ? first.map((value, index) => value + (second[index]! - value) * amount)
+    : first.map((value, index) => (
+      Math.sin((1 - amount) * angle) * value + Math.sin(amount * angle) * second[index]!
+    ) / sine);
+  const directionLength = Math.hypot(...direction);
+  const bladeLength = fromLength + (toLength - fromLength) * amount;
+  return [
+    rounded(guard[0] + direction[0]! / directionLength * bladeLength),
+    rounded(guard[1] + direction[1]! / directionLength * bladeLength),
+    rounded(guard[2] + direction[2]! / directionLength * bladeLength),
   ];
 }
 
@@ -273,13 +308,25 @@ export function sampleAnalyticHeavyPose(relativeTickValue: number): HeavyPoseSam
       break;
     }
   }
-  const amount = from.tick === to.tick ? 0 : smooth((relativeTick - from.tick) / (to.tick - from.tick));
+  const keyProgress = from.tick === to.tick ? 0 : (relativeTick - from.tick) / (to.tick - from.tick);
+  // Ease the broad post-contact arc into its recovery key. This keeps the
+  // last follow-through update below the recovery continuity bounds without
+  // changing the exterior contact or its immediate same-side departure.
+  const linearAmount = clamp01(keyProgress);
+  const amount = from.tick === 24 && to.tick === 34
+    ? linearAmount * linearAmount * (3 - 2 * linearAmount)
+    : linearAmount;
   const mixedJoints = Object.fromEntries(
     (Object.keys(from.joints) as HeavyJointName[]).map((name) => [
       name,
       mixVector(from.joints[name], to.joints[name], amount),
     ]),
   ) as Record<HeavyJointName, HeavyPoseVector>;
+  const bladeGuardRootLocal = mixVector(
+    from.bladeGuardRootLocal,
+    to.bladeGuardRootLocal,
+    amount,
+  );
   return {
     schema: "p30.r012a.analytic-heavy-pose.v1",
     relativeTick,
@@ -287,8 +334,15 @@ export function sampleAnalyticHeavyPose(relativeTickValue: number): HeavyPoseSam
     modelPosition: mixVector(from.modelPosition, to.modelPosition, amount),
     modelRotation: mixVector(from.modelRotation, to.modelRotation, amount),
     joints: mixedJoints,
-    bladeGuardRootLocal: mixVector(from.bladeGuardRootLocal, to.bladeGuardRootLocal, amount),
-    bladeTipRootLocal: mixVector(from.bladeTipRootLocal, to.bladeTipRootLocal, amount),
+    bladeGuardRootLocal,
+    bladeTipRootLocal: mixBladeTip(
+      bladeGuardRootLocal,
+      from.bladeGuardRootLocal,
+      from.bladeTipRootLocal,
+      to.bladeGuardRootLocal,
+      to.bladeTipRootLocal,
+      amount,
+    ),
     bladeRollRadians: rounded(from.bladeRollRadians + (to.bladeRollRadians - from.bladeRollRadians) * amount),
   };
 }
