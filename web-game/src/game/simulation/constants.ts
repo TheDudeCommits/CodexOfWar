@@ -21,6 +21,15 @@ export const ATTACK_RANGE = 2.25;
 export const ATTACK_HALF_ANGLE = Math.PI * 0.46;
 export const ATTACK_DAMAGE = 34;
 
+export const HEAVY_ATTACK_STARTUP_LAST_FRAME = 20;
+export const HEAVY_ATTACK_ACTIVE_FIRST_FRAME = 21;
+export const HEAVY_ATTACK_ACTIVE_LAST_FRAME = 23;
+export const HEAVY_ATTACK_CONTACT_FRAME = 22;
+export const HEAVY_ATTACK_RECOVERY_LAST_FRAME = 49;
+export const HEAVY_ATTACK_DAMAGE = 25;
+export const HEAVY_ATTACK_DURATION =
+  (HEAVY_ATTACK_RECOVERY_LAST_FRAME + 1) * FIXED_TIMESTEP;
+
 export interface SimulationTuning {
   walkSpeed: number;
   sprintSpeed: number;

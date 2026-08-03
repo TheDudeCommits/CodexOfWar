@@ -9,6 +9,7 @@ export class PhysicsBridge {
   private readonly playerCollider: RAPIER.Collider;
   private readonly enemyBody: RAPIER.RigidBody;
   private readonly characterController: RAPIER.KinematicCharacterController;
+  private enemyVerticalOffset = 0;
 
   private constructor() {
     this.world = new RAPIER.World({ x: 0, y: -9.81, z: 0 });
@@ -46,20 +47,27 @@ export class PhysicsBridge {
     return new PhysicsBridge();
   }
 
-  reset(player: Vec2, enemy: Vec2): void {
+  reset(player: Vec2, enemy: Vec2, enemyVerticalOffset = 0): void {
+    this.enemyVerticalOffset = enemyVerticalOffset;
     this.playerBody.setTranslation({ x: player.x, y: CHARACTER_CENTER_Y, z: player.z }, true);
     this.playerBody.setNextKinematicTranslation({
       x: player.x,
       y: CHARACTER_CENTER_Y,
       z: player.z,
     });
-    this.enemyBody.setTranslation({ x: enemy.x, y: 0.94, z: enemy.z }, true);
+    this.enemyBody.setTranslation(
+      { x: enemy.x, y: 0.94 + this.enemyVerticalOffset, z: enemy.z },
+      true,
+    );
     this.world.step();
   }
 
   resolvePlayerMovement(previous: Vec2, desired: Vec2, enemy: Vec2, dt: number): Vec2 {
     this.world.timestep = dt;
-    this.enemyBody.setTranslation({ x: enemy.x, y: 0.94, z: enemy.z }, false);
+    this.enemyBody.setTranslation(
+      { x: enemy.x, y: 0.94 + this.enemyVerticalOffset, z: enemy.z },
+      false,
+    );
     const requested = {
       x: desired.x - previous.x,
       y: 0,

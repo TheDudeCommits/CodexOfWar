@@ -11,6 +11,7 @@ const CAMERA_DAMPING = 13.5;
 const TARGET_YAW_DAMPING = 16;
 const TARGET_FOCUS_Y = 1.53;
 const SHAKE_FREQUENCY = 58;
+const CAMERA_SETTLE_EPSILON_SQUARED = 1e-18;
 
 export interface PlanarBasis {
   forward: Vec2;
@@ -225,6 +226,12 @@ export class ThirdPersonCamera {
     const smoothing = snap ? 1 : 1 - Math.exp(-frameDt * CAMERA_DAMPING);
     this.focus.lerp(this.targetFocus, smoothing);
     this.desiredPosition.lerp(this.composedPosition, smoothing);
+    if (this.focus.distanceToSquared(this.targetFocus) <= CAMERA_SETTLE_EPSILON_SQUARED) {
+      this.focus.copy(this.targetFocus);
+    }
+    if (this.desiredPosition.distanceToSquared(this.composedPosition) <= CAMERA_SETTLE_EPSILON_SQUARED) {
+      this.desiredPosition.copy(this.composedPosition);
+    }
     this.resolveBoom();
 
     const horizontalBoom = Math.hypot(

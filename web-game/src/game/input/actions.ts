@@ -6,6 +6,7 @@ export const ACTION_BINDINGS = {
   sprint: ["ShiftLeft", "ShiftRight"],
   dodge: ["Space"],
   attack: ["Mouse0", "KeyJ"],
+  heavyAttack: ["Mouse2", "KeyK"],
   lockOn: ["KeyQ"],
   diagnostics: ["F3"],
   postProcessing: ["KeyP"],
@@ -20,6 +21,8 @@ export interface InputSnapshot {
   dodgePressed: boolean;
   attackPressed: boolean;
   attackSource: "mouse-left" | "keyboard" | null;
+  heavyAttackPressed: boolean;
+  heavyAttackSource: "mouse-right" | "keyboard" | null;
   lockPressed: boolean;
   diagnosticsPressed: boolean;
   postPressed: boolean;

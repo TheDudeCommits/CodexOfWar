@@ -34,6 +34,10 @@ export interface ReviewEvent {
   type:
     | "attack_started"
     | "attack_rejected_busy"
+    | "heavy_attack_started"
+    | "heavy_attack_rejected_busy"
+    | "heavy_contact"
+    | "heavy_damage"
     | "enemy_hit"
     | "enemy_defeated"
     | "dodge_started";
@@ -358,6 +362,25 @@ class ReviewController {
         return { tick: this.tick, type: "attack_started", attackSerial: event.attackSerial };
       case "attack-rejected-busy":
         return { tick: this.tick, type: "attack_rejected_busy", attackSerial: event.attackSerial };
+      case "heavy-attack-started":
+        return { tick: this.tick, type: "heavy_attack_started", attackSerial: event.attackSerial };
+      case "heavy-attack-rejected-busy":
+        return {
+          tick: this.tick,
+          type: "heavy_attack_rejected_busy",
+          attackSerial: event.attackSerial,
+        };
+      case "heavy-contact":
+        return { tick: this.tick, type: "heavy_contact", attackSerial: event.attackSerial };
+      case "heavy-damage":
+        return {
+          tick: this.tick,
+          type: "heavy_damage",
+          damage: event.damage,
+          hpBefore,
+          hpAfter,
+          attackSerial: event.attackSerial,
+        };
       case "enemy-hit":
         return {
           tick: this.tick,

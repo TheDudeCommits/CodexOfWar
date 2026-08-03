@@ -8,6 +8,10 @@ import { clamp } from "../../game/simulation/math";
 import type { EnemyState, PlayerState } from "../../game/simulation/types";
 import type { AssetRegistry } from "../loaders/AssetRegistry";
 import {
+  createHeavyStrikeClip,
+  HEAVY_STRIKE_CLIP_NAME,
+} from "../animation/HeavyStrikeClip";
+import {
   measureBladeEdgeToCapsule,
   type BladeCapsuleContactMeasurement,
 } from "./CombatContactGeometry";
@@ -555,7 +559,11 @@ export class HeroView {
     "pelvis" | "spine01" | "spine02" | "spine03" | "neck",
     THREE.Quaternion | null
   > = { pelvis: null, spine01: null, spine02: null, spine03: null, neck: null };
-  private readonly gripBones: Record<"supportLowerArm" | "supportHand", THREE.Object3D | null> = {
+  private readonly gripBones: Record<
+    "supportUpperArm" | "supportLowerArm" | "supportHand",
+    THREE.Object3D | null
+  > = {
+    supportUpperArm: null,
     supportLowerArm: null,
     supportHand: null,
   };
@@ -585,7 +593,9 @@ export class HeroView {
       ...assets.getAnimations("animation.player-core"),
       ...assets.getAnimations("animation.combat"),
     ];
-    const clips = hero && hero.animations.length > 0 ? hero.animations : legacyClips;
+    const sourceClips = hero && hero.animations.length > 0 ? hero.animations : legacyClips;
+    const idleClip = sourceClips.find((clip) => clip.name === "Idle_Loop") ?? null;
+    let clips = sourceClips;
     const available = new Set(clips.map((clip) => clip.name));
     const weaponSocket =
       hero?.scene.getObjectByName("weapon_socket") ??
@@ -599,7 +609,10 @@ export class HeroView {
     if (missingClips.length > 0) missing.push(`clips:${missingClips.join("|")}`);
     this.usingFallback = missing.length > 0;
     this.fallbackReason = missing.length > 0 ? `missing ${missing.join(", ")}` : null;
-    this.animationNames = clips.map((clip) => clip.name).sort();
+    this.animationNames = [
+      ...sourceClips.map((clip) => clip.name),
+      ...(hero && idleClip ? [HEAVY_STRIKE_CLIP_NAME] : []),
+    ].sort();
 
     const blob = shadowBlob(0.65, 0.34);
     this.shadow = blob.mesh;
@@ -645,12 +658,12 @@ export class HeroView {
       weapon.scene.scale.setScalar(1);
       weaponSocket.add(weapon.scene);
       this.visual.add(hero.scene);
-      this.animator = new DeterministicAnimator(hero.scene, clips);
       this.poseBones.pelvis = hero.scene.getObjectByName("pelvis") ?? null;
       this.poseBones.spine01 = hero.scene.getObjectByName("spine_01") ?? null;
       this.poseBones.spine02 = hero.scene.getObjectByName("spine_02") ?? null;
       this.poseBones.spine03 = hero.scene.getObjectByName("spine_03") ?? null;
       this.poseBones.neck = hero.scene.getObjectByName("neck_01") ?? null;
+      this.gripBones.supportUpperArm = hero.scene.getObjectByName("upperarm_l") ?? null;
       this.gripBones.supportLowerArm = hero.scene.getObjectByName("lowerarm_l") ?? null;
       this.gripBones.supportHand = hero.scene.getObjectByName("hand_l") ?? null;
       this.poseAnchors.leadHand = hero.scene.getObjectByName("hand_r") ?? null;
@@ -660,6 +673,8 @@ export class HeroView {
       this.poseAnchors.bladeTip = weapon.scene.getObjectByName("BladeTip") ?? null;
       this.poseAnchors.leadFoot = hero.scene.getObjectByName("foot_l") ?? null;
       this.poseAnchors.supportFoot = hero.scene.getObjectByName("foot_r") ?? null;
+      clips = [...sourceClips, createHeavyStrikeClip(hero.scene, idleClip!)];
+      this.animator = new DeterministicAnimator(hero.scene, clips);
     }
 
     this.weaponTrail.name = "fx.weapon-trail";
@@ -784,10 +799,17 @@ export class HeroView {
     if (this.animator) this.updateAuthoredAnimation(state, elapsed);
     else this.updateFallbackAnimation(state, elapsed);
     this.captureAuthoredPose();
-    this.latestPose = sampleHeroCombatPose(state.attackPhase, state.attackFrame);
-    this.applyCombatPose(this.latestPose);
+    if (state.attackKind === "heavy") {
+      this.latestPose = sampleHeroCombatPose("idle", -1);
+      this.applyHeavyPresentation();
+    } else {
+      this.latestPose = sampleHeroCombatPose(state.attackPhase, state.attackFrame);
+      this.applyCombatPose(this.latestPose);
+    }
 
-    this.trailSample = sampleBladeTrailFx(state.attackPhase, state.attackElapsed);
+    this.trailSample = state.attackKind === "heavy"
+      ? sampleBladeTrailFx("idle", 0)
+      : sampleBladeTrailFx(state.attackPhase, state.attackElapsed);
     this.applyTrailVisuals();
     this.updatePoseAudit();
   }
@@ -807,6 +829,37 @@ export class HeroView {
       })),
       localEnvelope: BLADE_FX_LOCAL_ENVELOPE,
       textures: 0,
+    };
+  }
+
+  getRound012GeometryBindings(): {
+    leftHandBone: THREE.Bone;
+    rightHandBone: THREE.Bone;
+    swordBladePrimitives: Array<{ mesh: THREE.Mesh; materialGroupIndices: number[] }>;
+  } {
+    const leftHandBone = this.poseAnchors.supportHand;
+    const rightHandBone = this.poseAnchors.leadHand;
+    const bladeNames = [
+      "Dawnbreak_Blade",
+      "Dawnbreak_Rune_0",
+      "Dawnbreak_Rune_1",
+      "Dawnbreak_Rune_2",
+      "Dawnbreak_Rune_3",
+    ] as const;
+    const bladeMeshes = bladeNames.map((name) => this.authoredWeapon?.getObjectByName(name) ?? null);
+    if (!(leftHandBone instanceof THREE.Bone) || !(rightHandBone instanceof THREE.Bone)) {
+      throw new Error("Round012 rendered hand bones are unavailable");
+    }
+    if (bladeMeshes.some((blade) => !(blade instanceof THREE.Mesh))) {
+      throw new Error("Round012 visible blade primitives are unavailable");
+    }
+    return {
+      leftHandBone,
+      rightHandBone,
+      swordBladePrimitives: bladeMeshes.map((mesh) => ({
+        mesh: mesh as THREE.Mesh,
+        materialGroupIndices: [0],
+      })),
     };
   }
 
@@ -863,6 +916,57 @@ export class HeroView {
       sample.grip.supportLowerArmRotation,
     );
     this.closeSupportHandToGrip();
+  }
+
+  private applyHeavyPresentation(): void {
+    setTransform(this.visual, this.latestPose.model);
+    this.shadow.position.set(0, 0.014, 0);
+    if (this.authoredWeapon) this.authoredWeapon.rotation.set(0, ROUND005_WEAPON_AXIAL_ROLL, 0);
+    this.solveHeavySupportGrip();
+  }
+
+  /**
+   * Refines the authored left-arm tracks against the claymore's real secondary
+   * grip. CCD rotates the connected upper/lower-arm chain; it never teleports
+   * the wrist, so the rendered skin and the hand remain mechanically joined.
+   */
+  private solveHeavySupportGrip(): void {
+    const upperArm = this.gripBones.supportUpperArm;
+    const lowerArm = this.gripBones.supportLowerArm;
+    const hand = this.gripBones.supportHand;
+    const grip = this.poseAnchors.secondaryGrip;
+    if (!upperArm || !lowerArm || !hand || !grip) return;
+    const joints = [lowerArm, upperArm];
+    const jointPosition = new THREE.Vector3();
+    const handPosition = new THREE.Vector3();
+    const targetPosition = new THREE.Vector3();
+    const worldRotation = new THREE.Quaternion();
+    const parentRotation = new THREE.Quaternion();
+    const correction = new THREE.Quaternion();
+    const toHand = new THREE.Vector3();
+    const toTarget = new THREE.Vector3();
+    this.root.updateMatrixWorld(true);
+    for (let iteration = 0; iteration < 8; iteration += 1) {
+      for (const joint of joints) {
+        this.root.updateMatrixWorld(true);
+        joint.getWorldPosition(jointPosition);
+        hand.getWorldPosition(handPosition);
+        grip.getWorldPosition(targetPosition);
+        toHand.copy(handPosition).sub(jointPosition);
+        toTarget.copy(targetPosition).sub(jointPosition);
+        if (toHand.lengthSq() < 1e-10 || toTarget.lengthSq() < 1e-10) continue;
+        correction.setFromUnitVectors(toHand.normalize(), toTarget.normalize());
+        joint.getWorldQuaternion(worldRotation);
+        worldRotation.premultiply(correction).normalize();
+        if (joint.parent) {
+          joint.parent.getWorldQuaternion(parentRotation).invert();
+          joint.quaternion.copy(parentRotation.multiply(worldRotation)).normalize();
+        } else {
+          joint.quaternion.copy(worldRotation);
+        }
+      }
+    }
+    this.root.updateMatrixWorld(true);
   }
 
   private closeSupportHandToGrip(): void {
@@ -935,6 +1039,17 @@ export class HeroView {
 
   private updateAuthoredAnimation(state: PlayerState, elapsed: number): void {
     const animator = this.animator!;
+    if (state.motion === "heavy" && state.attackKind === "heavy") {
+      const seconds = Math.max(0, state.attackFrame) / 60;
+      this.latestAuthoredTiming = {
+        mode: "direct",
+        primarySeconds: roundFx(seconds),
+        secondarySeconds: roundFx(seconds),
+        blend01: 0,
+      };
+      animator.setTime(HEAVY_STRIKE_CLIP_NAME, seconds, false);
+      return;
+    }
     if (state.motion === "attack") {
       const duration = animator.getDuration("Sword_Regular_A");
       this.latestAuthoredTiming = sampleHeroAuthoredPoseTiming(
@@ -1042,6 +1157,7 @@ export class ZombieView {
   private readonly flashMaterials: FlashMaterial[] = [];
   private animator: DeterministicAnimator | null = null;
   private deathStartedAt: number | null = null;
+  private verticalOffset = 0;
   private latestPose = sampleTargetCombatPose("idle", 0);
   private readonly poseBones: Record<keyof TargetCombatPoseSample["bones"], THREE.Object3D | null> = {
     hips: null,
@@ -1142,7 +1258,11 @@ export class ZombieView {
   }
 
   update(state: EnemyState, elapsed: number): void {
-    this.root.position.set(state.position.x, 0, state.position.z);
+    this.root.position.set(
+      state.position.x,
+      state.verticalOffset + this.verticalOffset,
+      state.position.z,
+    );
     this.root.rotation.y = -state.yaw;
 
     this.restoreAuthoredPose();
@@ -1203,6 +1323,55 @@ export class ZombieView {
     for (const material of this.ownedMaterials) material.dispose();
     this.ownedGeometries.length = 0;
     this.ownedMaterials.length = 0;
+  }
+
+  setVerticalOffset(offset: number): void {
+    if (!Number.isFinite(offset)) throw new Error("Target vertical offset must be finite");
+    this.verticalOffset = offset;
+  }
+
+  getRound012GeometryBindings(): {
+    targetSkinnedMeshes: THREE.SkinnedMesh[];
+    targetLandmarkBones: Record<
+      | "pelvis" | "neck" | "head"
+      | "leftShoulder" | "leftElbow" | "leftWrist"
+      | "rightShoulder" | "rightElbow" | "rightWrist"
+      | "leftHip" | "leftKnee" | "leftAnkle"
+      | "rightHip" | "rightKnee" | "rightAnkle",
+      THREE.Bone
+    >;
+  } {
+    const visible = this.root.getObjectByName("hollow-visible-model");
+    if (!visible) throw new Error("Round012 rendered target root is unavailable");
+    const targetSkinnedMeshes: THREE.SkinnedMesh[] = [];
+    visible.traverse((node) => {
+      if (node instanceof THREE.SkinnedMesh) targetSkinnedMeshes.push(node);
+    });
+    const bone = (name: string): THREE.Bone => {
+      const result = visible.getObjectByName(name);
+      if (!(result instanceof THREE.Bone)) throw new Error(`Round012 target bone missing: ${name}`);
+      return result;
+    };
+    return {
+      targetSkinnedMeshes,
+      targetLandmarkBones: {
+        pelvis: bone("Hips"),
+        neck: bone("Neck"),
+        head: bone("Head"),
+        leftShoulder: bone("ShoulderL"),
+        leftElbow: bone("LowerArmL"),
+        leftWrist: bone("Middle1L"),
+        rightShoulder: bone("ShoulderR"),
+        rightElbow: bone("LowerArmR"),
+        rightWrist: bone("Middle1R"),
+        leftHip: bone("UpperLegL"),
+        leftKnee: bone("LowerLegL"),
+        leftAnkle: bone("FootL"),
+        rightHip: bone("UpperLegR"),
+        rightKnee: bone("LowerLegR"),
+        rightAnkle: bone("FootR"),
+      },
+    };
   }
 
   private applyHitFlash(amount: number): void {

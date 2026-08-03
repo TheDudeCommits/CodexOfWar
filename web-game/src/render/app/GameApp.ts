@@ -3,6 +3,7 @@ import { PerfDiagnostics, type RuntimeMetrics } from "../../diagnostics/PerfDiag
 import { getCombatPoseBeatTelemetry } from "../objects/CharacterViews";
 import { InputController } from "../../game/input/InputController";
 import type { InputSnapshot } from "../../game/input/actions";
+import { HeavyContactResolver, type HeavyContactTelemetry } from "../../game/combat/HeavyContactResolver";
 import { FIXED_TIMESTEP } from "../../game/simulation/constants";
 import { P30_REVIEW_TUNING } from "../../game/simulation/constants";
 import { FixedStepClock } from "../../game/simulation/FixedStepClock";
@@ -26,12 +27,15 @@ import { ViewportController } from "./ViewportController";
 interface PendingEdges {
   attack: boolean;
   attackSource: InputSnapshot["attackSource"];
+  heavyAttack: boolean;
+  heavyAttackSource: InputSnapshot["heavyAttackSource"];
   dodge: boolean;
 }
 
 export interface ProductionFixedUpdateReceipt {
   input: InputFrame;
   lightStrikeSource: InputSnapshot["attackSource"];
+  heavyStrikeSource: InputSnapshot["heavyAttackSource"];
   state: WorldState;
   events: GameEvent[];
   healthBefore: number;
@@ -61,6 +65,7 @@ export class GameApp {
   private readonly post: PostStack;
   private readonly viewport: ViewportController;
   private readonly renderBridge: RenderBridge;
+  private readonly heavyContactResolver: HeavyContactResolver;
   private readonly hud: Hud;
   private lastTimestamp = 0;
   private running = false;
@@ -73,6 +78,8 @@ export class GameApp {
     dodgePressed: false,
     attackPressed: false,
     attackSource: null,
+    heavyAttackPressed: false,
+    heavyAttackSource: null,
     lockPressed: false,
     diagnosticsPressed: false,
     postPressed: false,
@@ -84,6 +91,8 @@ export class GameApp {
   private readonly pendingEdges: PendingEdges = {
     attack: false,
     attackSource: null,
+    heavyAttack: false,
+    heavyAttackSource: null,
     dodge: false,
   };
   private manifestVersion: number | null = null;
@@ -91,6 +100,7 @@ export class GameApp {
   private simulationPaused = false;
   private p30AwaitingInput = false;
   private p30ScenarioActive = false;
+  private p30HeavyScenarioActive = false;
   private runtimeCapturePaused = false;
   private haltAfterLiveTick = false;
   private renderHeartbeat = 0;
@@ -167,6 +177,13 @@ export class GameApp {
       assetRegistry,
       this.renderer.capabilities.getMaxAnisotropy(),
     );
+    const heroGeometry = this.renderBridge.hero.getRound012GeometryBindings();
+    const targetGeometry = this.renderBridge.zombie.getRound012GeometryBindings();
+    this.heavyContactResolver = new HeavyContactResolver({
+      scene: this.lighting.scene,
+      ...heroGeometry,
+      ...targetGeometry,
+    });
     this.cameraController.setObstructionObjects([this.renderBridge.arena.root]);
     this.input.attach(this.renderer.domElement);
     this.manifestVersion = assetRegistry.manifestVersion;
@@ -208,15 +225,20 @@ export class GameApp {
 
   reset(): void {
     this.simulation.reset();
+    this.renderBridge.zombie.setVerticalOffset(0);
+    this.heavyContactResolver.reset();
     this.physics.reset(this.simulation.state.player.position, this.simulation.state.enemy.position);
     this.clock.reset();
     this.cameraController.reset();
     this.lockedOn = false;
     this.p30AwaitingInput = false;
     this.p30ScenarioActive = false;
+    this.p30HeavyScenarioActive = false;
     this.runtimeCapturePaused = false;
     this.pendingEdges.attack = false;
     this.pendingEdges.attackSource = null;
+    this.pendingEdges.heavyAttack = false;
+    this.pendingEdges.heavyAttackSource = null;
     this.pendingEdges.dodge = false;
     this.renderOnce(true);
   }
@@ -230,16 +252,21 @@ export class GameApp {
       }),
       P30_REVIEW_TUNING,
     );
+    this.renderBridge.zombie.setVerticalOffset(0);
+    this.heavyContactResolver.reset();
     this.physics.reset(this.simulation.state.player.position, this.simulation.state.enemy.position);
     this.clock.reset();
     this.cameraController.reset();
     this.lockedOn = false;
     this.p30AwaitingInput = false;
     this.p30ScenarioActive = false;
+    this.p30HeavyScenarioActive = false;
     this.runtimeCapturePaused = false;
     this.simulationPaused = false;
     this.pendingEdges.attack = false;
     this.pendingEdges.attackSource = null;
+    this.pendingEdges.heavyAttack = false;
+    this.pendingEdges.heavyAttackSource = null;
     this.pendingEdges.dodge = false;
     this.renderOnce(true);
   }
@@ -257,13 +284,53 @@ export class GameApp {
     this.lockedOn = false;
     this.pendingEdges.attack = false;
     this.pendingEdges.attackSource = null;
+    this.pendingEdges.heavyAttack = false;
+    this.pendingEdges.heavyAttackSource = null;
     this.pendingEdges.dodge = false;
     this.runtimeCapturePaused = false;
     this.p30ScenarioActive = true;
+    this.p30HeavyScenarioActive = false;
     // Tick 0 remains visible and stable until the first real player input.
     // The evaluator then drives the shared W/idle/mouse tape through the
     // production input controller; no scenario action is injected here.
     this.p30AwaitingInput = true;
+    this.simulationPaused = true;
+    this.renderOnce(true);
+  }
+
+  /** Resets the locked Round012 scenario to the pre-update absolute tick -1. */
+  prepareP30HeavyStrikeScenario(
+    targetOffsetMicrometres: readonly [number, number, number] = [0, 0, 0],
+  ): void {
+    const [right, up, forward] = targetOffsetMicrometres;
+    const initial = createInitialWorld({
+      playerPosition: { x: 0, z: 2.6 },
+      enemyPosition: {
+        // Canonical forward is -Z and right is -X for the frozen spawn.
+        x: -right / 1_000_000,
+        z: -forward / 1_000_000,
+      },
+      enemyVerticalOffset: up / 1_000_000,
+    });
+    initial.tick = -1;
+    initial.elapsed = -FIXED_TIMESTEP;
+    initial.enemy.idlePhase = -FIXED_TIMESTEP;
+    this.simulation.reset(initial, P30_REVIEW_TUNING, 1, true);
+    this.physics.reset(initial.player.position, initial.enemy.position, initial.enemy.verticalOffset);
+    this.clock.reset();
+    this.cameraController.reset();
+    this.input.resetGameplayState();
+    this.lockedOn = false;
+    this.pendingEdges.attack = false;
+    this.pendingEdges.attackSource = null;
+    this.pendingEdges.heavyAttack = false;
+    this.pendingEdges.heavyAttackSource = null;
+    this.pendingEdges.dodge = false;
+    this.heavyContactResolver.reset();
+    this.runtimeCapturePaused = true;
+    this.p30ScenarioActive = true;
+    this.p30HeavyScenarioActive = true;
+    this.p30AwaitingInput = false;
     this.simulationPaused = true;
     this.renderOnce(true);
   }
@@ -273,7 +340,7 @@ export class GameApp {
   }
 
   resumeRuntimeCapture(): void {
-    if (!this.runtimeCapturePaused) return;
+    if (!this.runtimeCapturePaused && !this.simulationPaused) return;
     this.runtimeCapturePaused = false;
     this.simulationPaused = false;
     this.clock.reset();
@@ -411,6 +478,27 @@ export class GameApp {
     return getCombatPoseBeatTelemetry();
   }
 
+  getHeavyContactTelemetry(): HeavyContactTelemetry {
+    return this.heavyContactResolver.telemetry();
+  }
+
+  getRound012GeometrySource(): Record<string, unknown> {
+    const hero = this.renderBridge.hero.getRound012GeometryBindings();
+    const target = this.renderBridge.zombie.getRound012GeometryBindings();
+    return {
+      scene: this.lighting.scene,
+      camera: this.cameraController.camera,
+      heroRoot: this.renderBridge.hero.root,
+      leftHandBone: hero.leftHandBone,
+      rightHandBone: hero.rightHandBone,
+      swordBladePrimitives: hero.swordBladePrimitives,
+      targetRoot: this.renderBridge.zombie.root,
+      targetSkinnedMeshes: target.targetSkinnedMeshes,
+      targetLandmarkBones: target.targetLandmarkBones,
+      healthStore: this.simulation.state.enemy,
+    };
+  }
+
   getActorWorldHeights(): { attacker: number; target: number } {
     this.lighting.scene.updateMatrixWorld(true);
     const attacker =
@@ -546,11 +634,16 @@ export class GameApp {
     if (this.latestInput.attackPressed) {
       this.pendingEdges.attackSource = this.latestInput.attackSource;
     }
+    this.pendingEdges.heavyAttack ||= this.latestInput.heavyAttackPressed;
+    if (this.latestInput.heavyAttackPressed) {
+      this.pendingEdges.heavyAttackSource = this.latestInput.heavyAttackSource;
+    }
     this.pendingEdges.dodge ||= this.latestInput.dodgePressed;
     if (
       this.p30AwaitingInput &&
       (Math.abs(this.latestInput.moveX) + Math.abs(this.latestInput.moveZ) > 0 ||
         this.latestInput.attackPressed ||
+        this.latestInput.heavyAttackPressed ||
         this.latestInput.dodgePressed)
     ) {
       this.p30AwaitingInput = false;
@@ -565,17 +658,26 @@ export class GameApp {
       const fixedInput = {
         ...simulationInput,
         attackPressed: !appliedEdges && this.pendingEdges.attack,
+        heavyAttackPressed: !appliedEdges && this.pendingEdges.heavyAttack,
         dodgePressed: !appliedEdges && this.pendingEdges.dodge,
       };
       this.haltAfterLiveTick = false;
-      this.fixedTick(fixedInput, dt, true, this.pendingEdges.attackSource);
+      this.fixedTick(
+        fixedInput,
+        dt,
+        true,
+        this.pendingEdges.attackSource,
+        this.pendingEdges.heavyAttackSource,
+      );
       appliedEdges = true;
       fixedSteps += 1;
       return !this.haltAfterLiveTick;
-    });
+    }, this.p30ScenarioActive ? 1 : undefined);
     if (appliedEdges) {
       this.pendingEdges.attack = false;
       this.pendingEdges.attackSource = null;
+      this.pendingEdges.heavyAttack = false;
+      this.pendingEdges.heavyAttackSource = null;
       this.pendingEdges.dodge = false;
     }
 
@@ -628,6 +730,7 @@ export class GameApp {
       moveZ: direction.z * magnitude,
       sprint: input.sprint,
       attackPressed: false,
+      heavyAttackPressed: false,
       dodgePressed: false,
       ...(faceYaw === undefined ? {} : { faceYaw }),
     };
@@ -635,10 +738,15 @@ export class GameApp {
 
   private updateCamera(dt: number, lookX: number, lookY: number, snap = false): void {
     const state = this.simulation.state;
+    const cameraTarget = this.p30HeavyScenarioActive && state.enemy.health > 0
+      ? { x: 0, z: 0 }
+      : state.enemy.health > 0
+        ? state.enemy.position
+        : null;
     this.cameraController.update(
       dt,
       state.player.position,
-      state.enemy.health > 0 ? state.enemy.position : null,
+      cameraTarget,
       lookX,
       lookY,
       snap,
@@ -650,6 +758,7 @@ export class GameApp {
     dt: number,
     notifyRuntimeObserver = false,
     lightStrikeSource: InputSnapshot["attackSource"] = null,
+    heavyStrikeSource: InputSnapshot["heavyAttackSource"] = null,
   ): GameEvent[] {
     const previous = { ...this.simulation.state.player.position };
     const healthBefore = this.simulation.state.enemy.health;
@@ -662,6 +771,15 @@ export class GameApp {
       dt,
     );
     this.simulation.reconcilePlayerPosition(resolved);
+    if (this.p30HeavyScenarioActive) {
+      this.renderBridge.update(this.simulation.state, dt);
+      const player = this.simulation.state.player;
+      const contact = this.heavyContactResolver.resolve(
+        this.simulation.state.tick,
+        player.attackKind === "heavy" ? player.attackSerial : null,
+      );
+      if (contact) this.simulation.applyHeavyContactDamage(contact.absoluteTick);
+    }
     const events = this.simulation.consumeEvents();
     this.renderBridge.handleEvents(events, this.simulation.state);
     const hitEvent = events.find((event) => event.type === "enemy-hit");
@@ -673,6 +791,7 @@ export class GameApp {
       const shouldContinue = this.runtimeObserver.afterFixedUpdate({
         input: { ...input },
         lightStrikeSource: input.attackPressed ? lightStrikeSource : null,
+        heavyStrikeSource: input.heavyAttackPressed ? heavyStrikeSource : null,
         state: structuredClone(this.simulation.state),
         events: events.map((event) => ({ ...event })),
         healthBefore,
@@ -717,6 +836,7 @@ export class GameApp {
     if (
       Math.abs(input.moveX) + Math.abs(input.moveZ) > 0 ||
       input.attackPressed ||
+      input.heavyAttackPressed ||
       input.dodgePressed ||
       input.lockPressed
     ) {

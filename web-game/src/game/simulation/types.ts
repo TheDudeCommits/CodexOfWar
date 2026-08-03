@@ -3,9 +3,10 @@ export interface Vec2 {
   z: number;
 }
 
-export type PlayerMotion = "idle" | "move" | "sprint" | "dodge" | "attack";
+export type PlayerMotion = "idle" | "move" | "sprint" | "dodge" | "attack" | "heavy";
 export type EnemyMotion = "idle" | "hit" | "dead";
 export type AttackPhase = "idle" | "startup" | "active" | "recovery";
+export type AttackKind = "light" | "heavy" | null;
 
 export interface PlayerState {
   position: Vec2;
@@ -19,6 +20,7 @@ export interface PlayerState {
   attackElapsed: number;
   attackFrame: number;
   attackPhase: AttackPhase;
+  attackKind: AttackKind;
   attackSerial: number;
   attackHasHit: boolean;
   dodgeRemaining: number;
@@ -28,6 +30,7 @@ export interface PlayerState {
 
 export interface EnemyState {
   position: Vec2;
+  verticalOffset: number;
   yaw: number;
   health: number;
   maxHealth: number;
@@ -50,6 +53,7 @@ export interface InputFrame {
   sprint: boolean;
   dodgePressed: boolean;
   attackPressed: boolean;
+  heavyAttackPressed?: boolean;
   faceYaw?: number;
 }
 
@@ -62,6 +66,28 @@ export type GameEvent =
   | {
       type: "attack-rejected-busy";
       tick: number;
+      attackSerial: number;
+    }
+  | {
+      type: "heavy-attack-started";
+      tick: number;
+      attackSerial: number;
+    }
+  | {
+      type: "heavy-attack-rejected-busy";
+      tick: number;
+      attackSerial: number;
+    }
+  | {
+      type: "heavy-contact";
+      tick: number;
+      attackSerial: number;
+    }
+  | {
+      type: "heavy-damage";
+      tick: number;
+      damage: number;
+      remainingHealth: number;
       attackSerial: number;
     }
   | {

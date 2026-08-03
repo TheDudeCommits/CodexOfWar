@@ -1,21 +1,22 @@
 {
-  "schema": "p30.r011.candidate-interface.v1",
-  "protocolID": "P30-R011-BLIND-v1",
-  "opaqueAlias": "candidate-9442539eea8abc4c",
+  "schema": "p30.r012a.candidate-interface.v1",
+  "protocolID": "P30-R012A-BLIND-v1",
+  "opaqueAlias": "candidate-0000000000000000",
+  "baselineReceiptSha256": "9d3a1e3d6809ff18d445d0c6b69e16342e6f72d0e39c3ebb025c9d34535f7259",
   "nodeMajor": 24,
   "packageManager": "npm",
-  "normalPlayableRoute": "/?scenario=P30-light-strike-v1&seed=30011",
+  "normalPlayableRoute": "/?scenario=P30-heavy-strike-v1&seed=30012",
   "readyPath": "/ready.json",
-  "scenarioID": "P30-light-strike-v1",
-  "seed": 30011,
+  "scenarioID": "P30-heavy-strike-v1",
+  "seed": 30012,
   "fixedDeltaNumerator": 1,
   "fixedDeltaDenominator": 60,
   "captureTickSpace": "absolute-scenario",
-  "attackRisingEdgeAbsoluteTick": 24,
-  "lightStrikeInput": {
-    "device": "mouse",
-    "button": "left"
-  },
+  "heavyRisingEdgeAbsoluteTick": 24,
+  "heavyInputs": [
+    { "device": "mouse", "button": "right", "buttonNumber": 2 },
+    { "device": "keyboard", "code": "KeyK" }
+  ],
   "criticHookGlobal": "__P30_CRITIC__",
   "buildOutputDirectory": "dist"
 }

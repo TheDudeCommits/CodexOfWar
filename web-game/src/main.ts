@@ -19,7 +19,7 @@ async function boot(): Promise<void> {
   const reviewMode = params.get("review") === "1";
   const captureScenario = params.get("capture");
   if (p30CriticScenario) {
-    app.prepareP30LightStrikeScenario();
+    app.prepareP30HeavyStrikeScenario();
     installP30CriticHarness(app);
     document.documentElement.dataset.gameReady = "true";
     app.start();
