@@ -20,30 +20,27 @@
   ],
   "activeBuild": {
     "pieceId": "P30",
-    "round": 11,
-    "roundLabel": "P30 · Round 011",
+    "round": 12,
+    "roundLabel": "P30 · Round 012 · Horde Run",
     "status": "criticized",
-    "builder": "Builder B · Blind-selected rejected checkpoint",
-    "brief": "Two fresh isolated Three.js builders repaired precise light-strike contact and lifecycle behavior from exact Round010 baseline acfe2f63f59ca4e87d3ca20db9dff225008c3817. A fresh source- and identity-blind critic ran both opaque production packages, sealed scores before reveal, and rejected both. Builder B swept the three focused ballots at 41–34 and is deployed only as an honest progress checkpoint.",
+    "builder": "Horde systems builder + fairness builder · integrated checkpoint",
+    "brief": "The default Three.js route is now a real five-wave Horde Run: deterministic combat, three weapons and signature abilities, coordinated zombie AI, scoring, combo, essence, upgrades, persistence, pause/restart flow, pooled multi-enemy rendering, and production HUD. A fresh harsh critic cleared three waves with physical inputs and passed the mechanics, then decisively rejected the visual presentation against God of War Ragnarök.",
     "facts": [
-      "P00 remains accepted as infrastructure; its blind visual baseline remains an explicit 28.33–76.67 loss.",
-      "P10 remains paused after the halted Unity Round 018 lane; Three.js P30 is the active implementation lane.",
-      "Round011 fanned the same bounded contact and lifecycle assignment to two fresh isolated builders from exact baseline acfe2f63f59ca4e87d3ca20db9dff225008c3817.",
-      "The critic locked a conjunctive 95/100 protocol with every category at least 9/10, focused 3/3, overall at least 5/6, and T1–T8 before opening either package.",
-      "Opaque package identities remained hidden until commit f07fadbe sealed the immutable alias-only scores.",
-      "Builder B scored 41/100, swept 3/3 focused ballots, won the only decisive game-wide ballot, and had no category at the required 9/10 floor.",
-      "Builder A scored 34/100 and won no focused or game-wide ballots.",
-      "Selected Builder B passes O29 and O41 but fails O34 because the opaque white blade core masks exact exterior contact topology.",
-      "Only two complete counted Builder B profiles existed; required later technical evidence was unavailable and failed closed.",
-      "The immutable score file mislabeled evaluator evidence-tree digests as package-tree digests; final T1 and T8 fail closed without mutating the score.",
-      "The committed map, public archives, presentation seed, and score commitment verified after reveal; the round is rejected but not void.",
-      "Root passed Node 24 clean install, typecheck, lint, 25 critic tests, production build, and seven serial browser tests.",
-      "Builder B is deployed at the stable play URL with no acceptance claim.",
-      "Round012-A's distinct-heavy/contact/damage protocol is locked, and a license-safe high-fidelity asset intake shortlist is filed.",
-      "The global latest capture manifest remains intentionally pinned to accepted P00."
+      "The stable play URL now opens Horde Run instead of the legacy one-enemy review scene.",
+      "Katana, greatsword, and twin blades each have distinct stamina costs, ranges, timing, knockback, normal attacks, and signature abilities.",
+      "Five deterministic waves introduce shamblers, flanking and pouncing stalkers, and telegraphed brute slams.",
+      "A combat director permits one committed attacker in waves 1–3 and two in waves 4–5; waiting enemies orbit instead of dog-piling.",
+      "Score, kills, essence, combo multiplier, nine upgrades, run victory/defeat, restart, and local personal records are live.",
+      "The start gate holds tick zero until real input; pause discards attack, weapon, and lock edges rather than replaying them on resume.",
+      "The default public harness reports Horde state truthfully and no longer exposes the legacy review mutator.",
+      "Fort collision is symmetric in simulation and Rapier while legacy review physics remains frozen.",
+      "The fresh headed critic physically cleared Wave 3 at 13 kills, 4,750 score, 162 essence, ×4 combo, and 100/100 health.",
+      "All 18 authored assets loaded with no fallback and the critic observed zero console errors.",
+      "Root passed 112 unit/integration tests, typecheck, lint, production build, two Horde browser tests, and the two previously timing-out legacy browser smokes.",
+      "The checkpoint is deployed as mechanics progress only; no AAA visual acceptance is claimed."
     ],
     "evidenceFingerprint": {
-      "auditContext": "Round011 fresh blind critic complete · rejected checkpoint deployed",
+      "auditContext": "Round012 physical-input Horde critic complete · mechanics pass · visual reject",
       "browser": "Google Chrome 150.0.7871.187",
       "graphics": "Hardware WebGL2 · Apple M2",
       "headed": true,
@@ -52,39 +49,39 @@
       "deviceScaleFactor": 1
     },
     "evidenceBundle": {
-      "roundLabel": "P30 · Round 011 blind verdict",
-      "status": "REJECT · BUILDER B STRONGER · DEPLOYED CHECKPOINT",
-      "manifestPath": "/data/P30-round-011.json",
+      "roundLabel": "P30 · Round 012 Horde verdict",
+      "status": "MECHANICS PASS · VISUAL REJECT · DEPLOYED CHECKPOINT",
+      "manifestPath": "/data/P30-round-012.json",
       "s01": {
-        "label": "S03 tick 29 · blind-winning anticipation",
-        "path": "/captures/P30/round-011/S03.png",
-        "sha256": "a4d8eb0c8e2ef6f9c2b56a8b29f7cb9837ea6360a921e24c3b4ca98df0d998cf"
+        "label": "Katana primary · actual live input",
+        "path": "/captures/P30/round-012-horde-run/KatanaPrimary.png",
+        "sha256": "ecb89c1e1596f0ca74387217eb4ae80eb4b014c642a17d19d51af9830998f1f1"
       },
       "diagnostic": {
-        "label": "S04 tick 34 · rejected bloom-obscured contact",
-        "path": "/captures/P30/round-011/S04.png",
-        "sha256": "bbd5b230016768d6bd2c3514711e2b201aa3341fd1ed507a7f3c6d938a7090ad"
+        "label": "Reference left · current Horde Run right",
+        "path": "/captures/P30/round-012-horde-run/BlindSideBySide.png",
+        "sha256": "a6f29966a1b1ecdb535d45b25aa0cf8b8537d50e1d3c3a08cf3d8a4bd2ce6ba2"
       },
       "metrics": [
         {
+          "label": "Mechanics",
+          "value": "PASS · 3 WAVES PHYSICALLY CLEARED"
+        },
+        {
+          "label": "Combat breadth",
+          "value": "3 WEAPONS · 3 SPECIALS · 3 ENEMY TYPES"
+        },
+        {
+          "label": "Progression",
+          "value": "SCORE · COMBO · ESSENCE · 9 UPGRADES"
+        },
+        {
+          "label": "Validation",
+          "value": "112 TESTS · TYPE · LINT · BUILD · PASS"
+        },
+        {
           "label": "Critic",
-          "value": "REJECT · 41/100"
-        },
-        {
-          "label": "Blind ballots",
-          "value": "FOCUSED 3/3 · OVERALL 1/6"
-        },
-        {
-          "label": "Objective gates",
-          "value": "O29/O41 PASS · O34 FAIL"
-        },
-        {
-          "label": "Technical gates",
-          "value": "T2 PASS · T1/T3–T8 FAIL CLOSED"
-        },
-        {
-          "label": "Root validation",
-          "value": "25 CRITIC · 7 BROWSER · PASS"
+          "value": "AAA VISUAL GATE · DECISIVE REJECT"
         },
         {
           "label": "Deployment",
@@ -92,42 +89,38 @@
         }
       ],
       "checks": [
-        "Fresh locked blind protocol · identities hidden until score seal",
-        "Map, public archives, presentation seed, and score commitment verified",
-        "Google Chrome 150 · actual headed WebGL2 game · 1600×900 · DPR1 · Apple M2",
-        "Builder B swept the three focused blind ballots",
-        "Opaque identities remained hidden through immutable score commit f07fadbe",
-        "Production route · no procedural fallback",
-        "Tick 29 anticipation · pass",
-        "Tick 41 low same-direction grounded braking · pass",
-        "Node 24 clean install · typecheck · lint · 25 critic · build · 7 serial browser",
-        "Stable Vercel alias updated to Builder B"
+        "Actual headed game · physical keyboard and mouse inputs only",
+        "Start gate · movement · sprint · lock · pause/resume · pass",
+        "Katana · greatsword · twin blades · normal and special branches · pass",
+        "Shambler bite · stalker flank/pounce · brute slam · pass",
+        "Three wave clears · keyboard upgrades · score/combo/essence · pass",
+        "All 18 authored assets · no procedural fallback",
+        "Zero console errors · three upstream deprecation warnings",
+        "Stable Vercel alias updated to deployment dpl_Gz6WryeeEb2XHV43Md3Rw8S29rE1"
       ],
       "limitations": [
-        "AAA gate · REJECT · 41/100 versus required 95/100",
-        "Focused comparison · 3/3 pass",
-        "Overall comparison · 1/6 versus required 5/6",
-        "Category floor · minimum 2/10 versus required 9/10",
-        "O34 · opaque blade bloom prevents exposed exterior-contact judgment",
-        "Required later technical evidence unavailable · fail closed",
-        "Immutable score mislabeled evidence-tree hashes · final T1/T8 fail closed",
-        "Repository-wide LFS integrity · eight historical raw PNG blobs"
+        "AAA visual gate · decisive reject",
+        "Character and enemy silhouettes remain prototype-grade",
+        "Weapons remain oversized relative to the hero and camera",
+        "Hit bloom can erase enemy form into a white/yellow silhouette",
+        "Brute telegraph geometry reads as debug primitives",
+        "Headed 1600×900 critic session reported roughly 30–34 FPS"
       ]
     },
-    "nextGate": "Round012-A adds one real Mouse2/KeyK heavy branch, evaluator-owned first visible blade contact at absolute tick 46, and exactly one authoritative 100-to-75 health transition on that tick. A separate measured asset intake must replace the current prototype-grade hero, zombie, motion, and environment before any reference-level visual claim."
+    "nextGate": "Rebuild the combat-presentation layer as one bounded piece: correct weapon scale, authored attack posing and enemy reactions, restrained impact VFX that preserve silhouettes, and production-grade zombie shapes. A fresh critic must replay the same physical-input encounter and compare the matched frame blind against the reference."
   },
   "canonicalCapture": {
-    "shotId": "S04",
-    "name": "Round 011 impact · stronger rejected candidate",
-    "purpose": "P30 Round 011 fresh blind-critic evidence",
-    "camera": "Adaptive 50-degree duel composer",
-    "heroHeight": "360–540 px target",
-    "measuredHeroHeight": "Focused 3/3 · absolute contact gate fails",
-    "sceneRead": "Builder B wins every focused comparison, but the opaque white sword core covers the target contour at tick 34. Exact exterior topology and reference-level force transfer therefore remain unreadable.",
-    "benchmarkId": "Fresh blind critic complete · Builder B stronger · no accepted candidate",
-    "benchmarkPolicy": "Actual-game captures, blind score, commitment verification, and rejection are public; supplied benchmark originals are not republished.",
-    "capturePath": "/captures/P30/round-011/S04.png",
-    "manifestPath": "/data/P30-round-011.json",
+    "shotId": "H12-BLIND",
+    "name": "Round 012 Horde Run · reference comparison",
+    "purpose": "P30 Round 012 mechanics checkpoint and harsh visual verdict",
+    "camera": "Physical-input shoulder camera at 1600×900",
+    "heroHeight": "Strong lower-left shoulder mass",
+    "measuredHeroHeight": "Mechanically readable · visually below reference",
+    "sceneRead": "The right-hand frame proves a real multi-enemy run and HUD, but the reference wins immediately on silhouette fidelity, weapon proportion, authored impact, atmosphere, and environmental depth.",
+    "benchmarkId": "Fresh physical-input critic · mechanics pass · visual reject",
+    "benchmarkPolicy": "The dashboard republishes the critic's local blind strip solely as evaluation evidence for this project checkpoint.",
+    "capturePath": "/captures/P30/round-012-horde-run/BlindSideBySide.png",
+    "manifestPath": "/data/P30-round-012.json",
     "latestManifestPath": "/data/capture-manifest-latest.json",
     "captureAvailable": true,
     "manifestAvailable": true
@@ -940,6 +933,42 @@
         "preference": "Builder B swept all three focused ballots and won the only decisive game-wide ballot",
         "primaryGap": "opaque blade bloom at absolute tick 34 obscures exterior contact topology, preventing the reference-level force-transfer read"
       }
+    },
+    {
+      "round": 12,
+      "label": "P30 · Round 012 · Horde Run",
+      "pieceId": "P30",
+      "phase": "Physical-input critic complete · mechanics pass · visual reject · deployed",
+      "status": "criticized",
+      "date": "2026-08-03",
+      "engineRun": true,
+      "actualGameCapturePerformed": true,
+      "targetMatchedGameCapturePerformed": true,
+      "gateQualifyingCapture": false,
+      "builderBrief": "Replace the default review scene with a deterministic five-wave playable Horde Run featuring three weapons and specials, coordinated zombie archetypes, scoring, combo, essence, upgrades, persistence, and complete run flow.",
+      "evidence": "A fresh harsh critic used physical keyboard and mouse input in headed Chrome at 1600×900, exercised all three weapons and their special attacks, verified shambler, stalker, and brute behavior, selected upgrades by keyboard, and cleared three waves. The final live state recorded 13 kills, 4,750 score, 162 essence, ×4 combo, and 100/100 health. Mechanics passed; the blind visual comparison failed decisively because weapon scale, attack posing, impact VFX, enemy silhouettes, and telegraph presentation remain prototype-grade. Root passed 112 unit/integration tests, typecheck, lint, production build, two Horde browser tests, two isolated legacy regression smokes, and a production smoke before updating the stable deployment.",
+      "evidenceLinks": [
+        "/captures/P30/round-012-horde-run/BlindSideBySide.png",
+        "/captures/P30/round-012-horde-run/KatanaPrimary.png",
+        "/captures/P30/round-012-horde-run/UpgradeWave1.png",
+        "/captures/P30/round-012-horde-run/Wave3Archetypes.png",
+        "/captures/P30/round-012-horde-run/BruteTelegraph.png",
+        "/captures/P30/round-012-horde-run/FinalState.png",
+        "/data/P30-round-012.json"
+      ],
+      "critic": {
+        "status": "MECHANICS PASS · VISUAL REJECT",
+        "score": null,
+        "focusedCandidatePreferredCount": 0,
+        "focusedComparisonCount": 1,
+        "candidatePreferredCount": 0,
+        "comparisonCount": 1,
+        "categoriesAtLeastNine": 0,
+        "categoryCount": 10,
+        "scoreLabel": "Physical-input Horde mechanics pass · AAA visual benchmark decisive reject",
+        "preference": "God of War Ragnarök reference wins the blind side-by-side immediately",
+        "primaryGap": "The entire combat-presentation layer—character and weapon scale, animation posing, impact VFX, and silhouette fidelity—is several production tiers below the reference."
+      }
     }
   ],
   "pieces": [
@@ -972,8 +1001,8 @@
       "id": "P02",
       "name": "Ground locomotion",
       "group": "Vertical slice",
-      "status": "queued",
-      "outcome": "Walk, run, pivot, stop, strafe, slope handling, and camera-relative control have grounded acceleration and readable weight.",
+      "status": "criticized",
+      "outcome": "Round012 ships camera-relative movement, sprint, stamina, target-facing combat locomotion, deterministic fixed-step control, and a real start gate. The physical-input critic passed the mechanics, while grounded animation weight and visual polish remain below the benchmark.",
       "requiredEvidence": [
         "S01",
         "12-second orbit / movement clip"
@@ -994,8 +1023,8 @@
       "id": "P04",
       "name": "Light combo",
       "group": "Vertical slice",
-      "status": "queued",
-      "outcome": "Buffered three-hit chain has authored startup, active, recovery, and cancel windows with one-hit-per-target resolution.",
+      "status": "criticized",
+      "outcome": "Round012 ships deterministic normal attacks for katana, greatsword, and twin blades with weapon-specific timing, range, stamina, damage, knockback, and one-hit-per-target resolution. Mechanical branches pass; authored pose quality, combo depth, and impact presentation remain rejected.",
       "requiredEvidence": [
         "S04 for each strike",
         "Telemetry",
@@ -1006,8 +1035,8 @@
       "id": "P05",
       "name": "Heavy attack",
       "group": "Vertical slice",
-      "status": "queued",
-      "outcome": "Heavy strike communicates commitment, displacement, contact, hitstop, camera impulse, and enemy reaction.",
+      "status": "building",
+      "outcome": "Greatsword normal and Worldbreaker Quake provide a committed high-damage branch with distinct timing, range, knockback, and stamina cost. It is mechanically live, but dedicated heavy-chain depth, animation commitment, contact fidelity, and reactions are still under construction.",
       "requiredEvidence": [
         "S04",
         "240 fps equivalent stepped replay"
@@ -1017,8 +1046,8 @@
       "id": "P06",
       "name": "Dodge and evasion",
       "group": "Vertical slice",
-      "status": "queued",
-      "outcome": "Directional dodge, invulnerability window, recovery, and camera continuity are predictable and readable.",
+      "status": "criticized",
+      "outcome": "Round012 ships deterministic directional dodge, stamina cost, invulnerability frames, recovery, and pause-safe input handling. The fresh physical-input critic passed behavior; animation readability and camera polish remain below acceptance.",
       "requiredEvidence": [
         "Telegraph-to-dodge replay",
         "Frame ledger"
@@ -1039,8 +1068,8 @@
       "id": "P08",
       "name": "Zombie navigation",
       "group": "Vertical slice",
-      "status": "queued",
-      "outcome": "One zombie can acquire, approach, flank, telegraph, attack, recover, lose or reacquire, and die without navigation jitter.",
+      "status": "criticized",
+      "outcome": "Round012 ships deterministic shambler pursue/bite, stalker flank/pounce, and brute approach/slam state machines with telegraph, attack, recovery, hit stun, knockback, separation, fort bounds, and death. Mechanics pass; motion and silhouettes remain visually rejected.",
       "requiredEvidence": [
         "S03",
         "20-second deterministic replay"
@@ -1050,8 +1079,8 @@
       "id": "P09",
       "name": "Crowd combat director",
       "group": "Vertical slice",
-      "status": "queued",
-      "outcome": "Four-to-six zombies surround without dog-piling; attack tokens, spacing, off-screen pressure, and threat cues create readable crowd combat.",
+      "status": "criticized",
+      "outcome": "Round012 ships five waves with fair attacker arbitration: one committed attacker in waves 1–3, two in waves 4–5, deterministic rotation, orbiting waiters, separation, target lock, and pooled rendering. The critic cleared three waves and passed fairness; presentation remains below the visual gate.",
       "requiredEvidence": [
         "S05",
         "Occupancy plot",
@@ -1129,8 +1158,8 @@
       "id": "P16",
       "name": "HUD and threat language",
       "group": "Vertical slice",
-      "status": "queued",
-      "outcome": "Minimal health, ability, lock-on, and threat information remains legible without weakening the cinematic frame.",
+      "status": "criticized",
+      "outcome": "Round012 ships health, stamina, wave, enemy count, score, kills, essence, combo, loadout, special readiness, boss health, control hints, upgrades, pause, victory, defeat, and records. Functional legibility passes; the cinematic composition and production styling remain unaccepted.",
       "requiredEvidence": [
         "S02 and S05",
         "Accessibility contrast checks"
@@ -1151,8 +1180,8 @@
       "id": "P18",
       "name": "Integrated encounter",
       "group": "Vertical slice",
-      "status": "queued",
-      "outcome": "A polished 45–90 second encounter combines the accepted systems into one authored dramatic arc.",
+      "status": "criticized",
+      "outcome": "Round012 is the first complete playable encounter loop: start, five deterministic waves, combat, upgrades, victory/defeat, records, and restart. A critic physically cleared three waves and passed the mechanics, but the encounter is not polished enough to pass the AAA visual benchmark.",
       "requiredEvidence": [
         "All canonical stills",
         "Full replay",
@@ -1163,8 +1192,8 @@
       "id": "P19",
       "name": "Performance and delivery",
       "group": "Vertical slice",
-      "status": "queued",
-      "outcome": "The native macOS target runs reliably, captures deterministically, meets frame budgets, and ships with reproducible build instructions.",
+      "status": "building",
+      "outcome": "Round012 is production-built and deployed on a stable Vercel alias with 112 passing unit/integration tests, browser smokes, deterministic harnesses, pooled enemies, and whole-frame renderer metrics. The headed 1600×900 critic session reported only roughly 30–34 FPS, so the frame-budget gate remains open.",
       "requiredEvidence": [
         "Player build",
         "Profiler summary",
@@ -1225,7 +1254,7 @@
       "name": "Three.js playable nucleus",
       "group": "Vertical slice",
       "status": "criticized",
-      "outcome": "Round011 completed a sealed two-candidate blind runtime comparison from the Round010 baseline. Builder B was stronger at 41/100, swept focused 3/3, and won the only decisive game-wide ballot, but both candidates failed the 95/100 and every-category 9/10 floors. Builder B also fails O34 because blade bloom hides exact exterior contact, and required technical evidence plus final T1/T8 fail closed. Builder B is deployed only as a rejected progress checkpoint while Round012-A's heavy-attack protocol and the high-fidelity asset intake plan are locked.",
+      "outcome": "Round012 replaces the default one-enemy review scene with the deployed five-wave Horde Run: three distinct weapons and specials, three zombie archetypes, coordinated crowd AI, scoring, combo, essence, nine upgrades, persistence, and complete run flow. A fresh physical-input critic passed the mechanics through three wave clears and decisively rejected the visual presentation. The next bounded loop is combat-presentation quality, not additional menu or infrastructure work.",
       "requiredEvidence": [
         "S01–S06 fresh browser captures",
         "Exact Tape A, Tape B, and Tape C replays",

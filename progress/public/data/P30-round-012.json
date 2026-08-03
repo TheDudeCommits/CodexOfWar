@@ -1,0 +1,173 @@
+{
+  "schema": "cow.public-browser-round.v1",
+  "piece": "P30",
+  "round": 12,
+  "date": "2026-08-03",
+  "status": "mechanics-pass-visual-reject-checkpoint-deployed",
+  "acceptanceScope": "The default Three.js route is now a deterministic five-wave Horde Run with three weapons and signature abilities, coordinated zombie AI, scoring, combo, essence, upgrades, persistence, and complete run flow. A fresh harsh critic exercised the real game with physical inputs at 1600x900, cleared three waves, passed the mechanics, and decisively rejected the visual presentation against the God of War Ragnarök reference. This is a deployed progress checkpoint; no AAA acceptance is claimed.",
+  "playtestUrl": "https://web-game-teal-one.vercel.app/",
+  "source": {
+    "repository": "https://github.com/TheDudeCommits/CodexOfWar",
+    "branch": "codex/gameplay-loop",
+    "gitRevision": "413d59be54ce49a694c754fbd892b6096dabf6c4"
+  },
+  "deployment": {
+    "provider": "Vercel",
+    "deploymentId": "dpl_Gz6WryeeEb2XHV43Md3Rw8S29rE1",
+    "deploymentUrl": "https://web-game-jv7jsrgs7-amirs-projects-d9680079.vercel.app",
+    "target": "production",
+    "stableAlias": "https://web-game-teal-one.vercel.app/",
+    "ready": true
+  },
+  "captureContract": {
+    "browser": "Google Chrome 150.0.7871.187",
+    "headed": true,
+    "hardwareAccelerated": true,
+    "renderer": "Hardware WebGL2 on Apple M2",
+    "viewport": {
+      "width": 1600,
+      "height": 900,
+      "deviceScaleFactor": 1
+    },
+    "fixedDeltaSeconds": 0.016666666666666666,
+    "productionRoute": true,
+    "physicalKeyboardAndMouseInput": true,
+    "proceduralFallbackActive": false
+  },
+  "rootValidation": {
+    "node": "23.11.0",
+    "typecheckPassed": true,
+    "lintPassed": true,
+    "unitIntegrationTestsPassed": 112,
+    "unitIntegrationTestFilesPassed": 17,
+    "hordeBrowserTestsPassed": 2,
+    "legacyRegressionBrowserTestsPassed": 2,
+    "productionBuildPassed": true,
+    "productionSmokePassed": true,
+    "consoleErrors": 0,
+    "upstreamDeprecationWarnings": 3
+  },
+  "mechanics": {
+    "status": "PASS THROUGH THREE PHYSICAL-INPUT WAVE CLEARS",
+    "fiveWaveRun": true,
+    "weaponCount": 3,
+    "weapons": [
+      {
+        "id": "katana",
+        "normal": true,
+        "signature": "Iaido Tempest"
+      },
+      {
+        "id": "greatsword",
+        "normal": true,
+        "signature": "Worldbreaker Quake"
+      },
+      {
+        "id": "twin-blades",
+        "normal": true,
+        "signature": "Cinder Whirlwind"
+      }
+    ],
+    "enemyArchetypes": [
+      "shambler-pursue-bite",
+      "stalker-flank-pounce",
+      "brute-telegraphed-slam"
+    ],
+    "crowdDirector": "One committed attacker in waves 1–3, two in waves 4–5; deterministic rotation and orbiting waiters",
+    "progression": [
+      "score",
+      "kills",
+      "combo-multiplier",
+      "essence",
+      "nine-upgrades",
+      "personal-records"
+    ],
+    "finalCriticState": {
+      "phase": "upgrade",
+      "wave": 3,
+      "kills": 13,
+      "score": 4750,
+      "essence": 162,
+      "comboMultiplier": 4,
+      "health": 100,
+      "maximumHealth": 100,
+      "appliedUpgrades": [
+        "tempered-edge",
+        "battle-trance"
+      ]
+    },
+    "authoredAssetsLoaded": 18,
+    "authoredAssetFailures": 0
+  },
+  "captures": [
+    {
+      "id": "H12-BLIND",
+      "phase": "reference left · current Horde Run right",
+      "path": "/captures/P30/round-012-horde-run/BlindSideBySide.png",
+      "bytes": 3709320,
+      "sha256": "a6f29966a1b1ecdb535d45b25aa0cf8b8537d50e1d3c3a08cf3d8a4bd2ce6ba2"
+    },
+    {
+      "id": "H12-KATANA",
+      "phase": "katana primary · actual live input",
+      "path": "/captures/P30/round-012-horde-run/KatanaPrimary.png",
+      "bytes": 1846390,
+      "sha256": "ecb89c1e1596f0ca74387217eb4ae80eb4b014c642a17d19d51af9830998f1f1"
+    },
+    {
+      "id": "H12-UPGRADE",
+      "phase": "Wave 1 cleared · upgrade selection",
+      "path": "/captures/P30/round-012-horde-run/UpgradeWave1.png",
+      "bytes": 986465,
+      "sha256": "53f4eb092c832ebf76305f5ebde2d09f1c2d627c31b83c2119ffcbb9f574a78f"
+    },
+    {
+      "id": "H12-WAVE3",
+      "phase": "Wave 3 · all three enemy archetypes",
+      "path": "/captures/P30/round-012-horde-run/Wave3Archetypes.png",
+      "bytes": 1962267,
+      "sha256": "909a5027beb205d059f30b272be711bc2f3c572af9ded52d1877dbe1361d4847"
+    },
+    {
+      "id": "H12-BRUTE",
+      "phase": "brute slam telegraph",
+      "path": "/captures/P30/round-012-horde-run/BruteTelegraph.png",
+      "bytes": 1237797,
+      "sha256": "54e66a03a9053509d97476161c34725ffea8d4e16e3aa2308e26b0e0e639247d"
+    },
+    {
+      "id": "H12-FINAL",
+      "phase": "continuous-run final critic state",
+      "path": "/captures/P30/round-012-horde-run/FinalState.png",
+      "bytes": 992644,
+      "sha256": "a0ddd7919c5fc10b96a183bce3559a2c4aac32e5033ab3ae88de29eda2d36e66"
+    }
+  ],
+  "critic": {
+    "status": "MECHANICS PASS · VISUAL REJECT",
+    "accepted": false,
+    "qualityScore": null,
+    "focusedCandidateWins": 0,
+    "focusedComparisonCount": 1,
+    "overallCandidateWins": 0,
+    "overallComparisonCount": 1,
+    "categoriesAtLeastNine": 0,
+    "categoryCount": 10,
+    "singleBiggestGap": "The entire combat-presentation layer—character and weapon scale, animation posing, impact VFX, and silhouette fidelity—is several production tiers below the reference. The mechanics are real, but the combat still reads as debug-quality presentation rather than authored cinematic action.",
+    "observedPresentationFailures": [
+      "Weapons are oversized and can clip outside the frame",
+      "Hit effects can erase enemies into featureless white/yellow silhouettes",
+      "Brute telegraph polygons and ring read as debug geometry",
+      "Character and enemy silhouettes remain prototype-grade",
+      "Headed 1600x900 session reported roughly 30–34 FPS"
+    ],
+    "acceptanceClaimed": false
+  },
+  "nextRound": {
+    "round": 13,
+    "status": "building",
+    "target": "Rebuild combat presentation as one bounded piece: correct weapon scale and sockets, distinct authored normal/special poses, controlled impact VFX and enemy reactions that preserve silhouettes, and production-grade telegraph language.",
+    "criticProtocol": "A separate fresh critic must run the actual game with physical inputs, capture matched 1600x900 framings, compare them blind against the reference, and name the single biggest remaining gap."
+  },
+  "qualityStatus": "deployed-mechanics-pass-visual-reject-progress-checkpoint"
+}
