@@ -81,7 +81,7 @@ export class InputController {
       ACTION_BINDINGS.weaponThree,
     ] as const;
     for (let index = 0; index < slots.length; index += 1) {
-      if (this.consumePressed(slots[index])) return (index + 1) as 1 | 2 | 3;
+      if (this.consumePressed(slots[index]!)) return (index + 1) as 1 | 2 | 3;
     }
     return null;
   }
