@@ -52,6 +52,9 @@ export class InputController {
         : keyboardAttackPressed
           ? "keyboard"
           : null,
+      specialAttackPressed: this.consumePressed(ACTION_BINDINGS.specialAttack),
+      weaponSlotPressed: this.consumeWeaponSlot(),
+      restartPressed: this.consumePressed(ACTION_BINDINGS.restart),
       lockPressed: this.consumePressed(ACTION_BINDINGS.lockOn),
       diagnosticsPressed: this.consumePressed(ACTION_BINDINGS.diagnostics),
       postPressed: this.consumePressed(ACTION_BINDINGS.postProcessing),
@@ -69,6 +72,18 @@ export class InputController {
     const wasPressed = bindings.some((binding) => this.pressed.has(binding));
     for (const binding of bindings) this.pressed.delete(binding);
     return wasPressed;
+  }
+
+  private consumeWeaponSlot(): 1 | 2 | 3 | null {
+    const slots = [
+      ACTION_BINDINGS.weaponOne,
+      ACTION_BINDINGS.weaponTwo,
+      ACTION_BINDINGS.weaponThree,
+    ] as const;
+    for (let index = 0; index < slots.length; index += 1) {
+      if (this.consumePressed(slots[index])) return (index + 1) as 1 | 2 | 3;
+    }
+    return null;
   }
 
   private readonly onKeyDown = (event: KeyboardEvent): void => {
@@ -95,6 +110,9 @@ export class InputController {
   private readonly onPointerDown = (event: PointerEvent): void => {
     if (event.button === 0) {
       this.pressed.add("Mouse0");
+      this.requestPointerLockSafely();
+    } else if (event.button === 2) {
+      this.pressed.add("Mouse2");
       this.requestPointerLockSafely();
     }
   };

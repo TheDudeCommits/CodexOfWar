@@ -6,6 +6,11 @@ export const ACTION_BINDINGS = {
   sprint: ["ShiftLeft", "ShiftRight"],
   dodge: ["Space"],
   attack: ["Mouse0", "KeyJ"],
+  specialAttack: ["Mouse2", "KeyK"],
+  weaponOne: ["Digit1", "Numpad1"],
+  weaponTwo: ["Digit2", "Numpad2"],
+  weaponThree: ["Digit3", "Numpad3"],
+  restart: ["KeyR", "Enter"],
   lockOn: ["KeyQ"],
   diagnostics: ["F3"],
   postProcessing: ["KeyP"],
@@ -20,6 +25,9 @@ export interface InputSnapshot {
   dodgePressed: boolean;
   attackPressed: boolean;
   attackSource: "mouse-left" | "keyboard" | null;
+  specialAttackPressed: boolean;
+  weaponSlotPressed: 1 | 2 | 3 | null;
+  restartPressed: boolean;
   lockPressed: boolean;
   diagnosticsPressed: boolean;
   postPressed: boolean;
