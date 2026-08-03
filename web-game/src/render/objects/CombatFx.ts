@@ -13,6 +13,8 @@ const UNIT_X = new THREE.Vector3(1, 0, 0);
 export interface CombatFxBurstStyle {
   readonly weapon?: WeaponVisualID;
   readonly special?: boolean;
+  /** Places an incoming-damage flash directly on its supplied body anchor. */
+  readonly centered?: boolean;
 }
 
 interface CombatFxPalette {
@@ -287,14 +289,15 @@ export class CombatFx {
     this.sourceAnchor.set(x, y, z);
     this.strikeTravel.set(strikeX, 0, strikeZ);
     this.swingTravel.set(swingX, 0, swingZ);
+    const centered = style?.centered === true;
     this.root.position.set(
-      x + swingX * CONTACT_TANGENT_OFFSET - strikeX * CONTACT_SURFACE_OFFSET,
-      y + CONTACT_VERTICAL_OFFSET,
-      z + swingZ * CONTACT_TANGENT_OFFSET - strikeZ * CONTACT_SURFACE_OFFSET,
+      centered ? x : x + swingX * CONTACT_TANGENT_OFFSET - strikeX * CONTACT_SURFACE_OFFSET,
+      centered ? y : y + CONTACT_VERTICAL_OFFSET,
+      centered ? z : z + swingZ * CONTACT_TANGENT_OFFSET - strikeZ * CONTACT_SURFACE_OFFSET,
     );
     this.root.visible = this.auditVisible;
     this.lastBurstSerial = serial;
-    this.styledBurst = style !== undefined;
+    this.styledBurst = style?.weapon !== undefined || style?.special !== undefined;
     const palette = COMBAT_FX_PALETTES[style?.weapon ?? "default"];
     const emphasis = style?.special ? 1.12 : 1;
     this.flashDuration = defeated ? DEFEAT_FLASH_LIFE : FLASH_LIFE;

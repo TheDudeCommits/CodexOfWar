@@ -146,6 +146,7 @@ export class RenderBridge {
             magnitude > 0.0001 ? dz / magnitude : -1,
             100_000 + event.attackSerial,
             false,
+            { centered: true },
           );
         }
         this.cameraController.kickShake(1.65);

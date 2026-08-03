@@ -927,9 +927,9 @@ export class HeroView {
     if (state.motion === "hit") {
       const remaining = clamp((state.hitStunRemaining ?? 0) / (14 / 60), 0, 1);
       const recoil = Math.sin((1 - remaining) * Math.PI);
-      this.visual.position.z += 0.24 * recoil;
-      this.visual.rotation.x -= 0.18 * recoil;
-      this.visual.rotation.z += 0.24 * recoil;
+      this.visual.position.z += 0.42 * recoil;
+      this.visual.rotation.x -= 0.34 * recoil;
+      this.visual.rotation.z += 0.48 * recoil;
     } else if (state.motion === "dead") {
       this.visual.position.y -= 0.18;
       this.visual.rotation.z += 0.92;
