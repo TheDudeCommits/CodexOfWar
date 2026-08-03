@@ -44,7 +44,7 @@ describe("WeaponLoadoutView", () => {
     ]);
 
     loadout.update({
-      activeWeapon: "twinblades",
+      activeWeapon: "twin-blades",
       specialCooldown01: 0.5,
       specialActive01: 1,
       elapsed: 0.25,
@@ -53,7 +53,9 @@ describe("WeaponLoadoutView", () => {
       "weapon-loadout.twinblades.left",
       "weapon-loadout.twinblades.right",
     ]);
-    expect(WEAPON_VISUAL_STYLE.katana.accent).not.toBe(WEAPON_VISUAL_STYLE.twinblades.accent);
+    expect(WEAPON_VISUAL_STYLE.katana.accent).not.toBe(
+      WEAPON_VISUAL_STYLE["twin-blades"].accent,
+    );
 
     loadout.dispose();
     expect(fixture.greatsword.visible).toBe(true);

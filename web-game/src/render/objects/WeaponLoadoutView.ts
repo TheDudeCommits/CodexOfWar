@@ -1,6 +1,6 @@
 import * as THREE from "three";
 
-export type WeaponVisualID = "katana" | "greatsword" | "twinblades";
+export type WeaponVisualID = "katana" | "greatsword" | "twin-blades";
 
 export interface WeaponLoadoutPresentation {
   activeWeapon: WeaponVisualID;
@@ -16,7 +16,7 @@ export const WEAPON_VISUAL_STYLE: Readonly<Record<WeaponVisualID, {
 }>> = Object.freeze({
   katana: { accent: 0x8ce9ff, glow: 0x25bde5, label: "MOONVEIL" },
   greatsword: { accent: 0xff9b52, glow: 0xff4d19, label: "STORMCAGE" },
-  twinblades: { accent: 0xd7a0ff, glow: 0x8b3dff, label: "NIGHTFANG" },
+  "twin-blades": { accent: 0xd7a0ff, glow: 0x8b3dff, label: "NIGHTFANG" },
 });
 
 interface ForgedWeapon {
@@ -98,7 +98,7 @@ function buildTwinBlade(
 ): ForgedWeapon {
   const root = new THREE.Group();
   root.name = `weapon-loadout.twinblades.${side}`;
-  const { steel, glow } = createBladeMaterial(WEAPON_VISUAL_STYLE.twinblades);
+  const { steel, glow } = createBladeMaterial(WEAPON_VISUAL_STYLE["twin-blades"]);
   const gripMaterial = new THREE.MeshStandardMaterial({
     color: 0x17101f,
     metalness: 0.28,
@@ -167,7 +167,7 @@ export class WeaponLoadoutView {
     const intensity = 0.75 + readiness * 0.85 + specialPulse * 2.2;
     const visibleGlow = state.activeWeapon === "katana"
       ? this.katana?.glowMaterials ?? []
-      : state.activeWeapon === "twinblades"
+      : state.activeWeapon === "twin-blades"
         ? [...(this.twinLeft?.glowMaterials ?? []), ...(this.twinRight?.glowMaterials ?? [])]
         : [];
     for (const material of visibleGlow) material.emissiveIntensity = intensity;
@@ -175,7 +175,7 @@ export class WeaponLoadoutView {
 
   getActiveAnchors(): THREE.Object3D[] {
     if (this.activeWeapon === "katana") return this.katana ? [this.katana.root] : [];
-    if (this.activeWeapon === "twinblades") {
+    if (this.activeWeapon === "twin-blades") {
       return [this.twinLeft?.root, this.twinRight?.root].filter(
         (value): value is THREE.Group => value !== null && value !== undefined,
       );
@@ -208,7 +208,7 @@ export class WeaponLoadoutView {
     this.activeWeapon = activeWeapon;
     if (this.authoredGreatsword) this.authoredGreatsword.visible = activeWeapon === "greatsword";
     if (this.katana) this.katana.root.visible = activeWeapon === "katana";
-    if (this.twinLeft) this.twinLeft.root.visible = activeWeapon === "twinblades";
-    if (this.twinRight) this.twinRight.root.visible = activeWeapon === "twinblades";
+    if (this.twinLeft) this.twinLeft.root.visible = activeWeapon === "twin-blades";
+    if (this.twinRight) this.twinRight.root.visible = activeWeapon === "twin-blades";
   }
 }
