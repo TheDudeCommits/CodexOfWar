@@ -36,9 +36,13 @@ export class RenderBridge {
 
   update(state: WorldState, dt: number): void {
     this.arena.update(state.elapsed);
+    this.updateActors(state);
+    this.combatFx.update(dt, state.elapsed);
+  }
+
+  updateActors(state: WorldState): void {
     this.hero.update(state.player, state.elapsed);
     this.zombie.update(state.enemy, state.elapsed);
-    this.combatFx.update(dt, state.elapsed);
   }
 
   handleEvents(events: readonly GameEvent[], state: WorldState): void {

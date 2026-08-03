@@ -41,6 +41,11 @@ export class InputController {
       .filter((binding) => binding !== "Mouse0")
       .some((binding) => this.pressed.has(binding));
     const attackPressed = this.consumePressed(ACTION_BINDINGS.attack);
+    const mouseHeavyAttackPressed = this.pressed.has("Mouse2");
+    const keyboardHeavyAttackPressed = ACTION_BINDINGS.heavyAttack
+      .filter((binding) => binding !== "Mouse2")
+      .some((binding) => this.pressed.has(binding));
+    const heavyAttackPressed = this.consumePressed(ACTION_BINDINGS.heavyAttack);
     const snapshot: InputSnapshot = {
       moveX,
       moveZ,
@@ -50,6 +55,12 @@ export class InputController {
       attackSource: mouseAttackPressed
         ? "mouse-left"
         : keyboardAttackPressed
+          ? "keyboard"
+          : null,
+      heavyAttackPressed,
+      heavyAttackSource: mouseHeavyAttackPressed
+        ? "mouse-right"
+        : keyboardHeavyAttackPressed
           ? "keyboard"
           : null,
       lockPressed: this.consumePressed(ACTION_BINDINGS.lockOn),
@@ -96,8 +107,17 @@ export class InputController {
     if (event.button === 0) {
       this.pressed.add("Mouse0");
       this.requestPointerLockSafely();
+    } else if (event.button === 2) {
+      this.pressed.add("Mouse2");
     }
   };
+
+  clear(): void {
+    this.down.clear();
+    this.pressed.clear();
+    this.lookX = 0;
+    this.lookY = 0;
+  }
 
   private requestPointerLockSafely(): void {
     const canvas = this.canvas;

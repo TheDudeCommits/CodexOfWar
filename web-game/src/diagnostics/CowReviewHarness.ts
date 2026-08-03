@@ -356,6 +356,8 @@ class ReviewController {
     switch (event.type) {
       case "attack-started":
         return { tick: this.tick, type: "attack_started", attackSerial: event.attackSerial };
+      case "heavy-started":
+        return { tick: this.tick, type: "attack_started", attackSerial: event.attackSerial };
       case "attack-rejected-busy":
         return { tick: this.tick, type: "attack_rejected_busy", attackSerial: event.attackSerial };
       case "enemy-hit":
@@ -367,6 +369,17 @@ class ReviewController {
           hpAfter,
           attackSerial: event.attackSerial,
         };
+      case "heavy-damage":
+        return {
+          tick: this.tick,
+          type: "enemy_hit",
+          damage: event.damage,
+          hpBefore,
+          hpAfter,
+          attackSerial: event.attackSerial,
+        };
+      case "heavy-contact":
+        return { tick: this.tick, type: "attack_started", attackSerial: event.attackSerial };
       case "enemy-defeated":
         return { tick: this.tick, type: "enemy_defeated", attackSerial: event.attackSerial };
       case "dodge-started":

@@ -6,6 +6,10 @@ import {
   ATTACK_HIT_FRAME,
   ATTACK_RECOVERY_LAST_FRAME,
   ATTACK_STARTUP_LAST_FRAME,
+  HEAVY_ACTIVE_FIRST_RELATIVE_TICK,
+  HEAVY_ACTIVE_LAST_RELATIVE_TICK,
+  HEAVY_CONTACT_DAMAGE,
+  HEAVY_NEUTRAL_RELATIVE_TICK,
   LIVE_TUNING,
   PLAYER_DODGE_COST,
   PLAYER_DODGE_DURATION,
@@ -23,6 +27,7 @@ export const EMPTY_INPUT: InputFrame = {
   sprint: false,
   dodgePressed: false,
   attackPressed: false,
+  heavyAttackPressed: false,
 };
 
 export interface InitialWorldOptions {
@@ -49,6 +54,8 @@ export function createInitialWorld(options: InitialWorldOptions = {}): WorldStat
       attackElapsed: 0,
       attackFrame: -1,
       attackPhase: "idle",
+      attackKind: "none",
+      heavyRelativeTick: -1,
       attackSerial: 0,
       attackHasHit: false,
       dodgeRemaining: 0,
@@ -57,6 +64,7 @@ export function createInitialWorld(options: InitialWorldOptions = {}): WorldStat
     },
     enemy: {
       position: { ...enemyPosition },
+      positionY: 0,
       yaw: Math.PI,
       health: 100,
       maxHealth: 100,
@@ -71,21 +79,27 @@ export class GameSimulation {
   state: WorldState;
   private readonly pendingEvents: GameEvent[] = [];
   private tuning: SimulationTuning;
+  private eventTickOffset = 0;
 
   constructor(initialState: WorldState = createInitialWorld(), tuning: SimulationTuning = LIVE_TUNING) {
     this.state = initialState;
     this.tuning = tuning;
   }
 
-  reset(initialState: WorldState = createInitialWorld(), tuning: SimulationTuning = this.tuning): void {
+  reset(
+    initialState: WorldState = createInitialWorld(),
+    tuning: SimulationTuning = this.tuning,
+    eventTickOffset = 0,
+  ): void {
     this.state = initialState;
     this.tuning = tuning;
+    this.eventTickOffset = eventTickOffset;
     this.pendingEvents.length = 0;
   }
 
   step(input: InputFrame, dt: number): void {
     const { player, enemy } = this.state;
-    const tick = this.state.tick;
+    const tick = this.state.tick + this.eventTickOffset;
     this.state.elapsed += dt;
     enemy.idlePhase += dt;
 
@@ -113,11 +127,34 @@ export class GameSimulation {
       this.pendingEvents.push({ type: "dodge-started", tick });
     }
 
-    if (input.attackPressed && enemy.health > 0) {
+    let heavyStarted = false;
+    if (input.heavyAttackPressed && enemy.health > 0) {
+      if (player.attackFrame < 0 && player.dodgeRemaining <= 0) {
+        player.attackFrame = 0;
+        player.heavyRelativeTick = 0;
+        player.attackElapsed = dt;
+        player.attackPhase = "startup";
+        player.attackKind = "heavy";
+        player.attackSerial += 1;
+        player.attackHasHit = false;
+        heavyStarted = true;
+        this.pendingEvents.push({ type: "heavy-started", tick, attackSerial: player.attackSerial });
+      } else {
+        this.pendingEvents.push({
+          type: "attack-rejected-busy",
+          tick,
+          attackSerial: player.attackSerial,
+        });
+      }
+    }
+
+    if (input.attackPressed && !input.heavyAttackPressed && enemy.health > 0) {
       if (player.attackFrame < 0 && player.dodgeRemaining <= 0) {
         player.attackFrame = 0;
         player.attackElapsed = Number.EPSILON;
         player.attackPhase = "startup";
+        player.attackKind = "light";
+        player.heavyRelativeTick = -1;
         player.attackSerial += 1;
         player.attackHasHit = false;
         this.pendingEvents.push({ type: "attack-started", tick, attackSerial: player.attackSerial });
@@ -145,22 +182,45 @@ export class GameSimulation {
         player.yaw = approachAngle(player.yaw, input.faceYaw, dt * 22);
       }
 
-      const attackFrame = player.attackFrame;
-      if (attackFrame <= ATTACK_STARTUP_LAST_FRAME) player.attackPhase = "startup";
-      else if (attackFrame >= ATTACK_ACTIVE_FIRST_FRAME && attackFrame <= ATTACK_ACTIVE_LAST_FRAME) {
-        player.attackPhase = "active";
-      } else player.attackPhase = "recovery";
+      if (player.attackKind === "heavy") {
+        if (!heavyStarted) player.heavyRelativeTick += 1;
+        const relativeTick = player.heavyRelativeTick;
+        if (relativeTick >= HEAVY_NEUTRAL_RELATIVE_TICK) {
+          player.attackFrame = -1;
+          player.attackElapsed = 0;
+          player.attackPhase = "idle";
+          player.attackKind = "none";
+          player.heavyRelativeTick = -1;
+          player.attackHasHit = false;
+          player.motion = "idle";
+        } else {
+          player.attackFrame = relativeTick;
+          player.attackElapsed = (relativeTick + 1) * dt;
+          if (relativeTick < HEAVY_ACTIVE_FIRST_RELATIVE_TICK) player.attackPhase = "startup";
+          else if (relativeTick <= HEAVY_ACTIVE_LAST_RELATIVE_TICK) player.attackPhase = "active";
+          else player.attackPhase = "recovery";
+        }
+      } else {
+        const attackFrame = player.attackFrame;
+        if (attackFrame <= ATTACK_STARTUP_LAST_FRAME) player.attackPhase = "startup";
+        else if (attackFrame >= ATTACK_ACTIVE_FIRST_FRAME && attackFrame <= ATTACK_ACTIVE_LAST_FRAME) {
+          player.attackPhase = "active";
+        } else player.attackPhase = "recovery";
 
-      player.attackElapsed = (attackFrame + 1) * dt;
-      if (attackFrame === ATTACK_HIT_FRAME && !player.attackHasHit) this.tryAttackHit(tick);
+        player.attackElapsed = (attackFrame + 1) * dt;
+        if (attackFrame === ATTACK_HIT_FRAME && !player.attackHasHit) this.tryAttackHit(tick);
 
-      if (attackFrame >= ATTACK_RECOVERY_LAST_FRAME) {
-        player.attackFrame = -1;
-        player.attackElapsed = 0;
-        player.attackHasHit = false;
-      } else player.attackFrame += 1;
+        if (attackFrame >= ATTACK_RECOVERY_LAST_FRAME) {
+          player.attackFrame = -1;
+          player.attackElapsed = 0;
+          player.attackHasHit = false;
+          player.attackKind = "none";
+        } else player.attackFrame += 1;
+      }
     } else if (inputMagnitude > 0) {
       player.attackPhase = "idle";
+      player.attackKind = "none";
+      player.heavyRelativeTick = -1;
       const wantsSprint = input.sprint && player.stamina > 0.5;
       const speed = wantsSprint ? this.tuning.sprintSpeed : this.tuning.walkSpeed;
       player.motion = wantsSprint ? "sprint" : "move";
@@ -175,6 +235,8 @@ export class GameSimulation {
       }
     } else {
       player.attackPhase = "idle";
+      player.attackKind = "none";
+      player.heavyRelativeTick = -1;
       player.motion = "idle";
       player.speed01 = 0;
       if (typeof input.faceYaw === "number") {
@@ -200,6 +262,35 @@ export class GameSimulation {
 
   consumeEvents(): GameEvent[] {
     return this.pendingEvents.splice(0, this.pendingEvents.length);
+  }
+
+  applyHeavyGeometryContact(tick: number, separationMeters: number): boolean {
+    const { player, enemy } = this.state;
+    if (
+      player.attackKind !== "heavy" || player.attackHasHit ||
+      player.heavyRelativeTick < HEAVY_ACTIVE_FIRST_RELATIVE_TICK ||
+      player.heavyRelativeTick > HEAVY_ACTIVE_LAST_RELATIVE_TICK ||
+      enemy.health !== enemy.maxHealth
+    ) return false;
+    player.attackHasHit = true;
+    enemy.health = Math.max(0, enemy.health - HEAVY_CONTACT_DAMAGE);
+    const separationMicrometres = Math.round(separationMeters * 1_000_000);
+    this.pendingEvents.push({
+      type: "heavy-contact",
+      tick,
+      heavyRelativeTick: player.heavyRelativeTick,
+      attackSerial: player.attackSerial,
+      separationMicrometres,
+    });
+    this.pendingEvents.push({
+      type: "heavy-damage",
+      tick,
+      heavyRelativeTick: player.heavyRelativeTick,
+      damage: HEAVY_CONTACT_DAMAGE,
+      remainingHealth: enemy.health,
+      attackSerial: player.attackSerial,
+    });
+    return true;
   }
 
   private movePlayer(direction: Vec2, speed: number, dt: number): void {

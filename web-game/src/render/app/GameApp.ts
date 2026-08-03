@@ -1,6 +1,12 @@
 import * as THREE from "three";
 import { PerfDiagnostics, type RuntimeMetrics } from "../../diagnostics/PerfDiagnostics";
 import { getCombatPoseBeatTelemetry } from "../objects/CharacterViews";
+import type { RenderedBladePrimitive, TargetLandmarkName } from "../objects/CharacterViews";
+import {
+  HeavyContactResolver,
+  type HeavyContactTickReceipt,
+  type HeavyGeometryBindings,
+} from "../objects/HeavyContactResolver";
 import { InputController } from "../../game/input/InputController";
 import type { InputSnapshot } from "../../game/input/actions";
 import { FIXED_TIMESTEP } from "../../game/simulation/constants";
@@ -26,16 +32,32 @@ import { ViewportController } from "./ViewportController";
 interface PendingEdges {
   attack: boolean;
   attackSource: InputSnapshot["attackSource"];
+  heavyAttack: boolean;
+  heavyAttackSource: InputSnapshot["heavyAttackSource"];
   dodge: boolean;
 }
 
 export interface ProductionFixedUpdateReceipt {
   input: InputFrame;
   lightStrikeSource: InputSnapshot["attackSource"];
+  heavyStrikeSource: InputSnapshot["heavyAttackSource"];
   state: WorldState;
   events: GameEvent[];
   healthBefore: number;
   healthAfter: number;
+}
+
+export interface P30ProductionGeometrySource {
+  scene: THREE.Scene;
+  camera: THREE.PerspectiveCamera;
+  heroRoot: THREE.Object3D;
+  leftHandBone: THREE.Bone;
+  rightHandBone: THREE.Bone;
+  swordBladePrimitives: RenderedBladePrimitive[];
+  targetRoot: THREE.Object3D;
+  targetSkinnedMeshes: THREE.SkinnedMesh[];
+  targetLandmarkBones: Record<TargetLandmarkName, THREE.Bone>;
+  healthStore: WorldState["enemy"];
 }
 
 export interface ProductionRenderReceipt {
@@ -61,6 +83,8 @@ export class GameApp {
   private readonly post: PostStack;
   private readonly viewport: ViewportController;
   private readonly renderBridge: RenderBridge;
+  private readonly heavyContactResolver: HeavyContactResolver | null;
+  private lastHeavyContactReceipt: HeavyContactTickReceipt | null = null;
   private readonly hud: Hud;
   private lastTimestamp = 0;
   private running = false;
@@ -73,6 +97,8 @@ export class GameApp {
     dodgePressed: false,
     attackPressed: false,
     attackSource: null,
+    heavyAttackPressed: false,
+    heavyAttackSource: null,
     lockPressed: false,
     diagnosticsPressed: false,
     postPressed: false,
@@ -84,6 +110,8 @@ export class GameApp {
   private readonly pendingEdges: PendingEdges = {
     attack: false,
     attackSource: null,
+    heavyAttack: false,
+    heavyAttackSource: null,
     dodge: false,
   };
   private manifestVersion: number | null = null;
@@ -167,6 +195,8 @@ export class GameApp {
       assetRegistry,
       this.renderer.capabilities.getMaxAnisotropy(),
     );
+    const heavyBindings = this.resolveHeavyGeometryBindings();
+    this.heavyContactResolver = heavyBindings ? new HeavyContactResolver(heavyBindings) : null;
     this.cameraController.setObstructionObjects([this.renderBridge.arena.root]);
     this.input.attach(this.renderer.domElement);
     this.manifestVersion = assetRegistry.manifestVersion;
@@ -217,7 +247,11 @@ export class GameApp {
     this.runtimeCapturePaused = false;
     this.pendingEdges.attack = false;
     this.pendingEdges.attackSource = null;
+    this.pendingEdges.heavyAttack = false;
+    this.pendingEdges.heavyAttackSource = null;
     this.pendingEdges.dodge = false;
+    this.input.clear();
+    this.heavyContactResolver?.reset();
     this.renderOnce(true);
   }
 
@@ -240,24 +274,32 @@ export class GameApp {
     this.simulationPaused = false;
     this.pendingEdges.attack = false;
     this.pendingEdges.attackSource = null;
+    this.pendingEdges.heavyAttack = false;
+    this.pendingEdges.heavyAttackSource = null;
     this.pendingEdges.dodge = false;
+    this.input.clear();
+    this.heavyContactResolver?.reset();
     this.renderOnce(true);
   }
 
   /** Selects the normal deterministic P30 scenario before gameplay begins. */
-  prepareP30LightStrikeScenario(): void {
+  prepareP30HeavyStrikeScenario(): void {
     const initial = createInitialWorld({
       playerPosition: { x: 0, z: 2.6 },
       enemyPosition: { x: 0, z: 0 },
     });
-    this.simulation.reset(initial, P30_REVIEW_TUNING);
+    initial.tick = -1;
+    this.simulation.reset(initial, P30_REVIEW_TUNING, 1);
     this.physics.reset(initial.player.position, initial.enemy.position);
     this.clock.reset();
     this.cameraController.reset();
     this.lockedOn = false;
     this.pendingEdges.attack = false;
     this.pendingEdges.attackSource = null;
+    this.pendingEdges.heavyAttack = false;
+    this.pendingEdges.heavyAttackSource = null;
     this.pendingEdges.dodge = false;
+    this.input.clear();
     this.runtimeCapturePaused = false;
     this.p30ScenarioActive = true;
     // Tick 0 remains visible and stable until the first real player input.
@@ -266,6 +308,50 @@ export class GameApp {
     this.p30AwaitingInput = true;
     this.simulationPaused = true;
     this.renderOnce(true);
+    this.heavyContactResolver?.reset();
+    this.lighting.scene.updateMatrixWorld(true);
+    this.heavyContactResolver?.prime();
+  }
+
+  /** Strict evaluator reset: configuration is applied only while creating tick -1. */
+  async resetAndPauseP30Scenario(options: {
+    seed: number;
+    targetOffsetMicrometres: readonly [number, number, number];
+  }): Promise<void> {
+    if (options.seed !== 30012) throw new Error(`Unsupported P30 seed: ${options.seed}`);
+    if (
+      options.targetOffsetMicrometres.length !== 3 ||
+      options.targetOffsetMicrometres.some((value) => !Number.isSafeInteger(value))
+    ) {
+      throw new Error("targetOffsetMicrometres must contain exactly three signed safe integers");
+    }
+    this.pause();
+    const [rightMicrometres, upMicrometres, forwardMicrometres] =
+      options.targetOffsetMicrometres;
+    const initial = createInitialWorld({
+      playerPosition: { x: 0, z: 2.6 },
+      enemyPosition: {
+        x: -rightMicrometres / 1_000_000,
+        z: -forwardMicrometres / 1_000_000,
+      },
+    });
+    initial.tick = -1;
+    initial.enemy.positionY = upMicrometres / 1_000_000;
+    this.simulation.reset(initial, P30_REVIEW_TUNING, 1);
+    this.physics.reset(initial.player.position, initial.enemy.position);
+    this.clock.reset();
+    this.cameraController.reset();
+    this.lockedOn = false;
+    this.clearPendingEdges();
+    this.input.clear();
+    this.p30ScenarioActive = true;
+    this.p30AwaitingInput = false;
+    this.runtimeCapturePaused = true;
+    this.simulationPaused = true;
+    this.renderOnce(true);
+    this.heavyContactResolver?.reset();
+    this.lighting.scene.updateMatrixWorld(true);
+    this.heavyContactResolver?.prime();
   }
 
   setProductionRuntimeObserver(observer: ProductionRuntimeObserver | null): void {
@@ -273,7 +359,7 @@ export class GameApp {
   }
 
   resumeRuntimeCapture(): void {
-    if (!this.runtimeCapturePaused) return;
+    if (!this.runtimeCapturePaused && !this.p30ScenarioActive) return;
     this.runtimeCapturePaused = false;
     this.simulationPaused = false;
     this.clock.reset();
@@ -411,6 +497,35 @@ export class GameApp {
     return getCombatPoseBeatTelemetry();
   }
 
+  getP30GeometrySource(): P30ProductionGeometrySource {
+    const hands = this.renderBridge.hero.getHandBones();
+    const landmarks = this.renderBridge.zombie.getLandmarkBones();
+    const missingLandmark = (Object.keys(landmarks) as TargetLandmarkName[]).find(
+      (name) => landmarks[name] === null,
+    );
+    if (!hands.left || !hands.right) throw new Error("Rendered hero hand bindings are unavailable");
+    if (missingLandmark) throw new Error(`Rendered target landmark is unavailable: ${missingLandmark}`);
+    const targetLandmarkBones = Object.fromEntries(
+      (Object.keys(landmarks) as TargetLandmarkName[]).map((name) => [name, landmarks[name]!]),
+    ) as Record<TargetLandmarkName, THREE.Bone>;
+    return {
+      scene: this.lighting.scene,
+      camera: this.cameraController.camera,
+      heroRoot: this.renderBridge.hero.root,
+      leftHandBone: hands.left,
+      rightHandBone: hands.right,
+      swordBladePrimitives: this.renderBridge.hero.getBladePrimitives(),
+      targetRoot: this.renderBridge.zombie.root,
+      targetSkinnedMeshes: this.renderBridge.zombie.getSkinnedMeshes(),
+      targetLandmarkBones,
+      healthStore: this.simulation.state.enemy,
+    };
+  }
+
+  getHeavyContactReceipt(): HeavyContactTickReceipt | null {
+    return this.lastHeavyContactReceipt ? { ...this.lastHeavyContactReceipt } : null;
+  }
+
   getActorWorldHeights(): { attacker: number; target: number } {
     this.lighting.scene.updateMatrixWorld(true);
     const attacker =
@@ -546,11 +661,16 @@ export class GameApp {
     if (this.latestInput.attackPressed) {
       this.pendingEdges.attackSource = this.latestInput.attackSource;
     }
+    this.pendingEdges.heavyAttack ||= this.latestInput.heavyAttackPressed;
+    if (this.latestInput.heavyAttackPressed) {
+      this.pendingEdges.heavyAttackSource = this.latestInput.heavyAttackSource;
+    }
     this.pendingEdges.dodge ||= this.latestInput.dodgePressed;
     if (
       this.p30AwaitingInput &&
       (Math.abs(this.latestInput.moveX) + Math.abs(this.latestInput.moveZ) > 0 ||
         this.latestInput.attackPressed ||
+        this.latestInput.heavyAttackPressed ||
         this.latestInput.dodgePressed)
     ) {
       this.p30AwaitingInput = false;
@@ -565,10 +685,17 @@ export class GameApp {
       const fixedInput = {
         ...simulationInput,
         attackPressed: !appliedEdges && this.pendingEdges.attack,
+        heavyAttackPressed: !appliedEdges && this.pendingEdges.heavyAttack,
         dodgePressed: !appliedEdges && this.pendingEdges.dodge,
       };
       this.haltAfterLiveTick = false;
-      this.fixedTick(fixedInput, dt, true, this.pendingEdges.attackSource);
+      this.fixedTick(
+        fixedInput,
+        dt,
+        true,
+        this.pendingEdges.attackSource,
+        this.pendingEdges.heavyAttackSource,
+      );
       appliedEdges = true;
       fixedSteps += 1;
       return !this.haltAfterLiveTick;
@@ -576,6 +703,8 @@ export class GameApp {
     if (appliedEdges) {
       this.pendingEdges.attack = false;
       this.pendingEdges.attackSource = null;
+      this.pendingEdges.heavyAttack = false;
+      this.pendingEdges.heavyAttackSource = null;
       this.pendingEdges.dodge = false;
     }
 
@@ -628,6 +757,7 @@ export class GameApp {
       moveZ: direction.z * magnitude,
       sprint: input.sprint,
       attackPressed: false,
+      heavyAttackPressed: false,
       dodgePressed: false,
       ...(faceYaw === undefined ? {} : { faceYaw }),
     };
@@ -650,6 +780,7 @@ export class GameApp {
     dt: number,
     notifyRuntimeObserver = false,
     lightStrikeSource: InputSnapshot["attackSource"] = null,
+    heavyStrikeSource: InputSnapshot["heavyAttackSource"] = null,
   ): GameEvent[] {
     const previous = { ...this.simulation.state.player.position };
     const healthBefore = this.simulation.state.enemy.health;
@@ -662,6 +793,19 @@ export class GameApp {
       dt,
     );
     this.simulation.reconcilePlayerPosition(resolved);
+    this.lastHeavyContactReceipt = null;
+    if (this.p30ScenarioActive && this.heavyContactResolver) {
+      this.renderBridge.updateActors(this.simulation.state);
+      this.lighting.scene.updateMatrixWorld(true);
+      const contact = this.heavyContactResolver.resolveTick();
+      this.lastHeavyContactReceipt = contact;
+      if (contact.risingContact) {
+        this.simulation.applyHeavyGeometryContact(
+          this.simulation.state.tick,
+          contact.minimumSweepSeparationMeters,
+        );
+      }
+    }
     const events = this.simulation.consumeEvents();
     this.renderBridge.handleEvents(events, this.simulation.state);
     const hitEvent = events.find((event) => event.type === "enemy-hit");
@@ -673,6 +817,7 @@ export class GameApp {
       const shouldContinue = this.runtimeObserver.afterFixedUpdate({
         input: { ...input },
         lightStrikeSource: input.attackPressed ? lightStrikeSource : null,
+        heavyStrikeSource: input.heavyAttackPressed ? heavyStrikeSource : null,
         state: structuredClone(this.simulation.state),
         events: events.map((event) => ({ ...event })),
         healthBefore,
@@ -717,11 +862,43 @@ export class GameApp {
     if (
       Math.abs(input.moveX) + Math.abs(input.moveZ) > 0 ||
       input.attackPressed ||
+      input.heavyAttackPressed ||
       input.dodgePressed ||
       input.lockPressed
     ) {
       this.hud.markEngaged();
     }
+  }
+
+  private clearPendingEdges(): void {
+    this.pendingEdges.attack = false;
+    this.pendingEdges.attackSource = null;
+    this.pendingEdges.heavyAttack = false;
+    this.pendingEdges.heavyAttackSource = null;
+    this.pendingEdges.dodge = false;
+  }
+
+  private resolveHeavyGeometryBindings(): HeavyGeometryBindings | null {
+    const hands = this.renderBridge.hero.getHandBones();
+    const bladePrimitives = this.renderBridge.hero.getBladePrimitives();
+    const targetSkinnedMeshes = this.renderBridge.zombie.getSkinnedMeshes();
+    const landmarks = this.renderBridge.zombie.getLandmarkBones();
+    if (!hands.left || !hands.right || bladePrimitives.length === 0 || targetSkinnedMeshes.length === 0) {
+      return null;
+    }
+    const targetLandmarkBones = {} as Record<TargetLandmarkName, THREE.Object3D>;
+    for (const name of Object.keys(landmarks) as TargetLandmarkName[]) {
+      const landmark = landmarks[name];
+      if (!landmark) return null;
+      targetLandmarkBones[name] = landmark;
+    }
+    return {
+      leftHandBone: hands.left,
+      rightHandBone: hands.right,
+      swordBladePrimitives: bladePrimitives,
+      targetSkinnedMeshes,
+      targetLandmarkBones,
+    };
   }
 
   private readonly onContextLost = (): void => {

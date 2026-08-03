@@ -1,10 +1,19 @@
+import type * as THREE from "three";
 import type { BcjObject, BcjValue } from "./CanonicalStateDigest";
 import { canonicalizeBcj, sha256Hex } from "./CanonicalStateDigest";
 import {
-  P30_ATTACK_EDGE_ABSOLUTE_TICK,
-  P30_FIXED_DELTA,
+  assertP30ResetOptions,
+  P30_FIXED_DELTA_DENOMINATOR,
+  P30_FIXED_DELTA_NUMERATOR,
+  P30_HEAVY_RISING_EDGE_ABSOLUTE_TICK,
+  P30_PROTOCOL_ID,
+  P30_RESOURCE_RECEIPT_SCHEMA,
+  P30_RUN_RECEIPT_SCHEMA,
+  P30_RUNTIME_HOOK_SCHEMA,
   P30_SCENARIO_ID,
   P30_SCENARIO_SEED,
+  P30_SNAPSHOT_SCHEMA,
+  type P30ResetOptions,
 } from "./P30CriticProtocol";
 import type { GameEvent, WorldState } from "../game/simulation/types";
 import type {
@@ -16,9 +25,43 @@ import type {
 type Vector3Receipt = [number, number, number];
 type QuaternionReceipt = [number, number, number, number];
 
+export interface P30TargetLandmarkBones {
+  pelvis: THREE.Bone;
+  neck: THREE.Bone;
+  head: THREE.Bone;
+  leftShoulder: THREE.Bone;
+  leftElbow: THREE.Bone;
+  leftWrist: THREE.Bone;
+  rightShoulder: THREE.Bone;
+  rightElbow: THREE.Bone;
+  rightWrist: THREE.Bone;
+  leftHip: THREE.Bone;
+  leftKnee: THREE.Bone;
+  leftAnkle: THREE.Bone;
+  rightHip: THREE.Bone;
+  rightKnee: THREE.Bone;
+  rightAnkle: THREE.Bone;
+}
+
+export interface P30GeometrySource {
+  scene: THREE.Scene;
+  camera: THREE.Camera;
+  heroRoot: THREE.Object3D;
+  leftHandBone: THREE.Bone;
+  rightHandBone: THREE.Bone;
+  swordBladePrimitives: Array<{
+    mesh: THREE.Mesh;
+    materialGroupIndices: number[];
+  }>;
+  targetRoot: THREE.Object3D;
+  targetSkinnedMeshes: THREE.SkinnedMesh[];
+  targetLandmarkBones: P30TargetLandmarkBones;
+  healthStore: object;
+}
+
 interface StateDigestReceipt {
   absoluteSimulationTick: number;
-  attackRelativeTick: number | null;
+  heavyRelativeTick: number | null;
   quantizationScale: 1_000_000;
   quantizedState: BcjObject;
   bcjVersion: "BCJ-v1";
@@ -28,52 +71,36 @@ interface StateDigestReceipt {
 
 interface InputEdgeReceipt {
   eventID: string;
-  action: "light-strike";
+  action: "heavy-strike" | "light-strike";
   phase: "rising";
   device: "mouse" | "keyboard" | "unknown";
-  button: "left" | null;
+  button: "left" | "right" | null;
   absoluteSimulationTick: number;
-  attackRelativeTick: 0;
+  heavyRelativeTick: 0 | null;
 }
 
 interface RuntimeEventReceipt {
   eventID: string;
   type: GameEvent["type"];
   absoluteSimulationTick: number;
-  attackRelativeTick: number | null;
+  heavyRelativeTick: number | null;
   attackSerial?: number;
   damage?: number;
   healthBefore?: number;
   healthAfter?: number;
-}
-
-interface WeaponKinematics {
-  angularVelocity: Vector3Receipt;
-  angularSpeedRadiansPerSecond: number;
-  velocityDirection: Vector3Receipt;
-}
-
-interface WeaponSample {
-  absoluteSimulationTick: number;
-  axis: Vector3Receipt;
-  tip: Vector3Receipt;
-}
-
-interface ResponseImpulseReceipt {
-  absoluteSimulationTick: number | null;
-  attackRelativeTick: number | null;
-  vector: Vector3Receipt;
-  magnitude: number;
+  separationMicrometres?: number;
 }
 
 export interface P30CriticApi {
-  readonly schema: "p30.r011.runtime-hook.v1";
+  readonly schema: typeof P30_RUNTIME_HOOK_SCHEMA;
   whenReady: () => Promise<void>;
+  resetAndPause: (options: P30ResetOptions) => Promise<void>;
   armCaptureTicks: (absoluteScenarioTicks: number[]) => void;
   resume: () => void;
   snapshot: () => Readonly<Record<string, unknown>>;
   runReceipt: () => Readonly<Record<string, unknown>>;
   resourceReceipt: () => Readonly<Record<string, unknown>>;
+  geometrySource: () => P30GeometrySource;
 }
 
 declare global {
@@ -82,64 +109,22 @@ declare global {
   }
 }
 
-const ZERO_VECTOR: Vector3Receipt = [0, 0, 0];
 const QUANTIZATION_SCALE = 1_000_000 as const;
 
-function round6(value: number): number {
-  return Math.round(value * QUANTIZATION_SCALE) / QUANTIZATION_SCALE;
-}
-
 function quantize(value: number): number {
-  const result = Math.round(value * QUANTIZATION_SCALE);
+  if (!Number.isFinite(value)) throw new Error(`Non-finite state value: ${String(value)}`);
+  const scaled = Math.abs(value) * QUANTIZATION_SCALE;
+  const result = Math.sign(value) * Math.floor(scaled + 0.5);
   if (!Number.isSafeInteger(result)) throw new Error(`Unsafe quantized state value: ${value}`);
   return Object.is(result, -0) ? 0 : result;
 }
 
-function vector3(value: readonly number[] | null | undefined): Vector3Receipt | null {
-  if (!value || value.length < 3) return null;
+function round6(value: number): number {
+  return quantize(value) / QUANTIZATION_SCALE;
+}
+
+function vector3(value: readonly number[]): Vector3Receipt {
   return [round6(value[0]!), round6(value[1]!), round6(value[2]!)];
-}
-
-function roundedVector(value: Vector3Receipt): Vector3Receipt {
-  return [round6(value[0]), round6(value[1]), round6(value[2])];
-}
-
-function subtract(left: Vector3Receipt, right: Vector3Receipt): Vector3Receipt {
-  return [left[0] - right[0], left[1] - right[1], left[2] - right[2]];
-}
-
-function cross(left: Vector3Receipt, right: Vector3Receipt): Vector3Receipt {
-  return [
-    left[1] * right[2] - left[2] * right[1],
-    left[2] * right[0] - left[0] * right[2],
-    left[0] * right[1] - left[1] * right[0],
-  ];
-}
-
-function dot(left: Vector3Receipt, right: Vector3Receipt): number {
-  return left[0] * right[0] + left[1] * right[1] + left[2] * right[2];
-}
-
-function magnitude(value: Vector3Receipt): number {
-  return Math.hypot(value[0], value[1], value[2]);
-}
-
-function normalize(value: Vector3Receipt): Vector3Receipt {
-  const length = magnitude(value);
-  if (length <= 1e-9) return [...ZERO_VECTOR];
-  return roundedVector([value[0] / length, value[1] / length, value[2] / length]);
-}
-
-function midpoint(
-  first: Vector3Receipt | null,
-  second: Vector3Receipt | null,
-): Vector3Receipt | null {
-  if (!first || !second) return first ?? second;
-  return roundedVector([
-    (first[0] + second[0]) * 0.5,
-    (first[1] + second[1]) * 0.5,
-    (first[2] + second[2]) * 0.5,
-  ]);
 }
 
 function quaternionForRootYaw(yaw: number): QuaternionReceipt {
@@ -148,34 +133,10 @@ function quaternionForRootYaw(yaw: number): QuaternionReceipt {
 }
 
 function transform(
-  position: Vector3Receipt | null,
-  quaternion: QuaternionReceipt | null = null,
-): { position: Vector3Receipt | null; quaternion: QuaternionReceipt | null } {
+  position: Vector3Receipt,
+  quaternion: QuaternionReceipt,
+): { position: Vector3Receipt; quaternion: QuaternionReceipt } {
   return { position, quaternion };
-}
-
-function multiplyMatrixVector(
-  matrix: readonly number[],
-  vector: readonly [number, number, number, number],
-): [number, number, number, number] {
-  return [
-    matrix[0]! * vector[0] + matrix[4]! * vector[1] + matrix[8]! * vector[2] + matrix[12]! * vector[3],
-    matrix[1]! * vector[0] + matrix[5]! * vector[1] + matrix[9]! * vector[2] + matrix[13]! * vector[3],
-    matrix[2]! * vector[0] + matrix[6]! * vector[1] + matrix[10]! * vector[2] + matrix[14]! * vector[3],
-    matrix[3]! * vector[0] + matrix[7]! * vector[1] + matrix[11]! * vector[2] + matrix[15]! * vector[3],
-  ];
-}
-
-function screenY(
-  point: Vector3Receipt,
-  viewMatrix: readonly number[],
-  projectionMatrix: readonly number[],
-  viewportHeight: number,
-): number | null {
-  const viewPoint = multiplyMatrixVector(viewMatrix, [point[0], point[1], point[2], 1]);
-  const clipPoint = multiplyMatrixVector(projectionMatrix, viewPoint);
-  if (Math.abs(clipPoint[3]) <= 1e-9) return null;
-  return round6((1 - clipPoint[1] / clipPoint[3]) * viewportHeight * 0.5);
 }
 
 function quantizedWorldState(state: WorldState): BcjObject {
@@ -193,13 +154,19 @@ function quantizedWorldState(state: WorldState): BcjObject {
       attackElapsed: quantize(state.player.attackElapsed),
       attackFrame: state.player.attackFrame,
       attackPhase: state.player.attackPhase,
+      attackKind: state.player.attackKind,
+      heavyRelativeTick: state.player.heavyRelativeTick,
       attackSerial: state.player.attackSerial,
       attackHasHit: state.player.attackHasHit,
       dodgeRemaining: quantize(state.player.dodgeRemaining),
       invulnerableRemaining: quantize(state.player.invulnerableRemaining),
     },
     target: {
-      position: [quantize(state.enemy.position.x), 0, quantize(state.enemy.position.z)],
+      position: [
+        quantize(state.enemy.position.x),
+        quantize(state.enemy.positionY),
+        quantize(state.enemy.position.z),
+      ],
       yaw: quantize(state.enemy.yaw),
       health: state.enemy.health,
       motion: state.enemy.motion,
@@ -213,6 +180,10 @@ function copyJson<T>(value: T): T {
   return structuredClone(value);
 }
 
+function eventTick(event: GameEvent, fallbackTick: number): number {
+  return "tick" in event && Number.isSafeInteger(event.tick) ? event.tick : fallbackTick;
+}
+
 class P30CriticController {
   private readonly armedTicks = new Set<number>();
   private readonly inputEdgeLog: InputEdgeReceipt[] = [];
@@ -221,140 +192,188 @@ class P30CriticController {
   private readonly stateDigestHistory: StateDigestReceipt[] = [];
   private readonly cameraHistory: Array<Record<string, unknown>> = [];
   private readonly errors: string[] = [];
-  private attackEdgeSeen = false;
+  private heavyEdgeAbsoluteTick: number | null = null;
+  private targetOffsetMicrometres: Vector3Receipt = [0, 0, 0];
   private eventSerial = 0;
-  private previousWeapon: WeaponSample | null = null;
-  private weaponKinematics: WeaponKinematics = {
-    angularVelocity: [...ZERO_VECTOR],
-    angularSpeedRadiansPerSecond: 0,
-    velocityDirection: [...ZERO_VECTOR],
-  };
-  private responseImpulse: ResponseImpulseReceipt = {
-    absoluteSimulationTick: null,
-    attackRelativeTick: null,
-    vector: [...ZERO_VECTOR],
-    magnitude: 0,
-  };
-  private pendingHit: { absoluteSimulationTick: number; damage: number } | null = null;
   private lastCameraTick: number | null = null;
-  private readyResolved = false;
-  private resolveReady!: () => void;
-  private readonly ready = new Promise<void>((resolve) => {
-    this.resolveReady = resolve;
-  });
 
   readonly api: P30CriticApi;
 
   constructor(private readonly app: GameApp) {
     this.api = Object.freeze({
-      schema: "p30.r011.runtime-hook.v1" as const,
-      whenReady: () => this.ready,
+      schema: P30_RUNTIME_HOOK_SCHEMA,
+      whenReady: async () => Promise.resolve(),
+      resetAndPause: (options: P30ResetOptions) => this.resetAndPause(options),
       armCaptureTicks: (ticks: number[]) => this.armCaptureTicks(ticks),
       resume: () => this.app.resumeRuntimeCapture(),
       snapshot: () => this.snapshot(),
       runReceipt: () => this.runReceipt(),
       resourceReceipt: () => this.resourceReceipt(),
+      geometrySource: () => this.app.getP30GeometrySource() as P30GeometrySource,
     });
-    this.recordStateDigest(this.app.getSnapshot());
     this.app.setProductionRuntimeObserver({
       afterFixedUpdate: (receipt) => this.afterFixedUpdate(receipt),
       afterRender: (receipt) => this.afterRender(receipt),
     });
+    this.recordStateDigest(this.app.getSnapshot());
   }
 
-  private attackRelativeTick(absoluteSimulationTick: number): number | null {
-    if (!this.attackEdgeSeen || absoluteSimulationTick < P30_ATTACK_EDGE_ABSOLUTE_TICK) {
-      return null;
+  private heavyRelativeTick(absoluteSimulationTick: number): number | null {
+    if (
+      this.heavyEdgeAbsoluteTick === null ||
+      absoluteSimulationTick < this.heavyEdgeAbsoluteTick
+    ) return null;
+    return absoluteSimulationTick - this.heavyEdgeAbsoluteTick;
+  }
+
+  private async resetAndPause(options: P30ResetOptions): Promise<void> {
+    assertP30ResetOptions(options);
+    this.clearRunState();
+    const targetOffsetMicrometres: Vector3Receipt = [
+      options.targetOffsetMicrometres[0],
+      options.targetOffsetMicrometres[1],
+      options.targetOffsetMicrometres[2],
+    ];
+    await this.app.resetAndPauseP30Scenario({
+      seed: P30_SCENARIO_SEED,
+      targetOffsetMicrometres,
+    });
+    this.targetOffsetMicrometres = targetOffsetMicrometres;
+    const state = this.app.getSnapshot();
+    if (state.tick !== -1) {
+      this.errors.push(`resetAndPause ended at tick ${state.tick}; expected -1`);
     }
-    return absoluteSimulationTick - P30_ATTACK_EDGE_ABSOLUTE_TICK;
+    if (!this.app.isSimulationPaused || this.app.isRuntimeCapturePaused) {
+      this.errors.push("resetAndPause did not leave the pre-update scenario normally paused");
+    }
+    this.recordStateDigest(state);
+  }
+
+  private clearRunState(): void {
+    this.armedTicks.clear();
+    this.inputEdgeLog.length = 0;
+    this.eventLog.length = 0;
+    this.fixedInputHistory.length = 0;
+    this.stateDigestHistory.length = 0;
+    this.cameraHistory.length = 0;
+    this.errors.length = 0;
+    this.heavyEdgeAbsoluteTick = null;
+    this.eventSerial = 0;
+    this.lastCameraTick = null;
   }
 
   private armCaptureTicks(ticks: number[]): void {
+    if (!Array.isArray(ticks)) throw new Error("Capture ticks must be an array");
     const currentTick = this.app.getSnapshot().tick;
+    const validated = new Set<number>();
     for (const tick of ticks) {
       if (!Number.isSafeInteger(tick) || tick < 0) {
-        throw new Error(`Capture tick must be a non-negative safe integer: ${tick}`);
+        throw new Error(`Capture tick must be a non-negative safe integer: ${String(tick)}`);
       }
       if (tick <= currentTick) {
         throw new Error(`Capture tick ${tick} is not ahead of current absolute tick ${currentTick}`);
       }
-      this.armedTicks.add(tick);
+      if (validated.has(tick) || this.armedTicks.has(tick)) {
+        throw new Error(`Capture tick ${tick} is already armed`);
+      }
+      validated.add(tick);
     }
+    for (const tick of validated) this.armedTicks.add(tick);
   }
 
   private afterFixedUpdate(receipt: ProductionFixedUpdateReceipt): boolean {
     const absoluteSimulationTick = receipt.state.tick;
-    if (receipt.input.attackPressed) this.recordAttackEdge(receipt);
+    if (receipt.input.heavyAttackPressed) this.recordHeavyEdge(receipt);
+    if (receipt.input.attackPressed) this.recordLightEdge(receipt);
     this.recordEvents(receipt);
     this.fixedInputHistory.push({
       absoluteSimulationTick,
-      attackRelativeTick: this.attackRelativeTick(absoluteSimulationTick),
-      sampledUpdateTick: absoluteSimulationTick - 1,
+      heavyRelativeTick: this.heavyRelativeTick(absoluteSimulationTick),
       moveX: quantize(receipt.input.moveX),
       moveZ: quantize(receipt.input.moveZ),
       sprint: receipt.input.sprint,
       dodgePressed: receipt.input.dodgePressed,
       attackPressed: receipt.input.attackPressed,
+      heavyAttackPressed: receipt.input.heavyAttackPressed,
       faceYaw: receipt.input.faceYaw === undefined ? null : quantize(receipt.input.faceYaw),
     });
     this.recordStateDigest(receipt.state);
-    if (!this.armedTicks.delete(absoluteSimulationTick)) return true;
-    return false;
+    return !this.armedTicks.delete(absoluteSimulationTick);
   }
 
-  private recordAttackEdge(receipt: ProductionFixedUpdateReceipt): void {
-    const absoluteSimulationTick = receipt.state.tick - 1;
-    if (this.attackEdgeSeen) return;
-    this.attackEdgeSeen = true;
-    if (absoluteSimulationTick !== P30_ATTACK_EDGE_ABSOLUTE_TICK) {
+  private recordHeavyEdge(receipt: ProductionFixedUpdateReceipt): void {
+    const absoluteSimulationTick = receipt.state.tick;
+    if (this.heavyEdgeAbsoluteTick !== null) {
+      this.errors.push(`Additional heavy rising edge sampled at tick ${absoluteSimulationTick}`);
+      return;
+    }
+    this.heavyEdgeAbsoluteTick = absoluteSimulationTick;
+    if (absoluteSimulationTick !== P30_HEAVY_RISING_EDGE_ABSOLUTE_TICK) {
       this.errors.push(
-        `Light-strike rising edge sampled at absolute tick ${absoluteSimulationTick}; expected ${P30_ATTACK_EDGE_ABSOLUTE_TICK}`,
+        `Heavy-strike rising edge sampled at absolute tick ${absoluteSimulationTick}; ` +
+          `expected ${P30_HEAVY_RISING_EDGE_ABSOLUTE_TICK}`,
       );
     }
-    const mouse = receipt.lightStrikeSource === "mouse-left";
+    const source = receipt.heavyStrikeSource;
+    this.inputEdgeLog.push({
+      eventID: `input-${String(this.inputEdgeLog.length + 1).padStart(4, "0")}`,
+      action: "heavy-strike",
+      phase: "rising",
+      device: source === "mouse-right" ? "mouse" : source === "keyboard" ? "keyboard" : "unknown",
+      button: source === "mouse-right" ? "right" : null,
+      absoluteSimulationTick,
+      heavyRelativeTick: 0,
+    });
+  }
+
+  private recordLightEdge(receipt: ProductionFixedUpdateReceipt): void {
+    const source = receipt.lightStrikeSource;
     this.inputEdgeLog.push({
       eventID: `input-${String(this.inputEdgeLog.length + 1).padStart(4, "0")}`,
       action: "light-strike",
       phase: "rising",
-      device: mouse
-        ? "mouse"
-        : receipt.lightStrikeSource === "keyboard"
-          ? "keyboard"
-          : "unknown",
-      button: mouse ? "left" : null,
-      absoluteSimulationTick,
-      attackRelativeTick: 0,
+      device: source === "mouse-left" ? "mouse" : source === "keyboard" ? "keyboard" : "unknown",
+      button: source === "mouse-left" ? "left" : null,
+      absoluteSimulationTick: receipt.state.tick,
+      heavyRelativeTick: null,
     });
   }
 
   private recordEvents(receipt: ProductionFixedUpdateReceipt): void {
     for (const event of receipt.events) {
       this.eventSerial += 1;
-      const attackStart = event.type === "attack-started" || event.type === "attack-rejected-busy";
-      const absoluteSimulationTick = attackStart ? event.tick : receipt.state.tick;
+      const absoluteSimulationTick = eventTick(event, receipt.state.tick);
       const mapped: RuntimeEventReceipt = {
         eventID: `event-${String(this.eventSerial).padStart(4, "0")}`,
         type: event.type,
         absoluteSimulationTick,
-        attackRelativeTick: this.attackRelativeTick(absoluteSimulationTick),
+        heavyRelativeTick:
+          "heavyRelativeTick" in event
+            ? event.heavyRelativeTick
+            : this.heavyRelativeTick(absoluteSimulationTick),
       };
       if ("attackSerial" in event) mapped.attackSerial = event.attackSerial;
-      if (event.type === "enemy-hit") {
+      if (event.type === "enemy-hit" || event.type === "heavy-damage") {
         mapped.damage = event.damage;
         mapped.healthBefore = receipt.healthBefore;
         mapped.healthAfter = receipt.healthAfter;
-        this.pendingHit = { absoluteSimulationTick, damage: event.damage };
+      }
+      if (event.type === "heavy-contact") {
+        mapped.separationMicrometres = event.separationMicrometres;
       }
       this.eventLog.push(mapped);
     }
   }
 
   private recordStateDigest(state: WorldState): void {
+    if (
+      this.stateDigestHistory.at(-1)?.absoluteSimulationTick === state.tick
+    ) return;
     const quantizedState = quantizedWorldState(state);
     const bcj = canonicalizeBcj(quantizedState);
     this.stateDigestHistory.push({
       absoluteSimulationTick: state.tick,
-      attackRelativeTick: this.attackRelativeTick(state.tick),
+      heavyRelativeTick: this.heavyRelativeTick(state.tick),
       quantizationScale: QUANTIZATION_SCALE,
       quantizedState,
       bcjVersion: "BCJ-v1",
@@ -364,70 +383,17 @@ class P30CriticController {
   }
 
   private afterRender(receipt: ProductionRenderReceipt): void {
-    this.updateWeaponKinematics(receipt.absoluteSimulationTick);
-    if (this.pendingHit) {
-      const direction = this.weaponKinematics.velocityDirection;
-      this.responseImpulse = {
-        absoluteSimulationTick: this.pendingHit.absoluteSimulationTick,
-        attackRelativeTick: this.attackRelativeTick(this.pendingHit.absoluteSimulationTick),
-        vector: roundedVector([
-          direction[0] * this.pendingHit.damage,
-          direction[1] * this.pendingHit.damage,
-          direction[2] * this.pendingHit.damage,
-        ]),
-        magnitude: this.pendingHit.damage,
-      };
-      this.pendingHit = null;
-    }
-    if (this.lastCameraTick !== receipt.absoluteSimulationTick) {
-      const camera = this.app.getCameraTelemetry();
-      this.cameraHistory.push({
-        absoluteSimulationTick: receipt.absoluteSimulationTick,
-        attackRelativeTick: this.attackRelativeTick(receipt.absoluteSimulationTick),
-        renderHeartbeat: receipt.heartbeat,
-        position: [...camera.position],
-        quaternion: [...camera.quaternion],
-        viewMatrix: [...camera.viewMatrix],
-        projectionMatrix: [...camera.projectionMatrix],
-      });
-      this.lastCameraTick = receipt.absoluteSimulationTick;
-    }
-    if (!this.readyResolved && receipt.absoluteSimulationTick === 0) {
-      this.readyResolved = true;
-      this.resolveReady();
-    }
-  }
-
-  private updateWeaponKinematics(absoluteSimulationTick: number): void {
-    const pose = this.app.getCombatPoseTelemetry();
-    const axis = vector3(pose.hero.anchors.bladeAxisWorld);
-    const tip = vector3(pose.hero.anchors.bladeTipWorld);
-    if (!axis || !tip) return;
-    const current: WeaponSample = { absoluteSimulationTick, axis: normalize(axis), tip };
-    const previous = this.previousWeapon;
-    if (previous && previous.absoluteSimulationTick !== absoluteSimulationTick) {
-      const elapsedTicks = absoluteSimulationTick - previous.absoluteSimulationTick;
-      const elapsed = Math.max(P30_FIXED_DELTA, elapsedTicks * P30_FIXED_DELTA);
-      const axisCross = cross(previous.axis, current.axis);
-      const axisCrossMagnitude = magnitude(axisCross);
-      const angle = Math.acos(Math.max(-1, Math.min(1, dot(previous.axis, current.axis))));
-      const rotationAxis = axisCrossMagnitude > 1e-9
-        ? normalize(axisCross)
-        : [...ZERO_VECTOR] as Vector3Receipt;
-      const angularSpeed = angle / elapsed;
-      this.weaponKinematics = {
-        angularVelocity: roundedVector([
-          rotationAxis[0] * angularSpeed,
-          rotationAxis[1] * angularSpeed,
-          rotationAxis[2] * angularSpeed,
-        ]),
-        angularSpeedRadiansPerSecond: round6(angularSpeed),
-        velocityDirection: normalize(subtract(current.tip, previous.tip)),
-      };
-    }
-    if (!previous || previous.absoluteSimulationTick !== absoluteSimulationTick) {
-      this.previousWeapon = current;
-    }
+    if (this.lastCameraTick === receipt.absoluteSimulationTick) return;
+    const camera = this.app.getCameraTelemetry();
+    this.cameraHistory.push({
+      absoluteSimulationTick: receipt.absoluteSimulationTick,
+      heavyRelativeTick: this.heavyRelativeTick(receipt.absoluteSimulationTick),
+      position: vector3(camera.position),
+      quaternion: camera.quaternion.map(round6) as QuaternionReceipt,
+      viewMatrix: camera.viewMatrix.map(round6),
+      projectionMatrix: camera.projectionMatrix.map(round6),
+    });
+    this.lastCameraTick = receipt.absoluteSimulationTick;
   }
 
   private currentDigest(state: WorldState): StateDigestReceipt {
@@ -439,7 +405,7 @@ class P30CriticController {
     const bcj = canonicalizeBcj(quantizedState);
     return {
       absoluteSimulationTick: state.tick,
-      attackRelativeTick: this.attackRelativeTick(state.tick),
+      heavyRelativeTick: this.heavyRelativeTick(state.tick),
       quantizationScale: QUANTIZATION_SCALE,
       quantizedState,
       bcjVersion: "BCJ-v1",
@@ -448,54 +414,24 @@ class P30CriticController {
     };
   }
 
-  snapshot(): Readonly<Record<string, unknown>> {
+  private snapshot(): Readonly<Record<string, unknown>> {
     const state = this.app.getSnapshot();
-    const pose = this.app.getCombatPoseTelemetry();
     const camera = this.app.getCameraTelemetry();
     const renderer = this.app.getRendererTelemetry();
     const mode = this.app.getProductionModeTelemetry();
-    const hero = pose.hero.anchors;
-    const target = pose.target.anchors;
-    const leadHand = vector3(hero.leadHandWorld);
-    const supportHand = vector3(hero.supportHandWorld);
-    const leadFoot = vector3(hero.leadFootWorld);
-    const supportFoot = vector3(hero.supportFootWorld);
-    const bladeContact = vector3(hero.bladeContactWorld);
-    const bladeTip = vector3(hero.bladeTipWorld);
-    const measurement = pose.contact.measurement;
-    const targetClosest = vector3(measurement?.targetClosestWorld);
-    const bladeClosest = vector3(measurement?.bladeClosestWorld);
-    const contactNormal = targetClosest && bladeClosest
-      ? normalize(subtract(bladeClosest, targetClosest))
-      : null;
-    const attackerRootPosition: Vector3Receipt = [
-      round6(state.player.position.x),
-      0,
-      round6(state.player.position.z),
-    ];
-    const targetRootPosition: Vector3Receipt = [
-      round6(state.enemy.position.x),
-      0,
-      round6(state.enemy.position.z),
-    ];
-    const targetHead = vector3(target.headWorld);
-    const targetHeadScreenY = targetHead
-      ? screenY(targetHead, camera.viewMatrix, camera.projectionMatrix, renderer.size.height)
-      : null;
-    const targetGroundScreenY = screenY(
-      targetRootPosition,
-      camera.viewMatrix,
-      camera.projectionMatrix,
-      renderer.size.height,
-    );
-
     return copyJson({
-      schema: "p30.r011.snapshot.v1",
+      schema: P30_SNAPSHOT_SCHEMA,
+      protocolID: P30_PROTOCOL_ID,
       scenarioID: P30_SCENARIO_ID,
       seed: P30_SCENARIO_SEED,
+      fixedDelta: {
+        numerator: P30_FIXED_DELTA_NUMERATOR,
+        denominator: P30_FIXED_DELTA_DENOMINATOR,
+      },
+      captureTickSpace: "absolute-scenario",
+      targetOffsetMicrometres: [...this.targetOffsetMicrometres],
       absoluteSimulationTick: state.tick,
-      attackRelativeTick: this.attackRelativeTick(state.tick),
-      fixedDelta: { numerator: 1, denominator: 60 },
+      heavyRelativeTick: this.heavyRelativeTick(state.tick),
       paused: this.app.isSimulationPaused,
       capturePaused: this.app.isRuntimeCapturePaused,
       renderHeartbeat: this.app.currentRenderHeartbeat,
@@ -509,59 +445,27 @@ class P30CriticController {
         viewport: { ...renderer.size, pixelRatio: renderer.pixelRatio },
       },
       attacker: {
-        root: transform(attackerRootPosition, quaternionForRootYaw(state.player.yaw)),
-        hips: transform(vector3(hero.pelvisWorld)),
-        torso: transform(vector3(hero.torsoWorld)),
-        head: transform(vector3(hero.headWorld)),
-        hands: {
-          lead: transform(leadHand),
-          support: transform(supportHand),
-        },
-        feet: {
-          lead: { ...transform(leadFoot), groundContact: leadFoot !== null && leadFoot[1] <= 0.11 },
-          support: {
-            ...transform(supportFoot),
-            groundContact: supportFoot !== null && supportFoot[1] <= 0.11,
-          },
-        },
-      },
-      weapon: {
-        root: transform(vector3(hero.weaponRootWorld)),
-        gripMidpoint: midpoint(leadHand, supportHand),
-        activeEdgeSamplePoints: [bladeContact, bladeTip],
-        tip: bladeTip,
-        angularVelocity: this.weaponKinematics.angularVelocity,
-        angularSpeedRadiansPerSecond: this.weaponKinematics.angularSpeedRadiansPerSecond,
-        velocityDirection: this.weaponKinematics.velocityDirection,
+        root: transform(
+          [round6(state.player.position.x), 0, round6(state.player.position.z)],
+          quaternionForRootYaw(state.player.yaw),
+        ),
+        attackKind: state.player.attackKind,
+        attackPhase: state.player.attackPhase,
+        attackSerial: state.player.attackSerial,
+        attackHasHit: state.player.attackHasHit,
       },
       target: {
-        root: transform(targetRootPosition, quaternionForRootYaw(state.enemy.yaw)),
-        head: transform(targetHead),
-        torso: transform(vector3(target.torsoWorld)),
-        contactSideShoulder: transform(vector3(target.contactShoulderWorld)),
-        worldHeight: targetHead ? round6(targetHead[1] - targetRootPosition[1]) : null,
-        screenHeightPixels:
-          targetHeadScreenY === null || targetGroundScreenY === null
-            ? null
-            : round6(Math.abs(targetGroundScreenY - targetHeadScreenY)),
+        root: transform(
+          [
+            round6(state.enemy.position.x),
+            round6(state.enemy.positionY),
+            round6(state.enemy.position.z),
+          ],
+          quaternionForRootYaw(state.enemy.yaw),
+        ),
         health: state.enemy.health,
-        collision: {
-          surface: {
-            type: "capsule",
-            axisStart: vector3(target.proxyAxisStartWorld),
-            axisEnd: vector3(target.proxyAxisEndWorld),
-            radiusMeters: round6(target.proxyRadiusMeters),
-          },
-          contactPoint: targetClosest,
-          bladeClosestPoint: bladeClosest,
-          contactNormal,
-          separationMeters: measurement?.separationMeters ?? null,
-          standoffMeters: measurement?.standoffMeters ?? null,
-          penetrationMeters: measurement?.penetrationMeters ?? null,
-          exteriorContactPoints: measurement?.exteriorContactPoints ?? 0,
-        },
-        responseImpulse: this.responseImpulse,
       },
+      candidateGeometryContact: this.app.getHeavyContactReceipt(),
       inputEdgeLog: this.inputEdgeLog,
       eventLog: this.eventLog,
       authoritativeState: this.currentDigest(state),
@@ -573,18 +477,23 @@ class P30CriticController {
     });
   }
 
-  runReceipt(): Readonly<Record<string, unknown>> {
+  private runReceipt(): Readonly<Record<string, unknown>> {
     const state = this.app.getSnapshot();
     return copyJson({
-      schema: "p30.r011.run-receipt.v1",
+      schema: P30_RUN_RECEIPT_SCHEMA,
+      protocolID: P30_PROTOCOL_ID,
       scenarioID: P30_SCENARIO_ID,
       seed: P30_SCENARIO_SEED,
-      fixedDelta: { numerator: 1, denominator: 60 },
+      fixedDelta: {
+        numerator: P30_FIXED_DELTA_NUMERATOR,
+        denominator: P30_FIXED_DELTA_DENOMINATOR,
+      },
       captureTickSpace: "absolute-scenario",
-      attackRisingEdgeAbsoluteTick: P30_ATTACK_EDGE_ABSOLUTE_TICK,
+      targetOffsetMicrometres: [...this.targetOffsetMicrometres],
+      heavyRisingEdgeAbsoluteTick: this.heavyEdgeAbsoluteTick,
+      expectedHeavyRisingEdgeAbsoluteTick: P30_HEAVY_RISING_EDGE_ABSOLUTE_TICK,
       absoluteSimulationTick: state.tick,
-      attackRelativeTick: this.attackRelativeTick(state.tick),
-      uninterrupted: true,
+      heavyRelativeTick: this.heavyRelativeTick(state.tick),
       inputEdgeLog: this.inputEdgeLog,
       eventLog: this.eventLog,
       fixedInputHistory: this.fixedInputHistory,
@@ -594,11 +503,14 @@ class P30CriticController {
     });
   }
 
-  resourceReceipt(): Readonly<Record<string, unknown>> {
+  private resourceReceipt(): Readonly<Record<string, unknown>> {
     const renderer = this.app.getRendererTelemetry();
     const mode = this.app.getProductionModeTelemetry();
     return copyJson({
-      schema: "p30.r011.resource-receipt.v1",
+      schema: P30_RESOURCE_RECEIPT_SCHEMA,
+      protocolID: P30_PROTOCOL_ID,
+      scenarioID: P30_SCENARIO_ID,
+      seed: P30_SCENARIO_SEED,
       rendererMode: mode.rendererMode,
       assetTier: mode.assetTier,
       fallbackActive: mode.fallbackActive,
@@ -620,6 +532,7 @@ class P30CriticController {
 }
 
 export function installP30CriticHarness(app: GameApp): P30CriticApi {
+  if (window.__P30_CRITIC__) throw new Error("P30 critic hook is already installed");
   const controller = new P30CriticController(app);
   window.__P30_CRITIC__ = controller.api;
   return controller.api;

@@ -20,6 +20,11 @@ import {
   type PoseVector,
   type TargetCombatPoseSample,
 } from "./CombatPoseBeat";
+import {
+  sampleAnalyticHeavyPose,
+  type HeavyJointName,
+  type HeavyPoseSample,
+} from "./HeavyPoseSpace";
 
 const HERO_REQUIRED_CLIPS = [
   "Idle_Loop",
@@ -111,6 +116,28 @@ interface TargetAnchorTelemetry {
   proxyAxisEndWorld: PoseVector | null;
   proxyRadiusMeters: number;
 }
+
+export interface RenderedBladePrimitive {
+  mesh: THREE.Mesh;
+  materialGroupIndices: number[];
+}
+
+export type TargetLandmarkName =
+  | "pelvis"
+  | "neck"
+  | "head"
+  | "leftShoulder"
+  | "leftElbow"
+  | "leftWrist"
+  | "rightShoulder"
+  | "rightElbow"
+  | "rightWrist"
+  | "leftHip"
+  | "leftKnee"
+  | "leftAnkle"
+  | "rightHip"
+  | "rightKnee"
+  | "rightAnkle";
 
 export interface CombatPoseBeatTelemetry {
   schema: "cow.combat-pose-beat.v1";
@@ -269,6 +296,19 @@ declare global {
 
 function roundFx(value: number): number {
   return Math.round(value * 1_000_000) / 1_000_000;
+}
+
+function objectByAnyName(root: THREE.Object3D, ...names: string[]): THREE.Object3D | null {
+  for (const name of names) {
+    const match = root.getObjectByName(name);
+    if (match) return match;
+  }
+  return null;
+}
+
+function boneByAnyName(root: THREE.Object3D, ...names: string[]): THREE.Bone | null {
+  const object = objectByAnyName(root, ...names);
+  return object && (object as THREE.Bone).isBone ? object as THREE.Bone : null;
 }
 
 function worldPoint(node: THREE.Object3D | null): PoseVector | null {
@@ -537,6 +577,8 @@ export class HeroView {
   private animator: DeterministicAnimator | null = null;
   private authoredWeapon: THREE.Object3D | null = null;
   private fallbackWeapon: THREE.Group | null = null;
+  private latestHeavyPose: HeavyPoseSample | null = null;
+  private readonly bladePrimitives: RenderedBladePrimitive[] = [];
   private latestPose = sampleHeroCombatPose("idle", -1);
   private latestAuthoredTiming: HeroAuthoredPoseTiming = {
     mode: "direct",
@@ -558,6 +600,44 @@ export class HeroView {
   private readonly gripBones: Record<"supportLowerArm" | "supportHand", THREE.Object3D | null> = {
     supportLowerArm: null,
     supportHand: null,
+  };
+  private readonly heavyBones: Record<HeavyJointName, THREE.Object3D | null> = {
+    pelvis: null,
+    spine01: null,
+    spine02: null,
+    spine03: null,
+    neck: null,
+    clavicleL: null,
+    upperArmL: null,
+    lowerArmL: null,
+    handL: null,
+    clavicleR: null,
+    upperArmR: null,
+    lowerArmR: null,
+    handR: null,
+    thighL: null,
+    calfL: null,
+    thighR: null,
+    calfR: null,
+  };
+  private readonly heavyBaseRotations: Record<HeavyJointName, THREE.Quaternion | null> = {
+    pelvis: null,
+    spine01: null,
+    spine02: null,
+    spine03: null,
+    neck: null,
+    clavicleL: null,
+    upperArmL: null,
+    lowerArmL: null,
+    handL: null,
+    clavicleR: null,
+    upperArmR: null,
+    lowerArmR: null,
+    handR: null,
+    thighL: null,
+    calfL: null,
+    thighR: null,
+    calfR: null,
   };
   private readonly poseAnchors: Record<
     | "leadHand"
@@ -660,6 +740,29 @@ export class HeroView {
       this.poseAnchors.bladeTip = weapon.scene.getObjectByName("BladeTip") ?? null;
       this.poseAnchors.leadFoot = hero.scene.getObjectByName("foot_l") ?? null;
       this.poseAnchors.supportFoot = hero.scene.getObjectByName("foot_r") ?? null;
+      this.heavyBones.pelvis = this.poseBones.pelvis;
+      this.heavyBones.spine01 = this.poseBones.spine01;
+      this.heavyBones.spine02 = this.poseBones.spine02;
+      this.heavyBones.spine03 = this.poseBones.spine03;
+      this.heavyBones.neck = this.poseBones.neck;
+      this.heavyBones.clavicleL = hero.scene.getObjectByName("clavicle_l") ?? null;
+      this.heavyBones.upperArmL = hero.scene.getObjectByName("upperarm_l") ?? null;
+      this.heavyBones.lowerArmL = hero.scene.getObjectByName("lowerarm_l") ?? null;
+      this.heavyBones.handL = hero.scene.getObjectByName("hand_l") ?? null;
+      this.heavyBones.clavicleR = hero.scene.getObjectByName("clavicle_r") ?? null;
+      this.heavyBones.upperArmR = hero.scene.getObjectByName("upperarm_r") ?? null;
+      this.heavyBones.lowerArmR = hero.scene.getObjectByName("lowerarm_r") ?? null;
+      this.heavyBones.handR = hero.scene.getObjectByName("hand_r") ?? null;
+      this.heavyBones.thighL = hero.scene.getObjectByName("thigh_l") ?? null;
+      this.heavyBones.calfL = hero.scene.getObjectByName("calf_l") ?? null;
+      this.heavyBones.thighR = hero.scene.getObjectByName("thigh_r") ?? null;
+      this.heavyBones.calfR = hero.scene.getObjectByName("calf_r") ?? null;
+      weapon.scene.traverse((node) => {
+        if (!(node as THREE.Mesh).isMesh) return;
+        const mesh = node as THREE.Mesh;
+        if (mesh.name !== "Cylinder010" && mesh.name !== "Cylinder010_1") return;
+        this.bladePrimitives.push({ mesh, materialGroupIndices: [0] });
+      });
     }
 
     this.weaponTrail.name = "fx.weapon-trail";
@@ -781,15 +884,52 @@ export class HeroView {
     this.root.rotation.y = -state.yaw;
 
     this.restoreAuthoredPose();
-    if (this.animator) this.updateAuthoredAnimation(state, elapsed);
-    else this.updateFallbackAnimation(state, elapsed);
-    this.captureAuthoredPose();
-    this.latestPose = sampleHeroCombatPose(state.attackPhase, state.attackFrame);
-    this.applyCombatPose(this.latestPose);
+    this.restoreHeavyAuthoredPose();
+    this.resetWeaponMount();
+    if (state.attackKind === "heavy" && state.heavyRelativeTick >= 0) {
+      if (this.animator) this.animator.setTime("Idle_Loop", 0, true);
+      else this.updateFallbackAnimation({ ...state, attackElapsed: 0 }, 0);
+      this.captureAuthoredPose();
+      this.captureHeavyAuthoredPose();
+      this.latestPose = sampleHeroCombatPose("idle", -1);
+      this.latestHeavyPose = sampleAnalyticHeavyPose(state.heavyRelativeTick);
+      this.applyHeavyPose(this.latestHeavyPose);
+      this.trailSample = sampleBladeTrailFx("idle", 0);
+    } else {
+      if (this.animator) this.updateAuthoredAnimation(state, elapsed);
+      else this.updateFallbackAnimation(state, elapsed);
+      this.captureAuthoredPose();
+      this.captureHeavyAuthoredPose();
+      this.latestHeavyPose = null;
+      this.latestPose = sampleHeroCombatPose(state.attackPhase, state.attackFrame);
+      this.applyCombatPose(this.latestPose);
+      this.trailSample = sampleBladeTrailFx(state.attackPhase, state.attackElapsed);
+    }
 
-    this.trailSample = sampleBladeTrailFx(state.attackPhase, state.attackElapsed);
     this.applyTrailVisuals();
     this.updatePoseAudit();
+  }
+
+  getHandBones(): { left: THREE.Bone | null; right: THREE.Bone | null } {
+    return {
+      left: this.heavyBones.handL && (this.heavyBones.handL as THREE.Bone).isBone
+        ? this.heavyBones.handL as THREE.Bone
+        : null,
+      right: this.heavyBones.handR && (this.heavyBones.handR as THREE.Bone).isBone
+        ? this.heavyBones.handR as THREE.Bone
+        : null,
+    };
+  }
+
+  getBladePrimitives(): RenderedBladePrimitive[] {
+    return this.bladePrimitives.map((primitive) => ({
+      mesh: primitive.mesh,
+      materialGroupIndices: [...primitive.materialGroupIndices],
+    }));
+  }
+
+  getHeavyPoseSample(): HeavyPoseSample | null {
+    return this.latestHeavyPose ? structuredClone(this.latestHeavyPose) : null;
   }
 
   getFxTelemetry(): BladeTrailFxTelemetry {
@@ -865,6 +1005,55 @@ export class HeroView {
     this.closeSupportHandToGrip();
   }
 
+  private applyHeavyPose(sample: HeavyPoseSample): void {
+    this.visual.position.set(...sample.modelPosition);
+    this.visual.rotation.set(...sample.modelRotation);
+    this.visual.scale.setScalar(1);
+    this.shadow.position.set(sample.modelPosition[0], 0.014, sample.modelPosition[2]);
+    for (const name of Object.keys(this.heavyBones) as HeavyJointName[]) {
+      addLocalRotation(this.heavyBones[name], sample.joints[name]);
+    }
+    this.placeWeaponFromBladePath(sample);
+    this.closeSupportHandToGrip();
+  }
+
+  private placeWeaponFromBladePath(sample: HeavyPoseSample): void {
+    const weapon = this.authoredWeapon;
+    const leadHand = this.heavyBones.handR;
+    const leadParent = leadHand?.parent ?? null;
+    if (!weapon || !leadHand || !leadParent) return;
+
+    this.root.updateMatrixWorld(true);
+    const guardWorld = this.root.localToWorld(new THREE.Vector3(...sample.bladeGuardRootLocal));
+    const tipWorld = this.root.localToWorld(new THREE.Vector3(...sample.bladeTipRootLocal));
+    const bladeAxis = tipWorld.clone().sub(guardWorld).normalize();
+    const weaponWorldScale = weapon.getWorldScale(new THREE.Vector3());
+    const weaponWorldQuaternion = new THREE.Quaternion()
+      .setFromUnitVectors(new THREE.Vector3(0, 1, 0), bladeAxis)
+      .multiply(new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0, 1, 0), sample.bladeRollRadians));
+    // The visible blade begins 0.496 metres above the authored weapon origin.
+    const weaponWorldPosition = guardWorld.clone().addScaledVector(
+      bladeAxis,
+      -0.496 * weaponWorldScale.y,
+    );
+    const desiredWeaponWorld = new THREE.Matrix4().compose(
+      weaponWorldPosition,
+      weaponWorldQuaternion,
+      weaponWorldScale,
+    );
+    const handToWeapon = new THREE.Matrix4()
+      .copy(leadHand.matrixWorld)
+      .invert()
+      .multiply(weapon.matrixWorld);
+    const desiredHandWorld = desiredWeaponWorld.multiply(handToWeapon.invert());
+    const desiredHandLocal = new THREE.Matrix4()
+      .copy(leadParent.matrixWorld)
+      .invert()
+      .multiply(desiredHandWorld);
+    desiredHandLocal.decompose(leadHand.position, leadHand.quaternion, leadHand.scale);
+    this.root.updateMatrixWorld(true);
+  }
+
   private closeSupportHandToGrip(): void {
     const hand = this.gripBones.supportHand;
     const grip = this.poseAnchors.secondaryGrip;
@@ -880,6 +1069,31 @@ export class HeroView {
       const base = this.poseBaseRotations[name];
       if (bone && base) bone.quaternion.copy(base);
     }
+  }
+
+  private restoreHeavyAuthoredPose(): void {
+    for (const name of Object.keys(this.heavyBones) as HeavyJointName[]) {
+      const bone = this.heavyBones[name];
+      const base = this.heavyBaseRotations[name];
+      if (bone && base) bone.quaternion.copy(base);
+    }
+  }
+
+  private captureHeavyAuthoredPose(): void {
+    for (const name of Object.keys(this.heavyBones) as HeavyJointName[]) {
+      const bone = this.heavyBones[name];
+      if (!bone) continue;
+      const base = this.heavyBaseRotations[name] ?? new THREE.Quaternion();
+      base.copy(bone.quaternion);
+      this.heavyBaseRotations[name] = base;
+    }
+  }
+
+  private resetWeaponMount(): void {
+    if (!this.authoredWeapon) return;
+    this.authoredWeapon.position.set(0, 0, 0);
+    this.authoredWeapon.rotation.set(0, ROUND005_WEAPON_AXIAL_ROLL, 0);
+    this.authoredWeapon.scale.setScalar(1);
   }
 
   private captureAuthoredPose(): void {
@@ -1042,6 +1256,24 @@ export class ZombieView {
   private readonly flashMaterials: FlashMaterial[] = [];
   private animator: DeterministicAnimator | null = null;
   private deathStartedAt: number | null = null;
+  private readonly targetSkinnedMeshes: THREE.SkinnedMesh[] = [];
+  private readonly targetLandmarks: Record<TargetLandmarkName, THREE.Bone | null> = {
+    pelvis: null,
+    neck: null,
+    head: null,
+    leftShoulder: null,
+    leftElbow: null,
+    leftWrist: null,
+    rightShoulder: null,
+    rightElbow: null,
+    rightWrist: null,
+    leftHip: null,
+    leftKnee: null,
+    leftAnkle: null,
+    rightHip: null,
+    rightKnee: null,
+    rightAnkle: null,
+  };
   private latestPose = sampleTargetCombatPose("idle", 0);
   private readonly poseBones: Record<keyof TargetCombatPoseSample["bones"], THREE.Object3D | null> = {
     hips: null,
@@ -1127,14 +1359,34 @@ export class ZombieView {
       this.poseBones.abdomen = zombie.scene.getObjectByName("Abdomen") ?? null;
       this.poseBones.torso = zombie.scene.getObjectByName("Torso") ?? null;
       this.poseBones.neck = zombie.scene.getObjectByName("Neck") ?? null;
-      this.poseBones.shoulderL = zombie.scene.getObjectByName("ShoulderL") ?? null;
-      this.poseBones.upperArmL = zombie.scene.getObjectByName("UpperArmL") ?? null;
-      this.poseBones.lowerArmL = zombie.scene.getObjectByName("LowerArmL") ?? null;
-      this.poseBones.shoulderR = zombie.scene.getObjectByName("ShoulderR") ?? null;
-      this.poseBones.upperArmR = zombie.scene.getObjectByName("UpperArmR") ?? null;
-      this.poseBones.lowerArmR = zombie.scene.getObjectByName("LowerArmR") ?? null;
+      this.poseBones.shoulderL = objectByAnyName(zombie.scene, "Shoulder.L", "ShoulderL");
+      this.poseBones.upperArmL = objectByAnyName(zombie.scene, "UpperArm.L", "UpperArmL");
+      this.poseBones.lowerArmL = objectByAnyName(zombie.scene, "LowerArm.L", "LowerArmL");
+      this.poseBones.shoulderR = objectByAnyName(zombie.scene, "Shoulder.R", "ShoulderR");
+      this.poseBones.upperArmR = objectByAnyName(zombie.scene, "UpperArm.R", "UpperArmR");
+      this.poseBones.lowerArmR = objectByAnyName(zombie.scene, "LowerArm.R", "LowerArmR");
       this.poseAnchors.impact = zombie.scene.getObjectByName("impact_socket") ?? null;
       this.poseAnchors.head = zombie.scene.getObjectByName("Head") ?? null;
+      this.targetLandmarks.pelvis = boneByAnyName(zombie.scene, "Hips");
+      this.targetLandmarks.neck = boneByAnyName(zombie.scene, "Neck");
+      this.targetLandmarks.head = boneByAnyName(zombie.scene, "Head");
+      this.targetLandmarks.leftShoulder = boneByAnyName(zombie.scene, "Shoulder.L", "ShoulderL");
+      this.targetLandmarks.leftElbow = boneByAnyName(zombie.scene, "LowerArm.L", "LowerArmL");
+      this.targetLandmarks.leftWrist = boneByAnyName(zombie.scene, "Index1.L", "Hand.L", "HandL");
+      this.targetLandmarks.rightShoulder = boneByAnyName(zombie.scene, "Shoulder.R", "ShoulderR");
+      this.targetLandmarks.rightElbow = boneByAnyName(zombie.scene, "LowerArm.R", "LowerArmR");
+      this.targetLandmarks.rightWrist = boneByAnyName(zombie.scene, "Index1.R", "Hand.R", "HandR");
+      this.targetLandmarks.leftHip = boneByAnyName(zombie.scene, "UpperLeg.L", "UpperLegL");
+      this.targetLandmarks.leftKnee = boneByAnyName(zombie.scene, "LowerLeg.L", "LowerLegL");
+      this.targetLandmarks.leftAnkle = boneByAnyName(zombie.scene, "Foot.L", "FootL");
+      this.targetLandmarks.rightHip = boneByAnyName(zombie.scene, "UpperLeg.R", "UpperLegR");
+      this.targetLandmarks.rightKnee = boneByAnyName(zombie.scene, "LowerLeg.R", "LowerLegR");
+      this.targetLandmarks.rightAnkle = boneByAnyName(zombie.scene, "Foot.R", "FootR");
+      zombie.scene.traverse((node) => {
+        if ((node as THREE.SkinnedMesh).isSkinnedMesh) {
+          this.targetSkinnedMeshes.push(node as THREE.SkinnedMesh);
+        }
+      });
     }
     if (typeof window !== "undefined" && !isP30CriticScenarioRoute()) {
       window.__COW_COMBAT_POSE__ = combatPoseAuditApi;
@@ -1142,7 +1394,7 @@ export class ZombieView {
   }
 
   update(state: EnemyState, elapsed: number): void {
-    this.root.position.set(state.position.x, 0, state.position.z);
+    this.root.position.set(state.position.x, state.positionY, state.position.z);
     this.root.rotation.y = -state.yaw;
 
     this.restoreAuthoredPose();
@@ -1195,6 +1447,14 @@ export class ZombieView {
     }
     else this.visual.position.y = Math.sin(elapsed * 2.4 + state.idlePhase * 0.15) * 0.024;
     this.updatePoseAudit();
+  }
+
+  getSkinnedMeshes(): THREE.SkinnedMesh[] {
+    return [...this.targetSkinnedMeshes];
+  }
+
+  getLandmarkBones(): Record<TargetLandmarkName, THREE.Bone | null> {
+    return { ...this.targetLandmarks };
   }
 
   dispose(): void {
