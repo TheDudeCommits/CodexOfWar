@@ -9,6 +9,9 @@ import {
   BASELINE_RECEIPT_PATH,
   BASELINE_RECEIPT_SHA256,
   ALIAS_SCORE_COMMIT_DOMAIN,
+  BLADE_LENGTH_MAX_METRES,
+  BLADE_RADIAL_MAX_METRES,
+  CANONICAL_TERMINAL_ABSOLUTE_TICK,
   COUNTERFACTUAL_COMMIT_DOMAIN,
   EVALUATOR_HELPER_PATH,
   EPS,
@@ -16,13 +19,23 @@ import {
   PACKAGE_MAP_COMMIT_DOMAIN,
   PROTOCOL_AMENDMENT_PATH,
   PROTOCOL_AMENDMENT_SHA256,
+  PROTOCOL_AMENDMENT_02_PATH,
+  PROTOCOL_AMENDMENT_02_SHA256,
   PROTOCOL_ID,
   PROTOCOL_PATH,
   PROTOCOL_PAYLOAD_SHA256,
+  PROTOCOL_RECOMMITMENT_HELPER_PATH,
+  PROTOCOL_RECOMMITMENT_HELPER_SHA256,
+  PROTOCOL_RECOMMITMENT_RECEIPT_PATH,
+  PROTOCOL_RECOMMITMENT_RECEIPT_SHA256,
+  PRIOR_ROUND_COMMITMENT_SHA256,
   REFERENCE_ARCHIVE_SHA256,
   REFERENCE_COMMIT_DOMAIN,
   ROUND_COMMITMENT_SCHEMA,
   Round012EvaluatorError,
+  SEALED_PUBLIC_ROOT_COMMIT,
+  SHIFTED_HEAVY_RISING_EDGE_ABSOLUTE_TICK,
+  SHIFTED_TERMINAL_ABSOLUTE_TICK,
   TREE_DOMAIN,
   TREE_HELPER_PATH,
   analyzeMaskTopology,
@@ -58,6 +71,7 @@ import {
   referenceCommit,
   referenceImageDimensions,
   roundHalfAwayFromZero,
+  shiftedContactChecks,
   validateAliasOnlyScore,
   validateBallotTokens,
   validateBlindOrderManifest,
@@ -104,6 +118,14 @@ function commitmentFixture() {
     protocolPayloadSha256: PROTOCOL_PAYLOAD_SHA256,
     protocolAmendmentPath: PROTOCOL_AMENDMENT_PATH,
     protocolAmendmentSha256: PROTOCOL_AMENDMENT_SHA256,
+    protocolAmendment02Path: PROTOCOL_AMENDMENT_02_PATH,
+    protocolAmendment02Sha256: PROTOCOL_AMENDMENT_02_SHA256,
+    protocolRecommitmentReceiptPath: PROTOCOL_RECOMMITMENT_RECEIPT_PATH,
+    protocolRecommitmentReceiptSha256: PROTOCOL_RECOMMITMENT_RECEIPT_SHA256,
+    protocolRecommitmentHelperPath: PROTOCOL_RECOMMITMENT_HELPER_PATH,
+    protocolRecommitmentHelperSha256: PROTOCOL_RECOMMITMENT_HELPER_SHA256,
+    priorRoundCommitmentSha256: PRIOR_ROUND_COMMITMENT_SHA256,
+    sealedPublicRootCommit: SEALED_PUBLIC_ROOT_COMMIT,
     baselineReceiptPath: BASELINE_RECEIPT_PATH,
     baselineReceiptSha256: BASELINE_RECEIPT_SHA256,
     presentationCommitDomain: PRESENTATION_COMMIT_DOMAIN,
@@ -251,6 +273,26 @@ test('Jacobi blade extraction identifies guard/tip and rejects ambiguous geometr
   );
 });
 
+test('recommitted millimetre ceilings remain fail-closed for oversized and hilt-inclusive geometry', () => {
+  assert.equal(BLADE_LENGTH_MAX_METRES, 1.873000);
+  assert.equal(BLADE_RADIAL_MAX_METRES, 0.185000);
+  const prism = (length, radial) => {
+    const vertices = [];
+    for (const x of [0, length * 0.25, length * 0.5, length * 0.75, length]) {
+      for (const y of [-radial, radial]) for (const z of [-0.01, 0.01]) vertices.push([x, y, z]);
+    }
+    return vertices;
+  };
+  assert.throws(
+    () => extractBladeCapsule(prism(1.874, 0.01), [-0.1, 0, 0]),
+    (error) => evaluatorCode(error, 'BLADE_LENGTH_OUT_OF_BOUNDS')
+  );
+  assert.throws(
+    () => extractBladeCapsule(prism(1.80, 0.186), [-0.1, 0, 0]),
+    (error) => evaluatorCode(error, 'BLADE_RADIAL_BOUND_EXCEEDED')
+  );
+});
+
 test('target capsules use the frozen ID order and height ratios', () => {
   const landmarks = Object.fromEntries([
     'pelvis', 'neck', 'head',
@@ -391,6 +433,22 @@ test('live geometry collector proves render-driving landmarks, culls hidden blad
   );
 });
 
+test('live geometry collection reaches shifted terminal 87 and rejects out-of-domain tick 88', () => {
+  const fixture = geometryFixture();
+  const tickZero = collectGeometrySource(fixture.source, { absoluteTick: 0 });
+  assert.doesNotThrow(() => collectGeometrySource(fixture.source, {
+    absoluteTick: SHIFTED_TERMINAL_ABSOLUTE_TICK,
+    targetHeightReceipt: tickZero.targetHeightReceipt
+  }));
+  assert.throws(
+    () => collectGeometrySource(fixture.source, {
+      absoluteTick: SHIFTED_TERMINAL_ABSOLUTE_TICK + 1,
+      targetHeightReceipt: tickZero.targetHeightReceipt
+    }),
+    (error) => evaluatorCode(error, 'GEOMETRY_ABSOLUTE_TICK_REQUIRED')
+  );
+});
+
 test('geometry collector rejects duplicate, detached, and zero-weight landmark identities', () => {
   const duplicate = geometryFixture();
   duplicate.source.targetLandmarkBones.head = duplicate.source.targetLandmarkBones.neck;
@@ -495,6 +553,251 @@ test('4096-substep sweep resolves exact tick-46 first contact without endpoint r
   const frame = canonicalContactFrame(result, { right: [1, 0, 0], up: [0, 1, 0], forward: [0, 0, 1] });
   assert.deepEqual(frame.normal, [1, 0, 0]);
   assert.match(frame.receiptSha256, /^[0-9a-f]{64}$/u);
+});
+
+test('SHIFT_PLUS_7 is an exact edge-31/contact-53 translation through terminal 87', () => {
+  assert.equal(CANONICAL_TERMINAL_ABSOLUTE_TICK, 80);
+  assert.equal(SHIFTED_HEAVY_RISING_EDGE_ABSOLUTE_TICK, 31);
+  assert.equal(SHIFTED_TERMINAL_ABSOLUTE_TICK, 87);
+  const states = sweepTestSeries(SHIFTED_TERMINAL_ABSOLUTE_TICK, (absoluteTick) => {
+    const bladeX = absoluteTick === 53 ? 0.12 : 0.3;
+    return sweepTestState(absoluteTick, {
+      bladeGuard: [bladeX, -0.5, 0],
+      bladeTip: [bladeX, 0.5, 0],
+      activeCapsules: { head: { a: [0, 0, 0], b: [0, 0, 0], radius: 0.1 } }
+    });
+  });
+  const result = evaluateSweptContact(states, SHIFTED_TERMINAL_ABSOLUTE_TICK);
+  assert.equal(result.intervals.length, 88);
+  assert.equal(result.firstContactTick, 53);
+  assert.deepEqual(risingContactCoordinates(result), [[53, 4096, 'head']]);
+  const shifted = shiftedContactChecks(result);
+  assert.equal(shifted.checks.completeTerminalDomain, true);
+  assert.equal(shifted.pass, true);
+  assert.equal(canonicalContactChecks(result).pass, false);
+});
+
+test('SHIFT_PLUS_7 rejects the critic regression truncated at departure tick 55 and terminal 86', () => {
+  for (const terminalTick of [55, 86]) {
+    const states = sweepTestSeries(terminalTick, (absoluteTick) => {
+      const bladeX = absoluteTick === 53 ? 0.12 : 0.3;
+      return sweepTestState(absoluteTick, {
+        bladeGuard: [bladeX, -0.5, 0],
+        bladeTip: [bladeX, 0.5, 0],
+        activeCapsules: { head: { a: [0, 0, 0], b: [0, 0, 0], radius: 0.1 } }
+      });
+    });
+    const result = evaluateSweptContact(states, terminalTick);
+    assert.equal(result.intervals.at(-1).absoluteTick, terminalTick);
+    assert.deepEqual(risingContactCoordinates(result), [[53, 4096, 'head']]);
+    const shifted = shiftedContactChecks(result);
+    assert.equal(shifted.checks.completeTerminalDomain, false);
+    assert.equal(shifted.pass, false);
+    assert.equal(
+      Object.entries(shifted.checks)
+        .filter(([key]) => key !== 'completeTerminalDomain')
+        .every(([, value]) => value),
+      true
+    );
+  }
+});
+
+test('SHIFT_PLUS_7 rejects a second rising contact at its exact terminal tick 87', () => {
+  const states = sweepTestSeries(SHIFTED_TERMINAL_ABSOLUTE_TICK, (absoluteTick) => {
+    const bladeX = absoluteTick === 53 || absoluteTick === SHIFTED_TERMINAL_ABSOLUTE_TICK ? 0.12 : 0.3;
+    return sweepTestState(absoluteTick, {
+      bladeGuard: [bladeX, -0.5, 0],
+      bladeTip: [bladeX, 0.5, 0],
+      activeCapsules: { head: { a: [0, 0, 0], b: [0, 0, 0], radius: 0.1 } }
+    });
+  });
+  const result = evaluateSweptContact(states, SHIFTED_TERMINAL_ABSOLUTE_TICK);
+  assert.deepEqual(risingContactCoordinates(result), [
+    [53, 4096, 'head'],
+    [87, 4096, 'head']
+  ]);
+  const shifted = shiftedContactChecks(result);
+  assert.equal(shifted.checks.completeTerminalDomain, true);
+  assert.equal(shifted.checks.noSecondRisingContact, false);
+  assert.equal(shifted.pass, false);
+});
+
+test('sweep-result custody rejects the critic proxy/truncation, clones, replacements, sparse accessors, and genuine proxies', () => {
+  const full = evaluateSweptContact(sweepTestSeries(SHIFTED_TERMINAL_ABSOLUTE_TICK, (absoluteTick) => {
+    const bladeX = absoluteTick === 53 ? 0.12 : 0.3;
+    return sweepTestState(absoluteTick, {
+      bladeGuard: [bladeX, -0.5, 0],
+      bladeTip: [bladeX, 0.5, 0],
+      activeCapsules: { head: { a: [0, 0, 0], b: [0, 0, 0], radius: 0.1 } }
+    });
+  }), SHIFTED_TERMINAL_ABSOLUTE_TICK);
+  const truncated = evaluateSweptContact(sweepTestSeries(55, (absoluteTick) => {
+    const bladeX = absoluteTick === 53 ? 0.12 : 0.3;
+    return sweepTestState(absoluteTick, {
+      bladeGuard: [bladeX, -0.5, 0],
+      bladeTip: [bladeX, 0.5, 0],
+      activeCapsules: { head: { a: [0, 0, 0], b: [0, 0, 0], radius: 0.1 } }
+    });
+  }), 55);
+  assert.equal(shiftedContactChecks(full).pass, true);
+  assert.equal(shiftedContactChecks(truncated).pass, false);
+
+  let proxyReads = 0;
+  const criticProxy = new Proxy(truncated, {
+    get(target, key, receiver) {
+      proxyReads += 1;
+      if (key === 'intervals') return full.intervals;
+      return Reflect.get(target, key, receiver);
+    }
+  });
+  assert.throws(
+    () => shiftedContactChecks(criticProxy),
+    (error) => evaluatorCode(error, 'SWEEP_RESULT_CUSTODY_INVALID')
+  );
+  assert.equal(proxyReads, 0);
+
+  const clone = structuredClone(full);
+  assert.throws(
+    () => shiftedContactChecks(clone),
+    (error) => evaluatorCode(error, 'SWEEP_RESULT_CUSTODY_INVALID')
+  );
+  assert.throws(
+    () => canonicalContactChecks(clone),
+    (error) => evaluatorCode(error, 'SWEEP_RESULT_CUSTODY_INVALID')
+  );
+  assert.throws(
+    () => canonicalContactFrame(clone, { right: [1, 0, 0], up: [0, 1, 0], forward: [0, 0, 1] }),
+    (error) => evaluatorCode(error, 'SWEEP_RESULT_CUSTODY_INVALID')
+  );
+  assert.throws(
+    () => shiftedContactChecks(new Proxy(full, {})),
+    (error) => evaluatorCode(error, 'SWEEP_RESULT_CUSTODY_INVALID')
+  );
+  assert.throws(
+    () => shiftedContactChecks({ ...full }),
+    (error) => evaluatorCode(error, 'SWEEP_RESULT_CUSTODY_INVALID')
+  );
+
+  const replacement = structuredClone(full);
+  replacement.intervals = full.intervals;
+  assert.throws(
+    () => shiftedContactChecks(replacement),
+    (error) => evaluatorCode(error, 'SWEEP_RESULT_CUSTODY_INVALID')
+  );
+  let accessorReads = 0;
+  const accessor = structuredClone(full);
+  accessor.intervals = Array(SHIFTED_TERMINAL_ABSOLUTE_TICK + 1);
+  Object.defineProperty(accessor.intervals, 0, {
+    enumerable: true,
+    get() {
+      accessorReads += 1;
+      return full.intervals[0];
+    }
+  });
+  assert.throws(
+    () => shiftedContactChecks(accessor),
+    (error) => evaluatorCode(error, 'SWEEP_RESULT_CUSTODY_INVALID')
+  );
+  assert.equal(accessorReads, 0);
+});
+
+test('minted sweep results deeply freeze all contact-check fields against post-mint mutation', () => {
+  const result = evaluateSweptContact(sweepTestSeries(SHIFTED_TERMINAL_ABSOLUTE_TICK, (absoluteTick) => {
+    const bladeX = absoluteTick === 53 ? 0.12 : 0.3;
+    return sweepTestState(absoluteTick, {
+      bladeGuard: [bladeX, -0.5, 0],
+      bladeTip: [bladeX, 0.5, 0],
+      activeCapsules: { head: { a: [0, 0, 0], b: [0, 0, 0], radius: 0.1 } }
+    });
+  }), SHIFTED_TERMINAL_ABSOLUTE_TICK);
+  assert.ok(Object.isFrozen(result));
+  assert.ok(Object.isFrozen(result.intervals));
+  assert.ok(result.intervals.every(Object.isFrozen));
+  assert.ok(Object.isFrozen(result.firstContact));
+  assert.ok(Object.isFrozen(result.firstContact.closestBladePoint));
+  assert.ok(Object.isFrozen(result.firstContact.closestTargetPoint));
+  assert.ok(Object.isFrozen(result.risingContacts));
+  assert.ok(result.risingContacts.every(Object.isFrozen));
+  assert.ok(Object.isFrozen(result.risingContactTicks));
+  assert.throws(() => { result.intervals = []; }, TypeError);
+  assert.throws(() => { result.intervals[0].absoluteTick = 99; }, TypeError);
+  assert.throws(() => { result.firstContact.closestBladePoint[0] = 99; }, TypeError);
+  assert.throws(() => { result.risingContacts[0].substep = 1; }, TypeError);
+  assert.throws(() => { result.maximumPenetration = -1; }, TypeError);
+  assert.equal(shiftedContactChecks(result).pass, true);
+});
+
+test('sweep-result custody minting resists post-import WeakMap, WeakSet, Reflect, and freeze poisoning', () => {
+  const originalWeakSetAdd = WeakSet.prototype.add;
+  const originalWeakSetHas = WeakSet.prototype.has;
+  const originalWeakMapSet = WeakMap.prototype.set;
+  const originalWeakMapGet = WeakMap.prototype.get;
+  const originalReflectApply = Reflect.apply;
+  const originalFreeze = Object.freeze;
+  const poisonedCalls = { weakSetAdd: 0, weakSetHas: 0, weakMapSet: 0, weakMapGet: 0, reflectApply: 0, freeze: 0 };
+  let result = null;
+  let checks = null;
+  let mintError = null;
+  try {
+    WeakSet.prototype.add = function poisonedWeakSetAdd(value) {
+      poisonedCalls.weakSetAdd += 1;
+      return originalReflectApply(originalWeakSetAdd, this, [value]);
+    };
+    WeakSet.prototype.has = () => { poisonedCalls.weakSetHas += 1; return true; };
+    WeakMap.prototype.set = function poisonedWeakMapSet(key, value) {
+      poisonedCalls.weakMapSet += 1;
+      return originalReflectApply(originalWeakMapSet, this, [key, value]);
+    };
+    WeakMap.prototype.get = () => { poisonedCalls.weakMapGet += 1; return { forged: true }; };
+    Reflect.apply = () => { poisonedCalls.reflectApply += 1; return undefined; };
+    Object.freeze = (value) => { poisonedCalls.freeze += 1; return value; };
+    try {
+      result = evaluateSweptContact(sweepTestSeries(0, (absoluteTick) => {
+        const bladeX = absoluteTick === 0 ? 0.12 : 0.3;
+        return sweepTestState(absoluteTick, {
+          bladeGuard: [bladeX, -0.5, 0],
+          bladeTip: [bladeX, 0.5, 0],
+          activeCapsules: { head: { a: [0, 0, 0], b: [0, 0, 0], radius: 0.1 } }
+        });
+      }), 0);
+      checks = canonicalContactChecks(result);
+    } catch (error) {
+      mintError = error;
+    }
+  } finally {
+    WeakSet.prototype.add = originalWeakSetAdd;
+    WeakSet.prototype.has = originalWeakSetHas;
+    WeakMap.prototype.set = originalWeakMapSet;
+    WeakMap.prototype.get = originalWeakMapGet;
+    Reflect.apply = originalReflectApply;
+    Object.freeze = originalFreeze;
+  }
+  assert.ifError(mintError);
+  assert.deepEqual(poisonedCalls, {
+    weakSetAdd: 0, weakSetHas: 0, weakMapSet: 0, weakMapGet: 0, reflectApply: 0, freeze: 0
+  });
+  assert.equal(checks.pass, false);
+  assert.ok(Object.isFrozen(result));
+  assert.ok(Object.isFrozen(result.intervals));
+  assert.ok(Object.isFrozen(result.intervals[0]));
+  assert.ok(Object.isFrozen(result.firstContact));
+  assert.ok(Object.isFrozen(result.firstContact.closestBladePoint));
+});
+
+test('all geometry terminal APIs fail closed at out-of-domain tick 88', () => {
+  const tick88 = SHIFTED_TERMINAL_ABSOLUTE_TICK + 1;
+  assert.throws(
+    () => evaluateSweptContact([], tick88),
+    (error) => evaluatorCode(error, 'SWEEP_TERMINAL_TICK_INVALID')
+  );
+  assert.throws(
+    () => computeMissOffsetExtrema(
+      [],
+      { right: [1, 0, 0], up: [0, 1, 0], forward: [0, 0, 1] },
+      tick88
+    ),
+    (error) => evaluatorCode(error, 'SWEEP_TERMINAL_TICK_INVALID')
+  );
 });
 
 test('sample-tape transitions reject endpoint-swap separation and recontact within interval 47', () => {
@@ -941,6 +1244,19 @@ test('reference custody proves selected bytes originate in the ZIP and rejects Z
 test('counterfactual validation binds all three hit offsets and both miss results without regeneration', () => {
   const hitOffsets = [0, 1, 2].map((index) => ({ canonicalMicrometres: [index + 1, 0, 0] }));
   const missOffsets = [{ canonicalMicrometres: [300000, 0, 0] }, { canonicalMicrometres: [-300000, 0, 0] }];
+  const hitEvaluatorResult = evaluateSweptContact(sweepTestSeries(80, (absoluteTick) => {
+    const bladeX = absoluteTick === 46 ? 0.12 : 0.3;
+    return sweepTestState(absoluteTick, {
+      bladeGuard: [bladeX, -0.5, 0],
+      bladeTip: [bladeX, 0.5, 0],
+      activeCapsules: { head: { a: [0, 0, 0], b: [0, 0, 0], radius: 0.1 } }
+    });
+  }));
+  const missEvaluatorResult = evaluateSweptContact(sweepTestSeries(80, (absoluteTick) => sweepTestState(absoluteTick, {
+    bladeGuard: [0.5, -0.5, 0],
+    bladeTip: [0.5, 0.5, 0],
+    activeCapsules: { head: { a: [0, 0, 0], b: [0, 0, 0], radius: 0.1 } }
+  })));
   const health = (hit) => Array.from({ length: 82 }, (_, index) => ({
     absoluteTick: index - 1,
     health: hit && index - 1 >= 46 ? 75 : 100
@@ -948,12 +1264,7 @@ test('counterfactual validation binds all three hit offsets and both miss result
   const hitRuns = hitOffsets.map((offset, index) => ({
     index,
     offsetCanonicalMicrometres: offset.canonicalMicrometres,
-    evaluatorResult: {
-      firstContactTick: 46,
-      risingContacts: [{ absoluteTick: 46, substep: 4096, capsuleID: 'head' }],
-      risingContactTicks: [46],
-      maximumPenetration: -0.011
-    },
+    evaluatorResult: hitEvaluatorResult,
     healthByTick: health(true),
     damageMutations: [{ absoluteTick: 46, before: 100, after: 75, amount: 25 }],
     events: [{ type: 'damage', absoluteTick: 46 }],
@@ -962,7 +1273,7 @@ test('counterfactual validation binds all three hit offsets and both miss result
   const missRuns = missOffsets.map((offset, index) => ({
     index,
     offsetCanonicalMicrometres: offset.canonicalMicrometres,
-    evaluatorResult: { firstContactTick: null, risingContacts: [], risingContactTicks: [], maximumPenetration: 0.25 },
+    evaluatorResult: missEvaluatorResult,
     healthByTick: health(false),
     events: [],
     reactionOrRecoil: false,
@@ -976,7 +1287,7 @@ test('counterfactual validation binds all three hit offsets and both miss result
   secondRise[1].evaluatorResult.risingContactTicks.push(47);
   assert.throws(
     () => validateCounterfactualRuns({ hitOffsets, missOffsets, hitRuns: secondRise, missRuns }),
-    (error) => evaluatorCode(error, 'COUNTERFACTUAL_HIT_GEOMETRY_FAILED')
+    (error) => evaluatorCode(error, 'SWEEP_RESULT_CUSTODY_INVALID')
   );
   hitRuns[2].offsetCanonicalMicrometres = [99, 0, 0];
   assert.throws(
