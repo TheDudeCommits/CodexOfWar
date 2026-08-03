@@ -22,7 +22,7 @@ test('committed public artifact verifies exact protocol, amendment, baseline, an
   assert.deepEqual(verification, {
     schema: 'p30.r012a.round-commitment-verification.v1',
     protocolID: 'P30-R012A-BLIND-v1',
-    roundCommitmentSha256: '7a4f81da9f757972a7e85bdb3c88473e458f8aa60897879c88245252291c28d1',
+    roundCommitmentSha256: '196566d0387d2aeec9993fbbbc62cbea1208fe8f86cd17bfd760128c873e1af1',
     protocolVerified: true,
     amendmentVerified: true,
     amendment02Verified: true,

@@ -1563,6 +1563,56 @@ function sweepStateHasContact(state) {
   return false;
 }
 
+const SWEEP_RESULT_PROOFS = new WeakSet();
+const SWEEP_RESULT_RECORDS = new WeakMap();
+
+function freezeSweepContact(contact) {
+  if (contact === null) return null;
+  PRISTINE_OBJECT_FREEZE(contact.closestBladePoint);
+  PRISTINE_OBJECT_FREEZE(contact.closestTargetPoint);
+  return PRISTINE_OBJECT_FREEZE(contact);
+}
+
+function mintSweepResult(result) {
+  for (const interval of result.intervals) {
+    freezeSweepContact(interval.firstSample);
+    PRISTINE_OBJECT_FREEZE(interval);
+  }
+  PRISTINE_OBJECT_FREEZE(result.intervals);
+  freezeSweepContact(result.firstContact);
+  for (const rising of result.risingContacts) PRISTINE_OBJECT_FREEZE(rising);
+  PRISTINE_OBJECT_FREEZE(result.risingContacts);
+  PRISTINE_OBJECT_FREEZE(result.risingContactTicks);
+  PRISTINE_OBJECT_FREEZE(result);
+  const record = PRISTINE_OBJECT_FREEZE({
+    result,
+    intervals: result.intervals,
+    firstContact: result.firstContact,
+    firstContactTick: result.firstContactTick,
+    risingContacts: result.risingContacts,
+    risingContactTicks: result.risingContactTicks,
+    maximumPenetration: result.maximumPenetration
+  });
+  PRISTINE_REFLECT_APPLY(PRISTINE_WEAK_SET_ADD, SWEEP_RESULT_PROOFS, [result]);
+  PRISTINE_REFLECT_APPLY(PRISTINE_WEAK_MAP_SET, SWEEP_RESULT_RECORDS, [result, record]);
+  return result;
+}
+
+function requireSweepResult(result) {
+  if (
+    result === null || typeof result !== 'object' ||
+    !PRISTINE_REFLECT_APPLY(PRISTINE_WEAK_SET_HAS, SWEEP_RESULT_PROOFS, [result])
+  ) evaluatorFail('SWEEP_RESULT_CUSTODY_INVALID');
+  const record = PRISTINE_REFLECT_APPLY(PRISTINE_WEAK_MAP_GET, SWEEP_RESULT_RECORDS, [result]);
+  if (
+    record?.result !== result || record.intervals !== result.intervals ||
+    record.firstContact !== result.firstContact || record.firstContactTick !== result.firstContactTick ||
+    record.risingContacts !== result.risingContacts || record.risingContactTicks !== result.risingContactTicks ||
+    record.maximumPenetration !== result.maximumPenetration
+  ) evaluatorFail('SWEEP_RESULT_CUSTODY_INVALID');
+  return result;
+}
+
 export function evaluateSweptContact(stateSeries, terminalTick = CANONICAL_TERMINAL_ABSOLUTE_TICK) {
   if (
     !Number.isSafeInteger(terminalTick) || terminalTick < 0 ||
@@ -1643,18 +1693,18 @@ export function evaluateSweptContact(stateSeries, terminalTick = CANONICAL_TERMI
       minimumSeparation: intervalMinimumSeparation
     });
   }
-  return {
+  return mintSweepResult({
     firstContact,
     firstContactTick: firstContact?.absoluteTick ?? null,
     risingContacts,
     risingContactTicks,
     maximumPenetration,
     intervals
-  };
+  });
 }
 
 function translatedContactChecks(result, tickShift, exactTerminalTick = null) {
-  if (!result || !Array.isArray(result.intervals)) evaluatorFail('SWEEP_RESULT_INVALID');
+  result = requireSweepResult(result);
   if (!Number.isSafeInteger(tickShift) || tickShift < 0) evaluatorFail('CONTACT_TICK_SHIFT_INVALID');
   if (
     exactTerminalTick !== null &&
@@ -1708,6 +1758,7 @@ export function shiftedContactChecks(result) {
 }
 
 export function canonicalContactFrame(result, basis) {
+  result = requireSweepResult(result);
   const canonical = validateBasis(basis);
   if (!canonicalContactChecks(result).pass || !result.firstContact) evaluatorFail('CANONICAL_CONTACT_RESULT_FAILED');
   const first = result.firstContact;
@@ -1831,10 +1882,11 @@ export function validateCounterfactualRuns({ hitOffsets, missOffsets, hitRuns, m
     if (run.index !== index || !sameIntegerVector(run.offsetCanonicalMicrometres, hitOffsets[index]?.canonicalMicrometres)) {
       evaluatorFail('COUNTERFACTUAL_HIT_OFFSET_MISMATCH');
     }
+    const evaluatorResult = requireSweepResult(run.evaluatorResult);
     if (
-      run.evaluatorResult?.firstContactTick !== 46 ||
-      !hasExpectedRisingContacts(run.evaluatorResult, 46) ||
-      !Number.isFinite(run.evaluatorResult.maximumPenetration) || run.evaluatorResult.maximumPenetration < -0.012000
+      evaluatorResult.firstContactTick !== 46 ||
+      !hasExpectedRisingContacts(evaluatorResult, 46) ||
+      !Number.isFinite(evaluatorResult.maximumPenetration) || evaluatorResult.maximumPenetration < -0.012000
     ) evaluatorFail('COUNTERFACTUAL_HIT_GEOMETRY_FAILED');
     validateHealthSeries(run.healthByTick, true);
     if (!Array.isArray(run.damageMutations) || run.damageMutations.length !== 1) evaluatorFail('COUNTERFACTUAL_HIT_DAMAGE_INVALID');
@@ -1865,10 +1917,11 @@ export function validateCounterfactualRuns({ hitOffsets, missOffsets, hitRuns, m
     if (run.index !== index || !sameIntegerVector(run.offsetCanonicalMicrometres, missOffsets[index]?.canonicalMicrometres)) {
       evaluatorFail('COUNTERFACTUAL_MISS_OFFSET_MISMATCH');
     }
+    const evaluatorResult = requireSweepResult(run.evaluatorResult);
     if (
-      run.evaluatorResult?.firstContactTick !== null ||
-      !hasExpectedRisingContacts(run.evaluatorResult, null) ||
-      !Number.isFinite(run.evaluatorResult.maximumPenetration) || run.evaluatorResult.maximumPenetration < 0.250000
+      evaluatorResult.firstContactTick !== null ||
+      !hasExpectedRisingContacts(evaluatorResult, null) ||
+      !Number.isFinite(evaluatorResult.maximumPenetration) || evaluatorResult.maximumPenetration < 0.250000
     ) evaluatorFail('COUNTERFACTUAL_MISS_CLEARANCE_FAILED');
     validateHealthSeries(run.healthByTick, false);
     if (!Array.isArray(run.events) || run.events.length !== 0) evaluatorFail('COUNTERFACTUAL_MISS_EVENT_INVALID');

@@ -622,6 +622,168 @@ test('SHIFT_PLUS_7 rejects a second rising contact at its exact terminal tick 87
   assert.equal(shifted.pass, false);
 });
 
+test('sweep-result custody rejects the critic proxy/truncation, clones, replacements, sparse accessors, and genuine proxies', () => {
+  const full = evaluateSweptContact(sweepTestSeries(SHIFTED_TERMINAL_ABSOLUTE_TICK, (absoluteTick) => {
+    const bladeX = absoluteTick === 53 ? 0.12 : 0.3;
+    return sweepTestState(absoluteTick, {
+      bladeGuard: [bladeX, -0.5, 0],
+      bladeTip: [bladeX, 0.5, 0],
+      activeCapsules: { head: { a: [0, 0, 0], b: [0, 0, 0], radius: 0.1 } }
+    });
+  }), SHIFTED_TERMINAL_ABSOLUTE_TICK);
+  const truncated = evaluateSweptContact(sweepTestSeries(55, (absoluteTick) => {
+    const bladeX = absoluteTick === 53 ? 0.12 : 0.3;
+    return sweepTestState(absoluteTick, {
+      bladeGuard: [bladeX, -0.5, 0],
+      bladeTip: [bladeX, 0.5, 0],
+      activeCapsules: { head: { a: [0, 0, 0], b: [0, 0, 0], radius: 0.1 } }
+    });
+  }), 55);
+  assert.equal(shiftedContactChecks(full).pass, true);
+  assert.equal(shiftedContactChecks(truncated).pass, false);
+
+  let proxyReads = 0;
+  const criticProxy = new Proxy(truncated, {
+    get(target, key, receiver) {
+      proxyReads += 1;
+      if (key === 'intervals') return full.intervals;
+      return Reflect.get(target, key, receiver);
+    }
+  });
+  assert.throws(
+    () => shiftedContactChecks(criticProxy),
+    (error) => evaluatorCode(error, 'SWEEP_RESULT_CUSTODY_INVALID')
+  );
+  assert.equal(proxyReads, 0);
+
+  const clone = structuredClone(full);
+  assert.throws(
+    () => shiftedContactChecks(clone),
+    (error) => evaluatorCode(error, 'SWEEP_RESULT_CUSTODY_INVALID')
+  );
+  assert.throws(
+    () => canonicalContactChecks(clone),
+    (error) => evaluatorCode(error, 'SWEEP_RESULT_CUSTODY_INVALID')
+  );
+  assert.throws(
+    () => canonicalContactFrame(clone, { right: [1, 0, 0], up: [0, 1, 0], forward: [0, 0, 1] }),
+    (error) => evaluatorCode(error, 'SWEEP_RESULT_CUSTODY_INVALID')
+  );
+  assert.throws(
+    () => shiftedContactChecks(new Proxy(full, {})),
+    (error) => evaluatorCode(error, 'SWEEP_RESULT_CUSTODY_INVALID')
+  );
+  assert.throws(
+    () => shiftedContactChecks({ ...full }),
+    (error) => evaluatorCode(error, 'SWEEP_RESULT_CUSTODY_INVALID')
+  );
+
+  const replacement = structuredClone(full);
+  replacement.intervals = full.intervals;
+  assert.throws(
+    () => shiftedContactChecks(replacement),
+    (error) => evaluatorCode(error, 'SWEEP_RESULT_CUSTODY_INVALID')
+  );
+  let accessorReads = 0;
+  const accessor = structuredClone(full);
+  accessor.intervals = Array(SHIFTED_TERMINAL_ABSOLUTE_TICK + 1);
+  Object.defineProperty(accessor.intervals, 0, {
+    enumerable: true,
+    get() {
+      accessorReads += 1;
+      return full.intervals[0];
+    }
+  });
+  assert.throws(
+    () => shiftedContactChecks(accessor),
+    (error) => evaluatorCode(error, 'SWEEP_RESULT_CUSTODY_INVALID')
+  );
+  assert.equal(accessorReads, 0);
+});
+
+test('minted sweep results deeply freeze all contact-check fields against post-mint mutation', () => {
+  const result = evaluateSweptContact(sweepTestSeries(SHIFTED_TERMINAL_ABSOLUTE_TICK, (absoluteTick) => {
+    const bladeX = absoluteTick === 53 ? 0.12 : 0.3;
+    return sweepTestState(absoluteTick, {
+      bladeGuard: [bladeX, -0.5, 0],
+      bladeTip: [bladeX, 0.5, 0],
+      activeCapsules: { head: { a: [0, 0, 0], b: [0, 0, 0], radius: 0.1 } }
+    });
+  }), SHIFTED_TERMINAL_ABSOLUTE_TICK);
+  assert.ok(Object.isFrozen(result));
+  assert.ok(Object.isFrozen(result.intervals));
+  assert.ok(result.intervals.every(Object.isFrozen));
+  assert.ok(Object.isFrozen(result.firstContact));
+  assert.ok(Object.isFrozen(result.firstContact.closestBladePoint));
+  assert.ok(Object.isFrozen(result.firstContact.closestTargetPoint));
+  assert.ok(Object.isFrozen(result.risingContacts));
+  assert.ok(result.risingContacts.every(Object.isFrozen));
+  assert.ok(Object.isFrozen(result.risingContactTicks));
+  assert.throws(() => { result.intervals = []; }, TypeError);
+  assert.throws(() => { result.intervals[0].absoluteTick = 99; }, TypeError);
+  assert.throws(() => { result.firstContact.closestBladePoint[0] = 99; }, TypeError);
+  assert.throws(() => { result.risingContacts[0].substep = 1; }, TypeError);
+  assert.throws(() => { result.maximumPenetration = -1; }, TypeError);
+  assert.equal(shiftedContactChecks(result).pass, true);
+});
+
+test('sweep-result custody minting resists post-import WeakMap, WeakSet, Reflect, and freeze poisoning', () => {
+  const originalWeakSetAdd = WeakSet.prototype.add;
+  const originalWeakSetHas = WeakSet.prototype.has;
+  const originalWeakMapSet = WeakMap.prototype.set;
+  const originalWeakMapGet = WeakMap.prototype.get;
+  const originalReflectApply = Reflect.apply;
+  const originalFreeze = Object.freeze;
+  const poisonedCalls = { weakSetAdd: 0, weakSetHas: 0, weakMapSet: 0, weakMapGet: 0, reflectApply: 0, freeze: 0 };
+  let result = null;
+  let checks = null;
+  let mintError = null;
+  try {
+    WeakSet.prototype.add = function poisonedWeakSetAdd(value) {
+      poisonedCalls.weakSetAdd += 1;
+      return originalReflectApply(originalWeakSetAdd, this, [value]);
+    };
+    WeakSet.prototype.has = () => { poisonedCalls.weakSetHas += 1; return true; };
+    WeakMap.prototype.set = function poisonedWeakMapSet(key, value) {
+      poisonedCalls.weakMapSet += 1;
+      return originalReflectApply(originalWeakMapSet, this, [key, value]);
+    };
+    WeakMap.prototype.get = () => { poisonedCalls.weakMapGet += 1; return { forged: true }; };
+    Reflect.apply = () => { poisonedCalls.reflectApply += 1; return undefined; };
+    Object.freeze = (value) => { poisonedCalls.freeze += 1; return value; };
+    try {
+      result = evaluateSweptContact(sweepTestSeries(0, (absoluteTick) => {
+        const bladeX = absoluteTick === 0 ? 0.12 : 0.3;
+        return sweepTestState(absoluteTick, {
+          bladeGuard: [bladeX, -0.5, 0],
+          bladeTip: [bladeX, 0.5, 0],
+          activeCapsules: { head: { a: [0, 0, 0], b: [0, 0, 0], radius: 0.1 } }
+        });
+      }), 0);
+      checks = canonicalContactChecks(result);
+    } catch (error) {
+      mintError = error;
+    }
+  } finally {
+    WeakSet.prototype.add = originalWeakSetAdd;
+    WeakSet.prototype.has = originalWeakSetHas;
+    WeakMap.prototype.set = originalWeakMapSet;
+    WeakMap.prototype.get = originalWeakMapGet;
+    Reflect.apply = originalReflectApply;
+    Object.freeze = originalFreeze;
+  }
+  assert.ifError(mintError);
+  assert.deepEqual(poisonedCalls, {
+    weakSetAdd: 0, weakSetHas: 0, weakMapSet: 0, weakMapGet: 0, reflectApply: 0, freeze: 0
+  });
+  assert.equal(checks.pass, false);
+  assert.ok(Object.isFrozen(result));
+  assert.ok(Object.isFrozen(result.intervals));
+  assert.ok(Object.isFrozen(result.intervals[0]));
+  assert.ok(Object.isFrozen(result.firstContact));
+  assert.ok(Object.isFrozen(result.firstContact.closestBladePoint));
+});
+
 test('all geometry terminal APIs fail closed at out-of-domain tick 88', () => {
   const tick88 = SHIFTED_TERMINAL_ABSOLUTE_TICK + 1;
   assert.throws(
@@ -1082,6 +1244,19 @@ test('reference custody proves selected bytes originate in the ZIP and rejects Z
 test('counterfactual validation binds all three hit offsets and both miss results without regeneration', () => {
   const hitOffsets = [0, 1, 2].map((index) => ({ canonicalMicrometres: [index + 1, 0, 0] }));
   const missOffsets = [{ canonicalMicrometres: [300000, 0, 0] }, { canonicalMicrometres: [-300000, 0, 0] }];
+  const hitEvaluatorResult = evaluateSweptContact(sweepTestSeries(80, (absoluteTick) => {
+    const bladeX = absoluteTick === 46 ? 0.12 : 0.3;
+    return sweepTestState(absoluteTick, {
+      bladeGuard: [bladeX, -0.5, 0],
+      bladeTip: [bladeX, 0.5, 0],
+      activeCapsules: { head: { a: [0, 0, 0], b: [0, 0, 0], radius: 0.1 } }
+    });
+  }));
+  const missEvaluatorResult = evaluateSweptContact(sweepTestSeries(80, (absoluteTick) => sweepTestState(absoluteTick, {
+    bladeGuard: [0.5, -0.5, 0],
+    bladeTip: [0.5, 0.5, 0],
+    activeCapsules: { head: { a: [0, 0, 0], b: [0, 0, 0], radius: 0.1 } }
+  })));
   const health = (hit) => Array.from({ length: 82 }, (_, index) => ({
     absoluteTick: index - 1,
     health: hit && index - 1 >= 46 ? 75 : 100
@@ -1089,12 +1264,7 @@ test('counterfactual validation binds all three hit offsets and both miss result
   const hitRuns = hitOffsets.map((offset, index) => ({
     index,
     offsetCanonicalMicrometres: offset.canonicalMicrometres,
-    evaluatorResult: {
-      firstContactTick: 46,
-      risingContacts: [{ absoluteTick: 46, substep: 4096, capsuleID: 'head' }],
-      risingContactTicks: [46],
-      maximumPenetration: -0.011
-    },
+    evaluatorResult: hitEvaluatorResult,
     healthByTick: health(true),
     damageMutations: [{ absoluteTick: 46, before: 100, after: 75, amount: 25 }],
     events: [{ type: 'damage', absoluteTick: 46 }],
@@ -1103,7 +1273,7 @@ test('counterfactual validation binds all three hit offsets and both miss result
   const missRuns = missOffsets.map((offset, index) => ({
     index,
     offsetCanonicalMicrometres: offset.canonicalMicrometres,
-    evaluatorResult: { firstContactTick: null, risingContacts: [], risingContactTicks: [], maximumPenetration: 0.25 },
+    evaluatorResult: missEvaluatorResult,
     healthByTick: health(false),
     events: [],
     reactionOrRecoil: false,
@@ -1117,7 +1287,7 @@ test('counterfactual validation binds all three hit offsets and both miss result
   secondRise[1].evaluatorResult.risingContactTicks.push(47);
   assert.throws(
     () => validateCounterfactualRuns({ hitOffsets, missOffsets, hitRuns: secondRise, missRuns }),
-    (error) => evaluatorCode(error, 'COUNTERFACTUAL_HIT_GEOMETRY_FAILED')
+    (error) => evaluatorCode(error, 'SWEEP_RESULT_CUSTODY_INVALID')
   );
   hitRuns[2].offsetCanonicalMicrometres = [99, 0, 0];
   assert.throws(
